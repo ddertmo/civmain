@@ -82,6 +82,7 @@
         .badge-assigned    { background:var(--info-bg); color:var(--info); }
         .badge-inprogress  { background:#FFF3E0; color:#E65100; }
         .badge-resolved    { background:var(--success-bg); color:var(--success); }
+        .badge-rejected    { background:var(--danger-bg);  color:var(--danger); }
         .badge-infra       { background:#E8F4FD; color:#1565C0; }
         .badge-env         { background:#E8F5E9; color:#2E7D32; }
         .badge-others      { background:var(--gray-100); color:var(--gray-600); }

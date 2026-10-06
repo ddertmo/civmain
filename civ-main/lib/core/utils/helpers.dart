@@ -58,6 +58,8 @@ class AppHelpers {
         return AppColors.statusInProgress;
       case 'resolved':
         return AppColors.statusResolved;
+      case 'rejected':
+        return AppColors.statusRejected;
       default:
         return AppColors.textSecondary;
     }
@@ -77,6 +79,8 @@ class AppHelpers {
         return AppColors.statusInProgressBg;
       case 'resolved':
         return AppColors.statusResolvedBg;
+      case 'rejected':
+        return AppColors.statusRejectedBg;
       default:
         return AppColors.background;
     }
@@ -96,6 +100,8 @@ class AppHelpers {
         return Icons.construction_rounded;
       case 'resolved':
         return Icons.task_alt_rounded;
+      case 'rejected':
+        return Icons.cancel_rounded;
       default:
         return Icons.circle_outlined;
     }

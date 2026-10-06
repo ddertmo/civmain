@@ -300,6 +300,7 @@ class AppState extends ChangeNotifier {
   int get pendingCount   => _reports.where((r) => r.isPending).length;
   int get inProgressCount => _reports.where((r) => r.status == 'In Progress').length;
   int get resolvedCount  => _reports.where((r) => r.status == 'Resolved').length;
+  int get rejectedCount  => _reports.where((r) => r.isRejected).length;
   int get totalCount     => _reports.length;
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -334,6 +335,7 @@ class AppState extends ChangeNotifier {
       case 'Assigned to Office': return 'Assigned to the appropriate government office.';
       case 'In Progress':        return 'Work is currently in progress.';
       case 'Resolved':           return 'The issue has been successfully resolved.';
+      case 'Rejected':           return 'The administrator rejected this report.';
       default:                   return 'Status updated.';
     }
   }

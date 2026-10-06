@@ -9,6 +9,7 @@ import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
 import '../../widgets/cards/activity_card.dart';
 import '../../widgets/cards/status_card.dart';
+import '../../widgets/timeline/rejection_notice.dart';
 
 class TrackReportScreen extends StatelessWidget {
   final Map<String, dynamic> reportData;
@@ -629,6 +630,8 @@ class _TrackReportBody extends StatelessWidget {
         return 'The assigned office is currently working on resolving this issue.';
       case 'resolved':
         return 'This issue has been successfully resolved. Thank you for your report.';
+      case 'rejected':
+        return 'The administrator rejected this report. See the timeline for the reason.';
       default:
         return 'Your report has been submitted successfully.';
     }
@@ -650,6 +653,13 @@ class _VerticalTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentIdx = report.statusIndex;
+
+    // Rejected exits the flow rather than stepping through it, so a vertical
+    // timeline of five uncompleted nodes would read as "nothing happened".
+    if (report.isRejected || currentIdx < 0) {
+      return RejectionNotice(report: report);
+    }
+
     return Column(
       children: List.generate(_steps.length, (i) {
         final isDone = i <= currentIdx;

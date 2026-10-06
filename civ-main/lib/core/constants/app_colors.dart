@@ -33,6 +33,10 @@ class AppColors {
   static const Color statusSubmitted = Color(0xFF7C3AED); // purple
   static const Color statusSubmittedBg = Color(0xFFF5F3FF);
 
+  static const Color statusRejected = Color(0xFFDC2626);   // red
+  static const Color statusRejectedBg = Color(0xFFFEF2F2);
+  static const Color statusRejectedBorder = Color(0xFFFECACA);
+
   // ── Neutral ──────────────────────────────────────────────────────────────────
   static const Color white = Color(0xFFFFFFFF);
   static const Color background = Color(0xFFF8FAFC);

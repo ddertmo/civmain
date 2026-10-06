@@ -5,6 +5,7 @@ $map = [
     'Assigned to Office' => 'badge-assigned',
     'In Progress'        => 'badge-inprogress',
     'Resolved'           => 'badge-resolved',
+    'Rejected'           => 'badge-rejected',
 ];
 $cls = $map[$status] ?? 'badge-submitted';
 @endphp

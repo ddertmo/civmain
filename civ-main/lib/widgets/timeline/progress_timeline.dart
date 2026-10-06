@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
+import 'rejection_notice.dart';
 
 class ProgressTimeline extends StatelessWidget {
   final IncidentReport report;
@@ -20,6 +21,12 @@ class ProgressTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentIdx = report.statusIndex;
+
+    // A rejected report has left the happy path. Rendering five uncompleted
+    // steps would just read as "nothing happened", so show why it stopped.
+    if (report.isRejected || currentIdx < 0) {
+      return RejectionNotice(report: report);
+    }
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,

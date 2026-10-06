@@ -5,6 +5,7 @@ import '../../core/routes/app_routes.dart';
 import '../../core/state/app_state.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
+import '../../widgets/timeline/rejection_notice.dart';
 
 /// Matches the "Status Update" reference image:
 /// ─ App bar: "Status Update / Track the latest progress"
@@ -299,11 +300,14 @@ class _StatusUpdateBody extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: AppColors.textPrimary)),
                   const SizedBox(height: 16),
-                  _HorizontalTimeline(
-                      steps: _steps,
-                      stepsRaw: _stepsRaw,
-                      currentIdx: currentIdx,
-                      activityLog: report.activityLog),
+                  if (report.isRejected)
+                    RejectionNotice(report: report)
+                  else
+                    _HorizontalTimeline(
+                        steps: _steps,
+                        stepsRaw: _stepsRaw,
+                        currentIdx: currentIdx,
+                        activityLog: report.activityLog),
                 ],
               ),
             ),
@@ -547,6 +551,8 @@ class _StatusUpdateBody extends StatelessWidget {
         return 'The assigned office is currently working on resolving this issue.';
       case 'resolved':
         return 'This issue has been successfully resolved. Thank you for your report.';
+      case 'rejected':
+        return 'The administrator rejected this report. See the timeline above for the reason.';
       default:
         return 'Status updated.';
     }

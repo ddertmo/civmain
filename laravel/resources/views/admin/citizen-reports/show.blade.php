@@ -157,13 +157,13 @@
                     <div class="form-group">
                         <label>New Status</label>
                         <select name="status" class="form-control" required>
-                            @foreach(['Submitted','Pending Validation','Assigned to Office','In Progress','Resolved'] as $s)
+                            @foreach(['Submitted','Pending Validation','Assigned to Office','In Progress','Resolved','Rejected'] as $s)
                                 <option value="{{ $s }}" {{ $report->status === $s ? 'selected' : '' }}>{{ $s }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Note (optional)</label>
+                        <label>Note (optional{{ $report->status === 'Submitted' || $report->status === 'Pending Validation' ? ', required when rejecting' : '' }})</label>
                         <textarea name="description" class="form-control" rows="2" placeholder="Add a note..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width:100%">Update Status</button>

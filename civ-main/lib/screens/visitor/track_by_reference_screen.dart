@@ -6,6 +6,7 @@ import '../../core/routes/app_routes.dart';
 import '../../core/state/app_state.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
+import '../../widgets/timeline/rejection_notice.dart';
 
 class TrackByReferenceScreen extends StatefulWidget {
   const TrackByReferenceScreen({super.key});
@@ -430,7 +431,10 @@ class _ResultCard extends StatelessWidget {
                 const SizedBox(height: 18),
 
                 // Progress timeline (compact)
-                _CompactTimeline(status: report.status),
+                if (report.isRejected)
+                  RejectionNotice(report: report)
+                else
+                  _CompactTimeline(status: report.status),
                 const SizedBox(height: 18),
 
                 // View full details button

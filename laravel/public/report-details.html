@@ -649,13 +649,19 @@
 
         document.getElementById('rejectConfirmBtn').onclick = async function() {
             var reason = document.querySelector('#rejectModal .form-textarea').value.trim();
+            if (!reason) {
+                // Keep the modal open — a rejection without a reason gives the
+                // reporter nothing to act on, so make it mandatory.
+                Utils.showToast('Please enter a reason for rejecting this report.', 'error');
+                return;
+            }
             closeModal('reject');
             await Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/status', {
-                status: 'Submitted',
-                description: reason || 'Report rejected by administrator.'
+                status: 'Rejected',
+                description: reason
             }, {
                 loading: 'Rejecting report…',
-                success: 'Report has been rejected.',
+                success: 'Report has been rejected. The reporter has been notified with your reason.',
                 successTitle: 'Report Rejected',
                 errorTitle: 'Rejection Failed',
                 onAction: function() {

@@ -119,16 +119,33 @@ class AdminCitizenReportController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // POST /api/admin/citizen-reports/{id}/status
     // Body: { status, description (optional) }
-    // Admin can move status to any value in the flow.
+    // Admin can move status to any value in the flow, except that a rejection
+    // is only legal while the report is still awaiting validation.
     // ─────────────────────────────────────────────────────────────────────
     public function updateStatus(Request $request, int $id): JsonResponse
     {
         $request->validate([
             'status'      => ['required', Rule::in(CitizenReport::STATUS_ORDER)],
-            'description' => 'nullable|string|max:500',
+            // A rejection without a reason gives the reporter nothing to act
+            // on, so the note is mandatory exactly when it matters.
+            'description' => [
+                'required_if:status,' . CitizenReport::STATUS_REJECTED,
+                'nullable',
+                'string',
+                'max:500',
+            ],
         ]);
 
         $report = CitizenReport::findOrFail($id);
+
+        if ($request->status === CitizenReport::STATUS_REJECTED
+            && ! in_array($report->status, CitizenReport::REJECTABLE_STATUSES, true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'A report can only be rejected before it is assigned to an office.',
+            ], 422);
+        }
+
         $report->transitionTo($request->status, $request->description);
 
         return response()->json([

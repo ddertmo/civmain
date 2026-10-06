@@ -35,7 +35,11 @@ class IncidentReport {
     required this.activityLog,
   });
 
-  /// All possible statuses in order
+  /// All possible statuses in order.
+  ///
+  /// This is the happy path a report walks. Rejected is deliberately absent —
+  /// it is an exit from the flow, not a step in it, so a rejected report gets
+  /// [statusIndex] == -1 and renders as a rejection rather than a timeline.
   static const List<String> statusOrder = [
     'Submitted',
     'Pending Validation',
@@ -47,6 +51,8 @@ class IncidentReport {
   int get statusIndex => statusOrder.indexWhere(
         (s) => s.toLowerCase() == status.toLowerCase(),
       );
+
+  bool get isRejected => status.toLowerCase() == 'rejected';
 
   bool get isPending =>
       status.toLowerCase() == 'pending validation' ||

@@ -50,6 +50,7 @@ class CitizenReport extends Model
     const STATUS_ASSIGNED          = 'Assigned to Office';
     const STATUS_IN_PROGRESS       = 'In Progress';
     const STATUS_RESOLVED          = 'Resolved';
+    const STATUS_REJECTED          = 'Rejected';
 
     const STATUS_ORDER = [
         self::STATUS_SUBMITTED,
@@ -57,6 +58,17 @@ class CitizenReport extends Model
         self::STATUS_ASSIGNED,
         self::STATUS_IN_PROGRESS,
         self::STATUS_RESOLVED,
+        self::STATUS_REJECTED,
+    ];
+
+    /**
+     * Statuses an admin may reject from. Rejection is only possible before a
+     * report is handed to an office — afterwards the fix is a reassignment,
+     * not a rejection.
+     */
+    const REJECTABLE_STATUSES = [
+        self::STATUS_SUBMITTED,
+        self::STATUS_PENDING_VALIDATION,
     ];
 
     // ── Relationships ──────────────────────────────────────────────────────
@@ -120,6 +132,12 @@ class CitizenReport extends Model
             $this->update(['is_public' => true]);
         }
 
+        // validate() sets is_public = true, so a report that is rejected after
+        // validation would otherwise stay visible on the community feed.
+        if ($newStatus === self::STATUS_REJECTED && $this->is_public) {
+            $this->update(['is_public' => false]);
+        }
+
         if ($newStatus === self::STATUS_RESOLVED) {
             $this->update(['resolved_at' => now()]);
         }
@@ -139,7 +157,7 @@ class CitizenReport extends Model
         CitizenNotification::send(
             citizenId:       $this->citizen_id,
             title:           $title,
-            message:         $this->buildNotificationMessage($newStatus, $officeName),
+            message:         $this->buildNotificationMessage($newStatus, $officeName, $description),
             type:            'status_update',
             reportId:        $this->id,
             referenceNumber: $this->reference_number,
@@ -155,11 +173,12 @@ class CitizenReport extends Model
             self::STATUS_ASSIGNED           => 'Your report has been assigned to ' . ($officeName ?? 'a city office') . '.',
             self::STATUS_IN_PROGRESS        => 'Work is currently in progress.',
             self::STATUS_RESOLVED           => 'Your report has been resolved. Thank you for helping improve Digos City.',
+            self::STATUS_REJECTED           => 'Your report was rejected by the administrator.',
             default                         => 'Status updated.',
         };
     }
 
-    private function buildNotificationMessage(string $status, ?string $officeName): string
+    private function buildNotificationMessage(string $status, ?string $officeName, ?string $description = null): string
     {
         return match ($status) {
             self::STATUS_SUBMITTED          => "{$this->reference_number} has been submitted successfully.",
@@ -167,6 +186,11 @@ class CitizenReport extends Model
             self::STATUS_ASSIGNED           => "{$this->reference_number} has been assigned to " . ($officeName ?? 'a city office') . '.',
             self::STATUS_IN_PROGRESS        => "{$this->reference_number} — Work is now in progress.",
             self::STATUS_RESOLVED           => "{$this->reference_number} — {$this->concern} has been resolved.",
+            // The admin's reason is the whole point of a rejection note.
+            self::STATUS_REJECTED           => "{$this->reference_number} — Rejected. "
+                . ($description !== null && $description !== ''
+                    ? $description
+                    : 'No reason was given by the administrator.'),
             default                         => "{$this->reference_number} status updated to {$status}.",
         };
     }

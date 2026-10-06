@@ -135,9 +135,17 @@ class AdminWebController extends Controller
     {
         $request->validate([
             'status'      => 'required|in:' . implode(',', CitizenReport::STATUS_ORDER),
-            'description' => 'nullable|string|max:500',
+            'description' => $request->status === CitizenReport::STATUS_REJECTED
+                ? 'required|string|max:500'
+                : 'nullable|string|max:500',
         ]);
         $report = CitizenReport::findOrFail($id);
+
+        if ($request->status === CitizenReport::STATUS_REJECTED
+            && ! in_array($report->status, CitizenReport::REJECTABLE_STATUSES, true)) {
+            return back()->with('error', 'A report can only be rejected before it is assigned to an office.');
+        }
+
         $report->transitionTo($request->status, $request->description);
         return back()->with('success', 'Status updated to: ' . $request->status);
     }
