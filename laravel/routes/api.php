@@ -76,7 +76,9 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
 // ADMIN — WEB PANEL API (staff users — email/password → Sanctum token)
 // ═══════════════════════════════════════════════════════════════════════
 
-Route::prefix('admin')->name('admin.')->middleware('auth:sanctum')->group(function () {
+// Writes here are super_admin only — see App\Middleware\EnsureSuperAdmin.
+// Reads stay open to every authenticated role (CEO/CENRO need the data).
+Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'superadmin'])->group(function () {
 
     // Citizen reports management
     Route::get('citizen-reports/summary',      [AdminCitizenReportController::class, 'summary']);
@@ -115,12 +117,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user',    [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Users (super_admin only)
+    // Users (super_admin only) — creating or changing staff accounts is a
+    // privilege escalation, so writes are gated; listing stays readable.
     Route::get('/users',         [UserController::class, 'index']);
-    Route::post('/users',        [UserController::class, 'store']);
+    Route::post('/users',        [UserController::class, 'store'])->middleware('superadmin');
     Route::get('/users/{id}',    [UserController::class, 'show']);
-    Route::put('/users/{id}',    [UserController::class, 'update']);
-    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    Route::put('/users/{id}',    [UserController::class, 'update'])->middleware('superadmin');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('superadmin');
 
     // Reports (admin-side) live at /api/admin/citizen-reports — the legacy
     // /api/reports* block against the dropped `reports` table was removed.

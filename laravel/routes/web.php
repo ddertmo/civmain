@@ -13,7 +13,9 @@ Route::get('/', function () {
 Route::get('/admin/login',  [AdminWebController::class, 'showLogin'])->name('admin.login');
 Route::post('/admin/login', [AdminWebController::class, 'login'])->name('admin.login.post');
 
-Route::middleware(['auth', 'web'])->prefix('admin')->name('admin.')->group(function () {
+// Writes here are super_admin only — see App\Middleware\EnsureSuperAdmin.
+// Reads stay open to every authenticated role (CEO/CENRO need the data).
+Route::middleware(['auth', 'web', 'superadmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminWebController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [AdminWebController::class, 'dashboard'])->name('dashboard');
     Route::get('/citizen-reports', [AdminWebController::class, 'reportsIndex'])->name('citizen-reports.index');
