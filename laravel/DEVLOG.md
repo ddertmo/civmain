@@ -5,6 +5,16 @@
 **Stack:** Laravel 12 + Sanctum + MySQL + Blade (admin panel)  
 **Flutter App:** `../civ-main/` (reference — all API shapes match the Flutter models exactly)
 
+> **Which DEVLOG is this?** This file (`laravel/DEVLOG.md`) is the **backend
+> reference** — routes, migrations, models, API field mapping, how the server
+> actually works. The **project history** (phases, decisions, page-by-page
+> integration status) lives in [`docs/DEVLOG.md`](docs/DEVLOG.md). They are
+> complementary, not duplicates — keep both.
+>
+> For the two admin interfaces, the reject-with-notes flow, the pending queue
+> and the `super_admin` role gate, see
+> [`docs/SUPER_ADMIN.md`](docs/SUPER_ADMIN.md).
+
 ---
 
 ## Latest Session Changes

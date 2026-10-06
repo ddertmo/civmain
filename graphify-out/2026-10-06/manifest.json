@@ -12,10 +12,10 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_colors.dart": {
-    "mtime": 1791089867.8279452,
-    "seen": 1791160565.1950524,
-    "ast_hash": "54972d09484067258a3b0701583f08b7",
-    "semantic_hash": "54972d09484067258a3b0701583f08b7"
+    "mtime": 1791282780.284198,
+    "seen": 1791285147.3210125,
+    "ast_hash": "bd1c58b5458e7e0a25facb6854b562ab",
+    "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_icons.dart": {
     "mtime": 1791089867.8279452,
@@ -54,9 +54,9 @@
     "semantic_hash": "3a513916b6143fb026556ec45f208fa0"
   },
   "civ-main/lib/core/state/app_state.dart": {
-    "mtime": 1791272028.2642057,
-    "seen": 1791272616.0235758,
-    "ast_hash": "f8f99ff1c771a5a8a7fbdc1b27edf43d",
+    "mtime": 1791282814.9081979,
+    "seen": 1791285147.3222263,
+    "ast_hash": "b02d5105e6a0c92fe4d692e709b5a5ad",
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/app_theme.dart": {
@@ -84,10 +84,10 @@
     "semantic_hash": "5e4e4dbccd9c96682f37d46a75d16f1c"
   },
   "civ-main/lib/core/utils/helpers.dart": {
-    "mtime": 1791089867.8319452,
-    "seen": 1791160565.195124,
-    "ast_hash": "b1fafe66eec27920587982752567c28c",
-    "semantic_hash": "b1fafe66eec27920587982752567c28c"
+    "mtime": 1791282784.2041981,
+    "seen": 1791285147.3229487,
+    "ast_hash": "112bca2f098135cef7851850ea876df4",
+    "semantic_hash": ""
   },
   "civ-main/lib/core/utils/validators.dart": {
     "mtime": 1791089867.8319452,
@@ -114,10 +114,10 @@
     "semantic_hash": "06e7e38121d7adfc7e62117f191d2135"
   },
   "civ-main/lib/models/report.dart": {
-    "mtime": 1791089867.8319452,
-    "seen": 1791160565.1951518,
-    "ast_hash": "54278761a163cb07f5cd1636c36d0c1f",
-    "semantic_hash": "54278761a163cb07f5cd1636c36d0c1f"
+    "mtime": 1791282798.012198,
+    "seen": 1791285147.3236196,
+    "ast_hash": "2803b4693d619345feb9674b642be3b1",
+    "semantic_hash": ""
   },
   "civ-main/lib/models/user.dart": {
     "mtime": 1791089867.8319452,
@@ -174,8 +174,8 @@
     "semantic_hash": "2dc36f5e66b899dc666110ee06cd12d7"
   },
   "civ-main/lib/screens/my_reports/my_reports_screen.dart": {
-    "mtime": 1791272167.4802055,
-    "seen": 1791272616.0267565,
+    "mtime": 1791282831.448198,
+    "seen": 1791285147.3252072,
     "ast_hash": "144e7407a922ffc84b2ebe9cb4e879ad",
     "semantic_hash": ""
   },
@@ -252,22 +252,22 @@
     "semantic_hash": "2b7304dd98f60306c5f4994c8972da0c"
   },
   "civ-main/lib/screens/track_report/status_update_screen.dart": {
-    "mtime": 1791264513.2014425,
-    "seen": 1791264631.3316674,
-    "ast_hash": "471cb407d57647bb2452e272699ca5bb",
+    "mtime": 1791283057.556198,
+    "seen": 1791285147.3273485,
+    "ast_hash": "0dc868a0cbc70360f19947ffd762f720",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/track_report/track_report_screen.dart": {
-    "mtime": 1791089867.8399453,
-    "seen": 1791160565.1952872,
-    "ast_hash": "1d496a7667c0820c931ef5c8c8d706d5",
-    "semantic_hash": "1d496a7667c0820c931ef5c8c8d706d5"
+    "mtime": 1791283134.7921977,
+    "seen": 1791285147.3273566,
+    "ast_hash": "07abde57d0e4a5aed5b9fe61ba8dc26e",
+    "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/track_by_reference_screen.dart": {
-    "mtime": 1791089867.8399453,
-    "seen": 1791160565.1952927,
-    "ast_hash": "b6f53b1961d06bbfe16a02a89091c104",
-    "semantic_hash": "b6f53b1961d06bbfe16a02a89091c104"
+    "mtime": 1791283013.644198,
+    "seen": 1791285147.3273637,
+    "ast_hash": "edabac7cac23818891eff34c9e48fb7a",
+    "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/visitor_about_screen.dart": {
     "mtime": 1791089867.8399453,
@@ -450,10 +450,10 @@
     "semantic_hash": "1eef13cc23a70e7ba964149988dc3de3"
   },
   "civ-main/lib/widgets/timeline/progress_timeline.dart": {
-    "mtime": 1791089867.8479452,
-    "seen": 1791160565.195462,
-    "ast_hash": "14186f2fc38ef3f024e34e08e6ac0064",
-    "semantic_hash": "14186f2fc38ef3f024e34e08e6ac0064"
+    "mtime": 1791283217.8841977,
+    "seen": 1791285147.332656,
+    "ast_hash": "b1f328e966ba3b2c5cb774c5f3a7c318",
+    "semantic_hash": ""
   },
   "civ-main/test/widget_test.dart": {
     "mtime": 1791089867.8559453,
@@ -474,16 +474,16 @@
     "semantic_hash": "f64a7a6314acb41603e49f5196dbbd6e"
   },
   "laravel/resources/views/admin/citizen-reports/index.blade.php": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791160565.195485,
-    "ast_hash": "4f26299243e0bc1eb3e96928024b132b",
-    "semantic_hash": "4f26299243e0bc1eb3e96928024b132b"
+    "mtime": 1791282417.9281983,
+    "seen": 1791285147.3332434,
+    "ast_hash": "d5cd68e481026c2dea592d0295f33cce",
+    "semantic_hash": ""
   },
   "laravel/resources/views/admin/citizen-reports/show.blade.php": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791160565.1954916,
-    "ast_hash": "1f149e853c65bb615d3516b6fdfe1167",
-    "semantic_hash": "1f149e853c65bb615d3516b6fdfe1167"
+    "mtime": 1791282420.0841982,
+    "seen": 1791285147.3332515,
+    "ast_hash": "dba255d0675a9b28f2f1265585b28478",
+    "semantic_hash": ""
   },
   "laravel/resources/views/admin/dashboard.blade.php": {
     "mtime": 1791089867.8879452,
@@ -492,10 +492,10 @@
     "semantic_hash": "c155929c4fddab2e26d3bab4d7113e09"
   },
   "laravel/resources/views/admin/layout.blade.php": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791160565.1955025,
-    "ast_hash": "2ee5b879ead4537df26b7aa42af484ba",
-    "semantic_hash": "2ee5b879ead4537df26b7aa42af484ba"
+    "mtime": 1791282410.6961982,
+    "seen": 1791285147.3334641,
+    "ast_hash": "c32c001e49d0bebe1fc542092b650e6c",
+    "semantic_hash": ""
   },
   "laravel/resources/views/admin/login.blade.php": {
     "mtime": 1791089867.8919454,
@@ -522,10 +522,10 @@
     "semantic_hash": "9a85170624b4d9d1179468dbc6926946"
   },
   "laravel/resources/views/admin/partials/status-badge.blade.php": {
-    "mtime": 1791089867.8999453,
-    "seen": 1791160565.1955318,
-    "ast_hash": "ffdf788f76fb67881c0f91ca1b377da4",
-    "semantic_hash": "ffdf788f76fb67881c0f91ca1b377da4"
+    "mtime": 1791282410.0441983,
+    "seen": 1791285147.3341997,
+    "ast_hash": "95e7377c687ac9eeee32380b2f7a01f1",
+    "semantic_hash": ""
   },
   "laravel/resources/views/welcome.blade.php": {
     "mtime": 1791089867.8999453,
@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1791156793.7366507,
-    "seen": 1791162257.3075738,
-    "ast_hash": "6a47d64fcc136324ca395065a707ef76",
+    "mtime": 1791273347.8242047,
+    "seen": 1791273395.4947195,
+    "ast_hash": "6e500ad8d7b4da72cb4fd8c2eaa8033c",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -630,9 +630,9 @@
     "semantic_hash": ""
   },
   "laravel/DEVLOG.md": {
-    "mtime": 1791089867.8599453,
-    "seen": 1791162257.307787,
-    "ast_hash": "babc41cc9afedba74db5c2ff4e8b2ff0",
+    "mtime": 1791285116.6361964,
+    "seen": 1791285147.3386004,
+    "ast_hash": "0f81eaaa93b3792d86f5e4c75ae7e146",
     "semantic_hash": ""
   },
   "laravel/README.md": {
@@ -642,9 +642,9 @@
     "semantic_hash": ""
   },
   "laravel/docs/DEVLOG.md": {
-    "mtime": 1791089867.8759453,
-    "seen": 1791162257.3078115,
-    "ast_hash": "18c1e78ebcd93e7bc5e343bf772d1cf3",
+    "mtime": 1791285118.5201964,
+    "seen": 1791285147.3387575,
+    "ast_hash": "cb67bffb3fea5f92471b3c9008742028",
     "semantic_hash": ""
   },
   "laravel/public/analytics.html": {
@@ -786,9 +786,9 @@
     "semantic_hash": ""
   },
   "laravel/public/report-details.html": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791162257.3081093,
-    "ast_hash": "c9c94f61438e5bc0a486c143a9caf6aa",
+    "mtime": 1791282368.5921984,
+    "seen": 1791285147.34267,
+    "ast_hash": "70e6978bbed84a6eb1c4e2ada0b5211f",
     "semantic_hash": ""
   },
   "laravel/public/resolved-reports.html": {
@@ -810,9 +810,9 @@
     "semantic_hash": ""
   },
   "laravel/public/users.html": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791162257.308159,
-    "ast_hash": "4a17113f022919a8a7ccd51261d82ae5",
+    "mtime": 1791283657.0441973,
+    "seen": 1791285147.3431432,
+    "ast_hash": "6abc47eaacd2e1030c296feca5fa78a3",
     "semantic_hash": ""
   },
   "civ-main/android/app/src/main/res/mipmap-hdpi/ic_launcher.png": {
@@ -1023,6 +1023,84 @@
     "mtime": 1791089867.8559453,
     "seen": 1791162257.308587,
     "ast_hash": "301a7604d45b3e739efc881eb04896ea",
+    "semantic_hash": ""
+  },
+  ".opencode/skills/changelog/SKILL.md": {
+    "mtime": 1791273306.8802047,
+    "seen": 1791273395.494696,
+    "ast_hash": "b4ce522e675dd5c728ea8410f81079df",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-04-001-initial-backup.md": {
+    "mtime": 1791273115.744205,
+    "seen": 1791273395.5002325,
+    "ast_hash": "5d33d20afa4e671d8586ffb074ac3052",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-002-graphify-setup.md": {
+    "mtime": 1791273124.392205,
+    "seen": 1791273395.5002475,
+    "ast_hash": "f344854dc2a87496a66fa17851dc7c79",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-003-ios-permissions.md": {
+    "mtime": 1791273164.984205,
+    "seen": 1791273395.5002613,
+    "ast_hash": "b4e5aaef56b409bde94a647300dd7738",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-004-api-base-url-demo-button.md": {
+    "mtime": 1791273209.3562047,
+    "seen": 1791273395.500275,
+    "ast_hash": "909a3546e4511ed33e6abac156805bd9",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-005-android-branding.md": {
+    "mtime": 1791273173.412205,
+    "seen": 1791273395.5002878,
+    "ast_hash": "ba142a8d26a8a5bc8df889b429c60520",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-006-401-json-db-timezone.md": {
+    "mtime": 1791273225.7402048,
+    "seen": 1791273395.5003068,
+    "ast_hash": "489eb664635acaf2da9a5700889b155b",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-007-docs-backend-truth.md": {
+    "mtime": 1791273250.7562048,
+    "seen": 1791273395.5003207,
+    "ast_hash": "d08f835a6ef125c67f90bff4ef650b2e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-008-report-visibility.md": {
+    "mtime": 1791273267.548205,
+    "seen": 1791273395.5003343,
+    "ast_hash": "aca0297d380805d136087871d724140d",
+    "semantic_hash": ""
+  },
+  "docs/changes/README.md": {
+    "mtime": 1791273091.9602048,
+    "seen": 1791273395.5003471,
+    "ast_hash": "653341b901fcd19bed7e1a8a1daadb63",
+    "semantic_hash": ""
+  },
+  "docs/changes/TEMPLATE.md": {
+    "mtime": 1791273096.4962049,
+    "seen": 1791273395.5003626,
+    "ast_hash": "e4d3feb3d3fce03b80e59393383e8919",
+    "semantic_hash": ""
+  },
+  "civ-main/lib/widgets/timeline/rejection_notice.dart": {
+    "mtime": 1791282922.660198,
+    "seen": 1791285147.3326652,
+    "ast_hash": "ab0c2676fdee5ce183e46e41148d4096",
+    "semantic_hash": ""
+  },
+  "laravel/docs/SUPER_ADMIN.md": {
+    "mtime": 1791284907.4321966,
+    "seen": 1791285147.3387673,
+    "ast_hash": "175c51b05f4ffece042b284733099d7e",
     "semantic_hash": ""
   }
 }

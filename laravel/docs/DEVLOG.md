@@ -7,6 +7,15 @@
 > **Proponents:** Renz Justine Y. Borinaga, Jhon Carlo Mag-Usara, Lawrence Roy P. Sereno
 > **Adviser:** Cyvil Dave Dasargo, MIT
 
+> **Which DEVLOG is this?** This file (`laravel/docs/DEVLOG.md`) is the
+> **project history** — phases, decisions, page-by-page integration status.
+> The **backend reference** (routes, migrations, models, API field mapping)
+> lives in [`../DEVLOG.md`](../DEVLOG.md). They are complementary, not
+> duplicates — keep both.
+>
+> For the two admin interfaces, the reject-with-notes flow, the pending queue
+> and the `super_admin` role gate, see [`SUPER_ADMIN.md`](SUPER_ADMIN.md).
+
 ---
 
 ## Phase 0 — Prototype (Pre-Laravel)

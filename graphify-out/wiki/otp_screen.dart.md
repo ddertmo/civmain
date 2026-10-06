@@ -1,0 +1,62 @@
+# otp_screen.dart
+
+> 27 nodes · cohesion 0.07
+
+## Key Concepts
+
+- **otp_screen.dart** (37 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **../../services/auth_service.dart** (4 connections)
+- **build** (2 connections) — `civ-main/lib/screens/auth/login_screen.dart`
+- **_OtpIllustration** (2 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_verify** (2 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **dart:async** (2 connections)
+- **Timer?** (2 connections)
+- **../../widgets/inputs/otp_box.dart** (2 connections)
+- **AppRoutes.register** (2 connections)
+- **_animController** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **build** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **createState** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_devOtp** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **dispose** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_fadeAnim** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **initState** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **isNewUser** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_isSending** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_otp** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **phoneNumber** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_resend** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_resendSeconds** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_sendFailed** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_sendOtp** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- **_slideAnim** (1 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
+- *... and 2 more nodes in this community*
+
+## Relationships
+
+- [forgot_password_flow.dart](forgot_password_flow.dart.md) (3 shared connections)
+- [login_screen.dart](login_screen.dart.md) (2 shared connections)
+- [splash_screen.dart](splash_screen.dart.md) (2 shared connections)
+- [_](_.md) (2 shared connections)
+- [State](State.md) (2 shared connections)
+- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (2 shared connections)
+- [VoidCallback?](VoidCallback_.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [report_review.dart](report_review.dart.md) (1 shared connections)
+- [StatelessWidget](StatelessWidget.md) (1 shared connections)
+
+## Source Files
+
+- `civ-main/lib/screens/auth/login_screen.dart`
+- `civ-main/lib/screens/auth/otp_screen.dart`
+
+## Audit Trail
+
+- EXTRACTED: 47 (100%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
+
+---
+
+*Part of the graphify knowledge wiki. See [index](index.md) to navigate.*
