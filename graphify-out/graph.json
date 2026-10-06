@@ -2523,6 +2523,28 @@
       "source_location": "L207"
     },
     {
+      "id": "civ_main_lib_screens_community_map_community_map_screen_communitymapscreen",
+      "label": "CommunityMapScreen",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "communitymapscreen",
+      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
+      "source_location": "L13"
+    },
+    {
+      "id": "civ_main_lib_screens_community_map_community_map_screen_communitymapscreenstate",
+      "label": "_CommunityMapScreenState",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "_communitymapscreenstate",
+      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
+      "source_location": "L21"
+    },
+    {
       "id": "civ_main_lib_screens_community_map_community_map_screen_count",
       "label": "count",
       "_origin": "ast",
@@ -3565,116 +3587,6 @@
       "source_location": "L722"
     },
     {
-      "id": "civ_main_lib_models_notification_model",
-      "label": "notification_model.dart",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "notification_model.dart",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_copywith",
-      "label": "copyWith",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "copywith",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L20"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_id",
-      "label": "id",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "id",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L2"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_isread",
-      "label": "isRead",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "isread",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L8"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_message",
-      "label": "message",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "message",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L4"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_referencenumber",
-      "label": "referenceNumber",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "referencenumber",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L5"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_status",
-      "label": "status",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "status",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L6"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_timestamp",
-      "label": "timestamp",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "timestamp",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L7"
-    },
-    {
-      "id": "civ_main_lib_models_notification_model_title",
-      "label": "title",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "title",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L3"
-    },
-    {
-      "id": "datetime",
-      "label": "DateTime",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "dummy_data.dart",
-      "file_type": "code",
-      "norm_label": "datetime",
-      "source_file": null,
-      "source_location": null
-    },
-    {
       "id": "models_office_dart",
       "label": "../../models/office.dart",
       "_origin": "ast",
@@ -3744,35 +3656,57 @@
       "source_location": "L84"
     },
     {
-      "id": "civ_main_lib_screens_report_report_concern_next",
-      "label": "_next",
+      "id": "civ_main_lib_widgets_common_loading",
+      "label": "loading.dart",
       "_origin": "ast",
       "community": 111,
-      "community_name": "_next",
+      "community_name": "String?",
       "file_type": "code",
-      "norm_label": "_next",
-      "source_file": "civ-main/lib/screens/report/report_concern.dart",
-      "source_location": "L81"
+      "norm_label": "loading.dart",
+      "source_file": "civ-main/lib/widgets/common/loading.dart",
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_screens_report_report_issue_next",
-      "label": "_next",
+      "id": "civ_main_lib_widgets_common_loading_apploading",
+      "label": "AppLoading",
       "_origin": "ast",
       "community": 111,
-      "community_name": "_next",
+      "community_name": "String?",
       "file_type": "code",
-      "norm_label": "_next",
-      "source_file": "civ-main/lib/screens/report/report_issue.dart",
-      "source_location": "L39"
+      "norm_label": "apploading",
+      "source_file": "civ-main/lib/widgets/common/loading.dart",
+      "source_location": "L4"
     },
     {
-      "id": "route_approutes_reportphoto",
-      "label": "AppRoutes.reportPhoto",
+      "id": "civ_main_lib_widgets_common_loading_build",
+      "label": "build",
       "_origin": "ast",
       "community": 111,
-      "community_name": "_next",
-      "file_type": "concept",
-      "norm_label": "approutes.reportphoto",
+      "community_name": "String?",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/widgets/common/loading.dart",
+      "source_location": "L9"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_loading_message",
+      "label": "message",
+      "_origin": "ast",
+      "community": 111,
+      "community_name": "String?",
+      "file_type": "code",
+      "norm_label": "message",
+      "source_file": "civ-main/lib/widgets/common/loading.dart",
+      "source_location": "L5"
+    },
+    {
+      "id": "string",
+      "label": "String?",
+      "_origin": "ast",
+      "community": 111,
+      "community_name": "String?",
+      "file_type": "code",
+      "norm_label": "string?",
       "source_file": null,
       "source_location": null
     },
@@ -3859,103 +3793,48 @@
       "source_location": "L1"
     },
     {
-      "id": "civ_main_lib_models_office",
-      "label": "office.dart",
+      "id": "civ_main_lib_screens_community_map_community_map_screen_viewonmap",
+      "label": "_viewOnMap",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
-      "norm_label": "office.dart",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": null
+      "norm_label": "_viewonmap",
+      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
+      "source_location": "L444"
     },
     {
-      "id": "civ_main_lib_models_office_abbreviation",
-      "label": "abbreviation",
+      "id": "civ_main_lib_screens_home_home_screen_build",
+      "label": "build",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
-      "norm_label": "abbreviation",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L4"
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L36"
     },
     {
-      "id": "civ_main_lib_models_office_address",
-      "label": "address",
+      "id": "civ_main_lib_screens_my_reports_my_reports_screen_build",
+      "label": "build",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
-      "norm_label": "address",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L8"
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
+      "source_location": "L58"
     },
     {
-      "id": "civ_main_lib_models_office_contactnumber",
-      "label": "contactNumber",
+      "id": "civ_main_lib_screens_profile_profile_screen_build",
+      "label": "build",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
-      "norm_label": "contactnumber",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L6"
-    },
-    {
-      "id": "civ_main_lib_models_office_email",
-      "label": "email",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "email",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L7"
-    },
-    {
-      "id": "civ_main_lib_models_office_governmentoffice",
-      "label": "GovernmentOffice",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "governmentoffice",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L1"
-    },
-    {
-      "id": "civ_main_lib_models_office_handles",
-      "label": "handles",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "handles",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L5"
-    },
-    {
-      "id": "civ_main_lib_models_office_id",
-      "label": "id",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "id",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L2"
-    },
-    {
-      "id": "civ_main_lib_models_office_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "civ-main/lib/models/office.dart",
-      "source_location": "L3"
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/profile/profile_screen.dart",
+      "source_location": "L15"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen",
@@ -3977,7 +3856,7 @@
       "file_type": "code",
       "norm_label": "activitylog",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L564"
+      "source_location": "L561"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_activityrow",
@@ -3988,18 +3867,18 @@
       "file_type": "code",
       "norm_label": "_activityrow",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L684"
+      "source_location": "L681"
     },
     {
-      "id": "civ_main_lib_screens_track_report_status_update_screen_advancestatusbutton",
-      "label": "_AdvanceStatusButton",
+      "id": "civ_main_lib_screens_track_report_status_update_screen_build",
+      "label": "build",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
-      "norm_label": "_advancestatusbutton",
+      "norm_label": "build",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L804"
+      "source_location": "L27"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_buildpendingsteps",
@@ -4010,7 +3889,7 @@
       "file_type": "code",
       "norm_label": "_buildpendingsteps",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L500"
+      "source_location": "L497"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_currentidx",
@@ -4021,7 +3900,7 @@
       "file_type": "code",
       "norm_label": "currentidx",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L563"
+      "source_location": "L560"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_description",
@@ -4032,7 +3911,7 @@
       "file_type": "code",
       "norm_label": "description",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L690"
+      "source_location": "L687"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_getreport",
@@ -4054,7 +3933,7 @@
       "file_type": "code",
       "norm_label": "highlightbg",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L695"
+      "source_location": "L692"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_highlightborder",
@@ -4065,7 +3944,7 @@
       "file_type": "code",
       "norm_label": "highlightborder",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L696"
+      "source_location": "L693"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_horizontaltimeline",
@@ -4076,7 +3955,7 @@
       "file_type": "code",
       "norm_label": "_horizontaltimeline",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L560"
+      "source_location": "L557"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_icon",
@@ -4087,7 +3966,7 @@
       "file_type": "code",
       "norm_label": "icon",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L685"
+      "source_location": "L682"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_iconbg",
@@ -4098,7 +3977,7 @@
       "file_type": "code",
       "norm_label": "iconbg",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L687"
+      "source_location": "L684"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_iconcolor",
@@ -4109,7 +3988,7 @@
       "file_type": "code",
       "norm_label": "iconcolor",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L686"
+      "source_location": "L683"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_iscurrent",
@@ -4120,7 +3999,7 @@
       "file_type": "code",
       "norm_label": "iscurrent",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L692"
+      "source_location": "L689"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_ishighlighted",
@@ -4131,18 +4010,7 @@
       "file_type": "code",
       "norm_label": "ishighlighted",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L694"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_status_update_screen_order",
-      "label": "_order",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "_order",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L808"
+      "source_location": "L691"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_report",
@@ -4175,7 +4043,7 @@
       "file_type": "code",
       "norm_label": "showline",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L693"
+      "source_location": "L690"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_statusmessage",
@@ -4186,7 +4054,7 @@
       "file_type": "code",
       "norm_label": "_statusmessage",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L541"
+      "source_location": "L538"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_statusupdatebody",
@@ -4241,7 +4109,7 @@
       "file_type": "code",
       "norm_label": "timelabel",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L691"
+      "source_location": "L688"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_title",
@@ -4252,7 +4120,7 @@
       "file_type": "code",
       "norm_label": "title",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L688"
+      "source_location": "L685"
     },
     {
       "id": "civ_main_lib_screens_track_report_status_update_screen_titlecolor",
@@ -4263,139 +4131,183 @@
       "file_type": "code",
       "norm_label": "titlecolor",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L689"
+      "source_location": "L686"
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box",
-      "label": "otp_box.dart",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "otp_box.dart",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_widgets_inputs_otp_box_build",
+      "id": "civ_main_lib_screens_track_report_track_report_screen_build",
       "label": "build",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
       "file_type": "code",
       "norm_label": "build",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L56"
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L27"
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_controllers",
-      "label": "_controllers",
+      "id": "route_approutes_communitymap",
+      "label": "AppRoutes.communityMap",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "_controllers",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L22"
+      "file_type": "concept",
+      "norm_label": "approutes.communitymap",
+      "source_file": null,
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_createstate",
-      "label": "createState",
+      "id": "route_approutes_myreports",
+      "label": "AppRoutes.myReports",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "createstate",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L18"
+      "file_type": "concept",
+      "norm_label": "approutes.myreports",
+      "source_file": null,
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_dispose",
-      "label": "dispose",
+      "id": "route_approutes_notifications",
+      "label": "AppRoutes.notifications",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "dispose",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L34"
+      "file_type": "concept",
+      "norm_label": "approutes.notifications",
+      "source_file": null,
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_focusnodes",
-      "label": "_focusNodes",
+      "id": "route_approutes_privatemap",
+      "label": "AppRoutes.privateMap",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "_focusnodes",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L23"
+      "file_type": "concept",
+      "norm_label": "approutes.privatemap",
+      "source_file": null,
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_initstate",
-      "label": "initState",
+      "id": "route_approutes_reportcategory",
+      "label": "AppRoutes.reportCategory",
       "_origin": "ast",
       "community": 12,
       "community_name": "status_update_screen.dart",
-      "file_type": "code",
-      "norm_label": "initstate",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L26"
+      "file_type": "concept",
+      "norm_label": "approutes.reportcategory",
+      "source_file": null,
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_length",
-      "label": "length",
+      "id": "civ_main_lib_models_notification_model",
+      "label": "notification_model.dart",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
+      "community": 13,
+      "community_name": "report.dart",
       "file_type": "code",
-      "norm_label": "length",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L6"
+      "norm_label": "notification_model.dart",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": null
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_onchanged",
-      "label": "_onChanged",
+      "id": "civ_main_lib_models_notification_model_appnotification",
+      "label": "AppNotification",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
+      "community": 13,
+      "community_name": "report.dart",
       "file_type": "code",
-      "norm_label": "_onchanged",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L40"
+      "norm_label": "appnotification",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L1"
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_otpinputrow",
-      "label": "OtpInputRow",
+      "id": "civ_main_lib_models_notification_model_copywith",
+      "label": "copyWith",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
+      "community": 13,
+      "community_name": "report.dart",
       "file_type": "code",
-      "norm_label": "otpinputrow",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "norm_label": "copywith",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L20"
+    },
+    {
+      "id": "civ_main_lib_models_notification_model_id",
+      "label": "id",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "id",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L2"
+    },
+    {
+      "id": "civ_main_lib_models_notification_model_isread",
+      "label": "isRead",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "isread",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L8"
+    },
+    {
+      "id": "civ_main_lib_models_notification_model_message",
+      "label": "message",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "message",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L4"
+    },
+    {
+      "id": "civ_main_lib_models_notification_model_referencenumber",
+      "label": "referenceNumber",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "referencenumber",
+      "source_file": "civ-main/lib/models/notification_model.dart",
       "source_location": "L5"
     },
     {
-      "id": "civ_main_lib_widgets_inputs_otp_box_otpinputrowstate",
-      "label": "_OtpInputRowState",
+      "id": "civ_main_lib_models_notification_model_status",
+      "label": "status",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
+      "community": 13,
+      "community_name": "report.dart",
       "file_type": "code",
-      "norm_label": "_otpinputrowstate",
-      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
-      "source_location": "L21"
+      "norm_label": "status",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L6"
     },
     {
-      "id": "list",
-      "label": "List",
+      "id": "civ_main_lib_models_notification_model_timestamp",
+      "label": "timestamp",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "status_update_screen.dart",
+      "community": 13,
+      "community_name": "report.dart",
       "file_type": "code",
-      "norm_label": "list",
-      "source_file": null,
-      "source_location": null
+      "norm_label": "timestamp",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L7"
+    },
+    {
+      "id": "civ_main_lib_models_notification_model_title",
+      "label": "title",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "title",
+      "source_file": "civ-main/lib/models/notification_model.dart",
+      "source_location": "L3"
     },
     {
       "id": "civ_main_lib_models_report",
@@ -4759,6 +4671,17 @@
       "norm_label": "_navitem",
       "source_file": "civ-main/lib/widgets/navigation/bottom_nav.dart",
       "source_location": "L93"
+    },
+    {
+      "id": "datetime",
+      "label": "DateTime",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "report.dart",
+      "file_type": "code",
+      "norm_label": "datetime",
+      "source_file": null,
+      "source_location": null
     },
     {
       "id": "static_const_list",
@@ -5146,6 +5069,138 @@
       "source_location": null
     },
     {
+      "id": "borderradius",
+      "label": "BorderRadius?",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "borderradius?",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "boxfit",
+      "label": "BoxFit",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "boxfit",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image",
+      "label": "app_network_image.dart",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "app_network_image.dart",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_appnetworkimage",
+      "label": "AppNetworkImage",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "appnetworkimage",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L6"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_borderradius",
+      "label": "borderRadius",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "borderradius",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L12"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L25"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_errorwidget",
+      "label": "errorWidget",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "errorwidget",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L11"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_fit",
+      "label": "fit",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "fit",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L10"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_height",
+      "label": "height",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "height",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L9"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_placeholder",
+      "label": "_placeholder",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "_placeholder",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L55"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_url",
+      "label": "url",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "url",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L7"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_network_image_width",
+      "label": "width",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "width",
+      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
+      "source_location": "L8"
+    },
+    {
       "id": "civ_main_lib_widgets_inputs_custom_textfield",
       "label": "custom_textfield.dart",
       "_origin": "ast",
@@ -5318,6 +5373,17 @@
       "community_name": "custom_textfield.dart",
       "file_type": "code",
       "norm_label": "textinputtype",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "widget",
+      "label": "Widget?",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "custom_textfield.dart",
+      "file_type": "code",
+      "norm_label": "widget?",
       "source_file": null,
       "source_location": null
     },
@@ -5606,248 +5672,6 @@
       "norm_label": "../../screens/auth/forgot_password_flow.dart",
       "source_file": null,
       "source_location": null
-    },
-    {
-      "id": "civ_main_lib_screens_auth_login_screen_loginscreen",
-      "label": "LoginScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "loginscreen",
-      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
-      "source_location": "L13"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_login_screen_loginscreenstate",
-      "label": "_LoginScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_loginscreenstate",
-      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
-      "source_location": "L21"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_login_screen_pinpasswordfield",
-      "label": "_PinPasswordField",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_pinpasswordfield",
-      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
-      "source_location": "L475"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_login_screen_pinpasswordfieldstate",
-      "label": "_PinPasswordFieldState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_pinpasswordfieldstate",
-      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
-      "source_location": "L490"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_otp_screen_otpscreen",
-      "label": "OtpScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "otpscreen",
-      "source_file": "civ-main/lib/screens/auth/otp_screen.dart",
-      "source_location": "L12"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_otp_screen_otpscreenstate",
-      "label": "_OtpScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_otpscreenstate",
-      "source_file": "civ-main/lib/screens/auth/otp_screen.dart",
-      "source_location": "L26"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_register_screen_registerscreen",
-      "label": "RegisterScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "registerscreen",
-      "source_file": "civ-main/lib/screens/auth/register_screen.dart",
-      "source_location": "L14"
-    },
-    {
-      "id": "civ_main_lib_screens_auth_register_screen_registerscreenstate",
-      "label": "_RegisterScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_registerscreenstate",
-      "source_file": "civ-main/lib/screens/auth/register_screen.dart",
-      "source_location": "L21"
-    },
-    {
-      "id": "civ_main_lib_screens_community_map_community_map_screen_communitymapscreen",
-      "label": "CommunityMapScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "communitymapscreen",
-      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
-      "source_location": "L13"
-    },
-    {
-      "id": "civ_main_lib_screens_community_map_community_map_screen_communitymapscreenstate",
-      "label": "_CommunityMapScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_communitymapscreenstate",
-      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
-      "source_location": "L21"
-    },
-    {
-      "id": "civ_main_lib_screens_home_home_screen_homescreen",
-      "label": "HomeScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "homescreen",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L17"
-    },
-    {
-      "id": "civ_main_lib_screens_home_home_screen_homescreenstate",
-      "label": "_HomeScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_homescreenstate",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L24"
-    },
-    {
-      "id": "civ_main_lib_screens_landing_landing_screen_landingscreen",
-      "label": "LandingScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "landingscreen",
-      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
-      "source_location": "L8"
-    },
-    {
-      "id": "civ_main_lib_screens_landing_landing_screen_landingscreenstate",
-      "label": "_LandingScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_landingscreenstate",
-      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
-      "source_location": "L15"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_submitted_reportsubmittedscreen",
-      "label": "ReportSubmittedScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "reportsubmittedscreen",
-      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
-      "source_location": "L9"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_submitted_reportsubmittedscreenstate",
-      "label": "_ReportSubmittedScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_reportsubmittedscreenstate",
-      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
-      "source_location": "L18"
-    },
-    {
-      "id": "civ_main_lib_screens_splash_splash_screen_splashscreen",
-      "label": "SplashScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "splashscreen",
-      "source_file": "civ-main/lib/screens/splash/splash_screen.dart",
-      "source_location": "L7"
-    },
-    {
-      "id": "civ_main_lib_screens_splash_splash_screen_splashscreenstate",
-      "label": "_SplashScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_splashscreenstate",
-      "source_file": "civ-main/lib/screens/splash/splash_screen.dart",
-      "source_location": "L14"
-    },
-    {
-      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreen",
-      "label": "VisitorReportsScreen",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "visitorreportsscreen",
-      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
-      "source_location": "L12"
-    },
-    {
-      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreenstate",
-      "label": "_VisitorReportsScreenState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_visitorreportsscreenstate",
-      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
-      "source_location": "L19"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_dialog_dialogcard",
-      "label": "_DialogCard",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_dialogcard",
-      "source_file": "civ-main/lib/widgets/common/app_dialog.dart",
-      "source_location": "L143"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_dialog_dialogcardstate",
-      "label": "_DialogCardState",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "_dialogcardstate",
-      "source_file": "civ-main/lib/widgets/common/app_dialog.dart",
-      "source_location": "L164"
     },
     {
       "id": "civ_main_lib_widgets_common_skeleton",
@@ -6178,39 +6002,6 @@
       "norm_label": "width",
       "source_file": "civ-main/lib/widgets/common/skeleton.dart",
       "source_location": "L19"
-    },
-    {
-      "id": "singletickerproviderstatemixin",
-      "label": "SingleTickerProviderStateMixin",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "singletickerproviderstatemixin",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "state",
-      "label": "State",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "state",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "statefulwidget",
-      "label": "StatefulWidget",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "skeleton.dart",
-      "file_type": "code",
-      "norm_label": "statefulwidget",
-      "source_file": null,
-      "source_location": null
     },
     {
       "id": "app_routes_dart",
@@ -8732,6 +8523,28 @@
       "source_location": "L1049"
     },
     {
+      "id": "civ_main_lib_screens_track_report_track_report_screen_fallbackphoto",
+      "label": "_FallbackPhoto",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "track_report_screen.dart",
+      "file_type": "code",
+      "norm_label": "_fallbackphoto",
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L1200"
+    },
+    {
+      "id": "civ_main_lib_screens_track_report_track_report_screen_fullscreenphotoview",
+      "label": "_FullscreenPhotoView",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "track_report_screen.dart",
+      "file_type": "code",
+      "norm_label": "_fullscreenphotoview",
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L1236"
+    },
+    {
       "id": "civ_main_lib_screens_track_report_track_report_screen_fullwidth",
       "label": "fullWidth",
       "_origin": "ast",
@@ -8864,6 +8677,17 @@
       "source_location": "L1023"
     },
     {
+      "id": "civ_main_lib_screens_track_report_track_report_screen_photopanel",
+      "label": "_PhotoPanel",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "track_report_screen.dart",
+      "file_type": "code",
+      "norm_label": "_photopanel",
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L1044"
+    },
+    {
       "id": "civ_main_lib_screens_track_report_track_report_screen_report",
       "label": "report",
       "_origin": "ast",
@@ -8928,28 +8752,6 @@
       "norm_label": "_trackreportbody",
       "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
       "source_location": "L92"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_trackreportscreen",
-      "label": "TrackReportScreen",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "track_report_screen.dart",
-      "file_type": "code",
-      "norm_label": "trackreportscreen",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L13"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_verticaltimeline",
-      "label": "_VerticalTimeline",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "track_report_screen.dart",
-      "file_type": "code",
-      "norm_label": "_verticaltimeline",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L638"
     },
     {
       "id": "widgets_cards_activity_card_dart",
@@ -9260,17 +9062,6 @@
       "source_location": "L637"
     },
     {
-      "id": "civ_main_lib_screens_home_home_screen_announcementcard",
-      "label": "_AnnouncementCard",
-      "_origin": "ast",
-      "community": 27,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_announcementcard",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L636"
-    },
-    {
       "id": "civ_main_lib_screens_home_home_screen_bg",
       "label": "bg",
       "_origin": "ast",
@@ -9324,6 +9115,17 @@
       "norm_label": "firstname",
       "source_file": "civ-main/lib/screens/home/home_screen.dart",
       "source_location": "L234"
+    },
+    {
+      "id": "civ_main_lib_screens_home_home_screen_greetingsection",
+      "label": "_GreetingSection",
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "_greetingsection",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L233"
     },
     {
       "id": "civ_main_lib_screens_home_home_screen_homeappbar",
@@ -9381,15 +9183,15 @@
       "source_location": "L418"
     },
     {
-      "id": "civ_main_lib_screens_home_home_screen_minimapcard",
-      "label": "_MiniMapCard",
+      "id": "civ_main_lib_screens_home_home_screen_legenditem",
+      "label": "_LegendItem",
       "_origin": "ast",
       "community": 27,
       "community_name": "_",
       "file_type": "code",
-      "norm_label": "_minimapcard",
+      "norm_label": "_legenditem",
       "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L484"
+      "source_location": "L610"
     },
     {
       "id": "civ_main_lib_screens_home_home_screen_minipin",
@@ -9742,28 +9544,6 @@
       "norm_label": "ontap",
       "source_file": "civ-main/lib/screens/report/report_concern.dart",
       "source_location": "L206"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_concern_reportconcernscreen",
-      "label": "ReportConcernScreen",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "report_concern.dart",
-      "file_type": "code",
-      "norm_label": "reportconcernscreen",
-      "source_file": "civ-main/lib/screens/report/report_concern.dart",
-      "source_location": "L65"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_concern_reportconcernscreenstate",
-      "label": "_ReportConcernScreenState",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "report_concern.dart",
-      "file_type": "code",
-      "norm_label": "_reportconcernscreenstate",
-      "source_file": "civ-main/lib/screens/report/report_concern.dart",
-      "source_location": "L73"
     },
     {
       "id": "civ_main_lib_screens_report_report_concern_selected",
@@ -11053,6 +10833,28 @@
       "source_location": "L166"
     },
     {
+      "id": "civ_main_lib_widgets_common_app_dialog_dialogcard",
+      "label": "_DialogCard",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "_dialogcard",
+      "source_file": "civ-main/lib/widgets/common/app_dialog.dart",
+      "source_location": "L143"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_app_dialog_dialogcardstate",
+      "label": "_DialogCardState",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "_dialogcardstate",
+      "source_file": "civ-main/lib/widgets/common/app_dialog.dart",
+      "source_location": "L164"
+    },
+    {
       "id": "civ_main_lib_widgets_common_app_dialog_dialogvariant",
       "label": "_DialogVariant",
       "_origin": "ast",
@@ -11226,7 +11028,7 @@
       "file_type": "code",
       "norm_label": "announcements",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L39"
+      "source_location": "L48"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_apiconstants",
@@ -11237,7 +11039,7 @@
       "file_type": "code",
       "norm_label": "apiconstants",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L11"
+      "source_location": "L17"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_authheaders",
@@ -11248,7 +11050,7 @@
       "file_type": "code",
       "norm_label": "authheaders",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L48"
+      "source_location": "L57"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_baseurl",
@@ -11259,7 +11061,7 @@
       "file_type": "code",
       "norm_label": "baseurl",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L15"
+      "source_location": "L21"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_communityreports",
@@ -11270,7 +11072,7 @@
       "file_type": "code",
       "norm_label": "communityreports",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L30"
+      "source_location": "L39"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_jsonheaders",
@@ -11281,7 +11083,7 @@
       "file_type": "code",
       "norm_label": "jsonheaders",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L42"
+      "source_location": "L51"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_login",
@@ -11292,7 +11094,7 @@
       "file_type": "code",
       "norm_label": "login",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L21"
+      "source_location": "L30"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_logout",
@@ -11303,7 +11105,7 @@
       "file_type": "code",
       "norm_label": "logout",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L25"
+      "source_location": "L34"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_markallread",
@@ -11314,7 +11116,7 @@
       "file_type": "code",
       "norm_label": "markallread",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L35"
+      "source_location": "L44"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_markoneread",
@@ -11325,7 +11127,7 @@
       "file_type": "code",
       "norm_label": "markoneread",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L36"
+      "source_location": "L45"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_me",
@@ -11336,7 +11138,7 @@
       "file_type": "code",
       "norm_label": "me",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L26"
+      "source_location": "L35"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_notifications",
@@ -11347,7 +11149,7 @@
       "file_type": "code",
       "norm_label": "notifications",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L34"
+      "source_location": "L43"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_ping",
@@ -11358,7 +11160,7 @@
       "file_type": "code",
       "norm_label": "ping",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L18"
+      "source_location": "L27"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_register",
@@ -11369,7 +11171,7 @@
       "file_type": "code",
       "norm_label": "register",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L24"
+      "source_location": "L33"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_reportbyid",
@@ -11380,7 +11182,7 @@
       "file_type": "code",
       "norm_label": "reportbyid",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L31"
+      "source_location": "L40"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_reports",
@@ -11391,7 +11193,7 @@
       "file_type": "code",
       "norm_label": "reports",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L29"
+      "source_location": "L38"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_sendotp",
@@ -11402,7 +11204,7 @@
       "file_type": "code",
       "norm_label": "sendotp",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L22"
+      "source_location": "L31"
     },
     {
       "id": "civ_main_lib_core_constants_api_constants_verifyotp",
@@ -11413,7 +11215,7 @@
       "file_type": "code",
       "norm_label": "verifyotp",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L23"
+      "source_location": "L32"
     },
     {
       "id": "civ_main_lib_core_theme_app_theme",
@@ -11581,26 +11383,26 @@
       "source_location": "L921"
     },
     {
-      "id": "civ_main_lib_screens_home_home_screen_greetingsection",
-      "label": "_GreetingSection",
+      "id": "civ_main_lib_screens_home_home_screen_announcementcard",
+      "label": "_AnnouncementCard",
       "_origin": "ast",
       "community": 35,
       "community_name": "StatelessWidget",
       "file_type": "code",
-      "norm_label": "_greetingsection",
+      "norm_label": "_announcementcard",
       "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L233"
+      "source_location": "L636"
     },
     {
-      "id": "civ_main_lib_screens_home_home_screen_legenditem",
-      "label": "_LegendItem",
+      "id": "civ_main_lib_screens_home_home_screen_minimapcard",
+      "label": "_MiniMapCard",
       "_origin": "ast",
       "community": 35,
       "community_name": "StatelessWidget",
       "file_type": "code",
-      "norm_label": "_legenditem",
+      "norm_label": "_minimapcard",
       "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L610"
+      "source_location": "L484"
     },
     {
       "id": "civ_main_lib_screens_home_home_screen_reportctabanner",
@@ -11636,39 +11438,6 @@
       "source_location": "L416"
     },
     {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_fallbackphoto",
-      "label": "_FallbackPhoto",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "StatelessWidget",
-      "file_type": "code",
-      "norm_label": "_fallbackphoto",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L1200"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_fullscreenphotoview",
-      "label": "_FullscreenPhotoView",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "StatelessWidget",
-      "file_type": "code",
-      "norm_label": "_fullscreenphotoview",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L1236"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_photopanel",
-      "label": "_PhotoPanel",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "StatelessWidget",
-      "file_type": "code",
-      "norm_label": "_photopanel",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L1044"
-    },
-    {
       "id": "civ_main_lib_screens_track_report_track_report_screen_realminimap",
       "label": "_RealMiniMap",
       "_origin": "ast",
@@ -11680,26 +11449,26 @@
       "source_location": "L762"
     },
     {
-      "id": "civ_main_lib_widgets_navigation_app_bar_civilwatchappbar",
-      "label": "CivilWatchAppBar",
+      "id": "civ_main_lib_screens_track_report_track_report_screen_trackreportscreen",
+      "label": "TrackReportScreen",
       "_origin": "ast",
       "community": 35,
       "community_name": "StatelessWidget",
       "file_type": "code",
-      "norm_label": "civilwatchappbar",
-      "source_file": "civ-main/lib/widgets/navigation/app_bar.dart",
-      "source_location": "L5"
+      "norm_label": "trackreportscreen",
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L13"
     },
     {
-      "id": "preferredsizewidget",
-      "label": "PreferredSizeWidget",
+      "id": "civ_main_lib_screens_track_report_track_report_screen_verticaltimeline",
+      "label": "_VerticalTimeline",
       "_origin": "ast",
       "community": 35,
       "community_name": "StatelessWidget",
       "file_type": "code",
-      "norm_label": "preferredsizewidget",
-      "source_file": null,
-      "source_location": null
+      "norm_label": "_verticaltimeline",
+      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
+      "source_location": "L638"
     },
     {
       "id": "statelesswidget",
@@ -12131,6 +11900,17 @@
       "source_location": null
     },
     {
+      "id": "animationcontroller",
+      "label": "AnimationController",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "splash_screen.dart",
+      "file_type": "code",
+      "norm_label": "animationcontroller",
+      "source_file": null,
+      "source_location": null
+    },
+    {
       "id": "civ_main_lib_screens_splash_splash_screen",
       "label": "splash_screen.dart",
       "_origin": "ast",
@@ -12263,37 +12043,59 @@
       "source_location": null
     },
     {
-      "id": "app_dart",
-      "label": "app.dart",
+      "id": "civ_main_lib_screens_report_report_stepper",
+      "label": "_report_stepper.dart",
       "_origin": "ast",
       "community": 39,
       "community_name": "package:flutter/material.dart",
       "file_type": "code",
-      "norm_label": "app.dart",
-      "source_file": null,
+      "norm_label": "_report_stepper.dart",
+      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
       "source_location": null
     },
     {
-      "id": "civ_main_lib_main",
-      "label": "main.dart",
+      "id": "civ_main_lib_screens_report_report_stepper_build",
+      "label": "build",
       "_origin": "ast",
       "community": 39,
       "community_name": "package:flutter/material.dart",
       "file_type": "code",
-      "norm_label": "main.dart",
-      "source_file": "civ-main/lib/main.dart",
-      "source_location": null
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
+      "source_location": "L19"
     },
     {
-      "id": "civ_main_lib_main_main",
-      "label": "main",
+      "id": "civ_main_lib_screens_report_report_stepper_currentstep",
+      "label": "currentStep",
       "_origin": "ast",
       "community": 39,
       "community_name": "package:flutter/material.dart",
       "file_type": "code",
-      "norm_label": "main",
-      "source_file": "civ-main/lib/main.dart",
+      "norm_label": "currentstep",
+      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
       "source_location": "L6"
+    },
+    {
+      "id": "civ_main_lib_screens_report_report_stepper_labels",
+      "label": "_labels",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "package:flutter/material.dart",
+      "file_type": "code",
+      "norm_label": "_labels",
+      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
+      "source_location": "L10"
+    },
+    {
+      "id": "civ_main_lib_screens_report_report_stepper_reportstepper",
+      "label": "ReportStepper",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "package:flutter/material.dart",
+      "file_type": "code",
+      "norm_label": "reportstepper",
+      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
+      "source_location": "L5"
     },
     {
       "id": "civ_main_test_widget_test",
@@ -12347,6 +12149,17 @@
       "community_name": "package:flutter/material.dart",
       "file_type": "code",
       "norm_label": "package:flutter_test/flutter_test.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "static_const",
+      "label": "static const",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "package:flutter/material.dart",
+      "file_type": "code",
+      "norm_label": "static const",
       "source_file": null,
       "source_location": null
     },
@@ -13011,6 +12824,17 @@
       "source_location": null
     },
     {
+      "id": "civ_main_lib_screens_report_report_concern_next",
+      "label": "_next",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "report_issue.dart",
+      "file_type": "code",
+      "norm_label": "_next",
+      "source_file": "civ-main/lib/screens/report/report_concern.dart",
+      "source_location": "L81"
+    },
+    {
       "id": "civ_main_lib_screens_report_report_issue",
       "label": "report_issue.dart",
       "_origin": "ast",
@@ -13066,6 +12890,17 @@
       "source_location": "L14"
     },
     {
+      "id": "civ_main_lib_screens_report_report_issue_next",
+      "label": "_next",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "report_issue.dart",
+      "file_type": "code",
+      "norm_label": "_next",
+      "source_file": "civ-main/lib/screens/report/report_issue.dart",
+      "source_location": "L39"
+    },
+    {
       "id": "civ_main_lib_screens_report_report_issue_onnext",
       "label": "onNext",
       "_origin": "ast",
@@ -13075,28 +12910,6 @@
       "norm_label": "onnext",
       "source_file": "civ-main/lib/screens/report/report_issue.dart",
       "source_location": "L177"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_issue_reportissuescreen",
-      "label": "ReportIssueScreen",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "report_issue.dart",
-      "file_type": "code",
-      "norm_label": "reportissuescreen",
-      "source_file": "civ-main/lib/screens/report/report_issue.dart",
-      "source_location": "L9"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_issue_reportissuescreenstate",
-      "label": "_ReportIssueScreenState",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "report_issue.dart",
-      "file_type": "code",
-      "norm_label": "_reportissuescreenstate",
-      "source_file": "civ-main/lib/screens/report/report_issue.dart",
-      "source_location": "L17"
     },
     {
       "id": "civ_main_lib_screens_report_report_issue_reportnavfooter",
@@ -13139,6 +12952,17 @@
       "community_name": "report_issue.dart",
       "file_type": "code",
       "norm_label": "../../widgets/navigation/app_bar.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "route_approutes_reportphoto",
+      "label": "AppRoutes.reportPhoto",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "report_issue.dart",
+      "file_type": "concept",
+      "norm_label": "approutes.reportphoto",
       "source_file": null,
       "source_location": null
     },
@@ -13293,17 +13117,6 @@
       "community_name": "user.dart",
       "file_type": "code",
       "norm_label": "string get",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "animationcontroller",
-      "label": "AnimationController",
-      "_origin": "ast",
-      "community": 43,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "animationcontroller",
       "source_file": null,
       "source_location": null
     },
@@ -13620,7 +13433,7 @@
       "label": "status_card.dart",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "status_card.dart",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13631,7 +13444,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13642,7 +13455,7 @@
       "label": "dateLabel",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "datelabel",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13653,7 +13466,7 @@
       "label": "message",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "message",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13664,7 +13477,7 @@
       "label": "showLock",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "showlock",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13675,7 +13488,7 @@
       "label": "status",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "status",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
@@ -13686,143 +13499,11 @@
       "label": "StatusCard",
       "_origin": "ast",
       "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
+      "community_name": "status_card.dart",
       "file_type": "code",
       "norm_label": "statuscard",
       "source_file": "civ-main/lib/widgets/cards/status_card.dart",
       "source_location": "L6"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_loading",
-      "label": "loading.dart",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "loading.dart",
-      "source_file": "civ-main/lib/widgets/common/loading.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_widgets_common_loading_apploading",
-      "label": "AppLoading",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "apploading",
-      "source_file": "civ-main/lib/widgets/common/loading.dart",
-      "source_location": "L4"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_loading_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/widgets/common/loading.dart",
-      "source_location": "L9"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_loading_message",
-      "label": "message",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "message",
-      "source_file": "civ-main/lib/widgets/common/loading.dart",
-      "source_location": "L5"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title",
-      "label": "section_title.dart",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "section_title.dart",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title_actionlabel",
-      "label": "actionLabel",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "actionlabel",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": "L7"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": "L18"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title_onaction",
-      "label": "onAction",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "onaction",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": "L8"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title_sectiontitle",
-      "label": "SectionTitle",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "sectiontitle",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": "L5"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_section_title_title",
-      "label": "title",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "title",
-      "source_file": "civ-main/lib/widgets/common/section_title.dart",
-      "source_location": "L6"
-    },
-    {
-      "id": "core_constants_app_colors_dart",
-      "label": "../../core/constants/app_colors.dart",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "../../core/constants/app_colors.dart",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "string",
-      "label": "String?",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "../../core/constants/app_colors.dart",
-      "file_type": "code",
-      "norm_label": "string?",
-      "source_file": null,
-      "source_location": null
     },
     {
       "id": "civ_main_lib_widgets_navigation_app_bar",
@@ -13867,6 +13548,17 @@
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/navigation/app_bar.dart",
       "source_location": "L30"
+    },
+    {
+      "id": "civ_main_lib_widgets_navigation_app_bar_civilwatchappbar",
+      "label": "CivilWatchAppBar",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "app_bar.dart",
+      "file_type": "code",
+      "norm_label": "civilwatchappbar",
+      "source_file": "civ-main/lib/widgets/navigation/app_bar.dart",
+      "source_location": "L5"
     },
     {
       "id": "civ_main_lib_widgets_navigation_app_bar_onback",
@@ -13935,6 +13627,17 @@
       "source_location": "L11"
     },
     {
+      "id": "preferredsizewidget",
+      "label": "PreferredSizeWidget",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "app_bar.dart",
+      "file_type": "code",
+      "norm_label": "preferredsizewidget",
+      "source_file": null,
+      "source_location": null
+    },
+    {
       "id": "size_get",
       "label": "Size get",
       "_origin": "ast",
@@ -13944,6 +13647,39 @@
       "norm_label": "size get",
       "source_file": null,
       "source_location": null
+    },
+    {
+      "id": "app_dart",
+      "label": "app.dart",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "app.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_main",
+      "label": "main.dart",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "main.dart",
+      "source_file": "civ-main/lib/main.dart",
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_main_main",
+      "label": "main",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "main",
+      "source_file": "civ-main/lib/main.dart",
+      "source_location": "L6"
     },
     {
       "id": "civ_main_lib_screens_my_reports_my_reports_screen",
@@ -14023,28 +13759,6 @@
       "source_location": "L28"
     },
     {
-      "id": "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreen",
-      "label": "MyReportsScreen",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "my_reports_screen.dart",
-      "file_type": "code",
-      "norm_label": "myreportsscreen",
-      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
-      "source_location": "L13"
-    },
-    {
-      "id": "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreenstate",
-      "label": "_MyReportsScreenState",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "my_reports_screen.dart",
-      "file_type": "code",
-      "norm_label": "_myreportsscreenstate",
-      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
-      "source_location": "L21"
-    },
-    {
       "id": "civ_main_lib_screens_my_reports_my_reports_screen_searchcontroller",
       "label": "_searchController",
       "_origin": "ast",
@@ -14065,6 +13779,94 @@
       "norm_label": "_searchquery",
       "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
       "source_location": "L24"
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen",
+      "label": "notification_screen.dart",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "notification_screen.dart",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": "L15"
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen_embedded",
+      "label": "embedded",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "embedded",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": "L11"
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen_grouplabel",
+      "label": "_GroupLabel",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "_grouplabel",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": "L190"
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen_label",
+      "label": "label",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "label",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": "L191"
+    },
+    {
+      "id": "civ_main_lib_screens_notifications_notification_screen_notificationscreen",
+      "label": "NotificationScreen",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "notificationscreen",
+      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "source_location": "L10"
+    },
+    {
+      "id": "core_state_app_state_dart",
+      "label": "../../core/state/app_state.dart",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "../../core/state/app_state.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "widgets_cards_notification_card_dart",
+      "label": "../../widgets/cards/notification_card.dart",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "my_reports_screen.dart",
+      "file_type": "code",
+      "norm_label": "../../widgets/cards/notification_card.dart",
+      "source_file": null,
+      "source_location": null
     },
     {
       "id": "widgets_cards_report_card_dart",
@@ -14115,7 +13917,7 @@
       "label": "ActivityEntry",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "activityentry",
       "source_file": "civ-main/lib/models/report.dart",
@@ -14126,73 +13928,18 @@
       "label": "IncidentReport",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "incidentreport",
       "source_file": "civ-main/lib/models/report.dart",
       "source_location": "L1"
     },
     {
-      "id": "civ_main_lib_screens_report_report_stepper",
-      "label": "_report_stepper.dart",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "_report_stepper.dart",
-      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_stepper_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
-      "source_location": "L19"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_stepper_currentstep",
-      "label": "currentStep",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "currentstep",
-      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
-      "source_location": "L6"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_stepper_labels",
-      "label": "_labels",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "_labels",
-      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
-      "source_location": "L10"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_stepper_reportstepper",
-      "label": "ReportStepper",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "reportstepper",
-      "source_file": "civ-main/lib/screens/report/_report_stepper.dart",
-      "source_location": "L5"
-    },
-    {
       "id": "civ_main_lib_widgets_cards_activity_card",
       "label": "activity_card.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "activity_card.dart",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14203,7 +13950,7 @@
       "label": "ActivityCard",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "activitycard",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14214,7 +13961,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14225,7 +13972,7 @@
       "label": "entry",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "entry",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14236,7 +13983,7 @@
       "label": "isCurrent",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "iscurrent",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14247,7 +13994,7 @@
       "label": "isLast",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "islast",
       "source_file": "civ-main/lib/widgets/cards/activity_card.dart",
@@ -14258,7 +14005,7 @@
       "label": "report_card.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "report_card.dart",
       "source_file": "civ-main/lib/widgets/cards/report_card.dart",
@@ -14269,7 +14016,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/cards/report_card.dart",
@@ -14280,7 +14027,7 @@
       "label": "onTap",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "ontap",
       "source_file": "civ-main/lib/widgets/cards/report_card.dart",
@@ -14291,7 +14038,7 @@
       "label": "report",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "report",
       "source_file": "civ-main/lib/widgets/cards/report_card.dart",
@@ -14302,7 +14049,7 @@
       "label": "ReportCard",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "reportcard",
       "source_file": "civ-main/lib/widgets/cards/report_card.dart",
@@ -14313,7 +14060,7 @@
       "label": "status_chip.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "status_chip.dart",
       "source_file": "civ-main/lib/widgets/common/status_chip.dart",
@@ -14324,7 +14071,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/common/status_chip.dart",
@@ -14335,7 +14082,7 @@
       "label": "small",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "small",
       "source_file": "civ-main/lib/widgets/common/status_chip.dart",
@@ -14346,7 +14093,7 @@
       "label": "status",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "status",
       "source_file": "civ-main/lib/widgets/common/status_chip.dart",
@@ -14357,7 +14104,7 @@
       "label": "StatusChip",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "statuschip",
       "source_file": "civ-main/lib/widgets/common/status_chip.dart",
@@ -14368,7 +14115,7 @@
       "label": "progress_timeline.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "progress_timeline.dart",
       "source_file": "civ-main/lib/widgets/timeline/progress_timeline.dart",
@@ -14379,7 +14126,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/timeline/progress_timeline.dart",
@@ -14390,7 +14137,7 @@
       "label": "ProgressTimeline",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "progresstimeline",
       "source_file": "civ-main/lib/widgets/timeline/progress_timeline.dart",
@@ -14401,7 +14148,7 @@
       "label": "report",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "report",
       "source_file": "civ-main/lib/widgets/timeline/progress_timeline.dart",
@@ -14412,7 +14159,7 @@
       "label": "_steps",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "_steps",
       "source_file": "civ-main/lib/widgets/timeline/progress_timeline.dart",
@@ -14423,7 +14170,7 @@
       "label": "../common/status_chip.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "../common/status_chip.dart",
       "source_file": null,
@@ -14434,7 +14181,7 @@
       "label": "../../core/utils/helpers.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "../../core/utils/helpers.dart",
       "source_file": null,
@@ -14445,31 +14192,9 @@
       "label": "../../models/report.dart",
       "_origin": "ast",
       "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
+      "community_name": "../../core/utils/helpers.dart",
       "file_type": "code",
       "norm_label": "../../models/report.dart",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "package_google_fonts_google_fonts_dart",
-      "label": "package:google_fonts/google_fonts.dart",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "package:google_fonts/google_fonts.dart",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "static_const",
-      "label": "static const",
-      "_origin": "ast",
-      "community": 48,
-      "community_name": "package:google_fonts/google_fonts.dart",
-      "file_type": "code",
-      "norm_label": "static const",
       "source_file": null,
       "source_location": null
     },
@@ -16989,110 +16714,308 @@
       "source_location": "L362"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen",
-      "label": "notification_screen.dart",
+      "id": "civ_main_lib_screens_auth_login_screen_loginscreen",
+      "label": "LoginScreen",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "notification_screen.dart",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
-      "source_location": null
+      "norm_label": "loginscreen",
+      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
+      "source_location": "L13"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen_build",
-      "label": "build",
+      "id": "civ_main_lib_screens_auth_login_screen_loginscreenstate",
+      "label": "_LoginScreenState",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
+      "norm_label": "_loginscreenstate",
+      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
+      "source_location": "L21"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_login_screen_pinpasswordfield",
+      "label": "_PinPasswordField",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_pinpasswordfield",
+      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
+      "source_location": "L475"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_login_screen_pinpasswordfieldstate",
+      "label": "_PinPasswordFieldState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_pinpasswordfieldstate",
+      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
+      "source_location": "L490"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_otp_screen_otpscreen",
+      "label": "OtpScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "otpscreen",
+      "source_file": "civ-main/lib/screens/auth/otp_screen.dart",
+      "source_location": "L12"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_otp_screen_otpscreenstate",
+      "label": "_OtpScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_otpscreenstate",
+      "source_file": "civ-main/lib/screens/auth/otp_screen.dart",
+      "source_location": "L26"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_register_screen_registerscreen",
+      "label": "RegisterScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "registerscreen",
+      "source_file": "civ-main/lib/screens/auth/register_screen.dart",
+      "source_location": "L14"
+    },
+    {
+      "id": "civ_main_lib_screens_auth_register_screen_registerscreenstate",
+      "label": "_RegisterScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_registerscreenstate",
+      "source_file": "civ-main/lib/screens/auth/register_screen.dart",
+      "source_location": "L21"
+    },
+    {
+      "id": "civ_main_lib_screens_home_home_screen_homescreen",
+      "label": "HomeScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "homescreen",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L17"
+    },
+    {
+      "id": "civ_main_lib_screens_home_home_screen_homescreenstate",
+      "label": "_HomeScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_homescreenstate",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L24"
+    },
+    {
+      "id": "civ_main_lib_screens_landing_landing_screen_landingscreen",
+      "label": "LandingScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "landingscreen",
+      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
+      "source_location": "L8"
+    },
+    {
+      "id": "civ_main_lib_screens_landing_landing_screen_landingscreenstate",
+      "label": "_LandingScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_landingscreenstate",
+      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
       "source_location": "L15"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen_embedded",
-      "label": "embedded",
+      "id": "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreen",
+      "label": "MyReportsScreen",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "embedded",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
-      "source_location": "L11"
+      "norm_label": "myreportsscreen",
+      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
+      "source_location": "L13"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen_grouplabel",
-      "label": "_GroupLabel",
+      "id": "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreenstate",
+      "label": "_MyReportsScreenState",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "_grouplabel",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
-      "source_location": "L190"
+      "norm_label": "_myreportsscreenstate",
+      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
+      "source_location": "L21"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen_label",
-      "label": "label",
+      "id": "civ_main_lib_screens_report_report_concern_reportconcernscreen",
+      "label": "ReportConcernScreen",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "label",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
-      "source_location": "L191"
+      "norm_label": "reportconcernscreen",
+      "source_file": "civ-main/lib/screens/report/report_concern.dart",
+      "source_location": "L65"
     },
     {
-      "id": "civ_main_lib_screens_notifications_notification_screen_notificationscreen",
-      "label": "NotificationScreen",
+      "id": "civ_main_lib_screens_report_report_concern_reportconcernscreenstate",
+      "label": "_ReportConcernScreenState",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "notificationscreen",
-      "source_file": "civ-main/lib/screens/notifications/notification_screen.dart",
-      "source_location": "L10"
+      "norm_label": "_reportconcernscreenstate",
+      "source_file": "civ-main/lib/screens/report/report_concern.dart",
+      "source_location": "L73"
     },
     {
-      "id": "core_state_app_state_dart",
-      "label": "../../core/state/app_state.dart",
+      "id": "civ_main_lib_screens_report_report_issue_reportissuescreen",
+      "label": "ReportIssueScreen",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "../../core/state/app_state.dart",
+      "norm_label": "reportissuescreen",
+      "source_file": "civ-main/lib/screens/report/report_issue.dart",
+      "source_location": "L9"
+    },
+    {
+      "id": "civ_main_lib_screens_report_report_issue_reportissuescreenstate",
+      "label": "_ReportIssueScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_reportissuescreenstate",
+      "source_file": "civ-main/lib/screens/report/report_issue.dart",
+      "source_location": "L17"
+    },
+    {
+      "id": "civ_main_lib_screens_report_report_submitted_reportsubmittedscreen",
+      "label": "ReportSubmittedScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "reportsubmittedscreen",
+      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
+      "source_location": "L9"
+    },
+    {
+      "id": "civ_main_lib_screens_report_report_submitted_reportsubmittedscreenstate",
+      "label": "_ReportSubmittedScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_reportsubmittedscreenstate",
+      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
+      "source_location": "L18"
+    },
+    {
+      "id": "civ_main_lib_screens_splash_splash_screen_splashscreen",
+      "label": "SplashScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "splashscreen",
+      "source_file": "civ-main/lib/screens/splash/splash_screen.dart",
+      "source_location": "L7"
+    },
+    {
+      "id": "civ_main_lib_screens_splash_splash_screen_splashscreenstate",
+      "label": "_SplashScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_splashscreenstate",
+      "source_file": "civ-main/lib/screens/splash/splash_screen.dart",
+      "source_location": "L14"
+    },
+    {
+      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreen",
+      "label": "VisitorReportsScreen",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "visitorreportsscreen",
+      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
+      "source_location": "L12"
+    },
+    {
+      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreenstate",
+      "label": "_VisitorReportsScreenState",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "_visitorreportsscreenstate",
+      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
+      "source_location": "L19"
+    },
+    {
+      "id": "singletickerproviderstatemixin",
+      "label": "SingleTickerProviderStateMixin",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "State",
+      "file_type": "code",
+      "norm_label": "singletickerproviderstatemixin",
       "source_file": null,
       "source_location": null
     },
     {
-      "id": "widgets_cards_notification_card_dart",
-      "label": "../../widgets/cards/notification_card.dart",
+      "id": "state",
+      "label": "State",
       "_origin": "ast",
       "community": 61,
-      "community_name": "../../core/state/app_state.dart",
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "../../widgets/cards/notification_card.dart",
+      "norm_label": "state",
       "source_file": null,
       "source_location": null
     },
     {
-      "id": "civ_main_lib_models_notification_model_appnotification",
-      "label": "AppNotification",
+      "id": "statefulwidget",
+      "label": "StatefulWidget",
       "_origin": "ast",
-      "community": 62,
-      "community_name": "VoidCallback?",
+      "community": 61,
+      "community_name": "State",
       "file_type": "code",
-      "norm_label": "appnotification",
-      "source_file": "civ-main/lib/models/notification_model.dart",
-      "source_location": "L1"
+      "norm_label": "statefulwidget",
+      "source_file": null,
+      "source_location": null
     },
     {
       "id": "civ_main_lib_widgets_cards_notification_card",
       "label": "notification_card.dart",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "notification_card.dart",
       "source_file": "civ-main/lib/widgets/cards/notification_card.dart",
@@ -17103,7 +17026,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/cards/notification_card.dart",
@@ -17114,7 +17037,7 @@
       "label": "notification",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "notification",
       "source_file": "civ-main/lib/widgets/cards/notification_card.dart",
@@ -17125,7 +17048,7 @@
       "label": "NotificationCard",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "notificationcard",
       "source_file": "civ-main/lib/widgets/cards/notification_card.dart",
@@ -17136,18 +17059,84 @@
       "label": "onTap",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "ontap",
       "source_file": "civ-main/lib/widgets/cards/notification_card.dart",
       "source_location": "L9"
     },
     {
+      "id": "civ_main_lib_widgets_common_section_title",
+      "label": "section_title.dart",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "section_title.dart",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": null
+    },
+    {
+      "id": "civ_main_lib_widgets_common_section_title_actionlabel",
+      "label": "actionLabel",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "actionlabel",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": "L7"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_section_title_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": "L18"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_section_title_onaction",
+      "label": "onAction",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "onaction",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": "L8"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_section_title_sectiontitle",
+      "label": "SectionTitle",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "sectiontitle",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": "L5"
+    },
+    {
+      "id": "civ_main_lib_widgets_common_section_title_title",
+      "label": "title",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "title",
+      "source_file": "civ-main/lib/widgets/common/section_title.dart",
+      "source_location": "L6"
+    },
+    {
       "id": "civ_main_lib_widgets_inputs_search_field",
       "label": "search_field.dart",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "search_field.dart",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
@@ -17158,7 +17147,7 @@
       "label": "build",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "build",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
@@ -17169,7 +17158,7 @@
       "label": "controller",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "controller",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
@@ -17180,7 +17169,7 @@
       "label": "hint",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "hint",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
@@ -17191,7 +17180,7 @@
       "label": "onClear",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "onclear",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
@@ -17202,18 +17191,40 @@
       "label": "SearchField",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "searchfield",
       "source_file": "civ-main/lib/widgets/inputs/search_field.dart",
       "source_location": "L5"
     },
     {
+      "id": "core_constants_app_colors_dart",
+      "label": "../../core/constants/app_colors.dart",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "../../core/constants/app_colors.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "package_google_fonts_google_fonts_dart",
+      "label": "package:google_fonts/google_fonts.dart",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "../../core/constants/app_colors.dart",
+      "file_type": "code",
+      "norm_label": "package:google_fonts/google_fonts.dart",
+      "source_file": null,
+      "source_location": null
+    },
+    {
       "id": "texteditingcontroller",
       "label": "TextEditingController?",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "texteditingcontroller?",
       "source_file": null,
@@ -17224,7 +17235,7 @@
       "label": "VoidCallback?",
       "_origin": "ast",
       "community": 62,
-      "community_name": "VoidCallback?",
+      "community_name": "../../core/constants/app_colors.dart",
       "file_type": "code",
       "norm_label": "voidcallback?",
       "source_file": null,
@@ -18245,94 +18256,6 @@
       "source_location": null
     },
     {
-      "id": "civ_main_lib_screens_auth_login_screen_skylinepainter",
-      "label": "_SkylinePainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_skylinepainter",
-      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
-      "source_location": "L722"
-    },
-    {
-      "id": "civ_main_lib_screens_community_map_community_map_screen_tailpainter",
-      "label": "_TailPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_tailpainter",
-      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
-      "source_location": "L947"
-    },
-    {
-      "id": "civ_main_lib_screens_home_home_screen_homeminimappainter",
-      "label": "_HomeMiniMapPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_homeminimappainter",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L755"
-    },
-    {
-      "id": "civ_main_lib_screens_home_home_screen_minicitypainter",
-      "label": "_MiniCityPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_minicitypainter",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L707"
-    },
-    {
-      "id": "civ_main_lib_screens_landing_landing_screen_landingskylinepainter",
-      "label": "_LandingSkylinePainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_landingskylinepainter",
-      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
-      "source_location": "L484"
-    },
-    {
-      "id": "civ_main_lib_screens_map_preview_private_map_screen_tailpainter",
-      "label": "_TailPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_tailpainter",
-      "source_file": "civ-main/lib/screens/map_preview/private_map_screen.dart",
-      "source_location": "L370"
-    },
-    {
-      "id": "civ_main_lib_screens_report_report_submitted_successcitypainter",
-      "label": "_SuccessCityPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_successcitypainter",
-      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
-      "source_location": "L276"
-    },
-    {
-      "id": "civ_main_lib_widgets_map_map_marker_pintailpainter",
-      "label": "_PinTailPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_pintailpainter",
-      "source_file": "civ-main/lib/widgets/map/map_marker.dart",
-      "source_location": "L58"
-    },
-    {
       "id": "civ_main_lib_widgets_map_map_preview",
       "label": "_",
       "_origin": "ast",
@@ -18454,17 +18377,6 @@
       "source_location": "L305"
     },
     {
-      "id": "civ_main_lib_widgets_map_map_preview_mappainter",
-      "label": "_MapPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_mappainter",
-      "source_file": "civ-main/lib/widgets/map/map_preview.dart",
-      "source_location": "L100"
-    },
-    {
       "id": "civ_main_lib_widgets_map_map_preview_mappin",
       "label": "_MapPin",
       "_origin": "ast",
@@ -18520,17 +18432,6 @@
       "source_location": "L228"
     },
     {
-      "id": "civ_main_lib_widgets_map_map_preview_pintailpainter",
-      "label": "_PinTailPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "_pintailpainter",
-      "source_file": "civ-main/lib/widgets/map/map_preview.dart",
-      "source_location": "L209"
-    },
-    {
       "id": "civ_main_lib_widgets_map_map_preview_shouldrepaint",
       "label": "shouldRepaint",
       "_origin": "ast",
@@ -18573,17 +18474,6 @@
       "norm_label": "status",
       "source_file": "civ-main/lib/widgets/map/map_preview.dart",
       "source_location": "L13"
-    },
-    {
-      "id": "custompainter",
-      "label": "CustomPainter",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_",
-      "file_type": "code",
-      "norm_label": "custompainter",
-      "source_file": null,
-      "source_location": null
     },
     {
       "id": "dart_ui",
@@ -18773,147 +18663,125 @@
       "source_location": "L18"
     },
     {
-      "id": "borderradius",
-      "label": "BorderRadius?",
+      "id": "civ_main_lib_widgets_inputs_otp_box",
+      "label": "otp_box.dart",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "borderradius?",
-      "source_file": null,
+      "norm_label": "otp_box.dart",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
       "source_location": null
     },
     {
-      "id": "boxfit",
-      "label": "BoxFit",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "app_network_image.dart",
-      "file_type": "code",
-      "norm_label": "boxfit",
-      "source_file": null,
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_network_image",
-      "label": "app_network_image.dart",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "app_network_image.dart",
-      "file_type": "code",
-      "norm_label": "app_network_image.dart",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": null
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_network_image_appnetworkimage",
-      "label": "AppNetworkImage",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "app_network_image.dart",
-      "file_type": "code",
-      "norm_label": "appnetworkimage",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L6"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_network_image_borderradius",
-      "label": "borderRadius",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "app_network_image.dart",
-      "file_type": "code",
-      "norm_label": "borderradius",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L12"
-    },
-    {
-      "id": "civ_main_lib_widgets_common_app_network_image_build",
+      "id": "civ_main_lib_widgets_inputs_otp_box_build",
       "label": "build",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
       "norm_label": "build",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L25"
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L56"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_errorwidget",
-      "label": "errorWidget",
+      "id": "civ_main_lib_widgets_inputs_otp_box_controllers",
+      "label": "_controllers",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "errorwidget",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L11"
+      "norm_label": "_controllers",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L22"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_fit",
-      "label": "fit",
+      "id": "civ_main_lib_widgets_inputs_otp_box_createstate",
+      "label": "createState",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "fit",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L10"
+      "norm_label": "createstate",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L18"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_height",
-      "label": "height",
+      "id": "civ_main_lib_widgets_inputs_otp_box_dispose",
+      "label": "dispose",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "height",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L9"
+      "norm_label": "dispose",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L34"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_placeholder",
-      "label": "_placeholder",
+      "id": "civ_main_lib_widgets_inputs_otp_box_focusnodes",
+      "label": "_focusNodes",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "_placeholder",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L55"
+      "norm_label": "_focusnodes",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L23"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_url",
-      "label": "url",
+      "id": "civ_main_lib_widgets_inputs_otp_box_initstate",
+      "label": "initState",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "url",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L7"
+      "norm_label": "initstate",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L26"
     },
     {
-      "id": "civ_main_lib_widgets_common_app_network_image_width",
-      "label": "width",
+      "id": "civ_main_lib_widgets_inputs_otp_box_length",
+      "label": "length",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "width",
-      "source_file": "civ-main/lib/widgets/common/app_network_image.dart",
-      "source_location": "L8"
+      "norm_label": "length",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L6"
     },
     {
-      "id": "widget",
-      "label": "Widget?",
+      "id": "civ_main_lib_widgets_inputs_otp_box_onchanged",
+      "label": "_onChanged",
       "_origin": "ast",
       "community": 76,
-      "community_name": "app_network_image.dart",
+      "community_name": "otp_box.dart",
       "file_type": "code",
-      "norm_label": "widget?",
-      "source_file": null,
-      "source_location": null
+      "norm_label": "_onchanged",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L40"
+    },
+    {
+      "id": "civ_main_lib_widgets_inputs_otp_box_otpinputrow",
+      "label": "OtpInputRow",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "otp_box.dart",
+      "file_type": "code",
+      "norm_label": "otpinputrow",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L5"
+    },
+    {
+      "id": "civ_main_lib_widgets_inputs_otp_box_otpinputrowstate",
+      "label": "_OtpInputRowState",
+      "_origin": "ast",
+      "community": 76,
+      "community_name": "otp_box.dart",
+      "file_type": "code",
+      "norm_label": "_otpinputrowstate",
+      "source_file": "civ-main/lib/widgets/inputs/otp_box.dart",
+      "source_location": "L21"
     },
     {
       "id": "civ_main_lib_screens_auth_register_screen_pininputrow",
@@ -19013,6 +18881,17 @@
       "norm_label": "_phoneformatter",
       "source_file": "civ-main/lib/screens/auth/register_screen.dart",
       "source_location": "L975"
+    },
+    {
+      "id": "civ_main_lib_screens_community_map_community_map_screen_viewfulldetails",
+      "label": "_viewFullDetails",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "code",
+      "norm_label": "_viewfulldetails",
+      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
+      "source_location": "L436"
     },
     {
       "id": "civ_main_lib_screens_visitor_track_by_reference_screen",
@@ -19323,6 +19202,39 @@
       "source_location": "L702"
     },
     {
+      "id": "civ_main_lib_screens_visitor_track_by_reference_screen_viewdetail",
+      "label": "_viewDetail",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "code",
+      "norm_label": "_viewdetail",
+      "source_file": "civ-main/lib/screens/visitor/track_by_reference_screen.dart",
+      "source_location": "L46"
+    },
+    {
+      "id": "civ_main_lib_screens_visitor_visitor_about_screen_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/visitor/visitor_about_screen.dart",
+      "source_location": "L18"
+    },
+    {
+      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
+      "source_location": "L56"
+    },
+    {
       "id": "textinputformatter",
       "label": "TextInputFormatter",
       "_origin": "ast",
@@ -19341,6 +19253,28 @@
       "community_name": "track_by_reference_screen.dart",
       "file_type": "code",
       "norm_label": "textstyle?",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "route_approutes_trackbyreference",
+      "label": "AppRoutes.trackByReference",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "concept",
+      "norm_label": "approutes.trackbyreference",
+      "source_file": null,
+      "source_location": null
+    },
+    {
+      "id": "route_approutes_trackreport",
+      "label": "AppRoutes.trackReport",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "track_by_reference_screen.dart",
+      "file_type": "concept",
+      "norm_label": "approutes.trackreport",
       "source_file": null,
       "source_location": null
     },
@@ -19411,123 +19345,112 @@
       "source_location": null
     },
     {
-      "id": "civ_main_lib_screens_community_map_community_map_screen_viewonmap",
-      "label": "_viewOnMap",
+      "id": "civ_main_lib_models_office",
+      "label": "office.dart",
       "_origin": "ast",
       "community": 86,
-      "community_name": "build",
+      "community_name": "List",
       "file_type": "code",
-      "norm_label": "_viewonmap",
-      "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
-      "source_location": "L444"
-    },
-    {
-      "id": "civ_main_lib_screens_home_home_screen_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/home/home_screen.dart",
-      "source_location": "L36"
-    },
-    {
-      "id": "civ_main_lib_screens_my_reports_my_reports_screen_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/my_reports/my_reports_screen.dart",
-      "source_location": "L58"
-    },
-    {
-      "id": "civ_main_lib_screens_profile_profile_screen_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/profile/profile_screen.dart",
-      "source_location": "L15"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_status_update_screen_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L27"
-    },
-    {
-      "id": "civ_main_lib_screens_track_report_track_report_screen_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/track_report/track_report_screen.dart",
-      "source_location": "L27"
-    },
-    {
-      "id": "route_approutes_communitymap",
-      "label": "AppRoutes.communityMap",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "build",
-      "file_type": "concept",
-      "norm_label": "approutes.communitymap",
-      "source_file": null,
+      "norm_label": "office.dart",
+      "source_file": "civ-main/lib/models/office.dart",
       "source_location": null
     },
     {
-      "id": "route_approutes_myreports",
-      "label": "AppRoutes.myReports",
+      "id": "civ_main_lib_models_office_abbreviation",
+      "label": "abbreviation",
       "_origin": "ast",
       "community": 86,
-      "community_name": "build",
-      "file_type": "concept",
-      "norm_label": "approutes.myreports",
-      "source_file": null,
-      "source_location": null
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "abbreviation",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L4"
     },
     {
-      "id": "route_approutes_notifications",
-      "label": "AppRoutes.notifications",
+      "id": "civ_main_lib_models_office_address",
+      "label": "address",
       "_origin": "ast",
       "community": 86,
-      "community_name": "build",
-      "file_type": "concept",
-      "norm_label": "approutes.notifications",
-      "source_file": null,
-      "source_location": null
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "address",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L8"
     },
     {
-      "id": "route_approutes_privatemap",
-      "label": "AppRoutes.privateMap",
+      "id": "civ_main_lib_models_office_contactnumber",
+      "label": "contactNumber",
       "_origin": "ast",
       "community": 86,
-      "community_name": "build",
-      "file_type": "concept",
-      "norm_label": "approutes.privatemap",
-      "source_file": null,
-      "source_location": null
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "contactnumber",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L6"
     },
     {
-      "id": "route_approutes_reportcategory",
-      "label": "AppRoutes.reportCategory",
+      "id": "civ_main_lib_models_office_email",
+      "label": "email",
       "_origin": "ast",
       "community": 86,
-      "community_name": "build",
-      "file_type": "concept",
-      "norm_label": "approutes.reportcategory",
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "email",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L7"
+    },
+    {
+      "id": "civ_main_lib_models_office_governmentoffice",
+      "label": "GovernmentOffice",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "governmentoffice",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L1"
+    },
+    {
+      "id": "civ_main_lib_models_office_handles",
+      "label": "handles",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "handles",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L5"
+    },
+    {
+      "id": "civ_main_lib_models_office_id",
+      "label": "id",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "id",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L2"
+    },
+    {
+      "id": "civ_main_lib_models_office_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "civ-main/lib/models/office.dart",
+      "source_location": "L3"
+    },
+    {
+      "id": "list",
+      "label": "List",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "List",
+      "file_type": "code",
+      "norm_label": "list",
       "source_file": null,
       "source_location": null
     },
@@ -19629,6 +19552,17 @@
       "norm_label": "paint",
       "source_file": "civ-main/lib/widgets/map/map_marker.dart",
       "source_location": "L63"
+    },
+    {
+      "id": "civ_main_lib_widgets_map_map_marker_pintailpainter",
+      "label": "_PinTailPainter",
+      "_origin": "ast",
+      "community": 87,
+      "community_name": "_",
+      "file_type": "code",
+      "norm_label": "_pintailpainter",
+      "source_file": "civ-main/lib/widgets/map/map_marker.dart",
+      "source_location": "L58"
     },
     {
       "id": "civ_main_lib_widgets_map_map_marker_shouldrepaint",
@@ -21000,68 +20934,112 @@
       "source_location": null
     },
     {
-      "id": "civ_main_lib_screens_community_map_community_map_screen_viewfulldetails",
-      "label": "_viewFullDetails",
+      "id": "civ_main_lib_screens_auth_login_screen_skylinepainter",
+      "label": "_SkylinePainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
+      "community_name": "CustomPainter",
       "file_type": "code",
-      "norm_label": "_viewfulldetails",
+      "norm_label": "_skylinepainter",
+      "source_file": "civ-main/lib/screens/auth/login_screen.dart",
+      "source_location": "L722"
+    },
+    {
+      "id": "civ_main_lib_screens_community_map_community_map_screen_tailpainter",
+      "label": "_TailPainter",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "_tailpainter",
       "source_file": "civ-main/lib/screens/community_map/community_map_screen.dart",
-      "source_location": "L436"
+      "source_location": "L947"
     },
     {
-      "id": "civ_main_lib_screens_visitor_track_by_reference_screen_viewdetail",
-      "label": "_viewDetail",
+      "id": "civ_main_lib_screens_home_home_screen_homeminimappainter",
+      "label": "_HomeMiniMapPainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
+      "community_name": "CustomPainter",
       "file_type": "code",
-      "norm_label": "_viewdetail",
-      "source_file": "civ-main/lib/screens/visitor/track_by_reference_screen.dart",
-      "source_location": "L46"
+      "norm_label": "_homeminimappainter",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L755"
     },
     {
-      "id": "civ_main_lib_screens_visitor_visitor_about_screen_build",
-      "label": "build",
+      "id": "civ_main_lib_screens_home_home_screen_minicitypainter",
+      "label": "_MiniCityPainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
+      "community_name": "CustomPainter",
       "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/visitor/visitor_about_screen.dart",
-      "source_location": "L18"
+      "norm_label": "_minicitypainter",
+      "source_file": "civ-main/lib/screens/home/home_screen.dart",
+      "source_location": "L707"
     },
     {
-      "id": "civ_main_lib_screens_visitor_visitor_reports_screen_build",
-      "label": "build",
+      "id": "civ_main_lib_screens_landing_landing_screen_landingskylinepainter",
+      "label": "_LandingSkylinePainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
+      "community_name": "CustomPainter",
       "file_type": "code",
-      "norm_label": "build",
-      "source_file": "civ-main/lib/screens/visitor/visitor_reports_screen.dart",
-      "source_location": "L56"
+      "norm_label": "_landingskylinepainter",
+      "source_file": "civ-main/lib/screens/landing/landing_screen.dart",
+      "source_location": "L484"
     },
     {
-      "id": "route_approutes_trackbyreference",
-      "label": "AppRoutes.trackByReference",
+      "id": "civ_main_lib_screens_map_preview_private_map_screen_tailpainter",
+      "label": "_TailPainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
-      "file_type": "concept",
-      "norm_label": "approutes.trackbyreference",
-      "source_file": null,
-      "source_location": null
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "_tailpainter",
+      "source_file": "civ-main/lib/screens/map_preview/private_map_screen.dart",
+      "source_location": "L370"
     },
     {
-      "id": "route_approutes_trackreport",
-      "label": "AppRoutes.trackReport",
+      "id": "civ_main_lib_screens_report_report_submitted_successcitypainter",
+      "label": "_SuccessCityPainter",
       "_origin": "ast",
       "community": 99,
-      "community_name": "AppRoutes.trackReport",
-      "file_type": "concept",
-      "norm_label": "approutes.trackreport",
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "_successcitypainter",
+      "source_file": "civ-main/lib/screens/report/report_submitted.dart",
+      "source_location": "L276"
+    },
+    {
+      "id": "civ_main_lib_widgets_map_map_preview_mappainter",
+      "label": "_MapPainter",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "_mappainter",
+      "source_file": "civ-main/lib/widgets/map/map_preview.dart",
+      "source_location": "L100"
+    },
+    {
+      "id": "civ_main_lib_widgets_map_map_preview_pintailpainter",
+      "label": "_PinTailPainter",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "_pintailpainter",
+      "source_file": "civ-main/lib/widgets/map/map_preview.dart",
+      "source_location": "L209"
+    },
+    {
+      "id": "custompainter",
+      "label": "CustomPainter",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "CustomPainter",
+      "file_type": "code",
+      "norm_label": "custompainter",
       "source_file": null,
       "source_location": null
     }
@@ -21532,7 +21510,7 @@
       "confidence_score": 1.0,
       "context": "variable_type",
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L39",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -23133,54 +23111,6 @@
     },
     {
       "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "list",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "variable_type",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L564",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "icondata",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "variable_type",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L685",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "string",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "variable_type",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L691",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "color",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "variable_type",
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L696",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
       "target": "civ_main_lib_models_report_incidentreport",
       "relation": "references",
       "_origin": "ast",
@@ -23188,7 +23118,19 @@
       "confidence_score": 1.0,
       "context": "variable_type",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L805",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "list",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "variable_type",
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L561",
       "weight": 1.0
     },
     {
@@ -23200,7 +23142,43 @@
       "confidence_score": 1.0,
       "context": "variable_type",
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L808",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "icondata",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "variable_type",
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L682",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "string",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "variable_type",
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L688",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "color",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "variable_type",
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L693",
       "weight": 1.0
     },
     {
@@ -26795,7 +26773,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L11",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -26806,7 +26784,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L15",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -26817,7 +26795,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L18",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -26828,7 +26806,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L21",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -26839,7 +26817,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L22",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -26850,7 +26828,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L23",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -26861,7 +26839,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L24",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -26872,7 +26850,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L25",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -26883,7 +26861,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L26",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -26894,7 +26872,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L29",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -26905,7 +26883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L30",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -26916,7 +26894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L31",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -26927,7 +26905,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L34",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -26938,7 +26916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L35",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -26949,7 +26927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L36",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -26960,7 +26938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L39",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -26971,7 +26949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L42",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -26982,7 +26960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/core/constants/api_constants.dart",
-      "source_location": "L48",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -38125,7 +38103,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L500",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -38136,7 +38114,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L541",
+      "source_location": "L538",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "civ_main_lib_screens_track_report_status_update_screen_report",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "civ_main_lib_screens_track_report_status_update_screen_steps",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L558",
+      "weight": 1.0
+    },
+    {
+      "source": "civ_main_lib_screens_track_report_status_update_screen",
+      "target": "civ_main_lib_screens_track_report_status_update_screen_stepsraw",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
+      "source_location": "L559",
       "weight": 1.0
     },
     {
@@ -38152,35 +38163,13 @@
     },
     {
       "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "civ_main_lib_screens_track_report_status_update_screen_steps",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L561",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "civ_main_lib_screens_track_report_status_update_screen_stepsraw",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L562",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
       "target": "civ_main_lib_screens_track_report_status_update_screen_currentidx",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L563",
+      "source_location": "L560",
       "weight": 1.0
     },
     {
@@ -38191,7 +38180,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L564",
+      "source_location": "L561",
       "weight": 1.0
     },
     {
@@ -38202,7 +38191,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L566",
+      "source_location": "L563",
       "weight": 1.0
     },
     {
@@ -38213,7 +38202,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L685",
+      "source_location": "L682",
       "weight": 1.0
     },
     {
@@ -38224,7 +38213,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L686",
+      "source_location": "L683",
       "weight": 1.0
     },
     {
@@ -38235,7 +38224,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L687",
+      "source_location": "L684",
       "weight": 1.0
     },
     {
@@ -38246,7 +38235,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L688",
+      "source_location": "L685",
       "weight": 1.0
     },
     {
@@ -38257,7 +38246,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L689",
+      "source_location": "L686",
       "weight": 1.0
     },
     {
@@ -38268,7 +38257,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L690",
+      "source_location": "L687",
       "weight": 1.0
     },
     {
@@ -38279,7 +38268,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L691",
+      "source_location": "L688",
       "weight": 1.0
     },
     {
@@ -38290,7 +38279,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L692",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -38301,7 +38290,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L693",
+      "source_location": "L690",
       "weight": 1.0
     },
     {
@@ -38312,7 +38301,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L694",
+      "source_location": "L691",
       "weight": 1.0
     },
     {
@@ -38323,7 +38312,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L695",
+      "source_location": "L692",
       "weight": 1.0
     },
     {
@@ -38334,7 +38323,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L696",
+      "source_location": "L693",
       "weight": 1.0
     },
     {
@@ -38345,40 +38334,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L698",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "civ_main_lib_screens_track_report_status_update_screen_report",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L805",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "civ_main_lib_screens_track_report_status_update_screen_advancestatusbutton",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L806",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen",
-      "target": "civ_main_lib_screens_track_report_status_update_screen_order",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L808",
+      "source_location": "L695",
       "weight": 1.0
     },
     {
@@ -38389,7 +38345,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L823",
+      "source_location": "L711",
       "weight": 1.0
     },
     {
@@ -48179,18 +48135,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L684",
-      "weight": 1.0
-    },
-    {
-      "source": "civ_main_lib_screens_track_report_status_update_screen_advancestatusbutton",
-      "target": "statelesswidget",
-      "relation": "inherits",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L804",
+      "source_location": "L681",
       "weight": 1.0
     },
     {
@@ -48201,7 +48146,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "civ-main/lib/screens/track_report/status_update_screen.dart",
-      "source_location": "L560",
+      "source_location": "L557",
       "weight": 1.0
     },
     {
@@ -49372,5 +49317,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c1e9035190cbc557a2bd13b63a518d115d14e73f"
+  "built_at_commit": "a16f8c1ed326f6a2c906726a5565123e17f727db"
 }
