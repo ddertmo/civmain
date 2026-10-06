@@ -306,20 +306,23 @@ Dedicated status history and detail view for a single report.
 | Concern | Implementation |
 |---|---|
 | State management | Singleton `ChangeNotifier` (`AppState`) — no external package |
-| Persistence | In-memory only — resets on app restart (prototype) |
+| Persistence | Server-backed (Laravel + MariaDB); auth token cached in `SharedPreferences`. `AppState` loads via `lib/services/*` and only falls back to `DummyData` when the API is unreachable |
 | Navigation | Named routes via `RouteGenerator` + `Navigator.pushNamed` |
 | Data passing | `Map<String, dynamic>` threaded through route arguments |
 | Geocoding | Live Nominatim API (OpenStreetMap) via `http` package |
 | Maps | `flutter_map` + `latlong2` + OpenStreetMap tile layer |
 
-### Dummy Data (pre-loaded)
-| Dataset | Count |
-|---|---|
-| User reports | 5 |
-| Community reports | 7 |
-| Government offices | 4 (CEO, CENRO, CPWD, CDRRMO) |
-| City announcements | Seeded in `DummyData` |
-| Notifications | Auto-generated on state changes |
+### Data Sources
+Every loader in `AppState` hits the Laravel API first and uses `DummyData`
+only as an offline/failed-request fallback:
+
+| Dataset | Live source | `DummyData` fallback |
+|---|---|---|
+| User reports | `GET /api/mobile/reports` | 5 |
+| Community reports | `GET /api/mobile/reports/community` | 7 pins |
+| City announcements | `GET /api/mobile/announcements` | 2 |
+| Notifications | `GET /api/mobile/notifications` | auto-generated |
+| Government offices | Not wired yet (`GET /api/admin/offices` is admin-only) | 4 (CEO, CENRO, CPWD, CDRRMO) |
 
 ### Government Offices
 | Abbreviation | Full Name | Handles |
@@ -724,7 +727,7 @@ class Announcement {
   final DateTime date;
 }
 ```
-Used by `DummyData.announcements` and rendered in the Home tab's "Latest Announcements" section. Two announcements are seeded.
+Rendered in the Home tab's "Latest Announcements" section from `AppState.announcements`, which loads `GET /api/mobile/announcements` and falls back to `DummyData.announcements` (2 seeded) when the API is unreachable.
 
 ### `MapPin` (defined in `dummy_data.dart`)
 ```dart
@@ -742,7 +745,7 @@ class MapPin {
   final String? imageUrl;
 }
 ```
-Used exclusively by `CommunityMapScreen`. `DummyData.communityPins` seeds **7 pins** with coordinates around Digos City. Linked to `DummyData.communityReports` (7 full `IncidentReport` objects) via `reportId`.
+Used by `CommunityMapScreen`, which builds pins from `AppState.communityReportsPublic` (loaded from `GET /api/mobile/reports/community`, falling back to `DummyData.communityPins` — **7 pins** with coordinates around Digos City — when the API is unreachable). `MapPin.reportId` links each pin to its `IncidentReport`.
 
 ---
 
@@ -904,4 +907,6 @@ dev_dependencies:
 
 ---
 
-*CIVILWATCH is a prototype. All data is in-memory and resets on restart. No backend, authentication server, or database is connected.*
+*CIVILWATCH ships with a real backend: a Laravel 12 + Sanctum API at `../laravel`, with a MariaDB `civilwatch` database. Mobile screens call it through `lib/services/*` (auth, reports, announcements, notifications) using `ApiConstants.baseUrl`, which is overridable with `--dart-define=API_BASE_URL=...` (see `lib/core/constants/api_constants.dart`). Set that flag when running on an emulator or a physical device — the default `http://127.0.0.1:8000/api` only works from the same machine.*
+
+*A few screens still read local seed data in `lib/core/utils/dummy_data.dart` (community map pins, prototype announcements) where an endpoint has not been wired up yet; those reset on restart until they are migrated.*

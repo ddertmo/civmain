@@ -5,6 +5,13 @@
 > **Purpose:** Complete technical context of the citizen app so both systems
 > can be integrated into the same Supabase backend.
 
+> **STATUS — SUPERSEDED.** This document was written before a backend existed.
+> The project now uses a **Laravel 12 + Sanctum** API in `../laravel` with a
+> MariaDB `civilwatch` database — not Supabase. Sections 1.2, 1.3 and 8.x below
+> still describe the pre-backend prototype state and are kept as historical
+> field-mapping notes. The live contract is `../laravel/routes/api.php`,
+> consumed by `lib/services/` and `lib/core/constants/api_constants.dart`.
+
 ---
 
 ## Table of Contents
@@ -40,15 +47,22 @@ No separate citizen sub-brand — it is just CIVILWATCH.
 | Platform | **Mobile app** (Android & iOS) — not web-based |
 | State management | Singleton `ChangeNotifier` — no Bloc/Riverpod/Provider |
 | Maps | `flutter_map ^8.1.1` + `latlong2 ^0.9.1` (OpenStreetMap tiles) |
-| HTTP | `http ^1.2.2` — used only for Nominatim reverse geocoding |
+| HTTP | `http ^1.2.2` — API calls (`lib/services/`) + Nominatim reverse geocoding |
 | Fonts | `google_fonts ^6.2.1` — Inter + Roboto Mono |
 | Date formatting | `intl ^0.19.0` |
-| Backend | **None** — 100% prototype, all data in-memory |
+| Backend | **Laravel 12 + Sanctum** (`../laravel`) on MariaDB — was "None" when this doc was written |
 
 ### 1.3 Current Backend Status
-**Zero backend connection.** No Supabase client, no API keys, no `.env` file.
-The only real HTTP call is to `nominatim.openstreetmap.org` for reverse geocoding.
-Everything else is fake data in `DummyData` and `AppState` (resets on restart).
+**Connected to a real backend.** Auth, reports, announcements and notifications
+go to `../laravel` via `lib/services/{auth,report,announcement,notification}_service.dart`.
+Base URL is selected at build time with `--dart-define=API_BASE_URL=...`
+(default `http://127.0.0.1:8000/api`; use `10.0.2.2` for the Android emulator,
+or your LAN IP for a physical device).
+
+Nominatim (`nominatim.openstreetmap.org`) is still called directly for reverse
+geocoding, and `semaphore_service.dart` still talks to Semaphore for OTP.
+Some screens (community map pins, prototype announcements) still read
+`DummyData` / `AppState` until their endpoint is wired up.
 
 ---
 
@@ -71,11 +85,15 @@ Phone number → OTP (6-digit, simulated) → Home or Register.
 - **New user path:** Phone → OTP → `/register` → `/home`
 - **Existing user path:** Phone → OTP → `/home` directly
 
-The 6-digit PIN is collected at registration but is **not verified on subsequent
-logins** in the prototype — this is a gap that needs to be filled during integration.
+The 6-digit PIN **is** verified on login: `POST /api/mobile/auth/login` takes
+`phone` + `pin` and returns a Sanctum bearer token (`loginWithPin` in
+`auth_service.dart`).
 
 ### 2.3 OTP Details
-- OTP is completely simulated (`Future.delayed`) — no real SMS is sent
+- OTP goes to the backend `POST /api/mobile/auth/send-otp` /
+  `verify-otp` (table `otp_codes`), not a local `Future.delayed`
+- The response currently echoes the `otp` back (source comment: *"Remove 'otp'
+  from response in production"*) so no SMS provider is required yet
 - 60-second countdown resend timer
 - `isNewUser: true/false` flag passed as argument to decide post-verify route
 
@@ -84,8 +102,10 @@ logins** in the prototype — this is a gap that needs to be filled during integ
 No report can be submitted without authenticating.
 
 ### 2.5 Current Auth System
-**Fake / local only.** No `supabase_flutter` in `pubspec.yaml`.
-No tokens, no sessions, no persistence across restarts.
+**Real.** `POST /api/mobile/auth/{send-otp,verify-otp,register,login,logout,me}`
+on the Laravel backend, guarded by **Sanctum** bearer tokens. The token is cached
+in `SharedPreferences` (`ApiClient.saveToken`) and the session is restored on app
+start via `GET /api/mobile/auth/me`.
 
 ### 2.6 Citizen User Data Model (`AppUser`)
 
@@ -184,21 +204,25 @@ No dedicated landing/marketing page. Splash → Login immediately.
 | Submitted at | `submittedAt` | Auto | `DateTime.now().toIso8601String()` |
 
 ### 4.3 Location Selection — Two Methods
-1. **Use Current Location** — simulated GPS at `6.7498, 125.3572` (Digos City centre).
-   In production requires `geolocator` package (not yet installed).
+1. **Use Current Location** — real GPS via `geolocator ^13.0.2`
+   (`Geolocator.getCurrentPosition` in `report_location.dart`), falling back to
+   `6.7498, 125.3572` (Digos City centre) if permission is denied.
 2. **Pick on Map** — inline `flutter_map`, tap anywhere to drop a red pin.
    Nominatim auto-fills address fields. All fields are editable if geocoding fails.
 
 ### 4.4 Photo Upload — Current Status
-**Simulated only.** `hasPhoto` is a boolean flag — no real `File`, no bytes, no URL.
-`image_picker` is **not** in `pubspec.yaml`.
-The `photo_url` column in `reports` will always be `null` until this is built.
+**Built.** `image_picker ^1.1.2` is in `pubspec.yaml`; `ReportService.submitReport`
+sends the picked image as multipart `photo` (`image|max:5120`) and the backend
+stores it on the `public` disk under `report-photos/`. `photo_url` is returned
+in the API response.
 
 ### 4.5 After Submitting
-1. 1.5-second simulated loading spinner
-2. Reference number generated client-side: `CW-{year}-{ms % 100000}`
-3. Report saved to in-memory `AppState`
-4. Two auto-notifications added: "Concern Submitted" + "Pending Validation"
+1. `ReportService.submitReport` posts multipart to `POST /api/mobile/reports`
+2. **Reference number generated server-side**: `CitizenReport::generateReferenceNumber()`
+   → `CW-{year}-{00000+}`, returned in the response
+3. Report persisted in MariaDB; `AppState` reloads it from `GET /api/mobile/reports`
+4. Two activities recorded server-side: "Report Submitted" + "Pending Validation",
+   plus two citizen notifications
 5. Navigated to Submitted screen — shows ref number (copyable) + timestamp
 
 ### 4.6 Exact Data Object Created on Submit
@@ -277,17 +301,20 @@ Full text search across reference number and concern type.
 Submitted → Pending Validation → Assigned to Office → In Progress → Resolved
 ```
 
-The citizen app also has a **demo "Advance Status" button** in Track Report
-that cycles through statuses locally — this is only for prototype testing
-and must be removed before live integration.
+The citizen app previously had a **demo "Advance Status" button** in Track Report
+that cycled through statuses locally. **It has been removed** — status now only
+changes server-side; the app refreshes from `GET /api/mobile/reports/{id}`.
 
 ---
 
 ## 6. Notifications
 
 ### 6.1 Notification System
-**In-app only.** No push notifications (FCM), no SMS, no email.
-Notifications are stored in `AppState` in memory.
+**API-backed, in-app only.** No push notifications (FCM), no SMS, no email.
+Notifications come from `GET /api/mobile/notifications` (table `citizen_notifications`)
+and are marked read via `PUT /api/mobile/notifications/{id}/read` and
+`POST /api/mobile/notifications/mark-all-read`. `DummyData.notifications` is the
+offline fallback.
 
 ### 6.2 Events That Trigger Notifications
 
