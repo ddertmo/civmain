@@ -61,6 +61,13 @@ return [
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+                // Keep the MySQL session timezone in sync with the app (config/app.php
+                // is UTC). Without this, rows written by MySQL's own
+                // CURRENT_TIMESTAMP() (e.g. ReportActivity.created_at default) are
+                // stored/read in the server's local timezone while rows written by
+                // PHP's now() are UTC, so activity logs show timestamps 8 hours
+                // apart when the server runs on UTC+8.
+                (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_INIT_COMMAND : PDO::MYSQL_ATTR_INIT_COMMAND) => "SET time_zone = '+00:00'",
             ]) : [],
         ],
 
@@ -81,6 +88,13 @@ return [
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+                // Keep the MySQL session timezone in sync with the app (config/app.php
+                // is UTC). Without this, rows written by MySQL's own
+                // CURRENT_TIMESTAMP() (e.g. ReportActivity.created_at default) are
+                // stored/read in the server's local timezone while rows written by
+                // PHP's now() are UTC, so activity logs show timestamps 8 hours
+                // apart when the server runs on UTC+8.
+                (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_INIT_COMMAND : PDO::MYSQL_ATTR_INIT_COMMAND) => "SET time_zone = '+00:00'",
             ]) : [],
         ],
 

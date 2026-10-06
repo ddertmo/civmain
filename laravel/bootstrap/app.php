@@ -24,5 +24,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // API requests must get JSON errors, not the HTML login redirect.
+        // Without this, an expired/missing token on any protected route
+        // throws RouteNotFoundException ("Route [login] not defined")
+        // because there is no named web 'login' route in this app.
+        $exceptions->shouldRenderJsonWhen(
+            fn ($request) => $request->is('api/*') || $request->expectsJson()
+        );
     })->create();
