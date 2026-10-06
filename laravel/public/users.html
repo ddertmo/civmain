@@ -761,11 +761,12 @@
 
                 if (!res.ok) throw new Error('Failed to fetch user stats');
 
-                const users = await res.json();
+                const body = await res.json();
+                const users = Array.isArray(body) ? body : (body.data || []);
 
                 // Calculate stats from user data
                 const total = users.length;
-                const active = users.filter(u => u.status === 'Active' || u.is_active === 1).length;
+                const active = users.filter(u => u.status === 'Active' || u.is_active === 1 || u.is_active === true).length;
                 const admins = users.filter(u => u.role === 'Administrator' || u.role === 'super_admin' || u.role === 'ceo' || u.role === 'cenro').length;
                 const staff = users.filter(u => u.role === 'Staff' || u.role === 'staff').length;
 

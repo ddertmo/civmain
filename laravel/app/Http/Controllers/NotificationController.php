@@ -2,30 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notification;
+use App\Models\CitizenNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Admin-panel notification feed.
+ *
+ * Backed by `citizen_notifications` (the shared organisation feed), not the
+ * legacy `notifications` table, which no longer exists. The panel shows the
+ * whole feed, so there is deliberately no per-user scoping here.
+ *
+ * Consumers: public/js/app.js (badge + dropdown) and the 30s unread-count poll.
+ * Expected shape: {success, data:{notifications, unread_count}} and
+ *                 {success, data:{unread_count}}.
+ */
 class NotificationController extends Controller
 {
     // ──────────────────────────────────────────────────────────
     // GET /api/notifications
-    // Returns all notifications for the authenticated user
+    // Returns the organisation-wide notification feed
     // ?unread_only=1  → filter to unread only
     // ──────────────────────────────────────────────────────────
     public function index(Request $request): JsonResponse
     {
-        $query = Notification::where('user_id', $request->user()->id)
-                             ->orderBy('created_at', 'desc');
+        $query = CitizenNotification::orderByDesc('created_at');
 
         if ($request->boolean('unread_only')) {
             $query->where('is_read', false);
         }
 
         $notifications = $query->limit(50)->get();
-        $unreadCount   = Notification::where('user_id', $request->user()->id)
-                                     ->where('is_read', false)
-                                     ->count();
+        $unreadCount   = CitizenNotification::where('is_read', false)->count();
 
         return response()->json([
             'success' => true,
@@ -42,9 +50,7 @@ class NotificationController extends Controller
     // ──────────────────────────────────────────────────────────
     public function markRead(Request $request, int $id): JsonResponse
     {
-        $notification = Notification::where('id', $id)
-                                    ->where('user_id', $request->user()->id)
-                                    ->firstOrFail();
+        $notification = CitizenNotification::findOrFail($id);
 
         $notification->update(['is_read' => true]);
 
@@ -56,13 +62,11 @@ class NotificationController extends Controller
 
     // ──────────────────────────────────────────────────────────
     // POST /api/notifications/read-all
-    // Mark ALL of the user's notifications as read
+    // Mark ALL notifications as read
     // ──────────────────────────────────────────────────────────
     public function markAllRead(Request $request): JsonResponse
     {
-        Notification::where('user_id', $request->user()->id)
-                    ->where('is_read', false)
-                    ->update(['is_read' => true]);
+        CitizenNotification::where('is_read', false)->update(['is_read' => true]);
 
         return response()->json([
             'success' => true,
@@ -76,11 +80,7 @@ class NotificationController extends Controller
     // ──────────────────────────────────────────────────────────
     public function destroy(Request $request, int $id): JsonResponse
     {
-        $notification = Notification::where('id', $id)
-                                    ->where('user_id', $request->user()->id)
-                                    ->firstOrFail();
-
-        $notification->delete();
+        CitizenNotification::findOrFail($id)->delete();
 
         return response()->json([
             'success' => true,
@@ -90,11 +90,11 @@ class NotificationController extends Controller
 
     // ──────────────────────────────────────────────────────────
     // DELETE /api/notifications
-    // Clear all notifications for the current user
+    // Clear all notifications
     // ──────────────────────────────────────────────────────────
     public function destroyAll(Request $request): JsonResponse
     {
-        Notification::where('user_id', $request->user()->id)->delete();
+        CitizenNotification::query()->delete();
 
         return response()->json([
             'success' => true,
@@ -105,13 +105,11 @@ class NotificationController extends Controller
     // ──────────────────────────────────────────────────────────
     // GET /api/notifications/unread-count
     // Lightweight poll endpoint — returns just the badge count
-    // The frontend can call this every 30s to update the bell badge
+    // The frontend calls this every 30s to update the bell badge
     // ──────────────────────────────────────────────────────────
     public function unreadCount(Request $request): JsonResponse
     {
-        $count = Notification::where('user_id', $request->user()->id)
-                             ->where('is_read', false)
-                             ->count();
+        $count = CitizenNotification::where('is_read', false)->count();
 
         return response()->json([
             'success' => true,

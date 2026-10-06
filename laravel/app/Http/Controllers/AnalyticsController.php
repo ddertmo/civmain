@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Report;
+use App\Models\CitizenReport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +19,12 @@ class AnalyticsController extends Controller
         $query = $this->scopedQuery($request);
 
         $total      = (clone $query)->count();
-        $pending    = (clone $query)->where('status', 'pending')->count();
-        $submitted  = (clone $query)->where('status', 'submitted')->count();
-        $assigned   = (clone $query)->where('status', 'assigned')->count();
-        $inProgress = (clone $query)->where('status', 'in_progress')->count();
-        $resolved   = (clone $query)->where('status', 'resolved')->count();
+        $pending    = (clone $query)->where('status', 'Pending Validation')->count();
+        $submitted  = (clone $query)->where('status', 'Submitted')->count();
+        $assigned   = (clone $query)->where('status', 'Assigned to Office')->count();
+        $inProgress = (clone $query)->where('status', 'In Progress')->count();
+        $resolved   = (clone $query)->where('status', 'Resolved')->count();
+        $rejected   = (clone $query)->where('status', 'Rejected')->count();
 
         return response()->json([
             'success' => true,
@@ -33,6 +34,7 @@ class AnalyticsController extends Controller
                 'assigned'           => $assigned,
                 'in_progress'        => $inProgress,
                 'resolved'           => $resolved,
+                'rejected'           => $rejected,
             ],
         ]);
     }
@@ -51,13 +53,12 @@ class AnalyticsController extends Controller
             ->get()
             ->keyBy('status');
 
-        $statuses = ['submitted', 'pending', 'assigned', 'in_progress', 'for_resolution', 'resolved'];
-        $labels   = [];
+        $statuses = ['Submitted', 'Pending Validation', 'Assigned to Office', 'In Progress', 'Resolved', 'Rejected'];
+        $labels   = $statuses;
         $data     = [];
 
         foreach ($statuses as $s) {
-            $labels[] = $this->formatLabel($s);
-            $data[]   = $rows->get($s)?->count ?? 0;
+            $data[] = $rows->get($s)?->count ?? 0;
         }
 
         $total = array_sum($data);
@@ -86,14 +87,14 @@ class AnalyticsController extends Controller
             ->get()
             ->keyBy('category');
 
-        $categories = ['infrastructure', 'environmental', 'public_safety', 'sanitation', 'other'];
+        $categories = ['Infrastructure', 'Environment', 'Others'];
         $labels     = [];
         $data       = [];
 
         foreach ($categories as $c) {
             $count = $rows->get($c)?->count ?? 0;
             if ($count > 0) {
-                $labels[] = ucfirst(str_replace('_', ' ', $c));
+                $labels[] = $c;
                 $data[]   = $count;
             }
         }
@@ -119,8 +120,8 @@ class AnalyticsController extends Controller
         $query = $this->scopedQuery($request);
 
         $rows = (clone $query)
-            ->select('title', DB::raw('COUNT(*) as count'))
-            ->groupBy('title')
+            ->select('concern', DB::raw('COUNT(*) as count'))
+            ->groupBy('concern')
             ->orderByDesc('count')
             ->limit(10)
             ->get();
@@ -128,7 +129,7 @@ class AnalyticsController extends Controller
         return response()->json([
             'success' => true,
             'data'    => [
-                'labels' => $rows->pluck('title')->toArray(),
+                'labels' => $rows->pluck('concern')->toArray(),
                 'data'   => $rows->pluck('count')->toArray(),
             ],
         ]);
@@ -250,36 +251,29 @@ class AnalyticsController extends Controller
     // ──────────────────────────────────────────────────────────
 
     /**
-     * Return a base Report query already scoped to the user's role.
+     * Return a base CitizenReport query already scoped to the user's role.
      * Super admin → all reports
-     * CEO         → only CEO-assigned reports
-     * CENRO       → only CENRO-assigned reports
+     * CEO         → only reports assigned to the CEO office
+     * CENRO       → only reports assigned to the CENRO office
      */
     private function scopedQuery(Request $request)
     {
         $user  = $request->user();
-        $query = Report::query();
+        $query = CitizenReport::query();
 
-        if ($user->role === 'ceo') {
-            $query->where('assigned_to_office', 'CEO');
-        } elseif ($user->role === 'cenro') {
-            $query->where('assigned_to_office', 'CENRO');
+        $officeAbbreviation = match ($user?->role) {
+            'ceo'   => 'CEO',
+            'cenro' => 'CENRO',
+            default => null,
+        };
+
+        if ($officeAbbreviation !== null) {
+            $query->whereHas(
+                'assignedOffice',
+                fn ($q) => $q->where('abbreviation', $officeAbbreviation)
+            );
         }
 
         return $query;
-    }
-
-    /** Convert snake_case status to a human-readable label */
-    private function formatLabel(string $status): string
-    {
-        return match ($status) {
-            'submitted'      => 'Submitted',
-            'pending'        => 'Pending Validation',
-            'assigned'       => 'Assigned',
-            'in_progress'    => 'In Progress',
-            'for_resolution' => 'For Resolution',
-            'resolved'       => 'Resolved',
-            default          => ucfirst(str_replace('_', ' ', $status)),
-        };
     }
 }

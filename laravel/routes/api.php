@@ -88,6 +88,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth:sanctum')->group(functi
     Route::post('citizen-reports/{id}/assign', [AdminCitizenReportController::class, 'assign']);
     Route::post('citizen-reports/{id}/status', [AdminCitizenReportController::class, 'updateStatus']);
 
+    // Users — stats table on public/users.html
+    Route::get('users',          [UserController::class, 'index']);
+
     // Government offices
     Route::get('offices',        [AdminOfficeController::class, 'index']);
     Route::post('offices',       [AdminOfficeController::class, 'store']);
