@@ -31,8 +31,8 @@
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)
 - [app_state.dart](app_state.dart.md) (1 shared connections)
 - [dummy_data.dart](dummy_data.dart.md) (1 shared connections)
-- [notification_screen.dart](notification_screen.dart.md) (1 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
+- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)
 
 ## Source Files
 

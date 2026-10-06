@@ -16,17 +16,17 @@
 ## Relationships
 
 - [_](_.md) (3 shared connections)
+- [visitor_shell.dart](visitor_shell.dart.md) (2 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [text_styles.dart](text_styles.dart.md) (1 shared connections)
 - [helpers.dart](helpers.dart.md) (1 shared connections)
-- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
 - [forgot_password_flow.dart](forgot_password_flow.dart.md) (1 shared connections)
 - [login_screen.dart](login_screen.dart.md) (1 shared connections)
 - [register_screen.dart](register_screen.dart.md) (1 shared connections)
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)
 - [splash_screen.dart](splash_screen.dart.md) (1 shared connections)
-- [track_by_reference_screen.dart](track_by_reference_screen.dart.md) (1 shared connections)
 
 ## Source Files
 

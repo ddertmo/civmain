@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791273091.9602048,
-    "seen": 1791273395.5003471,
-    "ast_hash": "653341b901fcd19bed7e1a8a1daadb63",
+    "mtime": 1791286614.7961953,
+    "seen": 1791286632.0988944,
+    "ast_hash": "8c25779361437648260dc37b504915d3",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1101,6 +1101,36 @@
     "mtime": 1791284907.4321966,
     "seen": 1791285147.3387673,
     "ast_hash": "175c51b05f4ffece042b284733099d7e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-009-reject-with-reason.md": {
+    "mtime": 1791285898.7401958,
+    "seen": 1791286632.0988533,
+    "ast_hash": "3a24ffc8a145d21cd97096b55aa9cc3e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-010-repair-dead-admin-endpoints.md": {
+    "mtime": 1791285979.6401958,
+    "seen": 1791286632.0988648,
+    "ast_hash": "f8876a9e2c9f3b6503d8272f2f572d4d",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-011-drop-legacy-reports-code.md": {
+    "mtime": 1791286073.6041956,
+    "seen": 1791286632.098873,
+    "ast_hash": "67de279c45acdb2b6c5db90802565c76",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-012-super-admin-write-gate.md": {
+    "mtime": 1791286154.2241957,
+    "seen": 1791286632.0988798,
+    "ast_hash": "9ad2d82046815a333d8083f989e5acad",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-013-super-admin-reference-graph.md": {
+    "mtime": 1791286582.2201953,
+    "seen": 1791286632.0988867,
+    "ast_hash": "fc9c56549bb47f1e4a017e509e32dc76",
     "semantic_hash": ""
   }
 }

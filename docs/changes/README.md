@@ -13,6 +13,11 @@ One markdown file per change. Newest last. Every code change made by the
 | 006 | 2026-10-06 | `fc497bd` | [401 JSON on API + DB session timezone](2026-10-06-006-401-json-db-timezone.md) |
 | 007 | 2026-10-06 | `5db5ba6` | [Docs: stop claiming the app has no backend](2026-10-06-007-docs-backend-truth.md) |
 | 008 | 2026-10-06 | `98e02f5` | [Submitted/approved reports invisible until restart](2026-10-06-008-report-visibility.md) |
+| 009 | 2026-10-06 | `04c3fba` | [Reject a report with a reason, end to end](2026-10-06-009-reject-with-reason.md) |
+| 010 | 2026-10-06 | `03aa975` | [Repair the dead analytics, notification and user-list endpoints](2026-10-06-010-repair-dead-admin-endpoints.md) |
+| 011 | 2026-10-06 | `3e21b70` | [Drop the legacy /api/reports subsystem](2026-10-06-011-drop-legacy-reports-code.md) |
+| 012 | 2026-10-06 | `9bfeab2` | [Gate every admin write behind super_admin](2026-10-06-012-super-admin-write-gate.md) |
+| 013 | 2026-10-06 | `2e58906` | [Super admin reference, DEVLOG cross-links, graph refresh](2026-10-06-013-super-admin-reference-graph.md) |
 
 ## Template
 

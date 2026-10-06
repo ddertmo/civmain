@@ -4,19 +4,19 @@
 
 ## Key Concepts
 
-- **_next** (2 connections) — `civ-main/lib/screens/report/report_concern.dart`
-- **_next** (2 connections) — `civ-main/lib/screens/report/report_issue.dart`
-- **AppRoutes.reportPhoto** (2 connections)
+- **_next** (2 connections) — `civ-main/lib/screens/report/report_details.dart`
+- **_next** (2 connections) — `civ-main/lib/screens/report/report_location.dart`
+- **AppRoutes.reportReview** (2 connections)
 
 ## Relationships
 
-- [report_concern.dart](report_concern.dart.md) (1 shared connections)
-- [report_issue.dart](report_issue.dart.md) (1 shared connections)
+- [report_details.dart](report_details.dart.md) (1 shared connections)
+- [report_location.dart](report_location.dart.md) (1 shared connections)
 
 ## Source Files
 
-- `civ-main/lib/screens/report/report_concern.dart`
-- `civ-main/lib/screens/report/report_issue.dart`
+- `civ-main/lib/screens/report/report_details.dart`
+- `civ-main/lib/screens/report/report_location.dart`
 
 ## Audit Trail
 

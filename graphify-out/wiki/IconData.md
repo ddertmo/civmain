@@ -17,9 +17,9 @@
 ## Relationships
 
 - [_](_.md) (4 shared connections)
-- [VoidCallback?](VoidCallback_.md) (2 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
 - [StatelessWidget](StatelessWidget.md) (2 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [VoidCallback?](VoidCallback_.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
 - [register_screen.dart](register_screen.dart.md) (1 shared connections)

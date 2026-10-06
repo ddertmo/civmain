@@ -20,15 +20,15 @@
 ## Relationships
 
 - [StatelessWidget](StatelessWidget.md) (3 shared connections)
-- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (2 shared connections)
-- [VoidCallback?](VoidCallback_.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
 - [app_network_image.dart](app_network_image.dart.md) (1 shared connections)
 - [IconData](IconData.md) (1 shared connections)
 - [Color](Color.md) (1 shared connections)
-- [track_by_reference_screen.dart](track_by_reference_screen.dart.md) (1 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [AppRoutes.trackReport](AppRoutes.trackReport.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
 - [visitor_reports_screen.dart](visitor_reports_screen.dart.md) (1 shared connections)
 
 ## Source Files

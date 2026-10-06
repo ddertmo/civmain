@@ -1,11 +1,12 @@
 # splash_screen.dart
 
-> 13 nodes · cohesion 0.15
+> 14 nodes · cohesion 0.14
 
 ## Key Concepts
 
 - **splash_screen.dart** (20 connections) — `civ-main/lib/screens/splash/splash_screen.dart`
 - **Animation** (8 connections)
+- **AnimationController** (8 connections)
 - **Offset** (7 connections)
 - **_CivilWatchLogo** (2 connections) — `civ-main/lib/screens/splash/splash_screen.dart`
 - **build** (1 connections) — `civ-main/lib/screens/splash/splash_screen.dart`
@@ -20,12 +21,12 @@
 
 ## Relationships
 
-- [_](_.md) (6 shared connections)
-- [login_screen.dart](login_screen.dart.md) (2 shared connections)
-- [otp_screen.dart](otp_screen.dart.md) (2 shared connections)
-- [register_screen.dart](register_screen.dart.md) (2 shared connections)
+- [_](_.md) (8 shared connections)
+- [login_screen.dart](login_screen.dart.md) (3 shared connections)
+- [otp_screen.dart](otp_screen.dart.md) (3 shared connections)
+- [register_screen.dart](register_screen.dart.md) (3 shared connections)
+- [skeleton.dart](skeleton.dart.md) (2 shared connections)
 - [State](State.md) (2 shared connections)
-- [skeleton.dart](skeleton.dart.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
@@ -39,7 +40,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 34 (100%)
+- EXTRACTED: 41 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

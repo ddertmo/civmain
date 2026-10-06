@@ -1,23 +1,26 @@
 # _next
 
-> 2 nodes · cohesion 1.00
+> 3 nodes · cohesion 0.67
 
 ## Key Concepts
 
-- **_next** (2 connections) — `civ-main/lib/screens/report/report_photo.dart`
-- **AppRoutes.reportLocation** (1 connections)
+- **_next** (2 connections) — `civ-main/lib/screens/report/report_concern.dart`
+- **_next** (2 connections) — `civ-main/lib/screens/report/report_issue.dart`
+- **AppRoutes.reportPhoto** (2 connections)
 
 ## Relationships
 
-- [report_photo.dart](report_photo.dart.md) (1 shared connections)
+- [report_concern.dart](report_concern.dart.md) (1 shared connections)
+- [report_issue.dart](report_issue.dart.md) (1 shared connections)
 
 ## Source Files
 
-- `civ-main/lib/screens/report/report_photo.dart`
+- `civ-main/lib/screens/report/report_concern.dart`
+- `civ-main/lib/screens/report/report_issue.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 4 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

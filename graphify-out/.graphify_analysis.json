@@ -487,11 +487,6 @@
       "dart_ui"
     ],
     "8": [
-      "civ_main_lib_screens_auth_forgot_password_flow_phonefmt",
-      "civ_main_lib_screens_auth_login_screen_phonenumberformatter",
-      "civ_main_lib_screens_auth_register_screen_phoneformatter",
-      "civ_main_lib_screens_community_map_community_map_screen_viewfulldetails",
-      "civ_main_lib_screens_my_reports_my_reports_screen_build",
       "civ_main_lib_screens_visitor_track_by_reference_screen",
       "civ_main_lib_screens_visitor_track_by_reference_screen_build",
       "civ_main_lib_screens_visitor_track_by_reference_screen_compacttimeline",
@@ -507,7 +502,6 @@
       "civ_main_lib_screens_visitor_track_by_reference_screen_notfoundcard",
       "civ_main_lib_screens_visitor_track_by_reference_screen_onviewdetail",
       "civ_main_lib_screens_visitor_track_by_reference_screen_placeholderhint",
-      "civ_main_lib_screens_visitor_track_by_reference_screen_refnumberformatter",
       "civ_main_lib_screens_visitor_track_by_reference_screen_report",
       "civ_main_lib_screens_visitor_track_by_reference_screen_result",
       "civ_main_lib_screens_visitor_track_by_reference_screen_resultcard",
@@ -520,13 +514,6 @@
       "civ_main_lib_screens_visitor_track_by_reference_screen_trackbyreferencescreenstate",
       "civ_main_lib_screens_visitor_track_by_reference_screen_value",
       "civ_main_lib_screens_visitor_track_by_reference_screen_valuestyle",
-      "civ_main_lib_screens_visitor_track_by_reference_screen_viewdetail",
-      "civ_main_lib_screens_visitor_visitor_about_screen_build",
-      "civ_main_lib_screens_visitor_visitor_reports_screen_build",
-      "route_approutes_reportcategory",
-      "route_approutes_trackbyreference",
-      "route_approutes_trackreport",
-      "textinputformatter",
       "textstyle"
     ],
     "9": [
@@ -648,13 +635,9 @@
       "static_final_list"
     ],
     "12": [
-      "civ_main_lib_screens_community_map_community_map_screen_viewonmap",
-      "civ_main_lib_screens_home_home_screen_build",
-      "civ_main_lib_screens_profile_profile_screen_build",
       "civ_main_lib_screens_track_report_status_update_screen",
       "civ_main_lib_screens_track_report_status_update_screen_activitylog",
       "civ_main_lib_screens_track_report_status_update_screen_activityrow",
-      "civ_main_lib_screens_track_report_status_update_screen_build",
       "civ_main_lib_screens_track_report_status_update_screen_buildpendingsteps",
       "civ_main_lib_screens_track_report_status_update_screen_currentidx",
       "civ_main_lib_screens_track_report_status_update_screen_description",
@@ -678,11 +661,6 @@
       "civ_main_lib_screens_track_report_status_update_screen_timelabel",
       "civ_main_lib_screens_track_report_status_update_screen_title",
       "civ_main_lib_screens_track_report_status_update_screen_titlecolor",
-      "civ_main_lib_screens_track_report_track_report_screen_build",
-      "route_approutes_communitymap",
-      "route_approutes_myreports",
-      "route_approutes_notifications",
-      "route_approutes_privatemap",
       "widgets_timeline_rejection_notice_dart"
     ],
     "13": [
@@ -799,8 +777,6 @@
       "civ_main_lib_screens_auth_login_screen_phonecontroller",
       "civ_main_lib_screens_auth_login_screen_phoneprefixwidget",
       "civ_main_lib_screens_auth_login_screen_pin",
-      "civ_main_lib_screens_auth_login_screen_pinpasswordfield",
-      "civ_main_lib_screens_auth_login_screen_pinpasswordfieldstate",
       "civ_main_lib_screens_auth_login_screen_shouldrepaint",
       "civ_main_lib_screens_auth_login_screen_size",
       "civ_main_lib_screens_auth_login_screen_slideanim",
@@ -916,15 +892,13 @@
       "civ_main_lib_screens_landing_landing_screen_initstate",
       "civ_main_lib_screens_landing_landing_screen_label",
       "civ_main_lib_screens_landing_landing_screen_landingbutton",
-      "civ_main_lib_screens_landing_landing_screen_loginorregister",
       "civ_main_lib_screens_landing_landing_screen_ontap",
       "civ_main_lib_screens_landing_landing_screen_paint",
       "civ_main_lib_screens_landing_landing_screen_shouldrepaint",
       "civ_main_lib_screens_landing_landing_screen_size",
       "civ_main_lib_screens_landing_landing_screen_slide",
       "civ_main_lib_screens_landing_landing_screen_sublabel",
-      "civ_main_lib_screens_landing_landing_screen_textcolor",
-      "route_approutes_login"
+      "civ_main_lib_screens_landing_landing_screen_textcolor"
     ],
     "21": [
       "civ_main_lib_core_routes_app_routes",
@@ -1041,18 +1015,17 @@
       "civ_main_lib_screens_track_report_track_report_screen_lng",
       "civ_main_lib_screens_track_report_track_report_screen_ontap",
       "civ_main_lib_screens_track_report_track_report_screen_openfullscreen",
-      "civ_main_lib_screens_track_report_track_report_screen_photopanel",
       "civ_main_lib_screens_track_report_track_report_screen_realminimap",
       "civ_main_lib_screens_track_report_track_report_screen_report",
       "civ_main_lib_screens_track_report_track_report_screen_reportdata",
       "civ_main_lib_screens_track_report_track_report_screen_statusmessage",
       "civ_main_lib_screens_track_report_track_report_screen_steps",
       "civ_main_lib_screens_track_report_track_report_screen_title",
+      "civ_main_lib_screens_track_report_track_report_screen_verticaltimeline",
       "widgets_cards_activity_card_dart",
       "widgets_cards_status_card_dart"
     ],
     "26": [
-      "civ_main_lib_screens_auth_login_screen_build",
       "civ_main_lib_screens_auth_otp_screen",
       "civ_main_lib_screens_auth_otp_screen_animcontroller",
       "civ_main_lib_screens_auth_otp_screen_build",
@@ -1073,9 +1046,7 @@
       "civ_main_lib_screens_auth_otp_screen_slideanim",
       "civ_main_lib_screens_auth_otp_screen_starttimer",
       "civ_main_lib_screens_auth_otp_screen_timer",
-      "civ_main_lib_screens_auth_otp_screen_verify",
       "dart_async",
-      "route_approutes_register",
       "services_auth_service_dart",
       "timer",
       "widgets_inputs_otp_box_dart"
@@ -1114,9 +1085,11 @@
       "civ_main_lib_screens_track_report_track_report_screen_beforeafterphotos",
       "civ_main_lib_screens_track_report_track_report_screen_fallbackphoto",
       "civ_main_lib_screens_track_report_track_report_screen_fullscreenphotoview",
+      "civ_main_lib_screens_track_report_track_report_screen_photopanel",
       "civ_main_lib_screens_track_report_track_report_screen_trackreportbody",
       "civ_main_lib_screens_track_report_track_report_screen_trackreportscreen",
-      "civ_main_lib_screens_track_report_track_report_screen_verticaltimeline",
+      "civ_main_lib_widgets_navigation_app_bar_civilwatchappbar",
+      "preferredsizewidget",
       "statelesswidget",
       "widgets_common_section_title_dart",
       "widgets_navigation_bottom_nav_dart"
@@ -1192,6 +1165,15 @@
       "civ_main_lib_screens_profile_profile_screen_value"
     ],
     "31": [
+      "civ_main_lib_models_office",
+      "civ_main_lib_models_office_abbreviation",
+      "civ_main_lib_models_office_address",
+      "civ_main_lib_models_office_contactnumber",
+      "civ_main_lib_models_office_email",
+      "civ_main_lib_models_office_governmentoffice",
+      "civ_main_lib_models_office_handles",
+      "civ_main_lib_models_office_id",
+      "civ_main_lib_models_office_name",
       "civ_main_lib_screens_visitor_visitor_shell",
       "civ_main_lib_screens_visitor_visitor_shell_build",
       "civ_main_lib_screens_visitor_visitor_shell_createstate",
@@ -1209,7 +1191,19 @@
       "civ_main_lib_screens_visitor_visitor_shell_visitorbottomnav",
       "civ_main_lib_screens_visitor_visitor_shell_visitorshell",
       "civ_main_lib_screens_visitor_visitor_shell_visitorshellstate",
+      "civ_main_lib_widgets_inputs_otp_box",
+      "civ_main_lib_widgets_inputs_otp_box_build",
+      "civ_main_lib_widgets_inputs_otp_box_controllers",
+      "civ_main_lib_widgets_inputs_otp_box_createstate",
+      "civ_main_lib_widgets_inputs_otp_box_dispose",
+      "civ_main_lib_widgets_inputs_otp_box_focusnodes",
+      "civ_main_lib_widgets_inputs_otp_box_initstate",
+      "civ_main_lib_widgets_inputs_otp_box_length",
+      "civ_main_lib_widgets_inputs_otp_box_onchanged",
+      "civ_main_lib_widgets_inputs_otp_box_otpinputrow",
+      "civ_main_lib_widgets_inputs_otp_box_otpinputrowstate",
       "community_map_community_map_screen_dart",
+      "list",
       "visitor_about_screen_dart",
       "visitor_reports_screen_dart"
     ],
@@ -1220,6 +1214,8 @@
       "civ_main_lib_widgets_common_app_dialog_build",
       "civ_main_lib_widgets_common_app_dialog_createstate",
       "civ_main_lib_widgets_common_app_dialog_ctrl",
+      "civ_main_lib_widgets_common_app_dialog_dialogcard",
+      "civ_main_lib_widgets_common_app_dialog_dialogcardstate",
       "civ_main_lib_widgets_common_app_dialog_dialogvariant",
       "civ_main_lib_widgets_common_app_dialog_dispose",
       "civ_main_lib_widgets_common_app_dialog_error",
@@ -1322,6 +1318,7 @@
     ],
     "38": [
       "animation",
+      "animationcontroller",
       "civ_main_lib_screens_splash_splash_screen",
       "civ_main_lib_screens_splash_splash_screen_build",
       "civ_main_lib_screens_splash_splash_screen_civilwatchlogo",
@@ -1398,7 +1395,6 @@
       "string_get"
     ],
     "43": [
-      "animationcontroller",
       "civ_main_lib_screens_report_report_submitted",
       "civ_main_lib_screens_report_report_submitted_build",
       "civ_main_lib_screens_report_report_submitted_controller",
@@ -1429,9 +1425,7 @@
       "civ_main_lib_screens_visitor_visitor_reports_screen_publicreportcard",
       "civ_main_lib_screens_visitor_visitor_reports_screen_report",
       "civ_main_lib_screens_visitor_visitor_reports_screen_searchctrl",
-      "civ_main_lib_screens_visitor_visitor_reports_screen_searchquery",
-      "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreen",
-      "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreenstate"
+      "civ_main_lib_screens_visitor_visitor_reports_screen_searchquery"
     ],
     "45": [
       "civ_main_lib_widgets_cards_status_card",
@@ -1440,21 +1434,29 @@
       "civ_main_lib_widgets_cards_status_card_message",
       "civ_main_lib_widgets_cards_status_card_showlock",
       "civ_main_lib_widgets_cards_status_card_status",
-      "civ_main_lib_widgets_cards_status_card_statuscard"
+      "civ_main_lib_widgets_cards_status_card_statuscard",
+      "civ_main_lib_widgets_common_loading",
+      "civ_main_lib_widgets_common_loading_apploading",
+      "civ_main_lib_widgets_common_loading_build",
+      "civ_main_lib_widgets_common_loading_message",
+      "civ_main_test_widget_test",
+      "civ_main_test_widget_test_main",
+      "package_civilwatch_app_dart",
+      "package_flutter_material_dart",
+      "package_flutter_test_flutter_test_dart",
+      "string"
     ],
     "46": [
       "civ_main_lib_widgets_navigation_app_bar",
       "civ_main_lib_widgets_navigation_app_bar_actions",
       "civ_main_lib_widgets_navigation_app_bar_backgroundcolor",
       "civ_main_lib_widgets_navigation_app_bar_build",
-      "civ_main_lib_widgets_navigation_app_bar_civilwatchappbar",
       "civ_main_lib_widgets_navigation_app_bar_onback",
       "civ_main_lib_widgets_navigation_app_bar_preferredsize",
       "civ_main_lib_widgets_navigation_app_bar_showback",
       "civ_main_lib_widgets_navigation_app_bar_subtitle",
       "civ_main_lib_widgets_navigation_app_bar_title",
       "civ_main_lib_widgets_navigation_app_bar_titlecolor",
-      "preferredsizewidget",
       "size_get"
     ],
     "47": [
@@ -1466,8 +1468,6 @@
       "civ_main_lib_screens_my_reports_my_reports_screen_filters",
       "civ_main_lib_screens_my_reports_my_reports_screen_getfiltered",
       "civ_main_lib_screens_my_reports_my_reports_screen_initstate",
-      "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreen",
-      "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreenstate",
       "civ_main_lib_screens_my_reports_my_reports_screen_searchcontroller",
       "civ_main_lib_screens_my_reports_my_reports_screen_searchquery",
       "widgets_cards_report_card_dart",
@@ -1481,19 +1481,12 @@
       "civ_main_lib_widgets_cards_report_card_ontap",
       "civ_main_lib_widgets_cards_report_card_report",
       "civ_main_lib_widgets_cards_report_card_reportcard",
-      "civ_main_lib_widgets_timeline_progress_timeline",
-      "civ_main_lib_widgets_timeline_progress_timeline_build",
-      "civ_main_lib_widgets_timeline_progress_timeline_progresstimeline",
-      "civ_main_lib_widgets_timeline_progress_timeline_report",
-      "civ_main_lib_widgets_timeline_progress_timeline_steps",
       "civ_main_lib_widgets_timeline_rejection_notice",
       "civ_main_lib_widgets_timeline_rejection_notice_build",
       "civ_main_lib_widgets_timeline_rejection_notice_rejectionnotice",
       "civ_main_lib_widgets_timeline_rejection_notice_report",
       "common_status_chip_dart",
-      "core_utils_helpers_dart",
-      "models_report_dart",
-      "rejection_notice_dart"
+      "models_report_dart"
     ],
     "49": [
       "civ_main_lib_screens_visitor_visitor_about_screen",
@@ -1656,8 +1649,12 @@
       "civ_main_map_flow_step_9_pin_tap_detail_sheet"
     ],
     "61": [
+      "civ_main_lib_screens_auth_forgot_password_flow_forgotpasswordsheet",
+      "civ_main_lib_screens_auth_forgot_password_flow_forgotpasswordsheetstate",
       "civ_main_lib_screens_auth_login_screen_loginscreen",
       "civ_main_lib_screens_auth_login_screen_loginscreenstate",
+      "civ_main_lib_screens_auth_login_screen_pinpasswordfield",
+      "civ_main_lib_screens_auth_login_screen_pinpasswordfieldstate",
       "civ_main_lib_screens_auth_otp_screen_otpscreen",
       "civ_main_lib_screens_auth_otp_screen_otpscreenstate",
       "civ_main_lib_screens_auth_register_screen_registerscreen",
@@ -1666,12 +1663,14 @@
       "civ_main_lib_screens_home_home_screen_homescreenstate",
       "civ_main_lib_screens_landing_landing_screen_landingscreen",
       "civ_main_lib_screens_landing_landing_screen_landingscreenstate",
+      "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreen",
+      "civ_main_lib_screens_my_reports_my_reports_screen_myreportsscreenstate",
       "civ_main_lib_screens_report_report_submitted_reportsubmittedscreen",
       "civ_main_lib_screens_report_report_submitted_reportsubmittedscreenstate",
       "civ_main_lib_screens_splash_splash_screen_splashscreen",
       "civ_main_lib_screens_splash_splash_screen_splashscreenstate",
-      "civ_main_lib_widgets_common_app_dialog_dialogcard",
-      "civ_main_lib_widgets_common_app_dialog_dialogcardstate",
+      "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreen",
+      "civ_main_lib_screens_visitor_visitor_reports_screen_visitorreportsscreenstate",
       "civ_main_lib_widgets_common_skeleton_skeletonshimmer",
       "civ_main_lib_widgets_common_skeleton_skeletonshimmerstate",
       "singletickerproviderstatemixin",
@@ -1679,17 +1678,12 @@
       "statefulwidget"
     ],
     "62": [
-      "civ_main_lib_widgets_common_loading",
-      "civ_main_lib_widgets_common_loading_apploading",
-      "civ_main_lib_widgets_common_loading_build",
-      "civ_main_lib_widgets_common_loading_message",
       "civ_main_lib_widgets_common_section_title",
       "civ_main_lib_widgets_common_section_title_actionlabel",
       "civ_main_lib_widgets_common_section_title_build",
       "civ_main_lib_widgets_common_section_title_onaction",
       "civ_main_lib_widgets_common_section_title_sectiontitle",
       "civ_main_lib_widgets_common_section_title_title",
-      "string",
       "voidcallback"
     ],
     "63": [
@@ -1784,12 +1778,16 @@
       "laravel_resources_views_admin_offices_index_blade_php_admin_layout"
     ],
     "69": [
+      "app_dart",
+      "civ_main_lib_main",
+      "civ_main_lib_main_main",
       "civ_main_lib_screens_notifications_notification_screen",
       "civ_main_lib_screens_notifications_notification_screen_build",
       "civ_main_lib_screens_notifications_notification_screen_embedded",
       "civ_main_lib_screens_notifications_notification_screen_grouplabel",
       "civ_main_lib_screens_notifications_notification_screen_label",
       "civ_main_lib_screens_notifications_notification_screen_notificationscreen",
+      "core_state_app_state_dart",
       "widgets_cards_notification_card_dart",
       "widgets_common_skeleton_dart"
     ],
@@ -1822,17 +1820,15 @@
       "civ_main_lib_core_state_app_state_appstate"
     ],
     "76": [
-      "civ_main_lib_widgets_inputs_otp_box",
-      "civ_main_lib_widgets_inputs_otp_box_build",
-      "civ_main_lib_widgets_inputs_otp_box_controllers",
-      "civ_main_lib_widgets_inputs_otp_box_createstate",
-      "civ_main_lib_widgets_inputs_otp_box_dispose",
-      "civ_main_lib_widgets_inputs_otp_box_focusnodes",
-      "civ_main_lib_widgets_inputs_otp_box_initstate",
-      "civ_main_lib_widgets_inputs_otp_box_length",
-      "civ_main_lib_widgets_inputs_otp_box_onchanged",
-      "civ_main_lib_widgets_inputs_otp_box_otpinputrow",
-      "civ_main_lib_widgets_inputs_otp_box_otpinputrowstate"
+      "civ_main_lib_screens_community_map_community_map_screen_viewonmap",
+      "civ_main_lib_screens_home_home_screen_build",
+      "civ_main_lib_screens_profile_profile_screen_build",
+      "civ_main_lib_screens_track_report_status_update_screen_build",
+      "civ_main_lib_screens_track_report_track_report_screen_build",
+      "route_approutes_communitymap",
+      "route_approutes_myreports",
+      "route_approutes_notifications",
+      "route_approutes_privatemap"
     ],
     "77": [
       "civ_main_lib_screens_auth_register_screen_pininputrow",
@@ -1980,29 +1976,26 @@
       "civ_main_integration_context_9_schema_changes_needed"
     ],
     "98": [
-      "app_dart",
       "civ_main_lib_app",
       "civ_main_lib_app_build",
       "civ_main_lib_app_civilwatchapp",
-      "civ_main_lib_main",
-      "civ_main_lib_main_main",
       "core_routes_app_routes_dart",
       "core_routes_route_generator_dart",
-      "core_state_app_state_dart",
       "core_theme_app_theme_dart"
     ],
     "99": [
+      "civ_main_lib_widgets_common_status_chip",
+      "civ_main_lib_widgets_common_status_chip_build",
+      "civ_main_lib_widgets_common_status_chip_small",
+      "civ_main_lib_widgets_common_status_chip_status",
+      "civ_main_lib_widgets_common_status_chip_statuschip",
       "civ_main_lib_widgets_inputs_search_field",
       "civ_main_lib_widgets_inputs_search_field_build",
       "civ_main_lib_widgets_inputs_search_field_controller",
       "civ_main_lib_widgets_inputs_search_field_hint",
       "civ_main_lib_widgets_inputs_search_field_onclear",
       "civ_main_lib_widgets_inputs_search_field_searchfield",
-      "civ_main_test_widget_test",
-      "civ_main_test_widget_test_main",
-      "package_civilwatch_app_dart",
-      "package_flutter_material_dart",
-      "package_flutter_test_flutter_test_dart",
+      "package_google_fonts_google_fonts_dart",
       "texteditingcontroller"
     ],
     "100": [
@@ -2075,11 +2068,16 @@
       "docs_changes_2026_10_06_006_401_json_db_timezone",
       "docs_changes_2026_10_06_006_401_json_db_timezone_api_returns_401_json_instead_of_a_500_html_page_db_session_timezone_aligned_with_the_app",
       "docs_changes_2026_10_06_006_401_json_db_timezone_bug_a_protected_api_routes_returned_500_html_instead_of_401_json",
+      "docs_changes_2026_10_06_006_401_json_db_timezone_bug_b_report_activity_timestamps_were_8_hours_apart",
       "docs_changes_2026_10_06_006_401_json_db_timezone_cause",
+      "docs_changes_2026_10_06_006_401_json_db_timezone_cause_64",
       "docs_changes_2026_10_06_006_401_json_db_timezone_changes",
+      "docs_changes_2026_10_06_006_401_json_db_timezone_changes_72",
       "docs_changes_2026_10_06_006_401_json_db_timezone_impact_how_to_test_by_hand",
       "docs_changes_2026_10_06_006_401_json_db_timezone_problem",
-      "docs_changes_2026_10_06_006_401_json_db_timezone_verification"
+      "docs_changes_2026_10_06_006_401_json_db_timezone_problem_52",
+      "docs_changes_2026_10_06_006_401_json_db_timezone_verification",
+      "docs_changes_2026_10_06_006_401_json_db_timezone_verification_81"
     ],
     "112": [
       "agents",
@@ -2104,7 +2102,13 @@
       "civ_main_lib_widgets_cards_activity_card_build",
       "civ_main_lib_widgets_cards_activity_card_entry",
       "civ_main_lib_widgets_cards_activity_card_iscurrent",
-      "civ_main_lib_widgets_cards_activity_card_islast"
+      "civ_main_lib_widgets_cards_activity_card_islast",
+      "civ_main_lib_widgets_cards_notification_card",
+      "civ_main_lib_widgets_cards_notification_card_build",
+      "civ_main_lib_widgets_cards_notification_card_notification",
+      "civ_main_lib_widgets_cards_notification_card_notificationcard",
+      "civ_main_lib_widgets_cards_notification_card_ontap",
+      "core_utils_helpers_dart"
     ],
     "117": [
       "docs_changes_2026_10_04_001_initial_backup",
@@ -2175,9 +2179,10 @@
       "civ_main_lib_screens_report_report_stepper_currentstep",
       "civ_main_lib_screens_report_report_stepper_labels",
       "civ_main_lib_screens_report_report_stepper_reportstepper",
-      "static_const"
+      "core_constants_app_colors_dart"
     ],
     "125": [
+      "docs_changes_2026_10_06_007_docs_backend_truth",
       "docs_changes_2026_10_06_007_docs_backend_truth_cause",
       "docs_changes_2026_10_06_007_docs_backend_truth_changes",
       "docs_changes_2026_10_06_007_docs_backend_truth_docs_stop_claiming_the_app_has_no_backend",
@@ -2186,14 +2191,16 @@
       "docs_changes_2026_10_06_007_docs_backend_truth_verification"
     ],
     "126": [
-      "docs_changes_2026_10_06_006_401_json_db_timezone_bug_b_report_activity_timestamps_were_8_hours_apart",
-      "docs_changes_2026_10_06_006_401_json_db_timezone_cause_64",
-      "docs_changes_2026_10_06_006_401_json_db_timezone_changes_72",
-      "docs_changes_2026_10_06_006_401_json_db_timezone_problem_52",
-      "docs_changes_2026_10_06_006_401_json_db_timezone_verification_81"
+      "civ_main_lib_screens_community_map_community_map_screen_viewfulldetails",
+      "civ_main_lib_screens_my_reports_my_reports_screen_build",
+      "civ_main_lib_screens_visitor_track_by_reference_screen_viewdetail",
+      "civ_main_lib_screens_visitor_visitor_about_screen_build",
+      "civ_main_lib_screens_visitor_visitor_reports_screen_build",
+      "route_approutes_reportcategory",
+      "route_approutes_trackbyreference",
+      "route_approutes_trackreport"
     ],
     "127": [
-      "docs_changes_2026_10_06_007_docs_backend_truth",
       "docs_changes_readme",
       "docs_changes_readme_civilwatch_change_log",
       "docs_changes_readme_template"
@@ -2204,16 +2211,13 @@
       "route_approutes_reportphoto"
     ],
     "129": [
-      "civ_main_lib_models_office",
-      "civ_main_lib_models_office_abbreviation",
-      "civ_main_lib_models_office_address",
-      "civ_main_lib_models_office_contactnumber",
-      "civ_main_lib_models_office_email",
-      "civ_main_lib_models_office_governmentoffice",
-      "civ_main_lib_models_office_handles",
-      "civ_main_lib_models_office_id",
-      "civ_main_lib_models_office_name",
-      "list"
+      "civ_main_lib_widgets_timeline_progress_timeline",
+      "civ_main_lib_widgets_timeline_progress_timeline_build",
+      "civ_main_lib_widgets_timeline_progress_timeline_progresstimeline",
+      "civ_main_lib_widgets_timeline_progress_timeline_report",
+      "civ_main_lib_widgets_timeline_progress_timeline_steps",
+      "rejection_notice_dart",
+      "static_const"
     ],
     "130": [
       "laravel_docs_super_admin_analytics_endpoints",
@@ -2236,20 +2240,22 @@
       "laravel_docs_devlog_technologies_used_in_prototype"
     ],
     "132": [
-      "civ_main_lib_widgets_cards_notification_card",
-      "civ_main_lib_widgets_cards_notification_card_build",
-      "civ_main_lib_widgets_cards_notification_card_notification",
-      "civ_main_lib_widgets_cards_notification_card_notificationcard",
-      "civ_main_lib_widgets_cards_notification_card_ontap",
-      "core_constants_app_colors_dart"
+      "docs_changes_2026_10_06_009_reject_with_reason",
+      "docs_changes_2026_10_06_009_reject_with_reason_cause",
+      "docs_changes_2026_10_06_009_reject_with_reason_changes",
+      "docs_changes_2026_10_06_009_reject_with_reason_impact_how_to_test_by_hand",
+      "docs_changes_2026_10_06_009_reject_with_reason_problem",
+      "docs_changes_2026_10_06_009_reject_with_reason_reject_a_report_with_a_reason_end_to_end",
+      "docs_changes_2026_10_06_009_reject_with_reason_verification"
     ],
     "133": [
-      "civ_main_lib_widgets_common_status_chip",
-      "civ_main_lib_widgets_common_status_chip_build",
-      "civ_main_lib_widgets_common_status_chip_small",
-      "civ_main_lib_widgets_common_status_chip_status",
-      "civ_main_lib_widgets_common_status_chip_statuschip",
-      "package_google_fonts_google_fonts_dart"
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_cause",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_changes",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_impact_how_to_test_by_hand",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_problem",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_repair_the_dead_analytics_notification_and_user_list_endpoints",
+      "docs_changes_2026_10_06_010_repair_dead_admin_endpoints_verification"
     ],
     "134": [
       "laravel_docs_devlog_cenro_office",
@@ -2279,8 +2285,47 @@
       "laravel_devlog_protected_requires_authorization_bearer_token"
     ],
     "138": [
-      "civ_main_lib_screens_auth_forgot_password_flow_forgotpasswordsheet",
-      "civ_main_lib_screens_auth_forgot_password_flow_forgotpasswordsheetstate"
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_cause",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_changes",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_drop_the_legacy_api_reports_subsystem",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_impact_how_to_test_by_hand",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_problem",
+      "docs_changes_2026_10_06_011_drop_legacy_reports_code_verification"
+    ],
+    "139": [
+      "docs_changes_2026_10_06_012_super_admin_write_gate",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_cause",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_changes",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_gate_every_admin_write_behind_super_admin",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_impact_how_to_test_by_hand",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_problem",
+      "docs_changes_2026_10_06_012_super_admin_write_gate_verification"
+    ],
+    "140": [
+      "docs_changes_2026_10_06_013_super_admin_reference_graph",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_cause",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_changes",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_impact_how_to_test_by_hand",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_problem",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_super_admin_reference_devlog_cross_links_graph_refresh",
+      "docs_changes_2026_10_06_013_super_admin_reference_graph_verification"
+    ],
+    "141": [
+      "civ_main_lib_screens_auth_forgot_password_flow_phonefmt",
+      "civ_main_lib_screens_auth_login_screen_phonenumberformatter",
+      "civ_main_lib_screens_auth_register_screen_phoneformatter",
+      "civ_main_lib_screens_visitor_track_by_reference_screen_refnumberformatter",
+      "textinputformatter"
+    ],
+    "142": [
+      "civ_main_lib_screens_auth_login_screen_build",
+      "civ_main_lib_screens_auth_otp_screen_verify",
+      "route_approutes_register"
+    ],
+    "143": [
+      "civ_main_lib_screens_landing_landing_screen_loginorregister",
+      "route_approutes_login"
     ]
   },
   "cohesion": {
@@ -2292,47 +2337,47 @@
     "5": 0.044444444444444446,
     "6": 0.08695652173913043,
     "7": 0.09523809523809523,
-    "8": 0.05,
+    "8": 0.07407407407407407,
     "9": 0.046511627906976744,
     "10": 0.05,
     "11": 0.07142857142857142,
-    "12": 0.05873015873015873,
+    "12": 0.07407407407407407,
     "13": 0.05555555555555555,
     "14": 0.06060606060606061,
     "15": 0.125,
-    "16": 0.07407407407407407,
+    "16": 0.07692307692307693,
     "17": 0.07407407407407407,
     "18": 0.07407407407407407,
     "19": 0.06896551724137931,
-    "20": 0.07407407407407407,
+    "20": 0.08,
     "21": 0.08,
     "22": 0.15384615384615385,
     "23": 0.07692307692307693,
     "24": 0.08333333333333333,
     "25": 0.07692307692307693,
-    "26": 0.07407407407407407,
-    "27": 0.06342780026990553,
+    "26": 0.08333333333333333,
+    "27": 0.05975609756097561,
     "28": 0.09523809523809523,
     "29": 0.1,
     "30": 0.09523809523809523,
-    "31": 0.10526315789473684,
-    "32": 0.1,
+    "31": 0.05121951219512195,
+    "32": 0.09523809523809523,
     "33": 0.10526315789473684,
     "34": 0.25,
     "35": 0.18181818181818182,
     "36": 0.1111111111111111,
     "37": 0.11764705882352941,
-    "38": 0.15384615384615385,
+    "38": 0.14285714285714285,
     "39": 0.15384615384615385,
     "40": 0.13333333333333333,
     "41": 0.18181818181818182,
     "42": 0.14285714285714285,
-    "43": 0.13333333333333333,
-    "44": 0.125,
-    "45": 0.2857142857142857,
-    "46": 0.15384615384615385,
-    "47": 0.14285714285714285,
-    "48": 0.1286549707602339,
+    "43": 0.14285714285714285,
+    "44": 0.13333333333333333,
+    "45": 0.125,
+    "46": 0.18181818181818182,
+    "47": 0.15384615384615385,
+    "48": 0.18181818181818182,
     "49": 0.16666666666666666,
     "50": 0.16666666666666666,
     "51": 0.16666666666666666,
@@ -2345,22 +2390,22 @@
     "58": 0.2222222222222222,
     "59": 0.2222222222222222,
     "60": 0.08695652173913043,
-    "61": 0.16666666666666666,
-    "62": 0.16666666666666666,
+    "61": 0.1225071225071225,
+    "62": 0.2857142857142857,
     "63": 0.11764705882352941,
     "64": 0.09523809523809523,
     "65": 0.10526315789473684,
     "66": 0.125,
     "67": 0.6666666666666666,
     "68": 0.6666666666666666,
-    "69": 0.25,
+    "69": 0.16666666666666666,
     "70": 0.6666666666666666,
     "71": 0.6666666666666666,
     "72": 0.6666666666666666,
     "73": 0.6666666666666666,
     "74": 1.0,
     "75": 1.0,
-    "76": 0.2,
+    "76": 0.2777777777777778,
     "77": 1.0,
     "78": 1.0,
     "79": 1.0,
@@ -2382,8 +2427,8 @@
     "95": 0.3333333333333333,
     "96": 0.3333333333333333,
     "97": 0.3333333333333333,
-    "98": 0.2,
-    "99": 0.16666666666666666,
+    "98": 0.3333333333333333,
+    "99": 0.15384615384615385,
     "100": 0.4,
     "101": 0.4,
     "102": 0.4,
@@ -2395,12 +2440,12 @@
     "108": 0.6666666666666666,
     "109": 0.6666666666666666,
     "110": 0.6666666666666666,
-    "111": 0.25,
+    "111": 0.15384615384615385,
     "112": 0.6666666666666666,
     "113": 1.0,
     "114": 1.0,
     "115": 1.0,
-    "116": 0.2857142857142857,
+    "116": 0.15384615384615385,
     "117": 0.2857142857142857,
     "118": 0.2857142857142857,
     "119": 0.2857142857142857,
@@ -2409,20 +2454,25 @@
     "122": 0.2857142857142857,
     "123": 0.2857142857142857,
     "124": 0.3333333333333333,
-    "125": 0.3333333333333333,
-    "126": 0.4,
-    "127": 0.5,
+    "125": 0.2857142857142857,
+    "126": 0.25,
+    "127": 0.6666666666666666,
     "128": 0.6666666666666666,
-    "129": 0.2,
+    "129": 0.2857142857142857,
     "130": 0.2222222222222222,
     "131": 0.2857142857142857,
-    "132": 0.3333333333333333,
-    "133": 0.3333333333333333,
+    "132": 0.2857142857142857,
+    "133": 0.2857142857142857,
     "134": 0.3333333333333333,
     "135": 0.3333333333333333,
     "136": 0.6666666666666666,
     "137": 0.6666666666666666,
-    "138": 1.0
+    "138": 0.2857142857142857,
+    "139": 0.2857142857142857,
+    "140": 0.2857142857142857,
+    "141": 0.4,
+    "142": 0.6666666666666666,
+    "143": 1.0
   },
   "gods": [
     {
@@ -2492,13 +2542,13 @@
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `_` connect `_` to `../../core/routes/app_routes.dart`, `CustomPainter`, `../../core/constants/app_colors.dart`, `package:google_fonts/google_fonts.dart`, `auth_service.dart`, `_`, `../../core/utils/helpers.dart`, `Color`, `IconData`, `VoidCallback?`?",
-      "why": "High betweenness centrality (0.042) - this node is a cross-community bridge."
+      "question": "Why does `_` connect `_` to `../../core/routes/app_routes.dart`, `CustomPainter`, `package:google_fonts/google_fonts.dart`, `../../core/state/app_state.dart`, `notification_service.dart`, `splash_screen.dart`, `build`, `../../models/report.dart`, `../../core/utils/helpers.dart`, `Color`, `_`, `VoidCallback?`, `IconData`, `../../core/constants/app_colors.dart`, `AppRoutes.trackReport`?",
+      "why": "High betweenness centrality (0.032) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
       "question": "What connects `aboutCivilwatch`, `activityLog`, `addAPhoto` to the rest of the system?",
-      "why": "1450 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "why": "1475 weakly-connected nodes found - possible documentation gaps or missing edges."
     },
     {
       "type": "low_cohesion",
@@ -2507,8 +2557,8 @@
     },
     {
       "type": "bridge_node",
-      "question": "Why does `_` connect `_` to `../../core/routes/app_routes.dart`, `CustomPainter`, `../../core/constants/app_colors.dart`, `notification_service.dart`, `splash_screen.dart`, `package:google_fonts/google_fonts.dart`, `track_by_reference_screen.dart`, `status_update_screen.dart`, `../../core/utils/helpers.dart`, `Color`, `_`, `IconData`, `VoidCallback?`?",
-      "why": "High betweenness centrality (0.035) - this node is a cross-community bridge."
+      "question": "Why does `_` connect `_` to `CustomPainter`, `package:google_fonts/google_fonts.dart`, `package:flutter/material.dart`, `../../core/utils/helpers.dart`, `Color`, `secondary_button.dart`, `IconData`, `../../core/constants/app_colors.dart`, `VoidCallback?`?",
+      "why": "High betweenness centrality (0.025) - this node is a cross-community bridge."
     },
     {
       "type": "low_cohesion",
@@ -2517,8 +2567,8 @@
     },
     {
       "type": "bridge_node",
-      "question": "Why does `_` connect `_` to `CustomPainter`, `../../core/constants/app_colors.dart`, `package:flutter/material.dart`, `package:google_fonts/google_fonts.dart`, `../../core/utils/helpers.dart`, `secondary_button.dart`, `Color`, `IconData`, `VoidCallback?`?",
-      "why": "High betweenness centrality (0.026) - this node is a cross-community bridge."
+      "question": "Why does `_` connect `_` to `progress_timeline.dart`, `../../core/routes/app_routes.dart`, `CustomPainter`, `package:flutter/services.dart`, `../../core/state/app_state.dart`, `splash_screen.dart`, `package:google_fonts/google_fonts.dart`, `package:flutter/material.dart`, `_loginOrRegister`, `Color`, `IconData`, `../../core/constants/app_colors.dart`, `State`, `VoidCallback?`?",
+      "why": "High betweenness centrality (0.020) - this node is a cross-community bridge."
     },
     {
       "type": "low_cohesion",

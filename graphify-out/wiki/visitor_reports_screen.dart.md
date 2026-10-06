@@ -1,12 +1,10 @@
 # visitor_reports_screen.dart
 
-> 17 nodes · cohesion 0.12
+> 15 nodes · cohesion 0.13
 
 ## Key Concepts
 
 - **visitor_reports_screen.dart** (30 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
-- **VisitorReportsScreen** (3 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
-- **_VisitorReportsScreenState** (3 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
 - **_LegendDot** (2 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
 - **_PublicReportCard** (2 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
 - **_activeFilter** (1 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
@@ -24,18 +22,18 @@
 
 ## Relationships
 
-- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (3 shared connections)
-- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (2 shared connections)
-- [StatelessWidget](StatelessWidget.md) (2 shared connections)
+- [../../models/report.dart](-..-models-report.dart.md) (2 shared connections)
 - [State](State.md) (2 shared connections)
-- [static const](static_const.md) (1 shared connections)
+- [StatelessWidget](StatelessWidget.md) (2 shared connections)
+- [progress_timeline.dart](progress_timeline.dart.md) (1 shared connections)
 - [VoidCallback?](VoidCallback_.md) (1 shared connections)
 - [Color](Color.md) (1 shared connections)
-- [track_by_reference_screen.dart](track_by_reference_screen.dart.md) (1 shared connections)
+- [AppRoutes.trackReport](AppRoutes.trackReport.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
-- [my_reports_screen.dart](my_reports_screen.dart.md) (1 shared connections)
+- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
 
 ## Source Files
 
@@ -43,7 +41,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 35 (100%)
+- EXTRACTED: 32 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
