@@ -3,7 +3,6 @@
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Mobile\MobileAuthController;
 use App\Http\Controllers\Mobile\MobileReportController;
@@ -123,17 +122,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{id}',    [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-    // Reports (admin-side, existing reports table)
-    Route::get('/reports',                        [ReportController::class, 'index']);
-    Route::post('/reports',                       [ReportController::class, 'store']);
-    Route::get('/reports/map',                    [ReportController::class, 'mapPins']);
-    Route::get('/reports/{id}',                   [ReportController::class, 'show']);
-    Route::put('/reports/{id}',                   [ReportController::class, 'update']);
-    Route::delete('/reports/{id}',                [ReportController::class, 'destroy']);
-    Route::post('/reports/{id}/validate',         [ReportController::class, 'validateReport']);
-    Route::post('/reports/{id}/reject',           [ReportController::class, 'rejectReport']);
-    Route::post('/reports/{id}/assign',           [ReportController::class, 'assign']);
-    Route::post('/reports/{id}/status',           [ReportController::class, 'updateStatus']);
+    // Reports (admin-side) live at /api/admin/citizen-reports — the legacy
+    // /api/reports* block against the dropped `reports` table was removed.
 
     // Analytics
     Route::get('/analytics',                      [AnalyticsController::class, 'full']);
