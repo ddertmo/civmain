@@ -487,9 +487,6 @@ class _StatusUpdateBody extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            // ── Demo: Advance status ──────────────────────────────────
-            if (report.status != 'Resolved')
-              _AdvanceStatusButton(report: report),
             const SizedBox(height: 24),
           ],
         ),
@@ -796,86 +793,6 @@ class _ActivityRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: row,
-    );
-  }
-}
-
-// ── Demo: Advance status button ───────────────────────────────────────────────
-class _AdvanceStatusButton extends StatelessWidget {
-  final IncidentReport report;
-  const _AdvanceStatusButton({required this.report});
-
-  static const _order = [
-    'Submitted',
-    'Pending Validation',
-    'Assigned to Office',
-    'In Progress',
-    'Resolved',
-  ];
-
-  String? get _nextStatus {
-    final idx = _order.indexOf(report.status);
-    if (idx == -1 || idx >= _order.length - 1) return null;
-    return _order[idx + 1];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final next = _nextStatus;
-    if (next == null) return const SizedBox.shrink();
-
-    return GestureDetector(
-      onTap: () {
-        AppState().updateStatus(report.id, next);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Status advanced to: $next'),
-            backgroundColor: AppColors.statusResolved,
-            behavior: SnackBarBehavior.floating,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            margin: const EdgeInsets.all(16),
-          ),
-        );
-      },
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        decoration: BoxDecoration(
-          color: AppColors.primarySurface,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-              color: AppColors.primary.withOpacity(0.3), width: 1.5),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.play_circle_outline_rounded,
-                color: AppColors.primary, size: 20),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Demo: Advance Status',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary),
-                ),
-                Text(
-                  'Next: $next',
-                  style: GoogleFonts.inter(
-                      fontSize: 11, color: AppColors.textSecondary),
-                ),
-              ],
-            ),
-            const Spacer(),
-            const Icon(Icons.arrow_forward_rounded,
-                color: AppColors.primary, size: 18),
-          ],
-        ),
-      ),
     );
   }
 }

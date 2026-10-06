@@ -1,18 +1,27 @@
-/// All API endpoint constants for the CivilWatch Laravel backend.
+/// All API endpoint constants for the CivilWatch backend.
 ///
-/// Base URL targets your local machine's LAN IP so both the browser
-/// AND a real Android phone on the same WiFi can reach Laravel.
+/// The base URL is overridable at build time so the same source works on
+/// every target without editing code:
 ///
-/// Your machine IP: 10.0.7.127  (confirmed via ipconfig)
-/// Laravel runs on port 8000 via: php artisan serve --host=0.0.0.0 --port=8000
+///   flutter run  --dart-define=API_BASE_URL=http://127.0.0.1:8000/api
+///   # Android emulator -> 10.0.2.2 (host loopback)
+///   flutter run  --dart-define=API_BASE_URL=http://10.0.2.2:8000/api
+///   # Real phone on the same WiFi -> your machine's LAN IPv4
+///   flutter run  --dart-define=API_BASE_URL=http://192.168.1.10:8000/api
 ///
-/// ⚠️  If your IP changes (e.g. different WiFi), update baseUrl here.
-///     Run `ipconfig` on Windows to find your new IPv4 address.
+/// Laravel must be started with --host=0.0.0.0 for phones to reach it:
+///   php artisan serve --host=0.0.0.0 --port=8000
+///
+/// Default is 127.0.0.1, which only reaches the backend from the same
+/// machine (web/desktop builds).
 class ApiConstants {
   ApiConstants._();
 
   // ── Base ────────────────────────────────────────────────────────────────
-  static const String baseUrl = 'http://127.0.0.1:8000/api';
+  static const String baseUrl = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8000/api',
+  );
 
   // ── Health ──────────────────────────────────────────────────────────────
   static const String ping = '$baseUrl/ping';
