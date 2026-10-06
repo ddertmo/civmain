@@ -7,9 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/state/app_state.dart';
 import '../../core/utils/helpers.dart';
 import '../../widgets/navigation/app_bar.dart';
-import '../../services/report_service.dart';
 import '../../widgets/common/app_dialog.dart';
 import '_report_stepper.dart';
 
@@ -37,7 +37,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
 
     AppDialog.loading(context, message: 'Submitting your report…');
 
-    final result = await ReportService.instance.submitReport(widget.reportData);
+    final result = await AppState().submitReport(widget.reportData);
 
     if (!mounted) return;
     AppDialog.hide(context);

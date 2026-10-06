@@ -1,7 +1,7 @@
 # Graph Report - prc  (2026-10-06)
 
 ## Corpus Check
-- 214 files · ~158,135 words
+- 214 files · ~158,661 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 88 file(s) not represented in the graph (top: (none) 26, .xml 20, .css 15)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a16f8c1e`
+- Built from commit: `fc497bd3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -476,7 +476,7 @@ Nodes (5): 1. Authentication, Login Screen, OTP Screen, Register Screen, Splash 
 
 ### Community 102 - "9. State Management & Data Layer"
 Cohesion: 0.40
-Nodes (5): 9. State Management & Data Layer, Dummy Data (pre-loaded), Government Offices, Report Status Flow, Severity Normalisation
+Nodes (5): 9. State Management & Data Layer, Data Sources, Government Offices, Report Status Flow, Severity Normalisation
 
 ### Community 103 - "18. Legacy / Parallel Screens"
 Cohesion: 0.50

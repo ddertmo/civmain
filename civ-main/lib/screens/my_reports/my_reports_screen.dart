@@ -25,6 +25,15 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
 
   static const _filters = ['All', 'Pending', 'In Progress', 'Resolved'];
 
+  @override
+  void initState() {
+    super.initState();
+    // Re-fetch from the API every time this screen opens so a report
+    // submitted from the review flow (or approved by an admin) appears
+    // without restarting the app.
+    AppState().refreshMyReports();
+  }
+
   List<IncidentReport> _getFiltered(List<IncidentReport> source) {
     var list = source;
     if (_activeFilter != 'All') {
@@ -32,7 +41,9 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
         if (_activeFilter == 'Pending') {
           return r.status == 'Pending Validation' || r.status == 'Submitted';
         }
-        if (_activeFilter == 'In Progress') return r.status == 'In Progress';
+        if (_activeFilter == 'In Progress') {
+          return r.status == 'In Progress' || r.status == 'Assigned to Office';
+        }
         if (_activeFilter == 'Resolved') return r.status == 'Resolved';
         return true;
       }).toList();

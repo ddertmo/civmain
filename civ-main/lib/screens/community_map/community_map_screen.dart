@@ -56,6 +56,15 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Refresh the public feed every time the map opens — reports are only
+    // published to it after an admin validates them, which can happen while
+    // the app is running.
+    AppState().refreshCommunityReports();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: AppState(),

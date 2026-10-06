@@ -176,6 +176,17 @@ class AppState extends ChangeNotifier {
     return getById(id);
   }
 
+  /// Re-fetch "My Reports" from the API and notify listeners.
+  /// Screens must call this in initState so a report submitted elsewhere
+  /// (or approved by an admin) shows up without restarting the app.
+  Future<void> refreshMyReports() async {
+    await _loadMyReports();
+    notifyListeners();
+  }
+
+  /// Re-fetch the public community feed (validated reports for the map).
+  Future<void> refreshCommunityReports() => _loadCommunityReports();
+
   /// Look up by ID across both lists (local cache).
   IncidentReport? getById(String id) {
     try { return _reports.firstWhere((r) => r.id == id); } catch (_) {}

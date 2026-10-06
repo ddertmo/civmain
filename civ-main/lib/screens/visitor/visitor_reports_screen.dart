@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/state/app_state.dart';
-import '../../core/utils/dummy_data.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
 import '../../widgets/inputs/search_field.dart';
@@ -24,13 +23,24 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
   static const _filters = ['All', 'Infrastructure', 'Environment'];
 
   @override
+  void initState() {
+    super.initState();
+    // Guest/visitor list is the public community feed — refresh it on open so
+    // reports the city has accepted actually show up. This screen is not a
+    // ListenableBuilder, so rebuild once the fetch lands.
+    AppState().refreshCommunityReports().then((_) {
+      if (mounted) setState(() {});
+    });
+  }
+
+  @override
   void dispose() {
     _searchCtrl.dispose();
     super.dispose();
   }
 
   List<IncidentReport> get _filtered {
-    var list = List<IncidentReport>.from(DummyData.communityReports);
+    var list = List<IncidentReport>.from(AppState().communityReportsPublic);
     if (_activeFilter != 'All') {
       list = list.where((r) => r.category == _activeFilter).toList();
     }

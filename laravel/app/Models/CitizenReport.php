@@ -112,6 +112,14 @@ class CitizenReport extends Model
 
         $this->update(['status' => $newStatus]);
 
+        // Any report the city has accepted past validation belongs on the
+        // public community map, even if the admin never pressed
+        // "Validate Report" (validate() is what usually sets is_public).
+        if (in_array($newStatus, [self::STATUS_ASSIGNED, self::STATUS_IN_PROGRESS, self::STATUS_RESOLVED], true)
+            && ! $this->is_public) {
+            $this->update(['is_public' => true]);
+        }
+
         if ($newStatus === self::STATUS_RESOLVED) {
             $this->update(['resolved_at' => now()]);
         }
