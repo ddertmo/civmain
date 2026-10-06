@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1791156793.7366507,
-    "seen": 1791162257.3075738,
-    "ast_hash": "6a47d64fcc136324ca395065a707ef76",
+    "mtime": 1791273347.8242047,
+    "seen": 1791273395.4947195,
+    "ast_hash": "6e500ad8d7b4da72cb4fd8c2eaa8033c",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -1023,6 +1023,72 @@
     "mtime": 1791089867.8559453,
     "seen": 1791162257.308587,
     "ast_hash": "301a7604d45b3e739efc881eb04896ea",
+    "semantic_hash": ""
+  },
+  ".opencode/skills/changelog/SKILL.md": {
+    "mtime": 1791273306.8802047,
+    "seen": 1791273395.494696,
+    "ast_hash": "b4ce522e675dd5c728ea8410f81079df",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-04-001-initial-backup.md": {
+    "mtime": 1791273115.744205,
+    "seen": 1791273395.5002325,
+    "ast_hash": "5d33d20afa4e671d8586ffb074ac3052",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-002-graphify-setup.md": {
+    "mtime": 1791273124.392205,
+    "seen": 1791273395.5002475,
+    "ast_hash": "f344854dc2a87496a66fa17851dc7c79",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-003-ios-permissions.md": {
+    "mtime": 1791273164.984205,
+    "seen": 1791273395.5002613,
+    "ast_hash": "b4e5aaef56b409bde94a647300dd7738",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-004-api-base-url-demo-button.md": {
+    "mtime": 1791273209.3562047,
+    "seen": 1791273395.500275,
+    "ast_hash": "909a3546e4511ed33e6abac156805bd9",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-005-android-branding.md": {
+    "mtime": 1791273173.412205,
+    "seen": 1791273395.5002878,
+    "ast_hash": "ba142a8d26a8a5bc8df889b429c60520",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-006-401-json-db-timezone.md": {
+    "mtime": 1791273225.7402048,
+    "seen": 1791273395.5003068,
+    "ast_hash": "489eb664635acaf2da9a5700889b155b",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-007-docs-backend-truth.md": {
+    "mtime": 1791273250.7562048,
+    "seen": 1791273395.5003207,
+    "ast_hash": "d08f835a6ef125c67f90bff4ef650b2e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-06-008-report-visibility.md": {
+    "mtime": 1791273267.548205,
+    "seen": 1791273395.5003343,
+    "ast_hash": "aca0297d380805d136087871d724140d",
+    "semantic_hash": ""
+  },
+  "docs/changes/README.md": {
+    "mtime": 1791273091.9602048,
+    "seen": 1791273395.5003471,
+    "ast_hash": "653341b901fcd19bed7e1a8a1daadb63",
+    "semantic_hash": ""
+  },
+  "docs/changes/TEMPLATE.md": {
+    "mtime": 1791273096.4962049,
+    "seen": 1791273395.5003626,
+    "ast_hash": "e4d3feb3d3fce03b80e59393383e8919",
     "semantic_hash": ""
   }
 }
