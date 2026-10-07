@@ -7,6 +7,22 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## CivilWatch setup
+
+This is the CivilWatch backend (Laravel 12 + Sanctum). To run it — including
+the one-file XAMPP/phpMyAdmin database import, admin credentials, citizen
+registration and the Flutter connection — see **[docs/SETUP_PC.md](docs/SETUP_PC.md)**.
+
+Short version:
+
+```bash
+cp .env.example .env && php artisan key:generate
+# import civilwatch_FINAL.sql in phpMyAdmin, or: composer setup
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+Admin login: `admin@civilwatch.ph` / `Admin@2026!`
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
