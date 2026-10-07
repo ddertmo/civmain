@@ -636,9 +636,9 @@
     "semantic_hash": ""
   },
   "laravel/README.md": {
-    "mtime": 1791089867.8599453,
-    "seen": 1791162257.3077993,
-    "ast_hash": "c9fd29cc7c9057820aebcdcd6bbddca3",
+    "mtime": 1791367843.9548032,
+    "seen": 1791368542.053468,
+    "ast_hash": "0ddfbe6fbc5df07fe6111f1a09cb462a",
     "semantic_hash": ""
   },
   "laravel/docs/DEVLOG.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791286614.7961953,
-    "seen": 1791286632.0988944,
-    "ast_hash": "8c25779361437648260dc37b504915d3",
+    "mtime": 1791368809.6428027,
+    "seen": 1791368842.8938856,
+    "ast_hash": "0f57b87abace75e666910f64a14a8f10",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1131,6 +1131,18 @@
     "mtime": 1791286582.2201953,
     "seen": 1791286632.0988867,
     "ast_hash": "fc9c56549bb47f1e4a017e509e32dc76",
+    "semantic_hash": ""
+  },
+  "laravel/docs/SETUP_PC.md": {
+    "mtime": 1791367800.5188034,
+    "seen": 1791368542.0536397,
+    "ast_hash": "33fee308389ae70844c61c5f5f654f9d",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-014-xampp-database-import-setup.md": {
+    "mtime": 1791368773.2708027,
+    "seen": 1791368842.8938725,
+    "ast_hash": "23965d56d853a234e92975f145281e66",
     "semantic_hash": ""
   }
 }

@@ -18,6 +18,7 @@ One markdown file per change. Newest last. Every code change made by the
 | 011 | 2026-10-06 | `3e21b70` | [Drop the legacy /api/reports subsystem](2026-10-06-011-drop-legacy-reports-code.md) |
 | 012 | 2026-10-06 | `9bfeab2` | [Gate every admin write behind super_admin](2026-10-06-012-super-admin-write-gate.md) |
 | 013 | 2026-10-06 | `2e58906` | [Super admin reference, DEVLOG cross-links, graph refresh](2026-10-06-013-super-admin-reference-graph.md) |
+| 014 | 2026-10-07 | `cdac1cb` | [One-file XAMPP database import and PC setup guide](2026-10-07-014-xampp-database-import-setup.md) |
 
 ## Template
 

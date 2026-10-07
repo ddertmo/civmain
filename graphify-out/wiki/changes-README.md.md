@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **changes/README.md** (14 connections) — `docs/changes/README.md`
+- **changes/README.md** (15 connections) — `docs/changes/README.md`
 - **CIVILWATCH — Change Log** (2 connections) — `docs/changes/README.md`
 - **Template** (1 connections) — `docs/changes/README.md`
 
@@ -21,7 +21,7 @@
 - [Drop the legacy /api/reports subsystem](Drop_the_legacy_-api-reports_subsystem.md) (1 shared connections)
 - [Gate every admin write behind super_admin](Gate_every_admin_write_behind_super_admin.md) (1 shared connections)
 - [Super admin reference, DEVLOG cross-links, graph refresh](Super_admin_reference,_DEVLOG_cross-links,_graph_refresh.md) (1 shared connections)
-- [Initial backup — civ-main + laravel](Initial_backup_—_civ-main_+_laravel.md) (1 shared connections)
+- [One-file XAMPP database import and PC setup guide](One-file_XAMPP_database_import_and_PC_setup_guide.md) (1 shared connections)
 
 ## Source Files
 
@@ -29,7 +29,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 15 (100%)
+- EXTRACTED: 16 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

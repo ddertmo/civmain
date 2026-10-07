@@ -20,12 +20,11 @@
 
 ## Relationships
 
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (2 shared connections)
 - [State](State.md) (2 shared connections)
 - [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (2 shared connections)
-- [progress_timeline.dart](progress_timeline.dart.md) (1 shared connections)
-- [AppRoutes.trackReport](AppRoutes.trackReport.md) (1 shared connections)
+- [build](build.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
 - [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
 - [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)

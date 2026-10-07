@@ -1,46 +1,46 @@
 # package:google_fonts/google_fonts.dart
 
-> 13 nodes · cohesion 0.15
+> 13 nodes · cohesion 0.17
 
 ## Key Concepts
 
 - **package:google_fonts/google_fonts.dart** (47 connections)
-- **search_field.dart** (10 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
-- **status_chip.dart** (7 connections) — `civ-main/lib/widgets/common/status_chip.dart`
-- **TextEditingController?** (4 connections)
-- **StatusChip** (2 connections) — `civ-main/lib/widgets/common/status_chip.dart`
-- **SearchField** (2 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
-- **build** (1 connections) — `civ-main/lib/widgets/common/status_chip.dart`
-- **small** (1 connections) — `civ-main/lib/widgets/common/status_chip.dart`
-- **status** (1 connections) — `civ-main/lib/widgets/common/status_chip.dart`
-- **build** (1 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
-- **controller** (1 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
-- **hint** (1 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
-- **onClear** (1 connections) — `civ-main/lib/widgets/inputs/search_field.dart`
+- **progress_timeline.dart** (12 connections) — `civ-main/lib/widgets/timeline/progress_timeline.dart`
+- **static const** (10 connections)
+- **_report_stepper.dart** (8 connections) — `civ-main/lib/screens/report/_report_stepper.dart`
+- **ReportStepper** (2 connections) — `civ-main/lib/screens/report/_report_stepper.dart`
+- **ProgressTimeline** (2 connections) — `civ-main/lib/widgets/timeline/progress_timeline.dart`
+- **build** (1 connections) — `civ-main/lib/screens/report/_report_stepper.dart`
+- **currentStep** (1 connections) — `civ-main/lib/screens/report/_report_stepper.dart`
+- **_labels** (1 connections) — `civ-main/lib/screens/report/_report_stepper.dart`
+- **build** (1 connections) — `civ-main/lib/widgets/timeline/progress_timeline.dart`
+- **report** (1 connections) — `civ-main/lib/widgets/timeline/progress_timeline.dart`
+- **_steps** (1 connections) — `civ-main/lib/widgets/timeline/progress_timeline.dart`
+- **rejection_notice.dart** (1 connections)
 
 ## Relationships
 
-- [_](_.md) (6 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (3 shared connections)
+- [_](_.md) (8 shared connections)
+- [../../models/report.dart](-..-models-report.dart.md) (4 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (3 shared connections)
 - [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (3 shared connections)
-- [StatelessWidget](StatelessWidget.md) (3 shared connections)
-- [VoidCallback?](VoidCallback_.md) (2 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
-- [forgot_password_flow.dart](forgot_password_flow.dart.md) (2 shared connections)
-- [report_location.dart](report_location.dart.md) (2 shared connections)
-- [../../models/report.dart](-..-models-report.dart.md) (2 shared connections)
-- [custom_textfield.dart](custom_textfield.dart.md) (2 shared connections)
-- [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
-- [text_styles.dart](text_styles.dart.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
+- [StatelessWidget](StatelessWidget.md) (2 shared connections)
+- [login_screen.dart](login_screen.dart.md) (2 shared connections)
+- [my_reports_screen.dart](my_reports_screen.dart.md) (2 shared connections)
+- [status_update_screen.dart](status_update_screen.dart.md) (2 shared connections)
+- [track_report_screen.dart](track_report_screen.dart.md) (2 shared connections)
+- [track_by_reference_screen.dart](track_by_reference_screen.dart.md) (2 shared connections)
+- [visitor_reports_screen.dart](visitor_reports_screen.dart.md) (2 shared connections)
 
 ## Source Files
 
-- `civ-main/lib/widgets/common/status_chip.dart`
-- `civ-main/lib/widgets/inputs/search_field.dart`
+- `civ-main/lib/screens/report/_report_stepper.dart`
+- `civ-main/lib/widgets/timeline/progress_timeline.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 67 (100%)
+- EXTRACTED: 75 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

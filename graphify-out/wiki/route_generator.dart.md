@@ -33,7 +33,7 @@
 
 ## Relationships
 
-- [StatelessWidget](StatelessWidget.md) (4 shared connections)
+- [_](_.md) (4 shared connections)
 - [splash_screen.dart](splash_screen.dart.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 
