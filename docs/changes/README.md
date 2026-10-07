@@ -24,6 +24,7 @@ One markdown file per change. Newest last. Every code change made by the
 | 017 | 2026-10-07 | `297a78b` | [Auto-update run scripts for app and backend](2026-10-07-017-auto-update-run-scripts.md) |
 | 018 | 2026-10-07 | `cccc83c` | [Add the missing sessions migration so web pages stop 500ing](2026-10-07-018-missing-sessions-migration.md) |
 | 019 | 2026-10-07 | `1c08c6e` | [RUN_APP: run on Chrome and auto-start the backend](2026-10-07-019-run-app-chrome-and-backend.md) |
+| 020 | 2026-10-07 | `40b619b` | [Report photos: missing storage link and CORS header](2026-10-07-020-report-photo-storage-link-and-cors.md) |
 
 ## Template
 
