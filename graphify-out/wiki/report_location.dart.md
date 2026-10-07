@@ -34,9 +34,9 @@
 ## Relationships
 
 - [StatelessWidget](StatelessWidget.md) (5 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (4 shared connections)
 - [_](_.md) (3 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
+- [VoidCallback?](VoidCallback_.md) (2 shared connections)
 - [ReportLocationScreen](ReportLocationScreen.md) (2 shared connections)
 - [semaphore_service.dart](semaphore_service.dart.md) (2 shared connections)
 - [report_issue.dart](report_issue.dart.md) (2 shared connections)

@@ -6,7 +6,7 @@ on another machine pick up where that one stopped.
 
 It covers, and these are not repeated elsewhere:
 
-- **two repos, one push target** — `prc/` pushes to `backup`
+- **three repos, one push target** — `prc/` pushes to `backup`
   (`dertmo01/civmain`); the parent `~/Prd/CIVILWATCH` has `origin`
   (`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
 - **environment limits** — Termux/Android, no Flutter SDK / Dart / Android SDK /

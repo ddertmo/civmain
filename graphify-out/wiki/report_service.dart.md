@@ -19,7 +19,7 @@
 
 - [report_photo.dart](report_photo.dart.md) (3 shared connections)
 - [report_review.dart](report_review.dart.md) (3 shared connections)
-- [announcement_service.dart](announcement_service.dart.md) (2 shared connections)
+- [notification_service.dart](notification_service.dart.md) (2 shared connections)
 - [semaphore_service.dart](semaphore_service.dart.md) (1 shared connections)
 - [../../models/report.dart](-..-models-report.dart.md) (1 shared connections)
 - [api_client.dart](api_client.dart.md) (1 shared connections)

@@ -28,6 +28,7 @@ One markdown file per change. Newest last. Every code change made by the
 | 021 | 2026-10-07 | `dcc171c` | [PC health-check scripts (Windows + Termux) and companion repo](2026-10-07-021-pc-health-check-scripts.md) |
 | 022 | 2026-10-07 | `dc8c30c` | [What `git pull` gives you on the PC vs what you must install](2026-10-07-022-pull-vs-install-on-pc.md) |
 | 023 | 2026-10-07 | `e95e9ea` | [PC setup: the SQL import path never ran the `sessions` migration](2026-10-07-023-sessions-migration-in-pc-setup.md) |
+| 024 | 2026-10-08 | `857a723` | [Pull the PC companion repo: civilwatch_check_pc into civmain](2026-10-08-024-pull-civilwatch-check-pc.md) |
 
 ## Template
 

@@ -28,14 +28,15 @@ show the actual error and the actual fix.
 
 ---
 
-## 2. Repositories — there are two, and only one is ours
+## 2. Repositories — there are three, only one gets pushes
 
 | Repo | Remote | Status |
 |---|---|---|
 | `~/Prd/CIVILWATCH/prc` | `backup` → `https://github.com/dertmo01/civmain.git` | **the working repo.** Push here. |
 | `~/Prd/CIVILWATCH` (parent) | `origin` → `https://github.com/SerenoLawrence/CIVILWATCH.git` | stale, last commit 2026-09-29. **Never commit or push here.** It tracks `prc/`'s files in its index, so `git status` in the parent shows `prc/` changes — ignore them. |
+| companion: `dertmo01/civilwatch_check_pc.git` (private) | added here as remote `civilwatch-check-pc` | PC-made backup repo, created 2026-10-07. Its `main` is civmain's tree **plus** a root `README.md` (PC health-check usage). It also carries branch `pc-backup-original` (its own snapshot history). Merged into `prc` 2026-10-08 (changelog 024), so the README now lives in civmain too. |
 
-`prc` has **no `origin`**, only `backup`. Rules:
+`prc` has **no `origin`**, only `backup` (+ the `civilwatch-check-pc` fetch remote). Rules:
 
 - Push: `git push backup main` — never `origin`.
 - Verify after every push: `git ls-remote backup main` must equal `git rev-parse HEAD`.

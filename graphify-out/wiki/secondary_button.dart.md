@@ -18,10 +18,12 @@
 
 ## Relationships
 
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (3 shared connections)
 - [Color](Color.md) (1 shared connections)
+- [VoidCallback?](VoidCallback_.md) (1 shared connections)
 - [IconData](IconData.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)
 - [primary_button.dart](primary_button.dart.md) (1 shared connections)
 - [app_network_image.dart](app_network_image.dart.md) (1 shared connections)

@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **changes/README.md** (25 connections) — `docs/changes/README.md`
+- **changes/README.md** (26 connections) — `docs/changes/README.md`
 - **2026-10-07-017-auto-update-run-scripts.md** (3 connections) — `docs/changes/2026-10-07-017-auto-update-run-scripts.md`
 - **2026-10-07-018-missing-sessions-migration.md** (3 connections) — `docs/changes/2026-10-07-018-missing-sessions-migration.md`
 - **CIVILWATCH — Change Log** (2 connections) — `docs/changes/README.md`
@@ -33,7 +33,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 29 (100%)
+- EXTRACTED: 30 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

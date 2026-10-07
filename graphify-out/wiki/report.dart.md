@@ -1,23 +1,13 @@
 # report.dart
 
-> 46 nodes · cohesion 0.04
+> 35 nodes · cohesion 0.06
 
 ## Key Concepts
 
 - **report.dart** (32 connections) — `civ-main/lib/models/report.dart`
-- **otp_box.dart** (14 connections) — `civ-main/lib/widgets/inputs/otp_box.dart`
-- **List** (11 connections)
-- **office.dart** (10 connections) — `civ-main/lib/models/office.dart`
-- **OtpInputRow** (3 connections) — `civ-main/lib/widgets/inputs/otp_box.dart`
-- **_OtpInputRowState** (3 connections) — `civ-main/lib/widgets/inputs/otp_box.dart`
-- **abbreviation** (1 connections) — `civ-main/lib/models/office.dart`
-- **address** (1 connections) — `civ-main/lib/models/office.dart`
-- **contactNumber** (1 connections) — `civ-main/lib/models/office.dart`
-- **email** (1 connections) — `civ-main/lib/models/office.dart`
-- **GovernmentOffice** (1 connections) — `civ-main/lib/models/office.dart`
-- **handles** (1 connections) — `civ-main/lib/models/office.dart`
-- **id** (1 connections) — `civ-main/lib/models/office.dart`
-- **name** (1 connections) — `civ-main/lib/models/office.dart`
+- **bottom_nav.dart** (13 connections) — `civ-main/lib/widgets/navigation/bottom_nav.dart`
+- **static const List** (3 connections)
+- **CivilWatchBottomNav** (2 connections) — `civ-main/lib/widgets/navigation/bottom_nav.dart`
 - **activityLog** (1 connections) — `civ-main/lib/models/report.dart`
 - **afterImageUrl** (1 connections) — `civ-main/lib/models/report.dart`
 - **assignedOffice** (1 connections) — `civ-main/lib/models/report.dart`
@@ -29,32 +19,41 @@
 - **imageUrl** (1 connections) — `civ-main/lib/models/report.dart`
 - **isPending** (1 connections) — `civ-main/lib/models/report.dart`
 - **isRejected** (1 connections) — `civ-main/lib/models/report.dart`
-- *... and 21 more nodes in this community*
+- **isResolved** (1 connections) — `civ-main/lib/models/report.dart`
+- **issue** (1 connections) — `civ-main/lib/models/report.dart`
+- **latitude** (1 connections) — `civ-main/lib/models/report.dart`
+- **longitude** (1 connections) — `civ-main/lib/models/report.dart`
+- **referenceNumber** (1 connections) — `civ-main/lib/models/report.dart`
+- **resolvedAt** (1 connections) — `civ-main/lib/models/report.dart`
+- **severity** (1 connections) — `civ-main/lib/models/report.dart`
+- **status** (1 connections) — `civ-main/lib/models/report.dart`
+- **statusIndex** (1 connections) — `civ-main/lib/models/report.dart`
+- **statusOrder** (1 connections) — `civ-main/lib/models/report.dart`
+- *... and 10 more nodes in this community*
 
 ## Relationships
 
-- [package:flutter/material.dart](package-flutter-material.dart.md) (3 shared connections)
-- [State](State.md) (2 shared connections)
-- [bottom_nav.dart](bottom_nav.dart.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
+- [visitor_shell.dart](visitor_shell.dart.md) (1 shared connections)
 - [user.dart](user.dart.md) (1 shared connections)
 - [auth_service.dart](auth_service.dart.md) (1 shared connections)
-- [dummy_data.dart](dummy_data.dart.md) (1 shared connections)
+- [notification_model.dart](notification_model.dart.md) (1 shared connections)
 - [../../models/report.dart](-..-models-report.dart.md) (1 shared connections)
-- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)
-- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
-- [app_state.dart](app_state.dart.md) (1 shared connections)
-- [register_screen.dart](register_screen.dart.md) (1 shared connections)
+- [activity_card.dart](activity_card.dart.md) (1 shared connections)
+- [IconData](IconData.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [StatelessWidget](StatelessWidget.md) (1 shared connections)
+- [app_strings.dart](app_strings.dart.md) (1 shared connections)
 
 ## Source Files
 
-- `civ-main/lib/models/office.dart`
 - `civ-main/lib/models/report.dart`
-- `civ-main/lib/widgets/inputs/otp_box.dart`
+- `civ-main/lib/widgets/navigation/bottom_nav.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 67 (100%)
+- EXTRACTED: 47 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -13,7 +13,7 @@
 - **session context — read first** (1 connections) — `AGENTS.md`
 - **10. Where things stand** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **1. What this project is** (1 connections) — `docs/SESSION_CONTEXT.md`
-- **2. Repositories — there are two, and only one is ours** (1 connections) — `docs/SESSION_CONTEXT.md`
+- **2. Repositories — there are three, only one gets pushes** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **3. Hard rules (also in AGENTS.md)** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **5. Credentials and data** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **6. Running it** (1 connections) — `docs/SESSION_CONTEXT.md`

@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1791369553.0593462,
-    "seen": 1791369589.6265607,
-    "ast_hash": "abde1857ba2a381302624ff1eb8052b1",
+    "mtime": 1791414416.5639954,
+    "seen": 1791414515.2340577,
+    "ast_hash": "27bd8804706f4d0bb2271c3ba00d0164",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791386132.9963346,
-    "seen": 1791386161.754581,
-    "ast_hash": "cb41c2b2701a7b6d5619d82ea6ce5657",
+    "mtime": 1791414481.3519952,
+    "seen": 1791414515.2409925,
+    "ast_hash": "92474aef7bf79c0fa06d66b2ee377ad5",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1791386050.2643347,
-    "seen": 1791386161.7510974,
-    "ast_hash": "efde43f38207242e62b19644899b8188",
+    "mtime": 1791414396.7999952,
+    "seen": 1791414515.236717,
+    "ast_hash": "8bc1aed2252a3f178970b770a230a951",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1203,6 +1203,18 @@
     "mtime": 1791386130.9763346,
     "seen": 1791386161.7545717,
     "ast_hash": "d46db724aa5cb1c81c0a9bc765097df0",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1791414359.0639954,
+    "seen": 1791414515.2340717,
+    "ast_hash": "000f2eed830176c0ee7322f0db48f05c",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-024-pull-civilwatch-check-pc.md": {
+    "mtime": 1791414457.9879951,
+    "seen": 1791414515.2409813,
+    "ast_hash": "1a7c010daa759a1c29d625aa70aa7949",
     "semantic_hash": ""
   }
 }

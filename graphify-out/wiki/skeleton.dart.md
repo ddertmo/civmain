@@ -35,7 +35,8 @@
 
 - [StatelessWidget](StatelessWidget.md) (5 shared connections)
 - [State](State.md) (4 shared connections)
-- [splash_screen.dart](splash_screen.dart.md) (2 shared connections)
+- [splash_screen.dart](splash_screen.dart.md) (1 shared connections)
+- [_](_.md) (1 shared connections)
 - [secondary_button.dart](secondary_button.dart.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)

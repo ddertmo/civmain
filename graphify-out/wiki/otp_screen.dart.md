@@ -31,18 +31,18 @@
 
 ## Relationships
 
-- [splash_screen.dart](splash_screen.dart.md) (3 shared connections)
 - [forgot_password_flow.dart](forgot_password_flow.dart.md) (3 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
-- [State](State.md) (2 shared connections)
+- [splash_screen.dart](splash_screen.dart.md) (2 shared connections)
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
+- [_](_.md) (2 shared connections)
+- [State](State.md) (2 shared connections)
 - [build](build.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
 - [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
-- [_](_.md) (1 shared connections)
 - [report_review.dart](report_review.dart.md) (1 shared connections)
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)
-- [app_state.dart](app_state.dart.md) (1 shared connections)
 
 ## Source Files
 

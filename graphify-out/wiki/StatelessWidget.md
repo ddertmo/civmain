@@ -1,6 +1,6 @@
 # StatelessWidget
 
-> 18 nodes · cohesion 0.11
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
@@ -12,15 +12,16 @@
 - **_HomeTab** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_LegendItem** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_MiniMapCard** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
+- **_MiniPin** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_ReportCtaBanner** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_ReportSummaryRow** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_SummaryTile** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_BeforeAfterPhotos** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
-- **_FallbackPhoto** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_FullscreenPhotoView** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_PhotoPanel** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
-- **_RealMiniMap** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
+- **_TrackReportBody** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **TrackReportScreen** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
+- **_VerticalTimeline** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **PreferredSizeWidget** (1 connections)
 
 ## Relationships
@@ -36,7 +37,7 @@
 - [profile_screen.dart](profile_screen.dart.md) (4 shared connections)
 - [report_details.dart](report_details.dart.md) (4 shared connections)
 - [report_photo.dart](report_photo.dart.md) (4 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (4 shared connections)
+- [status_update_screen.dart](status_update_screen.dart.md) (4 shared connections)
 
 ## Source Files
 
@@ -46,7 +47,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 147 (100%)
+- EXTRACTED: 148 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

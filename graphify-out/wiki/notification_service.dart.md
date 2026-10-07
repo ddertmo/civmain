@@ -1,34 +1,42 @@
 # notification_service.dart
 
-> 9 nodes · cohesion 0.22
+> 17 nodes · cohesion 0.12
 
 ## Key Concepts
 
 - **notification_service.dart** (10 connections) — `civ-main/lib/services/notification_service.dart`
-- **../../models/notification_model.dart** (5 connections)
+- **announcement_service.dart** (8 connections) — `civ-main/lib/services/announcement_service.dart`
+- **../core/constants/api_constants.dart** (4 connections)
+- **../core/network/api_client.dart** (4 connections)
+- **../core/utils/dummy_data.dart** (3 connections)
+- **AnnouncementService** (1 connections) — `civ-main/lib/services/announcement_service.dart`
+- **_api** (1 connections) — `civ-main/lib/services/announcement_service.dart`
+- **instance** (1 connections) — `civ-main/lib/services/announcement_service.dart`
+- **_parse** (1 connections) — `civ-main/lib/services/announcement_service.dart`
 - **_api** (1 connections) — `civ-main/lib/services/notification_service.dart`
 - **instance** (1 connections) — `civ-main/lib/services/notification_service.dart`
 - **markAllRead** (1 connections) — `civ-main/lib/services/notification_service.dart`
 - **markRead** (1 connections) — `civ-main/lib/services/notification_service.dart`
 - **NotificationService** (1 connections) — `civ-main/lib/services/notification_service.dart`
 - **_parse** (1 connections) — `civ-main/lib/services/notification_service.dart`
+- **static final AnnouncementService** (1 connections)
 - **static final NotificationService** (1 connections)
 
 ## Relationships
 
-- [announcement_service.dart](announcement_service.dart.md) (2 shared connections)
-- [app_state.dart](app_state.dart.md) (1 shared connections)
-- [dummy_data.dart](dummy_data.dart.md) (1 shared connections)
-- [notification_screen.dart](notification_screen.dart.md) (1 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [auth_service.dart](auth_service.dart.md) (2 shared connections)
+- [report_service.dart](report_service.dart.md) (2 shared connections)
+- [_](_.md) (2 shared connections)
+- [notification_card.dart](notification_card.dart.md) (1 shared connections)
 
 ## Source Files
 
+- `civ-main/lib/services/announcement_service.dart`
 - `civ-main/lib/services/notification_service.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 14 (100%)
+- EXTRACTED: 24 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
