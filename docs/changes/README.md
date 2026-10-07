@@ -22,6 +22,7 @@ One markdown file per change. Newest last. Every code change made by the
 | 015 | 2026-10-07 | `9fdad84` | [Export session context for cross-machine handoff](2026-10-07-015-session-context-export.md) |
 | 016 | 2026-10-07 | `994d6ed` | [Refresh Flutter and Composer dependencies for PC setup](2026-10-07-016-pc-dependency-refresh.md) |
 | 017 | 2026-10-07 | `297a78b` | [Auto-update run scripts for app and backend](2026-10-07-017-auto-update-run-scripts.md) |
+| 018 | 2026-10-07 | `cccc83c` | [Add the missing sessions migration so web pages stop 500ing](2026-10-07-018-missing-sessions-migration.md) |
 
 ## Template
 
