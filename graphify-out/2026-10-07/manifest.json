@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   "civ-main/analysis_options.yaml": {
-    "mtime": 1791089867.8159454,
-    "seen": 1791162257.3076458,
-    "ast_hash": "66d03d7647c8e438164feaf5b922d44a",
+    "mtime": 1791383119.3283367,
+    "seen": 1791384154.9902434,
+    "ast_hash": "33d8d2f7b7af52c5eaf407230a2a91d6",
     "semantic_hash": ""
   },
   "civ-main/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791369919.263346,
-    "seen": 1791370037.3953779,
-    "ast_hash": "ad6d9e5c9464dc983d0396c8b765e445",
+    "mtime": 1791385543.912335,
+    "seen": 1791385594.4671252,
+    "ast_hash": "6dcb2084f6e16681a36425168115e4d3",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1134,9 +1134,9 @@
     "semantic_hash": ""
   },
   "laravel/docs/SETUP_PC.md": {
-    "mtime": 1791367800.5188034,
-    "seen": 1791368542.0536397,
-    "ast_hash": "33fee308389ae70844c61c5f5f654f9d",
+    "mtime": 1791383834.3923361,
+    "seen": 1791384154.995004,
+    "ast_hash": "4347d49c4837861b78e60ecfe24c88d6",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-014-xampp-database-import-setup.md": {
@@ -1146,15 +1146,57 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1791369967.0193458,
-    "seen": 1791370037.393102,
-    "ast_hash": "04b7bd198e3d2afc33bd1775b8dac783",
+    "mtime": 1791384516.8763356,
+    "seen": 1791385594.4587514,
+    "ast_hash": "650ef1641dab53db3692c7881978d88d",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
-    "mtime": 1791369865.9953458,
-    "seen": 1791370037.3953674,
-    "ast_hash": "a01e82b098260dc1642ad29a260319e1",
+    "mtime": 1791370255.1913457,
+    "seen": 1791370724.5254729,
+    "ast_hash": "ce6992b30d27f976ad717bee061e9ea2",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-016-pc-dependency-refresh.md": {
+    "mtime": 1791383119.3323367,
+    "seen": 1791384154.9941592,
+    "ast_hash": "37d0cf9de4856edd308c505719a10003",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-017-auto-update-run-scripts.md": {
+    "mtime": 1791383119.3323367,
+    "seen": 1791384154.9941669,
+    "ast_hash": "7bc22da48f9b38c922fadb002b7717e6",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-018-missing-sessions-migration.md": {
+    "mtime": 1791383119.3363366,
+    "seen": 1791384154.9941735,
+    "ast_hash": "13a44d8528f24be009cf6469b3d4097e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-019-run-app-chrome-and-backend.md": {
+    "mtime": 1791383119.3363366,
+    "seen": 1791384154.9941797,
+    "ast_hash": "9023092db95f136ac1f8164449ca6a7d",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-020-report-photo-storage-link-and-cors.md": {
+    "mtime": 1791383119.3403368,
+    "seen": 1791384154.9941864,
+    "ast_hash": "da641a8a77a0c6eabe1cf1b4183ebe49",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-021-pc-health-check-scripts.md": {
+    "mtime": 1791383119.3403368,
+    "seen": 1791384154.9941943,
+    "ast_hash": "1b3d51f74c3e13a75db049a1e13cc6f4",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-022-pull-vs-install-on-pc.md": {
+    "mtime": 1791385542.876335,
+    "seen": 1791385594.4671063,
+    "ast_hash": "47bb6ca0c3b55894966d4f329321f109",
     "semantic_hash": ""
   }
 }

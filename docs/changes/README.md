@@ -26,6 +26,7 @@ One markdown file per change. Newest last. Every code change made by the
 | 019 | 2026-10-07 | `1c08c6e` | [RUN_APP: run on Chrome and auto-start the backend](2026-10-07-019-run-app-chrome-and-backend.md) |
 | 020 | 2026-10-07 | `40b619b` | [Report photos: missing storage link and CORS header](2026-10-07-020-report-photo-storage-link-and-cors.md) |
 | 021 | 2026-10-07 | `dcc171c` | [PC health-check scripts (Windows + Termux) and companion repo](2026-10-07-021-pc-health-check-scripts.md) |
+| 022 | 2026-10-07 | `dc8c30c` | [What `git pull` gives you on the PC vs what you must install](2026-10-07-022-pull-vs-install-on-pc.md) |
 
 ## Template
 

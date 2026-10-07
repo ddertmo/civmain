@@ -1,11 +1,12 @@
 # notification_service.dart
 
-> 17 nodes · cohesion 0.12
+> 18 nodes · cohesion 0.12
 
 ## Key Concepts
 
 - **notification_service.dart** (10 connections) — `civ-main/lib/services/notification_service.dart`
 - **announcement_service.dart** (8 connections) — `civ-main/lib/services/announcement_service.dart`
+- **../../models/notification_model.dart** (5 connections)
 - **../core/constants/api_constants.dart** (4 connections)
 - **../core/network/api_client.dart** (4 connections)
 - **../core/utils/dummy_data.dart** (3 connections)
@@ -27,7 +28,10 @@
 - [auth_service.dart](auth_service.dart.md) (2 shared connections)
 - [report_service.dart](report_service.dart.md) (2 shared connections)
 - [_](_.md) (2 shared connections)
+- [app_state.dart](app_state.dart.md) (1 shared connections)
 - [dummy_data.dart](dummy_data.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 
 ## Source Files
 
@@ -36,7 +40,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 28 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

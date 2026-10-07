@@ -15,7 +15,7 @@
 ## Relationships
 
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
-- [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
+- [splash_screen.dart](splash_screen.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [text_styles.dart](text_styles.dart.md) (1 shared connections)
 - [helpers.dart](helpers.dart.md) (1 shared connections)

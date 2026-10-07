@@ -1,10 +1,10 @@
 # CIVILWATCH — Session context
 
-> 18 nodes · cohesion 0.11
+> 19 nodes · cohesion 0.11
 
 ## Key Concepts
 
-- **CIVILWATCH — Session context** (11 connections) — `docs/SESSION_CONTEXT.md`
+- **CIVILWATCH — Session context** (12 connections) — `docs/SESSION_CONTEXT.md`
 - **AGENTS.md** (4 connections) — `AGENTS.md`
 - **SESSION_CONTEXT.md** (3 connections) — `docs/SESSION_CONTEXT.md`
 - **4. Machine and environment** (3 connections) — `docs/SESSION_CONTEXT.md`
@@ -17,6 +17,7 @@
 - **3. Hard rules (also in AGENTS.md)** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **5. Credentials and data** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **6. Running it** (1 connections) — `docs/SESSION_CONTEXT.md`
+- **6b. What `git pull` gives you vs what you must install** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **7. Architecture facts that are easy to get wrong** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **8. Graphify** (1 connections) — `docs/SESSION_CONTEXT.md`
 - **9. Verification techniques that actually work here** (1 connections) — `docs/SESSION_CONTEXT.md`
@@ -34,7 +35,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 18 (100%)
+- EXTRACTED: 19 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

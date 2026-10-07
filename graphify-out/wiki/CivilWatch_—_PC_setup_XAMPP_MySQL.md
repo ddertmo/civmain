@@ -1,6 +1,6 @@
 # CivilWatch — PC setup (XAMPP MySQL)
 
-> 25 nodes · cohesion 0.08
+> 26 nodes · cohesion 0.08
 
 ## Key Concepts
 
@@ -8,11 +8,11 @@
 - **laravel/README.md** (9 connections) — `laravel/README.md`
 - **SETUP_PC.md** (2 connections) — `laravel/docs/SETUP_PC.md`
 - **Alternative: composer setup** (2 connections) — `laravel/docs/SETUP_PC.md`
+- **.env and APP_KEY** (2 connections) — `laravel/docs/SETUP_PC.md`
 - **Laravel Sponsors** (2 connections) — `laravel/README.md`
 - **Admin login** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Android with your menu** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Citizen registration and report submission** (1 connections) — `laravel/docs/SETUP_PC.md`
-- **.env and APP_KEY** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Flutter on the PC** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Get the code** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Node is separate now** (1 connections) — `laravel/docs/SETUP_PC.md`
@@ -20,6 +20,7 @@
 - **One-time database import** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Prerequisites** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Run the backend** (1 connections) — `laravel/docs/SETUP_PC.md`
+- **Then create the `sessions` table** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **Troubleshooting** (1 connections) — `laravel/docs/SETUP_PC.md`
 - **About Laravel** (1 connections) — `laravel/README.md`
 - **CivilWatch setup** (1 connections) — `laravel/README.md`
@@ -28,7 +29,7 @@
 - **Learning Laravel** (1 connections) — `laravel/README.md`
 - **License** (1 connections) — `laravel/README.md`
 - **Premium Partners** (1 connections) — `laravel/README.md`
-- **Security Vulnerabilities** (1 connections) — `laravel/README.md`
+- *... and 1 more nodes in this community*
 
 ## Relationships
 
@@ -41,7 +42,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 24 (100%)
+- EXTRACTED: 25 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
