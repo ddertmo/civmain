@@ -1,10 +1,10 @@
-# String?
+# List
 
 > 10 nodes · cohesion 0.20
 
 ## Key Concepts
 
-- **String?** (25 connections)
+- **List** (11 connections)
 - **office.dart** (10 connections) — `civ-main/lib/models/office.dart`
 - **abbreviation** (1 connections) — `civ-main/lib/models/office.dart`
 - **address** (1 connections) — `civ-main/lib/models/office.dart`
@@ -17,18 +17,17 @@
 
 ## Relationships
 
-- [_](_.md) (4 shared connections)
-- [otp_box.dart](otp_box.dart.md) (1 shared connections)
-- [dummy_data.dart](dummy_data.dart.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [app_state.dart](app_state.dart.md) (1 shared connections)
 - [report.dart](report.dart.md) (1 shared connections)
-- [user.dart](user.dart.md) (1 shared connections)
-- [forgot_password_flow.dart](forgot_password_flow.dart.md) (1 shared connections)
-- [otp_screen.dart](otp_screen.dart.md) (1 shared connections)
 - [register_screen.dart](register_screen.dart.md) (1 shared connections)
-- [report_category.dart](report_category.dart.md) (1 shared connections)
+- [_](_.md) (1 shared connections)
 - [report_concern.dart](report_concern.dart.md) (1 shared connections)
-- [report_details.dart](report_details.dart.md) (1 shared connections)
-- [report_issue.dart](report_issue.dart.md) (1 shared connections)
+- [status_update_screen.dart](status_update_screen.dart.md) (1 shared connections)
+- [visitor_shell.dart](visitor_shell.dart.md) (1 shared connections)
+- [custom_textfield.dart](custom_textfield.dart.md) (1 shared connections)
+- [otp_box.dart](otp_box.dart.md) (1 shared connections)
+- [app_bar.dart](app_bar.dart.md) (1 shared connections)
 
 ## Source Files
 
@@ -36,7 +35,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 34 (100%)
+- EXTRACTED: 20 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

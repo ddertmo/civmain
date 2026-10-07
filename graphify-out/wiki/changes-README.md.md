@@ -4,7 +4,7 @@
 
 ## Key Concepts
 
-- **changes/README.md** (15 connections) — `docs/changes/README.md`
+- **changes/README.md** (17 connections) — `docs/changes/README.md`
 - **CIVILWATCH — Change Log** (2 connections) — `docs/changes/README.md`
 - **Template** (1 connections) — `docs/changes/README.md`
 
@@ -29,7 +29,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 16 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

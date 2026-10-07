@@ -5,6 +5,7 @@
 ## Key Concepts
 
 - **StatelessWidget** (130 connections)
+- **CivilWatchAppBar** (3 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **_AnnouncementCard** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_GreetingSection** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_HomeAppBar** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
@@ -15,14 +16,13 @@
 - **_ReportCtaBanner** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_ReportSummaryRow** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **_SummaryTile** (2 connections) — `civ-main/lib/screens/home/home_screen.dart`
-- **_BeforeAfterDialog** (2 connections) — `civ-main/lib/screens/map_preview/private_map_screen.dart`
 - **_BeforeAfterPhotos** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
-- **_FallbackPhoto** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_FullscreenPhotoView** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_PhotoPanel** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_TrackReportBody** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **TrackReportScreen** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
 - **_VerticalTimeline** (2 connections) — `civ-main/lib/screens/track_report/track_report_screen.dart`
+- **PreferredSizeWidget** (1 connections)
 
 ## Relationships
 
@@ -42,8 +42,8 @@
 ## Source Files
 
 - `civ-main/lib/screens/home/home_screen.dart`
-- `civ-main/lib/screens/map_preview/private_map_screen.dart`
 - `civ-main/lib/screens/track_report/track_report_screen.dart`
+- `civ-main/lib/widgets/navigation/app_bar.dart`
 
 ## Audit Trail
 

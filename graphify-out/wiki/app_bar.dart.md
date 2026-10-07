@@ -1,11 +1,10 @@
 # app_bar.dart
 
-> 13 nodes · cohesion 0.15
+> 11 nodes · cohesion 0.18
 
 ## Key Concepts
 
 - **app_bar.dart** (18 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
-- **CivilWatchAppBar** (3 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **actions** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **backgroundColor** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **build** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
@@ -15,19 +14,17 @@
 - **subtitle** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **title** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
 - **titleColor** (1 connections) — `civ-main/lib/widgets/navigation/app_bar.dart`
-- **PreferredSizeWidget** (1 connections)
 - **Size get** (1 connections)
 
 ## Relationships
 
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
 - [Color](Color.md) (1 shared connections)
 - [VoidCallback?](VoidCallback_.md) (1 shared connections)
-- [String?](String_.md) (1 shared connections)
-- [otp_box.dart](otp_box.dart.md) (1 shared connections)
+- [List](List.md) (1 shared connections)
+- [StatelessWidget](StatelessWidget.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
-- [StatelessWidget](StatelessWidget.md) (1 shared connections)
 
 ## Source Files
 
@@ -35,7 +32,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 20 (100%)
+- EXTRACTED: 18 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

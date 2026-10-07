@@ -24,12 +24,11 @@
 ## Relationships
 
 - [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
 - [icon_button.dart](icon_button.dart.md) (1 shared connections)
 - [app_network_image.dart](app_network_image.dart.md) (1 shared connections)
-- [otp_box.dart](otp_box.dart.md) (1 shared connections)
+- [List](List.md) (1 shared connections)
 - [VoidCallback?](VoidCallback_.md) (1 shared connections)
-- [String?](String_.md) (1 shared connections)
-- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
 - [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)

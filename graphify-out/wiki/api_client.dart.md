@@ -1,11 +1,10 @@
 # api_client.dart
 
-> 29 nodes · cohesion 0.07
+> 27 nodes · cohesion 0.07
 
 ## Key Concepts
 
 - **api_client.dart** (33 connections) — `civ-main/lib/core/network/api_client.dart`
-- **ApiException** (2 connections) — `civ-main/lib/core/network/api_client.dart`
 - **ApiClient** (1 connections) — `civ-main/lib/core/network/api_client.dart`
 - **delete** (1 connections) — `civ-main/lib/core/network/api_client.dart`
 - **deleteToken** (1 connections) — `civ-main/lib/core/network/api_client.dart`
@@ -29,7 +28,8 @@
 - **_tokenKey** (1 connections) — `civ-main/lib/core/network/api_client.dart`
 - **toString** (1 connections) — `civ-main/lib/core/network/api_client.dart`
 - **../constants/api_constants.dart** (1 connections)
-- *... and 4 more nodes in this community*
+- **package:shared_preferences/shared_preferences.dart** (1 connections)
+- *... and 2 more nodes in this community*
 
 ## Relationships
 
@@ -37,6 +37,7 @@
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
 - [_](_.md) (1 shared connections)
 - [auth_service.dart](auth_service.dart.md) (1 shared connections)
+- [ApiException](ApiException.md) (1 shared connections)
 - [report_service.dart](report_service.dart.md) (1 shared connections)
 
 ## Source Files
@@ -45,7 +46,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 34 (100%)
+- EXTRACTED: 33 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

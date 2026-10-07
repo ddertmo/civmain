@@ -1,12 +1,11 @@
-# AGENTS.md
+# app_theme.dart
 
-> 3 nodes · cohesion 0.67
+> 2 nodes · cohesion 1.00
 
 ## Key Concepts
 
-- **AGENTS.md** (2 connections) — `AGENTS.md`
-- **changelog** (1 connections) — `AGENTS.md`
-- **graphify** (1 connections) — `AGENTS.md`
+- **app_theme.dart** (1 connections)
+- **light_theme.dart** (1 connections) — `civ-main/lib/core/theme/light_theme.dart`
 
 ## Relationships
 
@@ -14,11 +13,11 @@
 
 ## Source Files
 
-- `AGENTS.md`
+- `civ-main/lib/core/theme/light_theme.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 2 (100%)
+- EXTRACTED: 1 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

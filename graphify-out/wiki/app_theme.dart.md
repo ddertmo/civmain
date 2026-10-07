@@ -1,23 +1,32 @@
 # app_theme.dart
 
-> 2 nodes · cohesion 1.00
+> 7 nodes · cohesion 0.29
 
 ## Key Concepts
 
-- **app_theme.dart** (1 connections)
-- **light_theme.dart** (1 connections) — `civ-main/lib/core/theme/light_theme.dart`
+- **app_theme.dart** (9 connections) — `civ-main/lib/core/theme/app_theme.dart`
+- **../constants/app_colors.dart** (3 connections)
+- **AppTheme** (1 connections) — `civ-main/lib/core/theme/app_theme.dart`
+- **light** (1 connections) — `civ-main/lib/core/theme/app_theme.dart`
+- **_lightTheme** (1 connections) — `civ-main/lib/core/theme/app_theme.dart`
+- **static final ThemeData** (1 connections)
+- **static ThemeData get** (1 connections)
 
 ## Relationships
 
-- No strong cross-community connections detected
+- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [text_styles.dart](text_styles.dart.md) (1 shared connections)
+- [helpers.dart](helpers.dart.md) (1 shared connections)
 
 ## Source Files
 
-- `civ-main/lib/core/theme/light_theme.dart`
+- `civ-main/lib/core/theme/app_theme.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 1 (100%)
+- EXTRACTED: 11 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

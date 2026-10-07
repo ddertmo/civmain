@@ -1,13 +1,17 @@
 # dummy_data.dart
 
-> 38 nodes · cohesion 0.05
+> 45 nodes · cohesion 0.05
 
 ## Key Concepts
 
 - **dummy_data.dart** (32 connections) — `civ-main/lib/core/utils/dummy_data.dart`
+- **notification_card.dart** (11 connections) — `civ-main/lib/widgets/cards/notification_card.dart`
 - **notification_model.dart** (10 connections) — `civ-main/lib/models/notification_model.dart`
+- **../../models/notification_model.dart** (5 connections)
 - **DateTime** (4 connections)
 - **Announcement** (2 connections) — `civ-main/lib/core/utils/dummy_data.dart`
+- **AppNotification** (2 connections) — `civ-main/lib/models/notification_model.dart`
+- **NotificationCard** (2 connections) — `civ-main/lib/widgets/cards/notification_card.dart`
 - **announcements** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **barangay** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **body** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
@@ -25,30 +29,32 @@
 - **lng** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **MapPin** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **myReports** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **notifications** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **offices** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **referenceNumber** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **reportId** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- *... and 13 more nodes in this community*
+- *... and 20 more nodes in this community*
 
 ## Relationships
 
-- [notification_card.dart](notification_card.dart.md) (2 shared connections)
-- [String?](String_.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
 - [../../models/report.dart](-..-models-report.dart.md) (1 shared connections)
 - [auth_service.dart](auth_service.dart.md) (1 shared connections)
 - [_](_.md) (1 shared connections)
+- [VoidCallback?](VoidCallback_.md) (1 shared connections)
+- [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)
+- [StatelessWidget](StatelessWidget.md) (1 shared connections)
 - [report.dart](report.dart.md) (1 shared connections)
 - [user.dart](user.dart.md) (1 shared connections)
+- [app_state.dart](app_state.dart.md) (1 shared connections)
 
 ## Source Files
 
 - `civ-main/lib/core/utils/dummy_data.dart`
 - `civ-main/lib/models/notification_model.dart`
+- `civ-main/lib/widgets/cards/notification_card.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 45 (100%)
+- EXTRACTED: 60 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

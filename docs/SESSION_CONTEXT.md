@@ -50,7 +50,9 @@ show the actual error and the actual fix.
    graph refresh, run the `changelog` skill. It writes
    `docs/changes/YYYY-MM-DD-NNN-<slug>.md`, updates `docs/changes/README.md`,
    runs `graphify update .`, then commits and pushes.
-   **Next sequence number is `015`.** One file per change; do not batch.
+   **Next sequence number:** take the last row number in
+   [`docs/changes/README.md`](changes/README.md) and add one — do not hardcode
+   it here. One file per change; do not batch.
 2. **Graphify first.** For codebase questions run `graphify query "…"`,
    `graphify path A B`, `graphify explain "concept"` before grepping. After
    code changes run `graphify update .`.

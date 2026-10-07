@@ -1,6 +1,6 @@
 # State
 
-> 23 nodes · cohesion 0.15
+> 27 nodes · cohesion 0.12
 
 ## Key Concepts
 
@@ -11,22 +11,25 @@
 - **_OtpScreenState** (4 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
 - **_RegisterScreenState** (4 connections) — `civ-main/lib/screens/auth/register_screen.dart`
 - **_LandingScreenState** (4 connections) — `civ-main/lib/screens/landing/landing_screen.dart`
+- **_ReportSubmittedScreenState** (4 connections) — `civ-main/lib/screens/report/report_submitted.dart`
 - **_SplashScreenState** (4 connections) — `civ-main/lib/screens/splash/splash_screen.dart`
-- **_DialogCardState** (4 connections) — `civ-main/lib/widgets/common/app_dialog.dart`
 - **_SkeletonShimmerState** (4 connections) — `civ-main/lib/widgets/common/skeleton.dart`
 - **_ForgotPasswordSheet** (3 connections) — `civ-main/lib/screens/auth/forgot_password_flow.dart`
 - **_ForgotPasswordSheetState** (3 connections) — `civ-main/lib/screens/auth/forgot_password_flow.dart`
 - **LoginScreen** (3 connections) — `civ-main/lib/screens/auth/login_screen.dart`
+- **_PinPasswordField** (3 connections) — `civ-main/lib/screens/auth/login_screen.dart`
+- **_PinPasswordFieldState** (3 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **OtpScreen** (3 connections) — `civ-main/lib/screens/auth/otp_screen.dart`
 - **RegisterScreen** (3 connections) — `civ-main/lib/screens/auth/register_screen.dart`
+- **HomeScreen** (3 connections) — `civ-main/lib/screens/home/home_screen.dart`
+- **_HomeScreenState** (3 connections) — `civ-main/lib/screens/home/home_screen.dart`
 - **LandingScreen** (3 connections) — `civ-main/lib/screens/landing/landing_screen.dart`
 - **MyReportsScreen** (3 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
 - **_MyReportsScreenState** (3 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
+- **ReportSubmittedScreen** (3 connections) — `civ-main/lib/screens/report/report_submitted.dart`
 - **SplashScreen** (3 connections) — `civ-main/lib/screens/splash/splash_screen.dart`
 - **VisitorReportsScreen** (3 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
-- **_VisitorReportsScreenState** (3 connections) — `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
-- **_DialogCard** (3 connections) — `civ-main/lib/widgets/common/app_dialog.dart`
-- **_SkeletonShimmer** (3 connections) — `civ-main/lib/widgets/common/skeleton.dart`
+- *... and 2 more nodes in this community*
 
 ## Relationships
 
@@ -49,16 +52,17 @@
 - `civ-main/lib/screens/auth/login_screen.dart`
 - `civ-main/lib/screens/auth/otp_screen.dart`
 - `civ-main/lib/screens/auth/register_screen.dart`
+- `civ-main/lib/screens/home/home_screen.dart`
 - `civ-main/lib/screens/landing/landing_screen.dart`
 - `civ-main/lib/screens/my_reports/my_reports_screen.dart`
+- `civ-main/lib/screens/report/report_submitted.dart`
 - `civ-main/lib/screens/splash/splash_screen.dart`
 - `civ-main/lib/screens/visitor/visitor_reports_screen.dart`
-- `civ-main/lib/widgets/common/app_dialog.dart`
 - `civ-main/lib/widgets/common/skeleton.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 90 (100%)
+- EXTRACTED: 96 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

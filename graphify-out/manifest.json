@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1791273347.8242047,
-    "seen": 1791273395.4947195,
-    "ast_hash": "6e500ad8d7b4da72cb4fd8c2eaa8033c",
+    "mtime": 1791369553.0593462,
+    "seen": 1791369589.6265607,
+    "ast_hash": "abde1857ba2a381302624ff1eb8052b1",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791368809.6428027,
-    "seen": 1791368842.8938856,
-    "ast_hash": "0f57b87abace75e666910f64a14a8f10",
+    "mtime": 1791369919.263346,
+    "seen": 1791370037.3953779,
+    "ast_hash": "ad6d9e5c9464dc983d0396c8b765e445",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1143,6 +1143,18 @@
     "mtime": 1791368773.2708027,
     "seen": 1791368842.8938725,
     "ast_hash": "23965d56d853a234e92975f145281e66",
+    "semantic_hash": ""
+  },
+  "docs/SESSION_CONTEXT.md": {
+    "mtime": 1791369967.0193458,
+    "seen": 1791370037.393102,
+    "ast_hash": "04b7bd198e3d2afc33bd1775b8dac783",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-015-session-context-export.md": {
+    "mtime": 1791369865.9953458,
+    "seen": 1791370037.3953674,
+    "ast_hash": "a01e82b098260dc1642ad29a260319e1",
     "semantic_hash": ""
   }
 }

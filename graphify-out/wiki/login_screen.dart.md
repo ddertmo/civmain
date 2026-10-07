@@ -1,12 +1,10 @@
 # login_screen.dart
 
-> 28 nodes · cohesion 0.07
+> 26 nodes · cohesion 0.08
 
 ## Key Concepts
 
 - **login_screen.dart** (48 connections) — `civ-main/lib/screens/auth/login_screen.dart`
-- **_PinPasswordField** (3 connections) — `civ-main/lib/screens/auth/login_screen.dart`
-- **_PinPasswordFieldState** (3 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **_CitySkyline** (2 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **_LogoBadge** (2 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **_PhonePrefixWidget** (2 connections) — `civ-main/lib/screens/auth/login_screen.dart`
@@ -29,7 +27,9 @@
 - **_phoneController** (1 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **_pin** (1 connections) — `civ-main/lib/screens/auth/login_screen.dart`
 - **shouldRepaint** (1 connections) — `civ-main/lib/screens/auth/login_screen.dart`
-- *... and 3 more nodes in this community*
+- **size** (1 connections) — `civ-main/lib/screens/auth/login_screen.dart`
+- **_slideAnim** (1 connections) — `civ-main/lib/screens/auth/login_screen.dart`
+- *... and 1 more nodes in this community*
 
 ## Relationships
 
@@ -38,13 +38,13 @@
 - [splash_screen.dart](splash_screen.dart.md) (3 shared connections)
 - [report_details.dart](report_details.dart.md) (2 shared connections)
 - [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (2 shared connections)
-- [otp_screen.dart](otp_screen.dart.md) (2 shared connections)
-- [_](_.md) (2 shared connections)
 - [VoidCallback?](VoidCallback_.md) (1 shared connections)
 - [TextInputFormatter](TextInputFormatter.md) (1 shared connections)
+- [build](build.md) (1 shared connections)
+- [CustomPainter](CustomPainter.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [_](_.md) (1 shared connections)
 - [report_review.dart](report_review.dart.md) (1 shared connections)
-- [package:flutter/services.dart](package-flutter-services.dart.md) (1 shared connections)
 
 ## Source Files
 
@@ -52,7 +52,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 55 (100%)
+- EXTRACTED: 52 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
