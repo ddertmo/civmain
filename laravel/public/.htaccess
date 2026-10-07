@@ -23,3 +23,12 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# CORS for uploaded report photos: the Flutter web dev server runs on its own
+# port, so browsers treat it as a different origin and block image loads
+# unless the response carries Access-Control-Allow-Origin.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(png|jpe?g|gif|webp|svg|ico)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
