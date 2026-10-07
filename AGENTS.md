@@ -1,3 +1,35 @@
+## session context — read first
+
+Before doing anything else, read [`docs/SESSION_CONTEXT.md`](docs/SESSION_CONTEXT.md).
+It is the exported context of a prior opencode session and makes a new session
+on another machine pick up where that one stopped.
+
+It covers, and these are not repeated elsewhere:
+
+- **two repos, one push target** — `prc/` pushes to `backup`
+  (`dertmo01/civmain`); the parent `~/Prd/CIVILWATCH` has `origin`
+  (`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
+- **environment limits** — Termux/Android, no Flutter SDK / Dart / Android SDK /
+  Windows / XAMPP / Node build, ~1 GB disk (no installs), `/tmp` unwritable
+  (use `/data/data/com.termux/files/usr/tmp/opencode`), no LLM key so
+  `graphify label` cannot run, `tree_sitter_php` unbuildable so Laravel PHP is
+  **not** in the graph — read PHP files directly.
+- **environment traps** — services die between tool calls; `pkill -f` matches
+  your own shell (use `pgrep -f 'foo[trick]'`); `php artisan serve` ignores a
+  `DB_DATABASE=` override, so pointing at another database means editing
+  `.env` and restoring it with `cmp`.
+- **credentials, live database contents, the canonical dump**
+  (`laravel/civilwatch_FINAL.sql`), how to run on Android and on PC.
+- **architecture facts that are easy to get wrong** — two admin UIs kept on
+  purpose, `requireAuth()` client-side only on the HTML prototype, the
+  `superadmin` role gate, the reject flow (reason lives in
+  `report_activities.description`, not a report column), `concern` not `title`,
+  the four role/enum values.
+- **graphify usage** — heading text must be used as a literal search key,
+  because markdown headings link only to their document root.
+- **verification techniques** that work on this machine, and **what is still
+  open** (Flutter verification path unchosen; next changelog number).
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
