@@ -155,6 +155,40 @@ default `http://127.0.0.1:8000/api`. See `civ-main/lib/core/constants/api_consta
 
 ---
 
+## 6b. What `git pull` gives you vs what you must install
+
+On the PC, after `git pull backup main` you already have — **nothing to
+download for these**:
+
+| Comes with the repo | |
+|---|---|
+| `graphify-out/` | ~335 tracked files: `graph.json`, `graph.html`, `GRAPH_REPORT.md`, `wiki/` (one plain-markdown article per community + `index.md`), `cache/`. Readable as plain markdown — no tool needed. |
+| `.opencode/opencode.json` | registers the graphify plugin |
+| `.opencode/plugins/graphify.js` | imports only `fs` and `path` — **no `npm install` required.** It only echoes a reminder before bash calls; it does not execute graphify. Already Windows-safe (`;` instead of `&&`). |
+| `.opencode/skills/graphify/` + `skills/changelog/` | both skills, plus `references/` |
+| `AGENTS.md`, `docs/`, `laravel/civilwatch_FINAL.sql`, `laravel/docs/` | context, guides, dump |
+| `RUN_BACKEND.bat`, `RUN_APP.bat`, `CHECK_PC.bat`, `check_pc.ps1`, `check_pc.sh` | PC launchers + health checks (added 2026-10-07, 017–021). `RUN_BACKEND` runs `composer update`, ensures `.env`/`APP_KEY`, starts `artisan serve` on 8000. `RUN_APP` runs `flutter pub upgrade` and starts the backend if 8000 is closed, then opens Chrome. `CHECK_PC.bat` → `check_pc.ps1` is the full Windows check (XAMPP, API, DB tables, storage link, CORS, git sync). `check_pc.sh` is HTTP-only on purpose so it runs **from Termux** against the PC's LAN IP. `RUN_APP` hardcodes `C:\Users\Administrator\Downloads\flutter`, and `RUN_APP`/
+`check_pc.ps1` hardcode `C:\xampp` — edit them for another machine. (`RUN_BACKEND.bat`
+takes `php`/`composer` from `PATH`.) |
+
+**Must be installed on the PC:**
+
+| What | Why |
+|---|---|
+| **`pip install graphifyy==0.9.76`** | PyPI package is `graphifyy` (double y), the importable module and CLI are `graphify`. **Only needed to _run_ `graphify query/path/explain/update`.** The graph itself is already in git; reading `graphify-out/wiki/index.md` and `GRAPH_REPORT.md` needs no install. Pin `==0.9.76` to match `.opencode/skills/graphify/.graphify_version`. |
+| PHP 8.2+ / Composer | Laravel |
+| XAMPP (MySQL + phpMyAdmin) | database |
+| Flutter SDK | the mobile app |
+
+**Not needed:** Node.js (no served view uses `@vite`), and `.opencode/package.json`
+is gitignored on purpose — the plugin has no third-party imports.
+
+**Bonus on Windows:** `tree_sitter_php` and the other parsers actually install
+there, so `laravel/*.php` can enter the graph for the first time. On Termux
+they cannot, which is why PHP must be read directly here.
+
+---
+
 ## 7. Architecture facts that are easy to get wrong
 
 - **There are two admin UIs and the decision is to keep both.** The HTML
