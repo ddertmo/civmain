@@ -107,7 +107,7 @@ if (Test-Path $laravelDir) {
 # ── 5. Database contents ────────────────────────────────────────────────────
 $mysqlExe = 'C:\xampp\mysql\bin\mysql.exe'
 if (Test-Path $mysqlExe) {
-    $out = @(& $mysqlExe -u root -N -e "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='civilwatch'; SELECT COUNT(*) FROM citizens; SELECT COUNT(*) FROM citizen_reports;" 2>&1)
+    $out = @(& $mysqlExe -u root -N civilwatch -e "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='civilwatch'; SELECT COUNT(*) FROM citizens; SELECT COUNT(*) FROM citizen_reports;" 2>&1)
     $nums = @($out | ForEach-Object { "$_".Trim() } | Where-Object { $_ -match '^\d+$' })
     if ($nums.Count -ge 3) {
         $tables = [int]$nums[0]; $citizens = [int]$nums[1]; $reports = [int]$nums[2]
