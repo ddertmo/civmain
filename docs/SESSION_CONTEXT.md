@@ -122,12 +122,19 @@ the prototype's "Staff" stat is therefore always 0 (pre-existing, out of scope).
 
 Live database contents (2026-10-07): 2 users, 1 citizen, 3 citizen_reports
 (2 Rejected + `is_public=0`, 1 Assigned + `is_public=1`), 9 report_activities,
-6 citizen_notifications, 5 government_offices, 2 announcements, 12 migrations.
+6 citizen_notifications, 5 government_offices, 2 announcements, **15 tables,
+12 of the 13 migrations ran**. The 13th (`create_sessions_table`, added
+2026-10-07) is **pending here and harmless** — live `.env` has
+`SESSION_DRIVER=file`. It is *not* harmless where the driver is `database`.
 
 Canonical dump: **`laravel/civilwatch_FINAL.sql`** — 15 tables, `Rejected` in
 the status ENUM, `CREATE DATABASE IF NOT EXISTS civilwatch`, phpMyAdmin
-instructions in the footer. A convenience copy sits outside the repo at
-`~/Prd/CIVILWATCH/civilwatch_FINAL.sql` (uncommitted there).
+instructions in the footer. **The dump predates the `sessions` migration, so
+it contains no `sessions` table** — a phpMyAdmin import must be followed by
+`php artisan migrate`, which runs exactly that one migration and touches no
+rows. Skip it and `/admin/login` 500s while `/` still works. A convenience
+copy sits outside the repo at `~/Prd/CIVILWATCH/civilwatch_FINAL.sql`
+(uncommitted there).
 
 ---
 
@@ -170,6 +177,10 @@ download for these**:
 | `RUN_BACKEND.bat`, `RUN_APP.bat`, `CHECK_PC.bat`, `check_pc.ps1`, `check_pc.sh` | PC launchers + health checks (added 2026-10-07, 017–021). `RUN_BACKEND` runs `composer update`, ensures `.env`/`APP_KEY`, starts `artisan serve` on 8000. `RUN_APP` runs `flutter pub upgrade` and starts the backend if 8000 is closed, then opens Chrome. `CHECK_PC.bat` → `check_pc.ps1` is the full Windows check (XAMPP, API, DB tables, storage link, CORS, git sync). `check_pc.sh` is HTTP-only on purpose so it runs **from Termux** against the PC's LAN IP. `RUN_APP` hardcodes `C:\Users\Administrator\Downloads\flutter`, and `RUN_APP`/
 `check_pc.ps1` hardcode `C:\xampp` — edit them for another machine. (`RUN_BACKEND.bat`
 takes `php`/`composer` from `PATH`.) |
+
+**Must do once after the first pull:** `php artisan migrate`. `.env.example`
+ships `SESSION_DRIVER=database` but the dump has no `sessions` table, so
+without it **`/admin/login` 500s while `/` still works** — easy to miss.
 
 **Must be installed on the PC:**
 

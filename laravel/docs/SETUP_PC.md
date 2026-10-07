@@ -73,6 +73,9 @@ SELECT COLUMN_TYPE FROM information_schema.COLUMNS
    AND COLUMN_NAME = 'status';               -- must contain 'Rejected'
 ```
 
+**15 is correct at this point.** The next section runs one migration that adds
+a 16th table (`sessions`), so you end up with 16.
+
 ---
 
 ## .env and APP_KEY
@@ -97,6 +100,24 @@ DB_PASSWORD=
 
 XAMPP's default is `root` with an **empty password** — leave `DB_PASSWORD`
 empty unless you changed it.
+
+### Then create the `sessions` table
+
+`.env.example` ships `SESSION_DRIVER=database`, but the SQL dump was taken
+before the `sessions` migration existed — so a phpMyAdmin import alone leaves
+no table for Laravel to store web sessions in. Run:
+
+```bash
+php artisan migrate
+```
+
+Verified: it runs **exactly one** migration (`create_sessions_table`), creates
+the 16th table, and touches no existing rows — your 2 users and 3 sample
+reports come through untouched.
+
+**Skip this and `/admin/login` returns 500** (the Blade session driver cannot
+write). The HTML/JS dashboard at `/` still works, which is what makes it easy
+to miss. `SESSION_DRIVER=file` sidesteps it, but the migration is the fix.
 
 ---
 
@@ -244,6 +265,11 @@ XAMPP's default root password is empty. If you set one, put it in
 Use the phpMyAdmin **Drop** on the old database first, or run the import
 with "Ignore errors" unchecked — the dump uses `CREATE DATABASE IF NOT
 EXISTS` and `DROP TABLE IF EXISTS`, so re-importing over itself is safe.
+
+**`/admin/login` returns 500 or a blank page**
+The `sessions` table is missing — run `php artisan migrate`. The HTML/JS
+dashboard at `/` keeps working, so this is easy to miss. See "Then create the
+`sessions` table" above.
 
 **Uploaded report photos return 404**
 `php artisan storage:link` was not run. `composer setup` now does it.
