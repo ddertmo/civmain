@@ -23,7 +23,7 @@
 ## Relationships
 
 - [app_state.dart](app_state.dart.md) (3 shared connections)
-- [notification_service.dart](notification_service.dart.md) (2 shared connections)
+- [announcement_service.dart](announcement_service.dart.md) (2 shared connections)
 - [api_client.dart](api_client.dart.md) (1 shared connections)
 - [report.dart](report.dart.md) (1 shared connections)
 - [register_screen.dart](register_screen.dart.md) (1 shared connections)

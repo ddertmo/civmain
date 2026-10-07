@@ -23,14 +23,12 @@
 
 ## Relationships
 
-- [VoidCallback?](VoidCallback_.md) (2 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (4 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
 - [icon_button.dart](icon_button.dart.md) (1 shared connections)
 - [app_network_image.dart](app_network_image.dart.md) (1 shared connections)
-- [visitor_shell.dart](visitor_shell.dart.md) (1 shared connections)
-- [splash_screen.dart](splash_screen.dart.md) (1 shared connections)
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [report.dart](report.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
 - [StatelessWidget](StatelessWidget.md) (1 shared connections)
 
 ## Source Files

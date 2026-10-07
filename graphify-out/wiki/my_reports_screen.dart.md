@@ -1,12 +1,10 @@
 # my_reports_screen.dart
 
-> 15 nodes · cohesion 0.14
+> 13 nodes · cohesion 0.15
 
 ## Key Concepts
 
 - **my_reports_screen.dart** (24 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
-- **MyReportsScreen** (3 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
-- **_MyReportsScreenState** (3 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
 - **../../widgets/inputs/search_field.dart** (2 connections)
 - **_activeFilter** (1 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
 - **createState** (1 connections) — `civ-main/lib/screens/my_reports/my_reports_screen.dart`
@@ -22,13 +20,16 @@
 
 ## Relationships
 
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (3 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
-- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (2 shared connections)
 - [State](State.md) (2 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (2 shared connections)
+- [progress_timeline.dart](progress_timeline.dart.md) (1 shared connections)
 - [AppRoutes.trackReport](AppRoutes.trackReport.md) (1 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
+- [notification_screen.dart](notification_screen.dart.md) (1 shared connections)
 - [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
+- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)
+- [../../models/report.dart](-..-models-report.dart.md) (1 shared connections)
 - [visitor_reports_screen.dart](visitor_reports_screen.dart.md) (1 shared connections)
 
 ## Source Files
@@ -37,7 +38,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
+- EXTRACTED: 25 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

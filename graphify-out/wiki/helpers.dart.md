@@ -31,7 +31,7 @@
 ## Relationships
 
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
-- [app_theme.dart](app_theme.dart.md) (1 shared connections)
+- [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (1 shared connections)
 
 ## Source Files
 

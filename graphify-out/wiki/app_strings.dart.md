@@ -34,7 +34,7 @@
 ## Relationships
 
 - [app_images.dart](app_images.dart.md) (1 shared connections)
-- [report.dart](report.dart.md) (1 shared connections)
+- [bottom_nav.dart](bottom_nav.dart.md) (1 shared connections)
 
 ## Source Files
 

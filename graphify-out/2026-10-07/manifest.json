@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791385543.912335,
-    "seen": 1791385594.4671252,
-    "ast_hash": "6dcb2084f6e16681a36425168115e4d3",
+    "mtime": 1791386132.9963346,
+    "seen": 1791386161.754581,
+    "ast_hash": "cb41c2b2701a7b6d5619d82ea6ce5657",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1791384516.8763356,
-    "seen": 1791385594.4587514,
-    "ast_hash": "650ef1641dab53db3692c7881978d88d",
+    "mtime": 1791386050.2643347,
+    "seen": 1791386161.7510974,
+    "ast_hash": "efde43f38207242e62b19644899b8188",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1197,6 +1197,12 @@
     "mtime": 1791385542.876335,
     "seen": 1791385594.4671063,
     "ast_hash": "47bb6ca0c3b55894966d4f329321f109",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-07-023-sessions-migration-in-pc-setup.md": {
+    "mtime": 1791386130.9763346,
+    "seen": 1791386161.7545717,
+    "ast_hash": "d46db724aa5cb1c81c0a9bc765097df0",
     "semantic_hash": ""
   }
 }

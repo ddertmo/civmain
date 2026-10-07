@@ -34,17 +34,17 @@
 ## Relationships
 
 - [StatelessWidget](StatelessWidget.md) (5 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (4 shared connections)
 - [_](_.md) (3 shared connections)
-- [../../core/routes/app_routes.dart](-..-core-routes-app_routes.dart.md) (3 shared connections)
 - [package:flutter/material.dart](package-flutter-material.dart.md) (2 shared connections)
-- [VoidCallback?](VoidCallback_.md) (2 shared connections)
 - [ReportLocationScreen](ReportLocationScreen.md) (2 shared connections)
 - [semaphore_service.dart](semaphore_service.dart.md) (2 shared connections)
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (2 shared connections)
+- [report_issue.dart](report_issue.dart.md) (2 shared connections)
 - [auth_service.dart](auth_service.dart.md) (1 shared connections)
 - [IconData](IconData.md) (1 shared connections)
 - [Color](Color.md) (1 shared connections)
 - [_next](_next.md) (1 shared connections)
+- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (1 shared connections)
 
 ## Source Files
 

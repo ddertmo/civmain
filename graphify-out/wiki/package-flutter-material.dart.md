@@ -25,17 +25,17 @@
 ## Relationships
 
 - [_](_.md) (10 shared connections)
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (7 shared connections)
-- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (4 shared connections)
-- [visitor_shell.dart](visitor_shell.dart.md) (3 shared connections)
-- [VoidCallback?](VoidCallback_.md) (3 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (8 shared connections)
+- [../../core/utils/helpers.dart](-..-core-utils-helpers.dart.md) (3 shared connections)
+- [report.dart](report.dart.md) (3 shared connections)
 - [StatelessWidget](StatelessWidget.md) (2 shared connections)
 - [../../core/state/app_state.dart](-..-core-state-app_state.dart.md) (2 shared connections)
-- [splash_screen.dart](splash_screen.dart.md) (2 shared connections)
 - [forgot_password_flow.dart](forgot_password_flow.dart.md) (2 shared connections)
 - [otp_screen.dart](otp_screen.dart.md) (2 shared connections)
 - [register_screen.dart](register_screen.dart.md) (2 shared connections)
 - [report_category.dart](report_category.dart.md) (2 shared connections)
+- [report_concern.dart](report_concern.dart.md) (2 shared connections)
+- [report_details.dart](report_details.dart.md) (2 shared connections)
 
 ## Source Files
 

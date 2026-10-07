@@ -1,11 +1,14 @@
 # dummy_data.dart
 
-> 28 nodes · cohesion 0.07
+> 39 nodes · cohesion 0.05
 
 ## Key Concepts
 
 - **dummy_data.dart** (32 connections) — `civ-main/lib/core/utils/dummy_data.dart`
+- **notification_model.dart** (10 connections) — `civ-main/lib/models/notification_model.dart`
+- **DateTime** (4 connections)
 - **Announcement** (2 connections) — `civ-main/lib/core/utils/dummy_data.dart`
+- **AppNotification** (2 connections) — `civ-main/lib/models/notification_model.dart`
 - **announcements** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **barangay** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **body** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
@@ -26,27 +29,27 @@
 - **notifications** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **offices** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
 - **referenceNumber** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **reportId** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **status** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- **title** (1 connections) — `civ-main/lib/core/utils/dummy_data.dart`
-- *... and 3 more nodes in this community*
+- *... and 14 more nodes in this community*
 
 ## Relationships
 
 - [package:flutter/material.dart](package-flutter-material.dart.md) (1 shared connections)
-- [report.dart](report.dart.md) (1 shared connections)
-- [package:google_fonts/google_fonts.dart](package-google_fonts-google_fonts.dart.md) (1 shared connections)
+- [../../models/report.dart](-..-models-report.dart.md) (1 shared connections)
 - [notification_service.dart](notification_service.dart.md) (1 shared connections)
 - [auth_service.dart](auth_service.dart.md) (1 shared connections)
 - [_](_.md) (1 shared connections)
+- [../../core/constants/app_colors.dart](-..-core-constants-app_colors.dart.md) (1 shared connections)
+- [report.dart](report.dart.md) (1 shared connections)
+- [user.dart](user.dart.md) (1 shared connections)
 
 ## Source Files
 
 - `civ-main/lib/core/utils/dummy_data.dart`
+- `civ-main/lib/models/notification_model.dart`
 
 ## Audit Trail
 
-- EXTRACTED: 33 (100%)
+- EXTRACTED: 46 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
