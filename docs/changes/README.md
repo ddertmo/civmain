@@ -41,3 +41,4 @@ automatically after each change.
 | 028 | 2026-10-08 | `HEAD` | [QA: login creds + users table from API](2026-10-08-028-login-creds-and-users-table-from-api.md) |
 | 029 | 2026-10-08 | `HEAD` | [QA: polish + cleanup + docs](2026-10-08-029-polish-cleanup-docs.md) |
 | 030 | 2026-10-08 | `1f9c078` | [Unauthenticated admin pages returned 500 instead of redirecting to login](2026-10-08-030-guest-redirect-admin-login.md) |
+| 031 | 2026-10-08 | `05b8e67` | [One-click boot script: START_ALL.bat starts the whole PC stack](2026-10-08-031-start-all-boot-script.md) |
