@@ -85,7 +85,7 @@
                         <button class="chip" data-filter="Pending Validation" onclick="setFilter(this,'Pending Validation')">
                             <span class="chip-dot" style="background:#F59E0B"></span> Pending Validation
                         </button>
-                        <button class="chip" data-filter="Assigned" onclick="setFilter(this,'Assigned')">
+                        <button class="chip" data-filter="Assigned to Office" onclick="setFilter(this,'Assigned to Office')">
                             <span class="chip-dot" style="background:#1A56DB"></span> Assigned
                         </button>
                         <button class="chip" data-filter="In Progress" onclick="setFilter(this,'In Progress')">
@@ -105,17 +105,24 @@
                             <div class="map-legend">
                                 <div class="map-legend-title">Legend</div>
                                 <div class="legend-row">
-                                    <div class="legend-pin pending"></div> Pending Validation
+                                    <div class="legend-pin" style="background:#9CA3AF"></div> Submitted
                                 </div>
                                 <div class="legend-row">
-                                    <div class="legend-pin assigned"></div> Assigned
+                                    <div class="legend-pin" style="background:#F59E0B"></div> Pending Validation
                                 </div>
                                 <div class="legend-row">
-                                    <div class="legend-pin inprogress"></div> In Progress
+                                    <div class="legend-pin" style="background:#1A56DB"></div> Assigned
                                 </div>
                                 <div class="legend-row">
-                                    <div class="legend-pin resolved"></div> Resolved
+                                    <div class="legend-pin" style="background:#7C3AED"></div> In Progress
                                 </div>
+                                <div class="legend-row">
+                                    <div class="legend-pin" style="background:#10B981"></div> Resolved
+                                </div>
+                                <div class="legend-row">
+                                    <div class="legend-pin" style="background:#EF4444"></div> Rejected
+                                </div>
+                                <div style="font-size:10px;color:var(--gray-400);margin-top:6px">Pins = status • Emoji = category</div>
                             </div>
                         </div>
 
@@ -171,12 +178,14 @@
     <script src="/js/app.js"></script>
     <script>
         // â”€â”€ Colour palette (matches status) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        var pinColors = {
+        var pinColors = Utils.STATUS_COLORS || {
             'Submitted': '#9CA3AF',
             'Pending Validation': '#F59E0B',
             'Assigned to Office': '#1A56DB',
-            'In Progress': '#F97316',
+            'Assigned': '#1A56DB',
+            'In Progress': '#7C3AED',
             'Resolved': '#10B981',
+            'Rejected': '#EF4444',
         };
 
         // â”€â”€ Map init â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -249,9 +258,9 @@
                 var cat = (r.category || r.cat || '').toLowerCase();
                 var status = r.status || '';
                 var pass = filter === 'all' ||
-                    (filter === 'Infrastructure' && cat.includes('infra')) ||
-                    (filter === 'Environmental' && (cat.includes('environ') || cat === 'environment')) ||
-                    status === filter;
+                     (filter === 'Infrastructure' && cat.includes('infra')) ||
+                     ((filter === 'Environmental' || filter === 'Environment') && (cat.includes('environ') || cat === 'environment')) ||
+                     status === filter;
                 if (!pass) return;
                 var m = createMarker(r);
                 if (m) markers.push(m);

@@ -815,116 +815,25 @@
             `;
             } catch (err) {
                 console.error('Error loading user stats:', err);
-                // Show error state (keep skeleton but dim it)
                 document.getElementById('userStatsContainer').style.opacity = '0.5';
             }
         }
 
-        // Load stats when page loads
-        loadUserStats();
-
-        // ── Sample data ──────────────────────────────────────────────
-        const AVATAR_COLORS = ['#1A56DB', '#10B981', '#F97316', '#7C3AED', '#EF4444', '#0891B2', '#D97706', '#059669', '#6366F1'];
+        let usersData = [];
+        let filtered = [];
+        let activeUser = null;
 
         function colorFor(i) {
             return AVATAR_COLORS[i % AVATAR_COLORS.length];
         }
 
         function initials(name) {
-            return name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+            if (!name) return 'U';
+            return name.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
         }
 
-        const usersData = [{
-                id: 'AD-2026-001',
-                name: 'Juan Dela Cruz',
-                email: 'juan.delacruz@digos.gov.ph',
-                phone: '0966 123 4567',
-                office: 'City Engineering Office',
-                role: 'Administrator',
-                status: 'Active',
-                lastLogin: 'May 21, 2026\n10:30 AM',
-                activity: 'Logged in via Chrome on Windows'
-            },
-            {
-                id: 'AD-2026-002',
-                name: 'Maria Santos',
-                email: 'maria.santos@cenro.gov.ph',
-                phone: '0998 765 4321',
-                office: 'CENRO',
-                role: 'Administrator',
-                status: 'Active',
-                lastLogin: 'May 21, 2026\n09:15 AM',
-                activity: 'Validated Report #CW-2026-218'
-            },
-            {
-                id: 'AD-2026-003',
-                name: 'Ana Reyes',
-                email: 'ana.reyes@tapikdigos.gov.ph',
-                phone: '0917 333 2244',
-                office: 'TAPIK Digos',
-                role: 'Staff',
-                status: 'Active',
-                lastLogin: 'May 20, 2026\n04:45 PM',
-                activity: 'Updated status on Report #CW-2026-214'
-            },
-            {
-                id: 'AD-2026-004',
-                name: 'Leo Pascual',
-                email: 'leo.pascual@digos.gov.ph',
-                phone: '0912 555 6677',
-                office: 'City Engineering Office',
-                role: 'Staff',
-                status: 'Active',
-                lastLogin: 'May 20, 2026\n11:20 AM',
-                activity: 'Logged in via Firefox on Windows'
-            },
-            {
-                id: 'AD-2026-005',
-                name: 'Carmen Rodriguez',
-                email: 'carmen.rodriguez@cenro.gov.ph',
-                phone: '0933 444 3311',
-                office: 'CENRO',
-                role: 'Staff',
-                status: 'Active',
-                lastLogin: 'May 19, 2026\n02:10 PM',
-                activity: 'Assigned Report #CW-2026-211 to CENRO'
-            },
-            {
-                id: 'AD-2026-006',
-                name: 'Tom Ramirez',
-                email: 'tom.ramirez@digos.gov.ph',
-                phone: '0906 222 8899',
-                office: 'City Engineering Office',
-                role: 'Administrator',
-                status: 'Inactive',
-                lastLogin: 'May 18, 2026\n—',
-                activity: 'Logged out of the system'
-            },
-            {
-                id: 'AD-2026-007',
-                name: 'Diana Suarez',
-                email: 'diana.suarez@tapikdigos.gov.ph',
-                phone: '0915 111 0022',
-                office: 'TAPIK Digos',
-                role: 'Staff',
-                status: 'Active',
-                lastLogin: 'May 18, 2026\n09:05 AM',
-                activity: 'Viewed Analytics dashboard'
-            },
-            {
-                id: 'AD-2026-008',
-                name: 'John Bermudez',
-                email: 'john.bermudez@cenro.gov.ph',
-                phone: '0977 888 7766',
-                office: 'CENRO',
-                role: 'Administrator',
-                status: 'Active',
-                lastLogin: 'May 17, 2026\n03:25 PM',
-                activity: 'Resolved Report #CW-2026-207'
-            },
-        ];
-
-        let filtered = [...usersData];
+        let usersData = [];
+        let filtered = [];
         let activeUser = null;
 
         // ── Render table ─────────────────────────────────────────────
@@ -938,7 +847,8 @@
             }
             tbody.innerHTML = filtered.map((u, i) => {
                 const col = colorFor(i);
-                const lines = u.lastLogin.split('\n');
+                const lastRaw = u.lastLogin || '—';
+                const lines = lastRaw.split('\n');
                 return `
       <tr style="cursor:pointer" onclick="openPanel(${i})">
         <td>
@@ -967,7 +877,7 @@
             <button class="btn-view" onclick="event.stopPropagation();openPanel(${i})">
               <span class="material-symbols-outlined">visibility</span> View
             </button>
-            <button class="btn-three-dot" onclick="event.stopPropagation();Utils.showToast('More actions for '+usersData[${i}].name,'info')">
+            <button class="btn-three-dot" onclick="event.stopPropagation();Utils.showToast('More actions for '+ (filtered[${i}].name || usersData[${i}].name),'info')">
               <span class="material-symbols-outlined">more_vert</span>
             </button>
           </div>
@@ -975,7 +885,7 @@
       </tr>
     `;
             }).join('');
-            document.getElementById('showingLabel').textContent = `Showing 1 to ${filtered.length} of 16 users`;
+            document.getElementById('showingLabel').textContent = `Showing 1 to ${filtered.length} of ${filtered.length} users`;
             renderPagination();
         }
 
@@ -990,8 +900,8 @@
 
         // ── Details panel ────────────────────────────────────────────
         function openPanel(idx) {
-            const realIdx = usersData.indexOf(filtered[idx]);
-            activeUser = realIdx >= 0 ? realIdx : idx;
+            const realIdx = filtered.length ? usersData.indexOf(filtered[idx]) : idx;
+            activeUser = (realIdx >= 0 && realIdx < usersData.length) ? realIdx : idx;
             renderPanel(activeUser);
             document.getElementById('detailsPanel').classList.add('open');
             document.getElementById('panelOverlay').classList.add('active');
@@ -1058,7 +968,7 @@
       <div class="activity-log-row">
         <span class="material-symbols-outlined">schedule</span>
         <div>
-          <div style="font-size:12px;color:var(--gray-700);font-weight:500">${u.lastLogin.replace('\n', ' ')}</div>
+          <div style="font-size:12px;color:var(--gray-700);font-weight:500">${(u.lastLogin || '').replace('\n', ' ')}</div>
           <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">${u.activity}</div>
         </div>
       </div>

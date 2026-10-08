@@ -157,18 +157,16 @@ class AdminCitizenReportController extends Controller
 
     // ─────────────────────────────────────────────────────────────────────
     // GET /api/admin/citizen-reports/map
-    // All public reports with coordinates for map view.
+    // Public reports with coordinates for map view.
+    // Map shows reports that are public and have coordinates. Include Pending
+    // Validation (already validated/approved) and Assigned+ (already assigned).
     // ─────────────────────────────────────────────────────────────────────
     public function map(Request $request): JsonResponse
     {
-        // ── CRITICAL: Only show reports that are ASSIGNED or later ───────
-        // - Submitted: NOT on map (not approved)
-        // - Pending Validation: NOT on map (approved but not assigned)
-        // - Assigned+: YES on map (assigned to office, ready to track)
         $query = CitizenReport::with('assignedOffice')
             ->where('is_public', true)
-            ->where('assigned_office_id', '!=', null)  // ← MUST be assigned to an office
             ->whereIn('status', [
+                CitizenReport::STATUS_PENDING_VALIDATION,
                 CitizenReport::STATUS_ASSIGNED,
                 CitizenReport::STATUS_IN_PROGRESS,
                 CitizenReport::STATUS_RESOLVED,

@@ -9,13 +9,35 @@ const Utils = {
         return dateStr || '—';
     },
 
+    // Canonical status colours — single source of truth for status pins,
+    // legend chips and analytics (mirrors STATUS_ORDER on the API).
+    STATUS_COLORS: {
+        'Submitted': '#9CA3AF',
+        'Pending Validation': '#F59E0B',
+        'Assigned to Office': '#1A56DB',
+        'Assigned': '#1A56DB', // short-label alias
+        'In Progress': '#7C3AED',
+        'Resolved': '#10B981',
+        'Rejected': '#EF4444',
+    },
+
     // Get status badge HTML
     statusBadge(status) {
         const map = {
+            'Submitted': {
+                cls: 'badge-submitted',
+                icon: 'schedule_send',
+                label: 'Submitted'
+            },
             'Pending Validation': {
                 cls: 'badge-validation',
                 icon: 'schedule',
                 label: 'Pending Validation'
+            },
+            'Assigned to Office': {
+                cls: 'badge-assigned',
+                icon: 'assignment_ind',
+                label: 'Assigned'
             },
             'Assigned': {
                 cls: 'badge-assigned',
@@ -32,6 +54,11 @@ const Utils = {
                 icon: 'check_circle',
                 label: 'Resolved'
             },
+            'Rejected': {
+                cls: 'badge-rejected',
+                icon: 'cancel',
+                label: 'Rejected'
+            },
         };
         const s = map[status] || {
             cls: 'badge-pending',
@@ -41,12 +68,37 @@ const Utils = {
         return `<span class="badge ${s.cls}"><span class="material-symbols-outlined">${s.icon}</span>${s.label}</span>`;
     },
 
-    // Get category badge HTML
+    // Get category badge HTML — canonical API value 'Environment' displays as
+    // 'Environmental'; 'Others' keeps its own badge instead of being mislabeled.
     categoryBadge(category) {
-        if (category === 'Infrastructure') {
-            return `<span class="badge-infra"><span class="material-symbols-outlined">construction</span>Infrastructure</span>`;
-        }
-        return `<span class="badge-env"><span class="material-symbols-outlined">eco</span>Environmental</span>`;
+        const labels = {
+            'Infrastructure': {
+                cls: 'badge-infra',
+                icon: 'construction',
+                label: 'Infrastructure'
+            },
+            'Environment': {
+                cls: 'badge-env',
+                icon: 'eco',
+                label: 'Environmental'
+            },
+            'Environmental': {
+                cls: 'badge-env',
+                icon: 'eco',
+                label: 'Environmental'
+            },
+            'Others': {
+                cls: 'badge-others',
+                icon: 'category',
+                label: 'Others'
+            },
+        };
+        const b = labels[category] || {
+            cls: 'badge-pending',
+            icon: 'help',
+            label: category
+        };
+        return `<span class="badge ${b.cls}"><span class="material-symbols-outlined">${b.icon}</span>${b.label}</span>`;
     },
 
     // Placeholder image for broken/missing photos

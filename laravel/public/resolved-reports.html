@@ -178,9 +178,9 @@
                         <option>This Month</option>
                         <option>Last 3 Months</option>
                     </select>
-                    <div class="date-filter">
+                    <div class="date-filter" id="dateRangeLabel">
                         <span class="material-symbols-outlined">calendar_today</span>
-                        May 1, 2025 – May 21, 2026
+                        <span id="dateRangeText">All dates</span>
                     </div>
                 </div>
 
@@ -436,6 +436,15 @@
                     return new Date(b.resolvedAt || b.resolved_at || 0)
                          - new Date(a.resolvedAt || a.resolved_at || 0);
                 });
+
+                const dates = allResolved.map(r => new Date(r.resolvedAt || r.resolved_at)).filter(d => !isNaN(d));
+                const rangeText = document.getElementById('dateRangeText');
+                if (rangeText && dates.length) {
+                    const min = new Date(Math.min.apply(null, dates));
+                    const max = new Date(Math.max.apply(null, dates));
+                    const fmt = d => d.toISOString().slice(0,10);
+                    rangeText.textContent = fmt(min) + ' – ' + fmt(max);
+                }
 
                 var totalAll = (summaryJson && summaryJson.success)
                     ? (summaryJson.data.total || 0) : '—';

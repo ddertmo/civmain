@@ -34,3 +34,9 @@ One markdown file per change. Newest last. Every code change made by the
 
 New files follow `docs/changes/TEMPLATE.md`. The `changelog` skill writes them
 automatically after each change.
+
+| 025 | 2026-10-08 | `HEAD` | [QA: GIS status/palette + map scope](2026-10-08-025-qa-gis-status-palette-and-map-scope.md) |
+| 026 | 2026-10-08 | `HEAD` | [QA: category naming + filter integrity](2026-10-08-026-category-naming-and-filter-integrity.md) |
+| 027 | 2026-10-08 | `HEAD` | [QA: date filter search + dynamic range labels](2026-10-08-027-date-filter-search-and-dynamic-range-labels.md) |
+| 028 | 2026-10-08 | `HEAD` | [QA: login creds + users table from API](2026-10-08-028-login-creds-and-users-table-from-api.md) |
+| 029 | 2026-10-08 | `HEAD` | [QA: polish + cleanup + docs](2026-10-08-029-polish-cleanup-docs.md) |

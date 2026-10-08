@@ -1646,7 +1646,7 @@
                             <!-- 1. Select Office -->
                             <div class="af-section-title">1. Select Office</div>
                             <p style="font-size:13px;color:var(--primary);margin-bottom:14px;">
-                                We recommend the office below for this report.
+                                Recommended because category = ${activeReport ? (activeReport.category || '').replace('Environment','Environmental') : '—'}
                             </p>
 
                             <!-- Dynamic office cards loaded from API -->
@@ -1715,7 +1715,7 @@
                                     <div class="af-info-icon tip"><span class="material-symbols-outlined">lightbulb</span></div>
                                     <span class="af-info-title">Tip</span>
                                 </div>
-                                <div class="af-info-body">We automatically suggest the best office based on the issue type and category. You can still change it if needed.</div>
+                                <div class="af-info-body">We automatically suggest the best office based on the issue type and category (Environmental → CENRO; Infrastructure/Others → CEO). You can still change it if needed.</div>
                             </div>
                             <div class="af-info-card">
                                 <div class="af-info-header">

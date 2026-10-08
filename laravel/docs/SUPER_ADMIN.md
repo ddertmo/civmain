@@ -230,3 +230,9 @@ mariadb --socket=$HOME/.local/var/mysql/mysql.sock -u root -D civilwatch \
 every change under `civ-main/` is static review only (brace balance + diff
 reading). `tree_sitter_php` cannot build on Termux, so Laravel PHP is absent
 from the graphify graph; read those files directly.
+
+## State machine and map scope (QA batch 025)
+
+- Status values: Submitted → Pending Validation → Assigned to Office → In Progress → Resolved, and Rejected (terminal before assignment in allowed rejectable states).
+- Admin GIS (`/api/admin/citizen-reports/map`): now includes Pending Validation (is_public + coords) in addition to Assigned/In Progress/Resolved. Submitted and Rejected are not returned by the map endpoint.
+- Admin GIS pins are colored by **status**; emoji on pins are chosen by **category** (Infrastructure vs Environmental/others) — this differs from the public/community mobile map which colors/represents by category. Both are intentional.

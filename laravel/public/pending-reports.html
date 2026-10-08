@@ -108,7 +108,8 @@
                     <select class="filter-select" id="catFilter">
                         <option value="">All Categories</option>
                         <option value="Infrastructure">Infrastructure</option>
-                        <option value="Environmental">Environmental</option>
+                        <option value="Environment">Environmental</option>
+                        <option value="Others">Others</option>
                     </select>
                     <select class="filter-select" id="brgyFilter">
                         <option value="">All Barangays</option>
@@ -119,9 +120,11 @@
                         <option>Badiang</option>
                         <option>Zone III</option>
                     </select>
-                    <div class="date-filter">
+                    <input type="date" id="fromDate" class="filter-select" style="min-width:130px" />
+                    <input type="date" id="toDate" class="filter-select" style="min-width:130px" />
+                    <div class="date-filter" id="dateRangeLabel">
                         <span class="material-symbols-outlined">calendar_today</span>
-                        May 1, 2025 – May 21, 2026
+                        <span id="dateRangeText">All dates</span>
                     </div>
                 </div>
 
@@ -146,6 +149,7 @@
                     </div>
                     <div class="table-footer">
                         <span class="table-showing" id="showingLabel">Showing 1 to 6 of 24 results</span>
+                        <button class="btn btn-secondary" onclick="document.getElementById('searchInput').value='';document.getElementById('catFilter').value='';document.getElementById('brgyFilter').value='';document.getElementById('fromDate').value='';document.getElementById('toDate').value='';applyFilter()" style="margin-left:4px">Clear Filters</button>
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div class="pagination" id="pagination"></div>
                             <select class="per-page-select">
@@ -297,15 +301,37 @@
             const q = (document.getElementById('searchInput').value || '').toLowerCase();
             const cat = document.getElementById('catFilter').value;
             const brgy = document.getElementById('brgyFilter').value;
+            const fromVal = document.getElementById('fromDate')?.value;
+            const toVal = document.getElementById('toDate')?.value;
             filtered = allReports.filter(r => {
                 const issue = (r.issue || r.concern || '').toLowerCase();
                 const barangay = (r.barangay || '').toLowerCase();
                 const name = ((r.citizen || {}).fullName || (r.citizen || {}).full_name || '').toLowerCase();
-                const matchQ = !q || issue.includes(q) || barangay.includes(q) || name.includes(q);
+                const ref = (r.referenceNumber || r.reference_number || '').toLowerCase();
+                const matchQ = !q || issue.includes(q) || barangay.includes(q) || name.includes(q) || ref.includes(q);
                 const matchCat = !cat || r.category === cat;
                 const matchBrgy = !brgy || r.barangay === brgy;
-                return matchQ && matchCat && matchBrgy;
+                let matchDate = true;
+                if (fromVal || toVal) {
+                    const d = new Date(r.submittedAt || r.created_at);
+                    if (isNaN(d)) {
+                        matchDate = false;
+                    } else {
+                        const start = fromVal ? new Date(fromVal + 'T00:00:00') : null;
+                        const end = toVal ? new Date(toVal + 'T23:59:59.999') : null;
+                        if (start && d < start) matchDate = false;
+                        if (end && d > end) matchDate = false;
+                    }
+                }
+                return matchQ && matchCat && matchBrgy && matchDate;
             });
+            const rangeText = document.getElementById('dateRangeText');
+            if (rangeText) {
+                if (!fromVal && !toVal) rangeText.textContent = 'All dates';
+                else if (fromVal && !toVal) rangeText.textContent = fromVal + ' – Latest';
+                else if (!fromVal && toVal) rangeText.textContent = 'Earliest – ' + toVal;
+                else rangeText.textContent = fromVal + ' – ' + toVal;
+            }
             currentPage = 1;
             render();
         }
@@ -314,6 +340,8 @@
         document.getElementById('searchInput').addEventListener('input', doFilter);
         document.getElementById('catFilter').addEventListener('change', applyFilter);
         document.getElementById('brgyFilter').addEventListener('change', applyFilter);
+        document.getElementById('fromDate')?.addEventListener('change', applyFilter);
+        document.getElementById('toDate')?.addEventListener('change', applyFilter);
 
         // ── Load from real API ─────────────────────────────────────────────────
         async function loadPendingReports() {

@@ -133,12 +133,15 @@
                         <span class="material-symbols-outlined">search</span>
                         <input type="text" class="search-input" id="searchInput" placeholder="Search reports..." />
                     </div>
+                    <button class="btn btn-secondary" onclick="document.getElementById('searchInput').value='';document.getElementById('statusFilter').value='';document.getElementById('officeFilter').value='';document.getElementById('catFilter').value='';document.getElementById('brgyFilter').value='';document.getElementById('fromDate').value='';document.getElementById('toDate').value='';applyFilter()" style="margin-left:4px">Clear Filters</button>
                     <select class="filter-select" id="statusFilter">
                         <option value="">All Statuses</option>
-                        <option value="Assigned">Assigned</option>
+                        <option value="Submitted">Submitted</option>
+                        <option value="Pending Validation">Pending Validation</option>
+                        <option value="Assigned to Office">Assigned</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Resolved">Resolved</option>
-                        <option value="Pending Validation">Pending Validation</option>
+                        <option value="Rejected">Rejected</option>
                     </select>
                     <select class="filter-select" id="officeFilter">
                         <option value="">All Offices</option>
@@ -148,7 +151,8 @@
                     <select class="filter-select" id="catFilter">
                         <option value="">All Categories</option>
                         <option value="Infrastructure">Infrastructure</option>
-                        <option value="Environmental">Environmental</option>
+                        <option value="Environment">Environmental</option>
+                        <option value="Others">Others</option>
                     </select>
                     <select class="filter-select" id="brgyFilter">
                         <option value="">All Barangays</option>
@@ -159,9 +163,11 @@
                         <option>Magsaysay</option>
                         <option>Badiang</option>
                     </select>
-                    <div class="date-filter">
+                    <input type="date" id="fromDate" class="filter-select" style="min-width:130px" />
+                    <input type="date" id="toDate" class="filter-select" style="min-width:130px" />
+                    <div class="date-filter" id="dateRangeLabel">
                         <span class="material-symbols-outlined">calendar_today</span>
-                        May 1, 2025 – May 21, 2026
+                        <span id="dateRangeText">All dates</span>
                     </div>
                 </div>
 
@@ -438,6 +444,8 @@
             var off = document.getElementById('officeFilter').value;
             var cat = document.getElementById('catFilter').value;
             var brgy = document.getElementById('brgyFilter').value;
+            var fromVal = document.getElementById('fromDate')?.value;
+            var toVal = document.getElementById('toDate')?.value;
 
             filtered = allReports.filter(function(r) {
                 var concern = (r.concern || r.issue || '').toLowerCase();
@@ -449,11 +457,30 @@
                 var normCat = normCategory(r.category);
                 var matchQ = !q || concern.includes(q) || ref.includes(q) || barangay.includes(q);
                 var matchSt = !st || r.status === st;
-                var matchOff = !off || office.includes(off);
-                var matchCat = !cat || normCat === cat;
+                var matchOff = !off || office.toLowerCase().includes(off.toLowerCase());
+                var matchCat = !cat || normCat === cat || r.category === cat;
                 var matchBrgy = !brgy || r.barangay === brgy;
-                return matchQ && matchSt && matchOff && matchCat && matchBrgy;
+                var matchDate = true;
+                if (fromVal || toVal) {
+                    var d = new Date(r.submittedAt || r.created_at);
+                    if (isNaN(d)) {
+                        matchDate = false;
+                    } else {
+                        var start = fromVal ? new Date(fromVal + 'T00:00:00') : null;
+                        var end = toVal ? new Date(toVal + 'T23:59:59.999') : null;
+                        if (start && d < start) matchDate = false;
+                        if (end && d > end) matchDate = false;
+                    }
+                }
+                return matchQ && matchSt && matchOff && matchCat && matchBrgy && matchDate;
             });
+            var rangeText = document.getElementById('dateRangeText');
+            if (rangeText) {
+                if (!fromVal && !toVal) rangeText.textContent = 'All dates';
+                else if (fromVal && !toVal) rangeText.textContent = fromVal + ' – Latest';
+                else if (!fromVal && toVal) rangeText.textContent = 'Earliest – ' + toVal;
+                else rangeText.textContent = fromVal + ' – ' + toVal;
+            }
             currentPage = 1;
             render();
         }
@@ -466,6 +493,8 @@
                 el.addEventListener('input', doFilter);
             }
         });
+        document.getElementById('fromDate')?.addEventListener('change', applyFilter);
+        document.getElementById('toDate')?.addEventListener('change', applyFilter);
 
         // ── Update progress modal ─────────────────────────────
         function openUpdateModal(id, ref) {

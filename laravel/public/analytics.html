@@ -56,9 +56,9 @@
                         <p class="page-subtitle">Descriptive analytics for monitoring incident reports.</p>
                     </div>
                     <div class="analytics-controls">
-                        <div class="date-filter">
+                        <div class="date-filter" id="dateRangeLabel">
                             <span class="material-symbols-outlined">calendar_today</span>
-                            May 1, 2025 – May 21, 2026
+                            <span id="dateRangeText">All dates</span>
                         </div>
                         <div class="toggle-group">
                             <button class="toggle-btn active" id="weeklyBtn" onclick="setMode('weekly',this)">Weekly</button>
@@ -650,6 +650,14 @@
                 });
                 if (!json || !json.success) throw new Error('API error');
                 allReports = (json.data && json.data.data) ? json.data.data : (json.data || []);
+                const dates = allReports.map(r => new Date(r.submittedAt || r.created_at)).filter(d => !isNaN(d));
+                const rangeText = document.getElementById('dateRangeText');
+                if (rangeText && dates.length) {
+                    const min = new Date(Math.min.apply(null, dates));
+                    const max = new Date(Math.max.apply(null, dates));
+                    const fmt = d => d.toISOString().slice(0,10);
+                    rangeText.textContent = fmt(min) + ' – ' + fmt(max);
+                }
                 buildAllCharts();
             } catch (e) {
                 console.error('Analytics load failed:', e);
