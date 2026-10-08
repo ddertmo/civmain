@@ -1,7 +1,7 @@
 # Persist an Approved status so approve/assign/map/monitoring/Android agree
 
 - **Date:** 2026-10-08
-- **Commit:** `<short hash>` (filled after commit)
+- **Commit:** `89d9eaf`
 - **Type:** fix
 - **Areas:** Laravel / Flutter / web admin (HTML + Blade)
 
