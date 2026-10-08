@@ -40,3 +40,4 @@ automatically after each change.
 | 027 | 2026-10-08 | `HEAD` | [QA: date filter search + dynamic range labels](2026-10-08-027-date-filter-search-and-dynamic-range-labels.md) |
 | 028 | 2026-10-08 | `HEAD` | [QA: login creds + users table from API](2026-10-08-028-login-creds-and-users-table-from-api.md) |
 | 029 | 2026-10-08 | `HEAD` | [QA: polish + cleanup + docs](2026-10-08-029-polish-cleanup-docs.md) |
+| 030 | 2026-10-08 | `1f9c078` | [Unauthenticated admin pages returned 500 instead of redirecting to login](2026-10-08-030-guest-redirect-admin-login.md) |
