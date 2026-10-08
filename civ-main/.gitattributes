@@ -1,0 +1,8 @@
+# Flutter auto-regenerates these files on `flutter pub get` / build.
+# Pin them to LF so regeneration never dirties the working tree
+# (they were committed with CRLF, which made every local run show
+# 7 spuriously modified files).
+**/generated_plugin_registrant.cc text eol=lf
+**/generated_plugin_registrant.h  text eol=lf
+**/generated_plugins.cmake        text eol=lf
+**/GeneratedPluginRegistrant.swift text eol=lf
