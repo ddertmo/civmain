@@ -648,15 +648,15 @@
     "semantic_hash": ""
   },
   "laravel/public/analytics.html": {
-    "mtime": 1791089867.8759453,
-    "seen": 1791162257.307824,
-    "ast_hash": "7a6990d51a681bc0635faecd14fd2351",
+    "mtime": 1791419048.395992,
+    "seen": 1791421259.9828234,
+    "ast_hash": "355fe239d79d67ab4162763fe4a247a4",
     "semantic_hash": ""
   },
   "laravel/public/assign-office.html": {
-    "mtime": 1791089867.8759453,
-    "seen": 1791162257.307836,
-    "ast_hash": "5fb6288d0f0a6a598bd838ea78ffc2bd",
+    "mtime": 1791420873.2199907,
+    "seen": 1791421259.9828315,
+    "ast_hash": "2bd9fd827ae0245b7714de025adb61f9",
     "semantic_hash": ""
   },
   "laravel/public/dashboard.html": {
@@ -666,21 +666,21 @@
     "semantic_hash": ""
   },
   "laravel/public/gis-map.html": {
-    "mtime": 1791089867.8799453,
-    "seen": 1791162257.3078613,
-    "ast_hash": "e88bf6508036338b59f179bf8ff14fec",
+    "mtime": 1791418570.3719923,
+    "seen": 1791421259.9830241,
+    "ast_hash": "55c94b6f3ff4909068527fb9e7836d2c",
     "semantic_hash": ""
   },
   "laravel/public/index.html": {
-    "mtime": 1791089867.8799453,
-    "seen": 1791162257.3078735,
-    "ast_hash": "5602e4d5f66763c936a936a3e1972b15",
+    "mtime": 1791419181.9279919,
+    "seen": 1791421259.9830337,
+    "ast_hash": "272e739da5e58d6239c4a46cd1a0a900",
     "semantic_hash": ""
   },
   "laravel/public/monitoring.html": {
-    "mtime": 1791089867.8799453,
-    "seen": 1791162257.307886,
-    "ast_hash": "d914a924aaebe8a565576996076654a5",
+    "mtime": 1791420858.7159905,
+    "seen": 1791421259.9830415,
+    "ast_hash": "c29890827506a8f99cbe2fddf5c90712",
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/analytics.html": {
@@ -780,9 +780,9 @@
     "semantic_hash": ""
   },
   "laravel/public/pending-reports.html": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791162257.3080974,
-    "ast_hash": "1c6dcd891e80993e58079b5c683530f4",
+    "mtime": 1791420842.9839907,
+    "seen": 1791421259.9863694,
+    "ast_hash": "a7253acb4b75c3c95cd751b63d20e7f0",
     "semantic_hash": ""
   },
   "laravel/public/report-details.html": {
@@ -792,9 +792,9 @@
     "semantic_hash": ""
   },
   "laravel/public/resolved-reports.html": {
-    "mtime": 1791089867.8879452,
-    "seen": 1791162257.3081212,
-    "ast_hash": "e45c5053ad51a4c997c7c25dd11f352c",
+    "mtime": 1791419127.0959918,
+    "seen": 1791421259.9865623,
+    "ast_hash": "a082709b6f8b981b5a85cafc3ac6d763",
     "semantic_hash": ""
   },
   "laravel/public/robots.txt": {
@@ -810,9 +810,9 @@
     "semantic_hash": ""
   },
   "laravel/public/users.html": {
-    "mtime": 1791283657.0441973,
-    "seen": 1791285147.3431432,
-    "ast_hash": "6abc47eaacd2e1030c296feca5fa78a3",
+    "mtime": 1791420286.999991,
+    "seen": 1791421259.9869351,
+    "ast_hash": "f43a514b3e5ac837dfd54d4dcb068427",
     "semantic_hash": ""
   },
   "civ-main/android/app/src/main/res/mipmap-hdpi/ic_launcher.png": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1791414481.3519952,
-    "seen": 1791414515.2409925,
-    "ast_hash": "92474aef7bf79c0fa06d66b2ee377ad5",
+    "mtime": 1791421226.4039903,
+    "seen": 1791421259.981745,
+    "ast_hash": "a43eaef8b65999b5064d148c44f56489",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1098,9 +1098,9 @@
     "semantic_hash": ""
   },
   "laravel/docs/SUPER_ADMIN.md": {
-    "mtime": 1791284907.4321966,
-    "seen": 1791285147.3387673,
-    "ast_hash": "175c51b05f4ffece042b284733099d7e",
+    "mtime": 1791420789.8239906,
+    "seen": 1791421259.9828131,
+    "ast_hash": "d306eba0785dc067da0b01c978ac318f",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-06-009-reject-with-reason.md": {
@@ -1215,6 +1215,36 @@
     "mtime": 1791414457.9879951,
     "seen": 1791414515.2409813,
     "ast_hash": "1a7c010daa759a1c29d625aa70aa7949",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-025-qa-gis-status-palette-and-map-scope.md": {
+    "mtime": 1791421094.2799904,
+    "seen": 1791421259.9816988,
+    "ast_hash": "c92a83774a08a69bd6381c09b6e7d05e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-026-category-naming-and-filter-integrity.md": {
+    "mtime": 1791421123.7159905,
+    "seen": 1791421259.981712,
+    "ast_hash": "0034704dc1bb6409b3e4246f883e57cf",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-027-date-filter-search-and-dynamic-range-labels.md": {
+    "mtime": 1791421158.5839903,
+    "seen": 1791421259.9817207,
+    "ast_hash": "9d3e11d89418ff271bf24539a1c87404",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-028-login-creds-and-users-table-from-api.md": {
+    "mtime": 1791421180.3839905,
+    "seen": 1791421259.9817283,
+    "ast_hash": "53909027eced9bad12c1cefc7a07e0fe",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-08-029-polish-cleanup-docs.md": {
+    "mtime": 1791421209.9679904,
+    "seen": 1791421259.9817357,
+    "ast_hash": "efabb67e462b5ac9ee4d262a73807f9d",
     "semantic_hash": ""
   }
 }
