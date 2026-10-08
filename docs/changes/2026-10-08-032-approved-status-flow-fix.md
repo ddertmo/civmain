@@ -58,6 +58,8 @@ nothing downstream could ever see an approval:
   `enum('Submitted','Pending Validation','Approved','Assigned to Office','In Progress','Resolved','Rejected')`.
 - `php -l` on every changed PHP file — no syntax errors.
 - `php artisan test` — 2 passed.
+- `graphify update .` could not be run: the graphify CLI is not installed on
+  this PC (only the graphify-out output files are present in the repo).
 - `flutter analyze` — 111 issues, all pre-existing warnings/infos (deprecated
   `withOpacity`, unused imports), no errors and none in the touched code.
 - Live end-to-end against `http://127.0.0.1:8000` (MySQL + Laravel running):
