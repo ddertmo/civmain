@@ -25,6 +25,10 @@
   --status-validation: #F59E0B;
   --status-validation-bg: #FFFBEB;
 
+  --status-approved: #0E7C7B;
+  --status-approved-bg: #E0F7F6;
+  --status-approved-border: #99F6E4;
+
   /* Neutral Colors */
   --white: #FFFFFF;
   --gray-50: #F9FAFB;

@@ -21,6 +21,7 @@ class AnalyticsController extends Controller
         $total      = (clone $query)->count();
         $pending    = (clone $query)->where('status', 'Pending Validation')->count();
         $submitted  = (clone $query)->where('status', 'Submitted')->count();
+        $approved   = (clone $query)->where('status', 'Approved')->count();
         $assigned   = (clone $query)->where('status', 'Assigned to Office')->count();
         $inProgress = (clone $query)->where('status', 'In Progress')->count();
         $resolved   = (clone $query)->where('status', 'Resolved')->count();
@@ -31,6 +32,7 @@ class AnalyticsController extends Controller
             'data'    => [
                 'total_reports'      => $total,
                 'pending_validation' => $pending + $submitted,
+                'approved'           => $approved,
                 'assigned'           => $assigned,
                 'in_progress'        => $inProgress,
                 'resolved'           => $resolved,

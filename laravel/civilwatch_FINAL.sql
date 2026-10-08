@@ -215,7 +215,7 @@ CREATE TABLE `citizen_reports` (
   `lng` decimal(10,7) DEFAULT NULL,
   `severity` enum('Minor','Moderate','Severe') NOT NULL DEFAULT 'Moderate',
   `photo_url` varchar(500) DEFAULT NULL,
-  `status` enum('Submitted','Pending Validation','Assigned to Office','In Progress','Resolved','Rejected') NOT NULL DEFAULT 'Submitted',
+  `status` enum('Submitted','Pending Validation','Approved','Assigned to Office','In Progress','Resolved','Rejected') NOT NULL DEFAULT 'Submitted',
   `assigned_office_id` bigint(20) unsigned DEFAULT NULL,
   `resolved_at` timestamp NULL DEFAULT NULL,
   `is_public` tinyint(1) NOT NULL DEFAULT 0,
@@ -638,7 +638,7 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 --   SELECT COLUMN_TYPE FROM information_schema.COLUMNS
 --    WHERE TABLE_SCHEMA = 'civilwatch'
 --      AND TABLE_NAME  = 'citizen_reports'
---      AND COLUMN_NAME = 'status';               -- must contain 'Rejected'
+--      AND COLUMN_NAME = 'status';               -- must contain 'Approved','Rejected'
 --
 -- NEXT STEP
 --   .env:  DB_CONNECTION=mysql, DB_DATABASE=civilwatch, DB_USERNAME=root

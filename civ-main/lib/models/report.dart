@@ -43,6 +43,7 @@ class IncidentReport {
   static const List<String> statusOrder = [
     'Submitted',
     'Pending Validation',
+    'Approved',
     'Assigned to Office',
     'In Progress',
     'Resolved',
@@ -57,6 +58,8 @@ class IncidentReport {
   bool get isPending =>
       status.toLowerCase() == 'pending validation' ||
       status.toLowerCase() == 'submitted';
+
+  bool get isApproved => status.toLowerCase() == 'approved';
 
   bool get isResolved => status.toLowerCase() == 'resolved';
 

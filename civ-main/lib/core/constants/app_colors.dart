@@ -18,6 +18,10 @@ class AppColors {
   static const Color statusPendingBg = Color(0xFFFFFBEB);
   static const Color statusPendingBorder = Color(0xFFFDE68A);
 
+  static const Color statusApproved = Color(0xFF0E7C7B);  // teal
+  static const Color statusApprovedBg = Color(0xFFE0F7F6);
+  static const Color statusApprovedBorder = Color(0xFF99F6E4);
+
   static const Color statusInProgress = Color(0xFFEA580C); // orange
   static const Color statusInProgressBg = Color(0xFFFFF7ED);
   static const Color statusInProgressBorder = Color(0xFFFED7AA);

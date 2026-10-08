@@ -92,6 +92,11 @@
             color: var(--status-pending);
         }
 
+        .activity-icon.approved {
+            background: var(--status-approved-bg);
+            color: var(--status-approved);
+        }
+
         .activity-icon.assign {
             background: var(--status-assigned-bg);
             color: var(--primary);
@@ -543,6 +548,7 @@
         var PIN_COLORS = {
             'Submitted': '#9CA3AF',
             'Pending Validation': '#F59E0B',
+            'Approved': '#0E7C7B',
             'Assigned to Office': '#1A56DB',
             'In Progress': '#F97316',
             'Resolved': '#10B981'
@@ -641,6 +647,11 @@
                         cls: 'submit',
                         icon: 'schedule',
                         verb: 'Pending validation'
+                    },
+                    'Approved': {
+                        cls: 'approved',
+                        icon: 'verified',
+                        verb: 'Report approved'
                     },
                     'Assigned to Office': {
                         cls: 'assign',

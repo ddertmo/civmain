@@ -624,6 +624,8 @@ class _TrackReportBody extends StatelessWidget {
     switch (status.toLowerCase()) {
       case 'pending validation':
         return 'Your report is currently being reviewed by the Super Administrator. Please wait for updates.';
+      case 'approved':
+        return 'Your report has been approved and published to the community map.';
       case 'assigned to office':
         return 'Your report has been assigned to the appropriate government office.';
       case 'in progress':
@@ -643,6 +645,7 @@ class _VerticalTimeline extends StatelessWidget {
   static const _steps = [
     'Submitted',
     'Pending Validation',
+    'Approved',
     'Assigned to Office',
     'In Progress',
     'Resolved',

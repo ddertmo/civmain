@@ -129,6 +129,7 @@
 .overview-icon.progress { background: var(--status-inprogress-bg); color: var(--status-inprogress); }
 .overview-icon.resolved { background: var(--status-resolved-bg);   color: var(--status-resolved); }
 .overview-icon.pending  { background: var(--status-pending-bg);    color: var(--status-pending); }
+.overview-icon.approved { background: var(--status-approved-bg);   color: var(--status-approved); }
 
 .overview-info { flex: 1; }
 

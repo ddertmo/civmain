@@ -59,6 +59,7 @@ class _StatusUpdateBody extends StatelessWidget {
   static const _steps = [
     'Submitted',
     'Pending\nValidation',
+    'Approved',
     'Assigned to\nOffice',
     'In Progress',
     'Resolved',
@@ -66,6 +67,7 @@ class _StatusUpdateBody extends StatelessWidget {
   static const _stepsRaw = [
     'Submitted',
     'Pending Validation',
+    'Approved',
     'Assigned to Office',
     'In Progress',
     'Resolved',
@@ -502,6 +504,7 @@ class _StatusUpdateBody extends StatelessWidget {
     const allSteps = [
       'Submitted',
       'Pending Validation',
+      'Approved',
       'Assigned to Office',
       'In Progress',
       'Resolved',
@@ -545,6 +548,8 @@ class _StatusUpdateBody extends StatelessWidget {
         return 'Your report has been submitted successfully.';
       case 'pending validation':
         return 'Your report is currently being reviewed by the Super Administrator. Please wait for updates.';
+      case 'approved':
+        return 'Your report has been approved and published to the community map.';
       case 'assigned to office':
         return 'Your report has been assigned to the appropriate government office.';
       case 'in progress':

@@ -357,7 +357,7 @@
                             <button class="modal-close" id="approveModalClose"><span class="material-symbols-outlined">close</span></button>
                         </div>
                         <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px;">
-                            Approving this report will move it to <strong>Pending Assignment</strong> and allow you to assign it to the appropriate office.
+                            Approving this report will move it to <strong>Approved</strong>, publish it to the community map, and allow you to assign it to the appropriate office.
                         </p>
                         <div style="display:flex;gap:10px;justify-content:flex-end;">
                             <button class="btn btn-secondary" id="approveCancelBtn">Cancel</button>
@@ -536,7 +536,7 @@
                 '<div class="info-field-value">' + Utils.statusBadge(status) + '</div></div>';
 
             // Timeline from real activity log
-            var statusOrder = ['Submitted', 'Pending Validation', 'Assigned to Office', 'In Progress', 'Resolved'];
+            var statusOrder = ['Submitted', 'Pending Validation', 'Approved', 'Assigned to Office', 'In Progress', 'Resolved'];
             var activityLog = r.activityLog || [];
             var tl = document.getElementById('timeline');
             if (activityLog.length > 0) {

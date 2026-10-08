@@ -63,6 +63,7 @@ class AdminWebController extends Controller
             'total'              => CitizenReport::count(),
             'submitted'          => CitizenReport::where('status', CitizenReport::STATUS_SUBMITTED)->count(),
             'pending_validation' => CitizenReport::where('status', CitizenReport::STATUS_PENDING_VALIDATION)->count(),
+            'approved'           => CitizenReport::where('status', CitizenReport::STATUS_APPROVED)->count(),
             'assigned'           => CitizenReport::where('status', CitizenReport::STATUS_ASSIGNED)->count(),
             'in_progress'        => CitizenReport::where('status', CitizenReport::STATUS_IN_PROGRESS)->count(),
             'resolved'           => CitizenReport::where('status', CitizenReport::STATUS_RESOLVED)->count(),
@@ -114,17 +115,24 @@ class AdminWebController extends Controller
     public function reportsValidate(int $id): RedirectResponse
     {
         $report = CitizenReport::findOrFail($id);
-        $report->update(['is_public' => true]);
-        if (in_array($report->status, [CitizenReport::STATUS_SUBMITTED, CitizenReport::STATUS_PENDING_VALIDATION])) {
-            $report->transitionTo(CitizenReport::STATUS_PENDING_VALIDATION);
+        if (! in_array($report->status, [CitizenReport::STATUS_SUBMITTED, CitizenReport::STATUS_PENDING_VALIDATION])) {
+            return back()->with('error', 'Only Submitted or Pending Validation reports can be approved.');
         }
-        return back()->with('success', 'Report validated and published to community map.');
+        $report->update(['is_public' => true]);
+        $report->transitionTo(CitizenReport::STATUS_APPROVED);
+        return back()->with('success', 'Report approved and published to community map.');
     }
 
     public function reportsAssign(Request $request, int $id): RedirectResponse
     {
         $request->validate(['office_id' => 'required|exists:government_offices,id']);
         $report = CitizenReport::findOrFail($id);
+        if ($report->status !== CitizenReport::STATUS_APPROVED) {
+            return back()->with('error', 'Only approved reports can be assigned to an office.');
+        }
+        if ($report->assigned_office_id !== null) {
+            return back()->with('error', 'This report is already assigned to an office.');
+        }
         $office = GovernmentOffice::findOrFail($request->office_id);
         $report->update(['assigned_office_id' => $office->id]);
         $report->transitionTo(CitizenReport::STATUS_ASSIGNED, null, $office->name);
@@ -159,6 +167,12 @@ class AdminWebController extends Controller
         $reports = CitizenReport::with('assignedOffice')
             ->whereNotNull('lat')
             ->whereNotNull('lng')
+            ->whereIn('status', [
+                CitizenReport::STATUS_APPROVED,
+                CitizenReport::STATUS_ASSIGNED,
+                CitizenReport::STATUS_IN_PROGRESS,
+                CitizenReport::STATUS_RESOLVED,
+            ])
             ->get()
             ->map(fn($r) => [
                 'id'              => $r->id,

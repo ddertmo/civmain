@@ -1453,7 +1453,7 @@
                         <span class="material-symbols-outlined" style="font-size:26px;color:var(--primary);">business_center</span>
                         Assign Office
                     </h1>
-                    <p class="page-subtitle">Review pending reports and assign them to the appropriate office.</p>
+                    <p class="page-subtitle">Review approved reports and assign them to the appropriate office.</p>
                 </div>
 
                 <!-- Stat cards -->
@@ -2027,10 +2027,10 @@
                 .then(function(json) {
                     if (!json || !json.success) throw new Error();
                     var d = json.data;
-                    var pending = (d.submitted || 0) + (d.pending_validation || 0);
+                    var approved = d.approved || 0;
                     var infra = 0,
                         env = 0;
-                    if (allReports.length) {
+                    if (approved) {
                         infra = allReports.filter(function(r) {
                             return normCategory(r.category) === 'Infrastructure';
                         }).length;
@@ -2039,7 +2039,7 @@
                             return c === 'Environment' || c === 'Environmental';
                         }).length;
                     }
-                    renderStatCards(pending, infra, env);
+                    renderStatCards(approved, infra, env);
                 })
                 .catch(function() {
                     renderStatCards('-', '-', '-');
@@ -2048,15 +2048,11 @@
 
         function loadReports() {
             var list = document.getElementById('reportList');
-            list.innerHTML = '<div class="ao-empty"><span class="material-symbols-outlined">pending_actions</span>Loading reports...</div>';
-            // Load Submitted + Pending Validation (reports awaiting assignment)
+            list.innerHTML = '<div class="ao-empty"><span class="material-symbols-outlined">pending_actions</span>Loading approved reports...</div>';
+            // Only APPROVED reports awaiting assignment appear here.
             Promise.all([
                 Api.get('/api/admin/citizen-reports', {
-                    status: 'Pending Validation',
-                    limit: 200
-                }),
-                Api.get('/api/admin/citizen-reports', {
-                    status: 'Submitted',
+                    status: 'Approved',
                     limit: 200
                 })
             ]).then(function(results) {
@@ -2130,7 +2126,7 @@
             var total = filtered.length;
 
             if (total === 0) {
-                list.innerHTML = '<div class="ao-empty"><span class="material-symbols-outlined">inbox</span>No pending reports found.</div>';
+                list.innerHTML = '<div class="ao-empty"><span class="material-symbols-outlined">inbox</span>No approved reports awaiting assignment.</div>';
                 document.getElementById('pgInfo').textContent = 'Showing 0 reports';
                 document.getElementById('pgBtns').innerHTML = '';
                 return;

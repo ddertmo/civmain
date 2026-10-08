@@ -79,6 +79,7 @@
         .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
         .badge-submitted   { background:#F0F4FF; color:#3B5BDB; }
         .badge-pending     { background:var(--warning-bg); color:var(--warning); }
+        .badge-approved    { background:#E0F7F6; color:#0E7C7B; }
         .badge-assigned    { background:var(--info-bg); color:var(--info); }
         .badge-inprogress  { background:#FFF3E0; color:#E65100; }
         .badge-resolved    { background:var(--success-bg); color:var(--success); }

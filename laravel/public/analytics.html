@@ -553,6 +553,7 @@
             var counts = {
                 'Submitted': 0,
                 'Pending Validation': 0,
+                'Approved': 0,
                 'Assigned to Office': 0,
                 'In Progress': 0,
                 'Resolved': 0
@@ -565,7 +566,7 @@
 
             var labels = Object.keys(counts);
             var values = Object.values(counts);
-            var colors = ['#9CA3AF', '#F59E0B', '#1A56DB', '#F97316', '#10B981'];
+            var colors = ['#9CA3AF', '#F59E0B', '#0E7C7B', '#1A56DB', '#F97316', '#10B981'];
 
             var pct = function(n) {
                 return total > 0 ? (n / total * 100).toFixed(1) + '%' : '0%';
@@ -575,6 +576,7 @@
                 var dotColors = {
                     'Submitted': '#9CA3AF',
                     'Pending Validation': '#F59E0B',
+                    'Approved': '#0E7C7B',
                     'Assigned to Office': '#1A56DB',
                     'In Progress': '#F97316',
                     'Resolved': '#10B981'

@@ -205,7 +205,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
             child: Row(
               children: [
                 _LegendDot(
-                    color: AppColors.statusPending, label: 'Pending'),
+                    color: AppColors.statusApproved, label: 'Approved'),
                 const SizedBox(width: 14),
                 _LegendDot(
                     color: AppColors.statusInProgress,

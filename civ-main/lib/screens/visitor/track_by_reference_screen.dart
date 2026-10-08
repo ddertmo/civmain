@@ -579,6 +579,7 @@ class _CompactTimeline extends StatelessWidget {
   static const _steps = [
     'Submitted',
     'Pending\nValidation',
+    'Approved',
     'Assigned',
     'In Progress',
     'Resolved',
@@ -587,6 +588,7 @@ class _CompactTimeline extends StatelessWidget {
   static const _statuses = [
     'Submitted',
     'Pending Validation',
+    'Approved',
     'Assigned to Office',
     'In Progress',
     'Resolved',

@@ -118,6 +118,14 @@
                         </div>
                     </div>
                     <div class="overview-card">
+                        <div class="overview-icon approved"><span class="material-symbols-outlined">verified</span></div>
+                        <div class="overview-info">
+                            <div class="overview-value" id="statApproved">—</div>
+                            <div class="overview-label">Approved</div>
+                            <div class="overview-sublabel">Awaiting office</div>
+                        </div>
+                    </div>
+                    <div class="overview-card">
                         <div class="overview-icon pending"><span class="material-symbols-outlined">schedule</span></div>
                         <div class="overview-info">
                             <div class="overview-value" id="statPending">—</div>
@@ -138,6 +146,7 @@
                         <option value="">All Statuses</option>
                         <option value="Submitted">Submitted</option>
                         <option value="Pending Validation">Pending Validation</option>
+                        <option value="Approved">Approved</option>
                         <option value="Assigned to Office">Assigned</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Resolved">Resolved</option>
@@ -177,6 +186,7 @@
                     <button class="tab-btn" data-tab="Assigned to Office" onclick="switchTab(this,'Assigned to Office')">Assigned (<span id="tabAssigned">—</span>)</button>
                     <button class="tab-btn" data-tab="In Progress" onclick="switchTab(this,'In Progress')">In Progress (<span id="tabInProgress">—</span>)</button>
                     <button class="tab-btn" data-tab="Resolved" onclick="switchTab(this,'Resolved')">Resolved (<span id="tabResolved">—</span>)</button>
+                    <button class="tab-btn" data-tab="Approved" onclick="switchTab(this,'Approved')">Approved (<span id="tabApproved">—</span>)</button>
                     <button class="tab-btn" data-tab="Pending Validation" onclick="switchTab(this,'Pending Validation')">Pending Validation (<span id="tabPending">—</span>)</button>
                 </div>
 
@@ -224,7 +234,7 @@
             </div>
             <p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;">Report: <strong id="updateReportId"></strong></p>
             <div class="update-modal-body">
-                <div class="status-option" data-status="Assigned" onclick="selectStatus(this)">
+                <div class="status-option" data-status="Assigned to Office" onclick="selectStatus(this)">
                     <div class="status-option-dot" style="background:#1A56DB"></div>
                     <div>
                         <div style="font-size:14px;font-weight:600;color:var(--gray-800)">Assigned</div>
@@ -416,24 +426,28 @@
                 assigned: 0,
                 inProgress: 0,
                 resolved: 0,
-                pending: 0
+                pending: 0,
+                approved: 0
             };
             data.forEach(function(r) {
                 var s = r.status || '';
                 if (s === 'Assigned to Office') counts.assigned++;
                 else if (s === 'In Progress') counts.inProgress++;
                 else if (s === 'Resolved') counts.resolved++;
+                else if (s === 'Approved') counts.approved++;
                 else if (s === 'Submitted' || s === 'Pending Validation') counts.pending++;
             });
             document.getElementById('statAll').textContent = counts.all;
             document.getElementById('statAssigned').textContent = counts.assigned;
             document.getElementById('statInProgress').textContent = counts.inProgress;
             document.getElementById('statResolved').textContent = counts.resolved;
+            document.getElementById('statApproved').textContent = counts.approved;
             document.getElementById('statPending').textContent = counts.pending;
             document.getElementById('tabAll').textContent = counts.all;
             document.getElementById('tabAssigned').textContent = counts.assigned;
             document.getElementById('tabInProgress').textContent = counts.inProgress;
             document.getElementById('tabResolved').textContent = counts.resolved;
+            document.getElementById('tabApproved').textContent = counts.approved;
             document.getElementById('tabPending').textContent = counts.pending;
         }
 
@@ -541,7 +555,7 @@
             Skeleton.injectTableRows('monitoringTableBody', 6, 7);
             try {
                 var json = await Api.get('/api/admin/citizen-reports', {
-                    status: 'Assigned', // Only show assigned reports in monitoring
+                    status: '', // load all — tabs/overview filter client-side
                     limit: 500
                 });
                 if (!json || !json.success) throw new Error('API error');

@@ -2,6 +2,7 @@
 $map = [
     'Submitted'          => 'badge-submitted',
     'Pending Validation' => 'badge-pending',
+    'Approved'           => 'badge-approved',
     'Assigned to Office' => 'badge-assigned',
     'In Progress'        => 'badge-inprogress',
     'Resolved'           => 'badge-resolved',

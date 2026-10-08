@@ -112,11 +112,19 @@ class MobileReportController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // GET /api/mobile/reports/community
     // All validated/public reports for the community map.
+    // Only reports past validation (Approved+) — never Submitted / Pending
+    // Validation / Rejected, even if is_public has been set.
     // ─────────────────────────────────────────────────────────────────────
     public function community(Request $request): JsonResponse
     {
         $reports = CitizenReport::with(['assignedOffice'])
             ->where('is_public', true)
+            ->whereIn('status', [
+                CitizenReport::STATUS_APPROVED,
+                CitizenReport::STATUS_ASSIGNED,
+                CitizenReport::STATUS_IN_PROGRESS,
+                CitizenReport::STATUS_RESOLVED,
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
 

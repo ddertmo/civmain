@@ -82,8 +82,8 @@
                         <button class="chip" data-filter="Environmental" onclick="setFilter(this,'Environmental')">
                             <span class="material-symbols-outlined">eco</span> Environmental
                         </button>
-                        <button class="chip" data-filter="Pending Validation" onclick="setFilter(this,'Pending Validation')">
-                            <span class="chip-dot" style="background:#F59E0B"></span> Pending Validation
+                        <button class="chip" data-filter="Approved" onclick="setFilter(this,'Approved')">
+                            <span class="chip-dot" style="background:#0E7C7B"></span> Approved
                         </button>
                         <button class="chip" data-filter="Assigned to Office" onclick="setFilter(this,'Assigned to Office')">
                             <span class="chip-dot" style="background:#1A56DB"></span> Assigned
@@ -105,10 +105,7 @@
                             <div class="map-legend">
                                 <div class="map-legend-title">Legend</div>
                                 <div class="legend-row">
-                                    <div class="legend-pin" style="background:#9CA3AF"></div> Submitted
-                                </div>
-                                <div class="legend-row">
-                                    <div class="legend-pin" style="background:#F59E0B"></div> Pending Validation
+                                    <div class="legend-pin" style="background:#0E7C7B"></div> Approved
                                 </div>
                                 <div class="legend-row">
                                     <div class="legend-pin" style="background:#1A56DB"></div> Assigned
@@ -118,9 +115,6 @@
                                 </div>
                                 <div class="legend-row">
                                     <div class="legend-pin" style="background:#10B981"></div> Resolved
-                                </div>
-                                <div class="legend-row">
-                                    <div class="legend-pin" style="background:#EF4444"></div> Rejected
                                 </div>
                                 <div style="font-size:10px;color:var(--gray-400);margin-top:6px">Pins = status • Emoji = category</div>
                             </div>
@@ -181,6 +175,7 @@
         var pinColors = Utils.STATUS_COLORS || {
             'Submitted': '#9CA3AF',
             'Pending Validation': '#F59E0B',
+            'Approved': '#0E7C7B',
             'Assigned to Office': '#1A56DB',
             'Assigned': '#1A56DB',
             'In Progress': '#7C3AED',

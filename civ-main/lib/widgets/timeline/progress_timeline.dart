@@ -13,6 +13,7 @@ class ProgressTimeline extends StatelessWidget {
   static const _steps = [
     'Submitted',
     'Pending Validation',
+    'Approved',
     'Assigned to Office',
     'In Progress',
     'Resolved',

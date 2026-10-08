@@ -14,6 +14,7 @@ const Utils = {
     STATUS_COLORS: {
         'Submitted': '#9CA3AF',
         'Pending Validation': '#F59E0B',
+        'Approved': '#0E7C7B',
         'Assigned to Office': '#1A56DB',
         'Assigned': '#1A56DB', // short-label alias
         'In Progress': '#7C3AED',
@@ -33,6 +34,11 @@ const Utils = {
                 cls: 'badge-validation',
                 icon: 'schedule',
                 label: 'Pending Validation'
+            },
+            'Approved': {
+                cls: 'badge-approved',
+                icon: 'verified',
+                label: 'Approved'
             },
             'Assigned to Office': {
                 cls: 'badge-assigned',

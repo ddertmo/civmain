@@ -332,6 +332,7 @@ class AppState extends ChangeNotifier {
   String _statusDescription(String status) {
     switch (status) {
       case 'Pending Validation': return 'Your report is now waiting for validation.';
+      case 'Approved':           return 'Your report has been approved and published to the community map.';
       case 'Assigned to Office': return 'Assigned to the appropriate government office.';
       case 'In Progress':        return 'Work is currently in progress.';
       case 'Resolved':           return 'The issue has been successfully resolved.';

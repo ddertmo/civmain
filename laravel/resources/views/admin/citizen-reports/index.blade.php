@@ -7,7 +7,7 @@
     <form method="GET" style="display:contents">
         <select name="status" onchange="this.form.submit()">
             <option value="">All Statuses</option>
-            @foreach(['Submitted','Pending Validation','Assigned to Office','In Progress','Resolved','Rejected'] as $s)
+            @foreach(['Submitted','Pending Validation','Approved','Assigned to Office','In Progress','Resolved','Rejected'] as $s)
                 <option value="{{ $s }}" {{ request('status') === $s ? 'selected' : '' }}>{{ $s }}</option>
             @endforeach
         </select>

@@ -39,7 +39,9 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
     if (_activeFilter != 'All') {
       list = list.where((r) {
         if (_activeFilter == 'Pending') {
-          return r.status == 'Pending Validation' || r.status == 'Submitted';
+          return r.status == 'Pending Validation' ||
+              r.status == 'Submitted' ||
+              r.status == 'Approved';
         }
         if (_activeFilter == 'In Progress') {
           return r.status == 'In Progress' || r.status == 'Assigned to Office';

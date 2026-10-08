@@ -20,6 +20,11 @@
         <div class="sub">Under review</div>
     </div>
     <div class="stat-card">
+        <div class="label">Approved</div>
+        <div class="value" style="color:#0E7C7B">{{ $stats['approved'] }}</div>
+        <div class="sub">Ready for office</div>
+    </div>
+    <div class="stat-card">
         <div class="label">Assigned</div>
         <div class="value" style="color:#1A6089">{{ $stats['assigned'] }}</div>
         <div class="sub">Sent to office</div>

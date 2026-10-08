@@ -110,22 +110,22 @@
             </div>
         </div>
 
-        {{-- Validate --}}
+        {{-- Approve --}}
         @if(in_array($report->status, ['Submitted', 'Pending Validation']))
         <div class="card">
-            <div class="card-header"><h2>Validate Report</h2></div>
+            <div class="card-header"><h2>Approve Report</h2></div>
             <div class="card-body">
-                <p style="font-size:12px;color:var(--gray-600);margin-bottom:12px">Validating will make this report visible on the community map.</p>
+                <p style="font-size:12px;color:var(--gray-600);margin-bottom:12px">Approving will move this report to <strong>Approved</strong> and make it visible on the community map, ready for office assignment.</p>
                 <form method="POST" action="{{ route('admin.citizen-reports.validate', $report->id) }}">
                     @csrf
-                    <button type="submit" class="btn btn-success" style="width:100%">✓ Validate Report</button>
+                    <button type="submit" class="btn btn-success" style="width:100%">✓ Approve Report</button>
                 </form>
             </div>
         </div>
         @endif
 
         {{-- Assign to Office --}}
-        @if(!in_array($report->status, ['Resolved']))
+        @if(in_array($report->status, ['Approved']))
         <div class="card">
             <div class="card-header"><h2>Assign to Office</h2></div>
             <div class="card-body">
@@ -157,7 +157,7 @@
                     <div class="form-group">
                         <label>New Status</label>
                         <select name="status" class="form-control" required>
-                            @foreach(['Submitted','Pending Validation','Assigned to Office','In Progress','Resolved','Rejected'] as $s)
+                            @foreach(['Submitted','Pending Validation','Approved','Assigned to Office','In Progress','Resolved','Rejected'] as $s)
                                 <option value="{{ $s }}" {{ $report->status === $s ? 'selected' : '' }}>{{ $s }}</option>
                             @endforeach
                         </select>

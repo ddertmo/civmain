@@ -25,6 +25,12 @@
   border-color: var(--status-pending-border);
 }
 
+.badge-approved {
+  background: #E0F7F6;
+  color: #0E7C7B;
+  border-color: #99F6E4;
+}
+
 .badge-assigned {
   background: var(--status-assigned-bg);
   color: var(--primary);

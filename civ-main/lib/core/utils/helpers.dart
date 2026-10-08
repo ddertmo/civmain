@@ -51,6 +51,8 @@ class AppHelpers {
       case 'pending validation':
       case 'pending':
         return AppColors.statusPending;
+      case 'approved':
+        return AppColors.statusApproved;
       case 'assigned to office':
       case 'assigned':
         return AppColors.statusAssigned;
@@ -72,6 +74,8 @@ class AppHelpers {
       case 'pending validation':
       case 'pending':
         return AppColors.statusPendingBg;
+      case 'approved':
+        return AppColors.statusApprovedBg;
       case 'assigned to office':
       case 'assigned':
         return AppColors.statusAssignedBg;
@@ -93,6 +97,8 @@ class AppHelpers {
       case 'pending validation':
       case 'pending':
         return Icons.hourglass_empty_rounded;
+      case 'approved':
+        return Icons.verified_rounded;
       case 'assigned to office':
       case 'assigned':
         return Icons.business_rounded;

@@ -45,16 +45,18 @@ class CitizenReport extends Model
     }
 
     // ── Status constants (match Flutter app exactly) ───────────────────────
-    const STATUS_SUBMITTED         = 'Submitted';
+    const STATUS_SUBMITTED          = 'Submitted';
     const STATUS_PENDING_VALIDATION = 'Pending Validation';
-    const STATUS_ASSIGNED          = 'Assigned to Office';
-    const STATUS_IN_PROGRESS       = 'In Progress';
-    const STATUS_RESOLVED          = 'Resolved';
-    const STATUS_REJECTED          = 'Rejected';
+    const STATUS_APPROVED           = 'Approved';
+    const STATUS_ASSIGNED           = 'Assigned to Office';
+    const STATUS_IN_PROGRESS        = 'In Progress';
+    const STATUS_RESOLVED           = 'Resolved';
+    const STATUS_REJECTED           = 'Rejected';
 
     const STATUS_ORDER = [
         self::STATUS_SUBMITTED,
         self::STATUS_PENDING_VALIDATION,
+        self::STATUS_APPROVED,
         self::STATUS_ASSIGNED,
         self::STATUS_IN_PROGRESS,
         self::STATUS_RESOLVED,
@@ -127,7 +129,9 @@ class CitizenReport extends Model
         // Any report the city has accepted past validation belongs on the
         // public community map, even if the admin never pressed
         // "Validate Report" (validate() is what usually sets is_public).
-        if (in_array($newStatus, [self::STATUS_ASSIGNED, self::STATUS_IN_PROGRESS, self::STATUS_RESOLVED], true)
+        // Approving a report is the first step of that: it persists the
+        // APPROVED status and makes the report public in one transaction.
+        if (in_array($newStatus, [self::STATUS_APPROVED, self::STATUS_ASSIGNED, self::STATUS_IN_PROGRESS, self::STATUS_RESOLVED], true)
             && ! $this->is_public) {
             $this->update(['is_public' => true]);
         }
@@ -170,6 +174,7 @@ class CitizenReport extends Model
         return match ($status) {
             self::STATUS_SUBMITTED          => 'Your report has been successfully submitted.',
             self::STATUS_PENDING_VALIDATION => 'Your report is now waiting for validation by the administrator.',
+            self::STATUS_APPROVED           => 'Your report has been approved and published to the community map.',
             self::STATUS_ASSIGNED           => 'Your report has been assigned to ' . ($officeName ?? 'a city office') . '.',
             self::STATUS_IN_PROGRESS        => 'Work is currently in progress.',
             self::STATUS_RESOLVED           => 'Your report has been resolved. Thank you for helping improve Digos City.',
@@ -183,6 +188,7 @@ class CitizenReport extends Model
         return match ($status) {
             self::STATUS_SUBMITTED          => "{$this->reference_number} has been submitted successfully.",
             self::STATUS_PENDING_VALIDATION => "{$this->reference_number} is now under review by the administrator.",
+            self::STATUS_APPROVED           => "{$this->reference_number} has been approved and published to the community map.",
             self::STATUS_ASSIGNED           => "{$this->reference_number} has been assigned to " . ($officeName ?? 'a city office') . '.',
             self::STATUS_IN_PROGRESS        => "{$this->reference_number} — Work is now in progress.",
             self::STATUS_RESOLVED           => "{$this->reference_number} — {$this->concern} has been resolved.",

@@ -18,7 +18,7 @@
 <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
     <select id="filterStatus" class="form-control" style="width:auto">
         <option value="">All Statuses</option>
-        @foreach(['Submitted','Pending Validation','Assigned to Office','In Progress','Resolved'] as $s)
+        @foreach(['Approved','Assigned to Office','In Progress','Resolved'] as $s)
         <option value="{{ $s }}">{{ $s }}</option>
         @endforeach
     </select>
@@ -45,8 +45,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const statusColors = {
-    'Submitted':          '#3B5BDB',
-    'Pending Validation': '#B7770D',
+    'Approved':           '#0E7C7B',
     'Assigned to Office': '#1A6089',
     'In Progress':        '#E65100',
     'Resolved':           '#1E8449',
