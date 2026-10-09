@@ -240,9 +240,11 @@ they cannot, which is why PHP must be read directly here.
 
 ## 8. Graphify
 
-- Output at `graphify-out/`. As of 2026-10-07: **2062 nodes / 2721 edges /
-  142 communities / 152 wiki articles.**
-- CLI: `export PATH="$HOME/.local/bin:$PATH"`.
+- Output at `graphify-out/`. As of **2026-10-09 (Windows rebuild): 2936 nodes /
+  4145 edges / 205 communities**. (Termux historical: 2062/2721/142.)
+- On this PC the CLI runs from a `uv`-managed venv — on Termux it is
+  `$HOME/.local/bin/graphify`. Pin `graphifyy==0.9.76` (the importable module
+  and CLI are `graphify`).
 - Useful commands: `graphify update .`, `graphify cluster-only .`,
   `graphify export wiki` (⚠ **not** `graphify . --wiki`),
   `graphify query "<q>" [--budget N]`, `graphify path "A" "B"`,

@@ -43,3 +43,4 @@ automatically after each change.
 | 030 | 2026-10-08 | `1f9c078` | [Unauthenticated admin pages returned 500 instead of redirecting to login](2026-10-08-030-guest-redirect-admin-login.md) |
 | 031 | 2026-10-08 | `05b8e67` | [One-click boot script: START_ALL.bat starts the whole PC stack](2026-10-08-031-start-all-boot-script.md) |
 | 032 | 2026-10-08 | `89d9eaf` | [Persist an Approved status so approve/assign/map/monitoring/Android agree](2026-10-08-032-approved-status-flow-fix.md) |
+| 033 | 2026-10-09 | `HEAD` | [graphify now runs on the PC — graph refreshed with SQL + PHP folded in](2026-10-09-033-graphify-on-pc.md) |
