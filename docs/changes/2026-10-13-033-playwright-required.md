@@ -1,7 +1,7 @@
 # Require Playwright E2E: scaffold, run script and docs
 
 - **Date:** 2026-10-13
-- **Commit:** `<filled after push>`
+- **Commit:** `91086ee`
 - **Type:** feature
 - **Areas:** tooling / docs / Laravel web admin
 
