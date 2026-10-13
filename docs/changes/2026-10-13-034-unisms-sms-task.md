@@ -1,7 +1,7 @@
 # Record UniSMS as the planned primary SMS provider
 
 - **Date:** 2026-10-13
-- **Commit:** `<short hash>`
+- **Commit:** `e61e0bc`
 - **Type:** docs
 - **Areas:** docs / Laravel
 
