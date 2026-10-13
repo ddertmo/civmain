@@ -30,6 +30,24 @@ It covers, and these are not repeated elsewhere:
 - **verification techniques** that work on this machine, and **what is still
   open** (Flutter verification path unchosen; next changelog number).
 
+## playwright (required)
+
+Playwright E2E is a **required** part of running this project. Read
+[`IMPORTANT.md`](IMPORTANT.md) for the full rationale.
+
+- The suite lives in `e2e/`. Run it with `RUN_TESTS.bat` (Windows) or
+  `cd e2e && npx playwright test`.
+- After any change to `laravel/`, the HTML/JS admin, or any citizen/web UI, run
+  the suite and fix failures before calling the work done.
+- Playwright produces the evidence opencode uses to find and fix bugs:
+  screenshots, a trace, video, and console/network logs. Read the failing
+  test's `test-results/<test>/trace.zip` with `npx playwright show-trace`.
+- Playwright runs on the **PC only** — it cannot run on Termux/Android (no
+  browser). If you are on Termux, state that the suite could not be run
+  instead of implying it passed.
+- The config auto-starts `php artisan serve` if the backend is not already up,
+  and reuses an existing server otherwise.
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.

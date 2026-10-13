@@ -23,9 +23,9 @@ echo.
 rem ---------- 1. MySQL ----------
 tasklist /FI "IMAGENAME eq mysqld.exe" 2>nul | findstr /I "mysqld.exe" >nul
 if %errorlevel%==0 (
-  echo [1/5] MySQL ............ already running
+  echo [1/6] MySQL ............ already running
 ) else (
-  echo [1/5] MySQL ............ starting...
+  echo [1/6] MySQL ............ starting...
   start "CIVILWATCH-MySQL" /min "%MYSQLD%" --standalone
   timeout /t 6 /nobreak >nul
 )
@@ -36,9 +36,9 @@ echo.
 rem ---------- 2. Apache / phpMyAdmin ----------
 tasklist /FI "IMAGENAME eq httpd.exe" 2>nul | findstr /I "httpd.exe" >nul
 if %errorlevel%==0 (
-  echo [2/5] Apache ........... already running
+  echo [2/6] Apache ........... already running
 ) else (
-  echo [2/5] Apache ........... starting...
+  echo [2/6] Apache ........... starting...
   start "CIVILWATCH-Apache" /min "%HTTPD%"
   timeout /t 4 /nobreak >nul
 )
@@ -49,9 +49,9 @@ echo.
 rem ---------- 3. Import civilwatch DB only if missing ----------
 "%MYSQL%" -u root -e "USE civilwatch" >nul 2>&1
 if %errorlevel%==0 (
-  echo [3/5] Database civilwatch .... present
+  echo [3/6] Database civilwatch .... present
 ) else (
-  echo [3/5] Database civilwatch .... missing - importing civilwatch_FINAL.sql ...
+  echo [3/6] Database civilwatch .... missing - importing civilwatch_FINAL.sql ...
   powershell -NoProfile -ExecutionPolicy Bypass -Command "$src='%REPO%laravel\civilwatch_FINAL.sql'; $dst=$env:TEMP+'\civilwatch_import.sql'; $lines=[System.IO.File]::ReadAllLines($src); $clean=$lines | Where-Object { $_ -notmatch 'M!999999' }; [System.IO.File]::WriteAllLines($dst,$clean,[System.Text.UTF8Encoding]::new($false)); cmd /c ('C:\xampp\mysql\bin\mysql.exe -u root --default-character-set=utf8mb4 < ""' + $dst + '""')" >nul 2>&1
   if %errorlevel%==0 (echo        Import OK) else (echo        WARNING: import failed - check %REPO%laravel\civilwatch_FINAL.sql)
 )
@@ -69,7 +69,7 @@ if errorlevel 1 (
 )
 cd /d "%LARAVEL%" && call "%PHP%" artisan migrate --force >nul 2>&1
 
-echo [4/5] Backend (Laravel :8000) ...
+echo [4/6] Backend (Laravel :8000) ...
 powershell -NoProfile -Command "if (-not (Test-NetConnection 127.0.0.1 -Port 8000 -InformationLevel Quiet -WarningAction SilentlyContinue)) { Start-Process '%PHP%' -ArgumentList 'artisan','serve','--host=127.0.0.1','--port=8000' -WorkingDirectory '%LARAVEL%' -WindowStyle Hidden }"
 set /a tries=0
 :waitbackend
@@ -86,7 +86,7 @@ echo        Backend up at %BACKEND_URL%
 echo.
 
 rem ---------- 5. Open pages in Chrome ----------
-echo [5/5] Opening in Chrome...
+echo [5/6] Opening in Chrome...
 start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "%BACKEND_URL%"
 start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "http://localhost/phpmyadmin/"
 start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "http://localhost:%FLUTTER_PORT%"
@@ -101,7 +101,17 @@ echo    Demo citizen: +639171234567 / PIN 123456
 echo ============================================================
 echo.
 
-rem ---------- 6. Flutter web ----------
+rem ---------- 6. Playwright E2E (required — warn, do not block) ----------
+echo [6/6] Playwright E2E ...
+call "%REPO%RUN_TESTS.bat"
+if errorlevel 1 (
+  echo        WARNING: Playwright E2E failed - see the report above. App still starting.
+) else (
+  echo        E2E OK
+)
+echo.
+
+rem ---------- 7. Flutter web ----------
 echo Starting Flutter web (first boot takes ~30s to compile)...
 cd /d "%CIVMAIN%"
 call "%FLUTTER%" run -d chrome --web-port %FLUTTER_PORT%

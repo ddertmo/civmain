@@ -227,6 +227,39 @@ curl -s -X POST http://127.0.0.1:8000/api/mobile/auth/login \
 
 ---
 
+## Run the E2E tests (Playwright) — required
+
+Playwright drives the real pages so we can **see what actually runs** before
+anyone loads the app by hand. It is a required part of running CivilWatch; see
+[`../../IMPORTANT.md`](../../IMPORTANT.md) for why.
+
+On the PC, from the repo root, double-click **`RUN_TESTS.bat`**. Or by hand:
+
+```bash
+cd e2e
+npm install
+npx playwright install chromium
+npx playwright test
+```
+
+The config points at `http://127.0.0.1:8000` and starts
+`php artisan serve` itself if it is not already running, so you can run the
+suite with or without the backend already up. On the PC, XAMPP ships PHP but
+does not always put it on `PATH`; `RUN_TESTS.bat` sets
+`PHP_BIN=C:\xampp\php\php.exe` for you when it finds it.
+
+When a test fails, open the report and the trace:
+
+```bash
+npx playwright show-report
+npx playwright show-trace test-results/<test>/trace.zip
+```
+
+**Playwright does not run on Android/Termux** — there is no browser binary for
+it. Run it on the PC.
+
+---
+
 ## Flutter on the PC
 
 The base URL is chosen at build time with `--dart-define`; the default is
@@ -307,3 +340,5 @@ equivalents rather than from a PC run:
   that no served view references `@vite`)
 - running under XAMPP Apache as a vhost (not part of this setup — Laravel's
   built-in server is used instead)
+- the Playwright E2E suite in `e2e/` (browser tests need a PC; they could not
+  be executed from Termux/Android)
