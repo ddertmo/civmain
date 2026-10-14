@@ -314,3 +314,13 @@ repaired, legacy `/api/reports` subsystem deleted, `super_admin` write gate,
 3. The parent repo (`SerenoLawrence/CIVILWATCH`) is stale and untouched.
 4. `README_DOCUMENTATION.md` / `CIVILWATCH_MASTER.md` etc. live in the parent
    repo, outside `prc/`, and are not part of this workflow.
+
+
+## Context-minimization (graph-first retrieval)
+
+Following the Obsidian+Graphify+ICM workflow:
+- Load only relevant context via graphify first: `graphify query "<question>"` → 1-2 hops (`graphify path`/`graphify explain`) → answer with minimal subset (~5 relevant notes/pages max).
+- "One home per fact": each fact lives in exactly one canonical location (file/note). Link rather than duplicate; keep relationships in the graph.
+- ICM-style routing: treat canonical docs (graphify-out/wiki, repo paths) as the routing table; don't embed entire narrative in every answer.
+- Only re-read what changed. After code edits, `graphify update .` keeps the graph current.
+

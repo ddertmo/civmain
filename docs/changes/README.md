@@ -50,3 +50,4 @@ automatically after each change.
 | 036 | 2026-10-14 | `6e5704d` | [Assign-office: real Date Submitted, readable recommendation, responsive layout](2026-10-14-036-assign-office-date-and-form.md) |
 | 037 | 2026-10-14 | `6e5704d` | [Approved reports leave Pending Reports](2026-10-14-037-approved-leaves-pending.md) |
 | 038 | 2026-10-14 | `6e5704d` | [Remove Playwright E2E](2026-10-14-038-remove-playwright.md) |
+| 039 | 2026-10-15 | `HEAD` | [Graph-first retrieval rules + in-repo Obsidian/ICM memory structure](2026-10-15-039-graph-first-retrieval-and-icm-memory.md) |
