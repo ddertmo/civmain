@@ -13,6 +13,7 @@ class AdminOfficeController extends Controller
     public function index(): JsonResponse
     {
         $offices = GovernmentOffice::where('is_active', true)
+            ->whereIn('abbreviation', ['CEO', 'CENRO'])
             ->orderBy('name')
             ->get()
             ->map(fn($o) => $o->toApiArray());

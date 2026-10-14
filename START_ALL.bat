@@ -101,17 +101,7 @@ echo    Demo citizen: +639171234567 / PIN 123456
 echo ============================================================
 echo.
 
-rem ---------- 6. Playwright E2E (required — warn, do not block) ----------
-echo [6/6] Playwright E2E ...
-call "%REPO%RUN_TESTS.bat"
-if errorlevel 1 (
-  echo        WARNING: Playwright E2E failed - see the report above. App still starting.
-) else (
-  echo        E2E OK
-)
-echo.
-
-rem ---------- 7. Flutter web ----------
+rem ---------- 6. Flutter web ----------
 echo Starting Flutter web (first boot takes ~30s to compile)...
 cd /d "%CIVMAIN%"
 call "%FLUTTER%" run -d chrome --web-port %FLUTTER_PORT%

@@ -30,23 +30,18 @@ It covers, and these are not repeated elsewhere:
 - **verification techniques** that work on this machine, and **what is still
   open** (Flutter verification path unchosen; next changelog number).
 
-## playwright (required)
+## playwright (removed)
 
-Playwright E2E is a **required** part of running this project. Read
-[`IMPORTANT.md`](IMPORTANT.md) for the full rationale.
+Playwright E2E was **removed** from this project at the user's request. Do **not**
+run `npx playwright test`, do not re-add the `e2e/` suite, and do not add
+Playwright tests to the code.
 
-- The suite lives in `e2e/`. Run it with `RUN_TESTS.bat` (Windows) or
-  `cd e2e && npx playwright test`.
-- After any change to `laravel/`, the HTML/JS admin, or any citizen/web UI, run
-  the suite and fix failures before calling the work done.
-- Playwright produces the evidence opencode uses to find and fix bugs:
-  screenshots, a trace, video, and console/network logs. Read the failing
-  test's `test-results/<test>/trace.zip` with `npx playwright show-trace`.
-- Playwright runs on the **PC only** — it cannot run on Termux/Android (no
-  browser). If you are on Termux, state that the suite could not be run
-  instead of implying it passed.
-- The config auto-starts `php artisan serve` if the backend is not already up,
-  and reuses an existing server otherwise.
+- `RUN_APP.bat` and `START_ALL.bat` no longer run any test step.
+- `RUN_TESTS.bat` and `e2e/` were deleted (recoverable from git history if ever
+  needed again).
+- To verify a UI change, inspect the served HTML/JS/CSS directly, or load the
+  page in a browser by hand. There is no automated browser suite.
+
 
 ## graphify
 

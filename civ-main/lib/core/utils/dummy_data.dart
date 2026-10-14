@@ -33,20 +33,6 @@ class DummyData {
       handles: ['Environment'],
       contactNumber: '+63 82 553 0002',
     ),
-    GovernmentOffice(
-      id: 'o-003',
-      name: 'City Public Works Department',
-      abbreviation: 'CPWD',
-      handles: ['Infrastructure', 'Environment'],
-      contactNumber: '+63 82 553 0003',
-    ),
-    GovernmentOffice(
-      id: 'o-004',
-      name: 'Digos City Disaster Risk Reduction Office',
-      abbreviation: 'CDRRMO',
-      handles: ['Infrastructure', 'Environment'],
-      contactNumber: '+63 82 553 0004',
-    ),
   ];
 
   // ── Reports ───────────────────────────────────────────────────────────────

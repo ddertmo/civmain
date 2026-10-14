@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <script>
     (function() {
@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GIS Map â€” CIVILWATCH Admin</title>
+    <title>GIS Map - CIVILWATCH Admin</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/variables.css" />
     <link rel="stylesheet" href="/css/global.css" />
@@ -199,17 +199,17 @@
         // â”€â”€ Circle marker (user-friendly, no drift on zoom) â”€â”€â”€â”€â”€â”€â”€
         function createMarker(r) {
             var color = pinColors[r.status] || '#9CA3AF';
-            var concern = r.concern || r.issue || 'â€”';
+            var concern = r.concern || r.issue || '-';
             var cat = r.category || r.cat || '';
             var isInfra = cat.toLowerCase().includes('infra');
             var emoji = isInfra ? 'ðŸ”§' : (cat.toLowerCase().includes('others') ? 'ðŸ“‹' : 'ðŸŒ¿');
             var ref = r.referenceNumber || r.reference_number || String(r.id);
-            var barangay = r.barangay || 'â€”';
+            var barangay = r.barangay || '-';
             var office = r.assignedOffice ?
                 (typeof r.assignedOffice === 'object' ? r.assignedOffice.name : r.assignedOffice) :
-                'â€”';
+                '-';
 
-            // Circle marker â€” no rotation, no drift, universally readable
+            // Circle marker - no rotation, no drift, universally readable
             var icon = L.divIcon({
                 className: '',
                 html: '<div style="' +
@@ -275,7 +275,7 @@
 
         // â”€â”€ Table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function fmtDate(str) {
-            if (!str) return 'â€”';
+            if (!str) return '-';
             var d = new Date(str);
             if (isNaN(d)) return str;
             return d.toLocaleDateString('en-PH', {
@@ -311,11 +311,11 @@
 
             tbody.innerHTML = data.map(function(r) {
                 var ref = r.referenceNumber || r.reference_number || String(r.id);
-                var concern = r.concern || r.issue || 'â€”';
+                var concern = r.concern || r.issue || '-';
                 var cat = r.category || r.cat || '';
                 var office = r.assignedOffice ?
                     (typeof r.assignedOffice === 'object' ? r.assignedOffice.name : r.assignedOffice) :
-                    'â€”';
+                    '-';
                 var photo = r.imageUrl || r.photo_url || null;
                 var imgHtml = photo ?
                     '<img style="width:36px;height:30px;object-fit:cover;border-radius:4px;" src="' + photo + '" onerror="this.style.display=\'none\'" />' :
@@ -328,7 +328,7 @@
                     imgHtml +
                     '<span style="font-size:13px;font-weight:600;color:var(--gray-800)">' + concern + '</span>' +
                     '</div></td>' +
-                    '<td>' + (r.barangay || 'â€”') + '</td>' +
+                    '<td>' + (r.barangay || '-') + '</td>' +
                     '<td>' + Utils.statusBadge(r.status) + '</td>' +
                     '<td style="font-size:12px;color:var(--gray-600)">' + office + '</td>' +
                     '<td style="font-size:12px">' + fmtDate(r.submittedAt || r.created_at) + '</td>' +
@@ -351,12 +351,12 @@
             if (!r) return;
             var lat = parseFloat(r.latitude || r.lat) || 0;
             var lng = parseFloat(r.longitude || r.lng) || 0;
-            var concern = r.concern || r.issue || 'â€”';
+            var concern = r.concern || r.issue || '-';
             var cat = r.category || r.cat || '';
             var ref = r.referenceNumber || r.reference_number || String(r.id);
             var office = r.assignedOffice ?
                 (typeof r.assignedOffice === 'object' ? r.assignedOffice.name : r.assignedOffice) :
-                'â€”';
+                '-';
             var photo = r.imageUrl || r.photo_url || null;
 
             if (lat && lng) map.setView([lat, lng], 15);
@@ -371,7 +371,7 @@
                 '<div>' + Utils.categoryBadge(cat) + '</div>' +
                 '<div class="map-detail-issue">' + concern + '</div>' +
                 '<div class="map-detail-info">' +
-                '<div class="map-detail-row"><span class="map-detail-key">Barangay</span><span class="map-detail-val">' + (r.barangay || 'â€”') + '</span></div>' +
+                '<div class="map-detail-row"><span class="map-detail-key">Barangay</span><span class="map-detail-val">' + (r.barangay || '-') + '</span></div>' +
                 '<div class="map-detail-row"><span class="map-detail-key">Status</span><span class="map-detail-val">' + Utils.statusBadge(r.status) + '</span></div>' +
                 '<div class="map-detail-row"><span class="map-detail-key">Assigned Office</span><span class="map-detail-val">' + office + '</span></div>' +
                 '<div class="map-detail-row"><span class="map-detail-key">Submitted</span><span class="map-detail-val">' + fmtDate(r.submittedAt || r.created_at).replace('<br>', '&nbsp;') + '</span></div>' +

@@ -371,7 +371,7 @@
                     .filter(r => {
                         if (seen.has(r.id)) return false;
                         seen.add(r.id);
-                        return true;
+                        return r.status === 'Submitted' || r.status === 'Pending Validation';
                     })
                     .sort((a, b) => new Date(b.submittedAt || b.created_at) - new Date(a.submittedAt || a.created_at));
 

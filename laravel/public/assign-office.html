@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <script>
     (function() {
@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assign Office â€” CIVILWATCH Admin</title>
+    <title>Assign Office - CIVILWATCH Admin</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/variables.css" />
     <link rel="stylesheet" href="/css/global.css" />
@@ -1116,9 +1116,14 @@
 
         .af-layout {
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: minmax(0, 1fr) 300px;
             gap: 20px;
             align-items: start;
+        }
+        @media (max-width: 900px) {
+            .af-layout {
+                grid-template-columns: 1fr;
+            }
         }
 
         .af-section-title {
@@ -1231,24 +1236,7 @@
             color: white;
         }
 
-        .af-other-select {
-            width: 100%;
-            height: 44px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-md);
-            padding: 0 14px;
-            font-size: 14px;
-            color: var(--gray-700);
-            background: var(--white);
-            font-family: var(--font-family);
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-
-        .af-other-select:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
+        
 
         .af-pri-pills {
             display: flex;
@@ -1463,7 +1451,7 @@
                             <span class="material-symbols-outlined">pending_actions</span>
                         </div>
                         <div>
-                            <div class="ao-stat-num" id="statTotal">â€”</div>
+                            <div class="ao-stat-num" id="statTotal">-</div>
                             <div class="ao-stat-label">Waiting for Assignment</div>
                         </div>
                     </div>
@@ -1472,7 +1460,7 @@
                             <span class="material-symbols-outlined">construction</span>
                         </div>
                         <div>
-                            <div class="ao-stat-num" id="statInfra">â€”</div>
+                            <div class="ao-stat-num" id="statInfra">-</div>
                             <div class="ao-stat-label">Infrastructure</div>
                         </div>
                     </div>
@@ -1481,7 +1469,7 @@
                             <span class="material-symbols-outlined">eco</span>
                         </div>
                         <div>
-                            <div class="ao-stat-num" id="statEnv">â€”</div>
+                            <div class="ao-stat-num" id="statEnv">-</div>
                             <div class="ao-stat-label">Environmental</div>
                         </div>
                     </div>
@@ -1612,27 +1600,27 @@
                         <div class="af-summary-fields">
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">tag</span>Report ID</div>
-                                <div class="af-field-value primary-text" id="afRef">â€”</div>
+                                <div class="af-field-value primary-text" id="afRef">-</div>
                             </div>
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">warning</span>Issue</div>
-                                <div class="af-field-value" id="afIssue">â€”</div>
+                                <div class="af-field-value" id="afIssue">-</div>
                             </div>
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">category</span>Category</div>
-                                <div class="af-field-value" id="afCategory">â€”</div>
+                                <div class="af-field-value" id="afCategory">-</div>
                             </div>
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">location_on</span>Barangay</div>
-                                <div class="af-field-value" id="afBarangay">â€”</div>
+                                <div class="af-field-value" id="afBarangay">-</div>
                             </div>
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">calendar_today</span>Date Submitted</div>
-                                <div class="af-field-value" id="afDate">â€”</div>
+                                <div class="af-field-value" id="afDate">-</div>
                             </div>
                             <div class="af-field">
                                 <div class="af-field-label"><span class="material-symbols-outlined">person</span>Submitted By</div>
-                                <div class="af-field-value" id="afSubmittedBy">â€”</div>
+                                <div class="af-field-value" id="afSubmittedBy">-</div>
                             </div>
                         </div>
                     </div>
@@ -1645,9 +1633,7 @@
 
                             <!-- 1. Select Office -->
                             <div class="af-section-title">1. Select Office</div>
-                            <p style="font-size:13px;color:var(--primary);margin-bottom:14px;">
-                                Recommended because category = ${activeReport ? (activeReport.category || '').replace('Environment','Environmental') : '—'}
-                            </p>
+                            <p id="afRecommendText" style="font-size:13px;color:var(--primary);margin-bottom:14px;font-weight:600;">Recommended based on category: —</p>
 
                             <!-- Dynamic office cards loaded from API -->
                             <div id="afOfficeContainer">
@@ -1670,7 +1656,7 @@
 
                             <div style="margin-bottom:4px;">
                                 <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);font-weight:600;margin-bottom:8px;">OR CHOOSE ANOTHER OFFICE</p>
-                                <select class="af-other-select" id="afOtherSelect" onchange="selectOtherOffice(this.value)">
+                                
                                     <option value="">Select another office</option>
                                 </select>
                             </div>
@@ -1793,15 +1779,15 @@
                 <div>
                     <p style="font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:10px;">Report Summary</p>
                     <div class="am-summ">
-                        <div class="am-ref" id="amRef">â€”</div>
-                        <div class="am-title" id="amTitle">â€”</div>
+                        <div class="am-ref" id="amRef">-</div>
+                        <div class="am-title" id="amTitle">-</div>
                         <div class="am-loc">
                             <span class="material-symbols-outlined" style="font-size:13px;">location_on</span>
-                            <span id="amLoc">â€”</span>
+                            <span id="amLoc">-</span>
                         </div>
                         <div style="margin-top:10px;">
                             <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Category</div>
-                            <div id="amCat">â€”</div>
+                            <div id="amCat">-</div>
                         </div>
                     </div>
 
@@ -1875,7 +1861,7 @@
         </div>
         <div style="font-size:20px;font-weight:700;color:var(--gray-900);margin-bottom:8px;">Report Assigned!</div>
         <div style="font-size:14px;color:var(--gray-500);margin-bottom:24px;">
-            Successfully assigned to <strong id="successOfficeName">â€”</strong>.<br>
+            Successfully assigned to <strong id="successOfficeName">-</strong>.<br>
             The office has been notified.
         </div>
         <div style="display:flex;gap:10px;justify-content:center;">
@@ -1934,7 +1920,7 @@
 
         // â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         function fmtDate(str) {
-            if (!str) return 'â€”';
+            if (!str) return '-';
             var d = new Date(str);
             if (isNaN(d)) return str;
             return d.toLocaleDateString('en-PH', {
@@ -1942,7 +1928,7 @@
                     day: 'numeric',
                     year: 'numeric'
                 }) +
-                ' Â· ' + d.toLocaleTimeString('en-PH', {
+                ' at ' + d.toLocaleTimeString('en-PH', {
                     hour: '2-digit',
                     minute: '2-digit'
                 });
@@ -1969,7 +1955,7 @@
 
         function citizenName(r) {
             var c = r.citizen || {};
-            return c.fullName || c.full_name || r.submitted_by || 'â€”';
+            return c.fullName || c.full_name || r.submitted_by || '-';
         }
 
         function photoPlaceholder() {
@@ -1985,8 +1971,8 @@
                     var d = json.data;
                     var pending = (d.submitted || 0) + (d.pending_validation || 0);
                     document.getElementById('statTotal').textContent = pending;
-                    document.getElementById('statInfra').textContent = 'â€”';
-                    document.getElementById('statEnv').textContent = 'â€”';
+                    document.getElementById('statInfra').textContent = '-';
+                    document.getElementById('statEnv').textContent = '-';
                     // also count by category from allReports if available
                     if (allReports.length) {
                         document.getElementById('statInfra').textContent =
@@ -2069,7 +2055,7 @@
                     });
                 });
                 allReports.sort(function(a, b) {
-                    return new Date(b.created_at) - new Date(a.created_at);
+                    return new Date(b.submittedAt || b.created_at) - new Date(a.submittedAt || a.created_at);
                 });
                 loadStats(); // refresh stat with category breakdown
                 applyFilters();
@@ -2106,11 +2092,11 @@
 
             if (sort === 'oldest') {
                 filtered.sort(function(a, b) {
-                    return new Date(a.created_at) - new Date(b.created_at);
+                    return new Date(a.submittedAt || a.created_at) - new Date(b.submittedAt || b.created_at);
                 });
             } else {
                 filtered.sort(function(a, b) {
-                    return new Date(b.created_at) - new Date(a.created_at);
+                    return new Date(b.submittedAt || b.created_at) - new Date(a.submittedAt || a.created_at);
                 });
             }
 
@@ -2134,12 +2120,12 @@
 
             var rows = page.map(function(r) {
                 var ref = r.referenceNumber || r.reference_number || String(r.id);
-                var concern = r.concern || r.issue || 'â€”';
+                var concern = r.concern || r.issue || '-';
                 var cat = normCategory(r.category);
-                var barangay = r.barangay || 'â€”';
-                var date = fmtDate(r.created_at);
+                var barangay = r.barangay || '-';
+                var date = fmtDate(r.submittedAt || r.created_at);
                 var photo = r.imageUrl || r.photo_url || null;
-                var status = r.status || 'â€”';
+                var status = r.status || '-';
 
                 var catBadge = Utils.categoryBadge(cat);
                 var imgHtml = photo ?
@@ -2205,10 +2191,10 @@
                     activeReport = r;
 
                     var cat = normCategory(r.category);
-                    var concern = r.concern || r.issue || 'â€”';
+                    var concern = r.concern || r.issue || '-';
                     var citizen = r.citizen || {};
-                    var name = citizen.fullName || citizen.full_name || 'â€”';
-                    var phone = citizen.phoneNumber || citizen.phone || 'â€”';
+                    var name = citizen.fullName || citizen.full_name || '-';
+                    var phone = citizen.phoneNumber || citizen.phone || '-';
                     var photo = r.imageUrl || r.photo_url || null;
                     var ref = r.referenceNumber || r.reference_number || String(r.id);
 
@@ -2236,14 +2222,14 @@
                         '<div>' +
                         '<div class="vm-badges">' + Utils.categoryBadge(cat) + ' ' + Utils.statusBadge(r.status) + '</div>' +
                         '<div class="vm-title">' + concern + '</div>' +
-                        '<div class="vm-loc"><span class="material-symbols-outlined" style="font-size:14px">location_on</span>' + (r.barangay || 'â€”') + ', Digos City</div>' +
+                        '<div class="vm-loc"><span class="material-symbols-outlined" style="font-size:14px">location_on</span>' + (r.barangay || '-') + ', Digos City</div>' +
                         '<div class="vm-dlabel">Description</div>' +
-                        '<div class="vm-desc">' + (r.description || 'â€”') + '</div>' +
+                        '<div class="vm-desc">' + (r.description || '-') + '</div>' +
                         '<div class="vm-meta">' +
                         '<div class="vm-meta-item"><strong>' + ref + '</strong>Reference No.</div>' +
                         '<div class="vm-meta-item"><strong>' + name + '</strong>Submitted By</div>' +
                         '<div class="vm-meta-item"><strong>' + phone + '</strong>Contact</div>' +
-                        '<div class="vm-meta-item"><strong>' + fmtDate(r.created_at) + '</strong>Date Submitted</div>' +
+                        '<div class="vm-meta-item"><strong>' + (r.submittedAt || r.created_at || '') + '</strong>Date Submitted</div>' +
                         '</div>' +
                         tlHtml +
                         '</div>';
@@ -2270,13 +2256,13 @@
             activeReport = r;
 
             var cat = normCategory(r.category);
-            var concern = r.concern || r.issue || 'â€”';
+            var concern = r.concern || r.issue || '-';
             var ref = r.referenceNumber || r.reference_number || String(r.id);
             var citizen = r.citizen || {};
-            var name = citizen.fullName || citizen.full_name || 'â€”';
+            var name = citizen.fullName || citizen.full_name || '-';
             var photo = r.imageUrl || r.photo_url || null;
 
-            // Photo â€” use real URL or hide
+            // Photo - use real URL or hide
             var imgEl = document.getElementById('afPhoto');
             if (photo) {
                 imgEl.src = photo;
@@ -2287,10 +2273,14 @@
 
             document.getElementById('afRef').textContent = ref;
             document.getElementById('afIssue').textContent = concern;
-            document.getElementById('afBarangay').textContent = r.barangay || 'â€”';
-            document.getElementById('afDate').textContent = fmtDate(r.created_at);
+            document.getElementById('afBarangay').textContent = r.barangay || '-';
+            document.getElementById('afDate').textContent = fmtDate(r.submittedAt || r.created_at);
             document.getElementById('afSubmittedBy').textContent = name;
             document.getElementById('afCategory').innerHTML = Utils.categoryBadge(cat);
+            var recOfficeName = (cat === 'Environmental' || cat === 'Environment')
+                ? 'City Environment and Natural Resources Office (CENRO)'
+                : 'City Engineering Office (CEO)';
+            document.getElementById('afRecommendText').textContent = 'Recommended based on category: ' + cat + ' — ' + recOfficeName;
 
             // Load offices from API (with skeleton loaders)
             loadOfficesForAssign();
@@ -2302,7 +2292,8 @@
             document.getElementById('afWhyDesc').textContent = whyDesc;
 
             // Reset form
-            document.getElementById('afOtherSelect').value = '';
+            var otherSelect = document.getElementById('afOtherSelect');
+            if (otherSelect) otherSelect.value = '';
             document.querySelectorAll('.af-pp').forEach(function(p) {
                 p.classList.remove('sel');
             });
@@ -2401,6 +2392,7 @@
 
         function populateOtherOffices(offices) {
             var select = document.getElementById('afOtherSelect');
+            if (!select) return;
             select.innerHTML = '<option value="">Select another office</option>';
             offices.forEach(function(office) {
                 var opt = document.createElement('option');
@@ -2474,12 +2466,12 @@
             el.classList.add('sel');
         }
 
-        // â”€â”€ Submit assignment â€” real API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // â”€â”€ Submit assignment - real API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         async function submitAssignForm() {
             if (!activeReport) return;
 
             var selCard = document.querySelector('.af-office-card.sel');
-            var otherSel = document.getElementById('afOtherSelect').value;
+            var otherSel = document.getElementById('afOtherSelect') ? document.getElementById('afOtherSelect').value : '';
             var officeAbbr = otherSel || (selCard ? selCard.getAttribute('data-office') : '');
             var selPill = document.querySelector('.af-pp.sel');
             var priority = selPill ? selPill.getAttribute('data-p') : 'medium';

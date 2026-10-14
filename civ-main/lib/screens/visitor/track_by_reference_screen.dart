@@ -418,7 +418,7 @@ class _ResultCard extends StatelessWidget {
                 _DetailRow(
                   icon: Icons.calendar_today_rounded,
                   label: 'Date Submitted',
-                  value: AppHelpers.formatDate(report.submittedAt),
+                  value: report.submittedAt.toIso8601String(),
                 ),
                 if (report.assignedOffice != null) ...[
                   const SizedBox(height: 10),

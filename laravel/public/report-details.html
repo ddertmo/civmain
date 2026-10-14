@@ -486,7 +486,7 @@
             var lat = parseFloat(r.latitude || r.lat) || 6.7498;
             var lng = parseFloat(r.longitude || r.lng) || 125.3572;
             var photo = r.imageUrl || r.photo_url || null;
-            var date = fmtDate(r.submittedAt || r.created_at);
+            var date = r.submittedAt || r.created_at || '—';
             var office = (r.assignedOffice && typeof r.assignedOffice === 'object') ?
                 r.assignedOffice.name :
                 (r.assignedOffice || null);
