@@ -45,3 +45,7 @@ automatically after each change.
 | 032 | 2026-10-08 | `89d9eaf` | [Persist an Approved status so approve/assign/map/monitoring/Android agree](2026-10-08-032-approved-status-flow-fix.md) |
 | 033 | 2026-10-13 | `91086ee` | [Require Playwright E2E: scaffold, run script and docs](2026-10-13-033-playwright-required.md) |
 | 034 | 2026-10-13 | `e61e0bc` | [Record UniSMS as the planned primary SMS provider](2026-10-13-034-unisms-sms-task.md) |
+| 035 | 2026-10-14 | `6e5704d` | [Office list restricted to CEO and CENRO](2026-10-14-035-office-list-ceo-cenro.md) |
+| 036 | 2026-10-14 | `6e5704d` | [Assign-office: real Date Submitted, readable recommendation, responsive layout](2026-10-14-036-assign-office-date-and-form.md) |
+| 037 | 2026-10-14 | `6e5704d` | [Approved reports leave Pending Reports](2026-10-14-037-approved-leaves-pending.md) |
+| 038 | 2026-10-14 | `6e5704d` | [Remove Playwright E2E](2026-10-14-038-remove-playwright.md) |
