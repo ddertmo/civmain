@@ -282,6 +282,17 @@
                                 <div style="min-width:0;">
                                     <div id="reporterName" class="rd-info-name">—</div>
                                     <span class="rd-pill-private"><span class="material-symbols-outlined" style="font-size:12px;">visibility_off</span> Hidden from public</span>
+                                    <button id="toggleReporterBtn" type="button" class="btn btn-secondary" style="margin-top:8px; height:34px; width:100%;">
+                                        <span class="material-symbols-outlined">person_search</span> View Reporter Details
+                                    </button>
+                                    <div id="reporterDetails" style="display:none; margin-top:10px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:8px; padding:12px; text-align:left;">
+                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">person</span>Name</div>
+                                        <div id="reporterDetailName" class="rd-quick-value" style="margin-bottom:8px;">—</div>
+                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">call</span>Phone / Contact</div>
+                                        <div id="reporterDetailPhone" class="rd-quick-value" style="margin-bottom:8px;">—</div>
+                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span>Location</div>
+                                        <div id="reporterDetailLocation" class="rd-quick-value">—</div>
+                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -498,6 +509,12 @@
 
             document.getElementById('reporterName').textContent = name;
             document.getElementById('reporterPhone').textContent = phone;
+            var rdName = document.getElementById('reporterDetailName');
+            var rdPhone = document.getElementById('reporterDetailPhone');
+            var rdLocation = document.getElementById('reporterDetailLocation');
+            if (rdName) rdName.textContent = name;
+            if (rdPhone) rdPhone.textContent = phone;
+            if (rdLocation) rdLocation.textContent = barangay + ', Digos City';
 
             document.getElementById('assignedOfficeName').textContent = office || 'Not yet assigned';
             document.getElementById('assignedOfficeBadge').innerHTML = Utils.statusBadge(office ? status : 'Pending Validation');
@@ -676,6 +693,19 @@
                 }
             });
         };
+
+        var reporterToggle = document.getElementById('toggleReporterBtn');
+        var reporterDetails = document.getElementById('reporterDetails');
+        if (reporterToggle && reporterDetails) {
+            reporterToggle.onclick = function() {
+                var hidden = reporterDetails.style.display === 'none' || reporterDetails.style.display === '';
+                reporterDetails.style.display = hidden ? 'block' : 'none';
+                reporterToggle.innerHTML = hidden ?
+                    '<span class="material-symbols-outlined">visibility_off</span> Hide Reporter Details' :
+                    '<span class="material-symbols-outlined">person_search</span> View Reporter Details';
+            };
+        }
+
 
         // ── Boot ──────────────────────────────────────────────────
         loadReport();
