@@ -145,4 +145,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/{id}/read',       [NotificationController::class, 'markRead']);
     Route::delete('/notifications/{id}',          [NotificationController::class, 'destroy']);
     Route::post('/notifications/read-all',        [NotificationController::class, 'markAllRead']);
+
+    // Priority management is restricted to authorized personnel of the
+    // office currently assigned to the report (no super_admin access).
+    Route::post('/admin/citizen-reports/{id}/priority',
+        [AdminCitizenReportController::class, 'updatePriority']);
 });

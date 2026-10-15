@@ -1633,7 +1633,6 @@
 
                             <!-- 1. Select Office -->
                             <div class="af-section-title">1. Select Office</div>
-                            <p id="afRecommendText" style="font-size:13px;color:var(--primary);margin-bottom:14px;font-weight:600;">Recommended based on category: —</p>
 
                             <!-- Dynamic office cards loaded from API -->
                             <div id="afOfficeContainer">
@@ -1654,33 +1653,10 @@
                                 </div>
                             </div>
 
-                            <div style="margin-bottom:4px;">
-                                <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);font-weight:600;margin-bottom:8px;">OR CHOOSE ANOTHER OFFICE</p>
-                                
-                                    <option value="">Select another office</option>
-                                </select>
-                            </div>
-
                             <div class="af-divider"></div>
 
-                            <!-- 2. Set Priority -->
-                            <div class="af-section-title">2. Set Priority</div>
-                            <div class="af-pri-pills">
-                                <div class="af-pp" data-p="low" onclick="selectAfPP(this)">
-                                    <div class="af-pdot"></div>Low
-                                </div>
-                                <div class="af-pp sel" data-p="medium" onclick="selectAfPP(this)">
-                                    <div class="af-pdot"></div>Medium
-                                </div>
-                                <div class="af-pp" data-p="high" onclick="selectAfPP(this)">
-                                    <div class="af-pdot"></div>High
-                                </div>
-                            </div>
-
-                            <div class="af-divider"></div>
-
-                            <!-- 3. Notes -->
-                            <div class="af-section-title">3. Add Notes <span style="font-weight:400;color:var(--gray-400);font-size:13px;">(Optional)</span></div>
+                            <!-- 2. Add Notes (Optional) -->
+                            <div class="af-section-title">2. Add Notes <span style="font-weight:400;color:var(--gray-400);font-size:13px;">(Optional)</span></div>
                             <textarea class="af-textarea" id="afNotes" rows="3" maxlength="200" placeholder="Add notes or instructions for the assigned office..." oninput="document.getElementById('afCharCount').textContent=this.value.length"></textarea>
                             <div style="text-align:right;font-size:12px;color:var(--gray-400);margin-top:4px;">
                                 <span id="afCharCount">0</span> / 200
@@ -2277,10 +2253,6 @@
             document.getElementById('afDate').textContent = fmtDate(r.submittedAt || r.created_at);
             document.getElementById('afSubmittedBy').textContent = name;
             document.getElementById('afCategory').innerHTML = Utils.categoryBadge(cat);
-            var recOfficeName = (cat === 'Environmental' || cat === 'Environment')
-                ? 'City Environment and Natural Resources Office (CENRO)'
-                : 'City Engineering Office (CEO)';
-            document.getElementById('afRecommendText').textContent = 'Recommended based on category: ' + cat + ' — ' + recOfficeName;
 
             // Load offices from API (with skeleton loaders)
             loadOfficesForAssign();
@@ -2294,11 +2266,6 @@
             // Reset form
             var otherSelect = document.getElementById('afOtherSelect');
             if (otherSelect) otherSelect.value = '';
-            document.querySelectorAll('.af-pp').forEach(function(p) {
-                p.classList.remove('sel');
-            });
-            var med = document.querySelector('.af-pp[data-p="medium"]');
-            if (med) med.classList.add('sel');
             document.getElementById('afNotes').value = '';
             document.getElementById('afCharCount').textContent = '0';
 
@@ -2429,7 +2396,8 @@
                 c.classList.remove('sel');
             });
             el.classList.add('sel');
-            document.getElementById('afOtherSelect').value = '';
+            var otherSel = document.getElementById('afOtherSelect');
+            if (otherSel) otherSel.value = '';
 
             // Update "why this office" description
             if (cachedOffices) {
@@ -2473,8 +2441,6 @@
             var selCard = document.querySelector('.af-office-card.sel');
             var otherSel = document.getElementById('afOtherSelect') ? document.getElementById('afOtherSelect').value : '';
             var officeAbbr = otherSel || (selCard ? selCard.getAttribute('data-office') : '');
-            var selPill = document.querySelector('.af-pp.sel');
-            var priority = selPill ? selPill.getAttribute('data-p') : 'medium';
             var notes = document.getElementById('afNotes').value.trim();
 
             if (!officeAbbr) {
@@ -2512,7 +2478,6 @@
 
             Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/assign', {
                 office_id: officeId,
-                priority: priority,
                 notes: notes || undefined
             }, {
                 loading: 'Assigning report\u2026',

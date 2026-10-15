@@ -175,6 +175,46 @@ class AdminCitizenReportController extends Controller
         ]);
     }
 
+    // ---------------------------------------------------------------------
+    // POST /api/admin/citizen-reports/{id}/priority
+    // Only authorized personnel of the office currently assigned to the
+    // report may change its priority. TAPik/Super Admin and personnel of
+    // other offices are denied on the server.
+    // ---------------------------------------------------------------------
+    public function updatePriority(Request $request, int $id): JsonResponse
+    {
+        $request->validate([
+            'priority' => ['required', Rule::in(['Low', 'Medium', 'High'])],
+        ]);
+
+        $report = CitizenReport::with('assignedOffice')->findOrFail($id);
+        $user   = $request->user();
+
+        if (! in_array($user->role, ['ceo', 'cenro'], true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Priority updates are restricted to the assigned office.',
+            ], 403);
+        }
+
+        $expectedOffice = $user->role === 'ceo' ? 'CEO' : 'CENRO';
+        if (! $report->assignedOffice
+            || $report->assignedOffice->abbreviation !== $expectedOffice) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You may only change priority for reports assigned to your office.',
+            ], 403);
+        }
+
+        $report->update(['priority' => $request->priority]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Priority updated.',
+            'data'    => $report->fresh(['activities', 'assignedOffice'])->toApiArray(),
+        ]);
+    }
+
     // ─────────────────────────────────────────────────────────────────────
     // GET /api/admin/citizen-reports/map
     // Public reports with coordinates for map view.

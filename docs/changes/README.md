@@ -51,3 +51,5 @@ automatically after each change.
 | 037 | 2026-10-14 | `6e5704d` | [Approved reports leave Pending Reports](2026-10-14-037-approved-leaves-pending.md) |
 | 038 | 2026-10-14 | `6e5704d` | [Remove Playwright E2E](2026-10-14-038-remove-playwright.md) |
 | 039 | 2026-10-15 | `HEAD` | [Graph-first retrieval rules + in-repo Obsidian/ICM memory structure](2026-10-15-039-graph-first-retrieval-and-icm-memory.md) |
+| 040 | 2026-10-15 | `HEAD` | [GIS map emoji marker replaced with a proper category icon](2026-10-15-040-gis-map-emoji-marker-to-icon.md) |
+| 041 | 2026-10-15 | `HEAD` | [Clean up Assign Report modal and restrict priority to the assigned office](2026-10-15-041-assign-report-cleanup-priority-permissions.md) |
