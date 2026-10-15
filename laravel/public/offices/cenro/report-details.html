@@ -494,6 +494,38 @@
                     </div>
                 </div>
 
+                <!-- Citizen / Reporter Information -->
+                <div class="card card-padded" style="margin-top:20px;">
+                    <div class="card-header">
+                        <span class="card-title">Citizen / Reporter Information</span>
+                        <span style="font-size:11px;font-weight:600;color:var(--gray-400);display:inline-flex;align-items:center;gap:4px;">
+                            <span class="material-symbols-outlined" style="font-size:14px;">visibility_off</span> Hidden from public
+                        </span>
+                    </div>
+                    <table class="info-table">
+                        <tr>
+                            <td><span class="material-symbols-outlined">person</span></td>
+                            <td>Full Name</td>
+                            <td id="citizenName">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">call</span></td>
+                            <td>Contact Number</td>
+                            <td id="citizenPhone">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">mail</span></td>
+                            <td>Email Address</td>
+                            <td id="citizenEmail">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">home</span></td>
+                            <td>Home Address</td>
+                            <td id="citizenAddress">&mdash;</td>
+                        </tr>
+                    </table>
+                </div>
+
                 <div class="detail-mid-grid">
                     <div class="card card-padded">
                         <div class="card-header"><span class="card-title">Description</span></div>
@@ -713,6 +745,15 @@
             },
         };
 
+        const CITIZENS = {
+            'CW-2026-00125': { name: 'Lawrence James', phone: '0917 555 0125', email: 'lawrence.james@example.com', address: 'Poblacion, Digos City' },
+            'CW-2026-00118': { name: 'Maria Santos', phone: '0918 555 0118', email: 'maria.santos@example.com', address: 'Badiang, Digos City' },
+            'CW-2026-00110': { name: 'Juan Dela Cruz', phone: '0919 555 0110', email: 'juan.delacruz@example.com', address: 'Carmen, Digos City' },
+            'CW-2026-00105': { name: 'Ana Reyes', phone: '0920 555 0105', email: 'ana.reyes@example.com', address: 'Soong, Digos City' },
+            'CW-2026-00098': { name: 'Pedro Cruz', phone: '0921 555 0098', email: 'pedro.cruz@example.com', address: 'Badiang, Digos City' },
+            'CW-2026-00092': { name: 'Liza Mercado', phone: '0922 555 0092', email: 'liza.mercado@example.com', address: 'Goma, Digos City' },
+        };
+
         const ref = new URLSearchParams(window.location.search).get('ref') || 'CW-2026-00125';
         const report = REPORTS[ref] || REPORTS['CW-2026-00125'];
 
@@ -731,6 +772,11 @@
 
         document.getElementById('reportRef').textContent = ref;
         document.getElementById('infoRef').textContent = ref;
+        var citizen = CITIZENS[ref] || {};
+        document.getElementById('citizenName').textContent = citizen.name || '—';
+        document.getElementById('citizenPhone').textContent = citizen.phone || '—';
+        document.getElementById('citizenEmail').textContent = citizen.email || '—';
+        document.getElementById('citizenAddress').textContent = citizen.address || report.barangay;
         document.getElementById('infoCategory').textContent = 'Environmental';
         document.getElementById('infoLocation').textContent = report.barangay;
         document.getElementById('infoCoords').textContent = report.lat.toFixed(6) + ', ' + report.lng.toFixed(6);

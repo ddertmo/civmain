@@ -518,6 +518,38 @@
                 </div>
 
                 <!-- Mid grid: description + map -->
+                <!-- Citizen / Reporter Information -->
+                <div class="card card-padded" style="margin-top:20px;">
+                    <div class="card-header">
+                        <span class="card-title">Citizen / Reporter Information</span>
+                        <span style="font-size:11px;font-weight:600;color:var(--gray-400);display:inline-flex;align-items:center;gap:4px;">
+                            <span class="material-symbols-outlined" style="font-size:14px;">visibility_off</span> Hidden from public
+                        </span>
+                    </div>
+                    <table class="info-table">
+                        <tr>
+                            <td><span class="material-symbols-outlined">person</span></td>
+                            <td>Full Name</td>
+                            <td id="citizenName">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">call</span></td>
+                            <td>Contact Number</td>
+                            <td id="citizenPhone">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">mail</span></td>
+                            <td>Email Address</td>
+                            <td id="citizenEmail">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">home</span></td>
+                            <td>Home Address</td>
+                            <td id="citizenAddress">&mdash;</td>
+                        </tr>
+                    </table>
+                </div>
+
                 <div class="detail-mid-grid">
                     <div class="card card-padded">
                         <div class="card-header"><span class="card-title">Description</span></div>
@@ -749,6 +781,15 @@
             },
         };
 
+        const CITIZENS = {
+            'CW-2026-00132': { name: 'Roberto Lim', phone: '0917 555 0132', email: 'roberto.lim@example.com', address: 'Poblacion, Digos City' },
+            'CW-2026-00131': { name: 'Grace Bautista', phone: '0918 555 0131', email: 'grace.bautista@example.com', address: 'Zone 2, Digos City' },
+            'CW-2026-00130': { name: 'Mark Villanueva', phone: '0919 555 0130', email: 'mark.villanueva@example.com', address: 'Ma-a, Digos City' },
+            'CW-2026-00129': { name: 'Jenny Rose Domingo', phone: '0920 555 0129', email: 'jennyrose.domingo@example.com', address: 'Badiang, Digos City' },
+            'CW-2026-00128': { name: 'Carlos Mendoza', phone: '0921 555 0128', email: 'carlos.mendoza@example.com', address: 'Buhangin, Digos City' },
+            'CW-2026-00127': { name: 'Kim Navarro', phone: '0922 555 0127', email: 'kim.navarro@example.com', address: 'Aplaya, Digos City' },
+        };
+
         const ref = new URLSearchParams(window.location.search).get('ref') || 'CW-2026-00132';
         const report = REPORTS[ref] || REPORTS['CW-2026-00132'];
 
@@ -768,6 +809,11 @@
         // ── Populate page ────────────────────────────────────────────
         document.getElementById('reportRef').textContent = ref;
         document.getElementById('infoRef').textContent = ref;
+        var citizen = CITIZENS[ref] || {};
+        document.getElementById('citizenName').textContent = citizen.name || '—';
+        document.getElementById('citizenPhone').textContent = citizen.phone || '—';
+        document.getElementById('citizenEmail').textContent = citizen.email || '—';
+        document.getElementById('citizenAddress').textContent = citizen.address || report.barangay;
         document.getElementById('infoCategory').textContent = 'Infrastructure';
         document.getElementById('infoLocation').textContent = report.barangay;
         document.getElementById('infoCoords').textContent = report.lat.toFixed(6) + ', ' + report.lng.toFixed(6);
