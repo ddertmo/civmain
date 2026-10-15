@@ -61,10 +61,15 @@ class AdminCitizenReportController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // GET /api/admin/citizen-reports/{id}
     // ─────────────────────────────────────────────────────────────────────
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
-        $report = CitizenReport::with(['citizen', 'assignedOffice', 'activities'])
-            ->findOrFail($id);
+        $query = CitizenReport::with(['citizen', 'assignedOffice', 'activities']);
+
+        // Accept either the numeric id or the human reference number
+        // (e.g. CW-2026-00125) so the office pages can link by reference.
+        $report = ctype_digit($id)
+            ? $query->findOrFail((int) $id)
+            : $query->where('reference_number', $id)->firstOrFail();
 
         return response()->json(['success' => true, 'data' => $report->toApiArray()]);
     }

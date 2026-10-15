@@ -63,3 +63,4 @@ automatically after each change.
 | 049 | 2026-10-15 | `HEAD` | [Unify the Digos City barangay list to the official 26 everywhere](2026-10-15-049-unify-digos-barangay-list.md) |
 | 050 | 2026-10-15 | `HEAD` | [Session start: fresh sessions continue from a short handoff, existing sessions keep their history](2026-10-15-050-session-start-handoff.md) |
 | 051 | 2026-10-15 | `HEAD` | [Token-lean session start: read `## NOW` + the last 3 changelog rows, with research fallbacks](2026-10-15-051-token-lean-handoff-now-block.md) |
+| 052 | 2026-10-15 | `HEAD` | [CEO/CENRO report details load from the API; reporter panels show name, address and phone](2026-10-15-052-office-report-details-live-api-reporter-panels.md) |

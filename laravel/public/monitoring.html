@@ -498,10 +498,10 @@
                                     <div id="reporterDetails" style="display:none; margin-top:10px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:8px; padding:12px; text-align:left;">
                                         <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">person</span>Name</div>
                                         <div id="reporterDetailName" class="rd-quick-value" style="margin-bottom:8px;">—</div>
+                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">home</span>Home Address</div>
+                                        <div id="reporterDetailLocation" class="rd-quick-value" style="margin-bottom:8px;">—</div>
                                         <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">call</span>Phone / Contact</div>
-                                        <div id="reporterDetailPhone" class="rd-quick-value" style="margin-bottom:8px;">—</div>
-                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span>Home Barangay</div>
-                                        <div id="reporterDetailLocation" class="rd-quick-value">—</div>
+                                        <div id="reporterDetailPhone" class="rd-quick-value">—</div>
                                     </div>
                                 </div>
                             </div>
@@ -1083,8 +1083,8 @@
             var rdPhone = document.getElementById('reporterDetailPhone');
             var rdLocation = document.getElementById('reporterDetailLocation');
             if (rdName) rdName.textContent = name;
+            if (rdLocation) rdLocation.textContent = Utils.fullAddress(citizen);
             if (rdPhone) rdPhone.textContent = phone;
-            if (rdLocation) rdLocation.textContent = citizen.barangay || '—';
 
             document.getElementById('assignedOfficeName').textContent = office || 'Not yet assigned';
             document.getElementById('assignedOfficeBadge').innerHTML = Utils.statusBadge(office ? status : 'Pending Validation');

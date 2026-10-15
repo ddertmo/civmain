@@ -471,6 +471,11 @@
                                 <td id="infoCategory">Environmental</td>
                             </tr>
                             <tr>
+                                <td><span class="material-symbols-outlined">flag</span></td>
+                                <td>Priority</td>
+                                <td id="infoPriority">&mdash;</td>
+                            </tr>
+                            <tr>
                                 <td><span class="material-symbols-outlined">location_on</span></td>
                                 <td>Location</td>
                                 <td id="infoLocation">Poblacion, Digos City</td>
@@ -509,19 +514,14 @@
                             <td id="citizenName">&mdash;</td>
                         </tr>
                         <tr>
-                            <td><span class="material-symbols-outlined">call</span></td>
-                            <td>Contact Number</td>
-                            <td id="citizenPhone">&mdash;</td>
-                        </tr>
-                        <tr>
-                            <td><span class="material-symbols-outlined">mail</span></td>
-                            <td>Email Address</td>
-                            <td id="citizenEmail">&mdash;</td>
-                        </tr>
-                        <tr>
                             <td><span class="material-symbols-outlined">home</span></td>
                             <td>Home Address</td>
                             <td id="citizenAddress">&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><span class="material-symbols-outlined">call</span></td>
+                            <td>Contact Number</td>
+                            <td id="citizenPhone">&mdash;</td>
                         </tr>
                     </table>
                 </div>
@@ -754,8 +754,9 @@
             'CW-2026-00092': { name: 'Liza Mercado', phone: '0922 555 0092', email: 'liza.mercado@example.com', address: 'Poblacion, Digos City' },
         };
 
-        const ref = new URLSearchParams(window.location.search).get('ref') || 'CW-2026-00125';
-        const report = REPORTS[ref] || REPORTS['CW-2026-00125'];
+        // ── Live data + rendering ────────────────────────────────────
+        var DEFAULT_REF = 'CW-2026-00125';
+        var OFFICE_CATEGORY = 'Environmental';
 
         const statusColors = {
             'In Progress': '#F97316',
@@ -770,49 +771,132 @@
             'Assigned': '#EFF6FF'
         };
 
-        document.getElementById('reportRef').textContent = ref;
-        document.getElementById('infoRef').textContent = ref;
-        var citizen = CITIZENS[ref] || {};
-        document.getElementById('citizenName').textContent = citizen.name || '—';
-        document.getElementById('citizenPhone').textContent = citizen.phone || '—';
-        document.getElementById('citizenEmail').textContent = citizen.email || '—';
-        document.getElementById('citizenAddress').textContent = citizen.address || '—';
-        document.getElementById('infoCategory').textContent = 'Environmental';
-        document.getElementById('infoLocation').textContent = report.barangay;
-        document.getElementById('infoCoords').textContent = report.lat.toFixed(6) + ', ' + report.lng.toFixed(6);
-        document.getElementById('infoDate').innerHTML = report.date.replace(' · ', ' &bull; ');
-        document.getElementById('infoDesc').textContent = report.desc;
-        document.getElementById('assignedDate').textContent = report.assigned;
-        document.getElementById('modalRefLabel').textContent = ref;
-        document.getElementById('incidentPhoto').src = getPhotoUrl(report.photo);
-        document.getElementById('beforePhoto').src = getPhotoUrl(report.photo);
-        document.getElementById('statusSelect').value = report.status;
-        document.getElementById('statusBadgeEl').innerHTML = `<span style="display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:700;background:${statusBg[report.status]};color:${statusColors[report.status]};">${report.status}</span>`;
-
-        if (report.status === 'Resolved') {
-            document.getElementById('resolveBtn').style.display = 'none';
-            document.getElementById('successBanner').classList.add('show');
-            markTimelineResolved();
+        function statusBadgeHtml(status) {
+            var bg = statusBg[status] || '#F3F4F6';
+            var fg = statusColors[status] || '#6B7280';
+            return `<span style="display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:700;background:${bg};color:${fg};">${status}</span>`;
         }
 
-        const map = L.map('detailMap', {
-            zoomControl: false,
-            scrollWheelZoom: false,
-            dragging: false
-        }).setView([report.lat, report.lng], 15);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap',
-            maxZoom: 19
-        }).addTo(map);
-        const icon = L.divIcon({
-            className: '',
-            html: `<div style="width:24px;height:24px;border-radius:50%;background:#10B981;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
-        L.marker([report.lat, report.lng], {
-            icon
-        }).addTo(map).bindPopup(report.issue).openPopup();
+        // Collapse the canonical API statuses onto the four the office
+        // workflow exposes in the dropdown.
+        function normalizeStatus(s) {
+            var x = String(s || '').toLowerCase();
+            if (x.indexOf('resolve') !== -1 || x === 'completed') return 'Resolved';
+            if (x.indexOf('progress') !== -1) return 'In Progress';
+            return 'Assigned';
+        }
+
+        function fmtDate(str) {
+            if (!str) return '—';
+            var d = new Date(str);
+            if (isNaN(d)) return str;
+            return d.toLocaleDateString('en-PH', { month:'short', day:'numeric', year:'numeric' }) +
+                ' · ' + d.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+        }
+
+        // Map a live API report onto the shape this page renders.
+        function fromApi(d) {
+            var city = d.city || 'Digos City';
+            return {
+                issue: d.issue || d.concern || 'Report',
+                barangay: d.barangay ? (d.barangay + ', ' + city) : city,
+                lat: parseFloat(d.latitude || d.lat) || 6.7498,
+                lng: parseFloat(d.longitude || d.lng) || 125.3572,
+                status: normalizeStatus(d.status),
+                date: fmtDate(d.submittedAt || d.created_at),
+                assigned: fmtDate(d.submittedAt || d.created_at),
+                photo: d.issue || d.concern || '',
+                imageUrl: d.imageUrl || d.photo_url || null,
+                priority: d.priority || '—',
+                category: d.category || '',
+                desc: d.description || '—',
+                citizen: d.citizen || null
+            };
+        }
+
+        function render(ref, report) {
+            document.getElementById('reportRef').textContent = ref;
+            document.getElementById('infoRef').textContent = ref;
+
+            var citizen = report.citizen || {};
+            document.getElementById('citizenName').textContent = citizen.fullName || citizen.full_name || '—';
+            document.getElementById('citizenAddress').textContent = Utils.fullAddress(citizen);
+            document.getElementById('citizenPhone').textContent = citizen.phoneNumber || citizen.phone || '—';
+
+            document.getElementById('infoCategory').textContent =
+                (report.category === 'Infrastructure') ? 'Infrastructure' : OFFICE_CATEGORY;
+            document.getElementById('infoPriority').textContent = report.priority || '—';
+            document.getElementById('infoLocation').textContent = report.barangay;
+            document.getElementById('infoCoords').textContent = report.lat.toFixed(6) + ', ' + report.lng.toFixed(6);
+            document.getElementById('infoDate').innerHTML = report.date.replace(' · ', ' &bull; ');
+            document.getElementById('infoDesc').textContent = report.desc;
+            document.getElementById('assignedDate').textContent = report.assigned;
+            document.getElementById('modalRefLabel').textContent = ref;
+            document.getElementById('incidentPhoto').src = report.imageUrl || getPhotoUrl(report.photo);
+            document.getElementById('beforePhoto').src = report.imageUrl || getPhotoUrl(report.photo);
+            document.getElementById('statusSelect').value = report.status;
+            document.getElementById('statusBadgeEl').innerHTML = statusBadgeHtml(report.status);
+
+            if (report.status === 'Resolved') {
+                document.getElementById('resolveBtn').style.display = 'none';
+                document.getElementById('successBanner').classList.add('show');
+                markTimelineResolved();
+            }
+
+            const map = L.map('detailMap', {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                dragging: false
+            }).setView([report.lat, report.lng], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap',
+                maxZoom: 19
+            }).addTo(map);
+            const icon = L.divIcon({
+                className: '',
+                html: `<div style="width:24px;height:24px;border-radius:50%;background:#10B981;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
+            L.marker([report.lat, report.lng], {
+                icon
+            }).addTo(map).bindPopup(report.issue).openPopup();
+        }
+
+        var ref = Utils.getParam('ref') || Utils.getParam('id') || DEFAULT_REF;
+
+        // Prefer the real API; fall back to the built-in sample record when
+        // there is no backend or the user is not signed in, so the page still
+        // renders as a prototype.
+        async function loadReport() {
+            var s = REPORTS[ref] || REPORTS[DEFAULT_REF] || {};
+            var sc = CITIZENS[ref] || {};
+            var fallback = Object.assign({}, s, {
+                priority: s.priority || 'Medium',
+                citizen: {
+                    fullName: sc.name,
+                    phoneNumber: sc.phone,
+                    street: sc.address
+                }
+            });
+
+            if (typeof Api === 'undefined' || !Api.token()) {
+                render(ref, fallback);
+                return;
+            }
+            try {
+                var json = await Api.get('/api/admin/citizen-reports/' + encodeURIComponent(ref));
+                if (json && json.success && json.data) {
+                    render(ref, fromApi(json.data));
+                    return;
+                }
+            } catch (e) {
+                console.warn('Falling back to sample report data:', e);
+            }
+            render(ref, fallback);
+        }
+
+        loadReport();
 
         function saveUpdate() {
             const status = document.getElementById('statusSelect').value;

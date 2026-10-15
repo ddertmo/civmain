@@ -151,6 +151,16 @@ const Utils = {
         return new URLSearchParams(window.location.search).get(name);
     },
 
+    // Compose a citizen's home address from its separate parts
+    // (street, purok, barangay, city, province), skipping blank fields.
+    fullAddress(citizen) {
+        if (!citizen) return '—';
+        const parts = [citizen.street, citizen.purok, citizen.barangay, citizen.city, citizen.province]
+            .map(p => (p || '').trim())
+            .filter(Boolean);
+        return parts.length ? parts.join(', ') : '—';
+    },
+
     // Format relative time
     relativeTime(minutesAgo) {
         if (minutesAgo < 1) return 'just now';
