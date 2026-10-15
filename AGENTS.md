@@ -1,11 +1,44 @@
 ## session context — read on a NEW session only
 
-**Fresh session (no prior messages)?** Read
-[`docs/SESSION_CONTEXT.md`](docs/SESSION_CONTEXT.md) first and continue from it.
-It is the short handoff of what the last sessions did and what is next.
+Startup read is deliberately tiny. On a **fresh session** (no prior messages),
+read exactly two things and stop:
 
-**Resumed session (already has history)?** Do **not** re-read it — the existing
-conversation already is your context.
+1. `docs/SESSION_CONTEXT.md` — the **`## NOW` block only** (~10 lines).
+2. `docs/changes/README.md` — the **last 3 rows only** (latest changes).
+
+**Latest by default, earliest only when asked.** The index is append-only and is
+never read past those 3 rows at startup; read it from the top (earliest) only
+if a task needs the full history.
+
+**Resumed session (already has history)?** Skip both — your own history is the
+context.
+
+### lazy lookups — do not preload
+
+- Answer from `## NOW` + the current context first.
+- On a gap, run `graphify query "<q>"` → walk 1–2 hops → open only the specific
+  doc/line. Never dump whole files or `GRAPH_REPORT.md`.
+- Do a **thorough** search only when the quick pass misses.
+
+### unknown info — use a subagent, then write it down
+
+- **`@researcher`** — graphify → docs → code → `git log`, returns a compact
+  cited answer. It runs in a child session, so this context stays small.
+- **`@explore`** — built-in, for pure codebase file/keyword hunting.
+- If the answer exists **nowhere**, write it into a doc (or a `docs/changes`
+  note) and run `graphify update .` so the next session finds it.
+
+### `## NOW` budget — a snapshot, never a log
+
+`## NOW` is **rewritten in place** on every change, never appended. Hard caps:
+`at:` 1 line · `running:` 1 line · `doing:` ≤ 2 · `next:` ≤ 3 · `blocked:` ≤ 2 ·
+total ≤ ~10 lines.
+
+If it would exceed that, collapse the overflow into a one-line pointer and put
+the detail elsewhere — e.g. `next: see docs/TASKS.md (4 open)`. Open/next items
+go to [`docs/TASKS.md`](docs/TASKS.md); durable facts go to
+[`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md). Completed work lives in
+`docs/changes/` only.
 
 For detail, go to (do not duplicate these):
 

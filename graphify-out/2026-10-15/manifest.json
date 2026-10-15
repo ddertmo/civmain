@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1792050081.448266,
-    "seen": 1792053160.30281,
-    "ast_hash": "f6b24c79501cf086d0bed827a2f12ffa",
+    "mtime": 1792062075.1574945,
+    "seen": 1792062166.2465653,
+    "ast_hash": "3042bc8baf0f4be8e4ec84fc9500022e",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -1026,9 +1026,9 @@
     "semantic_hash": ""
   },
   ".opencode/skills/changelog/SKILL.md": {
-    "mtime": 1792050081.4452734,
-    "seen": 1792053160.30281,
-    "ast_hash": "7d06ac9c1bfb1f68f03dbe2348e6760d",
+    "mtime": 1792062095.4464314,
+    "seen": 1792062166.2465653,
+    "ast_hash": "9896e9bba049a9db785880760c1955a9",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-04-001-initial-backup.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792060496.6269321,
-    "seen": 1792060508.2201471,
-    "ast_hash": "d6c3cdd94a4cd1e4c660c1ea21b38ac4",
+    "mtime": 1792062144.0693953,
+    "seen": 1792062166.2465653,
+    "ast_hash": "829c5215c0f4ec9c2599a58f8749c616",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792050081.5094373,
-    "seen": 1792053160.30281,
-    "ast_hash": "90531a4f0457d8aafbdbb61e93399b18",
+    "mtime": 1792062061.5773456,
+    "seen": 1792062166.2465653,
+    "ast_hash": "cf5cb41da8f0612f68fa46301821fac9",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -2022,9 +2022,9 @@
     "semantic_hash": ""
   },
   "docs/icm/routing/ROUTING.md": {
-    "mtime": 1792050081.5180376,
-    "seen": 1792053160.30281,
-    "ast_hash": "89a79e81ac8d2f0895594155970d1e7f",
+    "mtime": 1792062123.0694244,
+    "seen": 1792062166.2465653,
+    "ast_hash": "2e0734f73fad96b5fce317b39f72d1fb",
     "semantic_hash": ""
   },
   "docs/memory/README.md": {
@@ -2034,9 +2034,9 @@
     "semantic_hash": ""
   },
   "docs/memory/projects/HUB-CIVILWATCH.md": {
-    "mtime": 1792050081.519545,
-    "seen": 1792053160.30281,
-    "ast_hash": "6b56d4a7b7cfe506bab055a577e7b3c2",
+    "mtime": 1792062123.076719,
+    "seen": 1792062166.2465653,
+    "ast_hash": "dfafcf976a8ab590cbb68ee13ad4b36a",
     "semantic_hash": ""
   },
   "docs/memory/projects/README.md": {
@@ -2121,6 +2121,18 @@
     "mtime": 1792060489.6698346,
     "seen": 1792060508.2201471,
     "ast_hash": "dbadb90d4bc7ca59e6de64768fa1ca0d",
+    "semantic_hash": ""
+  },
+  "docs/PROJECT_CONTEXT.md": {
+    "mtime": 1792062055.2792,
+    "seen": 1792062166.2465653,
+    "ast_hash": "a891d8370458774780d0ba6736bccaad",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-050-session-start-handoff.md": {
+    "mtime": 1792062134.9917035,
+    "seen": 1792062166.2465653,
+    "ast_hash": "174aa609dbe53a1907457a9589cf7d5a",
     "semantic_hash": ""
   }
 }

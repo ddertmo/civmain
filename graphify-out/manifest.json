@@ -534,9 +534,9 @@
     "semantic_hash": "f9f90b3bab40fd1d366e9b54466deac7"
   },
   "AGENTS.md": {
-    "mtime": 1792062075.1574945,
-    "seen": 1792062166.2465653,
-    "ast_hash": "3042bc8baf0f4be8e4ec84fc9500022e",
+    "mtime": 1792064638.4326825,
+    "seen": 1792064741.6809058,
+    "ast_hash": "a971d4ab1e1f46866c9960fe3f6a0106",
     "semantic_hash": ""
   },
   "civ-main/FEATURES.md": {
@@ -1026,9 +1026,9 @@
     "semantic_hash": ""
   },
   ".opencode/skills/changelog/SKILL.md": {
-    "mtime": 1792062095.4464314,
-    "seen": 1792062166.2465653,
-    "ast_hash": "9896e9bba049a9db785880760c1955a9",
+    "mtime": 1792064661.5806825,
+    "seen": 1792064741.6809058,
+    "ast_hash": "708f7d4171b387e193ab2ef6e96f1c45",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-04-001-initial-backup.md": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792062144.0693953,
-    "seen": 1792062166.2465653,
-    "ast_hash": "829c5215c0f4ec9c2599a58f8749c616",
+    "mtime": 1792064729.3545666,
+    "seen": 1792064741.6809058,
+    "ast_hash": "f1e87c0159398cbd3da0b0f790d4d8d2",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792062061.5773456,
-    "seen": 1792062166.2465653,
-    "ast_hash": "cf5cb41da8f0612f68fa46301821fac9",
+    "mtime": 1792064629.000911,
+    "seen": 1792064741.6809058,
+    "ast_hash": "dcd2be8063cce2da13294d9af5a74f41",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -2133,6 +2133,24 @@
     "mtime": 1792062134.9917035,
     "seen": 1792062166.2465653,
     "ast_hash": "174aa609dbe53a1907457a9589cf7d5a",
+    "semantic_hash": ""
+  },
+  ".opencode/agents/researcher.md": {
+    "mtime": 1792064647.281703,
+    "seen": 1792064741.6809058,
+    "ast_hash": "f06f893ac45a89c332dcb03de7eebbae",
+    "semantic_hash": ""
+  },
+  ".opencode/commands/recap.md": {
+    "mtime": 1792064647.281703,
+    "seen": 1792064741.6809058,
+    "ast_hash": "61b0bf52c3a5eb475d5c8e9c1980576e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-051-token-lean-handoff-now-block.md": {
+    "mtime": 1792064725.5695398,
+    "seen": 1792064741.6809058,
+    "ast_hash": "044c12a273866f9f4129a14195a8f10e",
     "semantic_hash": ""
   }
 }

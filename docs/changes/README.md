@@ -62,3 +62,4 @@ automatically after each change.
 | 048 | 2026-10-15 | `HEAD` | [Citizen registration now captures a full home address](2026-10-15-048-registration-full-address.md) |
 | 049 | 2026-10-15 | `HEAD` | [Unify the Digos City barangay list to the official 26 everywhere](2026-10-15-049-unify-digos-barangay-list.md) |
 | 050 | 2026-10-15 | `HEAD` | [Session start: fresh sessions continue from a short handoff, existing sessions keep their history](2026-10-15-050-session-start-handoff.md) |
+| 051 | 2026-10-15 | `HEAD` | [Token-lean session start: read `## NOW` + the last 3 changelog rows, with research fallbacks](2026-10-15-051-token-lean-handoff-now-block.md) |

@@ -88,15 +88,27 @@ Append a row to `docs/changes/README.md`:
 
 Keep it sorted newest-last and make sure the link path matches the file.
 
-### 4b. Keep the fresh-session handoff current
+### 4b. Refresh the handoff's `## NOW` snapshot
 
-Update the `## Recent sessions` block in `docs/SESSION_CONTEXT.md` with a
-one-line entry for this change (date + what changed). That file is what a
-**new** opencode session reads to continue where the last one stopped; an
-**existing** session keeps its own history and ignores it (`AGENTS.md`).
+You do **not** add a line to `docs/SESSION_CONTEXT.md` — you **replace** its
+`## NOW` block with the current state:
 
-Keep it to a few lines — it is a handoff, not a second changelog. The full
-detail still lives in this change's `docs/changes/` file.
+- `at:` this change's date + which changelog number it is (the exact commit is
+  the newest row of `docs/changes/README.md` — do not hardcode a hash you cannot
+  know yet)
+- `running:` what is up right now, or `—`
+- `doing:` at most 2 lines
+- `next:` at most 3 bullets
+- `blocked:` at most 2 lines
+
+**Hard budget: `## NOW` stays ≤ ~10 lines.** If it would exceed that, move the
+detail to `docs/TASKS.md` (open/next items) or `docs/PROJECT_CONTEXT.md`
+(durable facts) and leave a one-line pointer, e.g. `next: see docs/TASKS.md
+(4 open)`.
+
+Completed work lives in `docs/changes/` only — never in `## NOW`, and never as a
+"recent sessions" list (the index already is that list). A fresh session reads
+`## NOW` + the **last 3 index rows**; a resumed session reads neither.
 
 ### 5. Refresh the graph if code changed
 
@@ -111,7 +123,7 @@ Doc-only changes can skip this, but running it is cheap and keeps
 ### 6. Commit and push
 
 ```bash
-git add docs/changes docs/SESSION_CONTEXT.md graphify-out
+git add -A
 git commit -m "docs(changes): <NNN> <short title>"
 git push backup main
 ```
