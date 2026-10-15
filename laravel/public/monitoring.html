@@ -68,6 +68,12 @@
             flex-shrink: 0;
         }
     </style>
+    <style id="monitoringReportDetailStyles">
+        #reportDetailOverlay { display:none; position:fixed; inset:0; z-index:1100; background:rgba(15,45,98,.48); align-items:center; justify-content:center; padding:18px; }
+        #reportDetailPanel { position:relative; width:min(1480px,calc(100vw - 36px)); height:min(94vh,calc(100vh - 36px)); background:#F5F8FC; border-radius:14px; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,.28); }
+        #reportDetailClose { position:absolute; top:12px; right:12px; z-index:1200; height:36px; }
+        #reportDetailFrame { width:100%; height:100%; border:0; background:#F5F8FC; display:block; }
+    </style>
 </head>
 
 <body data-page="monitoring">
@@ -363,7 +369,7 @@
                     '<div style="font-size:11px;color:var(--gray-400);">' + (updated.split('\n')[1] || '') + '</div>' +
                     '</td>' +
                     '<td><div class="actions-cell">' +
-                    '<a href="report-details.html?id=' + encodeURIComponent(r.id) + '&from=monitoring" class="btn-view" onclick="sessionStorage.setItem(\'cw:lastListUrl\',window.location.href); sessionStorage.setItem(\'cw:backLabel\',\'Back to Monitoring\'); sessionStorage.setItem(\'cw:backHref\',\'monitoring.html\');">' +
+                    '<a href="#" class="btn-view" onclick="return openMonitoringReportDetail(' + JSON.stringify(String(r.id)) + ');">' +
                     '<span class="material-symbols-outlined">visibility</span> View' +
                     '</a>' +
                     (status !== 'Resolved' ?
@@ -573,6 +579,26 @@
         }
 
         // ── Boot ──────────────────────────────────────────────
+        // ── Report detail embedded in Monitoring ───────────────
+        function openMonitoringReportDetail(id) {
+            var frame = document.getElementById('reportDetailFrame');
+            if (frame) frame.src = 'report-details.html?id=' + encodeURIComponent(id) + '&embedded=1&from=monitoring';
+            var overlay = document.getElementById('reportDetailOverlay');
+            if (overlay) overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            return false;
+        }
+        function closeMonitoringReportDetail() {
+            var overlay = document.getElementById('reportDetailOverlay');
+            if (overlay) overlay.style.display = 'none';
+            var frame = document.getElementById('reportDetailFrame');
+            if (frame) frame.src = 'about:blank';
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMonitoringReportDetail();
+        });
+
         loadReports().then(function() {
             var updateId = sessionStorage.getItem('monitoring:updateId');
             var updateRef = sessionStorage.getItem('monitoring:updateRef');
@@ -584,6 +610,12 @@
         });
         setInterval(loadReports, 30000);
     </script>
+    <div id="reportDetailOverlay" onclick="if(event.target===this)closeMonitoringReportDetail();">
+        <div id="reportDetailPanel">
+            <button id="reportDetailClose" type="button" class="btn btn-secondary" onclick="closeMonitoringReportDetail()">Close</button>
+            <iframe id="reportDetailFrame" src="about:blank" title="Report details"></iframe>
+        </div>
+    </div>
 </body>
 
 </html>

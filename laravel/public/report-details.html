@@ -389,6 +389,14 @@
             backLabel.textContent = sessionStorage.getItem('cw:backLabel') || info.label;
         })();
 
+        (function hideBackLinkWhenEmbedded() {
+            var embedded = (new URLSearchParams(location.search)).get('embedded') === '1';
+            if (embedded) {
+                var backLink = document.getElementById('backLink');
+                if (backLink) backLink.style.display = 'none';
+            }
+        })();
+
         function fmtDate(str) {
             if (!str) return '—';
             var d = new Date(str);

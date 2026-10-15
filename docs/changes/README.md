@@ -56,3 +56,4 @@ automatically after each change.
 | 042 | 2026-10-15 | `HEAD` | [Monitoring report view reused pending-reports detail layout with corrected navigation, dates, and photo placeholder](2026-10-15-042-monitoring-report-details-reuse.md) |
 | 043 | 2026-10-15 | `HEAD` | [Fix report view link JavaScript quoting](2026-10-15-043-report-view-link-javascript-quoting.md) |
 | 044 | 2026-10-15 | `HEAD` | [Report details redesigned to two-column workflow layout](2026-10-15-044-report-details-redesign.md) |
+| 045 | 2026-10-15 | `HEAD` | [Embedded report detail panel in Monitoring page](2026-10-15-045-monitoring-embedded-report-detail.md) |

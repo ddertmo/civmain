@@ -678,9 +678,9 @@
     "semantic_hash": ""
   },
   "laravel/public/monitoring.html": {
-    "mtime": 1792054613.5309105,
-    "seen": 1792056380.976821,
-    "ast_hash": "1f0ee86df30eec87d8daa98d5892e02c",
+    "mtime": 1792056766.2825215,
+    "seen": 1792056789.2143064,
+    "ast_hash": "572e36f75790edd2c2d6a12357ac0827",
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/analytics.html": {
@@ -786,9 +786,9 @@
     "semantic_hash": ""
   },
   "laravel/public/report-details.html": {
-    "mtime": 1792056323.6743288,
-    "seen": 1792056380.976821,
-    "ast_hash": "396ecf55fb4824d13c406903b6daf411",
+    "mtime": 1792056768.139473,
+    "seen": 1792056789.2143064,
+    "ast_hash": "10e87e3ff29dd311e45d211dccdb82b4",
     "semantic_hash": ""
   },
   "laravel/public/resolved-reports.html": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792056372.45604,
-    "seen": 1792056380.976821,
-    "ast_hash": "57a795bb747914357bd2f9fa4e694bf3",
+    "mtime": 1792056779.9601858,
+    "seen": 1792056789.2143064,
+    "ast_hash": "85effc84afab12402002768c8d92d8d2",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -2079,6 +2079,12 @@
     "mtime": 1792056372.45604,
     "seen": 1792056380.976821,
     "ast_hash": "5a0d3cf799a49ab91e0bf3b3f68fdaae",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-045-monitoring-embedded-report-detail.md": {
+    "mtime": 1792056779.9612057,
+    "seen": 1792056789.2143064,
+    "ast_hash": "a75c0b5c1442db901ff9c61b4229ca9c",
     "semantic_hash": ""
   }
 }
