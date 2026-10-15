@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/register_screen.dart": {
-    "mtime": 1792050081.4768045,
-    "seen": 1792053160.30281,
-    "ast_hash": "8764fabab82cde4567a19738072d6c11",
+    "mtime": 1792059903.9065807,
+    "seen": 1792060033.7814834,
+    "ast_hash": "5aad1e41739d72bf837a1f4cc54509e2",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/community_map/community_map_screen.dart": {
@@ -294,9 +294,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/services/auth_service.dart": {
-    "mtime": 1792050081.4837902,
-    "seen": 1792053160.30281,
-    "ast_hash": "eb07f7e886ef2f45653d697c8bdd01e4",
+    "mtime": 1792059879.3214002,
+    "seen": 1792060033.7814834,
+    "ast_hash": "db42c70dc7333309dbb3acdd5b0b21fa",
     "semantic_hash": ""
   },
   "civ-main/lib/services/notification_service.dart": {
@@ -678,9 +678,9 @@
     "semantic_hash": ""
   },
   "laravel/public/monitoring.html": {
-    "mtime": 1792057127.2477238,
-    "seen": 1792057160.2258701,
-    "ast_hash": "0b069b0c560f1400901e1d8ba9ab2982",
+    "mtime": 1792059339.036213,
+    "seen": 1792060033.7814834,
+    "ast_hash": "054d88a37ad2f4cc521fcf6ae358e6e4",
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/analytics.html": {
@@ -708,9 +708,9 @@
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/report-details.html": {
-    "mtime": 1792050081.7615907,
-    "seen": 1792053160.30281,
-    "ast_hash": "5e55f2c2e7f197a767619d6822679fc4",
+    "mtime": 1792059360.5065,
+    "seen": 1792060033.7814834,
+    "ast_hash": "4bd5808f21f219bd2dd989dac80d2e8b",
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/reports.html": {
@@ -756,9 +756,9 @@
     "semantic_hash": ""
   },
   "laravel/public/offices/ceo/report-details.html": {
-    "mtime": 1792050081.7641504,
-    "seen": 1792053160.30281,
-    "ast_hash": "2cfeef2372325c53831d47b10a8a2d9e",
+    "mtime": 1792059360.507489,
+    "seen": 1792060033.7814834,
+    "ast_hash": "85d186a2d0d6b80bca17755b5dec2c0f",
     "semantic_hash": ""
   },
   "laravel/public/offices/ceo/reports.html": {
@@ -786,9 +786,9 @@
     "semantic_hash": ""
   },
   "laravel/public/report-details.html": {
-    "mtime": 1792056768.139473,
-    "seen": 1792056789.2143064,
-    "ast_hash": "10e87e3ff29dd311e45d211dccdb82b4",
+    "mtime": 1792059339.036213,
+    "seen": 1792060033.7814834,
+    "ast_hash": "148f771d1cb5db1cb8177bf92f210c1e",
     "semantic_hash": ""
   },
   "laravel/public/resolved-reports.html": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792057147.9650047,
-    "seen": 1792057160.2258701,
-    "ast_hash": "63340692fafcfb6bd1e115ee223fecb5",
+    "mtime": 1792060016.8960588,
+    "seen": 1792060033.7814834,
+    "ast_hash": "c892b1405f9f0ae04c64aa0ace3bbb93",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1506,9 +1506,9 @@
     "semantic_hash": ""
   },
   "laravel/app/Http/Controllers/Mobile/MobileAuthController.php": {
-    "mtime": 1792050081.7350264,
-    "seen": 1792053160.30281,
-    "ast_hash": "1b55c292682c89bf87f691afaed00d6b",
+    "mtime": 1792059871.4823015,
+    "seen": 1792060033.7814834,
+    "ast_hash": "bf20dc081f1df8aa405d6fa6fb709dae",
     "semantic_hash": ""
   },
   "laravel/app/Http/Controllers/Mobile/MobileNotificationController.php": {
@@ -1548,9 +1548,9 @@
     "semantic_hash": ""
   },
   "laravel/app/Models/Citizen.php": {
-    "mtime": 1792050081.7370224,
-    "seen": 1792053160.30281,
-    "ast_hash": "c45af54e24b05da039e74e6beba4e2d6",
+    "mtime": 1792059862.4902656,
+    "seen": 1792060033.7814834,
+    "ast_hash": "70f64b733bd97ec746e946ac50e6c2cf",
     "semantic_hash": ""
   },
   "laravel/app/Models/CitizenNotification.php": {
@@ -1560,9 +1560,9 @@
     "semantic_hash": ""
   },
   "laravel/app/Models/CitizenReport.php": {
-    "mtime": 1792052986.2939696,
-    "seen": 1792053160.30281,
-    "ast_hash": "bddffeea0bcb23678623c527f7278c90",
+    "mtime": 1792059875.0197475,
+    "seen": 1792060033.7814834,
+    "ast_hash": "09948a5ecfbc393325ce7a81276bbe96",
     "semantic_hash": ""
   },
   "laravel/app/Models/GovernmentOffice.php": {
@@ -2094,9 +2094,27 @@
     "semantic_hash": ""
   },
   "laravel/public/monitoring-report-details.html": {
-    "mtime": 1792057104.206332,
-    "seen": 1792057160.2258701,
-    "ast_hash": "ee5ef8c4d9bc2d229ffbf9cc62f0da7f",
+    "mtime": 1792059339.036213,
+    "seen": 1792060033.7814834,
+    "ast_hash": "8fc2f42712600fd2e3e53c4793bd15ca",
+    "semantic_hash": ""
+  },
+  "laravel/database/migrations/2026_10_15_000002_add_address_to_citizens_table.php": {
+    "mtime": 1792059856.959121,
+    "seen": 1792060033.7814834,
+    "ast_hash": "f6fdb57d81af28ed8ed285c7d6c73148",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-047-reporter-details-and-home-barangay.md": {
+    "mtime": 1792059409.135281,
+    "seen": 1792060033.7814834,
+    "ast_hash": "3ec51ed5aeb19287a8c39ad2de691f3e",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-048-registration-full-address.md": {
+    "mtime": 1792060014.3347783,
+    "seen": 1792060033.7814834,
+    "ast_hash": "9c9ecfa5475a7a202b89135a6c253cd1",
     "semantic_hash": ""
   }
 }

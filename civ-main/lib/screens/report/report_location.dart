@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/utils/helpers.dart';
 import '../../widgets/navigation/app_bar.dart';
@@ -16,34 +17,8 @@ const _kDefaultLat = 6.7498;
 const _kDefaultLng = 125.3572;
 
 // ── Official 26 barangays of Digos City (PhilAtlas / PSA 2020) ───────────────
-const _kDigosBarangays = [
-  'Aplaya',
-  'Balabag',
-  'Binaton',
-  'Cogon',
-  'Colorado',
-  'Dawis',
-  'Dulangan',
-  'Goma',
-  'Igpit',
-  'Kapatagan',
-  'Kiagot',
-  'Lungag',
-  'Mahayahay',
-  'Matti',
-  'Ruparan',
-  'San Agustin',
-  'San Jose',
-  'San Miguel',
-  'San Roque',
-  'Sinawilan',
-  'Soong',
-  'Tiguman',
-  'Tres de Mayo',
-  'Zone 1 (Pob.)',
-  'Zone 2 (Pob.)',
-  'Zone 3 (Pob.)',
-];
+// Shared with citizen registration — one canonical list in AppStrings.
+const _kDigosBarangays = AppStrings.barangays;
 
 class ReportLocationScreen extends StatefulWidget {
   final Map<String, dynamic> reportData;

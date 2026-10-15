@@ -60,3 +60,4 @@ automatically after each change.
 | 046 | 2026-10-15 | `HEAD` | [Dedicated Monitoring report details page](2026-10-15-046-monitoring-dedicated-report-detail-page.md) |
 | 047 | 2026-10-15 | `HEAD` | [Reporter details panel in admin report views + Home Barangay fix](2026-10-15-047-reporter-details-and-home-barangay.md) |
 | 048 | 2026-10-15 | `HEAD` | [Citizen registration now captures a full home address](2026-10-15-048-registration-full-address.md) |
+| 049 | 2026-10-15 | `HEAD` | [Unify the Digos City barangay list to the official 26 everywhere](2026-10-15-049-unify-digos-barangay-list.md) |

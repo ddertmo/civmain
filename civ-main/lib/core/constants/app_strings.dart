@@ -190,9 +190,11 @@ class AppStrings {
   static const String resident = 'Resident';
 
   // ── Barangays ─────────────────────────────────────────────────────────────
+  // Official 26 barangays of Digos City, Davao del Sur (PSA 2020 / PhilAtlas).
+  // Single source of truth for the app — keep in sync with the backend
+  // MobileAuthController::BARANGAYS validation list.
   static const List<String> barangays = [
     'Aplaya',
-    'Badiang',
     'Balabag',
     'Binaton',
     'Cogon',
@@ -202,16 +204,21 @@ class AppStrings {
     'Goma',
     'Igpit',
     'Kapatagan',
-    'Kiagdan',
+    'Kiagot',
+    'Lungag',
+    'Mahayahay',
     'Matti',
-    'New Visayas',
-    'Rizal',
+    'Ruparan',
+    'San Agustin',
     'San Jose',
     'San Miguel',
+    'San Roque',
+    'Sinawilan',
     'Soong',
+    'Tiguman',
     'Tres de Mayo',
-    'Zone 1',
-    'Zone 2',
-    'Zone 3',
+    'Zone 1 (Pob.)',
+    'Zone 2 (Pob.)',
+    'Zone 3 (Pob.)',
   ];
 }

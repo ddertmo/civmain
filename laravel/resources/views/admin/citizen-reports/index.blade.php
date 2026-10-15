@@ -19,7 +19,7 @@
         </select>
         <select name="barangay" onchange="this.form.submit()">
             <option value="">All Barangays</option>
-            @foreach(['Aplaya','Badiang','Balabag','Binaton','Cogon','Colorado','Dawis','Dulangan','Goma','Igpit','Kapatagan','Kiagdan','Matti','New Visayas','Rizal','San Jose','San Miguel','Soong','Tres de Mayo','Zone 1','Zone 2','Zone 3'] as $b)
+            @foreach(['Aplaya','Balabag','Binaton','Cogon','Colorado','Dawis','Dulangan','Goma','Igpit','Kapatagan','Kiagot','Lungag','Mahayahay','Matti','Ruparan','San Agustin','San Jose','San Miguel','San Roque','Sinawilan','Soong','Tiguman','Tres de Mayo','Zone 1 (Pob.)','Zone 2 (Pob.)','Zone 3 (Pob.)'] as $b)
                 <option value="{{ $b }}" {{ request('barangay') === $b ? 'selected' : '' }}>{{ $b }}</option>
             @endforeach
         </select>

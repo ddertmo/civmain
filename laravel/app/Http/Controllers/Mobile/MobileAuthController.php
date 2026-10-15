@@ -298,11 +298,13 @@ class MobileAuthController extends Controller
         return $phone;
     }
 
-    // All 22 barangays of Digos City, Davao del Sur
+    // Official 26 barangays of Digos City, Davao del Sur (PSA 2020 / PhilAtlas).
+    // Keep in sync with AppStrings.barangays in the Flutter app.
     private const BARANGAYS = [
-        'Aplaya', 'Badiang', 'Balabag', 'Binaton', 'Cogon', 'Colorado',
-        'Dawis', 'Dulangan', 'Goma', 'Igpit', 'Kapatagan', 'Kiagdan',
-        'Matti', 'New Visayas', 'Rizal', 'San Jose', 'San Miguel',
-        'Soong', 'Tres de Mayo', 'Zone 1', 'Zone 2', 'Zone 3',
+        'Aplaya', 'Balabag', 'Binaton', 'Cogon', 'Colorado', 'Dawis',
+        'Dulangan', 'Goma', 'Igpit', 'Kapatagan', 'Kiagot', 'Lungag',
+        'Mahayahay', 'Matti', 'Ruparan', 'San Agustin', 'San Jose',
+        'San Miguel', 'San Roque', 'Sinawilan', 'Soong', 'Tiguman',
+        'Tres de Mayo', 'Zone 1 (Pob.)', 'Zone 2 (Pob.)', 'Zone 3 (Pob.)',
     ];
 }
