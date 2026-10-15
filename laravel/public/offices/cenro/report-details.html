@@ -746,12 +746,12 @@
         };
 
         const CITIZENS = {
-            'CW-2026-00125': { name: 'Lawrence James', phone: '0917 555 0125', email: 'lawrence.james@example.com', address: 'Poblacion, Digos City' },
-            'CW-2026-00118': { name: 'Maria Santos', phone: '0918 555 0118', email: 'maria.santos@example.com', address: 'Badiang, Digos City' },
-            'CW-2026-00110': { name: 'Juan Dela Cruz', phone: '0919 555 0110', email: 'juan.delacruz@example.com', address: 'Carmen, Digos City' },
-            'CW-2026-00105': { name: 'Ana Reyes', phone: '0920 555 0105', email: 'ana.reyes@example.com', address: 'Soong, Digos City' },
-            'CW-2026-00098': { name: 'Pedro Cruz', phone: '0921 555 0098', email: 'pedro.cruz@example.com', address: 'Badiang, Digos City' },
-            'CW-2026-00092': { name: 'Liza Mercado', phone: '0922 555 0092', email: 'liza.mercado@example.com', address: 'Goma, Digos City' },
+            'CW-2026-00125': { name: 'Lawrence James', phone: '0917 555 0125', email: 'lawrence.james@example.com', address: 'Rizal Avenue, Digos City' },
+            'CW-2026-00118': { name: 'Maria Santos', phone: '0918 555 0118', email: 'maria.santos@example.com', address: 'Zone 1, Digos City' },
+            'CW-2026-00110': { name: 'Juan Dela Cruz', phone: '0919 555 0110', email: 'juan.delacruz@example.com', address: 'Aplaya, Digos City' },
+            'CW-2026-00105': { name: 'Ana Reyes', phone: '0920 555 0105', email: 'ana.reyes@example.com', address: 'Buhangin, Digos City' },
+            'CW-2026-00098': { name: 'Pedro Cruz', phone: '0921 555 0098', email: 'pedro.cruz@example.com', address: 'Goma, Digos City' },
+            'CW-2026-00092': { name: 'Liza Mercado', phone: '0922 555 0092', email: 'liza.mercado@example.com', address: 'Poblacion, Digos City' },
         };
 
         const ref = new URLSearchParams(window.location.search).get('ref') || 'CW-2026-00125';
@@ -776,7 +776,7 @@
         document.getElementById('citizenName').textContent = citizen.name || '—';
         document.getElementById('citizenPhone').textContent = citizen.phone || '—';
         document.getElementById('citizenEmail').textContent = citizen.email || '—';
-        document.getElementById('citizenAddress').textContent = citizen.address || report.barangay;
+        document.getElementById('citizenAddress').textContent = citizen.address || '—';
         document.getElementById('infoCategory').textContent = 'Environmental';
         document.getElementById('infoLocation').textContent = report.barangay;
         document.getElementById('infoCoords').textContent = report.lat.toFixed(6) + ', ' + report.lng.toFixed(6);

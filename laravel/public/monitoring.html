@@ -480,7 +480,7 @@
                                         <div id="reporterDetailName" class="rd-quick-value" style="margin-bottom:8px;">—</div>
                                         <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">call</span>Phone / Contact</div>
                                         <div id="reporterDetailPhone" class="rd-quick-value" style="margin-bottom:8px;">—</div>
-                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span>Location</div>
+                                        <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span>Home Barangay</div>
                                         <div id="reporterDetailLocation" class="rd-quick-value">—</div>
                                     </div>
                                 </div>
@@ -1064,7 +1064,7 @@
             var rdLocation = document.getElementById('reporterDetailLocation');
             if (rdName) rdName.textContent = name;
             if (rdPhone) rdPhone.textContent = phone;
-            if (rdLocation) rdLocation.textContent = barangay + ', Digos City';
+            if (rdLocation) rdLocation.textContent = citizen.barangay || '—';
 
             document.getElementById('assignedOfficeName').textContent = office || 'Not yet assigned';
             document.getElementById('assignedOfficeBadge').innerHTML = Utils.statusBadge(office ? status : 'Pending Validation');
