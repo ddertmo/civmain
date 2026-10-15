@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    (function() {
+        var role = localStorage.getItem('cw_role');
+        if (!role) {
+            window.location.replace('index.html');
+        } else if (role !== 'super_admin') {
+            window.location.replace(role === 'ceo' ? 'offices/ceo/dashboard.html' : 'offices/cenro/dashboard.html');
+        }
+    })();
+</script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoring Report Details — CIVILWATCH Admin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/cards.css" />
+    <link rel="stylesheet" href="/css/buttons.css" />
+    <link rel="stylesheet" href="/css/badges.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        .rd-page { background:#F5F8FC; min-height:100%; }
+        .rd-header { margin-bottom:14px; }
+        .rd-back {
+            display:inline-flex; align-items:center; gap:6px;
+            color:var(--primary); font-size:14px; font-weight:500; text-decoration:none;
+            margin-bottom:12px;
+        }
+        .rd-back .material-symbols-outlined { font-size:18px; }
+        .rd-title { font-size:24px; font-weight:800; color:#0F2D62; line-height:1.2; margin-bottom:8px; }
+        .rd-badges { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:8px; }
+        .rd-badge {
+            display:inline-flex; align-items:center; gap:4px;
+            border-radius:9999px; padding:5px 10px; font-size:12px; font-weight:700;
+        }
+        .rd-badge--blue { background:#EFF6FF; color:#2563EB; border:1px solid #BFDBFE; }
+        .rd-badge--gray { background:var(--gray-100); color:var(--gray-700); border:1px solid var(--gray-200); }
+        .rd-meta { display:flex; flex-wrap:wrap; gap:14px; color:#64748B; font-size:12px; }
+        .rd-meta span { display:inline-flex; align-items:center; gap:4px; }
+        .rd-meta .material-symbols-outlined { font-size:16px; }
+
+        .rd-shell { display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr); gap:14px; align-items:start; }
+        .rd-left, .rd-right { display:flex; flex-direction:column; gap:12px; min-width:0; }
+        .rd-card { background:#FFFFFF; border:1px solid #DCE6F2; border-radius:12px; padding:16px; box-shadow:0 1px 3px rgba(15,45,98,0.06),0 1px 2px rgba(15,45,98,0.04); min-width:0; }
+        .rd-card h2 { font-size:14px; font-weight:700; color:#111827; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--gray-200); }
+        .rd-card p { font-size:12px; color:#64748B; margin-bottom:12px; }
+
+        /* Summary */
+        .rd-summary { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+        .rd-summary-item { display:flex; align-items:center; gap:8px; padding:8px; border-left:1px solid var(--gray-200); min-width:0; }
+        .rd-summary-item:first-child { border-left:none; }
+        .rd-summary-icon { width:34px; height:34px; border-radius:50%; background:#EFF6FF; color:#2563EB; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .rd-summary-icon .material-symbols-outlined { font-size:18px; }
+        .rd-summary-label { font-size:11px; color:#64748B; text-transform:uppercase; letter-spacing:.4px; font-weight:600; }
+        .rd-summary-value { font-size:13px; font-weight:700; color:#111827; margin-top:2px; overflow-wrap:anywhere; }
+
+        /* Photo/map */
+        .rd-image-wrap { width:100%; height:260px; overflow:hidden; border-radius:8px; background:var(--gray-100); margin-bottom:8px; }
+        .rd-image { width:100%; height:100%; object-fit:cover; display:block; }
+        .rd-image-placeholder { height:130px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--gray-400); }
+        .rd-image-placeholder .material-symbols-outlined { font-size:34px; }
+        .rd-map { width:100%; height:280px; min-width:0; position:relative; overflow:hidden; border-radius:8px; margin-top:8px; }
+        .rd-map .leaflet-container { width:100%; height:100%; border-radius:8px; }
+        .rd-map-note { font-size:12px; color:#64748B; margin-bottom:4px; display:flex; align-items:center; gap:4px; }
+
+        /* Description */
+        .rd-desc { background:var(--gray-50); border:1px solid var(--gray-200); border-radius:8px; padding:14px; font-size:14px; line-height:1.7; color:var(--gray-700); overflow-wrap:anywhere; }
+
+        /* Timeline */
+        .rd-timeline { display:flex; flex-direction:column; gap:0; }
+        .rd-timeline-step { display:flex; gap:12px; }
+        .rd-dot-wrap { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+        .rd-dot { width:14px; height:14px; border-radius:50%; border:2px solid var(--gray-300); background:#FFFFFF; }
+        .rd-dot.done { background:var(--primary); border-color:var(--primary); }
+        .rd-dot.current { border-color:var(--primary); box-shadow:0 0 0 3px rgba(26,86,219,0.15); }
+        .rd-dot.future { opacity:.45; }
+        .rd-connector { width:2px; flex:1; min-height:24px; background:var(--gray-200); }
+        .rd-connector.done { background:var(--primary); }
+        .rd-step-content { padding-bottom:16px; }
+        .rd-step-title { font-size:13px; font-weight:600; color:var(--gray-700); }
+        .rd-step-title.current { color:var(--primary); }
+        .rd-step-title.done { color:var(--gray-800); }
+        .rd-step-date { font-size:11px; color:var(--gray-400); margin-top:2px; }
+        .rd-step-note { font-size:11px; color:var(--gray-500); margin-top:2px; }
+
+        /* Status options */
+        .rd-status-options { display:flex; flex-direction:column; gap:10px; }
+        .rd-status-option { position:relative; display:flex; gap:10px; border:1px solid var(--gray-200); border-radius:8px; padding:12px; cursor:pointer; background:#FFFFFF; transition:var(--transition); }
+        .rd-status-option.selected { border-color:#2563EB; background:#EFF6FF; }
+        .rd-status-option input { position:absolute; opacity:0; pointer-events:none; }
+        .rd-status-option:focus-within { border-color:#2563EB; }
+        .rd-status-icon { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .rd-status-icon .material-symbols-outlined { font-size:19px; color:#FFFFFF; }
+        .rd-status-icon--amber { background:#F59E0B; }
+        .rd-status-icon--blue { background:#2563EB; }
+        .rd-status-icon--green { background:#10B981; }
+        .rd-status-title { font-size:13px; font-weight:700; color:#111827; }
+        .rd-status-desc { font-size:11px; color:#64748B; margin-top:2px; line-height:1.4; }
+        .rd-notes { width:100%; min-height:110px; border:1px solid var(--gray-200); border-radius:8px; padding:12px; font-size:13px; color:var(--gray-700); resize:vertical; font-family:var(--font-family); }
+        .rd-notes:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
+        .rd-counter { font-size:11px; color:var(--gray-400); text-align:right; margin-top:4px; }
+        .rd-action-row { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }
+
+        /* Assigned/reporter/quick */
+        .rd-info-row { display:flex; gap:10px; align-items:center; }
+        .rd-info-icon { width:36px; height:36px; border-radius:8px; background:var(--gray-100); color:var(--gray-500); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .rd-info-name { font-size:14px; font-weight:700; color:#111827; }
+        .rd-pill-private { display:inline-flex; align-items:center; gap:4px; font-size:10px; color:var(--gray-500); background:var(--gray-100); border-radius:9999px; padding:3px 8px; margin-top:4px; }
+        .rd-quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .rd-quick-item { min-width:0; }
+        .rd-quick-label { font-size:11px; color:#64748B; font-weight:600; margin-bottom:3px; display:flex; align-items:center; gap:4px; }
+        .rd-quick-value { font-size:13px; font-weight:700; color:#111827; overflow-wrap:anywhere; }
+
+        @media (max-width:1080px) {
+            .rd-shell { grid-template-columns:1fr; }
+            .rd-summary { grid-template-columns:repeat(3,minmax(0,1fr)); }
+        }
+        @media (max-width:720px) {
+            .rd-summary { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .rd-quick-grid { grid-template-columns:1fr; }
+            .rd-title { font-size:22px; }
+            .rd-map { height:240px; }
+            .rd-image-wrap { height:220px; }
+        }
+    </style>
+</head>
+<body data-page="pending-reports" class="rd-page">
+    <div class="app-wrapper">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main-area" id="mainArea">
+            <nav class="navbar" id="navbar"></nav>
+            <main class="page-content">
+                <div class="rd-header">
+                    <a id="backLink" href="pending-reports.html" class="rd-back">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <span id="backLinkLabel">Back to Pending Reports</span>
+                    </a>
+                    <h1 id="pageTitle" class="rd-title">Monitoring Report Details</h1>
+                    <div class="rd-badges">
+                        <span id="refNo" class="rd-badge rd-badge--blue"></span>
+                        <span id="categoryBadge"></span>
+                        <span id="statusBadge"></span>
+                    </div>
+                    <div class="rd-meta">
+                        <span><span class="material-symbols-outlined">schedule</span><span id="submittedAt">—</span></span>
+                        <span><span class="material-symbols-outlined">location_on</span><span id="locationLabel">Digos City</span></span>
+                    </div>
+                </div>
+
+                <div class="rd-shell">
+                    <section class="rd-left">
+                        <article class="rd-card">
+                            <h2>Report Summary</h2>
+                            <div class="rd-summary">
+                                <div class="rd-summary-item">
+                                    <div class="rd-summary-icon"><span class="material-symbols-outlined">label</span></div>
+                                    <div><div class="rd-summary-label">Category</div><div id="summaryCategory" class="rd-summary-value">—</div></div>
+                                </div>
+                                <div class="rd-summary-item">
+                                    <div class="rd-summary-icon"><span class="material-symbols-outlined">location_on</span></div>
+                                    <div><div class="rd-summary-label">Location</div><div id="summaryLocation" class="rd-summary-value">—</div></div>
+                                </div>
+                                <div class="rd-summary-item">
+                                    <div class="rd-summary-icon"><span class="material-symbols-outlined">person</span></div>
+                                    <div><div class="rd-summary-label">Submitted By</div><div id="summarySubmittedBy" class="rd-summary-value">—</div></div>
+                                </div>
+                                <div class="rd-summary-item">
+                                    <div class="rd-summary-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div><div class="rd-summary-label">Date Submitted</div><div id="summaryDate" class="rd-summary-value">—</div></div>
+                                </div>
+                                <div class="rd-summary-item">
+                                    <div class="rd-summary-icon"><span class="material-symbols-outlined">info</span></div>
+                                    <div><div class="rd-summary-label">Current Status</div><div id="summaryStatus" class="rd-summary-value">—</div></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="rd-card" id="photoCard">
+                            <h2>Report Photo</h2>
+                            <div class="rd-image-wrap">
+                                <img id="incidentPhoto" class="rd-image" src="" alt="Incident photo" style="display:none" onerror="this.style.display='none'; var p=document.getElementById('photoPlaceholder'); if(p)p.style.display='flex';" />
+                                <div id="photoPlaceholder" class="rd-image-placeholder" style="display:none">
+                                    <span class="material-symbols-outlined">image</span>
+                                    <span>No photo available</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Location</h2>
+                            <div class="rd-map-note"><span class="material-symbols-outlined">location_on</span><span id="locationLabel">Digos City</span></div>
+                            <div id="detailMap" class="rd-map"></div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Description</h2>
+                            <div id="descBox" class="rd-desc">Loading description…</div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Status Timeline</h2>
+                            <div id="timeline" class="rd-timeline"></div>
+                        </article>
+                    </section>
+
+                    <aside class="rd-right">
+                        <article class="rd-card">
+                            <h2>Update Report Status</h2>
+                            <p>Select the current stage of this report.</p>
+                            <div class="rd-status-options" role="radiogroup" aria-label="Report status">
+                                <label class="rd-status-option" data-status="Pending Validation">
+                                    <input type="radio" name="statusOption" value="Pending Validation" />
+                                    <div class="rd-status-icon rd-status-icon--amber"><span class="material-symbols-outlined">schedule</span></div>
+                                    <div>
+                                        <div class="rd-status-title">Pending Validation</div>
+                                        <div class="rd-status-desc">The report is under review by the Super Admin to check its truth, completeness, location, and correct category. The responsible office must not be assigned before validation.</div>
+                                    </div>
+                                </label>
+                                <label class="rd-status-option" data-status="In Progress">
+                                    <input type="radio" name="statusOption" value="In Progress" />
+                                    <div class="rd-status-icon rd-status-icon--blue"><span class="material-symbols-outlined">construction</span></div>
+                                    <div>
+                                        <div class="rd-status-title">In Progress</div>
+                                        <div class="rd-status-desc">The report has been assigned to the responsible office and is being inspected or acted upon.</div>
+                                    </div>
+                                </label>
+                                <label class="rd-status-option" data-status="Resolved">
+                                    <input type="radio" name="statusOption" value="Resolved" />
+                                    <div class="rd-status-icon rd-status-icon--green"><span class="material-symbols-outlined">check_circle</span></div>
+                                    <div>
+                                        <div class="rd-status-title">Completed / Resolved</div>
+                                        <div class="rd-status-desc">The responsible office has resolved the reported concern.</div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div style="margin-top:12px;">
+                                <label for="statusNotes" style="font-size:12px;font-weight:600;color:#111827;display:block;margin-bottom:6px;">Notes (Optional)</label>
+                                <textarea id="statusNotes" class="rd-notes" maxlength="500" placeholder="Add notes about the status update..."></textarea>
+                                <div id="notesCount" class="rd-counter">0/500</div>
+                            </div>
+
+                            <div class="rd-action-row">
+                                <button id="statusCancelBtn" type="button" class="btn btn-secondary">Cancel</button>
+                                <button id="statusSaveBtn" type="button" class="btn btn-primary">
+                                    <span class="material-symbols-outlined">save</span> Save Status
+                                </button>
+                            </div>
+                        </article>
+
+                        <article id="workflowActions" class="rd-card" style="display:none;">
+                            <h2>Review Actions</h2>
+                            <p>Need to approve or reject a pending report?</p>
+                            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                                <button id="approveBtn" class="btn btn-primary"><span class="material-symbols-outlined">verified</span>Approve Report</button>
+                                <button id="rejectBtn" class="btn btn-danger"><span class="material-symbols-outlined">cancel</span>Reject Report</button>
+                            </div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Assigned Office</h2>
+                            <div class="rd-info-row">
+                                <div class="rd-info-icon"><span class="material-symbols-outlined">apartment</span></div>
+                                <div style="min-width:0;">
+                                    <div id="assignedOfficeName" class="rd-info-name">Not yet assigned</div>
+                                    <div id="assignedOfficeBadge"></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Reporter</h2>
+                            <div class="rd-info-row">
+                                <div class="rd-info-icon"><span class="material-symbols-outlined">person</span></div>
+                                <div style="min-width:0;">
+                                    <div id="reporterName" class="rd-info-name">—</div>
+                                    <span class="rd-pill-private"><span class="material-symbols-outlined" style="font-size:12px;">visibility_off</span> Hidden from public</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="rd-card">
+                            <h2>Quick Information</h2>
+                            <div class="rd-quick-grid">
+                                <div class="rd-quick-item">
+                                    <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">label</span>Category</div>
+                                    <div id="quickCategory" class="rd-quick-value">—</div>
+                                </div>
+                                <div class="rd-quick-item">
+                                    <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span>Location</div>
+                                    <div id="quickLocation" class="rd-quick-value">—</div>
+                                </div>
+                                <div class="rd-quick-item">
+                                    <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">person</span>Submitted By</div>
+                                    <div id="quickSubmittedBy" class="rd-quick-value">—</div>
+                                </div>
+                                <div class="rd-quick-item">
+                                    <div class="rd-quick-label"><span class="material-symbols-outlined" style="font-size:14px;">calendar_today</span>Date & Time</div>
+                                    <div id="quickDate" class="rd-quick-value">—</div>
+                                </div>
+                            </div>
+                            <div id="reporterPhone" style="display:none;"></div>
+                        </article>
+                    </aside>
+                </div>
+
+                <!-- Approve Modal -->
+                <div class="overlay" id="approveOverlay"></div>
+                <div class="modal" id="approveModal">
+                    <div class="modal-box">
+                        <div class="modal-header">
+                            <span class="modal-title">Approve Report</span>
+                            <button class="modal-close" id="approveModalClose"><span class="material-symbols-outlined">close</span></button>
+                        </div>
+                        <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px;">
+                            Approving this report will move it to <strong>Approved</strong>, publish it to the community map, and allow you to assign it to the appropriate office.
+                        </p>
+                        <div style="display:flex;gap:10px;justify-content:flex-end;">
+                            <button class="btn btn-secondary" id="approveCancelBtn">Cancel</button>
+                            <button class="btn btn-primary" id="approveConfirmBtn">
+                                <span class="material-symbols-outlined">verified</span> Confirm Approve
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reject Modal -->
+                <div class="overlay" id="rejectOverlay"></div>
+                <div class="modal" id="rejectModal">
+                    <div class="modal-box">
+                        <div class="modal-header">
+                            <span class="modal-title">Reject Report</span>
+                            <button class="modal-close" id="rejectModalClose"><span class="material-symbols-outlined">close</span></button>
+                        </div>
+                        <p style="font-size:14px;color:var(--gray-600);margin-bottom:14px;">
+                            Please provide a reason for rejecting this report. The reporter will be notified.
+                        </p>
+                        <div class="form-group">
+                            <label class="form-label">Reason for Rejection</label>
+                            <textarea class="form-textarea" placeholder="e.g., Duplicate report, Insufficient information, Outside jurisdiction..." rows="3"></textarea>
+                        </div>
+                        <div style="display:flex;gap:10px;justify-content:flex-end;">
+                            <button class="btn btn-secondary" id="rejectCancelBtn">Cancel</button>
+                            <button class="btn btn-danger" id="rejectConfirmBtn">
+                                <span class="material-symbols-outlined">cancel</span> Confirm Reject
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="monitorUpdateWrap" style="display:none;"><button id="monitorUpdateBtn" onclick="goToUpdateStatus()">Update</button></div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        var reportId = Utils.getParam('id');
+        var detailMap = null;
+        var fromPage = 'monitoring';
+        var savedStatusValue = 'Pending Validation';
+
+        (function setBackLink() {
+            var backLink = document.getElementById('backLink');
+            var backLabel = document.getElementById('backLinkLabel');
+            var defaults = {
+                pending: { href: 'pending-reports.html', label: 'Back to Pending Reports' },
+                monitoring: { href: 'monitoring.html', label: 'Back to Monitoring' }
+            };
+            var info = defaults[fromPage] || defaults.pending;
+            var savedHref = sessionStorage.getItem('cw:lastListUrl');
+            try {
+                if (savedHref && (new URL(savedHref, location.href)).origin === location.origin) {
+                    backLink.href = savedHref;
+                } else {
+                    backLink.href = info.href;
+                }
+            } catch (e) {
+                backLink.href = info.href;
+            }
+            backLabel.textContent = sessionStorage.getItem('cw:backLabel') || info.label;
+        })();
+
+        (function hideBackLinkWhenEmbedded() {
+            var embedded = (new URLSearchParams(location.search)).get('embedded') === '1';
+            if (embedded) {
+                var backLink = document.getElementById('backLink');
+                if (backLink) backLink.style.display = 'none';
+            }
+        })();
+
+        function fmtDate(str) {
+            if (!str) return '—';
+            var d = new Date(str);
+            if (isNaN(d)) return str;
+            return d.toLocaleDateString('en-PH', { month:'short', day:'numeric', year:'numeric' }) +
+                ' · ' + d.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+        }
+
+        function normCategory(c) {
+            if (!c) return '';
+            var lc = c.toLowerCase();
+            if (lc === 'infrastructure') return 'Infrastructure';
+            if (lc === 'environment' || lc === 'environmental') return 'Environmental';
+            return c;
+        }
+
+        function openModal(id) {
+            var m = document.getElementById(id + 'Modal');
+            var o = document.getElementById(id + 'Overlay');
+            if (m) m.classList.add('active');
+            if (o) o.classList.add('active');
+        }
+        function closeModal(id) {
+            var m = document.getElementById(id + 'Modal');
+            var o = document.getElementById(id + 'Overlay');
+            if (m) m.classList.remove('active');
+            if (o) o.classList.remove('active');
+        }
+
+        function normalizeUiStatus(status) {
+            var s = String(status || '').toLowerCase();
+            if (s.indexOf('resolve') !== -1 || s === 'completed') return 'Resolved';
+            if (s.indexOf('progress') !== -1 || s.indexOf('assign') !== -1 || s === 'approved') return 'In Progress';
+            return 'Pending Validation';
+        }
+
+        function setUiStatus(value) {
+            document.querySelectorAll('.rd-status-option').forEach(function(card) {
+                var checked = card.getAttribute('data-status') === value;
+                card.classList.toggle('selected', checked);
+                var input = card.querySelector('input');
+                if (input) input.checked = checked;
+            });
+            savedStatusValue = value;
+        }
+
+        async function loadReport() {
+            if (!reportId) {
+                document.getElementById('pageTitle').textContent = 'Report not found';
+                return;
+            }
+            try {
+                document.getElementById('pageTitle').textContent = 'Loading…';
+                var json = await Api.get('/api/admin/citizen-reports/' + reportId);
+                if (!json || !json.success) throw new Error('Not found');
+                render(json.data);
+            } catch (e) {
+                document.getElementById('pageTitle').textContent = 'Report not found';
+                document.getElementById('descBox').textContent = 'Could not load this report. It may have been deleted or you do not have access.';
+                console.error('Report detail load failed:', e);
+            }
+        }
+
+        function render(r) {
+            var citizen = r.citizen || {};
+            var name = citizen.fullName || citizen.full_name || '—';
+            var phone = citizen.phoneNumber || citizen.phone || '—';
+            var ref = r.referenceNumber || r.reference_number || String(r.id);
+            var concern = r.concern || r.issue || '—';
+            var cat = normCategory(r.category);
+            var barangay = r.barangay || '—';
+            var status = r.status || '—';
+            var desc = r.description || '—';
+            var lat = parseFloat(r.latitude || r.lat) || 6.7498;
+            var lng = parseFloat(r.longitude || r.lng) || 125.3572;
+            var photo = r.imageUrl || r.photo_url || null;
+            var date = fmtDate(r.submittedAt || r.created_at || '—');
+            var office = (r.assignedOffice && typeof r.assignedOffice === 'object') ? r.assignedOffice.name : (r.assignedOffice || null);
+
+            document.getElementById('pageTitle').textContent = concern;
+            document.getElementById('refNo').textContent = '#' + ref;
+            document.getElementById('categoryBadge').innerHTML = Utils.categoryBadge(cat);
+            document.getElementById('statusBadge').innerHTML = Utils.statusBadge(status);
+            document.getElementById('submittedAt').textContent = date;
+            document.getElementById('locationLabel').textContent = barangay + ', Digos City';
+
+            document.getElementById('summaryCategory').innerHTML = Utils.categoryBadge(cat);
+            document.getElementById('summaryLocation').textContent = barangay;
+            document.getElementById('summarySubmittedBy').textContent = name;
+            document.getElementById('summaryDate').textContent = date;
+            document.getElementById('summaryStatus').innerHTML = Utils.statusBadge(status);
+
+            document.getElementById('quickCategory').innerHTML = Utils.categoryBadge(cat);
+            document.getElementById('quickLocation').textContent = barangay;
+            document.getElementById('quickSubmittedBy').textContent = name;
+            document.getElementById('quickDate').textContent = date;
+
+            document.getElementById('descBox').textContent = desc;
+
+            document.getElementById('reporterName').textContent = name;
+            document.getElementById('reporterPhone').textContent = phone;
+
+            document.getElementById('assignedOfficeName').textContent = office || 'Not yet assigned';
+            document.getElementById('assignedOfficeBadge').innerHTML = Utils.statusBadge(office ? status : 'Pending Validation');
+
+            var imgEl = document.getElementById('incidentPhoto');
+            var phEl = document.getElementById('photoPlaceholder');
+            var photoCard = document.getElementById('photoCard');
+            if (photo) {
+                imgEl.src = photo;
+                imgEl.style.display = 'block';
+                if (phEl) phEl.style.display = 'none';
+                if (photoCard) photoCard.style.display = 'block';
+                imgEl.onerror = function() { imgEl.style.display='none'; if(phEl) phEl.style.display='flex'; };
+            } else {
+                imgEl.style.display = 'none';
+                if (phEl) phEl.style.display = 'flex';
+                if (photoCard) photoCard.style.display = 'block';
+            }
+
+            setUiStatus(normalizeUiStatus(status));
+
+            var tl = document.getElementById('timeline');
+            var activityLog = r.activityLog || [];
+            var statusOrder = ['Report Submitted','Pending Validation','In Progress','Completed / Resolved'];
+            if (activityLog.length > 0) {
+                tl.innerHTML = activityLog.map(function(a, i) {
+                    var isCurrent = i === activityLog.length - 1;
+                    return '<div class="rd-timeline-step">' +
+                        '<div class="rd-dot-wrap"><div class="rd-dot ' + (isCurrent ? 'current' : 'done') + '"></div>' +
+                        (i < activityLog.length - 1 ? '<div class="rd-connector done"></div>' : '') +
+                        '</div><div class="rd-step-content">' +
+                        '<div class="rd-step-title ' + (isCurrent ? 'current' : 'done') + '">' + (a.title || a.status) + '</div>' +
+                        '<div class="rd-step-date">' + fmtDate(a.timestamp || a.created_at) + '</div>' +
+                        (a.description ? '<div class="rd-step-note">' + a.description + '</div>' : '') +
+                        '</div></div>';
+                }).join('');
+            } else {
+                var currentIdx = statusOrder.indexOf(normalizeUiStatus(status) === 'Resolved' ? 'Completed / Resolved' :
+                    normalizeUiStatus(status) === 'In Progress' ? 'In Progress' :
+                    normalizeUiStatus(status) === 'Pending Validation' ? 'Pending Validation' : 'Report Submitted');
+                // Keep the four-step list but start after "Report Submitted".
+                tl.innerHTML = statusOrder.map(function(s, i) {
+                    var done = i < currentIdx;
+                    var current = i === currentIdx;
+                    return '<div class="rd-timeline-step">' +
+                        '<div class="rd-dot-wrap"><div class="rd-dot ' + (done ? 'done' : current ? 'current' : 'future') + '"></div>' +
+                        (i < statusOrder.length - 1 ? '<div class="rd-connector ' + (done ? 'done' : '') + '"></div>' : '') +
+                        '</div><div class="rd-step-content">' +
+                        '<div class="rd-step-title ' + (done ? 'done' : current ? 'current' : '') + '">' + s + '</div>' +
+                        '<div class="rd-step-date">' + (done || current ? date : '—') + '</div>' +
+                        '</div></div>';
+                }).join('');
+            }
+
+            if (!detailMap) {
+                detailMap = L.map('detailMap').setView([lat, lng], 16);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'&copy; OpenStreetMap' }).addTo(detailMap);
+            } else {
+                detailMap.setView([lat, lng], 16);
+            }
+            var pinIcon = L.divIcon({
+                className:'',
+                html:'<div style="width:26px;height:26px;border-radius:50%;background:#2563EB;border:3px solid white;box-shadow:0 3px 8px rgba(0,0,0,.3);"></div>',
+                iconSize:[26,26], iconAnchor:[13,13]
+            });
+            detailMap.eachLayer(function(layer){ if (layer instanceof L.Marker) detailMap.removeLayer(layer); });
+            L.marker([lat, lng], { icon: pinIcon }).addTo(detailMap).bindPopup('<strong>'+concern+'</strong><br>'+barangay).openPopup();
+            setTimeout(function() { if (detailMap) detailMap.invalidateSize(); }, 150);
+
+            var workflowActions = document.getElementById('workflowActions');
+            if (workflowActions) {
+                workflowActions.style.display = (status === 'Submitted' || status === 'Pending Validation') && fromPage !== 'monitoring' ? 'block' : 'none';
+            }
+
+            window.goToUpdateStatus = function() {
+                sessionStorage.setItem('monitoring:updateId', reportId);
+                sessionStorage.setItem('monitoring:updateRef', ref);
+                window.location.href = 'monitoring.html';
+            };
+        }
+
+        // Event wiring
+        document.querySelectorAll('.rd-status-option input').forEach(function(input) {
+            input.addEventListener('change', function() {
+                setUiStatus(this.value);
+            });
+        });
+        document.querySelectorAll('.rd-status-option').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var input = card.querySelector('input');
+                if (input) { input.checked = true; setUiStatus(input.value); }
+            });
+        });
+        var notesEl = document.getElementById('statusNotes');
+        var counter = document.getElementById('notesCount');
+        function updateCounter() {
+            if (counter && notesEl) counter.textContent = (notesEl.value.length || 0) + '/500';
+        }
+        if (notesEl) notesEl.addEventListener('input', updateCounter);
+        updateCounter();
+
+        document.getElementById('statusCancelBtn').onclick = function() {
+            setUiStatus(savedStatusValue);
+            if (notesEl) notesEl.value = '';
+            updateCounter();
+        };
+        document.getElementById('statusSaveBtn').onclick = function() {
+            var selected = document.querySelector('input[name="statusOption"]:checked');
+            var newStatus = selected ? selected.value : savedStatusValue;
+            var description = notesEl ? notesEl.value.trim() : '';
+            Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/status', {
+                status: newStatus,
+                description: description || null
+            }, {
+                loading: 'Updating status…',
+                success: 'Status updated to: ' + newStatus,
+                successTitle: 'Status Updated',
+                errorTitle: 'Status Update Failed',
+                onAction: function() {
+                    savedStatusValue = newStatus;
+                    if (notesEl) notesEl.value = '';
+                    updateCounter();
+                    loadReport();
+                }
+            });
+        };
+
+        var approveBtn = document.getElementById('approveBtn');
+        var rejectBtn = document.getElementById('rejectBtn');
+        if (approveBtn) approveBtn.onclick = function() { openModal('approve'); };
+        if (rejectBtn) rejectBtn.onclick = function() { openModal('reject'); };
+        var approveModalClose = document.getElementById('approveModalClose');
+        var approveCancelBtn = document.getElementById('approveCancelBtn');
+        var approveOverlay = document.getElementById('approveOverlay');
+        var approveConfirmBtn = document.getElementById('approveConfirmBtn');
+        if (approveModalClose) approveModalClose.onclick = function() { closeModal('approve'); };
+        if (approveCancelBtn) approveCancelBtn.onclick = function() { closeModal('approve'); };
+        if (approveOverlay) approveOverlay.onclick = function() { closeModal('approve'); };
+        if (approveConfirmBtn) approveConfirmBtn.onclick = async function() {
+            closeModal('approve');
+            await Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/validate', {}, {
+                loading: 'Approving report…',
+                success: 'Report approved and published to community map.',
+                successTitle: 'Report Approved',
+                errorTitle: 'Approval Failed',
+                onAction: function() {
+                    sessionStorage.setItem('pending-reports-needs-refresh', 'true');
+                    location.href = 'assign-office.html?id=' + reportId;
+                }
+            });
+        };
+        var rejectModalClose = document.getElementById('rejectModalClose');
+        var rejectCancelBtn = document.getElementById('rejectCancelBtn');
+        var rejectOverlay = document.getElementById('rejectOverlay');
+        var rejectConfirmBtn = document.getElementById('rejectConfirmBtn');
+        if (rejectModalClose) rejectModalClose.onclick = function() { closeModal('reject'); };
+        if (rejectCancelBtn) rejectCancelBtn.onclick = function() { closeModal('reject'); };
+        if (rejectOverlay) rejectOverlay.onclick = function() { closeModal('reject'); };
+        if (rejectConfirmBtn) rejectConfirmBtn.onclick = async function() {
+            var reason = document.querySelector('#rejectModal .form-textarea').value.trim();
+            if (!reason) {
+                Utils.showToast('Please enter a reason for rejecting this report.', 'error');
+                return;
+            }
+            closeModal('reject');
+            await Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/status', {
+                status: 'Rejected',
+                description: reason
+            }, {
+                loading: 'Rejecting report…',
+                success: 'Report has been rejected. The reporter has been notified with your reason.',
+                successTitle: 'Report Rejected',
+                errorTitle: 'Rejection Failed',
+                onAction: function() {
+                    location.href = 'pending-reports.html';
+                }
+            });
+        };
+
+        // ── Boot ──────────────────────────────────────────────────
+        loadReport();
+    </script>
+</body>
+</html>

@@ -57,3 +57,4 @@ automatically after each change.
 | 043 | 2026-10-15 | `HEAD` | [Fix report view link JavaScript quoting](2026-10-15-043-report-view-link-javascript-quoting.md) |
 | 044 | 2026-10-15 | `HEAD` | [Report details redesigned to two-column workflow layout](2026-10-15-044-report-details-redesign.md) |
 | 045 | 2026-10-15 | `HEAD` | [Embedded report detail panel in Monitoring page](2026-10-15-045-monitoring-embedded-report-detail.md) |
+| 046 | 2026-10-15 | `HEAD` | [Dedicated Monitoring report details page](2026-10-15-046-monitoring-dedicated-report-detail-page.md) |

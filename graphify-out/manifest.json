@@ -678,9 +678,9 @@
     "semantic_hash": ""
   },
   "laravel/public/monitoring.html": {
-    "mtime": 1792056766.2825215,
-    "seen": 1792056789.2143064,
-    "ast_hash": "572e36f75790edd2c2d6a12357ac0827",
+    "mtime": 1792057127.2477238,
+    "seen": 1792057160.2258701,
+    "ast_hash": "0b069b0c560f1400901e1d8ba9ab2982",
     "semantic_hash": ""
   },
   "laravel/public/offices/cenro/analytics.html": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792056779.9601858,
-    "seen": 1792056789.2143064,
-    "ast_hash": "85effc84afab12402002768c8d92d8d2",
+    "mtime": 1792057147.9650047,
+    "seen": 1792057160.2258701,
+    "ast_hash": "63340692fafcfb6bd1e115ee223fecb5",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -2085,6 +2085,18 @@
     "mtime": 1792056779.9612057,
     "seen": 1792056789.2143064,
     "ast_hash": "a75c0b5c1442db901ff9c61b4229ca9c",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-15-046-monitoring-dedicated-report-detail-page.md": {
+    "mtime": 1792057147.9650047,
+    "seen": 1792057160.2258701,
+    "ast_hash": "a6e021d3dd45e0f75d4ab25f1156af8b",
+    "semantic_hash": ""
+  },
+  "laravel/public/monitoring-report-details.html": {
+    "mtime": 1792057104.206332,
+    "seen": 1792057160.2258701,
+    "ast_hash": "ee5ef8c4d9bc2d229ffbf9cc62f0da7f",
     "semantic_hash": ""
   }
 }
