@@ -1,34 +1,35 @@
-## session context — read first
+## session context — read on a NEW session only
 
-Before doing anything else, read [`docs/SESSION_CONTEXT.md`](docs/SESSION_CONTEXT.md).
-It is the exported context of a prior opencode session and makes a new session
-on another machine pick up where that one stopped.
+**Fresh session (no prior messages)?** Read
+[`docs/SESSION_CONTEXT.md`](docs/SESSION_CONTEXT.md) first and continue from it.
+It is the short handoff of what the last sessions did and what is next.
 
-It covers, and these are not repeated elsewhere:
+**Resumed session (already has history)?** Do **not** re-read it — the existing
+conversation already is your context.
 
-- **three repos, one push target** — `prc/` pushes to `backup`
-  (`dertmo01/civmain`); the parent `~/Prd/CIVILWATCH` has `origin`
-  (`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
-- **environment limits** — Termux/Android, no Flutter SDK / Dart / Android SDK /
-  Windows / XAMPP / Node build, ~1 GB disk (no installs), `/tmp` unwritable
-  (use `/data/data/com.termux/files/usr/tmp/opencode`), no LLM key so
-  `graphify label` cannot run, `tree_sitter_php` unbuildable so Laravel PHP is
-  **not** in the graph — read PHP files directly.
-- **environment traps** — services die between tool calls; `pkill -f` matches
-  your own shell (use `pgrep -f 'foo[trick]'`); `php artisan serve` ignores a
-  `DB_DATABASE=` override, so pointing at another database means editing
-  `.env` and restoring it with `cmp`.
-- **credentials, live database contents, the canonical dump**
-  (`laravel/civilwatch_FINAL.sql`), how to run on Android and on PC.
-- **architecture facts that are easy to get wrong** — two admin UIs kept on
-  purpose, `requireAuth()` client-side only on the HTML prototype, the
-  `superadmin` role gate, the reject flow (reason lives in
-  `report_activities.description`, not a report column), `concern` not `title`,
-  the four role/enum values.
-- **graphify usage** — heading text must be used as a literal search key,
-  because markdown headings link only to their document root.
-- **verification techniques** that work on this machine, and **what is still
-  open** (Flutter verification path unchosen; next changelog number).
+For detail, go to (do not duplicate these):
+
+- **detailed / portable project notes** — [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md)
+  (architecture, credentials, running it, graphify). Its "Machine and
+  environment" section is Termux-specific and historical.
+- **what changed, per change** — [`docs/changes/README.md`](docs/changes/README.md)
+- **how to run on the PC** — [`laravel/docs/SETUP_PC.md`](laravel/docs/SETUP_PC.md)
+
+### two machines — detect before applying env-specific commands
+
+This repo is edited from **two machines**; the limits differ:
+
+| Machine | Platform | Environment |
+|---|---|---|
+| Windows PC | `win32` | XAMPP — PHP `C:\xampp\php\php.exe`, MySQL `C:\xampp\mysql\bin\mysql.exe`; Flutter `C:\Users\Administrator\Downloads\flutter\bin\flutter.bat`; Node available; `tree_sitter_php` parses, so Laravel PHP **can** be in the graph |
+| Android / Termux | `android` | PHP / Composer / MariaDB only — **no** Flutter, Dart, Node, Windows or XAMPP; small disk (no installs); `/tmp` unwritable; Laravel PHP is **not** in the graph — read PHP files directly |
+
+**Never assume the other machine's limits.** Detect the current platform, then
+apply the matching column.
+
+**Push target (both machines):** the working repo pushes to `backup`
+(`dertmo01/civmain`); the parent `CIVILWATCH` has `origin`
+(`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
 
 ## playwright (removed)
 

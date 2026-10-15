@@ -61,3 +61,4 @@ automatically after each change.
 | 047 | 2026-10-15 | `HEAD` | [Reporter details panel in admin report views + Home Barangay fix](2026-10-15-047-reporter-details-and-home-barangay.md) |
 | 048 | 2026-10-15 | `HEAD` | [Citizen registration now captures a full home address](2026-10-15-048-registration-full-address.md) |
 | 049 | 2026-10-15 | `HEAD` | [Unify the Digos City barangay list to the official 26 everywhere](2026-10-15-049-unify-digos-barangay-list.md) |
+| 050 | 2026-10-15 | `HEAD` | [Session start: fresh sessions continue from a short handoff, existing sessions keep their history](2026-10-15-050-session-start-handoff.md) |

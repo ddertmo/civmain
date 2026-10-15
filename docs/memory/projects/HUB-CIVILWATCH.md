@@ -10,7 +10,7 @@ Active
 - laravel/app/Http/Controllers/* (Admin, Mobile)
 - laravel/public/*.html (admin UI prototype)
 - civ-main/ (Flutter app)
-- docs/SESSION_CONTEXT.md, AGENTS.md
+- docs/PROJECT_CONTEXT.md, docs/SESSION_CONTEXT.md, AGENTS.md
 
 ## Links
 - Repo: /data/data/com.termux/files/home/Prd/CIVILWATCH/prc
@@ -21,7 +21,7 @@ Active
 - sessions/YYYY-MM-DD-<date>.md
 
 ## Constraints
-Termux/Android, backup-only push (dertmo01/civmain), no Playwright, graph-first retrieval.
+Windows PC (XAMPP/Flutter) and Termux/Android — detect the machine; backup-only push (dertmo01/civmain), no Playwright, graph-first retrieval.
 
 ## Decisions
 - Approved status is first-class (post-approve flow)

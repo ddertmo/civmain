@@ -48,8 +48,9 @@ graphify query "<what broke / where is this used>"
 graphify explain "<symbol>"
 ```
 
-If the change touches Laravel PHP, note that PHP is **not** in the graph
-(`tree_sitter_php` cannot build on Termux) — read the files directly.
+If the change touches Laravel PHP, check whether PHP is in the graph: it **is**
+on the Windows PC (`tree_sitter_php` parses) but is **not** on Termux — if the
+query returns nothing, read the files directly.
 
 ### 3. Write `docs/changes/YYYY-MM-DD-NNN-<slug>.slug>.md`
 
@@ -87,6 +88,16 @@ Append a row to `docs/changes/README.md`:
 
 Keep it sorted newest-last and make sure the link path matches the file.
 
+### 4b. Keep the fresh-session handoff current
+
+Update the `## Recent sessions` block in `docs/SESSION_CONTEXT.md` with a
+one-line entry for this change (date + what changed). That file is what a
+**new** opencode session reads to continue where the last one stopped; an
+**existing** session keeps its own history and ignores it (`AGENTS.md`).
+
+Keep it to a few lines — it is a handoff, not a second changelog. The full
+detail still lives in this change's `docs/changes/` file.
+
 ### 5. Refresh the graph if code changed
 
 ```bash
@@ -100,7 +111,7 @@ Doc-only changes can skip this, but running it is cheap and keeps
 ### 6. Commit and push
 
 ```bash
-git add docs/changes graphify-out
+git add docs/changes docs/SESSION_CONTEXT.md graphify-out
 git commit -m "docs(changes): <NNN> <short title>"
 git push backup main
 ```
