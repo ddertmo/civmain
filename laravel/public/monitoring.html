@@ -68,6 +68,13 @@
             flex-shrink: 0;
         }
     </style>
+    <style id="monitoringInlineReportStyles">
+        .monitoring-list-view { min-width: 0; }
+        #monitoringReportView { display:none; padding-top:4px; }
+        #monitoringReportHead { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; gap:12px; flex-wrap:wrap; }
+        #monitoringReportHead .page-title { font-size:22px; }
+        #monitoringReportFrame { width:100%; min-height:780px; height:calc(100vh - 120px); border:1px solid var(--gray-200); border-radius:12px; background:#F5F8FC; display:block; }
+    </style>
 </head>
 
 <body data-page="monitoring">
@@ -363,7 +370,7 @@
                     '<div style="font-size:11px;color:var(--gray-400);">' + (updated.split('\n')[1] || '') + '</div>' +
                     '</td>' +
                     '<td><div class="actions-cell">' +
-                    '<a href="monitoring-report-details.html?id=' + encodeURIComponent(r.id) + '" class="btn-view">' +
+                    '<a href="monitoring-report-details.html?id=' + encodeURIComponent(r.id) + '" class="btn-view" onclick="return openMonitoringReportDetail(\'' + String(r.id).replace(/'/g, "\\'") + '\');">' +
                     '<span class="material-symbols-outlined">visibility</span> View' +
                     '</a>' +
                     (status !== 'Resolved' ?
@@ -573,6 +580,48 @@
         }
 
         // ── Boot ──────────────────────────────────────────────
+        // ── Built-in Monitoring report detail (not a modal) ─────
+        var monitoringListView = null;
+        var monitoringReportView = null;
+        var monitoringReportFrame = null;
+        function ensureMonitoringReportView() {
+            if (monitoringReportView) return;
+            var main = document.querySelector('main.page-content');
+            if (!main) return;
+            monitoringListView = document.createElement('div');
+            monitoringListView.id = 'monitoringListView';
+            monitoringListView.className = 'monitoring-list-view';
+            while (main.firstChild) monitoringListView.appendChild(main.firstChild);
+            monitoringReportView = document.createElement('div');
+            monitoringReportView.id = 'monitoringReportView';
+            monitoringReportView.style.display = 'none';
+            monitoringReportView.innerHTML =
+                '<div id="monitoringReportHead">' +
+                    '<h1 class="page-title" style="margin-bottom:0;">Monitoring Report Detail</h1>' +
+                    '<button type="button" class="btn btn-secondary" onclick="closeMonitoringReportDetail()">Back to Monitoring</button>' +
+                '</div>' +
+                '<iframe id="monitoringReportFrame" src="about:blank" title="Monitoring report detail"></iframe>';
+            main.appendChild(monitoringListView);
+            main.appendChild(monitoringReportView);
+            monitoringReportFrame = document.getElementById('monitoringReportFrame');
+        }
+        function openMonitoringReportDetail(id) {
+            ensureMonitoringReportView();
+            if (monitoringListView) monitoringListView.style.display = 'none';
+            if (monitoringReportView) monitoringReportView.style.display = 'block';
+            if (monitoringReportFrame) monitoringReportFrame.src = 'monitoring-report-details.html?id=' + encodeURIComponent(id) + '&embed=0';
+            document.body.style.overflow = '';
+            return false;
+        }
+        function closeMonitoringReportDetail() {
+            if (monitoringReportView) monitoringReportView.style.display = 'none';
+            if (monitoringListView) monitoringListView.style.display = 'block';
+            if (monitoringReportFrame) monitoringReportFrame.src = 'about:blank';
+            loadReports();
+            return false;
+        }
+
+        ensureMonitoringReportView();
         loadReports().then(function() {
             var updateId = sessionStorage.getItem('monitoring:updateId');
             var updateRef = sessionStorage.getItem('monitoring:updateRef');
