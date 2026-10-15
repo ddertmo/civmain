@@ -233,7 +233,11 @@ class CitizenReport extends Model
             'citizen'         => $this->citizen ? [
                 'fullName'    => $this->citizen->full_name,
                 'phoneNumber' => $this->citizen->phone,
+                'street'      => $this->citizen->street,
+                'purok'       => $this->citizen->purok,
                 'barangay'    => $this->citizen->barangay,
+                'city'        => $this->citizen->city,
+                'province'    => $this->citizen->province,
             ] : null,
         ];
     }

@@ -103,6 +103,10 @@ class AuthService {
     required String barangay,
     required String pin,
     String? email,
+    String? street,
+    String? purok,
+    String? city,
+    String? province,
   }) async {
     try {
       final res = await _api.post(
@@ -113,6 +117,10 @@ class AuthService {
           'barangay': barangay,
           'pin': pin,
           if (email != null && email.isNotEmpty) 'email': email,
+          if (street != null && street.isNotEmpty) 'street': street,
+          if (purok != null && purok.isNotEmpty) 'purok': purok,
+          if (city != null && city.isNotEmpty) 'city': city,
+          if (province != null && province.isNotEmpty) 'province': province,
         },
         auth: false,
       );

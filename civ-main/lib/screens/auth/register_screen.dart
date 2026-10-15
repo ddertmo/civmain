@@ -26,6 +26,10 @@ class _RegisterScreenState extends State<RegisterScreen>
   final _phoneCtrl = TextEditingController();
   final _nameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
+  final _streetCtrl = TextEditingController();
+  final _purokCtrl = TextEditingController();
+  final _cityCtrl = TextEditingController(text: 'Digos City');
+  final _provinceCtrl = TextEditingController(text: 'Davao del Sur');
 
   // ── PIN state ─────────────────────────────────────────────────────────────
   String _pin = '';
@@ -81,6 +85,10 @@ class _RegisterScreenState extends State<RegisterScreen>
     _phoneCtrl.dispose();
     _nameCtrl.dispose();
     _emailCtrl.dispose();
+    _streetCtrl.dispose();
+    _purokCtrl.dispose();
+    _cityCtrl.dispose();
+    _provinceCtrl.dispose();
     _animController.dispose();
     super.dispose();
   }
@@ -136,6 +144,10 @@ class _RegisterScreenState extends State<RegisterScreen>
       barangay: _selectedBarangay!,
       pin: _pin,
       email: _emailCtrl.text.trim().isEmpty ? null : _emailCtrl.text.trim(),
+      street: _streetCtrl.text.trim(),
+      purok: _purokCtrl.text.trim(),
+      city: _cityCtrl.text.trim(),
+      province: _provinceCtrl.text.trim(),
     );
 
     if (!mounted) return;
@@ -300,6 +312,31 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 ),
                                 const SizedBox(height: 18),
 
+                                // ── Home Address ──────────────────────────
+                                _FieldLabel(
+                                    icon: Icons.signpost_outlined,
+                                    label: 'Street / Area'),
+                                const SizedBox(height: 8),
+                                _buildTextField(
+                                  controller: _streetCtrl,
+                                  hint: 'e.g. 123 Rizal Street',
+                                  prefixIcon: Icons.signpost_outlined,
+                                ),
+                                const SizedBox(height: 18),
+
+                                _FieldLabel(
+                                    icon: Icons.holiday_village_outlined,
+                                    label: 'Purok',
+                                    isOptional: true),
+                                const SizedBox(height: 8),
+                                _buildTextField(
+                                  controller: _purokCtrl,
+                                  hint: 'e.g. Purok 3',
+                                  prefixIcon:
+                                      Icons.holiday_village_outlined,
+                                ),
+                                const SizedBox(height: 18),
+
                                 // ── Home Barangay ─────────────────────────
                                 _FieldLabel(
                                     icon: Icons.location_on_outlined,
@@ -309,6 +346,28 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   value: _selectedBarangay,
                                   onChanged: (v) => setState(
                                       () => _selectedBarangay = v),
+                                ),
+                                const SizedBox(height: 18),
+
+                                _FieldLabel(
+                                    icon: Icons.location_city_outlined,
+                                    label: 'City / Municipality'),
+                                const SizedBox(height: 8),
+                                _buildTextField(
+                                  controller: _cityCtrl,
+                                  hint: 'Digos City',
+                                  prefixIcon: Icons.location_city_outlined,
+                                ),
+                                const SizedBox(height: 18),
+
+                                _FieldLabel(
+                                    icon: Icons.map_outlined,
+                                    label: 'Province'),
+                                const SizedBox(height: 8),
+                                _buildTextField(
+                                  controller: _provinceCtrl,
+                                  hint: 'Davao del Sur',
+                                  prefixIcon: Icons.map_outlined,
                                 ),
                                 const SizedBox(height: 24),
 

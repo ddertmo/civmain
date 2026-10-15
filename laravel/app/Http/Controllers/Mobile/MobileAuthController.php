@@ -173,7 +173,11 @@ class MobileAuthController extends Controller
                     }
                 }],
                 'email'    => 'nullable|email|max:191|unique:citizens,email',
+                'street'   => 'nullable|string|max:150',
+                'purok'    => 'nullable|string|max:100',
                 'barangay' => ['required', 'string', 'in:' . implode(',', self::BARANGAYS)],
+                'city'     => 'nullable|string|max:100',
+                'province' => 'nullable|string|max:100',
                 'pin'      => ['required', 'string', 'regex:/^\d{6}$/'],
                 'phone'    => [
                     'required', 'string',
@@ -200,8 +204,11 @@ class MobileAuthController extends Controller
                 'full_name' => $request->fullName,
                 'email'     => $request->email,
                 'phone'     => $normalized,
+                'street'    => $request->street ?: null,
+                'purok'     => $request->purok ?: null,
                 'barangay'  => $request->barangay,
-                'city'      => 'Digos City',
+                'city'      => $request->city ?: 'Digos City',
+                'province'  => $request->province ?: 'Davao del Sur',
                 'pin_hash'  => Hash::make($request->pin),
             ]);
         } catch (QueryException $e) {
@@ -265,7 +272,11 @@ class MobileAuthController extends Controller
             'id'              => (string) $citizen->id,
             'fullName'        => $citizen->full_name,
             'phoneNumber'     => $citizen->phone,
+            'street'          => $citizen->street,
+            'purok'           => $citizen->purok,
             'barangay'        => $citizen->barangay,
+            'city'            => $citizen->city,
+            'province'        => $citizen->province,
             'joinedDate'      => $citizen->created_at?->toIso8601String(),
             'totalReports'    => $citizen->total_reports,
             'resolvedReports' => $citizen->resolved_reports,

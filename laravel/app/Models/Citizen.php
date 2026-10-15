@@ -17,8 +17,11 @@ class Citizen extends Authenticatable
         'full_name',
         'email',
         'phone',
+        'street',
+        'purok',
         'barangay',
         'city',
+        'province',
         'pin_hash',
         'is_active',
     ];

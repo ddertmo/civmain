@@ -59,3 +59,4 @@ automatically after each change.
 | 045 | 2026-10-15 | `HEAD` | [Embedded report detail panel in Monitoring page](2026-10-15-045-monitoring-embedded-report-detail.md) |
 | 046 | 2026-10-15 | `HEAD` | [Dedicated Monitoring report details page](2026-10-15-046-monitoring-dedicated-report-detail-page.md) |
 | 047 | 2026-10-15 | `HEAD` | [Reporter details panel in admin report views + Home Barangay fix](2026-10-15-047-reporter-details-and-home-barangay.md) |
+| 048 | 2026-10-15 | `HEAD` | [Citizen registration now captures a full home address](2026-10-15-048-registration-full-address.md) |
