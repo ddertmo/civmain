@@ -363,7 +363,7 @@
                     '<div style="font-size:11px;color:var(--gray-400);">' + (updated.split('\n')[1] || '') + '</div>' +
                     '</td>' +
                     '<td><div class="actions-cell">' +
-                    '<a href="report-details.html?id=' + r.id + '" class="btn-view">' +
+                    '<a href="report-details.html?id=' + encodeURIComponent(r.id) + '&from=monitoring" class="btn-view" onclick="sessionStorage.setItem('cw:lastListUrl',window.location.href); sessionStorage.setItem('cw:backLabel','Back to Monitoring'); sessionStorage.setItem('cw:backHref','monitoring.html');">' +
                     '<span class="material-symbols-outlined">visibility</span> View' +
                     '</a>' +
                     (status !== 'Resolved' ?
@@ -573,7 +573,15 @@
         }
 
         // ── Boot ──────────────────────────────────────────────
-        loadReports();
+        loadReports().then(function() {
+            var updateId = sessionStorage.getItem('monitoring:updateId');
+            var updateRef = sessionStorage.getItem('monitoring:updateRef');
+            if (updateId) {
+                sessionStorage.removeItem('monitoring:updateId');
+                sessionStorage.removeItem('monitoring:updateRef');
+                setTimeout(function() { openUpdateModal(updateId, updateRef); }, 250);
+            }
+        });
         setInterval(loadReports, 30000);
     </script>
 </body>

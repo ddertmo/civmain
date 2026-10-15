@@ -56,6 +56,12 @@
             align-items: start;
         }
 
+        .incident-photo-wrap {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            margin-bottom: 14px;
+        }
         .incident-photo {
             width: 100%;
             height: 260px;
@@ -63,6 +69,19 @@
             border-radius: var(--radius-md);
             background: var(--gray-100);
             display: block;
+        }
+        .incident-photo-placeholder {
+            width: 100%;
+            height: 260px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-direction: column;
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            color: var(--gray-400);
+            font-size: 14px;
         }
 
         .info-grid {
@@ -246,15 +265,20 @@
             <nav class="navbar" id="navbar"></nav>
             <main class="page-content">
 
-                <a href="pending-reports.html" class="back-link">
+                <a id="backLink" href="pending-reports.html" class="back-link">
                     <span class="material-symbols-outlined">arrow_back</span>
-                    Back to Pending Reports
+                    <span id="backLinkLabel">Back to Pending Reports</span>
                 </a>
 
                 <div class="page-header">
                     <h1 class="page-title" id="pageTitle">Report Details</h1>
                 </div>
 
+                <div id="monitorUpdateWrap" style="display:none; margin-bottom:14px;">
+                    <button id="monitorUpdateBtn" class="btn btn-primary" onclick="goToUpdateStatus()">
+                        <span class="material-symbols-outlined">update</span> Update Status
+                    </button>
+                </div>
                 <div class="details-layout">
                     <!-- Left: Incident Info -->
                     <div style="display:flex; flex-direction:column; gap:18px;">
@@ -262,7 +286,10 @@
                         <!-- Main info card -->
                         <div class="card card-padded">
                             <div class="section-title">Incident Information</div>
-                            <img class="incident-photo" id="incidentPhoto" src="" alt="Incident photo" />
+                            <div class="incident-photo-wrap">
+                                <img class="incident-photo" id="incidentPhoto" src="" alt="Incident photo" style="display:none" onerror="this.style.display='none'; var p=document.getElementById('incidentPhotoPlaceholder'); if(p)p.style.display='flex';" />
+                                <div id="incidentPhotoPlaceholder" class="incident-photo-placeholder" style="display:none"><span class="material-symbols-outlined">image</span><span>No photo available</span></div>
+                            </div>
 
                             <div class="info-grid" id="infoGrid">
                                 <!-- Filled by JS -->
@@ -402,6 +429,28 @@
     <script>
         var reportId = Utils.getParam('id');
         var detailMap = null;
+        var fromPage = (new URLSearchParams(location.search)).get('from') || 'pending';
+
+        (function setBackLink() {
+            var backLink = document.getElementById('backLink');
+            var backLabel = document.getElementById('backLinkLabel');
+            var defaults = {
+                pending: { href: 'pending-reports.html', label: 'Back to Pending Reports' },
+                monitoring: { href: 'monitoring.html', label: 'Back to Monitoring' }
+            };
+            var info = defaults[fromPage] || defaults.pending;
+            var savedHref = sessionStorage.getItem('cw:lastListUrl');
+            try {
+                if (savedHref && (new URL(savedHref, location.href)).origin === location.origin) {
+                    backLink.href = savedHref;
+                } else {
+                    backLink.href = info.href;
+                }
+            } catch (e) {
+                backLink.href = info.href;
+            }
+            backLabel.textContent = sessionStorage.getItem('cw:backLabel') || info.label;
+        })();
 
         // ── Helpers ───────────────────────────────────────────────
         function fmtDate(str) {
@@ -486,7 +535,8 @@
             var lat = parseFloat(r.latitude || r.lat) || 6.7498;
             var lng = parseFloat(r.longitude || r.lng) || 125.3572;
             var photo = r.imageUrl || r.photo_url || null;
-            var date = r.submittedAt || r.created_at || '—';
+            var rawDate = r.submittedAt || r.created_at || '—';
+            var date = fmtDate(rawDate);
             var office = (r.assignedOffice && typeof r.assignedOffice === 'object') ?
                 r.assignedOffice.name :
                 (r.assignedOffice || null);
@@ -496,11 +546,15 @@
 
             // Photo
             var imgEl = document.getElementById('incidentPhoto');
+            var phEl = document.getElementById('incidentPhotoPlaceholder');
             if (photo) {
                 imgEl.src = photo;
                 imgEl.style.display = 'block';
+                imgEl.onerror = function() { imgEl.style.display='none'; if(phEl) phEl.style.display='flex'; };
+                if (phEl) phEl.style.display = 'none';
             } else {
                 imgEl.style.display = 'none';
+                if (phEl) phEl.style.display = 'flex';
             }
 
             // Description
@@ -592,15 +646,29 @@
                 }).addTo(detailMap)
                 .bindPopup('<strong>' + concern + '</strong><br>' + barangay).openPopup();
 
-            // Show/hide Approve button based on status
+            // Reuse the layout, but use different actions depending on where the report was opened from.
             var approveBtn = document.getElementById('approveBtn');
             var rejectBtn = document.getElementById('rejectBtn');
-            if (status === 'Submitted' || status === 'Pending Validation') {
-                approveBtn.style.display = 'flex';
-                rejectBtn.style.display = 'flex';
+            var updateWrap = document.getElementById('monitorUpdateWrap');
+            if (fromPage === 'monitoring') {
+                if (approveBtn) approveBtn.style.display = 'none';
+                if (rejectBtn) rejectBtn.style.display = 'none';
+                if (status !== 'Resolved' && updateWrap) updateWrap.style.display = 'block';
+                (function() {
+                    window.goToUpdateStatus = function() {
+                        sessionStorage.setItem('monitoring:updateId', reportId);
+                        sessionStorage.setItem('monitoring:updateRef', ref);
+                        window.location.href = sessionStorage.getItem('cw:lastListUrl') || 'monitoring.html';
+                    };
+                })();
+            } else if (status === 'Submitted' || status === 'Pending Validation') {
+                if (approveBtn) approveBtn.style.display = 'flex';
+                if (rejectBtn) rejectBtn.style.display = 'flex';
+                if (updateWrap) updateWrap.style.display = 'none';
             } else {
-                approveBtn.style.display = 'none';
-                rejectBtn.style.display = 'none';
+                if (approveBtn) approveBtn.style.display = 'none';
+                if (rejectBtn) rejectBtn.style.display = 'none';
+                if (updateWrap) updateWrap.style.display = 'none';
             }
         }
 

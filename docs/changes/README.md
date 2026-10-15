@@ -53,3 +53,4 @@ automatically after each change.
 | 039 | 2026-10-15 | `HEAD` | [Graph-first retrieval rules + in-repo Obsidian/ICM memory structure](2026-10-15-039-graph-first-retrieval-and-icm-memory.md) |
 | 040 | 2026-10-15 | `HEAD` | [GIS map emoji marker replaced with a proper category icon](2026-10-15-040-gis-map-emoji-marker-to-icon.md) |
 | 041 | 2026-10-15 | `HEAD` | [Clean up Assign Report modal and restrict priority to the assigned office](2026-10-15-041-assign-report-cleanup-priority-permissions.md) |
+| 042 | 2026-10-15 | `HEAD` | [Monitoring report view reused pending-reports detail layout with corrected navigation, dates, and photo placeholder](2026-10-15-042-monitoring-report-details-reuse.md) |
