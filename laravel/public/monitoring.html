@@ -588,6 +588,11 @@
             document.body.style.overflow = 'hidden';
             return false;
         }
+        function closeMonitoringReportDetailFromOverlay(e) {
+            if (!e || (e.target && e.target.id === 'reportDetailOverlay')) {
+                closeMonitoringReportDetail();
+            }
+        }
         function closeMonitoringReportDetail() {
             var overlay = document.getElementById('reportDetailOverlay');
             if (overlay) overlay.style.display = 'none';
@@ -610,7 +615,7 @@
         });
         setInterval(loadReports, 30000);
     </script>
-    <div id="reportDetailOverlay" onclick="if(event.target===this)closeMonitoringReportDetail();">
+    <div id="reportDetailOverlay" onclick="closeMonitoringReportDetailFromOverlay(event)">
         <div id="reportDetailPanel">
             <button id="reportDetailClose" type="button" class="btn btn-secondary" onclick="closeMonitoringReportDetail()">Close</button>
             <iframe id="reportDetailFrame" src="about:blank" title="Report details"></iframe>
