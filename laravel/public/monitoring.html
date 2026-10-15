@@ -369,7 +369,7 @@
                     '<div style="font-size:11px;color:var(--gray-400);">' + (updated.split('\n')[1] || '') + '</div>' +
                     '</td>' +
                     '<td><div class="actions-cell">' +
-                    '<a href="#" class="btn-view" onclick="return openMonitoringReportDetail(' + JSON.stringify(String(r.id)) + ');">' +
+                    '<a href="#" class="btn-view" onclick="return openMonitoringReportDetail(\'' + String(r.id).replace(/'/g, "\\\\'") + '\');">' +
                     '<span class="material-symbols-outlined">visibility</span> View' +
                     '</a>' +
                     (status !== 'Resolved' ?
