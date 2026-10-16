@@ -66,3 +66,4 @@ automatically after each change.
 | 052 | 2026-10-15 | `HEAD` | [CEO/CENRO report details load from the API; reporter panels show name, address and phone](2026-10-15-052-office-report-details-live-api-reporter-panels.md) |
 | 053 | 2026-10-16 | `HEAD` | [CEO/CENRO list pages load from the API; offices can post status updates](2026-10-16-053-office-list-pages-live-and-status-post.md) |
 | 054 | 2026-10-16 | `b9c9bfe` | [Dark mode on/off toggle in Profile (and fix the missing dark theme body)](2026-10-16-054-dark-mode-toggle-switch.md) |
+| 055 | 2026-10-16 | `f8e24a7` | [Animated Sun/Moon dark mode toggle — and a palette that actually switches app-wide](2026-10-16-055-animated-sun-moon-dark-mode-toggle.md) |

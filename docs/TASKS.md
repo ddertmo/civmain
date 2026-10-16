@@ -62,3 +62,39 @@ Running list of planned work. Nothing here is done unless its box is checked.
 - `php artisan test` with a faked `UniSmsService` (no live credits burned).
 - One real send from the PC; check `GET /sms/:reference_id` or the webhook.
 - Confirm the production response no longer contains `otp`.
+
+---
+
+## [ ] Dark mode toggle for visitor mode + status-bar icon conflicts
+
+- **Status:** planned, not started. **Do not implement until this task is picked up.** (User decided 2026-10-16: leave visitor mode as-is for now.)
+- **Context:** change [055](changes/2026-10-16-055-animated-sun-moon-dark-mode-toggle.md)
+  added the animated Sun/Moon toggle (`lib/widgets/common/theme_toggle.dart`)
+  to the logged-in Home header only.
+
+### Scope
+1. **Visitor mode has no theme control.** Guests (`/visitor`, `VisitorShell`)
+   have no Profile screen and the toggle lives only in the logged-in Home
+   header, so a guest is stuck with whatever theme is active. Add the
+   `ThemeToggle` widget to the guest flow — decide placement:
+   - in `_GuestBanner` row (visible on Reports/About tabs), or
+   - in the `VisitorAboutScreen` header.
+   It already reads/writes `AppState().setDarkMode`, so no state changes needed.
+2. **Hardcoded status-bar brightness overrides the theme.** These calls force
+   `Brightness.dark` status-bar icons on every build, beating
+   `AppState._applySystemUi()`, so in dark mode the status icons stay dark on
+   dark screens (and splash forces them dark for 3 s at startup):
+   - `lib/screens/home/home_screen.dart:40`
+   - `lib/screens/splash/splash_screen.dart:26`
+   - `lib/screens/landing/landing_screen.dart:26`
+   - `lib/screens/visitor/visitor_shell.dart:37`
+   Fix: delete the `SystemChrome.setSystemUIOverlayStyle` calls and let
+   `AppState._applySystemUi()` (set at init and on every toggle) be the single
+   authority. The per-theme values live in `app_theme.dart` (lines ~101/274).
+
+### Verification (when built)
+- `flutter analyze --no-pub` stays at 0 errors.
+- On Home/splash/landing/visitor in dark mode: status-bar icons are light
+  (readable), in light mode dark.
+- As guest: toggle flips the visitor shell, reports list, about tab and
+  persists across restart (same `dark_mode` key).

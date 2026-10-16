@@ -11,10 +11,10 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-10-16 - latest change = 054 (exact commit = newest row of `docs/changes/README.md`)
-- running: Laravel artisan serve (8000), MySQL (MariaDB), Flutter web (8080)
-- doing:   dark mode toggle added in Profile (persisted, default dark); _darkTheme body restored - analyzer clean
-- next:    verify toggle by hand in browser; see `docs/TASKS.md` (UniSMS planned)
+- at:      2026-10-16 - latest change = 055 (exact commit = newest row of `docs/changes/README.md`)
+- running: Laravel artisan serve (8000), MySQL (MariaDB), Flutter web (8080 static build)
+- doing:   dark mode: animated Sun/Moon toggle in Home header + runtime-swappable palette (persisted, synced with Profile)
+- next:    verify toggle by hand in browser (light/dark + restart); follow-ups in `docs/TASKS.md` (2 open)
 - blocked: -
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)
