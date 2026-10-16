@@ -115,3 +115,38 @@ Running list of planned work. Nothing here is done unless its box is checked.
 - **Proposed fix:** darken the three dark-mode `statusXBg` values in
   `AppPalette` (Light Mode untouched). No existing darker token is wrong for
   this; it needs a values change, not a new token.
+
+---
+
+## [ ] Pre-login flow still uses fixed brand ink in Dark Mode
+
+- **Status:** known and deliberately deferred — decision 2026-10-16 while doing
+  change [058](changes/2026-10-16-058-dark-mode-ink-profile-reports-widgets.md).
+  The approved scope for 058 was Profile + My Reports + shared widgets; these
+  sites turned up in the same audit and were left untouched on purpose.
+- **Defect:** identical to 057/058 — fixed `AppColors.primary` / `AppColors.navy`
+  used as *foreground ink* on themed surfaces instead of
+  `context.c.primaryOnSurface` / `context.c.textPrimary`.
+- **Confirmed sites (1.02–2.3:1 in Dark Mode):**
+
+  | file:line | element | why |
+  |---|---|---|
+  | `landing_screen.dart:179-182` | "Explore as Visitor" CTA — icon, label, border | `primary` on `primarySurface`, 1.16:1 |
+  | `landing_screen.dart:378,383,419` | `_LandingButton` icon circle, icon, chevron | `primary` on `primarySurface`, 1.16:1 |
+  | `landing_screen.dart:130` | `CIVILWATCH` wordmark | `navy` on themed bg, ~1.1:1 |
+  | `otp_screen.dart:386,400` | OTP countdown + "Resend OTP" | `navy` on themed bg, ~1.1:1 |
+  | `otp_screen.dart:452,459` | "Back" arrow icon + label | `navy` on themed bg, ~1.1:1 |
+  | `forgot_password_flow.dart:552` | "Resend OTP" link | `primary` on themed card, ~1.9:1 |
+  | `forgot_password_flow.dart:741,747` | password-hint icon + copy | `primary` on `primarySurface`, 1.16:1 |
+  | `forgot_password_flow.dart:878` | secondary TextButton label | `navy` on themed bg, ~1.1:1 |
+  | `forgot_password_flow.dart:1068,1113` | **OTP input text** — typed digits | `navy` on `inputFill` `#1E293B`, ~1.1:1 |
+- **Suspected, not yet audited** (same fixed-ink pattern): `login_screen.dart`,
+  `register_screen.dart`, `splash_screen.dart`, `visitor_shell.dart`,
+  `visitor_about_screen.dart`, `visitor_reports_screen.dart`,
+  `track_by_reference_screen.dart`, `track_report_screen.dart`,
+  `status_update_screen.dart`. Re-run the `AppColors.(primary|navy)` audit
+  before editing them — do not assume these lines are still accurate.
+- **Fix:** foreground uses → `context.c.primaryOnSurface` /
+  `context.c.textPrimary`. **Leave every use that is a *fill* carrying
+  `AppColors.onAccent` text** (button backgrounds, badges, the bottom-nav centre
+  circle, the OTP badge). Light Mode stays unchanged either way.

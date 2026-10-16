@@ -12,9 +12,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_colors.dart": {
-    "mtime": 1792155757.0343306,
-    "seen": 1792156087.951775,
-    "ast_hash": "9cfb5e8c75a498f5b84c3e559643c7cc",
+    "mtime": 1792157879.138909,
+    "seen": 1792158295.8991625,
+    "ast_hash": "dea3c7eaf86ee8bc363d55f7874489ae",
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_icons.dart": {
@@ -150,15 +150,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/community_map/community_map_screen.dart": {
-    "mtime": 1792155431.0298648,
-    "seen": 1792156087.9531202,
-    "ast_hash": "d68949956556224b89e49fee0bc365f6",
+    "mtime": 1792157942.1947906,
+    "seen": 1792158295.9012225,
+    "ast_hash": "d9a57ccafe222c10dd83ce1fd6fb11af",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/home/home_screen.dart": {
-    "mtime": 1792155548.9623015,
-    "seen": 1792156087.953122,
-    "ast_hash": "be3fd37c5b4669aa995bf8fd8d5e9833",
+    "mtime": 1792157942.2158732,
+    "seen": 1792158295.9012249,
+    "ast_hash": "5a0c4a4f0e9730908ddc7aac4dd6e7fb",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/landing/landing_screen.dart": {
@@ -180,9 +180,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/notifications/notification_screen.dart": {
-    "mtime": 1792155431.0359907,
-    "seen": 1792156087.9531283,
-    "ast_hash": "be8499f7055e4f44a0ea9d923e309759",
+    "mtime": 1792157901.0862403,
+    "seen": 1792158295.9015157,
+    "ast_hash": "cddb73a9fb36e73ee0b517300ce9f9d9",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/profile/profile_screen.dart": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/notification_card.dart": {
-    "mtime": 1792155431.0369954,
-    "seen": 1792156087.9538143,
-    "ast_hash": "c1c419f1f2798e5e3faf36dab87d3ac1",
+    "mtime": 1792157901.0862403,
+    "seen": 1792158295.9039478,
+    "ast_hash": "99bee03ba089d1bf30c1bad69bcc0425",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/report_card.dart": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/section_title.dart": {
-    "mtime": 1792155431.044004,
-    "seen": 1792156087.9538252,
-    "ast_hash": "b5a8a2bec29b017bb24666bdab9c2077",
+    "mtime": 1792157901.0764725,
+    "seen": 1792158295.9045167,
+    "ast_hash": "e468bdcdcedaa0cf1cd7d8650c573305",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/skeleton.dart": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792156074.1980808,
-    "seen": 1792156087.972167,
-    "ast_hash": "9dbce62c2509b179ddce64bd85c5e54b",
+    "mtime": 1792158279.4300804,
+    "seen": 1792158295.9244738,
+    "ast_hash": "731666c605175d0f2845f3fb35cee6f5",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792155695.290156,
-    "seen": 1792156087.9668727,
-    "ast_hash": "2f97151a768dbb08eddf537b1cc672a3",
+    "mtime": 1792158279.4300804,
+    "seen": 1792158295.9185262,
+    "ast_hash": "c323aadfeba74989a7c748573c9ef96b",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1950,9 +1950,9 @@
     "semantic_hash": ""
   },
   "docs/TASKS.md": {
-    "mtime": 1792155645.512785,
-    "seen": 1792156087.966875,
-    "ast_hash": "f78e84f1b4ef12958e48cdcf13ea4de6",
+    "mtime": 1792158279.4300804,
+    "seen": 1792158295.9185286,
+    "ast_hash": "b72f410734e065cfe2e99eb56d8584c1",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-09-033-graphify-on-pc.md": {
@@ -2184,9 +2184,9 @@
     "semantic_hash": ""
   },
   "civ-main/test/theme_tokens_test.dart": {
-    "mtime": 1792155833.5426912,
-    "seen": 1792156087.9548826,
-    "ast_hash": "02d8a4105a89e31e5ef4fd111934a46d",
+    "mtime": 1792157942.1797314,
+    "seen": 1792158295.906827,
+    "ast_hash": "80294f6d9fa34e0e6753bd98967ead95",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-16-054-dark-mode-toggle-switch.md": {
@@ -2205,6 +2205,12 @@
     "mtime": 1792155903.9190583,
     "seen": 1792156087.9721637,
     "ast_hash": "924c02959bb557beecf3e992abf37ec6",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-16-057-dark-mode-contrast-home-notifications.md": {
+    "mtime": 1792158242.915675,
+    "seen": 1792158295.9244702,
+    "ast_hash": "42aca59a95a49bd438367a349c708d6d",
     "semantic_hash": ""
   }
 }
