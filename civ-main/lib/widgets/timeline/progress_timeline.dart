@@ -107,7 +107,7 @@ class ProgressTimeline extends StatelessWidget {
                   height: 2,
                   margin: const EdgeInsets.only(bottom: 28),
                   decoration: BoxDecoration(
-                    color: i < currentIdx ? AppColors.primary : context.c.divider,
+                    color: i < currentIdx ? context.c.primaryOnSurface : context.c.divider,
                     borderRadius: BorderRadius.circular(1),
                   ),
                 ),

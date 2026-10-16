@@ -76,14 +76,14 @@ class ProfileScreen extends StatelessWidget {
                                 color: AppColors.primary.withValues(alpha: 0.2)),
                           ),
                           child: Row(mainAxisSize: MainAxisSize.min, children: [
-                            const Icon(Icons.edit_rounded,
-                                size: 13, color: AppColors.primary),
+                            Icon(Icons.edit_rounded,
+                                size: 13, color: context.c.primaryOnSurface),
                             const SizedBox(width: 4),
                             Text('Edit',
                                 style: GoogleFonts.inter(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.primary)),
+                                    color: context.c.primaryOnSurface)),
                           ]),
                         ),
                       ],
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                             color: AppColors.navy,
                             shape: BoxShape.circle,
                             border: Border.all(
-                                color: AppColors.primary, width: 2.5),
+                                color: context.c.primaryOnSurface, width: 2.5),
                           ),
                           child: Center(
                             child: Text(
@@ -158,7 +158,7 @@ class ProfileScreen extends StatelessWidget {
                           style: GoogleFonts.inter(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.primary)),
+                              color: context.c.primaryOnSurface)),
                     ),
                   ],
                 ),
@@ -259,7 +259,7 @@ class ProfileScreen extends StatelessWidget {
                     _MenuTile(
                       icon: Icons.help_outline_rounded,
                       iconBg: context.c.primarySurface,
-                      iconColor: AppColors.primary,
+                      iconColor: context.c.primaryOnSurface,
                       label: 'Help Center',
                       onTap: () {},
                     ),
@@ -270,7 +270,7 @@ class ProfileScreen extends StatelessWidget {
                       builder: (context, _) => _MenuTile(
                         icon: Icons.dark_mode_rounded,
                         iconBg: AppColors.navy.withValues(alpha: 0.10),
-                        iconColor: AppColors.navy,
+                        iconColor: context.c.textPrimary,
                         label: 'Dark Mode',
                         onTap: () => AppState()
                             .setDarkMode(!AppState().isDarkMode),

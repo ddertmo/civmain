@@ -338,7 +338,7 @@ class _EnterPhoneModal extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Icon(Icons.mark_email_unread_rounded,
-                    color: AppColors.primary, size: 36),
+                    color: context.c.primaryOnSurface, size: 36),
                 Positioned(
                   right: 10,
                   bottom: 10,

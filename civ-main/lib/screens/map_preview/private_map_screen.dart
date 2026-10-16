@@ -337,7 +337,7 @@ class _InfoRow extends StatelessWidget {
               color: context.c.primarySurface,
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, size: 16, color: AppColors.primary),
+            child: Icon(icon, size: 16, color: context.c.primaryOnSurface),
           ),
           const SizedBox(width: 12),
           Column(
@@ -653,8 +653,8 @@ class _BeforeAfterDialog extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                const Icon(Icons.compare_arrows_rounded,
-                    size: 20, color: AppColors.primary),
+                Icon(Icons.compare_arrows_rounded,
+                    size: 20, color: context.c.primaryOnSurface),
                 const SizedBox(width: 10),
                 Expanded(
                   child: _MapPhotoTile(

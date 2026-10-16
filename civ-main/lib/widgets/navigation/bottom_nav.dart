@@ -61,7 +61,7 @@ class CivilWatchBottomNav extends StatelessWidget {
                       else
                         Icon(
                           isActive ? item.activeIcon : item.icon,
-                          color: isActive ? AppColors.primary : context.c.textHint,
+                          color: isActive ? context.c.primaryOnSurface : context.c.textHint,
                           size: 24,
                         ),
                       if (!isCenter) ...[
@@ -73,7 +73,7 @@ class CivilWatchBottomNav extends StatelessWidget {
                             fontWeight:
                                 isActive ? FontWeight.w600 : FontWeight.w400,
                             color: isActive
-                                ? AppColors.primary
+                                ? context.c.primaryOnSurface
                                 : context.c.textHint,
                           ),
                         ),

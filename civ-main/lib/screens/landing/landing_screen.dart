@@ -290,7 +290,7 @@ class _FeatureRow extends StatelessWidget {
                   border: Border.all(
                       color: AppColors.primary.withValues(alpha: 0.15)),
                 ),
-                child: Icon(f.$1, color: AppColors.primary, size: 24),
+                child: Icon(f.$1, color: context.c.primaryOnSurface, size: 24),
               ),
               const SizedBox(height: 8),
               Text(

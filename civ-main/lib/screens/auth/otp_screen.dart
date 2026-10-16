@@ -425,15 +425,15 @@ class _OtpScreenState extends State<OtpScreen>
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.verified_user_rounded,
-                          color: AppColors.primary, size: 16),
+                      Icon(Icons.verified_user_rounded,
+                          color: context.c.primaryOnSurface, size: 16),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'For your security, never share your OTP with anyone.',
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.primary,
+                            color: context.c.primaryOnSurface,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
