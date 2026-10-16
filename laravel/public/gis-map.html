@@ -202,8 +202,8 @@
             var concern = r.concern || r.issue || '-';
             var cat = r.category || r.cat || '';
             var isInfra = cat.toLowerCase().includes('infra');
-            var isOthers = cat.toLowerCase().includes('others'); var isEnv = cat.toLowerCase().includes('env') || cat.toLowerCase().includes('environ'); var categoryIcon = isInfra ? 'construction' : (isEnv ? 'eco' : (isOthers ? 'more_horiz' : 'eco'));
-            var categoryIcon = isInfra ? 'construction' : (isOthers ? 'more_horiz' : 'eco');
+            var isInfra = cat.toLowerCase().includes('infra'); var isEnv = cat.toLowerCase().includes('env'); var isOthers = cat.toLowerCase().includes('others'); var categoryIcon = isInfra ? 'construction' : (isEnv ? 'eco' : 'more_horiz');
+            
             var ref = r.referenceNumber || r.reference_number || String(r.id);
             var barangay = r.barangay || '-';
             var office = r.assignedOffice ?
@@ -424,6 +424,8 @@
 
 </body>
 </html>
+
+
 
 
 
