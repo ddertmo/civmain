@@ -27,7 +27,7 @@ class MapFilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedColor = activeColor ?? AppColors.white;
+    final selectedColor = activeColor ?? context.c.card;
     final selectedBg = activeBg ?? AppColors.navy;
 
     // Filters chip — always outlined, never filled
@@ -37,15 +37,15 @@ class MapFilterChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: context.c.card,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.divider, width: 1.5),
+            border: Border.all(color: context.c.divider, width: 1.5),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null) ...[
-                Icon(icon, size: 14, color: AppColors.textSecondary),
+                Icon(icon, size: 14, color: context.c.textSecondary),
                 const SizedBox(width: 5),
               ],
               Text(
@@ -53,7 +53,7 @@ class MapFilterChip extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
               ),
             ],
@@ -69,10 +69,10 @@ class MapFilterChip extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? selectedBg : AppColors.white,
+          color: isSelected ? selectedBg : context.c.card,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? selectedBg : AppColors.divider,
+            color: isSelected ? selectedBg : context.c.divider,
             width: 1.5,
           ),
           boxShadow: isSelected
@@ -92,7 +92,7 @@ class MapFilterChip extends StatelessWidget {
               Icon(
                 icon,
                 size: 14,
-                color: isSelected ? selectedColor : AppColors.textSecondary,
+                color: isSelected ? selectedColor : context.c.textSecondary,
               ),
               const SizedBox(width: 5),
             ],
@@ -101,7 +101,7 @@ class MapFilterChip extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: isSelected ? selectedColor : AppColors.textSecondary,
+                color: isSelected ? selectedColor : context.c.textSecondary,
               ),
             ),
           ],

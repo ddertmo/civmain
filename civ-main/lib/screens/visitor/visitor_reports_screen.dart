@@ -67,7 +67,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
     final reports = _filtered;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       body: Column(
         children: [
           // ── Guest banner ───────────────────────────────────────────────
@@ -75,7 +75,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
 
           // ── Header ────────────────────────────────────────────────────
           Container(
-            color: AppColors.white,
+            color: context.c.card,
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,14 +91,14 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                           Text(
                             'Browse the latest community concerns.',
                             style: GoogleFonts.inter(
                               fontSize: 12,
-                              color: AppColors.textSecondary,
+                              color: context.c.textSecondary,
                             ),
                           ),
                         ],
@@ -168,11 +168,11 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 14, vertical: 8),
                             decoration: BoxDecoration(
-                              color: active ? chipColor : AppColors.white,
+                              color: active ? chipColor : context.c.card,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
                                 color:
-                                    active ? chipColor : AppColors.divider,
+                                    active ? chipColor : context.c.divider,
                               ),
                             ),
                             child: Text(
@@ -182,7 +182,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                                 fontWeight: FontWeight.w600,
                                 color: active
                                     ? AppColors.onAccent
-                                    : AppColors.textSecondary,
+                                    : context.c.textSecondary,
                               ),
                             ),
                           ),
@@ -195,11 +195,11 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
               ],
             ),
           ),
-          Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.c.divider),
 
           // ── Status legend ──────────────────────────────────────────────
           Container(
-            color: AppColors.white,
+            color: context.c.card,
             padding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Row(
@@ -218,14 +218,14 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                   '${reports.length} report${reports.length == 1 ? '' : 's'}',
                   style: GoogleFonts.inter(
                     fontSize: 11,
-                    color: AppColors.textHint,
+                    color: context.c.textHint,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
           ),
-          Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.c.divider),
 
           // ── Report list ────────────────────────────────────────────────
           Expanded(
@@ -236,7 +236,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                       children: [
                         Icon(Icons.search_off_rounded,
                             size: 56,
-                            color: AppColors.textHint
+                            color: context.c.textHint
                                 .withValues(alpha: 0.5)),
                         const SizedBox(height: 12),
                         Text(
@@ -244,7 +244,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                           style: GoogleFonts.inter(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary,
+                            color: context.c.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -252,7 +252,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                           'Try a different search or filter.',
                           style: GoogleFonts.inter(
                             fontSize: 13,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                           ),
                         ),
                       ],
@@ -293,19 +293,19 @@ class _PublicReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryColor = AppHelpers.getCategoryColor(report.category);
-    final categoryBg = AppHelpers.getCategoryBgColor(report.category);
-    final statusColor = AppHelpers.getStatusColor(report.status);
-    final statusBg = AppHelpers.getStatusBgColor(report.status);
+    final categoryColor = context.c.categoryColor(report.category);
+    final categoryBg = context.c.categoryBg(report.category);
+    final statusColor = context.c.statusColor(report.status);
+    final statusBg = context.c.statusBg(report.status);
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
           boxShadow: const [
             BoxShadow(
                 color: AppColors.cardShadow,
@@ -350,7 +350,7 @@ class _PublicReportCard extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                         ),
@@ -378,13 +378,13 @@ class _PublicReportCard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.location_on_rounded,
-                            size: 12, color: AppColors.textSecondary),
+                            size: 12, color: context.c.textSecondary),
                         const SizedBox(width: 3),
                         Text(
                           report.barangay,
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                           ),
                         ),
                       ],
@@ -398,7 +398,7 @@ class _PublicReportCard extends StatelessWidget {
                           AppHelpers.formatDate(report.submittedAt),
                           style: GoogleFonts.inter(
                             fontSize: 11,
-                            color: AppColors.textHint,
+                            color: context.c.textHint,
                           ),
                         ),
                         const Spacer(),
@@ -449,7 +449,7 @@ class _LegendDot extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 10,
             fontWeight: FontWeight.w500,
-            color: AppColors.textSecondary,
+            color: context.c.textSecondary,
           ),
         ),
       ],

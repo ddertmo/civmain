@@ -13,8 +13,8 @@ class ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catColor = AppHelpers.getCategoryColor(report.category);
-    final catBg = AppHelpers.getCategoryBgColor(report.category);
+    final catColor = context.c.categoryColor(report.category);
+    final catBg = context.c.categoryBg(report.category);
     final catIcon = AppHelpers.getCategoryIcon(report.category);
 
     return GestureDetector(
@@ -22,9 +22,9 @@ class ReportCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
           boxShadow: const [
             BoxShadow(
               color: AppColors.cardShadow,
@@ -45,7 +45,7 @@ class ReportCard extends StatelessWidget {
               child: Container(
                 width: 90,
                 height: 110,
-                color: AppColors.background,
+                color: context.c.background,
                 child: report.imageUrl != null
                     ? Image.network(report.imageUrl!, fit: BoxFit.cover)
                     : Container(
@@ -72,7 +72,7 @@ class ReportCard extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                         ),
@@ -86,13 +86,13 @@ class ReportCard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.location_on_rounded,
-                            size: 12, color: AppColors.textSecondary),
+                            size: 12, color: context.c.textSecondary),
                         const SizedBox(width: 3),
                         Text(
                           'Barangay ${report.barangay}',
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                           ),
                         ),
                       ],
@@ -103,13 +103,13 @@ class ReportCard extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.calendar_today_rounded,
-                            size: 12, color: AppColors.textSecondary),
+                            size: 12, color: context.c.textSecondary),
                         const SizedBox(width: 3),
                         Text(
                           AppHelpers.formatDateTime(report.submittedAt),
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                           ),
                         ),
                       ],
@@ -149,7 +149,7 @@ class ReportCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 10, top: 40),
               child: Icon(Icons.chevron_right_rounded,
-                  color: AppColors.textHint, size: 20),
+                  color: context.c.textHint, size: 20),
             ),
           ],
         ),

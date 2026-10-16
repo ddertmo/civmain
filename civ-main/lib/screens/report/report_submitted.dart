@@ -47,7 +47,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
     final submittedAt = DateTime.tryParse(submittedAtStr) ?? DateTime.now();
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: context.c.card,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -69,7 +69,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                   style: GoogleFonts.inter(
                     fontSize: 26,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -77,7 +77,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                   'Thank you for helping make\nDigos City a better place.',
                   style: GoogleFonts.inter(
                     fontSize: 14,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                     height: 1.5,
                   ),
                   textAlign: TextAlign.center,
@@ -89,9 +89,9 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: context.c.background,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: AppColors.divider),
+                    border: Border.all(color: context.c.divider),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                         'Reference Number',
                         style: GoogleFonts.inter(
                           fontSize: 12,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -136,25 +136,25 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: AppColors.white,
+                                color: context.c.card,
                                 borderRadius: BorderRadius.circular(8),
                                 border:
-                                    Border.all(color: AppColors.divider),
+                                    Border.all(color: context.c.divider),
                               ),
                               child: Icon(Icons.copy_rounded,
-                                  size: 16, color: AppColors.textSecondary),
+                                  size: 16, color: context.c.textSecondary),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 12),
-                      Divider(color: AppColors.divider),
+                      Divider(color: context.c.divider),
                       const SizedBox(height: 12),
                       Text(
                         'Submitted on',
                         style: GoogleFonts.inter(
                           fontSize: 12,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -163,7 +163,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textPrimary,
+                          color: context.c.textPrimary,
                         ),
                       ),
                     ],
@@ -175,7 +175,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: AppColors.primarySurface,
+                    color: context.c.primarySurface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                         color: AppColors.primary.withOpacity(0.2)),

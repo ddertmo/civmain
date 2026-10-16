@@ -34,13 +34,13 @@ class NotificationScreen extends StatelessWidget {
             .toList();
 
         return Scaffold(
-          backgroundColor: AppColors.background,
+          backgroundColor: context.c.background,
           body: SafeArea(
             child: Column(
               children: [
                 // ── Header ───────────────────────────────────────────
                 Container(
-                  color: AppColors.white,
+                  color: context.c.card,
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
                   child: Row(
                     children: [
@@ -63,7 +63,7 @@ class NotificationScreen extends StatelessWidget {
                               style: GoogleFonts.inter(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                               ),
                             ),
                             if (unread > 0) ...[
@@ -104,7 +104,7 @@ class NotificationScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Divider(height: 1, color: AppColors.divider),
+                Divider(height: 1, color: context.c.divider),
 
                 // ── List ─────────────────────────────────────────────
                 Expanded(
@@ -119,7 +119,7 @@ class NotificationScreen extends StatelessWidget {
                                 width: 72,
                                 height: 72,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primarySurface,
+                                  color: context.c.primarySurface,
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(
@@ -134,7 +134,7 @@ class NotificationScreen extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
-                                  color: AppColors.textPrimary,
+                                  color: context.c.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 6),
@@ -142,7 +142,7 @@ class NotificationScreen extends StatelessWidget {
                                 "You'll be notified when\nyour report status changes.",
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
-                                  color: AppColors.textSecondary,
+                                  color: context.c.textSecondary,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -200,7 +200,7 @@ class _GroupLabel extends StatelessWidget {
         style: GoogleFonts.inter(
           fontSize: 12,
           fontWeight: FontWeight.w700,
-          color: AppColors.textHint,
+          color: context.c.textHint,
           letterSpacing: 0.5,
         ),
       ),

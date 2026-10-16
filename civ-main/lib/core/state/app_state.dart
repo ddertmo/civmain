@@ -66,22 +66,25 @@ class AppState extends ChangeNotifier {
 
   // ── Theme — dark mode toggle ──────────────────────────────────────────────
   static const _kDarkModeKey = 'dark_mode';
-  bool _isDarkMode = true; // default: dark (matches shipped look)
+  // Default for first-time users (no saved preference): Light Mode.
+  bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
 
   Future<void> _loadThemePreference() async {
     final prefs = await SharedPreferences.getInstance();
-    _isDarkMode = prefs.getBool(_kDarkModeKey) ?? true;
-    // Swap the palette tokens BEFORE the first frame so nothing flashes.
-    AppColors.setDark(_isDarkMode);
+    // Restore the saved choice; first launch falls back to Light Mode.
+    _isDarkMode = prefs.getBool(_kDarkModeKey) ?? false;
     _applySystemUi();
   }
 
   /// Flip dark mode on/off. Persists the choice across app restarts.
+  ///
+  /// This is the single source of truth: `MaterialApp.themeMode` listens and
+  /// swaps the whole theme (including the [AppPalette] extension), so every
+  /// screen repaints. There is no second palette state.
   Future<void> setDarkMode(bool value) async {
     if (_isDarkMode == value) return;
     _isDarkMode = value;
-    AppColors.setDark(value); // repaints every screen that reads the tokens
     _applySystemUi();
     notifyListeners(); // MaterialApp listens → switches themeMode
     final prefs = await SharedPreferences.getInstance();
@@ -95,7 +98,8 @@ class AppState extends ChangeNotifier {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: _isDarkMode ? Brightness.light : Brightness.dark,
       statusBarBrightness: _isDarkMode ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: AppColors.surface,
+      systemNavigationBarColor:
+          _isDarkMode ? AppPalette.dark.surface : AppPalette.light.surface,
       systemNavigationBarIconBrightness:
           _isDarkMode ? Brightness.light : Brightness.dark,
     ));

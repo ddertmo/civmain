@@ -30,7 +30,7 @@ class EmptyState extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: AppColors.primarySurface,
+                color: context.c.primarySurface,
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 36, color: AppColors.primary),
@@ -41,7 +41,7 @@ class EmptyState extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -51,7 +51,7 @@ class EmptyState extends StatelessWidget {
                 subtitle!,
                 style: GoogleFonts.inter(
                   fontSize: 14,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
                 textAlign: TextAlign.center,
               ),

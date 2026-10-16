@@ -18,7 +18,7 @@ class MapMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getCategoryColor(category);
+    final color = context.c.categoryColor(category);
     final icon = issue != null
         ? AppHelpers.getIssueIcon(issue!)
         : AppHelpers.getCategoryIcon(category);

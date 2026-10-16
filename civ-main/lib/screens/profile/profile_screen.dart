@@ -6,6 +6,7 @@ import '../../core/utils/helpers.dart';
 import '../../core/state/app_state.dart';
 import '../../models/user.dart';
 import '../../widgets/common/skeleton.dart';
+import '../../widgets/common/theme_toggle.dart';
 
 class ProfileScreen extends StatelessWidget {
   final bool embedded;
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
     // Show skeleton while data is loading from API
     if (state.isLoading) {
       return Scaffold(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.c.background,
         body: SafeArea(child: ProfileSkeleton()),
       );
     }
@@ -36,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -44,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
             children: [
               // ── Header ────────────────────────────────────────────────
               Container(
-                color: AppColors.white,
+                color: context.c.card,
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
                 child: Column(
                   children: [
@@ -63,13 +64,13 @@ class ProfileScreen extends StatelessWidget {
                             style: GoogleFonts.inter(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.textPrimary)),
+                                color: context.c.textPrimary)),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
-                            color: AppColors.primarySurface,
+                            color: context.c.primarySurface,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
                                 color: AppColors.primary.withValues(alpha: 0.2)),
@@ -131,18 +132,18 @@ class ProfileScreen extends StatelessWidget {
                         style: GoogleFonts.inter(
                             fontSize: 20,
                             fontWeight: FontWeight.w800,
-                            color: AppColors.textPrimary)),
+                            color: context.c.textPrimary)),
                     const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.location_on_rounded,
-                            size: 13, color: AppColors.textSecondary),
+                            size: 13, color: context.c.textSecondary),
                         const SizedBox(width: 3),
                         Text('Barangay ${user.barangay}, Digos City',
                             style: GoogleFonts.inter(
                                 fontSize: 13,
-                                color: AppColors.textSecondary)),
+                                color: context.c.textSecondary)),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -150,7 +151,7 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.primarySurface,
+                        color: context.c.primarySurface,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text('Resident',
@@ -169,9 +170,9 @@ class ProfileScreen extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: context.c.card,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: context.c.divider),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +181,7 @@ class ProfileScreen extends StatelessWidget {
                         style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary)),
+                            color: context.c.textPrimary)),
                     const SizedBox(height: 14),
                     Row(
                       children: [
@@ -189,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                           label: 'Total\nReports',
                           icon: Icons.summarize_rounded,
                           color: AppColors.statusAssigned,
-                          bg: AppColors.statusAssignedBg,
+                          bg: context.c.statusAssignedBg,
                         ),
                         const SizedBox(width: 10),
                         _StatTile(
@@ -197,7 +198,7 @@ class ProfileScreen extends StatelessWidget {
                           label: 'Resolved',
                           icon: Icons.task_alt_rounded,
                           color: AppColors.statusResolved,
-                          bg: AppColors.statusResolvedBg,
+                          bg: context.c.statusResolvedBg,
                         ),
                         const SizedBox(width: 10),
                         _StatTile(
@@ -205,12 +206,12 @@ class ProfileScreen extends StatelessWidget {
                           label: 'Pending',
                           icon: Icons.hourglass_empty_rounded,
                           color: AppColors.statusPending,
-                          bg: AppColors.statusPendingBg,
+                          bg: context.c.statusPendingBg,
                         ),
                       ],
                     ),
                     const SizedBox(height: 14),
-                    Divider(color: AppColors.divider),
+                    Divider(color: context.c.divider),
                     const SizedBox(height: 12),
                     _ProfileInfoRow(
                         icon: Icons.phone_rounded,
@@ -230,39 +231,39 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: context.c.card,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: context.c.divider),
                 ),
                 child: Column(
                   children: [
                     _MenuTile(
                       icon: Icons.article_rounded,
-                      iconBg: AppColors.statusAssignedBg,
+                      iconBg: context.c.statusAssignedBg,
                       iconColor: AppColors.statusAssigned,
                       label: 'My Reports',
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.myReports),
                     ),
-                    Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: context.c.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.notifications_rounded,
-                      iconBg: AppColors.statusPendingBg,
+                      iconBg: context.c.statusPendingBg,
                       iconColor: AppColors.statusPending,
                       label: 'Notifications',
       badge: AppState().unreadCount,
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.notifications),
                     ),
-                    Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: context.c.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.help_outline_rounded,
-                      iconBg: AppColors.primarySurface,
+                      iconBg: context.c.primarySurface,
                       iconColor: AppColors.primary,
                       label: 'Help Center',
                       onTap: () {},
                     ),
-                    Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: context.c.divider, indent: 56),
                     // ── Dark mode toggle (like the website's on/off switch) ──
                     ListenableBuilder(
                       listenable: AppState(),
@@ -274,18 +275,14 @@ class ProfileScreen extends StatelessWidget {
                         onTap: () => AppState()
                             .setDarkMode(!AppState().isDarkMode),
                         showArrow: false,
-                        trailing: Switch(
-                          value: AppState().isDarkMode,
-                          activeTrackColor: AppColors.primary,
-                          onChanged: (v) => AppState().setDarkMode(v),
-                        ),
+                        trailing: const ThemeToggle(),
                       ),
                     ),
-                    Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: context.c.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.info_outline_rounded,
-                      iconBg: AppColors.background,
-                      iconColor: AppColors.textSecondary,
+                      iconBg: context.c.background,
+                      iconColor: context.c.textSecondary,
                       label: 'About CIVILWATCH',
                       onTap: () => _showAbout(context),
                     ),
@@ -298,9 +295,9 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: context.c.card,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: context.c.divider),
                 ),
                 child: _MenuTile(
                   icon: Icons.logout_rounded,
@@ -316,10 +313,10 @@ class ProfileScreen extends StatelessWidget {
 
               Text('CIVILWATCH v1.0.0',
                   style: GoogleFonts.inter(
-                      fontSize: 11, color: AppColors.textHint)),
+                      fontSize: 11, color: context.c.textHint)),
               Text('Digos City, Davao del Sur',
                   style: GoogleFonts.inter(
-                      fontSize: 11, color: AppColors.textHint)),
+                      fontSize: 11, color: context.c.textHint)),
               const SizedBox(height: 24),
             ],
           ),
@@ -340,14 +337,14 @@ class ProfileScreen extends StatelessWidget {
         content: Text(
             'Are you sure you want to logout?',
             style: GoogleFonts.inter(
-                fontSize: 14, color: AppColors.textSecondary)),
+                fontSize: 14, color: context.c.textSecondary)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
             child: Text('Cancel',
                 style: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textSecondary)),
+                    color: context.c.textSecondary)),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -413,13 +410,13 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text('Version 1.0.0',
                 style: GoogleFonts.inter(
-                    fontSize: 13, color: AppColors.textSecondary)),
+                    fontSize: 13, color: context.c.textSecondary)),
             const SizedBox(height: 8),
             Text(
               'Community Infrastructure & Environmental Incident Reporting, Management, and Monitoring System for Digos City.',
               style: GoogleFonts.inter(
                   fontSize: 13,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                   height: 1.5),
             ),
           ],
@@ -473,11 +470,11 @@ class _StatTile extends StatelessWidget {
               style: GoogleFonts.inter(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimary)),
+                  color: context.c.textPrimary)),
           Text(label,
               style: GoogleFonts.inter(
                   fontSize: 10,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                   height: 1.3),
               textAlign: TextAlign.center),
         ]),
@@ -501,20 +498,20 @@ class _ProfileInfoRow extends StatelessWidget {
         width: 34,
         height: 34,
         decoration: BoxDecoration(
-            color: AppColors.background,
+            color: context.c.background,
             borderRadius: BorderRadius.circular(8)),
-        child: Icon(icon, size: 16, color: AppColors.textSecondary),
+        child: Icon(icon, size: 16, color: context.c.textSecondary),
       ),
       const SizedBox(width: 12),
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(label,
             style: GoogleFonts.inter(
-                fontSize: 11, color: AppColors.textHint)),
+                fontSize: 11, color: context.c.textHint)),
         Text(value,
             style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppColors.textPrimary)),
+                color: context.c.textPrimary)),
       ]),
     ]);
   }
@@ -563,7 +560,7 @@ class _MenuTile extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: labelColor ?? AppColors.textPrimary)),
+                    color: labelColor ?? context.c.textPrimary)),
           ),
           if (trailing != null)
             trailing!
@@ -583,7 +580,7 @@ class _MenuTile extends StatelessWidget {
             ),
           if (showArrow)
             Icon(Icons.chevron_right_rounded,
-                color: AppColors.textHint, size: 20),
+                color: context.c.textHint, size: 20),
         ]),
       ),
     );

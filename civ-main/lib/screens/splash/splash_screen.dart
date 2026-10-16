@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
@@ -21,11 +20,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
@@ -58,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: context.c.card,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -66,8 +60,8 @@ class _SplashScreenState extends State<SplashScreen>
             end: Alignment.bottomCenter,
             colors: [
               Color(0xFFEBF5FB),
-              AppColors.white,
-              AppColors.white,
+              context.c.card,
+              context.c.card,
             ],
             stops: [0.0, 0.4, 1.0],
           ),
@@ -131,7 +125,7 @@ class _SplashScreenState extends State<SplashScreen>
                         'Community Infrastructure &\nEnvironmental Incident Reporting System',
                         style: GoogleFonts.inter(
                           fontSize: 13,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           height: 1.5,
                         ),
                         textAlign: TextAlign.center,
@@ -166,7 +160,7 @@ class _SplashScreenState extends State<SplashScreen>
                       'Digos City, Davao del Sur',
                       style: GoogleFonts.inter(
                         fontSize: 12,
-                        color: AppColors.textHint,
+                        color: context.c.textHint,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -175,7 +169,7 @@ class _SplashScreenState extends State<SplashScreen>
                       'v1.0.0',
                       style: GoogleFonts.inter(
                         fontSize: 11,
-                        color: AppColors.textHint,
+                        color: context.c.textHint,
                       ),
                     ),
                   ],

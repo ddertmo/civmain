@@ -21,24 +21,24 @@ class SearchField extends StatelessWidget {
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: AppColors.inputFill,
+        color: context.c.inputFill,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.inputBorder),
+        border: Border.all(color: context.c.inputBorder),
       ),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
-        style: GoogleFonts.inter(fontSize: 14, color: AppColors.textPrimary),
+        style: GoogleFonts.inter(fontSize: 14, color: context.c.textPrimary),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle:
-              GoogleFonts.inter(fontSize: 14, color: AppColors.textHint),
+              GoogleFonts.inter(fontSize: 14, color: context.c.textHint),
           prefixIcon: Icon(Icons.search_rounded,
-              color: AppColors.textHint, size: 20),
+              color: context.c.textHint, size: 20),
           suffixIcon: (controller?.text.isNotEmpty ?? false)
               ? IconButton(
                   icon: Icon(Icons.close_rounded,
-                      color: AppColors.textHint, size: 18),
+                      color: context.c.textHint, size: 18),
                   onPressed: () {
                     controller?.clear();
                     onClear?.call();

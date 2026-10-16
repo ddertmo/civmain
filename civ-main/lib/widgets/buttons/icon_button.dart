@@ -34,15 +34,15 @@ class AppIconButton extends StatelessWidget {
             width: size,
             height: size,
             decoration: BoxDecoration(
-              color: backgroundColor ?? AppColors.background,
+              color: backgroundColor ?? context.c.background,
               shape: BoxShape.circle,
               border: hasBorder
-                  ? Border.all(color: AppColors.divider, width: 1)
+                  ? Border.all(color: context.c.divider, width: 1)
                   : null,
             ),
             child: Icon(
               icon,
-              color: iconColor ?? AppColors.textPrimary,
+              color: iconColor ?? context.c.textPrimary,
               size: iconSize,
             ),
           ),

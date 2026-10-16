@@ -24,7 +24,7 @@ class SectionTitle extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
         ),
         if (actionLabel != null)

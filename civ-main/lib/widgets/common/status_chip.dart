@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/utils/helpers.dart';
+import '../../core/constants/app_colors.dart';
 
 class StatusChip extends StatelessWidget {
   final String status;
@@ -10,8 +10,8 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(status);
-    final bg = AppHelpers.getStatusBgColor(status);
+    final color = context.c.statusColor(status);
+    final bg = context.c.statusBg(status);
 
     return Container(
       padding: EdgeInsets.symmetric(

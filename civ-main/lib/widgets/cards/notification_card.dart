@@ -16,8 +16,8 @@ class NotificationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(notification.status);
-    final bg = AppHelpers.getStatusBgColor(notification.status);
+    final color = context.c.statusColor(notification.status);
+    final bg = context.c.statusBg(notification.status);
     final icon = AppHelpers.getStatusIcon(notification.status);
 
     return GestureDetector(
@@ -26,10 +26,10 @@ class NotificationCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: notification.isRead ? AppColors.onAccent : AppColors.primarySurface,
+          color: notification.isRead ? AppColors.onAccent : context.c.primarySurface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: notification.isRead ? AppColors.divider : AppColors.primary.withOpacity(0.2),
+            color: notification.isRead ? context.c.divider : AppColors.primary.withOpacity(0.2),
           ),
         ),
         child: Row(
@@ -54,7 +54,7 @@ class NotificationCard extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary,
+                            color: context.c.textPrimary,
                           ),
                         ),
                       ),
@@ -74,7 +74,7 @@ class NotificationCard extends StatelessWidget {
                     notification.message,
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -82,7 +82,7 @@ class NotificationCard extends StatelessWidget {
                     AppHelpers.timeAgo(notification.timestamp),
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                     ),
                   ),
                 ],

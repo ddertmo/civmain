@@ -19,8 +19,8 @@ class StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(status);
-    final bg = AppHelpers.getStatusBgColor(status);
+    final color = context.c.statusColor(status);
+    final bg = context.c.statusBg(status);
     final icon = AppHelpers.getStatusIcon(status);
 
     return Container(
@@ -59,7 +59,7 @@ class StatusCard extends StatelessWidget {
                   message,
                   style: GoogleFonts.inter(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                 ),
                 if (dateLabel != null) ...[
@@ -67,13 +67,13 @@ class StatusCard extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.calendar_today_rounded,
-                          size: 11, color: AppColors.textSecondary),
+                          size: 11, color: context.c.textSecondary),
                       const SizedBox(width: 4),
                       Text(
                         dateLabel!,
                         style: GoogleFonts.inter(
                           fontSize: 11,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                         ),
                       ),
                     ],

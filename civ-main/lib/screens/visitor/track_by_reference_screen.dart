@@ -59,14 +59,14 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: context.c.card,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
+              size: 20, color: context.c.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
         title: Column(
@@ -77,7 +77,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
               style: GoogleFonts.inter(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
             ),
             Text(
@@ -92,7 +92,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, color: AppColors.divider),
+          child: Divider(height: 1, color: context.c.divider),
         ),
       ),
       body: SingleChildScrollView(
@@ -105,7 +105,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.primarySurface,
+                color: context.c.primarySurface,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                     color: AppColors.primary.withValues(alpha: 0.2)),
@@ -145,7 +145,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
             ),
             const SizedBox(height: 8),
@@ -175,18 +175,18 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       hintText: 'CW-2026-00001',
                       hintStyle: GoogleFonts.robotoMono(
                         fontSize: 15,
-                        color: AppColors.textHint,
+                        color: context.c.textHint,
                         letterSpacing: 1,
                       ),
                       filled: true,
-                      fillColor: AppColors.white,
+                      fillColor: context.c.card,
                       prefixIcon: Icon(Icons.tag_rounded,
-                          color: AppColors.textSecondary, size: 20),
+                          color: context.c.textSecondary, size: 20),
                       suffixIcon: _ctrl.text.isNotEmpty
                           ? IconButton(
                               icon: Icon(Icons.clear_rounded,
                                   size: 18,
-                                  color: AppColors.textSecondary),
+                                  color: context.c.textSecondary),
                               onPressed: () {
                                 _ctrl.clear();
                                 setState(() {
@@ -202,12 +202,12 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            BorderSide(color: AppColors.inputBorder),
+                            BorderSide(color: context.c.inputBorder),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            BorderSide(color: AppColors.inputBorder),
+                            BorderSide(color: context.c.inputBorder),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -226,7 +226,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.navy,
                       foregroundColor: AppColors.onAccent,
-                      disabledBackgroundColor: AppColors.textDisabled,
+                      disabledBackgroundColor: context.c.textDisabled,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14)),
                       elevation: 0,
@@ -246,7 +246,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
             Text(
               'Format: CW-YYYY-#####  (e.g. CW-2026-00125)',
               style: GoogleFonts.inter(
-                  fontSize: 11, color: AppColors.textHint),
+                  fontSize: 11, color: context.c.textHint),
             ),
 
             const SizedBox(height: 32),
@@ -278,14 +278,14 @@ class _ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryColor = AppHelpers.getCategoryColor(report.category);
-    final categoryBg = AppHelpers.getCategoryBgColor(report.category);
-    final statusColor = AppHelpers.getStatusColor(report.status);
-    final statusBg = AppHelpers.getStatusBgColor(report.status);
+    final categoryColor = context.c.categoryColor(report.category);
+    final categoryBg = context.c.categoryBg(report.category);
+    final statusColor = context.c.statusColor(report.status);
+    final statusBg = context.c.statusBg(report.status);
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
         boxShadow: [
@@ -357,7 +357,7 @@ class _ResultCard extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 17,
                               fontWeight: FontWeight.w800,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                           const SizedBox(height: 3),
@@ -392,7 +392,7 @@ class _ResultCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 18),
-                Divider(color: AppColors.divider, height: 1),
+                Divider(color: context.c.divider, height: 1),
                 const SizedBox(height: 16),
 
                 // Details grid
@@ -476,7 +476,7 @@ class _NotFoundCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: const Color(0xFFFCA5A5)),
       ),
@@ -498,7 +498,7 @@ class _NotFoundCard extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
@@ -506,7 +506,7 @@ class _NotFoundCard extends StatelessWidget {
             'No report matches that reference number.\nPlease check and try again.',
             style: GoogleFonts.inter(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: context.c.textSecondary,
               height: 1.5,
             ),
             textAlign: TextAlign.center,
@@ -516,7 +516,7 @@ class _NotFoundCard extends StatelessWidget {
             'Expected format: CW-2026-#####',
             style: GoogleFonts.inter(
               fontSize: 12,
-              color: AppColors.textHint,
+              color: context.c.textHint,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -540,7 +540,7 @@ class _PlaceholderHint extends StatelessWidget {
           Icon(
             Icons.receipt_long_rounded,
             size: 72,
-            color: AppColors.textHint.withValues(alpha: 0.4),
+            color: context.c.textHint.withValues(alpha: 0.4),
           ),
           const SizedBox(height: 14),
           Text(
@@ -548,7 +548,7 @@ class _PlaceholderHint extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
@@ -556,7 +556,7 @@ class _PlaceholderHint extends StatelessWidget {
             'Reference numbers are in the format\nCW-YYYY-##### and are shown\non your submitted report.',
             style: GoogleFonts.inter(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: context.c.textSecondary,
               height: 1.55,
             ),
             textAlign: TextAlign.center,
@@ -612,7 +612,7 @@ class _CompactTimeline extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: AppColors.textSecondary,
+            color: context.c.textSecondary,
           ),
         ),
         const SizedBox(height: 10),
@@ -627,7 +627,7 @@ class _CompactTimeline extends StatelessWidget {
                   height: 2,
                   color: isComplete
                       ? AppColors.primary
-                      : AppColors.divider,
+                      : context.c.divider,
                 ),
               );
             }
@@ -648,11 +648,11 @@ class _CompactTimeline extends StatelessWidget {
                         ? AppColors.primary
                         : isActive
                             ? AppColors.navy
-                            : AppColors.background,
+                            : context.c.background,
                     border: Border.all(
                       color: isDone || isActive
                           ? (isDone ? AppColors.primary : AppColors.navy)
-                          : AppColors.divider,
+                          : context.c.divider,
                       width: 2,
                     ),
                   ),
@@ -683,7 +683,7 @@ class _CompactTimeline extends StatelessWidget {
                         ? AppColors.primary
                         : isActive
                             ? AppColors.navy
-                            : AppColors.textHint,
+                            : context.c.textHint,
                     height: 1.3,
                   ),
                   textAlign: TextAlign.center,
@@ -719,7 +719,7 @@ class _DetailRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 15, color: AppColors.textSecondary),
+        Icon(icon, size: 15, color: context.c.textSecondary),
         const SizedBox(width: 8),
         SizedBox(
           width: 100,
@@ -727,7 +727,7 @@ class _DetailRow extends StatelessWidget {
             label,
             style: GoogleFonts.inter(
               fontSize: 12,
-              color: AppColors.textSecondary,
+              color: context.c.textSecondary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -739,7 +739,7 @@ class _DetailRow extends StatelessWidget {
                 GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
           ),
         ),

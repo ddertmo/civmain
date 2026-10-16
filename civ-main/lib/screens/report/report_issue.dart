@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
-import '../../core/utils/helpers.dart';
 import '../../widgets/navigation/app_bar.dart';
 import '_report_stepper.dart';
 
@@ -47,11 +46,11 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
   @override
   Widget build(BuildContext context) {
     final issues = _issues[widget.category] ?? [];
-    final catColor = AppHelpers.getCategoryColor(widget.category);
-    final catBg = AppHelpers.getCategoryBgColor(widget.category);
+    final catColor = context.c.categoryColor(widget.category);
+    final catBg = context.c.categoryBg(widget.category);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 2 of 5',
@@ -73,7 +72,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                     style: GoogleFonts.inter(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -81,7 +80,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                     'Choose the specific issue you want\nto report.',
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -99,10 +98,10 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 14),
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: context.c.card,
                           borderRadius: BorderRadius.circular(14),
                           border: Border.all(
-                            color: isSelected ? catColor : AppColors.divider,
+                            color: isSelected ? catColor : context.c.divider,
                             width: isSelected ? 2 : 1,
                           ),
                           boxShadow: [
@@ -121,14 +120,14 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
-                                color: isSelected ? catBg : AppColors.background,
+                                color: isSelected ? catBg : context.c.background,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
                                 icon,
                                 color: isSelected
                                     ? catColor
-                                    : AppColors.textSecondary,
+                                    : context.c.textSecondary,
                                 size: 20,
                               ),
                             ),
@@ -142,8 +141,8 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                                       ? FontWeight.w700
                                       : FontWeight.w500,
                                   color: isSelected
-                                      ? AppColors.textPrimary
-                                      : AppColors.textPrimary,
+                                      ? context.c.textPrimary
+                                      : context.c.textPrimary,
                                 ),
                               ),
                             ),
@@ -165,7 +164,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
           ),
           _ReportNavFooter(
             onNext: _selected != null ? _next : null,
-            catColor: AppHelpers.getCategoryColor(widget.category),
+            catColor: context.c.categoryColor(widget.category),
           ),
         ],
       ),
@@ -184,8 +183,8 @@ class _ReportNavFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
@@ -195,8 +194,8 @@ class _ReportNavFooter extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_rounded, size: 18),
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textPrimary,
-                side: BorderSide(color: AppColors.divider),
+                foregroundColor: context.c.textPrimary,
+                side: BorderSide(color: context.c.divider),
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -213,7 +212,7 @@ class _ReportNavFooter extends StatelessWidget {
               icon: const Icon(Icons.arrow_forward_rounded, size: 18),
               label: const Text('Next'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: onNext != null ? catColor : AppColors.textDisabled,
+                backgroundColor: onNext != null ? catColor : context.c.textDisabled,
                 foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(

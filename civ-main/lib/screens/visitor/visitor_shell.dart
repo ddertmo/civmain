@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
@@ -32,13 +31,8 @@ class _VisitorShellState extends State<VisitorShell> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
-
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       // ── Guest banner ──────────────────────────────────────────────────
       appBar: _index == 0
           ? null // map fills the whole screen — banner is inside map header
@@ -178,8 +172,8 @@ class _VisitorBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
         boxShadow: [
           BoxShadow(
             color: Color(0x0F000000),
@@ -252,7 +246,7 @@ class _NavItem extends StatelessWidget {
                     horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
                   color: isActive
-                      ? AppColors.primarySurface
+                      ? context.c.primarySurface
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -261,7 +255,7 @@ class _NavItem extends StatelessWidget {
                   size: 22,
                   color: isActive
                       ? AppColors.primary
-                      : AppColors.textSecondary,
+                      : context.c.textSecondary,
                 ),
               ),
               const SizedBox(height: 2),
@@ -273,7 +267,7 @@ class _NavItem extends StatelessWidget {
                       isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
                       ? AppColors.primary
-                      : AppColors.textSecondary,
+                      : context.c.textSecondary,
                 ),
               ),
             ],

@@ -24,8 +24,8 @@ class CivilWatchBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider, width: 1)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider, width: 1)),
       ),
       child: SafeArea(
         top: false,
@@ -61,7 +61,7 @@ class CivilWatchBottomNav extends StatelessWidget {
                       else
                         Icon(
                           isActive ? item.activeIcon : item.icon,
-                          color: isActive ? AppColors.primary : AppColors.textHint,
+                          color: isActive ? AppColors.primary : context.c.textHint,
                           size: 24,
                         ),
                       if (!isCenter) ...[
@@ -74,7 +74,7 @@ class CivilWatchBottomNav extends StatelessWidget {
                                 isActive ? FontWeight.w600 : FontWeight.w400,
                             color: isActive
                                 ? AppColors.primary
-                                : AppColors.textHint,
+                                : context.c.textHint,
                           ),
                         ),
                       ],

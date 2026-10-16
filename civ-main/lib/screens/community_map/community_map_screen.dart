@@ -112,7 +112,7 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
                       MarkerLayer(
                         markers: filtered.map((pin) {
                           final isSelected = _selectedPin?.id == pin.id;
-                          final color = AppHelpers.getCategoryColor(
+                          final color = context.c.categoryColor(
                             pin.category,
                           );
                           final icon = AppHelpers.getIssueIcon(pin.issue);
@@ -146,7 +146,7 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
                         width: 44,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: context.c.card,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -155,7 +155,7 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
                               offset: const Offset(0, 2),
                             ),
                           ],
-                          border: Border.all(color: AppColors.divider),
+                          border: Border.all(color: context.c.divider),
                         ),
                         child: const Icon(
                           Icons.my_location_rounded,
@@ -277,7 +277,7 @@ class _MapHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: context.c.card,
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,7 +290,7 @@ class _MapHeader extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_back_ios_new_rounded,
                   size: 20,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
             ),
@@ -304,7 +304,7 @@ class _MapHeader extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -313,14 +313,14 @@ class _MapHeader extends StatelessWidget {
                     Icon(
                       Icons.location_on_rounded,
                       size: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                     ),
                     const SizedBox(width: 3),
                     Text(
                       'Digos City, Davao del Sur',
                       style: GoogleFonts.inter(
                         fontSize: 12,
-                        color: AppColors.textSecondary,
+                        color: context.c.textSecondary,
                       ),
                     ),
                   ],
@@ -336,14 +336,14 @@ class _MapHeader extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppColors.background,
+                  color: context.c.background,
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.divider),
+                  border: Border.all(color: context.c.divider),
                 ),
                 child: Icon(
                   Icons.notifications_outlined,
                   size: 20,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
               Positioned(
@@ -375,7 +375,7 @@ class _FilterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: context.c.card,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -461,14 +461,14 @@ class _PinDetailSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getCategoryColor(pin.category);
-    final catBg = AppHelpers.getCategoryBgColor(pin.category);
-    final statusColor = AppHelpers.getStatusColor(pin.status);
-    final statusBg = AppHelpers.getStatusBgColor(pin.status);
+    final color = context.c.categoryColor(pin.category);
+    final catBg = context.c.categoryBg(pin.category);
+    final statusColor = context.c.statusColor(pin.status);
+    final statusBg = context.c.statusBg(pin.status);
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
           BoxShadow(
@@ -489,7 +489,7 @@ class _PinDetailSheet extends StatelessWidget {
                 width: 36,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.divider,
+                  color: context.c.divider,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -556,7 +556,7 @@ class _PinDetailSheet extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.textPrimary,
+                                    color: context.c.textPrimary,
                                   ),
                                 ),
                               ),
@@ -594,7 +594,7 @@ class _PinDetailSheet extends StatelessWidget {
                                     'Ref. No.',
                                     style: GoogleFonts.inter(
                                       fontSize: 9,
-                                      color: AppColors.textSecondary,
+                                      color: context.c.textSecondary,
                                     ),
                                   ),
                                   Text(
@@ -620,14 +620,14 @@ class _PinDetailSheet extends StatelessWidget {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          color: AppColors.background,
+                          color: context.c.background,
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.divider),
+                          border: Border.all(color: context.c.divider),
                         ),
                         child: Icon(
                           Icons.close_rounded,
                           size: 14,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                         ),
                       ),
                     ),
@@ -642,7 +642,7 @@ class _PinDetailSheet extends StatelessWidget {
                     Icon(
                       Icons.article_outlined,
                       size: 15,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -650,7 +650,7 @@ class _PinDetailSheet extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: context.c.textPrimary,
                       ),
                     ),
                   ],
@@ -660,7 +660,7 @@ class _PinDetailSheet extends StatelessWidget {
                   pin.description,
                   style: GoogleFonts.inter(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                     height: 1.5,
                   ),
                 ),
@@ -670,7 +670,7 @@ class _PinDetailSheet extends StatelessWidget {
                     Icon(
                       Icons.location_on_outlined,
                       size: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                     ),
                     const SizedBox(width: 4),
                     Flexible(
@@ -678,7 +678,7 @@ class _PinDetailSheet extends StatelessWidget {
                         pin.barangay,
                         style: GoogleFonts.inter(
                           fontSize: 12,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -694,7 +694,7 @@ class _PinDetailSheet extends StatelessWidget {
                     Icon(
                       Icons.location_on_rounded,
                       size: 15,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -702,7 +702,7 @@ class _PinDetailSheet extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                        color: context.c.textPrimary,
                       ),
                     ),
                   ],
@@ -736,7 +736,7 @@ class _PinDetailSheet extends StatelessWidget {
                                   height: 50,
                                   alignment: Alignment.bottomCenter,
                                   child: _TeardropPin(
-                                    color: AppHelpers.getCategoryColor(
+                                    color: context.c.categoryColor(
                                       pin.category,
                                     ),
                                     icon: AppHelpers.getIssueIcon(pin.issue),
@@ -756,7 +756,7 @@ class _PinDetailSheet extends StatelessWidget {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                color: AppColors.white,
+                                color: context.c.card,
                                 borderRadius: BorderRadius.circular(6),
                                 boxShadow: const [
                                   BoxShadow(
@@ -768,7 +768,7 @@ class _PinDetailSheet extends StatelessWidget {
                               child: Icon(
                                 Icons.open_in_new_rounded,
                                 size: 14,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                               ),
                             ),
                           ),
@@ -842,15 +842,15 @@ class _StatsBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: context.c.card,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
       child: Row(
         children: [
           _StatTile(
             label: 'Total',
             count: total,
-            color: AppColors.textPrimary,
-            bg: AppColors.background,
+            color: context.c.textPrimary,
+            bg: context.c.background,
             isActive: false,
           ),
           const SizedBox(width: 10),
@@ -858,7 +858,7 @@ class _StatsBar extends StatelessWidget {
             label: 'Infrastructure',
             count: infraCount,
             color: AppColors.infrastructure,
-            bg: AppColors.infrastructureBg,
+            bg: context.c.infrastructureBg,
             isActive: true,
           ),
           const SizedBox(width: 10),
@@ -866,7 +866,7 @@ class _StatsBar extends StatelessWidget {
             label: 'Environment',
             count: envCount,
             color: AppColors.environment,
-            bg: AppColors.environmentBg,
+            bg: context.c.environmentBg,
             isActive: true,
           ),
         ],
@@ -916,7 +916,7 @@ class _StatTile extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
-                color: isActive ? color : AppColors.textSecondary,
+                color: isActive ? color : context.c.textSecondary,
               ),
             ),
           ],
@@ -940,13 +940,13 @@ class _ZoomBtn extends StatelessWidget {
         width: 34,
         height: 34,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(8),
           boxShadow: const [
             BoxShadow(color: AppColors.cardShadow, blurRadius: 4),
           ],
         ),
-        child: Icon(icon, size: 20, color: AppColors.textPrimary),
+        child: Icon(icon, size: 20, color: context.c.textPrimary),
       ),
     );
   }

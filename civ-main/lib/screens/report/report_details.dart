@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/routes/app_routes.dart';
-import '../../core/utils/helpers.dart';
 import '../../core/utils/validators.dart';
 import '../../widgets/navigation/app_bar.dart';
 import '_report_stepper.dart';
@@ -43,10 +42,10 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
   Widget build(BuildContext context) {
     final category =
         widget.reportData['category'] as String? ?? 'Infrastructure';
-    final catColor = AppHelpers.getCategoryColor(category);
+    final catColor = context.c.categoryColor(category);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 4 of 5',
@@ -108,7 +107,7 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                     Text(
                       'Provide details about the incident.',
                       style: GoogleFonts.inter(
-                          fontSize: 12, color: AppColors.textSecondary),
+                          fontSize: 12, color: context.c.textSecondary),
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
@@ -117,23 +116,23 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                       maxLines: 4,
                       maxLength: 300,
                       style: GoogleFonts.inter(
-                          fontSize: 14, color: AppColors.textPrimary),
+                          fontSize: 14, color: context.c.textPrimary),
                       decoration: InputDecoration(
                         hintText: 'Describe the issue...',
                         hintStyle: GoogleFonts.inter(
-                            fontSize: 13, color: AppColors.textHint),
+                            fontSize: 13, color: context.c.textHint),
                         filled: true,
-                        fillColor: AppColors.white,
+                        fillColor: context.c.card,
                         contentPadding: const EdgeInsets.all(14),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: AppColors.inputBorder),
+                              BorderSide(color: context.c.inputBorder),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: AppColors.inputBorder),
+                              BorderSide(color: context.c.inputBorder),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -168,14 +167,14 @@ class _SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: AppColors.textPrimary),
+        Icon(icon, size: 18, color: context.c.textPrimary),
         const SizedBox(width: 8),
         Text(
           label,
           style: GoogleFonts.inter(
             fontSize: 15,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
         ),
       ],
@@ -203,10 +202,10 @@ class _LocationOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.divider,
+            color: isSelected ? AppColors.primary : context.c.divider,
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -215,7 +214,7 @@ class _LocationOption extends StatelessWidget {
             Icon(icon,
                 color: isSelected
                     ? AppColors.primary
-                    : AppColors.textSecondary,
+                    : context.c.textSecondary,
                 size: 20),
             const SizedBox(width: 12),
             Expanded(
@@ -224,12 +223,12 @@ class _LocationOption extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
             ),
             Icon(Icons.chevron_right_rounded,
-                color: AppColors.textHint, size: 18),
+                color: context.c.textHint, size: 18),
           ],
         ),
       ),
@@ -249,7 +248,7 @@ class _BarangayDropdown extends StatelessWidget {
       value: value,
       hint: Text('Select barangay',
           style:
-              GoogleFonts.inter(fontSize: 14, color: AppColors.textHint)),
+              GoogleFonts.inter(fontSize: 14, color: context.c.textHint)),
       onChanged: onChanged,
       items: AppStrings.barangays
           .map((b) => DropdownMenuItem(
@@ -260,18 +259,18 @@ class _BarangayDropdown extends StatelessWidget {
           .toList(),
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColors.white,
+        fillColor: context.c.card,
         prefixIcon: Icon(Icons.location_city_rounded,
-            color: AppColors.textHint, size: 20),
+            color: context.c.textHint, size: 20),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -280,9 +279,9 @@ class _BarangayDropdown extends StatelessWidget {
         ),
       ),
       style: GoogleFonts.inter(
-          fontSize: 14, color: AppColors.textPrimary),
+          fontSize: 14, color: context.c.textPrimary),
       icon: Icon(Icons.keyboard_arrow_down_rounded,
-          color: AppColors.textSecondary),
+          color: context.c.textSecondary),
       borderRadius: BorderRadius.circular(12),
     );
   }
@@ -299,8 +298,8 @@ class _ReportDetailsFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
@@ -310,8 +309,8 @@ class _ReportDetailsFooter extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_rounded, size: 18),
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textPrimary,
-                side: BorderSide(color: AppColors.divider),
+                foregroundColor: context.c.textPrimary,
+                side: BorderSide(color: context.c.divider),
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),

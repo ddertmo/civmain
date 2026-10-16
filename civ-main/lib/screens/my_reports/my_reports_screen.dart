@@ -76,13 +76,13 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
         final filtered = _getFiltered(AppState().reports);
 
         return Scaffold(
-          backgroundColor: AppColors.background,
+          backgroundColor: context.c.background,
           body: SafeArea(
             child: Column(
               children: [
                 // ── Header ──────────────────────────────────────────────
                 Container(
-                  color: AppColors.white,
+                  color: context.c.card,
                   padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,14 +106,14 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                               style: GoogleFonts.inter(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                               ),
                             ),
                             Text(
                               'Track the status of your reported incidents.',
                               style: GoogleFonts.inter(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: context.c.textSecondary,
                               ),
                             ),
                           ],
@@ -123,21 +123,21 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
-                          color: AppColors.background,
+                          color: context.c.background,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.divider),
+                          border: Border.all(color: context.c.divider),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.filter_list_rounded,
-                                size: 16, color: AppColors.textSecondary),
+                                size: 16, color: context.c.textSecondary),
                             const SizedBox(width: 4),
                             Text('Filter',
                                 style: GoogleFonts.inter(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textSecondary,
+                                  color: context.c.textSecondary,
                                 )),
                           ],
                         ),
@@ -148,7 +148,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
 
                 // ── Search + filter chips ──────────────────────────────
                 Container(
-                  color: AppColors.white,
+                  color: context.c.card,
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
                   child: Column(
                     children: [
@@ -165,7 +165,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                         child: Row(
                           children: _filters.map((f) {
                             final isActive = _activeFilter == f;
-                            Color dotColor = AppColors.textSecondary;
+                            Color dotColor = context.c.textSecondary;
                             if (f == 'Pending')
                               dotColor = AppColors.statusPending;
                             if (f == 'In Progress')
@@ -186,13 +186,13 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                   decoration: BoxDecoration(
                                     color: isActive
                                         ? AppColors.navy
-                                        : AppColors.white,
+                                        : context.c.card,
                                     borderRadius:
                                         BorderRadius.circular(20),
                                     border: Border.all(
                                       color: isActive
                                           ? AppColors.navy
-                                          : AppColors.divider,
+                                          : context.c.divider,
                                     ),
                                   ),
                                   child: Row(
@@ -215,7 +215,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                             size: 14,
                                             color: isActive
                                                 ? AppColors.onAccent
-                                                : AppColors.textSecondary),
+                                                : context.c.textSecondary),
                                         const SizedBox(width: 6),
                                       ],
                                       Text(
@@ -225,7 +225,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                           fontWeight: FontWeight.w600,
                                           color: isActive
                                               ? AppColors.onAccent
-                                              : AppColors.textSecondary,
+                                              : context.c.textSecondary,
                                         ),
                                       ),
                                     ],
@@ -239,7 +239,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                     ],
                   ),
                 ),
-                Divider(height: 1, color: AppColors.divider),
+                Divider(height: 1, color: context.c.divider),
 
                 // ── Report List ────────────────────────────────────────
                 Expanded(

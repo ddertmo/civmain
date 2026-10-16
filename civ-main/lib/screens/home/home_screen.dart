@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
@@ -35,12 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       body: IndexedStack(index: _navIndex, children: _pages),
       bottomNavigationBar: CivilWatchBottomNav(
         currentIndex: _navIndex,
@@ -68,7 +63,7 @@ class _HomeTab extends StatelessWidget {
         // ── Show skeleton while data is loading from API ────────────────
         if (state.isLoading) {
           return Scaffold(
-            backgroundColor: AppColors.background,
+            backgroundColor: context.c.background,
             body: SafeArea(child: HomeTabSkeleton()),
           );
         }
@@ -155,7 +150,7 @@ class _HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.white,
+      color: context.c.card,
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
       child: Row(
         children: [
@@ -217,7 +212,7 @@ class _GreetingSection extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
               ),
               Text(
@@ -225,7 +220,7 @@ class _GreetingSection extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 26,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
               const SizedBox(height: 4),
@@ -233,7 +228,7 @@ class _GreetingSection extends StatelessWidget {
                 'Help make Digos City a better place.',
                 style: GoogleFonts.inter(
                   fontSize: 13,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
               ),
             ],
@@ -350,7 +345,7 @@ class _ReportSummaryRow extends StatelessWidget {
           label: 'Pending\nValidation',
           icon: Icons.hourglass_empty_rounded,
           color: AppColors.statusPending,
-          bg: AppColors.statusPendingBg,
+          bg: context.c.statusPendingBg,
         ),
         const SizedBox(width: 10),
         _SummaryTile(
@@ -358,7 +353,7 @@ class _ReportSummaryRow extends StatelessWidget {
           label: 'In Progress',
           icon: Icons.construction_rounded,
           color: AppColors.statusInProgress,
-          bg: AppColors.statusInProgressBg,
+          bg: context.c.statusInProgressBg,
         ),
         const SizedBox(width: 10),
         _SummaryTile(
@@ -366,7 +361,7 @@ class _ReportSummaryRow extends StatelessWidget {
           label: 'Resolved',
           icon: Icons.task_alt_rounded,
           color: AppColors.statusResolved,
-          bg: AppColors.statusResolvedBg,
+          bg: context.c.statusResolvedBg,
         ),
         const SizedBox(width: 10),
         _SummaryTile(
@@ -374,7 +369,7 @@ class _ReportSummaryRow extends StatelessWidget {
           label: 'Total\nReports',
           icon: Icons.summarize_rounded,
           color: AppColors.statusAssigned,
-          bg: AppColors.statusAssignedBg,
+          bg: context.c.statusAssignedBg,
         ),
       ],
     );
@@ -402,9 +397,9 @@ class _SummaryTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
           boxShadow: const [
             BoxShadow(
                 color: AppColors.cardShadow,
@@ -427,7 +422,7 @@ class _SummaryTile extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
             ),
             const SizedBox(height: 2),
@@ -435,7 +430,7 @@ class _SummaryTile extends StatelessWidget {
               label,
               style: GoogleFonts.inter(
                 fontSize: 10,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 fontWeight: FontWeight.w500,
                 height: 1.3,
               ),
@@ -461,7 +456,7 @@ class _MiniMapCard extends StatelessWidget {
         height: 170,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
           boxShadow: const [
             BoxShadow(
                 color: AppColors.cardShadow,
@@ -505,7 +500,7 @@ class _MiniMapCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.onAccent.withOpacity(0.92),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColors.divider),
+                    border: Border.all(color: context.c.divider),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -536,7 +531,7 @@ class _MiniMapCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary.withOpacity(0.7),
+                      color: context.c.textPrimary.withOpacity(0.7),
                     ),
                   ),
                 ),
@@ -593,7 +588,7 @@ class _LegendItem extends StatelessWidget {
         Text(label,
             style: GoogleFonts.inter(
                 fontSize: 10,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 fontWeight: FontWeight.w500)),
       ],
     );
@@ -611,9 +606,9 @@ class _AnnouncementCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.c.divider),
         boxShadow: const [
           BoxShadow(
               color: AppColors.cardShadow,
@@ -627,7 +622,7 @@ class _AnnouncementCard extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: AppColors.primarySurface,
+              color: context.c.primarySurface,
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.campaign_rounded,
@@ -643,7 +638,7 @@ class _AnnouncementCard extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -651,7 +646,7 @@ class _AnnouncementCard extends StatelessWidget {
                   announcement.body,
                   style: GoogleFonts.inter(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -659,7 +654,7 @@ class _AnnouncementCard extends StatelessWidget {
                   AppHelpers.formatDate(announcement.date),
                   style: GoogleFonts.inter(
                     fontSize: 11,
-                    color: AppColors.textHint,
+                    color: context.c.textHint,
                   ),
                 ),
               ],

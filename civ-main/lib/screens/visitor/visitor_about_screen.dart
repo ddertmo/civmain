@@ -17,7 +17,7 @@ class VisitorAboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       body: Column(
         children: [
           // ── Guest banner ─────────────────────────────────────────────
@@ -78,7 +78,7 @@ class VisitorAboutScreen extends StatelessWidget {
                     'Community Reporting for a Better Digos City',
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -188,7 +188,7 @@ class VisitorAboutScreen extends StatelessWidget {
                       label: const Text('Track by Reference No.'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.navy,
-                        side: BorderSide(color: AppColors.divider),
+                        side: BorderSide(color: context.c.divider),
                         minimumSize: const Size(0, 52),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
@@ -202,13 +202,13 @@ class VisitorAboutScreen extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   // ── System info ─────────────────────────────────────
-                  Divider(color: AppColors.divider),
+                  Divider(color: context.c.divider),
                   const SizedBox(height: 20),
                   Text(
                     'A Capstone Project',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -217,7 +217,7 @@ class VisitorAboutScreen extends StatelessWidget {
                     'University of Mindanao — Digos Branch\nBS Information Technology · 2026',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                       height: 1.6,
                     ),
                     textAlign: TextAlign.center,
@@ -227,7 +227,7 @@ class VisitorAboutScreen extends StatelessWidget {
                     'Borinaga · Mag-Usara · Sereno',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -236,7 +236,7 @@ class VisitorAboutScreen extends StatelessWidget {
                     'Adviser: Cyvil Dave Dasargo, MIT',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                     ),
                   ),
                 ],
@@ -272,9 +272,9 @@ class _SectionCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.c.divider),
         boxShadow: const [
           BoxShadow(
               color: AppColors.cardShadow,
@@ -291,7 +291,7 @@ class _SectionCard extends StatelessWidget {
                 width: 34,
                 height: 34,
                 decoration: BoxDecoration(
-                  color: AppColors.primarySurface,
+                  color: context.c.primarySurface,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, color: AppColors.primary, size: 18),
@@ -302,7 +302,7 @@ class _SectionCard extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 14,
                   fontWeight: FontWeight.w800,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
             ],
@@ -313,7 +313,7 @@ class _SectionCard extends StatelessWidget {
               body!,
               style: GoogleFonts.inter(
                 fontSize: 13,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 height: 1.55,
               ),
             ),
@@ -371,7 +371,7 @@ class _FeatureItem extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -379,7 +379,7 @@ class _FeatureItem extends StatelessWidget {
                   subtitle,
                   style: GoogleFonts.inter(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                     height: 1.4,
                   ),
                 ),

@@ -33,15 +33,15 @@ class TrackReportScreen extends StatelessWidget {
 
         if (report == null) {
           return Scaffold(
-            backgroundColor: AppColors.background,
+            backgroundColor: context.c.background,
             appBar: AppBar(
-              backgroundColor: AppColors.white,
+              backgroundColor: context.c.card,
               elevation: 0,
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios_new_rounded,
                   size: 20,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
@@ -50,7 +50,7 @@ class TrackReportScreen extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
             ),
@@ -61,7 +61,7 @@ class TrackReportScreen extends StatelessWidget {
                   Icon(
                     Icons.article_outlined,
                     size: 56,
-                    color: AppColors.textHint,
+                    color: context.c.textHint,
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -69,7 +69,7 @@ class TrackReportScreen extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -98,15 +98,15 @@ class _TrackReportBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: context.c.card,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -118,14 +118,14 @@ class _TrackReportBody extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
             ),
             Text(
               'Track the latest progress of your report.',
               style: GoogleFonts.inter(
                 fontSize: 11,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
               ),
             ),
           ],
@@ -137,7 +137,7 @@ class _TrackReportBody extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.notifications_outlined,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
                 onPressed: () =>
                     Navigator.pushNamed(context, AppRoutes.notifications),
@@ -159,7 +159,7 @@ class _TrackReportBody extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, color: AppColors.divider),
+          child: Divider(height: 1, color: context.c.divider),
         ),
       ),
       body: SingleChildScrollView(
@@ -187,9 +187,9 @@ class _TrackReportBody extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: context.c.card,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(color: context.c.divider),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +199,7 @@ class _TrackReportBody extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -207,7 +207,7 @@ class _TrackReportBody extends StatelessWidget {
                     report.description,
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -225,9 +225,9 @@ class _TrackReportBody extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: context.c.card,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.divider),
+                      border: Border.all(color: context.c.divider),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,7 +237,7 @@ class _TrackReportBody extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary,
+                            color: context.c.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -259,9 +259,9 @@ class _TrackReportBody extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: context.c.card,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.divider),
+                        border: Border.all(color: context.c.divider),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +271,7 @@ class _TrackReportBody extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -288,7 +288,7 @@ class _TrackReportBody extends StatelessWidget {
                             'Barangay ${report.barangay}, Digos City',
                             style: GoogleFonts.inter(
                               fontSize: 10,
-                              color: AppColors.textSecondary,
+                              color: context.c.textSecondary,
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -328,9 +328,9 @@ class _TrackReportBody extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: context.c.card,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.divider),
+                      border: Border.all(color: context.c.divider),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,7 +340,7 @@ class _TrackReportBody extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary,
+                            color: context.c.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -351,14 +351,14 @@ class _TrackReportBody extends StatelessWidget {
                                 width: 36,
                                 height: 36,
                                 decoration: BoxDecoration(
-                                  color: AppColors.background,
+                                  color: context.c.background,
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: AppColors.divider),
+                                  border: Border.all(color: context.c.divider),
                                 ),
                                 child: Icon(
                                   Icons.business_rounded,
                                   size: 18,
-                                  color: AppColors.textHint,
+                                  color: context.c.textHint,
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -371,14 +371,14 @@ class _TrackReportBody extends StatelessWidget {
                                       style: GoogleFonts.inter(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.textPrimary,
+                                        color: context.c.textPrimary,
                                       ),
                                     ),
                                     Text(
                                       'After validation.',
                                       style: GoogleFonts.inter(
                                         fontSize: 10,
-                                        color: AppColors.textHint,
+                                        color: context.c.textHint,
                                       ),
                                     ),
                                   ],
@@ -393,7 +393,7 @@ class _TrackReportBody extends StatelessWidget {
                                 width: 36,
                                 height: 36,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primarySurface,
+                                  color: context.c.primarySurface,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Icon(
@@ -409,7 +409,7 @@ class _TrackReportBody extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.textPrimary,
+                                    color: context.c.textPrimary,
                                   ),
                                 ),
                               ),
@@ -426,9 +426,9 @@ class _TrackReportBody extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: context.c.card,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.divider),
+                      border: Border.all(color: context.c.divider),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,7 +438,7 @@ class _TrackReportBody extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 13,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.textPrimary,
+                            color: context.c.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -448,13 +448,13 @@ class _TrackReportBody extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(Icons.history_rounded,
-                                    size: 14, color: AppColors.textHint),
+                                    size: 14, color: context.c.textHint),
                                 const SizedBox(width: 6),
                                 Text(
                                   'No activity yet.',
                                   style: GoogleFonts.inter(
                                     fontSize: 11,
-                                    color: AppColors.textHint,
+                                    color: context.c.textHint,
                                   ),
                                 ),
                               ],
@@ -601,8 +601,8 @@ class _TrackReportBody extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back_rounded, size: 18),
                   label: const Text('Back to My Reports'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.textPrimary,
-                    side: BorderSide(color: AppColors.divider),
+                    foregroundColor: context.c.textPrimary,
+                    side: BorderSide(color: context.c.divider),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -669,8 +669,8 @@ class _VerticalTimeline extends StatelessWidget {
         final isCurrent = i == currentIdx;
         final isLast = i == _steps.length - 1;
         final color = isDone
-            ? AppHelpers.getStatusColor(_steps[i])
-            : AppColors.textDisabled;
+            ? context.c.statusColor(_steps[i])
+            : context.c.textDisabled;
         final icon = AppHelpers.getStatusIcon(_steps[i]);
 
         return Row(
@@ -683,18 +683,18 @@ class _VerticalTimeline extends StatelessWidget {
                   height: 26,
                   decoration: BoxDecoration(
                     color: isDone
-                        ? AppHelpers.getStatusBgColor(_steps[i])
-                        : AppColors.background,
+                        ? context.c.statusBg(_steps[i])
+                        : context.c.background,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: isDone ? color : AppColors.divider,
+                      color: isDone ? color : context.c.divider,
                       width: isCurrent ? 2 : 1,
                     ),
                   ),
                   child: Icon(
                     icon,
                     size: 13,
-                    color: isDone ? color : AppColors.textDisabled,
+                    color: isDone ? color : context.c.textDisabled,
                   ),
                 ),
                 if (!isLast)
@@ -703,7 +703,7 @@ class _VerticalTimeline extends StatelessWidget {
                     height: 22,
                     color: i < currentIdx
                         ? AppColors.primary
-                        : AppColors.divider,
+                        : context.c.divider,
                   ),
               ],
             ),
@@ -725,8 +725,8 @@ class _VerticalTimeline extends StatelessWidget {
                                   ? FontWeight.w700
                                   : FontWeight.w500,
                               color: isDone
-                                  ? AppColors.textPrimary
-                                  : AppColors.textHint,
+                                  ? context.c.textPrimary
+                                  : context.c.textHint,
                             ),
                           ),
                         ),
@@ -758,7 +758,7 @@ class _VerticalTimeline extends StatelessWidget {
                         ),
                         style: GoogleFonts.inter(
                           fontSize: 9,
-                          color: AppColors.textHint,
+                          color: context.c.textHint,
                         ),
                       ),
                   ],
@@ -843,15 +843,15 @@ class _BeforeAfterPhotos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasAfter = report.afterImageUrl != null;
-    final catColor = AppHelpers.getCategoryColor(report.category);
-    final catBg = AppHelpers.getCategoryBgColor(report.category);
+    final catColor = context.c.categoryColor(report.category);
+    final catBg = context.c.categoryBg(report.category);
     final catIcon = AppHelpers.getCategoryIcon(report.category);
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: context.c.divider),
         boxShadow: const [
           BoxShadow(
             color: AppColors.cardShadow,
@@ -887,20 +887,20 @@ class _BeforeAfterPhotos extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
+                          color: context.c.textPrimary,
                         ),
                       ),
                       Row(
                         children: [
                           Icon(Icons.location_on_rounded,
-                              size: 11, color: AppColors.textSecondary),
+                              size: 11, color: context.c.textSecondary),
                           const SizedBox(width: 2),
                           Flexible(
                             child: Text(
                               'Barangay ${report.barangay}, Digos City',
                               style: GoogleFonts.inter(
                                 fontSize: 11,
-                                color: AppColors.textSecondary,
+                                color: context.c.textSecondary,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -931,7 +931,7 @@ class _BeforeAfterPhotos extends StatelessWidget {
               ],
             ),
           ),
-          Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: context.c.divider),
 
           // ── Photo panels ─────────────────────────────────────────────
           Padding(
@@ -959,7 +959,7 @@ class _BeforeAfterPhotos extends StatelessWidget {
                         width: 28,
                         height: 28,
                         decoration: BoxDecoration(
-                          color: AppColors.primarySurface,
+                          color: context.c.primarySurface,
                           shape: BoxShape.circle,
                           border: Border.all(
                               color: AppColors.primary
@@ -1156,7 +1156,7 @@ class _PhotoPanel extends StatelessWidget {
                     // After photo not yet uploaded
                     _FallbackPhoto(
                       icon: Icons.hourglass_top_rounded,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                       label: 'After photo pending\nresolution',
                     )
                   else

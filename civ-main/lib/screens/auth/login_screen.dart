@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.loginBg,
+      backgroundColor: context.c.loginBg,
       body: Stack(
         children: [
           // ── Background decorations ────────────────────────────────────
@@ -173,11 +173,11 @@ class _LoginScreenState extends State<LoginScreen>
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12, vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: AppColors.white
+                                  color: context.c.card
                                       .withValues(alpha: 0.85),
                                   borderRadius: BorderRadius.circular(20),
                                   border:
-                                      Border.all(color: AppColors.divider),
+                                      Border.all(color: context.c.divider),
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -185,14 +185,14 @@ class _LoginScreenState extends State<LoginScreen>
                                     Icon(
                                         Icons.arrow_back_ios_new_rounded,
                                         size: 13,
-                                        color: AppColors.textSecondary),
+                                        color: context.c.textSecondary),
                                     const SizedBox(width: 5),
                                     Text(
                                       'Continue Browsing',
                                       style: GoogleFonts.inter(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.textSecondary,
+                                        color: context.c.textSecondary,
                                       ),
                                     ),
                                   ],
@@ -223,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 'Community Reporting for a\nBetter Digos City',
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
-                                  color: AppColors.textSecondary,
+                                  color: context.c.textSecondary,
                                   height: 1.55,
                                 ),
                                 textAlign: TextAlign.center,
@@ -238,7 +238,7 @@ class _LoginScreenState extends State<LoginScreen>
                         Container(
                           padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: AppColors.white,
+                            color: context.c.card,
                             borderRadius: BorderRadius.circular(24),
                             boxShadow: [
                               BoxShadow(
@@ -277,14 +277,14 @@ class _LoginScreenState extends State<LoginScreen>
                                           style: GoogleFonts.inter(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w800,
-                                            color: AppColors.textPrimary,
+                                            color: context.c.textPrimary,
                                           ),
                                         ),
                                         Text(
                                           'Welcome back! Please login to your account.',
                                           style: GoogleFonts.inter(
                                             fontSize: 12,
-                                            color: AppColors.textSecondary,
+                                            color: context.c.textSecondary,
                                           ),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -302,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textPrimary,
+                                  color: context.c.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -317,16 +317,16 @@ class _LoginScreenState extends State<LoginScreen>
                                 ],
                                 style: GoogleFonts.inter(
                                   fontSize: 15,
-                                  color: AppColors.textPrimary,
+                                  color: context.c.textPrimary,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 decoration: InputDecoration(
                                   hintText: '9XX XXX XXXX',
                                   hintStyle: GoogleFonts.inter(
                                       fontSize: 14,
-                                      color: AppColors.textHint),
+                                      color: context.c.textHint),
                                   filled: true,
-                                  fillColor: AppColors.inputFill,
+                                  fillColor: context.c.inputFill,
                                   prefixIcon: _PhonePrefixWidget(),
                                   contentPadding:
                                       const EdgeInsets.symmetric(
@@ -335,13 +335,13 @@ class _LoginScreenState extends State<LoginScreen>
                                     borderRadius:
                                         BorderRadius.circular(14),
                                     borderSide: BorderSide(
-                                        color: AppColors.inputBorder),
+                                        color: context.c.inputBorder),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(14),
                                     borderSide: BorderSide(
-                                        color: AppColors.inputBorder),
+                                        color: context.c.inputBorder),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
@@ -372,7 +372,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.textPrimary,
+                                  color: context.c.textPrimary,
                                 ),
                               ),
                               const SizedBox(height: 8),
@@ -429,7 +429,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 "Don't have an account? ",
                                 style: GoogleFonts.inter(
                                   fontSize: 14,
-                                  color: AppColors.textSecondary,
+                                  color: context.c.textSecondary,
                                 ),
                               ),
                               GestureDetector(
@@ -518,19 +518,19 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
         hintText: widget.obscure ? '● ● ● ● ● ●' : '0 0 0 0 0 0',
         hintStyle: GoogleFonts.inter(
           fontSize: 16,
-          color: AppColors.textHint,
+          color: context.c.textHint,
           letterSpacing: 4,
         ),
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         prefixIcon: Icon(Icons.lock_outline_rounded,
-            color: AppColors.textSecondary, size: 20),
+            color: context.c.textSecondary, size: 20),
         suffixIcon: IconButton(
           icon: Icon(
             widget.obscure
                 ? Icons.visibility_off_outlined
                 : Icons.visibility_outlined,
-            color: AppColors.textSecondary,
+            color: context.c.textSecondary,
             size: 20,
           ),
           onPressed: widget.onToggleObscure,
@@ -539,11 +539,11 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -576,7 +576,7 @@ class _PhonePrefixWidget extends StatelessWidget {
       margin: const EdgeInsets.only(left: 12, right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        border: Border(right: BorderSide(color: AppColors.inputBorder)),
+        border: Border(right: BorderSide(color: context.c.inputBorder)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -588,12 +588,12 @@ class _PhonePrefixWidget extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(width: 2),
           Icon(Icons.keyboard_arrow_down_rounded,
-              size: 16, color: AppColors.textSecondary),
+              size: 16, color: context.c.textSecondary),
         ],
       ),
     );
@@ -649,7 +649,7 @@ class _TrustBadgeRow extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
               ),
             ],

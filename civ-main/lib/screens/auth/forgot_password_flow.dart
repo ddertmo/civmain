@@ -331,7 +331,7 @@ class _EnterPhoneModal extends StatelessWidget {
             width: 72,
             height: 72,
             decoration: BoxDecoration(
-              color: AppColors.primarySurface,
+              color: context.c.primarySurface,
               shape: BoxShape.circle,
             ),
             child: Stack(
@@ -365,7 +365,7 @@ class _EnterPhoneModal extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
@@ -373,7 +373,7 @@ class _EnterPhoneModal extends StatelessWidget {
             'Enter your mobile number and we\'ll\nsend you a 6-digit OTP to reset\nyour password.',
             style: GoogleFonts.inter(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: context.c.textSecondary,
               height: 1.6,
             ),
             textAlign: TextAlign.center,
@@ -420,7 +420,7 @@ class _EnterPhoneModal extends StatelessWidget {
             child: TextButton(
               onPressed: onCancel,
               style: TextButton.styleFrom(
-                foregroundColor: AppColors.textSecondary,
+                foregroundColor: context.c.textSecondary,
                 minimumSize: const Size(0, 48),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
@@ -482,12 +482,12 @@ class _EnterOtpModal extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.arrow_back_ios_new_rounded,
-                      size: 14, color: AppColors.textSecondary),
+                      size: 14, color: context.c.textSecondary),
                   const SizedBox(width: 4),
                   Text('Back',
                       style: GoogleFonts.inter(
                           fontSize: 13,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           fontWeight: FontWeight.w500)),
                 ],
               ),
@@ -500,7 +500,7 @@ class _EnterOtpModal extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 6),
@@ -508,7 +508,7 @@ class _EnterOtpModal extends StatelessWidget {
             textAlign: TextAlign.center,
             text: TextSpan(
               style: GoogleFonts.inter(
-                  fontSize: 13, color: AppColors.textSecondary, height: 1.6),
+                  fontSize: 13, color: context.c.textSecondary, height: 1.6),
               children: [
                 const TextSpan(text: 'We\'ve sent a 6-digit code to\n'),
                 TextSpan(
@@ -516,7 +516,7 @@ class _EnterOtpModal extends StatelessWidget {
                   style: GoogleFonts.inter(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary),
+                      color: context.c.textPrimary),
                 ),
               ],
             ),
@@ -535,7 +535,7 @@ class _EnterOtpModal extends StatelessWidget {
           Text(
             "Didn't receive the code?",
             style: GoogleFonts.inter(
-                fontSize: 12, color: AppColors.textSecondary),
+                fontSize: 12, color: context.c.textSecondary),
           ),
           const SizedBox(height: 4),
           GestureDetector(
@@ -548,7 +548,7 @@ class _EnterOtpModal extends StatelessWidget {
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: resendSeconds > 0
-                    ? AppColors.textSecondary
+                    ? context.c.textSecondary
                     : AppColors.primary,
                 decoration: resendSeconds == 0
                     ? TextDecoration.underline
@@ -638,12 +638,12 @@ class _SetNewPinModal extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.arrow_back_ios_new_rounded,
-                    size: 14, color: AppColors.textSecondary),
+                    size: 14, color: context.c.textSecondary),
                 const SizedBox(width: 4),
                 Text('Back',
                     style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: context.c.textSecondary,
                         fontWeight: FontWeight.w500)),
               ],
             ),
@@ -655,14 +655,14 @@ class _SetNewPinModal extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             'Create a new password for your account.',
             style: GoogleFonts.inter(
-                fontSize: 13, color: AppColors.textSecondary),
+                fontSize: 13, color: context.c.textSecondary),
           ),
           const SizedBox(height: 20),
 
@@ -707,7 +707,7 @@ class _SetNewPinModal extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.onAccent,
-                disabledBackgroundColor: AppColors.textDisabled,
+                disabledBackgroundColor: context.c.textDisabled,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
@@ -731,7 +731,7 @@ class _SetNewPinModal extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.primarySurface,
+              color: context.c.primarySurface,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -830,7 +830,7 @@ class _StatusModal extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.w800,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(height: 8),
@@ -838,7 +838,7 @@ class _StatusModal extends StatelessWidget {
             message,
             style: GoogleFonts.inter(
               fontSize: 13,
-              color: AppColors.textSecondary,
+              color: context.c.textSecondary,
               height: 1.6,
             ),
             textAlign: TextAlign.center,
@@ -876,7 +876,7 @@ class _StatusModal extends StatelessWidget {
                 style: TextButton.styleFrom(
                   foregroundColor: onSecondary != null
                       ? AppColors.navy
-                      : AppColors.textDisabled,
+                      : context.c.textDisabled,
                   minimumSize: const Size(0, 44),
                 ),
                 child: Text(
@@ -908,7 +908,7 @@ class _SheetWrapper extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       child: Column(
@@ -920,7 +920,7 @@ class _SheetWrapper extends StatelessWidget {
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: AppColors.divider,
+              color: context.c.divider,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -932,7 +932,7 @@ class _SheetWrapper extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 4, 8, 0),
               child: IconButton(
                 icon: Icon(Icons.close_rounded,
-                    color: AppColors.textSecondary, size: 22),
+                    color: context.c.textSecondary, size: 22),
                 onPressed: onClose,
               ),
             ),
@@ -983,27 +983,27 @@ class _PhoneField extends StatelessWidget {
       ],
       style: GoogleFonts.inter(
           fontSize: 15,
-          color: AppColors.textPrimary,
+          color: context.c.textPrimary,
           fontWeight: FontWeight.w500),
       decoration: InputDecoration(
         hintText: 'Mobile Number',
         hintStyle:
-            GoogleFonts.inter(fontSize: 14, color: AppColors.textHint),
+            GoogleFonts.inter(fontSize: 14, color: context.c.textHint),
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 12, right: 8),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.phone_android_rounded,
-                  color: AppColors.textSecondary, size: 18),
+                  color: context.c.textSecondary, size: 18),
               const SizedBox(width: 6),
               Text('+63',
                   style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary)),
+                      color: context.c.textPrimary)),
             ],
           ),
         ),
@@ -1011,11 +1011,11 @@ class _PhoneField extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -1074,19 +1074,19 @@ class _PinField extends StatelessWidget {
         hintText: hint,
         hintStyle: GoogleFonts.inter(
             fontSize: 14,
-            color: AppColors.textHint,
+            color: context.c.textHint,
             fontWeight: FontWeight.w400,
             letterSpacing: 0),
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         prefixIcon: Icon(Icons.lock_outline_rounded,
-            color: AppColors.textSecondary, size: 18),
+            color: context.c.textSecondary, size: 18),
         suffixIcon: IconButton(
           icon: Icon(
             obscure
                 ? Icons.visibility_off_outlined
                 : Icons.visibility_outlined,
-            color: AppColors.textSecondary,
+            color: context.c.textSecondary,
             size: 18,
           ),
           onPressed: onToggle,
@@ -1098,14 +1098,14 @@ class _PinField extends StatelessWidget {
           borderSide: BorderSide(
               color: isError
                   ? const Color(0xFFDC2626)
-                  : AppColors.inputBorder),
+                  : context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
               color: isError
                   ? const Color(0xFFDC2626)
-                  : AppColors.inputBorder),
+                  : context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),

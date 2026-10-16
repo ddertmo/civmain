@@ -34,8 +34,8 @@ class StatusUpdateScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Status Update'),
-              backgroundColor: AppColors.white,
-              foregroundColor: AppColors.textPrimary,
+              backgroundColor: context.c.card,
+              foregroundColor: context.c.textPrimary,
               elevation: 0,
             ),
             body: Center(
@@ -75,23 +75,23 @@ class _StatusUpdateBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catColor = AppHelpers.getCategoryColor(report.category);
-    final catBg = AppHelpers.getCategoryBgColor(report.category);
+    final catColor = context.c.categoryColor(report.category);
+    final catBg = context.c.categoryBg(report.category);
     final catIcon = AppHelpers.getCategoryIcon(report.category);
-    final statusColor = AppHelpers.getStatusColor(report.status);
-    final statusBg = AppHelpers.getStatusBgColor(report.status);
+    final statusColor = context.c.statusColor(report.status);
+    final statusBg = context.c.statusBg(report.status);
     final statusIcon = AppHelpers.getStatusIcon(report.status);
     final currentIdx = report.statusIndex;
     final unread = AppState().unreadCount;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: context.c.card,
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded,
-              size: 20, color: AppColors.textPrimary),
+              size: 20, color: context.c.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
         title: Column(
@@ -101,10 +101,10 @@ class _StatusUpdateBody extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary)),
+                    color: context.c.textPrimary)),
             Text('Track the latest progress of your report.',
                 style: GoogleFonts.inter(
-                    fontSize: 11, color: AppColors.textSecondary)),
+                    fontSize: 11, color: context.c.textSecondary)),
           ],
         ),
         actions: [
@@ -113,7 +113,7 @@ class _StatusUpdateBody extends StatelessWidget {
             children: [
               IconButton(
                 icon: Icon(Icons.notifications_outlined,
-                    color: AppColors.textPrimary, size: 26),
+                    color: context.c.textPrimary, size: 26),
                 onPressed: () =>
                     Navigator.pushNamed(context, AppRoutes.notifications),
               ),
@@ -134,7 +134,7 @@ class _StatusUpdateBody extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, color: AppColors.divider),
+          child: Divider(height: 1, color: context.c.divider),
         ),
       ),
       body: SingleChildScrollView(
@@ -146,9 +146,9 @@ class _StatusUpdateBody extends StatelessWidget {
             // ── Top info card ─────────────────────────────────────────
             Container(
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: context.c.card,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(color: context.c.divider),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,7 +181,7 @@ class _StatusUpdateBody extends StatelessWidget {
                               style: GoogleFonts.inter(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
-                                  color: AppColors.textPrimary)),
+                                  color: context.c.textPrimary)),
                           const SizedBox(height: 5),
                           // Category chip
                           Container(
@@ -208,14 +208,14 @@ class _StatusUpdateBody extends StatelessWidget {
                           Row(
                             children: [
                               Icon(Icons.location_on_rounded,
-                                  size: 11, color: AppColors.textSecondary),
+                                  size: 11, color: context.c.textSecondary),
                               const SizedBox(width: 3),
                               Expanded(
                                 child: Text(
                                     'Barangay ${report.barangay}, Digos City',
                                     style: GoogleFonts.inter(
                                         fontSize: 10,
-                                        color: AppColors.textSecondary)),
+                                        color: context.c.textSecondary)),
                               ),
                             ],
                           ),
@@ -230,7 +230,7 @@ class _StatusUpdateBody extends StatelessWidget {
                               'Submitted  ${AppHelpers.formatDateTime(report.submittedAt)}',
                               style: GoogleFonts.inter(
                                   fontSize: 10,
-                                  color: AppColors.textSecondary)),
+                                  color: context.c.textSecondary)),
                         ],
                       ),
                     ),
@@ -260,7 +260,7 @@ class _StatusUpdateBody extends StatelessWidget {
                               Text('Current Status',
                                   style: GoogleFonts.inter(
                                       fontSize: 9,
-                                      color: AppColors.textHint)),
+                                      color: context.c.textHint)),
                             ],
                           ),
                         ),
@@ -268,13 +268,13 @@ class _StatusUpdateBody extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.calendar_today_rounded,
-                                size: 10, color: AppColors.textHint),
+                                size: 10, color: context.c.textHint),
                             const SizedBox(width: 3),
                             Text(
                                 'Submitted\n${AppHelpers.formatDate(report.submittedAt)}',
                                 style: GoogleFonts.inter(
                                     fontSize: 9,
-                                    color: AppColors.textHint)),
+                                    color: context.c.textHint)),
                           ],
                         ),
                       ],
@@ -289,9 +289,9 @@ class _StatusUpdateBody extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: context.c.card,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(color: context.c.divider),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +300,7 @@ class _StatusUpdateBody extends StatelessWidget {
                       style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary)),
+                          color: context.c.textPrimary)),
                   const SizedBox(height: 16),
                   if (report.isRejected)
                     RejectionNotice(report: report)
@@ -348,7 +348,7 @@ class _StatusUpdateBody extends StatelessWidget {
                         Text(_statusMessage(report.status),
                             style: GoogleFonts.inter(
                                 fontSize: 12,
-                                color: AppColors.textSecondary,
+                                color: context.c.textSecondary,
                                 height: 1.4)),
                       ],
                     ),
@@ -362,9 +362,9 @@ class _StatusUpdateBody extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: context.c.card,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(color: context.c.divider),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -373,16 +373,16 @@ class _StatusUpdateBody extends StatelessWidget {
                       style: GoogleFonts.inter(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary)),
+                          color: context.c.textPrimary)),
                   const SizedBox(height: 16),
                   // Completed entries from activityLog
                   ...report.activityLog.map((entry) {
                     final isCurrentEntry =
                         entry == report.activityLog.last;
                     final entryColor =
-                        AppHelpers.getStatusColor(entry.status);
+                        context.c.statusColor(entry.status);
                     final entryBg =
-                        AppHelpers.getStatusBgColor(entry.status);
+                        context.c.statusBg(entry.status);
                     final entryIcon =
                         AppHelpers.getStatusIcon(entry.status);
                     final isLast = entry == report.activityLog.last;
@@ -394,7 +394,7 @@ class _StatusUpdateBody extends StatelessWidget {
                       title: entry.title,
                       titleColor: isCurrentEntry
                           ? entryColor
-                          : AppColors.textPrimary,
+                          : context.c.textPrimary,
                       description: entry.description,
                       timeLabel: AppHelpers.formatDateTime(entry.timestamp),
                       isCurrent: isCurrentEntry,
@@ -405,7 +405,7 @@ class _StatusUpdateBody extends StatelessWidget {
                     );
                   }),
                   // Future pending steps (greyed out)
-                  ..._buildPendingSteps(report),
+                  ..._buildPendingSteps(context, report),
                 ],
               ),
             ),
@@ -500,7 +500,7 @@ class _StatusUpdateBody extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildPendingSteps(IncidentReport report) {
+  List<Widget> _buildPendingSteps(BuildContext context, IncidentReport report) {
     const allSteps = [
       'Submitted',
       'Pending Validation',
@@ -527,10 +527,10 @@ class _StatusUpdateBody extends StatelessWidget {
       final isLast = entry.key == pending.length - 1;
       return _ActivityRow(
         icon: AppHelpers.getStatusIcon(step),
-        iconColor: AppColors.textDisabled,
-        iconBg: AppColors.background,
+        iconColor: context.c.textDisabled,
+        iconBg: context.c.background,
         title: step,
-        titleColor: AppColors.textHint,
+        titleColor: context.c.textHint,
         description: descriptions[step] ?? '',
         timeLabel: null,
         isCurrent: false,
@@ -589,8 +589,8 @@ class _HorizontalTimeline extends StatelessWidget {
           final isCurrent = i == currentIdx;
           final isLast = i == steps.length - 1;
           final color = isDone
-              ? AppHelpers.getStatusColor(stepsRaw[i])
-              : AppColors.textDisabled;
+              ? context.c.statusColor(stepsRaw[i])
+              : context.c.textDisabled;
           final icon = AppHelpers.getStatusIcon(stepsRaw[i]);
           final timeLabel = i < activityLog.length
               ? AppHelpers.formatDateShort(activityLog[i].timestamp) +
@@ -611,17 +611,17 @@ class _HorizontalTimeline extends StatelessWidget {
                       height: 40,
                       decoration: BoxDecoration(
                         color: isDone
-                            ? AppHelpers.getStatusBgColor(stepsRaw[i])
-                            : AppColors.background,
+                            ? context.c.statusBg(stepsRaw[i])
+                            : context.c.background,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isDone ? color : AppColors.divider,
+                          color: isDone ? color : context.c.divider,
                           width: isCurrent ? 2.5 : 1.5,
                         ),
                       ),
                       child: Icon(icon,
                           size: 18,
-                          color: isDone ? color : AppColors.textDisabled),
+                          color: isDone ? color : context.c.textDisabled),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -632,8 +632,8 @@ class _HorizontalTimeline extends StatelessWidget {
                             ? FontWeight.w700
                             : FontWeight.w400,
                         color: isDone
-                            ? AppColors.textPrimary
-                            : AppColors.textHint,
+                            ? context.c.textPrimary
+                            : context.c.textHint,
                         height: 1.3,
                       ),
                       textAlign: TextAlign.center,
@@ -643,7 +643,7 @@ class _HorizontalTimeline extends StatelessWidget {
                       Text(
                         timeLabel,
                         style: GoogleFonts.inter(
-                            fontSize: 9, color: AppColors.textHint),
+                            fontSize: 9, color: context.c.textHint),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -675,7 +675,7 @@ class _HorizontalTimeline extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: i < currentIdx
                           ? AppColors.primary
-                          : AppColors.divider,
+                          : context.c.divider,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -755,13 +755,13 @@ class _ActivityRow extends StatelessWidget {
             const SizedBox(height: 2),
             Text(description,
                 style: GoogleFonts.inter(
-                    fontSize: 12, color: AppColors.textSecondary)),
+                    fontSize: 12, color: context.c.textSecondary)),
           ],
           if (timeLabel != null) ...[
             const SizedBox(height: 4),
             Text(timeLabel!,
                 style: GoogleFonts.inter(
-                    fontSize: 11, color: AppColors.textHint)),
+                    fontSize: 11, color: context.c.textHint)),
           ],
           if (showLine) const SizedBox(height: 12),
         ],
@@ -781,7 +781,7 @@ class _ActivityRow extends StatelessWidget {
             ),
             if (showLine)
               Container(
-                  width: 2, height: 40, color: AppColors.divider),
+                  width: 2, height: 40, color: context.c.divider),
           ],
         ),
         Expanded(child: content),

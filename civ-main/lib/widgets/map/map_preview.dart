@@ -176,7 +176,7 @@ class _MapPin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(status);
+    final color = context.c.statusColor(status);
     final icon = AppHelpers.getIssueIcon(issue ?? '');
 
     return Column(
@@ -233,12 +233,12 @@ class _PinPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(status);
+    final color = context.c.statusColor(status);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(color: AppColors.cardShadow, blurRadius: 8, offset: Offset(0, 2)),
@@ -251,7 +251,7 @@ class _PinPopup extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: AppHelpers.getStatusBgColor(status),
+              color: context.c.statusBg(status),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -270,7 +270,7 @@ class _PinPopup extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
               Row(
@@ -312,13 +312,13 @@ class _MapButton extends StatelessWidget {
       width: 32,
       height: 32,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(8),
         boxShadow: const [
           BoxShadow(color: AppColors.cardShadow, blurRadius: 4),
         ],
       ),
-      child: Icon(icon, size: 18, color: AppColors.textPrimary),
+      child: Icon(icon, size: 18, color: context.c.textPrimary),
     );
   }
 }

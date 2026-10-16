@@ -30,17 +30,17 @@ class AppNetworkImage extends StatelessWidget {
       fit: fit,
       loadingBuilder: (context, child, progress) {
         if (progress == null) return child;
-        return _placeholder();
+        return _placeholder(context);
       },
       errorBuilder: (context, error, stackTrace) {
         return errorWidget ??
             Container(
               width: width,
               height: height,
-              color: AppColors.background,
+              color: context.c.background,
               child: Center(
                 child: Icon(Icons.broken_image_outlined,
-                    color: AppColors.textHint, size: 32),
+                    color: context.c.textHint, size: 32),
               ),
             );
       },
@@ -52,12 +52,12 @@ class AppNetworkImage extends StatelessWidget {
     return image;
   }
 
-  Widget _placeholder() {
+  Widget _placeholder(BuildContext context) {
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: context.c.background,
         borderRadius: borderRadius,
       ),
       child: Center(

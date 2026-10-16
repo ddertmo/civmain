@@ -196,7 +196,7 @@ class _DialogCardState extends State<_DialogCard>
 
   Color get _accentLight {
     return switch (widget.variant) {
-      _DialogVariant.loading => AppColors.primarySurface,
+      _DialogVariant.loading => context.c.primarySurface,
       _DialogVariant.success => const Color(0xFFF0FDF4),
       _DialogVariant.error   => const Color(0xFFFEF2F2),
     };
@@ -228,7 +228,7 @@ class _DialogCardState extends State<_DialogCard>
         scale: _scale,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: context.c.card,
             borderRadius: BorderRadius.circular(28),
             boxShadow: [
               BoxShadow(
@@ -281,7 +281,7 @@ class _DialogCardState extends State<_DialogCard>
                         style: GoogleFonts.inter(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
-                          color: AppColors.textPrimary,
+                          color: context.c.textPrimary,
                           height: 1.25,
                         ),
                       ),
@@ -296,7 +296,7 @@ class _DialogCardState extends State<_DialogCard>
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 15,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           height: 1.6,
                           fontWeight: FontWeight.w400,
                         ),
@@ -347,7 +347,7 @@ class _DialogCardState extends State<_DialogCard>
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.textHint,
+                            color: context.c.textHint,
                           ),
                         ),
                       ],
@@ -362,7 +362,7 @@ class _DialogCardState extends State<_DialogCard>
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           fontSize: 15,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           height: 1.5,
                         ),
                       ),

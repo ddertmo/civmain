@@ -190,7 +190,7 @@ class RegisterSkeleton extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.c.card,
               borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(
@@ -212,7 +212,7 @@ class RegisterSkeleton extends StatelessWidget {
                 _skeletonField(labelWidth: 120),
                 const SizedBox(height: 24),
 
-                Divider(color: AppColors.divider),
+                Divider(color: context.c.divider),
                 const SizedBox(height: 20),
 
                 // PIN row
@@ -236,7 +236,7 @@ class RegisterSkeleton extends StatelessWidget {
           Container(
             height: 56,
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.c.card,
               borderRadius: BorderRadius.circular(14),
             ),
           ),
@@ -289,7 +289,7 @@ class HomeTabSkeleton extends StatelessWidget {
         children: [
           // ── Greeting area ────────────────────────────────────────────────
           Container(
-            color: AppColors.white,
+            color: context.c.card,
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,7 +323,7 @@ class HomeTabSkeleton extends StatelessWidget {
                   children: List.generate(4, (i) => Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(right: i < 3 ? 10 : 0),
-                      child: _statTile(),
+                      child: _statTile(context),
                     ),
                   )),
                 ),
@@ -343,9 +343,9 @@ class HomeTabSkeleton extends StatelessWidget {
                 const SizedBox(height: 14),
 
                 // ── 2 announcement cards ──────────────────────────────────
-                _announcementCard(),
+                _announcementCard(context),
                 const SizedBox(height: 12),
-                _announcementCard(),
+                _announcementCard(context),
                 const SizedBox(height: 24),
               ],
             ),
@@ -363,12 +363,12 @@ class HomeTabSkeleton extends StatelessWidget {
         ],
       );
 
-  Widget _statTile() => Container(
+  Widget _statTile(BuildContext context) => Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
         ),
         child: Column(
           children: const [
@@ -381,12 +381,12 @@ class HomeTabSkeleton extends StatelessWidget {
         ),
       );
 
-  Widget _announcementCard() => Container(
+  Widget _announcementCard(BuildContext context) => Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -443,19 +443,19 @@ class MyReportsSkeleton extends StatelessWidget {
           // Report card list
           ...List.generate(5, (_) => Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: _reportCard(),
+            child: _reportCard(context),
           )),
         ],
       ),
     );
   }
 
-  Widget _reportCard() => Container(
+  Widget _reportCard(BuildContext context) => Container(
         height: 100,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
         ),
         clipBehavior: Clip.hardEdge,
         child: Row(
@@ -516,7 +516,7 @@ class NotificationsSkeleton extends StatelessWidget {
           const SizedBox(height: 10),
           ...List.generate(3, (_) => Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: _notifRow(),
+            child: _notifRow(context),
           )),
           const SizedBox(height: 12),
 
@@ -525,19 +525,19 @@ class NotificationsSkeleton extends StatelessWidget {
           const SizedBox(height: 10),
           ...List.generate(2, (_) => Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: _notifRow(),
+            child: _notifRow(context),
           )),
         ],
       ),
     );
   }
 
-  Widget _notifRow() => Container(
+  Widget _notifRow(BuildContext context) => Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.divider),
+          border: Border.all(color: context.c.divider),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -580,7 +580,7 @@ class ProfileSkeleton extends StatelessWidget {
         children: [
           // ── Header ───────────────────────────────────────────────────────
           Container(
-            color: AppColors.white,
+            color: context.c.card,
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
             child: Column(
               children: [
@@ -614,9 +614,9 @@ class ProfileSkeleton extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.c.card,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: context.c.divider),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -640,7 +640,7 @@ class ProfileSkeleton extends StatelessWidget {
                   )),
                 ),
                 const SizedBox(height: 14),
-                Divider(color: AppColors.divider),
+                Divider(color: context.c.divider),
                 const SizedBox(height: 12),
                 _infoRow(),
                 const SizedBox(height: 10),
@@ -654,9 +654,9 @@ class ProfileSkeleton extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.c.card,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: context.c.divider),
             ),
             child: Column(
               children: List.generate(4, (i) => Column(
@@ -675,7 +675,7 @@ class ProfileSkeleton extends StatelessWidget {
                     ),
                   ),
                   if (i < 3)
-                    Divider(height: 1, color: AppColors.divider),
+                    Divider(height: 1, color: context.c.divider),
                 ],
               )),
             ),

@@ -37,8 +37,8 @@ class ProgressTimeline extends StatelessWidget {
           final isCurrent = i == currentIdx;
           final isLast = i == _steps.length - 1;
           final color = isDone
-              ? AppHelpers.getStatusColor(_steps[i])
-              : AppColors.textDisabled;
+              ? context.c.statusColor(_steps[i])
+              : context.c.textDisabled;
           final icon = AppHelpers.getStatusIcon(_steps[i]);
 
           return Row(
@@ -53,18 +53,18 @@ class ProgressTimeline extends StatelessWidget {
                       height: 38,
                       decoration: BoxDecoration(
                         color: isDone
-                            ? AppHelpers.getStatusBgColor(_steps[i])
-                            : AppColors.background,
+                            ? context.c.statusBg(_steps[i])
+                            : context.c.background,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: isDone ? color : AppColors.divider,
+                          color: isDone ? color : context.c.divider,
                           width: isCurrent ? 2 : 1.5,
                         ),
                       ),
                       child: Icon(
                         icon,
                         size: 18,
-                        color: isDone ? color : AppColors.textDisabled,
+                        color: isDone ? color : context.c.textDisabled,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -74,7 +74,7 @@ class ProgressTimeline extends StatelessWidget {
                         fontSize: 10,
                         fontWeight:
                             isCurrent ? FontWeight.w700 : FontWeight.w400,
-                        color: isDone ? AppColors.textPrimary : AppColors.textHint,
+                        color: isDone ? context.c.textPrimary : context.c.textHint,
                       ),
                       textAlign: TextAlign.center,
                       maxLines: 2,
@@ -107,7 +107,7 @@ class ProgressTimeline extends StatelessWidget {
                   height: 2,
                   margin: const EdgeInsets.only(bottom: 28),
                   decoration: BoxDecoration(
-                    color: i < currentIdx ? AppColors.primary : AppColors.divider,
+                    color: i < currentIdx ? AppColors.primary : context.c.divider,
                     borderRadius: BorderRadius.circular(1),
                   ),
                 ),

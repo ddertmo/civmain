@@ -44,52 +44,9 @@ class AppHelpers {
   }
 
   // ── Status Helpers ────────────────────────────────────────────────────────
-  static Color getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'submitted':
-        return AppColors.statusSubmitted;
-      case 'pending validation':
-      case 'pending':
-        return AppColors.statusPending;
-      case 'approved':
-        return AppColors.statusApproved;
-      case 'assigned to office':
-      case 'assigned':
-        return AppColors.statusAssigned;
-      case 'in progress':
-        return AppColors.statusInProgress;
-      case 'resolved':
-        return AppColors.statusResolved;
-      case 'rejected':
-        return AppColors.statusRejected;
-      default:
-        return AppColors.textSecondary;
-    }
-  }
-
-  static Color getStatusBgColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'submitted':
-        return AppColors.statusSubmittedBg;
-      case 'pending validation':
-      case 'pending':
-        return AppColors.statusPendingBg;
-      case 'approved':
-        return AppColors.statusApprovedBg;
-      case 'assigned to office':
-      case 'assigned':
-        return AppColors.statusAssignedBg;
-      case 'in progress':
-        return AppColors.statusInProgressBg;
-      case 'resolved':
-        return AppColors.statusResolvedBg;
-      case 'rejected':
-        return AppColors.statusRejectedBg;
-      default:
-        return AppColors.background;
-    }
-  }
-
+  // Status/category colors depend on the active theme, so they live on
+  // [AppPalette] (`context.c.statusColor(...)`, `context.c.statusBg(...)`,
+  // `context.c.categoryColor(...)`, `context.c.categoryBg(...)`).
   static IconData getStatusIcon(String status) {
     switch (status.toLowerCase()) {
       case 'submitted':
@@ -114,32 +71,6 @@ class AppHelpers {
   }
 
   // ── Category Helpers ─────────────────────────────────────────────────────
-  static Color getCategoryColor(String category) {
-    switch (category.toLowerCase()) {
-      case 'infrastructure':
-        return AppColors.infrastructure;
-      case 'environment':
-        return AppColors.environment;
-      case 'others':
-        return AppColors.statusSubmitted;
-      default:
-        return AppColors.textSecondary;
-    }
-  }
-
-  static Color getCategoryBgColor(String category) {
-    switch (category.toLowerCase()) {
-      case 'infrastructure':
-        return AppColors.infrastructureBg;
-      case 'environment':
-        return AppColors.environmentBg;
-      case 'others':
-        return AppColors.statusSubmittedBg;
-      default:
-        return AppColors.background;
-    }
-  }
-
   static IconData getCategoryIcon(String category) {
     switch (category.toLowerCase()) {
       case 'infrastructure':

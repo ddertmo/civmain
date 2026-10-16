@@ -208,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       body: SafeArea(
         child: FadeTransition(
           opacity: _fadeAnim,
@@ -239,7 +239,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                             style: GoogleFonts.inter(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -247,7 +247,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                             'Fill in your details to get started with CIVILWATCH.',
                             style: GoogleFonts.inter(
                               fontSize: 13,
-                              color: AppColors.textSecondary,
+                              color: context.c.textSecondary,
                               height: 1.5,
                             ),
                           ),
@@ -257,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                           Container(
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: AppColors.white,
+                              color: context.c.card,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: const [
                                 BoxShadow(
@@ -372,7 +372,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 const SizedBox(height: 24),
 
                                 // ── Divider ───────────────────────────────
-                                Divider(color: AppColors.divider),
+                                Divider(color: context.c.divider),
                                 const SizedBox(height: 20),
 
                                 // ── Create PIN ────────────────────────────
@@ -384,7 +384,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   'You will use this PIN to log in to CIVILWATCH.',
                                   style: GoogleFonts.inter(
                                     fontSize: 12,
-                                    color: AppColors.textSecondary,
+                                    color: context.c.textSecondary,
                                     height: 1.4,
                                   ),
                                 ),
@@ -406,7 +406,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                   'Re-enter your 6-digit PIN to confirm.',
                                   style: GoogleFonts.inter(
                                     fontSize: 12,
-                                    color: AppColors.textSecondary,
+                                    color: context.c.textSecondary,
                                     height: 1.4,
                                   ),
                                 ),
@@ -521,24 +521,24 @@ class _RegisterScreenState extends State<RegisterScreen>
       ],
       style: GoogleFonts.inter(
           fontSize: 14,
-          color: AppColors.textPrimary,
+          color: context.c.textPrimary,
           fontWeight: FontWeight.w500),
       decoration: InputDecoration(
         hintText: '9XX XXX XXXX',
         hintStyle:
-            GoogleFonts.inter(fontSize: 14, color: AppColors.textHint),
+            GoogleFonts.inter(fontSize: 14, color: context.c.textHint),
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         prefixIcon: _PhonePrefixWidget(),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -571,25 +571,25 @@ class _RegisterScreenState extends State<RegisterScreen>
       validator: validator,
       keyboardType: keyboardType,
       style: GoogleFonts.inter(
-          fontSize: 14, color: AppColors.textPrimary),
+          fontSize: 14, color: context.c.textPrimary),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: GoogleFonts.inter(
-            fontSize: 14, color: AppColors.textHint),
+            fontSize: 14, color: context.c.textHint),
         prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, color: AppColors.textHint, size: 20)
+            ? Icon(prefixIcon, color: context.c.textHint, size: 20)
             : null,
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         contentPadding: const EdgeInsets.symmetric(
             horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -700,19 +700,19 @@ class _PinInputRowState extends State<_PinInputRow> {
               filled: true,
               fillColor: isFilled
                   ? filledColor.withValues(alpha: 0.06)
-                  : AppColors.inputFill,
+                  : context.c.inputFill,
               contentPadding: EdgeInsets.zero,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide:
-                    BorderSide(color: AppColors.inputBorder),
+                    BorderSide(color: context.c.inputBorder),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide: BorderSide(
                   color: isFilled
                       ? filledColor.withValues(alpha: 0.4)
-                      : AppColors.inputBorder,
+                      : context.c.inputBorder,
                   width: isFilled ? 1.5 : 1,
                 ),
               ),
@@ -752,10 +752,10 @@ class _TermsCheckbox extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: agreed ? AppColors.primarySurface : AppColors.white,
+          color: agreed ? context.c.primarySurface : context.c.card,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: agreed ? AppColors.primary : AppColors.divider,
+            color: agreed ? AppColors.primary : context.c.divider,
             width: agreed ? 2 : 1,
           ),
         ),
@@ -772,7 +772,7 @@ class _TermsCheckbox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color:
-                      agreed ? AppColors.primary : AppColors.inputBorder,
+                      agreed ? AppColors.primary : context.c.inputBorder,
                   width: 1.5,
                 ),
               ),
@@ -787,7 +787,7 @@ class _TermsCheckbox extends StatelessWidget {
                 text: TextSpan(
                   style: GoogleFonts.inter(
                     fontSize: 13,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                     height: 1.5,
                   ),
                   children: [
@@ -833,14 +833,14 @@ class _RegisterHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(bottom: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(bottom: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
           IconButton(
             icon: Icon(Icons.arrow_back_ios_new_rounded,
-                size: 20, color: AppColors.textPrimary),
+                size: 20, color: context.c.textPrimary),
             onPressed: () => Navigator.pop(context),
           ),
           Expanded(
@@ -852,14 +852,14 @@ class _RegisterHeader extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 Text(
                   'Step 1 of 2 · Create Account',
                   style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textSecondary),
+                      color: context.c.textSecondary),
                 ),
               ],
             ),
@@ -899,14 +899,14 @@ class _FieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.textSecondary),
+        Icon(icon, size: 16, color: context.c.textSecondary),
         const SizedBox(width: 6),
         Text(
           label,
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
         ),
         if (isOptional) ...[
@@ -915,15 +915,15 @@ class _FieldLabel extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
                 horizontal: 7, vertical: 2),
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: context.c.background,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(color: context.c.divider),
             ),
             child: Text(
               'Optional',
               style: GoogleFonts.inter(
                   fontSize: 10,
-                  color: AppColors.textHint,
+                  color: context.c.textHint,
                   fontWeight: FontWeight.w500),
             ),
           ),
@@ -951,7 +951,7 @@ class _BarangayDropdown extends StatelessWidget {
       hint: Text(
         'Select your barangay',
         style: GoogleFonts.inter(
-            fontSize: 14, color: AppColors.textHint),
+            fontSize: 14, color: context.c.textHint),
       ),
       onChanged: onChanged,
       items: AppStrings.barangays
@@ -963,18 +963,18 @@ class _BarangayDropdown extends StatelessWidget {
           .toList(),
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColors.inputFill,
+        fillColor: context.c.inputFill,
         prefixIcon: Icon(Icons.location_on_outlined,
-            color: AppColors.textHint, size: 20),
+            color: context.c.textHint, size: 20),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: context.c.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -983,9 +983,9 @@ class _BarangayDropdown extends StatelessWidget {
         ),
       ),
       style: GoogleFonts.inter(
-          fontSize: 14, color: AppColors.textPrimary),
+          fontSize: 14, color: context.c.textPrimary),
       icon: Icon(Icons.keyboard_arrow_down_rounded,
-          color: AppColors.textSecondary),
+          color: context.c.textSecondary),
       borderRadius: BorderRadius.circular(12),
       isExpanded: true,
     );
@@ -1003,7 +1003,7 @@ class _PhonePrefixWidget extends StatelessWidget {
       margin: const EdgeInsets.only(left: 12, right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        border: Border(right: BorderSide(color: AppColors.inputBorder)),
+        border: Border(right: BorderSide(color: context.c.inputBorder)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -1015,12 +1015,12 @@ class _PhonePrefixWidget extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
+              color: context.c.textPrimary,
             ),
           ),
           const SizedBox(width: 2),
           Icon(Icons.keyboard_arrow_down_rounded,
-              size: 16, color: AppColors.textSecondary),
+              size: 16, color: context.c.textSecondary),
         ],
       ),
     );

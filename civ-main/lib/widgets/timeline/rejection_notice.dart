@@ -32,9 +32,9 @@ class RejectionNotice extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.statusRejectedBg,
+        color: context.c.statusRejectedBg,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.statusRejectedBorder),
+        border: Border.all(color: context.c.statusRejectedBorder),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class RejectionNotice extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 12,
                     height: 1.4,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                 ),
               ],

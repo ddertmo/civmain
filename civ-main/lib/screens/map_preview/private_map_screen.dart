@@ -26,20 +26,20 @@ class PrivateMapScreen extends StatelessWidget {
       return const Scaffold(body: Center(child: Text('Report not found.')));
     }
 
-    final pinColor = AppHelpers.getStatusColor(report.status);
+    final pinColor = context.c.statusColor(report.status);
     final pinIcon = AppHelpers.getIssueIcon(report.issue);
     final reportLatLng = LatLng(report.latitude, report.longitude);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: context.c.card,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -48,12 +48,12 @@ class PrivateMapScreen extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Divider(height: 1, color: AppColors.divider),
+          child: Divider(height: 1, color: context.c.divider),
         ),
       ),
       body: Column(
@@ -66,9 +66,9 @@ class PrivateMapScreen extends StatelessWidget {
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: AppColors.statusPendingBg,
+                color: context.c.statusPendingBg,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.statusPendingBorder),
+                border: Border.all(color: context.c.statusPendingBorder),
               ),
               child: Row(
                 children: [
@@ -103,7 +103,7 @@ class PrivateMapScreen extends StatelessWidget {
                           'Only you can see this report until it has been validated.',
                           style: GoogleFonts.inter(
                             fontSize: 11,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                             height: 1.4,
                           ),
                         ),
@@ -160,7 +160,7 @@ class PrivateMapScreen extends StatelessWidget {
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.white,
+                                color: context.c.card,
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: const [
                                   BoxShadow(
@@ -175,7 +175,7 @@ class PrivateMapScreen extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w700,
-                                  color: AppColors.textPrimary,
+                                  color: context.c.textPrimary,
                                 ),
                               ),
                             ),
@@ -223,7 +223,7 @@ class PrivateMapScreen extends StatelessWidget {
           // ── Info sheet ────────────────────────────────────────────────
           Container(
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.c.card,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(20),
               ),
@@ -243,7 +243,7 @@ class PrivateMapScreen extends StatelessWidget {
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.divider,
+                    color: context.c.divider,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -254,7 +254,7 @@ class PrivateMapScreen extends StatelessWidget {
                 ),
                 Divider(
                   height: 1,
-                  color: AppColors.divider,
+                  color: context.c.divider,
                   indent: 20,
                   endIndent: 20,
                 ),
@@ -266,7 +266,7 @@ class PrivateMapScreen extends StatelessWidget {
                 ),
                 Divider(
                   height: 1,
-                  color: AppColors.divider,
+                  color: context.c.divider,
                   indent: 20,
                   endIndent: 20,
                 ),
@@ -283,7 +283,7 @@ class PrivateMapScreen extends StatelessWidget {
           //Back button 
           Container(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-            color: AppColors.white,
+            color: context.c.card,
             child: SizedBox(
               width: double.infinity,
               height: 52,
@@ -334,7 +334,7 @@ class _InfoRow extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: AppColors.primarySurface,
+              color: context.c.primarySurface,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, size: 16, color: AppColors.primary),
@@ -348,14 +348,14 @@ class _InfoRow extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: context.c.textPrimary,
                 ),
               ),
               Text(
                 subtitle,
                 style: GoogleFonts.inter(
                   fontSize: 11,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                 ),
               ),
             ],
@@ -435,9 +435,9 @@ class _MapPhotoTile extends StatelessWidget {
                   ? Image.network(
                       imageUrl!,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholder(),
+                      errorBuilder: (_, __, ___) => _placeholder(context),
                     )
-                  : _placeholder(),
+                  : _placeholder(context),
             ),
           ),
         ],
@@ -445,19 +445,19 @@ class _MapPhotoTile extends StatelessWidget {
     );
   }
 
-  Widget _placeholder() {
+  Widget _placeholder(BuildContext context) {
     return Container(
-      color: AppColors.background,
+      color: context.c.background,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.image_not_supported_outlined,
-                color: AppColors.textHint, size: 22),
+                color: context.c.textHint, size: 22),
             const SizedBox(height: 4),
             Text('No photo',
                 style: GoogleFonts.inter(
-                    fontSize: 10, color: AppColors.textHint)),
+                    fontSize: 10, color: context.c.textHint)),
           ],
         ),
       ),
@@ -574,14 +574,14 @@ class _BeforeAfterDialog extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.compare_rounded,
-                    size: 18, color: AppColors.textPrimary),
+                    size: 18, color: context.c.textPrimary),
                 const SizedBox(width: 8),
                 Text(
                   'Before & After',
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const Spacer(),
@@ -608,12 +608,12 @@ class _BeforeAfterDialog extends StatelessWidget {
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
-                      color: AppColors.background,
+                      color: context.c.background,
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.divider),
+                      border: Border.all(color: context.c.divider),
                     ),
                     child: Icon(Icons.close_rounded,
-                        size: 14, color: AppColors.textSecondary),
+                        size: 14, color: context.c.textSecondary),
                   ),
                 ),
               ],
@@ -626,7 +626,7 @@ class _BeforeAfterDialog extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textPrimary,
+                color: context.c.textPrimary,
               ),
             ),
             const SizedBox(height: 2),
@@ -634,7 +634,7 @@ class _BeforeAfterDialog extends StatelessWidget {
               'Barangay ${report.barangay}, Digos City',
               style: GoogleFonts.inter(
                 fontSize: 11,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
               ),
             ),
             const SizedBox(height: 16),

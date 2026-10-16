@@ -1,80 +1,40 @@
 import 'package:flutter/material.dart';
 
-/// CivilWatch color palette.
+/// CivilWatch color tokens.
 ///
 /// Two token groups:
-///  - **Accent tokens** (primary green, navy, status hues): `const`, identical
-///    in both themes — the brand never changes.
-///  - **Surface tokens** (backgrounds, cards, text, borders, tints): plain
-///    static fields swapped at runtime by [AppColors.setDark]. Every screen
-///    reads these, so toggling repaints the whole app without per-screen
-///    theming.
+///  - **Accent tokens** (primary green, navy, status hues, category hues):
+///    `const`, identical in both themes — the brand never changes, so these
+///    stay on [AppColors] and need no `BuildContext`.
+///  - **Surface tokens** (backgrounds, cards, text, borders, status tints):
+///    exposed through [AppPalette], a [ThemeExtension] registered on the light
+///    and dark [ThemeData]. Screens read them with `context.c.<token>`, which
+///    creates a dependency on the active theme, so every widget repaints when
+///    the theme changes — including `const` widgets, because the dependency is
+///    resolved through the widget tree rather than a mutable global.
+///
+/// There is exactly one theme state: `AppState.isDarkMode` (persisted in
+/// `shared_preferences`). Never keep a second copy of the palette anywhere.
 class AppColors {
   AppColors._();
 
-  // ── Theme state ───────────────────────────────────────────────────────────
-  static bool _isDark = false;
-  static bool get isDark => _isDark;
-
-  /// Swap every surface token between the light and dark palettes.
-  /// Call before the first frame (from AppState.init) and on every toggle.
-  static void setDark(bool dark) {
-    if (_isDark == dark) return;
-    _isDark = dark;
-
-    background = dark ? _backgroundDark : _backgroundLight;
-    surface = dark ? _surfaceDark : _surfaceLight;
-    card = dark ? _cardDark : _cardLight;
-    divider = dark ? _dividerDark : _dividerLight;
-
-    textPrimary = dark ? _textPrimaryDark : _textPrimaryLight;
-    textSecondary = dark ? _textSecondaryDark : _textSecondaryLight;
-    textHint = dark ? _textHintDark : _textHintLight;
-    textDisabled = dark ? _textDisabledDark : _textDisabledLight;
-
-    inputBorder = dark ? _inputBorderDark : _inputBorderLight;
-    inputFill = dark ? _inputFillDark : _inputFillLight;
-
-    primarySurface = dark ? _primarySurfaceDark : _primarySurfaceLight;
-
-    statusPendingBg = dark ? _pendingBgDark : _pendingBgLight;
-    statusPendingBorder = dark ? _pendingBorderDark : _pendingBorderLight;
-    statusApprovedBg = dark ? _approvedBgDark : _approvedBgLight;
-    statusApprovedBorder = dark ? _approvedBorderDark : _approvedBorderLight;
-    statusInProgressBg = dark ? _inProgressBgDark : _inProgressBgLight;
-    statusInProgressBorder =
-        dark ? _inProgressBorderDark : _inProgressBorderLight;
-    statusResolvedBg = dark ? _resolvedBgDark : _resolvedBgLight;
-    statusResolvedBorder = dark ? _resolvedBorderDark : _resolvedBorderLight;
-    statusAssignedBg = dark ? _assignedBgDark : _assignedBgLight;
-    statusAssignedBorder = dark ? _assignedBorderDark : _assignedBorderLight;
-    statusSubmittedBg = dark ? _submittedBgDark : _submittedBgLight;
-    statusRejectedBg = dark ? _rejectedBgDark : _rejectedBgLight;
-    statusRejectedBorder = dark ? _rejectedBorderDark : _rejectedBorderLight;
-
-    infrastructureBg = dark ? _pendingBgDark : _pendingBgLight;
-    environmentBg = dark ? _resolvedBgDark : _resolvedBgLight;
-
-    loginBg = dark ? _backgroundDark : _loginBgLight;
-  }
-
   // ── Primary Palette (accent — same in both themes) ────────────────────────
-  static const Color primary = Color(0xFF1B5E20);        // deep green
-  static const Color primaryLight = Color(0xFF2E7D32);   // green
+  static const Color primary = Color(0xFF1B5E20); // deep green
+  static const Color primaryLight = Color(0xFF2E7D32); // green
   static const Color primaryMid = Color(0xFF388E3C);
 
   // ── Navy / Dark (accent) ──────────────────────────────────────────────────
-  static const Color navy = Color(0xFF0D2137);            // dark navy (CTAs)
+  static const Color navy = Color(0xFF0D2137); // dark navy (CTAs)
   static const Color navyLight = Color(0xFF1A3A5C);
 
   // ── Status hues (accent) ──────────────────────────────────────────────────
-  static const Color statusPending = Color(0xFFF59E0B);   // amber/yellow
-  static const Color statusApproved = Color(0xFF0E7C7B);  // teal
+  static const Color statusPending = Color(0xFFF59E0B); // amber/yellow
+  static const Color statusApproved = Color(0xFF0E7C7B); // teal
   static const Color statusInProgress = Color(0xFFEA580C); // orange
-  static const Color statusResolved = Color(0xFF16A34A);  // green
-  static const Color statusAssigned = Color(0xFF2563EB);  // blue
+  static const Color statusResolved = Color(0xFF16A34A); // green
+  static const Color statusAssigned = Color(0xFF2563EB); // blue
   static const Color statusSubmitted = Color(0xFF7C3AED); // purple
-  static const Color statusRejected = Color(0xFFDC2626);  // red
+  static const Color statusRejected = Color(0xFFDC2626); // red
 
   // ── Category Colors (accent) ──────────────────────────────────────────────
   static const Color infrastructure = Color(0xFFF59E0B);
@@ -85,94 +45,287 @@ class AppColors {
   /// mode — accent surfaces keep their color in both themes.
   static const Color onAccent = Color(0xFFFFFFFF);
 
-  // ── Surface tokens (swapped by setDark) ───────────────────────────────────
-  // Light palettes (also the app's original visual identity).
-  static const Color _backgroundLight = Color(0xFFF8FAFC);
-  static const Color _surfaceLight = Color(0xFFFFFFFF);
-  static const Color _cardLight = Color(0xFFFFFFFF);
-  static const Color _dividerLight = Color(0xFFE2E8F0);
-  static const Color _textPrimaryLight = Color(0xFF0F172A);
-  static const Color _textSecondaryLight = Color(0xFF64748B);
-  static const Color _textHintLight = Color(0xFF94A3B8);
-  static const Color _textDisabledLight = Color(0xFFCBD5E1);
-  static const Color _inputBorderLight = Color(0xFFE2E8F0);
-  static const Color _inputFillLight = Color(0xFFF8FAFC);
-  static const Color _primarySurfaceLight = Color(0xFFE8F5E9);
-  static const Color _pendingBgLight = Color(0xFFFFFBEB);
-  static const Color _pendingBorderLight = Color(0xFFFDE68A);
-  static const Color _approvedBgLight = Color(0xFFE0F7F6);
-  static const Color _approvedBorderLight = Color(0xFF99F6E4);
-  static const Color _inProgressBgLight = Color(0xFFFFF7ED);
-  static const Color _inProgressBorderLight = Color(0xFFFED7AA);
-  static const Color _resolvedBgLight = Color(0xFFF0FDF4);
-  static const Color _resolvedBorderLight = Color(0xFFBBF7D0);
-  static const Color _assignedBgLight = Color(0xFFEFF6FF);
-  static const Color _assignedBorderLight = Color(0xFFBFDBFE);
-  static const Color _submittedBgLight = Color(0xFFF5F3FF);
-  static const Color _rejectedBgLight = Color(0xFFFEF2F2);
-  static const Color _rejectedBorderLight = Color(0xFFFECACA);
-  static const Color _loginBgLight = Color(0xFFE8F4FD);
-
-  // Dark palettes — deep navy backgrounds, slightly lighter navy cards.
-  static const Color _backgroundDark = Color(0xFF0F172A); // slate-900
-  static const Color _surfaceDark = Color(0xFF1E293B);    // slate-800
-  static const Color _cardDark = Color(0xFF1E293B);
-  static const Color _dividerDark = Color(0xFF334155);    // slate-700
-  static const Color _textPrimaryDark = Color(0xFFF1F5F9); // slate-100
-  static const Color _textSecondaryDark = Color(0xFF94A3B8); // slate-400
-  static const Color _textHintDark = Color(0xFF64748B);   // slate-500
-  static const Color _textDisabledDark = Color(0xFF475569); // slate-600
-  static const Color _inputBorderDark = Color(0xFF475569);
-  static const Color _inputFillDark = Color(0xFF1E293B);
-  static const Color _primarySurfaceDark = Color(0xFF14532D); // green-900
-  static const Color _pendingBgDark = Color(0xFF451A04);
-  static const Color _pendingBorderDark = Color(0xFF92400E);
-  static const Color _approvedBgDark = Color(0xFF042F2E);
-  static const Color _approvedBorderDark = Color(0xFF115E59);
-  static const Color _inProgressBgDark = Color(0xFF431407);
-  static const Color _inProgressBorderDark = Color(0xFF9A3412);
-  static const Color _resolvedBgDark = Color(0xFF052E16);
-  static const Color _resolvedBorderDark = Color(0xFF166534);
-  static const Color _assignedBgDark = Color(0xFF172554);
-  static const Color _assignedBorderDark = Color(0xFF1D4ED8);
-  static const Color _submittedBgDark = Color(0xFF2E1065);
-  static const Color _rejectedBgDark = Color(0xFF450A0A);
-  static const Color _rejectedBorderDark = Color(0xFF991B1B);
-
-  // Current values — start light; AppColors.setDark swaps them before runApp.
-  static Color background = _backgroundLight;
-  static Color surface = _surfaceLight;
-  static Color card = _cardLight;
-  static Color divider = _dividerLight;
-  static Color textPrimary = _textPrimaryLight;
-  static Color textSecondary = _textSecondaryLight;
-  static Color textHint = _textHintLight;
-  static Color textDisabled = _textDisabledLight;
-  static Color inputBorder = _inputBorderLight;
-  static Color inputFill = _inputFillLight;
-  static Color primarySurface = _primarySurfaceLight;
-  static Color statusPendingBg = _pendingBgLight;
-  static Color statusPendingBorder = _pendingBorderLight;
-  static Color statusApprovedBg = _approvedBgLight;
-  static Color statusApprovedBorder = _approvedBorderLight;
-  static Color statusInProgressBg = _inProgressBgLight;
-  static Color statusInProgressBorder = _inProgressBorderLight;
-  static Color statusResolvedBg = _resolvedBgLight;
-  static Color statusResolvedBorder = _resolvedBorderLight;
-  static Color statusAssignedBg = _assignedBgLight;
-  static Color statusAssignedBorder = _assignedBorderLight;
-  static Color statusSubmittedBg = _submittedBgLight;
-  static Color statusRejectedBg = _rejectedBgLight;
-  static Color statusRejectedBorder = _rejectedBorderLight;
-  static Color infrastructureBg = _pendingBgLight;
-  static Color environmentBg = _resolvedBgLight;
-  static Color loginBg = _loginBgLight;
-
-  // ── Kept for compatibility ────────────────────────────────────────────────
-  /// Legacy alias — surfaces should prefer [card]; prefer [onAccent] for
-  /// white-on-colored-circle icons. Dynamic so old surface reads still theme.
-  static Color get white => card;
-
   static const Color loginBgDark = Color(0xFFBFDBFE);
   static const Color cardShadow = Color(0x0F000000);
+}
+
+/// Theme-dependent surface palette — a [ThemeExtension] so values are read
+/// from the widget tree (`context.c.background`) and update automatically.
+///
+/// Register the light variant on the light theme and the dark variant on the
+/// dark theme (see `app_theme.dart`). Do **not** mutate these at runtime.
+class AppPalette extends ThemeExtension<AppPalette> {
+  const AppPalette({
+    required this.background,
+    required this.surface,
+    required this.card,
+    required this.divider,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.textHint,
+    required this.textDisabled,
+    required this.inputBorder,
+    required this.inputFill,
+    required this.primarySurface,
+    required this.statusPendingBg,
+    required this.statusPendingBorder,
+    required this.statusApprovedBg,
+    required this.statusApprovedBorder,
+    required this.statusInProgressBg,
+    required this.statusInProgressBorder,
+    required this.statusResolvedBg,
+    required this.statusResolvedBorder,
+    required this.statusAssignedBg,
+    required this.statusAssignedBorder,
+    required this.statusSubmittedBg,
+    required this.statusRejectedBg,
+    required this.statusRejectedBorder,
+    required this.infrastructureBg,
+    required this.environmentBg,
+    required this.loginBg,
+  });
+
+  final Color background;
+  final Color surface;
+  final Color card;
+  final Color divider;
+  final Color textPrimary;
+  final Color textSecondary;
+  final Color textHint;
+  final Color textDisabled;
+  final Color inputBorder;
+  final Color inputFill;
+  final Color primarySurface;
+  final Color statusPendingBg;
+  final Color statusPendingBorder;
+  final Color statusApprovedBg;
+  final Color statusApprovedBorder;
+  final Color statusInProgressBg;
+  final Color statusInProgressBorder;
+  final Color statusResolvedBg;
+  final Color statusResolvedBorder;
+  final Color statusAssignedBg;
+  final Color statusAssignedBorder;
+  final Color statusSubmittedBg;
+  final Color statusRejectedBg;
+  final Color statusRejectedBorder;
+  final Color infrastructureBg;
+  final Color environmentBg;
+  final Color loginBg;
+
+  /// Light palette — the app's original visual identity (off-white / cool-gray
+  /// background, white cards, dark slate text).
+  static const AppPalette light = AppPalette(
+    background: Color(0xFFF8FAFC),
+    surface: Color(0xFFFFFFFF),
+    card: Color(0xFFFFFFFF),
+    divider: Color(0xFFE2E8F0),
+    textPrimary: Color(0xFF0F172A),
+    textSecondary: Color(0xFF64748B),
+    textHint: Color(0xFF94A3B8),
+    textDisabled: Color(0xFFCBD5E1),
+    inputBorder: Color(0xFFE2E8F0),
+    inputFill: Color(0xFFF8FAFC),
+    primarySurface: Color(0xFFE8F5E9),
+    statusPendingBg: Color(0xFFFFFBEB),
+    statusPendingBorder: Color(0xFFFDE68A),
+    statusApprovedBg: Color(0xFFE0F7F6),
+    statusApprovedBorder: Color(0xFF99F6E4),
+    statusInProgressBg: Color(0xFFFFF7ED),
+    statusInProgressBorder: Color(0xFFFED7AA),
+    statusResolvedBg: Color(0xFFF0FDF4),
+    statusResolvedBorder: Color(0xFFBBF7D0),
+    statusAssignedBg: Color(0xFFEFF6FF),
+    statusAssignedBorder: Color(0xFFBFDBFE),
+    statusSubmittedBg: Color(0xFFF5F3FF),
+    statusRejectedBg: Color(0xFFFEF2F2),
+    statusRejectedBorder: Color(0xFFFECACA),
+    infrastructureBg: Color(0xFFFFFBEB),
+    environmentBg: Color(0xFFF0FDF4),
+    loginBg: Color(0xFFE8F4FD),
+  );
+
+  /// Dark palette — deep navy background, slightly lighter navy cards,
+  /// near-white text.
+  static const AppPalette dark = AppPalette(
+    background: Color(0xFF0F172A), // slate-900
+    surface: Color(0xFF1E293B), // slate-800
+    card: Color(0xFF1E293B),
+    divider: Color(0xFF334155), // slate-700
+    textPrimary: Color(0xFFF1F5F9), // slate-100
+    textSecondary: Color(0xFF94A3B8), // slate-400
+    textHint: Color(0xFF64748B), // slate-500
+    textDisabled: Color(0xFF475569), // slate-600
+    inputBorder: Color(0xFF475569),
+    inputFill: Color(0xFF1E293B),
+    primarySurface: Color(0xFF14532D), // green-900
+    statusPendingBg: Color(0xFF451A04),
+    statusPendingBorder: Color(0xFF92400E),
+    statusApprovedBg: Color(0xFF042F2E),
+    statusApprovedBorder: Color(0xFF115E59),
+    statusInProgressBg: Color(0xFF431407),
+    statusInProgressBorder: Color(0xFF9A3412),
+    statusResolvedBg: Color(0xFF052E16),
+    statusResolvedBorder: Color(0xFF166534),
+    statusAssignedBg: Color(0xFF172554),
+    statusAssignedBorder: Color(0xFF1D4ED8),
+    statusSubmittedBg: Color(0xFF2E1065),
+    statusRejectedBg: Color(0xFF450A0A),
+    statusRejectedBorder: Color(0xFF991B1B),
+    infrastructureBg: Color(0xFF451A04),
+    environmentBg: Color(0xFF052E16),
+    loginBg: Color(0xFF0F172A),
+  );
+
+  // ── Status / category lookups (theme-dependent tints) ─────────────────────
+  // Accent hues live in [AppColors]; only the tinted backgrounds depend on
+  // the theme, so these lookups hang off the palette.
+  Color statusBg(String status) {
+    switch (status.toLowerCase()) {
+      case 'submitted':
+        return statusSubmittedBg;
+      case 'pending validation':
+      case 'pending':
+        return statusPendingBg;
+      case 'approved':
+        return statusApprovedBg;
+      case 'assigned to office':
+      case 'assigned':
+        return statusAssignedBg;
+      case 'in progress':
+        return statusInProgressBg;
+      case 'resolved':
+        return statusResolvedBg;
+      case 'rejected':
+        return statusRejectedBg;
+      default:
+        return background;
+    }
+  }
+
+  Color categoryBg(String category) {
+    switch (category.toLowerCase()) {
+      case 'infrastructure':
+        return infrastructureBg;
+      case 'environment':
+        return environmentBg;
+      case 'others':
+        return statusSubmittedBg;
+      default:
+        return background;
+    }
+  }
+
+  Color statusColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'submitted':
+        return AppColors.statusSubmitted;
+      case 'pending validation':
+      case 'pending':
+        return AppColors.statusPending;
+      case 'approved':
+        return AppColors.statusApproved;
+      case 'assigned to office':
+      case 'assigned':
+        return AppColors.statusAssigned;
+      case 'in progress':
+        return AppColors.statusInProgress;
+      case 'resolved':
+        return AppColors.statusResolved;
+      case 'rejected':
+        return AppColors.statusRejected;
+      default:
+        return textSecondary;
+    }
+  }
+
+  Color categoryColor(String category) {
+    switch (category.toLowerCase()) {
+      case 'infrastructure':
+        return AppColors.infrastructure;
+      case 'environment':
+        return AppColors.environment;
+      case 'others':
+        return AppColors.statusSubmitted;
+      default:
+        return textSecondary;
+    }
+  }
+
+  @override
+  AppPalette copyWith({
+    Color? background,
+    Color? surface,
+    Color? card,
+    Color? divider,
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textHint,
+    Color? textDisabled,
+    Color? inputBorder,
+    Color? inputFill,
+    Color? primarySurface,
+    Color? statusPendingBg,
+    Color? statusPendingBorder,
+    Color? statusApprovedBg,
+    Color? statusApprovedBorder,
+    Color? statusInProgressBg,
+    Color? statusInProgressBorder,
+    Color? statusResolvedBg,
+    Color? statusResolvedBorder,
+    Color? statusAssignedBg,
+    Color? statusAssignedBorder,
+    Color? statusSubmittedBg,
+    Color? statusRejectedBg,
+    Color? statusRejectedBorder,
+    Color? infrastructureBg,
+    Color? environmentBg,
+    Color? loginBg,
+  }) {
+    return AppPalette(
+      background: background ?? this.background,
+      surface: surface ?? this.surface,
+      card: card ?? this.card,
+      divider: divider ?? this.divider,
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
+      textHint: textHint ?? this.textHint,
+      textDisabled: textDisabled ?? this.textDisabled,
+      inputBorder: inputBorder ?? this.inputBorder,
+      inputFill: inputFill ?? this.inputFill,
+      primarySurface: primarySurface ?? this.primarySurface,
+      statusPendingBg: statusPendingBg ?? this.statusPendingBg,
+      statusPendingBorder: statusPendingBorder ?? this.statusPendingBorder,
+      statusApprovedBg: statusApprovedBg ?? this.statusApprovedBg,
+      statusApprovedBorder: statusApprovedBorder ?? this.statusApprovedBorder,
+      statusInProgressBg: statusInProgressBg ?? this.statusInProgressBg,
+      statusInProgressBorder:
+          statusInProgressBorder ?? this.statusInProgressBorder,
+      statusResolvedBg: statusResolvedBg ?? this.statusResolvedBg,
+      statusResolvedBorder: statusResolvedBorder ?? this.statusResolvedBorder,
+      statusAssignedBg: statusAssignedBg ?? this.statusAssignedBg,
+      statusAssignedBorder: statusAssignedBorder ?? this.statusAssignedBorder,
+      statusSubmittedBg: statusSubmittedBg ?? this.statusSubmittedBg,
+      statusRejectedBg: statusRejectedBg ?? this.statusRejectedBg,
+      statusRejectedBorder: statusRejectedBorder ?? this.statusRejectedBorder,
+      infrastructureBg: infrastructureBg ?? this.infrastructureBg,
+      environmentBg: environmentBg ?? this.environmentBg,
+      loginBg: loginBg ?? this.loginBg,
+    );
+  }
+
+  @override
+  AppPalette lerp(ThemeExtension<AppPalette>? other, double t) {
+    // The app switches themes instantly (no cross-fade), so an instant swap is
+    // all that is needed here.
+    if (other is! AppPalette) return this;
+    return t < 0.5 ? this : other;
+  }
+}
+
+/// `context.c` — the active [AppPalette]. Creates a dependency on the theme, so
+/// any widget that reads it rebuilds when the theme changes.
+extension AppPaletteContext on BuildContext {
+  AppPalette get c =>
+      Theme.of(this).extension<AppPalette>() ?? AppPalette.light;
 }

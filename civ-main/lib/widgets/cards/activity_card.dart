@@ -18,8 +18,8 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = AppHelpers.getStatusColor(entry.status);
-    final bg = AppHelpers.getStatusBgColor(entry.status);
+    final color = context.c.statusColor(entry.status);
+    final bg = context.c.statusBg(entry.status);
     final icon = AppHelpers.getStatusIcon(entry.status);
 
     return Row(
@@ -38,7 +38,7 @@ class ActivityCard extends StatelessWidget {
               Container(
                 width: 2,
                 height: 36,
-                color: AppColors.divider,
+                color: context.c.divider,
               ),
           ],
         ),
@@ -59,7 +59,7 @@ class ActivityCard extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
-                          color: isCurrent ? color : AppColors.textPrimary,
+                          color: isCurrent ? color : context.c.textPrimary,
                         ),
                       ),
                     ),
@@ -87,7 +87,7 @@ class ActivityCard extends StatelessWidget {
                   entry.description,
                   style: GoogleFonts.inter(
                     fontSize: 12,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                 ),
                 const SizedBox(height: 3),
@@ -95,7 +95,7 @@ class ActivityCard extends StatelessWidget {
                   AppHelpers.formatDateTime(entry.timestamp),
                   style: GoogleFonts.inter(
                     fontSize: 11,
-                    color: AppColors.textHint,
+                    color: context.c.textHint,
                   ),
                 ),
               ],

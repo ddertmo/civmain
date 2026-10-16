@@ -8,7 +8,6 @@ import 'package:geolocator/geolocator.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/routes/app_routes.dart';
-import '../../core/utils/helpers.dart';
 import '../../widgets/navigation/app_bar.dart';
 import '_report_stepper.dart';
 
@@ -294,10 +293,10 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
   Widget build(BuildContext context) {
     final category =
         widget.reportData['category'] as String? ?? 'Infrastructure';
-    final catColor = AppHelpers.getCategoryColor(category);
+    final catColor = context.c.categoryColor(category);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 4 of 5',
@@ -325,7 +324,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                     "Don't know the exact address? Just pick the spot on the map.",
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -462,7 +461,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Icon(Icons.info_outline_rounded,
-                            size: 13, color: AppColors.textHint),
+                            size: 13, color: context.c.textHint),
                         const SizedBox(width: 6),
                         Expanded(
                           child: Text(
@@ -470,7 +469,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                             'Please verify and correct the Barangay and Purok fields if needed.',
                             style: GoogleFonts.inter(
                               fontSize: 11,
-                              color: AppColors.textHint,
+                              color: context.c.textHint,
                               height: 1.4,
                             ),
                           ),
@@ -484,13 +483,13 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                   _SectionLabel(
                     icon: Icons.place_rounded,
                     label: 'Landmark (Optional)',
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                   const SizedBox(height: 10),
                   TextField(
                     controller: _landmarkCtrl,
                     style: GoogleFonts.inter(
-                        fontSize: 14, color: AppColors.textPrimary),
+                        fontSize: 14, color: context.c.textPrimary),
                     decoration: _inputDecoration(
                       hintText:
                           'e.g. Near Barangay Hall, Near Church, Beside School',
@@ -504,13 +503,13 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                   _SectionLabel(
                     icon: Icons.chat_bubble_outline_rounded,
                     label: 'Additional Details (Optional)',
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                   const SizedBox(height: 6),
                   Text(
                     'Maximum 300 characters.',
                     style: GoogleFonts.inter(
-                        fontSize: 11, color: AppColors.textHint),
+                        fontSize: 11, color: context.c.textHint),
                   ),
                   const SizedBox(height: 10),
                   TextField(
@@ -518,14 +517,14 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                     maxLines: 4,
                     maxLength: 300,
                     style: GoogleFonts.inter(
-                        fontSize: 14, color: AppColors.textPrimary),
+                        fontSize: 14, color: context.c.textPrimary),
                     decoration: _inputDecoration(
                       hintText: 'Describe the concern in more detail...',
                       catColor: catColor,
                     ).copyWith(
                       alignLabelWithHint: true,
                       counterStyle: GoogleFonts.inter(
-                          fontSize: 11, color: AppColors.textHint),
+                          fontSize: 11, color: context.c.textHint),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -552,21 +551,21 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
     return InputDecoration(
       hintText: hintText,
       hintStyle:
-          GoogleFonts.inter(fontSize: 13, color: AppColors.textHint),
+          GoogleFonts.inter(fontSize: 13, color: context.c.textHint),
       prefixIcon: prefixIcon != null
-          ? Icon(prefixIcon, color: AppColors.textHint, size: 20)
+          ? Icon(prefixIcon, color: context.c.textHint, size: 20)
           : null,
       filled: true,
-      fillColor: AppColors.white,
+      fillColor: context.c.card,
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: AppColors.inputBorder),
+        borderSide: BorderSide(color: context.c.inputBorder),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: AppColors.inputBorder),
+        borderSide: BorderSide(color: context.c.inputBorder),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
@@ -667,7 +666,7 @@ class _AddressCard extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: geocodeFailed
@@ -718,7 +717,7 @@ class _AddressCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Divider(color: AppColors.divider, height: 1),
+                Divider(color: context.c.divider, height: 1),
                 const SizedBox(height: 12),
                 _AddressField(
                     label: 'Street / Area', ctrl: addressCtrl),
@@ -736,7 +735,7 @@ class _AddressCard extends StatelessWidget {
                           'Barangay',
                           style: GoogleFonts.inter(
                             fontSize: 11,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -747,12 +746,12 @@ class _AddressCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AppColors.background,
+                            color: context.c.background,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color: selectedBarangay != null
                                   ? AppColors.primary
-                                  : AppColors.inputBorder,
+                                  : context.c.inputBorder,
                               width: selectedBarangay != null ? 1.5 : 1,
                             ),
                           ),
@@ -763,18 +762,18 @@ class _AddressCard extends StatelessWidget {
                                 'Select barangay',
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
-                                  color: AppColors.textHint,
+                                  color: context.c.textHint,
                                 ),
                               ),
                               isExpanded: true,
                               isDense: true,
                               style: GoogleFonts.inter(
                                 fontSize: 13,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                               ),
                               icon: Icon(
                                 Icons.arrow_drop_down_rounded,
-                                color: AppColors.textSecondary,
+                                color: context.c.textSecondary,
                               ),
                               onChanged: onBarangayChanged,
                               items: _kDigosBarangays
@@ -826,7 +825,7 @@ class _AddressField extends StatelessWidget {
               label,
               style: GoogleFonts.inter(
                 fontSize: 11,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -837,20 +836,20 @@ class _AddressField extends StatelessWidget {
               controller: ctrl,
               textCapitalization: TextCapitalization.words,
               style:
-                  GoogleFonts.inter(fontSize: 13, color: AppColors.textPrimary),
+                  GoogleFonts.inter(fontSize: 13, color: context.c.textPrimary),
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(
                     horizontal: 10, vertical: 8),
                 filled: true,
-                fillColor: AppColors.background,
+                fillColor: context.c.background,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: AppColors.inputBorder),
+                  borderSide: BorderSide(color: context.c.inputBorder),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(color: AppColors.inputBorder),
+                  borderSide: BorderSide(color: context.c.inputBorder),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -892,7 +891,7 @@ class _SectionLabel extends StatelessWidget {
           style: GoogleFonts.inter(
             fontSize: 15,
             fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
         ),
       ],
@@ -915,8 +914,8 @@ class _LocationNavBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -928,12 +927,12 @@ class _LocationNavBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.info_outline_rounded,
-                      size: 14, color: AppColors.textHint),
+                      size: 14, color: context.c.textHint),
                   const SizedBox(width: 6),
                   Text(
                     'Please select a location to continue',
                     style: GoogleFonts.inter(
-                        fontSize: 12, color: AppColors.textHint),
+                        fontSize: 12, color: context.c.textHint),
                   ),
                 ],
               ),
@@ -946,8 +945,8 @@ class _LocationNavBar extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back_rounded, size: 18),
                   label: const Text('Back'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.textPrimary,
-                    side: BorderSide(color: AppColors.divider),
+                    foregroundColor: context.c.textPrimary,
+                    side: BorderSide(color: context.c.divider),
                     minimumSize: const Size(0, 52),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16)),
@@ -963,7 +962,7 @@ class _LocationNavBar extends StatelessWidget {
                   onPressed: onNext,
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        onNext != null ? catColor : AppColors.textDisabled,
+                        onNext != null ? catColor : context.c.textDisabled,
                     foregroundColor: AppColors.onAccent,
                     minimumSize: const Size(0, 52),
                     shape: RoundedRectangleBorder(

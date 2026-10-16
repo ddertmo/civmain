@@ -24,7 +24,7 @@ class _ReportCategoryScreenState extends State<ReportCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 1 of 5',
@@ -48,7 +48,7 @@ class _ReportCategoryScreenState extends State<ReportCategoryScreen> {
                     style: GoogleFonts.inter(
                       fontSize: 22,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                       height: 1.25,
                     ),
                   ),
@@ -57,7 +57,7 @@ class _ReportCategoryScreenState extends State<ReportCategoryScreen> {
                     'Select the category that best describes your community concern.',
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -70,7 +70,7 @@ class _ReportCategoryScreenState extends State<ReportCategoryScreen> {
                         'Road repairs, streetlights, canals, and other public infrastructure managed by the City Engineering Office.',
                     icon: Icons.construction_rounded,
                     color: AppColors.infrastructure,
-                    bg: AppColors.infrastructureBg,
+                    bg: context.c.infrastructureBg,
                     isSelected: _selected == 'Infrastructure',
                     onTap: () =>
                         setState(() => _selected = 'Infrastructure'),
@@ -84,7 +84,7 @@ class _ReportCategoryScreenState extends State<ReportCategoryScreen> {
                         'Illegal dumping and garbage collection concerns managed by the City Environment and Natural Resources Office.',
                     icon: Icons.eco_rounded,
                     color: AppColors.environment,
-                    bg: AppColors.environmentBg,
+                    bg: context.c.environmentBg,
                     isSelected: _selected == 'Environment',
                     onTap: () => setState(() => _selected = 'Environment'),
                   ),
@@ -136,10 +136,10 @@ class _CategoryCard extends StatelessWidget {
         curve: Curves.easeOutCubic,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.c.card,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? color : AppColors.divider,
+            color: isSelected ? color : context.c.divider,
             width: isSelected ? 2 : 1,
           ),
           boxShadow: [
@@ -184,7 +184,7 @@ class _CategoryCard extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.w800,
                           color:
-                              isSelected ? color : AppColors.textPrimary,
+                              isSelected ? color : context.c.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -194,7 +194,7 @@ class _CategoryCard extends StatelessWidget {
                           fontSize: 11,
                           color: isSelected
                               ? color.withValues(alpha: 0.8)
-                              : AppColors.textHint,
+                              : context.c.textHint,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -210,7 +210,7 @@ class _CategoryCard extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: isSelected ? color : AppColors.onAccent,
                     border: Border.all(
-                      color: isSelected ? color : AppColors.inputBorder,
+                      color: isSelected ? color : context.c.inputBorder,
                       width: 2,
                     ),
                   ),
@@ -222,14 +222,14 @@ class _CategoryCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            Divider(color: AppColors.divider, height: 1),
+            Divider(color: context.c.divider, height: 1),
             const SizedBox(height: 14),
             // ── Description ────────────────────────────────────────────
             Text(
               subtitle,
               style: GoogleFonts.inter(
                 fontSize: 13,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 height: 1.5,
               ),
             ),
@@ -258,8 +258,8 @@ class _ReportNavBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
@@ -270,8 +270,8 @@ class _ReportNavBar extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back_rounded, size: 18),
                 label: const Text('Back'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.textPrimary,
-                  side: BorderSide(color: AppColors.divider),
+                  foregroundColor: context.c.textPrimary,
+                  side: BorderSide(color: context.c.divider),
                   minimumSize: const Size(0, 52),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
@@ -289,7 +289,7 @@ class _ReportNavBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: onNext != null
                     ? AppColors.primary
-                    : AppColors.textDisabled,
+                    : context.c.textDisabled,
                 foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(

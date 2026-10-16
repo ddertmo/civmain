@@ -5,46 +5,64 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:civilwatch/core/constants/app_colors.dart';
 import 'package:civilwatch/core/state/app_state.dart';
 
-/// Verifies the root fix: the runtime-swappable surface palette that makes
-/// dark mode actually repaint the app (previously every screen read `const`
-/// colors, so switching `themeMode` had no visible effect).
+/// Verifies the theme architecture: surface colors live on [AppPalette], a
+/// [ThemeExtension] registered on both themes. Widgets read it via
+/// `context.c`, so switching `themeMode` repaints the whole app — there is a
+/// single theme state (`AppState.isDarkMode`), persisted in `shared_preferences`.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('AppColors.setDark swaps surface tokens, keeps accents', () {
-    AppColors.setDark(false);
-    expect(AppColors.isDark, isFalse);
-    expect(AppColors.background, const Color(0xFFF8FAFC));
-    expect(AppColors.card, const Color(0xFFFFFFFF));
-    expect(AppColors.textPrimary, const Color(0xFF0F172A));
+  test('first-time default is Light Mode (no saved preference)', () {
+    // A fresh session with no persisted choice must start light.
+    expect(AppState().isDarkMode, isFalse);
+  });
 
-    AppColors.setDark(true);
-    expect(AppColors.isDark, isTrue);
-    expect(AppColors.background, const Color(0xFF0F172A));
-    expect(AppColors.card, const Color(0xFF1E293B));
-    expect(AppColors.textPrimary, const Color(0xFFF1F5F9));
+  test('AppPalette light/dark tokens differ; accent tokens never change', () {
+    expect(AppPalette.light.background, const Color(0xFFF8FAFC));
+    expect(AppPalette.light.card, const Color(0xFFFFFFFF));
+    expect(AppPalette.light.textPrimary, const Color(0xFF0F172A));
 
-    // Accent tokens must be identical in both themes.
+    expect(AppPalette.dark.background, const Color(0xFF0F172A));
+    expect(AppPalette.dark.card, const Color(0xFF1E293B));
+    expect(AppPalette.dark.textPrimary, const Color(0xFFF1F5F9));
+
+    // Accent tokens are identical in both themes.
     expect(AppColors.primary, const Color(0xFF1B5E20));
     expect(AppColors.onAccent, const Color(0xFFFFFFFF));
-
-    AppColors.setDark(false); // reset
   });
 
-  test('AppState.setDarkMode flips the palette and persists', () async {
-    SharedPreferences.setMockInitialValues({});
-    final state = AppState();
-
-    // Start known-dark: default _isDarkMode is already true, so flip to false.
-    await state.setDarkMode(false);
-    expect(state.isDarkMode, isFalse);
-    expect(AppColors.isDark, isFalse);
-
-    await state.setDarkMode(true);
-    expect(state.isDarkMode, isTrue);
-    expect(AppColors.isDark, isTrue); // palette actually swapped
-
-    final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getBool('dark_mode'), isTrue);
+  test('status/category tint lookups resolve against the palette', () {
+    expect(
+      AppPalette.light.statusBg('pending'),
+      AppPalette.light.statusPendingBg,
+    );
+    expect(
+      AppPalette.dark.statusBg('pending'),
+      AppPalette.dark.statusPendingBg,
+    );
+    expect(
+      AppPalette.light.categoryBg('environment'),
+      AppPalette.light.environmentBg,
+    );
+    // Accent hues come from AppColors in both themes.
+    expect(AppPalette.light.statusColor('resolved'), AppColors.statusResolved);
+    expect(AppPalette.dark.categoryColor('others'), AppColors.statusSubmitted);
   });
+
+  test(
+    'AppState.setDarkMode flips the single theme state and persists',
+    () async {
+      SharedPreferences.setMockInitialValues({});
+      final state = AppState();
+
+      await state.setDarkMode(false);
+      expect(state.isDarkMode, isFalse);
+
+      await state.setDarkMode(true);
+      expect(state.isDarkMode, isTrue);
+
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('dark_mode'), isTrue);
+    },
+  );
 }

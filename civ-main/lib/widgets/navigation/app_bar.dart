@@ -29,14 +29,14 @@ class CivilWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor ?? AppColors.white,
+      backgroundColor: backgroundColor ?? context.c.card,
       elevation: 0,
       centerTitle: false,
       automaticallyImplyLeading: false,
       leading: showBack
           ? IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-              color: titleColor ?? AppColors.textPrimary,
+              color: titleColor ?? context.c.textPrimary,
               onPressed: onBack ?? () => Navigator.pop(context),
             )
           : null,
@@ -49,7 +49,7 @@ class CivilWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: GoogleFonts.inter(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: titleColor ?? AppColors.textPrimary,
+              color: titleColor ?? context.c.textPrimary,
             ),
           ),
           if (subtitle != null)
@@ -57,7 +57,7 @@ class CivilWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
               subtitle!,
               style: GoogleFonts.inter(
                 fontSize: 12,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
               ),
             ),
         ],
@@ -65,7 +65,7 @@ class CivilWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(1),
-        child: Divider(height: 1, color: AppColors.divider),
+        child: Divider(height: 1, color: context.c.divider),
       ),
     );
   }

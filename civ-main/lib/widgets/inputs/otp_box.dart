@@ -77,15 +77,15 @@ class _OtpInputRowState extends State<OtpInputRow> {
             decoration: InputDecoration(
               counterText: '',
               filled: true,
-              fillColor: AppColors.inputFill,
+              fillColor: context.c.inputFill,
               contentPadding: EdgeInsets.zero,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColors.inputBorder),
+                borderSide: BorderSide(color: context.c.inputBorder),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: AppColors.inputBorder),
+                borderSide: BorderSide(color: context.c.inputBorder),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),

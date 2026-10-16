@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
@@ -21,10 +20,6 @@ class _LandingScreenState extends State<LandingScreen>
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
     _ctrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 900));
     _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);
@@ -55,7 +50,7 @@ class _LandingScreenState extends State<LandingScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: context.c.card,
       body: Stack(
         children: [
           // ── Background gradient ───────────────────────────────────────
@@ -65,7 +60,7 @@ class _LandingScreenState extends State<LandingScreen>
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Color(0xFFEAF4EE), AppColors.white, AppColors.white],
+                  colors: [Color(0xFFEAF4EE), context.c.card, context.c.card],
                   stops: [0.0, 0.45, 1.0],
                 ),
               ),
@@ -141,7 +136,7 @@ class _LandingScreenState extends State<LandingScreen>
                         'Community Reporting for a\nBetter Digos City',
                         style: GoogleFonts.inter(
                           fontSize: 14,
-                          color: AppColors.textSecondary,
+                          color: context.c.textSecondary,
                           height: 1.55,
                         ),
                         textAlign: TextAlign.center,
@@ -156,7 +151,7 @@ class _LandingScreenState extends State<LandingScreen>
                       Row(
                         children: [
                           Expanded(
-                              child: Divider(color: AppColors.divider)),
+                              child: Divider(color: context.c.divider)),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 12),
@@ -164,13 +159,13 @@ class _LandingScreenState extends State<LandingScreen>
                               'How would you like to continue?',
                               style: GoogleFonts.inter(
                                 fontSize: 11,
-                                color: AppColors.textHint,
+                                color: context.c.textHint,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
                           Expanded(
-                              child: Divider(color: AppColors.divider)),
+                              child: Divider(color: context.c.divider)),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -182,7 +177,7 @@ class _LandingScreenState extends State<LandingScreen>
                         sublabel:
                             'Browse the map and view reports without an account.',
                         color: AppColors.primary,
-                        bg: AppColors.primarySurface,
+                        bg: context.c.primarySurface,
                         border: AppColors.primary,
                         textColor: AppColors.primary,
                         filled: true,
@@ -211,14 +206,14 @@ class _LandingScreenState extends State<LandingScreen>
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.info_outline_rounded,
-                              size: 13, color: AppColors.textHint),
+                              size: 13, color: context.c.textHint),
                           const SizedBox(width: 5),
                           Flexible(
                             child: Text(
                               'Anyone can view reports and the map without an account.',
                               style: GoogleFonts.inter(
                                 fontSize: 11,
-                                color: AppColors.textHint,
+                                color: context.c.textHint,
                                 height: 1.4,
                               ),
                               textAlign: TextAlign.center,
@@ -246,7 +241,7 @@ class _LandingScreenState extends State<LandingScreen>
                     'Digos City, Davao del Sur',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -255,7 +250,7 @@ class _LandingScreenState extends State<LandingScreen>
                     'University of Mindanao — Digos Branch',
                     style: GoogleFonts.inter(
                       fontSize: 10,
-                      color: AppColors.textHint,
+                      color: context.c.textHint,
                     ),
                   ),
                 ],
@@ -290,7 +285,7 @@ class _FeatureRow extends StatelessWidget {
                 width: 52,
                 height: 52,
                 decoration: BoxDecoration(
-                  color: AppColors.primarySurface,
+                  color: context.c.primarySurface,
                   shape: BoxShape.circle,
                   border: Border.all(
                       color: AppColors.primary.withValues(alpha: 0.15)),
@@ -303,7 +298,7 @@ class _FeatureRow extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textSecondary,
+                  color: context.c.textSecondary,
                   height: 1.4,
                 ),
                 textAlign: TextAlign.center,
@@ -355,7 +350,7 @@ class _LandingButton extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
-          color: isSolid ? bg : AppColors.primarySurface,
+          color: isSolid ? bg : context.c.primarySurface,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: isSolid
@@ -409,7 +404,7 @@ class _LandingButton extends StatelessWidget {
                       fontSize: 11,
                       color: isSolid
                           ? AppColors.onAccent.withValues(alpha: 0.75)
-                          : AppColors.textSecondary,
+                          : context.c.textSecondary,
                       height: 1.4,
                     ),
                   ),

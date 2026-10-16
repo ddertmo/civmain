@@ -189,15 +189,15 @@ class _OtpScreenState extends State<OtpScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: context.c.card,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
+        backgroundColor: context.c.card,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
-            color: AppColors.textPrimary,
+            color: context.c.textPrimary,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -222,7 +222,7 @@ class _OtpScreenState extends State<OtpScreen>
                   style: GoogleFonts.inter(
                     fontSize: 26,
                     fontWeight: FontWeight.w800,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -230,7 +230,7 @@ class _OtpScreenState extends State<OtpScreen>
                   'Enter the 6-digit code we sent to verify\nyour phone for registration.',
                   style: GoogleFonts.inter(
                     fontSize: 14,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -240,7 +240,7 @@ class _OtpScreenState extends State<OtpScreen>
                   style: GoogleFonts.inter(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textPrimary,
+                    color: context.c.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -265,7 +265,7 @@ class _OtpScreenState extends State<OtpScreen>
                           'Sending OTP via SMS…',
                           style: GoogleFonts.inter(
                             fontSize: 12,
-                            color: AppColors.textSecondary,
+                            color: context.c.textSecondary,
                           ),
                         ),
                       ],
@@ -365,7 +365,7 @@ class _OtpScreenState extends State<OtpScreen>
                   "Didn't receive the code?",
                   style: GoogleFonts.inter(
                     fontSize: 13,
-                    color: AppColors.textSecondary,
+                    color: context.c.textSecondary,
                   ),
                 ),
                 const SizedBox(height: 6),
@@ -375,7 +375,7 @@ class _OtpScreenState extends State<OtpScreen>
                       text: 'Resend in ',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: context.c.textSecondary,
                       ),
                       children: [
                         TextSpan(
@@ -418,7 +418,7 @@ class _OtpScreenState extends State<OtpScreen>
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: AppColors.primarySurface,
+                    color: context.c.primarySurface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                         color: AppColors.primary.withValues(alpha: 0.2)),
@@ -486,9 +486,9 @@ class _OtpIllustration extends StatelessWidget {
             width: 80,
             height: 110,
             decoration: BoxDecoration(
-              color: AppColors.inputFill,
+              color: context.c.inputFill,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.inputBorder, width: 2),
+              border: Border.all(color: context.c.inputBorder, width: 2),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -498,7 +498,7 @@ class _OtpIllustration extends StatelessWidget {
                   width: 50,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: AppColors.divider,
+                    color: context.c.divider,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -507,7 +507,7 @@ class _OtpIllustration extends StatelessWidget {
                   width: 40,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: AppColors.divider,
+                    color: context.c.divider,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),

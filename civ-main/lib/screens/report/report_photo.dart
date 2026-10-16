@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
-import '../../core/utils/helpers.dart';
 import '../../widgets/navigation/app_bar.dart';
 import '_report_stepper.dart';
 
@@ -88,11 +87,11 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
   Widget build(BuildContext context) {
     final category =
         widget.reportData['category'] as String? ?? 'Infrastructure';
-    final catColor = AppHelpers.getCategoryColor(category);
-    final catBg = AppHelpers.getCategoryBgColor(category);
+    final catColor = context.c.categoryColor(category);
+    final catBg = context.c.categoryBg(category);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 3 of 5',
@@ -115,7 +114,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                     style: GoogleFonts.inter(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -123,7 +122,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                     'A clear photo helps us verify\nthe concern faster.',
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -174,7 +173,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                         child: Text('or',
                             style: GoogleFonts.inter(
                                 fontSize: 13,
-                                color: AppColors.textHint)),
+                                color: context.c.textHint)),
                       ),
                       const Expanded(child: Divider()),
                     ]),
@@ -185,8 +184,8 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                       icon: Icons.photo_library_rounded,
                       title: 'Choose from Gallery',
                       subtitle: 'Pick an existing photo',
-                      color: AppColors.textSecondary,
-                      bg: AppColors.background,
+                      color: context.c.textSecondary,
+                      bg: context.c.background,
                       onTap: () => _pickImage(ImageSource.gallery),
                       isPrimary: false,
                     ),
@@ -198,7 +197,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.primarySurface,
+                      color: context.c.primarySurface,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: AppColors.primary.withOpacity(0.2)),
@@ -240,7 +239,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
   void _showSourceSheet(Color catColor) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.white,
+      backgroundColor: context.c.card,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -256,7 +255,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                 height: 4,
                 margin: const EdgeInsets.only(bottom: 18),
                 decoration: BoxDecoration(
-                  color: AppColors.divider,
+                  color: context.c.divider,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -288,11 +287,11 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: context.c.background,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(Icons.photo_library_rounded,
-                      color: AppColors.textSecondary, size: 22),
+                      color: context.c.textSecondary, size: 22),
                 ),
                 title: Text('Gallery',
                     style: GoogleFonts.inter(
@@ -538,7 +537,7 @@ class _PhotoOption extends StatelessWidget {
           color: isPrimary ? bg : AppColors.onAccent,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isPrimary ? color.withOpacity(0.35) : AppColors.divider,
+            color: isPrimary ? color.withOpacity(0.35) : context.c.divider,
             width: isPrimary ? 1.5 : 1,
           ),
         ),
@@ -563,7 +562,7 @@ class _PhotoOption extends StatelessWidget {
                   Text(
                     subtitle,
                     style: GoogleFonts.inter(
-                        fontSize: 12, color: AppColors.textHint),
+                        fontSize: 12, color: context.c.textHint),
                   ),
                 ],
               ],
@@ -594,8 +593,8 @@ class _ReportPhotoFooter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
@@ -606,8 +605,8 @@ class _ReportPhotoFooter extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_rounded, size: 18),
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textPrimary,
-                side: BorderSide(color: AppColors.divider),
+                foregroundColor: context.c.textPrimary,
+                side: BorderSide(color: context.c.divider),
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),

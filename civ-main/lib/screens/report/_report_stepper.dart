@@ -19,7 +19,7 @@ class ReportStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.c.card,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -59,7 +59,7 @@ class ReportStepper extends StatelessWidget {
                                     ? AppColors.primary
                                     : isDone
                                         ? Colors.transparent
-                                        : AppColors.divider,
+                                        : context.c.divider,
                                 width: isCurrent ? 2 : 1.5,
                               ),
                               boxShadow: isCurrent
@@ -91,7 +91,7 @@ class ReportStepper extends StatelessWidget {
                                           width: 8,
                                           height: 8,
                                           decoration: BoxDecoration(
-                                            color: AppColors.textDisabled,
+                                            color: context.c.textDisabled,
                                             shape: BoxShape.circle,
                                           ),
                                         ),
@@ -108,7 +108,7 @@ class ReportStepper extends StatelessWidget {
                                   : FontWeight.w400,
                               color: isDone || isCurrent
                                   ? AppColors.primary
-                                  : AppColors.textHint,
+                                  : context.c.textHint,
                             ),
                           ),
                         ],
@@ -132,7 +132,7 @@ class ReportStepper extends StatelessWidget {
                 height: 4,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.divider,
+                  color: context.c.divider,
                   borderRadius: BorderRadius.circular(2),
                 ),
                 child: Align(

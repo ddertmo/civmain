@@ -82,8 +82,8 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
     final photoFile  = data['photoFile']  as XFile?;
     final photoBytes = data['photoBytes'] as Uint8List?;
 
-    final catColor = AppHelpers.getCategoryColor(category);
-    final catBg = AppHelpers.getCategoryBgColor(category);
+    final catColor = context.c.categoryColor(category);
+    final catBg = context.c.categoryBg(category);
     final catIcon = AppHelpers.getCategoryIcon(category);
     final concernIcon = AppHelpers.getConcernIcon(concern);
 
@@ -99,7 +99,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
         : addressParts.join(', ');
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Review Concern',
         subtitle: 'Step 5 of 5',
@@ -121,7 +121,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                     style: GoogleFonts.inter(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                       height: 1.3,
                     ),
                   ),
@@ -130,7 +130,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                     'Once submitted, your concern will be forwarded\nto the appropriate city office.',
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -139,9 +139,9 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                   // ── Summary card ──────────────────────────────────────
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.white,
+                      color: context.c.card,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColors.divider),
+                      border: Border.all(color: context.c.divider),
                       boxShadow: const [
                         BoxShadow(
                           color: Color(0x08000000),
@@ -172,7 +172,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                             ),
                           ),
                         ),
@@ -242,7 +242,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.textPrimary,
+                              color: context.c.textPrimary,
                               height: 1.4,
                             ),
                           ),
@@ -259,7 +259,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                               style: GoogleFonts.inter(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                               ),
                             ),
                           ),
@@ -278,8 +278,8 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: additionalDetails.isEmpty
-                                  ? AppColors.textHint
-                                  : AppColors.textPrimary,
+                                  ? context.c.textHint
+                                  : context.c.textPrimary,
                               height: 1.4,
                             ),
                             maxLines: 4,
@@ -301,13 +301,13 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: _confirmed
-                            ? AppColors.primarySurface
-                            : AppColors.white,
+                            ? context.c.primarySurface
+                            : context.c.card,
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: _confirmed
                               ? AppColors.primary
-                              : AppColors.divider,
+                              : context.c.divider,
                           width: _confirmed ? 2 : 1,
                         ),
                       ),
@@ -320,12 +320,12 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                             decoration: BoxDecoration(
                               color: _confirmed
                                   ? AppColors.primary
-                                  : AppColors.white,
+                                  : context.c.card,
                               borderRadius: BorderRadius.circular(7),
                               border: Border.all(
                                 color: _confirmed
                                     ? AppColors.primary
-                                    : AppColors.inputBorder,
+                                    : context.c.inputBorder,
                                 width: 2,
                               ),
                             ),
@@ -340,7 +340,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                               'I confirm that the information provided\nis accurate and true.',
                               style: GoogleFonts.inter(
                                 fontSize: 13,
-                                color: AppColors.textPrimary,
+                                color: context.c.textPrimary,
                                 fontWeight: FontWeight.w500,
                                 height: 1.4,
                               ),
@@ -360,8 +360,8 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
           Container(
             padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
             decoration: BoxDecoration(
-              color: AppColors.white,
-              border: Border(top: BorderSide(color: AppColors.divider)),
+              color: context.c.card,
+              border: Border(top: BorderSide(color: context.c.divider)),
             ),
             child: Row(
               children: [
@@ -371,8 +371,8 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                     icon: const Icon(Icons.arrow_back_rounded, size: 18),
                     label: const Text('Back'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.textPrimary,
-                      side: BorderSide(color: AppColors.divider),
+                      foregroundColor: context.c.textPrimary,
+                      side: BorderSide(color: context.c.divider),
                       minimumSize: const Size(0, 52),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -420,7 +420,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
 class _RowDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
-      Divider(height: 1, color: AppColors.divider);
+      Divider(height: 1, color: context.c.divider);
 }
 
 class _ReviewRow extends StatelessWidget {
@@ -441,7 +441,7 @@ class _ReviewRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 18, color: AppColors.textSecondary),
+          Icon(icon, size: 18, color: context.c.textSecondary),
           const SizedBox(width: 12),
           SizedBox(
             width: 68,
@@ -449,7 +449,7 @@ class _ReviewRow extends StatelessWidget {
               label,
               style: GoogleFonts.inter(
                 fontSize: 12,
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
             ),

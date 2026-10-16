@@ -90,12 +90,12 @@ class _ReportConcernScreenState extends State<ReportConcernScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final catColor = AppHelpers.getCategoryColor(widget.category);
-    final catBg = AppHelpers.getCategoryBgColor(widget.category);
+    final catColor = context.c.categoryColor(widget.category);
+    final catBg = context.c.categoryBg(widget.category);
     final catIcon = AppHelpers.getCategoryIcon(widget.category);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.c.background,
       appBar: CivilWatchAppBar(
         title: 'Report Concern',
         subtitle: 'Step 2 of 5',
@@ -147,7 +147,7 @@ class _ReportConcernScreenState extends State<ReportConcernScreen> {
                     style: GoogleFonts.inter(
                       fontSize: 22,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
+                      color: context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -155,7 +155,7 @@ class _ReportConcernScreenState extends State<ReportConcernScreen> {
                     'Choose the specific concern you want\nto report.',
                     style: GoogleFonts.inter(
                       fontSize: 13,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.5,
                     ),
                   ),
@@ -222,10 +222,10 @@ class _ConcernCard extends StatelessWidget {
         curve: Curves.easeOutCubic,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? catColor.withOpacity(0.04) : AppColors.white,
+          color: isSelected ? catColor.withOpacity(0.04) : context.c.card,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? catColor : AppColors.divider,
+            color: isSelected ? catColor : context.c.divider,
             width: isSelected ? 2 : 1,
           ),
           boxShadow: [
@@ -267,7 +267,7 @@ class _ConcernCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: isSelected ? catColor : AppColors.textPrimary,
+                      color: isSelected ? catColor : context.c.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 3),
@@ -275,7 +275,7 @@ class _ConcernCard extends StatelessWidget {
                     concern.hint,
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.textSecondary,
+                      color: context.c.textSecondary,
                       height: 1.4,
                     ),
                   ),
@@ -293,7 +293,7 @@ class _ConcernCard extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: isSelected ? catColor : AppColors.onAccent,
                 border: Border.all(
-                  color: isSelected ? catColor : AppColors.inputBorder,
+                  color: isSelected ? catColor : context.c.inputBorder,
                   width: 2,
                 ),
               ),
@@ -324,8 +324,8 @@ class _ConcernNavBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.divider)),
+        color: context.c.card,
+        border: Border(top: BorderSide(color: context.c.divider)),
       ),
       child: Row(
         children: [
@@ -336,8 +336,8 @@ class _ConcernNavBar extends StatelessWidget {
               icon: const Icon(Icons.arrow_back_rounded, size: 18),
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: AppColors.textPrimary,
-                side: BorderSide(color: AppColors.divider),
+                foregroundColor: context.c.textPrimary,
+                side: BorderSide(color: context.c.divider),
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
@@ -355,7 +355,7 @@ class _ConcernNavBar extends StatelessWidget {
               onPressed: onNext,
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    onNext != null ? catColor : AppColors.textDisabled,
+                    onNext != null ? catColor : context.c.textDisabled,
                 foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(

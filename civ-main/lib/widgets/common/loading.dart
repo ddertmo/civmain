@@ -20,7 +20,7 @@ class AppLoading extends StatelessWidget {
             Text(
               message!,
               style: TextStyle(
-                color: AppColors.textSecondary,
+                color: context.c.textSecondary,
                 fontSize: 14,
               ),
             ),
