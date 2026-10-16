@@ -579,7 +579,6 @@
                             <select class="form-select" id="statusSelect">
                                 <option value="Assigned">Assigned</option>
                                 <option value="In Progress" selected>In Progress</option>
-                                <option value="For Resolution">For Resolution</option>
                                 <option value="Resolved">Resolved</option>
                             </select>
                         </div>
@@ -704,7 +703,7 @@
                 barangay: 'Carmen, Digos City',
                 lat: 6.7420,
                 lng: 125.3480,
-                status: 'For Resolution',
+                status: 'In Progress',
                 date: 'May 19, 2026 · 11:15 AM',
                 assigned: 'May 19, 2026',
                 photo: 'Overgrown Vegetation',
@@ -760,13 +759,11 @@
 
         const statusColors = {
             'In Progress': '#F97316',
-            'For Resolution': '#F59E0B',
             'Resolved': '#10B981',
             'Assigned': '#1A56DB'
         };
         const statusBg = {
             'In Progress': '#FFF7ED',
-            'For Resolution': '#FFFBEB',
             'Resolved': '#ECFDF5',
             'Assigned': '#EFF6FF'
         };
@@ -777,13 +774,11 @@
             return `<span style="display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:700;background:${bg};color:${fg};">${status}</span>`;
         }
 
-        // Collapse the canonical API statuses onto the four the office
-        // workflow exposes in the dropdown.
+        // Collapse the canonical API status 'Assigned to Office' onto the
+        // short office label 'Assigned'; every other status is already one of
+        // the labels the dropdown exposes.
         function normalizeStatus(s) {
-            var x = String(s || '').toLowerCase();
-            if (x.indexOf('resolve') !== -1 || x === 'completed') return 'Resolved';
-            if (x.indexOf('progress') !== -1) return 'In Progress';
-            return 'Assigned';
+            return Utils.officeStatusLabel(s);
         }
 
         function fmtDate(str) {
@@ -898,15 +893,46 @@
 
         loadReport();
 
-        function saveUpdate() {
+        // Reflect a status change in the badge + dropdown (and the Resolved
+        // UI) without reloading the page.
+        function applyStatusLocally(status) {
+            document.getElementById('statusBadgeEl').innerHTML = statusBadgeHtml(status);
+            document.getElementById('statusSelect').value = status;
+            if (status === 'Resolved') {
+                document.getElementById('resolveBtn').style.display = 'none';
+                document.getElementById('successBanner').classList.add('show');
+                markTimelineResolved();
+            }
+        }
+
+        async function saveUpdate() {
             const status = document.getElementById('statusSelect').value;
             const remarks = document.getElementById('remarksInput').value.trim();
             if (!remarks) {
                 Utils.showToast('Please add remarks before saving', 'error');
                 return;
             }
-            Utils.showToast('Progress updated successfully', 'success');
-            document.getElementById('statusBadgeEl').innerHTML = `<span style="display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:700;background:${statusBg[status]};color:${statusColors[status]};">${status}</span>`;
+
+            // Prototype fallback: no backend/token — reflect locally only.
+            if (typeof Api === 'undefined' || !Api.token()) {
+                applyStatusLocally(status);
+                Utils.showToast('Progress updated successfully', 'success');
+                return;
+            }
+
+            const json = await Api.action('POST',
+                '/api/admin/citizen-reports/' + encodeURIComponent(ref) + '/status', {
+                    status: Utils.apiStatusValue(status),
+                    description: remarks,
+                }, {
+                    loading: 'Saving update…',
+                    success: 'Report status updated to ' + status + '.',
+                });
+            if (json && json.success) {
+                applyStatusLocally(status);
+                document.getElementById('remarksInput').value = '';
+                document.getElementById('charCount').textContent = '0/500';
+            }
         }
 
         function openResolveModal() {
@@ -919,13 +945,28 @@
             document.getElementById('resolveModal').classList.remove('active');
         }
 
-        function confirmResolve() {
+        async function confirmResolve() {
             closeResolveModal();
-            document.getElementById('statusBadgeEl').innerHTML = `<span style="display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:700;background:#ECFDF5;color:#10B981;">Resolved</span>`;
-            document.getElementById('resolveBtn').style.display = 'none';
-            document.getElementById('successBanner').classList.add('show');
-            markTimelineResolved();
-            Utils.showToast('Report marked as Resolved successfully', 'success');
+
+            // Prototype fallback: no backend/token — reflect locally only.
+            if (typeof Api === 'undefined' || !Api.token()) {
+                applyStatusLocally('Resolved');
+                Utils.showToast('Report marked as Resolved successfully', 'success');
+                return;
+            }
+
+            const remarks = document.getElementById('remarksInput').value.trim();
+            const json = await Api.action('POST',
+                '/api/admin/citizen-reports/' + encodeURIComponent(ref) + '/status', {
+                    status: Utils.apiStatusValue('Resolved'),
+                    description: remarks || 'Marked as resolved by the office.',
+                }, {
+                    loading: 'Marking as resolved…',
+                    success: 'Report marked as Resolved successfully.',
+                });
+            if (json && json.success) {
+                applyStatusLocally('Resolved');
+            }
         }
 
         function markTimelineResolved() {

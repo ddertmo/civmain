@@ -11,10 +11,10 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-10-15 · latest change = 052 (exact commit = newest row of `docs/changes/README.md`)
-- running: XAMPP Apache :80 + MySQL :3306 · Laravel :8000 · Flutter web :5599
+- at:      2026-10-16 · latest change = 053 (exact commit = newest row of `docs/changes/README.md`)
+- running: — (this checkout has no PHP/vendor/.env; nothing was booted here)
 - doing:   —
-- next:    wire CEO/CENRO list pages (reports/inprogress/resolved.html) to the API (still sample data); make office Save Update/Resolve POST to `/api/admin/citizen-reports/{id}/status` (badge-only today); see `docs/TASKS.md` (UniSMS planned)
-- blocked: `graphify label` needs an LLM key, so community names drift
+- next:    run `php -l` + a live office click-through on a machine with PHP/XAMPP; see `docs/TASKS.md` (UniSMS planned)
+- blocked: office list/status changes verified by static review only — no PHP or browser run in this clone
 
 Detailed/portable notes → [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · open work → [`TASKS.md`](TASKS.md)

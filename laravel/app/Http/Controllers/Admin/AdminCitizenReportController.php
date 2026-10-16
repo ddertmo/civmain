@@ -38,6 +38,17 @@ class AdminCitizenReportController extends Controller
             });
         }
 
+        // Office staff only ever see the reports handed to their own office;
+        // the super admin still sees every report.
+        $user = $request->user();
+        if ($user && in_array($user->role, ['ceo', 'cenro'], true)) {
+            $abbr = $user->role === 'ceo' ? 'CEO' : 'CENRO';
+            $query->whereHas(
+                'assignedOffice',
+                fn ($q) => $q->where('abbreviation', $abbr)
+            );
+        }
+
         // The admin HTML pages pass ?limit=200/500 expecting all matching rows
         // in one shot; the Blade admin defaults to 25 per page. Honor both
         // without letting a caller page through unbounded results.
@@ -146,8 +157,11 @@ class AdminCitizenReportController extends Controller
     // Body: { status, description (optional) }
     // Admin can move status to any value in the flow, except that a rejection
     // is only legal while the report is still awaiting validation.
+    // The assigned office (CEO/CENRO) may also call this, but only for its own
+    // reports and only along the repair workflow (Assigned → In Progress →
+    // Resolved). Validation, approval and rejection stay super-admin only.
     // ─────────────────────────────────────────────────────────────────────
-    public function updateStatus(Request $request, int $id): JsonResponse
+    public function updateStatus(Request $request, string $id): JsonResponse
     {
         $request->validate([
             'status'      => ['required', Rule::in(CitizenReport::STATUS_ORDER)],
@@ -161,7 +175,43 @@ class AdminCitizenReportController extends Controller
             ],
         ]);
 
-        $report = CitizenReport::findOrFail($id);
+        // Accept either the numeric id or the human reference number, matching
+        // show() — the office pages link and post by reference (CW-…).
+        $query = CitizenReport::with('assignedOffice');
+        $report = ctype_digit($id)
+            ? $query->findOrFail((int) $id)
+            : $query->where('reference_number', $id)->firstOrFail();
+
+        $user = $request->user();
+
+        if ($user && $user->role !== 'super_admin') {
+            if (! in_array($user->role, ['ceo', 'cenro'], true)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You are not allowed to update report statuses.',
+                ], 403);
+            }
+
+            $expectedOffice = $user->role === 'ceo' ? 'CEO' : 'CENRO';
+            if (! $report->assignedOffice
+                || $report->assignedOffice->abbreviation !== $expectedOffice) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You may only update reports assigned to your office.',
+                ], 403);
+            }
+
+            if (! in_array($request->status, [
+                CitizenReport::STATUS_ASSIGNED,
+                CitizenReport::STATUS_IN_PROGRESS,
+                CitizenReport::STATUS_RESOLVED,
+            ], true)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Offices can only move a report to Assigned, In Progress or Resolved.',
+                ], 422);
+            }
+        }
 
         if ($request->status === CitizenReport::STATUS_REJECTED
             && ! in_array($report->status, CitizenReport::REJECTABLE_STATUSES, true)) {

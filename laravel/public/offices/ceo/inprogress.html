@@ -421,12 +421,12 @@
                     </div>
                     <div class="active-stat-card">
                         <div class="active-stat-icon resolution">
-                            <span class="material-symbols-outlined">flag</span>
+                            <span class="material-symbols-outlined">list_alt</span>
                         </div>
                         <div>
-                            <div class="active-stat-val" id="countResolution">0</div>
-                            <div class="active-stat-label">For Resolution</div>
-                            <a class="active-stat-link" onclick="filterBy('For Resolution')">View all</a>
+                            <div class="active-stat-val" id="countTotal">0</div>
+                            <div class="active-stat-label">Total Active</div>
+                            <a class="active-stat-link" onclick="filterBy('')">View all</a>
                         </div>
                     </div>
                     <div class="active-stat-card">
@@ -504,13 +504,6 @@
                                         <div class="legend-sub">Report is assigned and awaiting action.</div>
                                     </div>
                                 </div>
-                                <div class="legend-row">
-                                    <div class="legend-dot" style="background:#F59E0B;"></div>
-                                    <div>
-                                        <div class="legend-label">For Resolution</div>
-                                        <div class="legend-sub">Issues are resolved and waiting for finalisation.</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -545,7 +538,8 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        const activeData = [{
+        // Built-in sample rows — shown only when there is no backend/token.
+        const sampleReports = [{
                 ref: 'CW-2026-00132',
                 issue: 'Potholes on Rizal Street',
                 barangay: 'Poblacion, Digos City',
@@ -571,7 +565,7 @@
                 barangay: 'Zone 3, Digos City',
                 date: 'May 20, 2026',
                 time: '7:30 PM',
-                status: 'For Resolution',
+                status: 'In Progress',
                 photo: 'Broken Streetlight',
                 assignedBy: 'TAPIK (Super Admin)'
             },
@@ -611,7 +605,7 @@
                 barangay: 'Buhangin, Digos City',
                 date: 'May 17, 2026',
                 time: '9:00 AM',
-                status: 'For Resolution',
+                status: 'Assigned',
                 photo: 'Damaged Road',
                 assignedBy: 'TAPIK (Super Admin)'
             },
@@ -619,30 +613,35 @@
 
         const statusPillMap = {
             'In Progress': '<span class="status-pill inprogress">In Progress</span>',
-            'For Resolution': '<span class="status-pill resolution">For Resolution</span>',
             'Assigned': '<span class="status-pill assigned">Assigned</span>',
         };
 
-        let filtered = [...activeData];
+        let activeData = [];
+        let filtered = [];
+        let loading = true;
 
-        // Update stat counts
-        function updateCounts(data) {
-            document.getElementById('countInProgress').textContent = data.filter(r => r.status === 'In Progress').length;
-            document.getElementById('countResolution').textContent = data.filter(r => r.status === 'For Resolution').length;
-            document.getElementById('countAssigned').textContent = data.filter(r => r.status === 'Assigned').length;
+        // Update stat counts from the full active set (not the filtered view).
+        function updateCounts() {
+            document.getElementById('countInProgress').textContent = activeData.filter(r => r.status === 'In Progress').length;
+            document.getElementById('countTotal').textContent = activeData.length;
+            document.getElementById('countAssigned').textContent = activeData.filter(r => r.status === 'Assigned').length;
         }
 
         function render() {
-            updateCounts(filtered);
+            updateCounts();
             const list = document.getElementById('reportList');
+            if (loading) {
+                list.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--gray-400);">Loading active reports…</div>`;
+                return;
+            }
             if (!filtered.length) {
                 list.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--gray-400);">No active reports found.</div>`;
                 return;
             }
             list.innerHTML = filtered.map(r => `
-    <div class="report-list-item" onclick="location.href='report-details.html?ref=${r.ref}'">
+    <div class="report-list-item" onclick="location.href='report-details.html?ref=${encodeURIComponent(r.ref)}'">
       <img class="report-list-thumb"
-           src="${getPhotoUrl(r.issue)}"
+           src="${r.imageUrl || getPhotoUrl(r.photo || r.issue)}"
            onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')"
            alt="${r.issue}" />
       <div class="report-list-body">
@@ -655,7 +654,7 @@
           &nbsp;&bull;&nbsp;
           ${r.date} &bull; ${r.time}
         </div>
-        <div class="report-list-meta assigned-by" style="margin-top:4px;">
+        <div class="report-list-meta" style="margin-top:4px;">
           <span class="material-symbols-outlined">person</span>
           Assigned by ${r.assignedBy}
         </div>
@@ -663,9 +662,9 @@
       <div class="report-list-right">
         ${statusPillMap[r.status] || ''}
         <div class="report-list-started">
-          Started<strong>${r.date}</strong>
+          Started<strong>${r.dateAssigned || r.date}</strong>
         </div>
-        <button class="btn-continue" onclick="event.stopPropagation();location.href='report-details.html?ref=${r.ref}'">
+        <button class="btn-continue" onclick="event.stopPropagation();location.href='report-details.html?ref=${encodeURIComponent(r.ref)}'">
           Continue <span class="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
@@ -677,7 +676,7 @@
             document.getElementById('searchInput').value = '';
             document.getElementById('categoryFilter').value = '';
             document.getElementById('barangayFilter').value = '';
-            filtered = activeData.filter(r => r.status === status);
+            filtered = status ? activeData.filter(r => r.status === status) : [...activeData];
             render();
         }
 
@@ -687,7 +686,7 @@
             const bar = document.getElementById('barangayFilter').value;
             const srt = document.getElementById('sortFilter').value;
             filtered = activeData.filter(r =>
-                (!q || r.issue.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || r.barangay.toLowerCase().includes(q)) &&
+                (!q || (r.issue || '').toLowerCase().includes(q) || (r.ref || '').toLowerCase().includes(q) || (r.barangay || '').toLowerCase().includes(q)) &&
                 (!cat || r.issue === cat) &&
                 (!bar || r.barangay.includes(bar))
             );
@@ -701,6 +700,16 @@
         document.getElementById('sortFilter').addEventListener('change', doFilter);
 
         render();
+
+        // Load the office's real reports; keep the sample rows as a fallback.
+        // The "Active Reports" page shows only Assigned + In Progress.
+        (async function load() {
+            const res = await Utils.fetchOfficeReports(sampleReports);
+            activeData = res.reports.filter(r => r.status === 'In Progress' || r.status === 'Assigned');
+            filtered = [...activeData];
+            loading = false;
+            doFilter();
+        })();
     </script>
 </body>
 

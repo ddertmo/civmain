@@ -161,6 +161,89 @@ const Utils = {
         return parts.length ? parts.join(', ') : '—';
     },
 
+    // ── Office report helpers ─────────────────────────────────────────
+    // The API stores the canonical status 'Assigned to Office'; the office
+    // pages show the short label 'Assigned'. apiStatusValue() is the exact
+    // inverse, used when posting a status change back to the API.
+    officeStatusLabel(status) {
+        const s = String(status || '');
+        return s === 'Assigned to Office' ? 'Assigned' : s;
+    },
+
+    apiStatusValue(label) {
+        const s = String(label || '');
+        return s === 'Assigned' ? 'Assigned to Office' : s;
+    },
+
+    // Format an API timestamp as e.g. 'May 21, 2026' / '9:20 AM'.
+    shortDate(str) {
+        if (!str) return '—';
+        const d = new Date(str);
+        if (isNaN(d)) return String(str);
+        return d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+    },
+
+    shortTime(str) {
+        if (!str) return '';
+        const d = new Date(str);
+        if (isNaN(d)) return '';
+        return d.toLocaleTimeString('en-PH', { hour: 'numeric', minute: '2-digit' });
+    },
+
+    // The date a report was handed to an office (its 'Assigned to Office'
+    // activity), falling back to the submission date.
+    assignedDate(r) {
+        const acts = (r && (r.activityLog || r.activities)) || [];
+        const a = acts.find(x => x && x.status === 'Assigned to Office');
+        return this.shortDate((a && a.timestamp) || r.submittedAt || r.created_at);
+    },
+
+    // Flatten one report from GET /api/admin/citizen-reports into the shape
+    // every office list page renders.
+    officeReport(r) {
+        r = r || {};
+        const submittedAt = r.submittedAt || r.created_at || null;
+        const resolvedAt = r.resolvedAt || r.resolved_at || null;
+        return {
+            id: r.id != null ? r.id : null,
+            ref: r.referenceNumber || r.reference_number || (r.id != null ? String(r.id) : ''),
+            issue: r.issue || r.concern || 'Report',
+            category: r.category || '',
+            barangay: r.barangay || '—',
+            priority: r.priority || 'Medium',
+            status: this.officeStatusLabel(r.status),
+            rawStatus: r.status || '',
+            date: this.shortDate(submittedAt),
+            time: this.shortTime(submittedAt),
+            dateAssigned: this.assignedDate(r),
+            dateResolved: this.shortDate(resolvedAt),
+            imageUrl: r.imageUrl || r.photo_url || null,
+            assignedBy: r.assignedOffice || '',
+            submittedAt: submittedAt,
+            resolvedAt: resolvedAt,
+        };
+    },
+
+    // Fetch every report assigned to the signed-in office. Falls back to the
+    // caller's built-in sample rows when there is no backend or no token, so
+    // the page still previews as a prototype.
+    async fetchOfficeReports(sampleRows) {
+        const sample = sampleRows || [];
+        if (typeof Api === 'undefined' || !Api.token()) {
+            return { reports: sample, live: false };
+        }
+        try {
+            const json = await Api.get('/api/admin/citizen-reports', { limit: 500 });
+            if (json && json.success) {
+                const rows = (json.data && json.data.data) ? json.data.data : (json.data || []);
+                return { reports: rows.map(r => Utils.officeReport(r)), live: true };
+            }
+        } catch (e) {
+            console.warn('Falling back to sample office reports:', e);
+        }
+        return { reports: sample, live: false };
+    },
+
     // Format relative time
     relativeTime(minutesAgo) {
         if (minutesAgo < 1) return 'just now';

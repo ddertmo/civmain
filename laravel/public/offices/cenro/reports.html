@@ -124,7 +124,6 @@
                         <option value="">All Status</option>
                         <option value="Assigned">Assigned</option>
                         <option value="In Progress">In Progress</option>
-                        <option value="For Resolution">For Resolution</option>
                         <option value="Resolved">Resolved</option>
                     </select>
                     <select class="filter-select" id="priorityFilter">
@@ -178,7 +177,6 @@
                     <select class="form-select" id="modalStatus">
                         <option value="Assigned">Assigned</option>
                         <option value="In Progress">In Progress</option>
-                        <option value="For Resolution">For Resolution</option>
                         <option value="Resolved">Resolved</option>
                     </select>
                 </div>
@@ -199,7 +197,8 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        const reportsData = [{
+        // Built-in sample rows — shown only when there is no backend/token.
+        const sampleReports = [{
                 ref: 'CW-2026-00125',
                 issue: 'Illegal Dumping',
                 barangay: 'Poblacion',
@@ -215,15 +214,6 @@
                 priority: 'High',
                 status: 'In Progress',
                 date: 'May 20, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00110',
-                issue: 'Garbage Collection',
-                barangay: 'Carmen',
-                priority: 'Medium',
-                status: 'For Resolution',
-                date: 'May 19, 2026',
                 photo: 'illegal-dumping'
             },
             {
@@ -264,7 +254,9 @@
             },
         ];
 
-        let filtered = [...reportsData];
+        let reportsData = [];
+        let filtered = [];
+        let loading = true;
         const priorityClass = {
             'High': 'high',
             'Medium': 'medium',
@@ -272,30 +264,33 @@
         };
         const statusColors = {
             'In Progress': '#F97316',
-            'For Resolution': '#F59E0B',
             'Resolved': '#10B981',
             'Assigned': '#1A56DB'
         };
         const statusBg = {
             'In Progress': '#FFF7ED',
-            'For Resolution': '#FFFBEB',
             'Resolved': '#ECFDF5',
             'Assigned': '#EFF6FF'
         };
 
         function render() {
             const tbody = document.getElementById('reportsBody');
+            if (loading) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">Loading reports…</td></tr>`;
+                document.getElementById('showingLabel').textContent = 'Loading…';
+                return;
+            }
             tbody.innerHTML = filtered.length ? filtered.map(r => `
     <tr>
-      <td><img class="table-photo" src="${getPhotoUrl(r.issue)}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${r.issue}" /></td>
+      <td><img class="table-photo" src="${r.imageUrl || getPhotoUrl(r.photo || r.issue)}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${r.issue}" /></td>
       <td><span class="ref-id">${r.ref}</span></td>
       <td style="font-size:13px;font-weight:600;color:var(--gray-800);max-width:180px;">${r.issue}</td>
       <td style="font-size:13px;color:var(--gray-600);">${r.barangay}</td>
-      <td><span class="priority-badge ${priorityClass[r.priority]}">${r.priority}</span></td>
-      <td><span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:${statusBg[r.status]};color:${statusColors[r.status]};">${r.status}</span></td>
-      <td style="font-size:12px;color:var(--gray-500);">${r.date}</td>
+      <td><span class="priority-badge ${priorityClass[r.priority] || ''}">${r.priority}</span></td>
+      <td><span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:${statusBg[r.status] || '#F3F4F6'};color:${statusColors[r.status] || '#6B7280'};">${r.status}</span></td>
+      <td style="font-size:12px;color:var(--gray-500);">${r.dateAssigned || r.date || '—'}</td>
       <td>
-        <button class="btn-view" onclick="location.href='report-details.html?ref=${r.ref}'">
+        <button class="btn-view" onclick="location.href='report-details.html?ref=${encodeURIComponent(r.ref)}'">
           <span class="material-symbols-outlined">visibility</span> View
         </button>
       </td>
@@ -304,21 +299,22 @@
             document.getElementById('showingLabel').textContent = `Showing ${filtered.length} of ${reportsData.length} reports`;
         }
 
-        const doFilter = Utils.debounce(() => {
+        function applyFilter() {
             const q = document.getElementById('searchInput').value.toLowerCase();
             const st = document.getElementById('statusFilter').value;
             const pr = document.getElementById('priorityFilter').value;
             filtered = reportsData.filter(r =>
-                (!q || r.issue.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || r.barangay.toLowerCase().includes(q)) &&
+                (!q || (r.issue || '').toLowerCase().includes(q) || (r.ref || '').toLowerCase().includes(q) || (r.barangay || '').toLowerCase().includes(q)) &&
                 (!st || r.status === st) &&
                 (!pr || r.priority === pr)
             );
             render();
-        }, 250);
+        }
 
+        const doFilter = Utils.debounce(applyFilter, 250);
         document.getElementById('searchInput').addEventListener('input', doFilter);
-        document.getElementById('statusFilter').addEventListener('change', doFilter);
-        document.getElementById('priorityFilter').addEventListener('change', doFilter);
+        document.getElementById('statusFilter').addEventListener('change', applyFilter);
+        document.getElementById('priorityFilter').addEventListener('change', applyFilter);
 
         function openUpdateModal(ref, status) {
             document.getElementById('modalRef').value = ref;
@@ -338,6 +334,14 @@
         }
 
         render();
+
+        // Load the office's real reports; keep the sample rows as a fallback.
+        (async function load() {
+            const res = await Utils.fetchOfficeReports(sampleReports);
+            reportsData = res.reports;
+            loading = false;
+            applyFilter();
+        })();
     </script>
 </body>
 

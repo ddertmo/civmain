@@ -64,3 +64,4 @@ automatically after each change.
 | 050 | 2026-10-15 | `HEAD` | [Session start: fresh sessions continue from a short handoff, existing sessions keep their history](2026-10-15-050-session-start-handoff.md) |
 | 051 | 2026-10-15 | `HEAD` | [Token-lean session start: read `## NOW` + the last 3 changelog rows, with research fallbacks](2026-10-15-051-token-lean-handoff-now-block.md) |
 | 052 | 2026-10-15 | `HEAD` | [CEO/CENRO report details load from the API; reporter panels show name, address and phone](2026-10-15-052-office-report-details-live-api-reporter-panels.md) |
+| 053 | 2026-10-16 | `HEAD` | [CEO/CENRO list pages load from the API; offices can post status updates](2026-10-16-053-office-list-pages-live-and-status-post.md) |

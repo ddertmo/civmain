@@ -78,6 +78,9 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
 
 // Writes here are super_admin only — see App\Middleware\EnsureSuperAdmin.
 // Reads stay open to every authenticated role (CEO/CENRO need the data).
+// Exception: POST citizen-reports/{id}/status is deliberately NOT here — the
+// assigned office (CEO/CENRO) drives that transition, so it lives in the
+// auth-only group below where updateStatus() enforces office ownership.
 Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'superadmin'])->group(function () {
 
     // Citizen reports management
@@ -87,7 +90,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'superadmin'
     Route::get('citizen-reports/{id}',         [AdminCitizenReportController::class, 'show']);
     Route::post('citizen-reports/{id}/validate', [AdminCitizenReportController::class, 'validate']);
     Route::post('citizen-reports/{id}/assign', [AdminCitizenReportController::class, 'assign']);
-    Route::post('citizen-reports/{id}/status', [AdminCitizenReportController::class, 'updateStatus']);
 
     // Users — stats table on public/users.html
     Route::get('users',          [UserController::class, 'index']);
@@ -150,4 +152,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // office currently assigned to the report (no super_admin access).
     Route::post('/admin/citizen-reports/{id}/priority',
         [AdminCitizenReportController::class, 'updatePriority']);
+
+    // Status updates are shared: the super admin can drive any transition
+    // (from Monitoring) and the assigned office can progress its own reports.
+    // It sits outside the super_admin gate for that reason; updateStatus()
+    // checks role + office ownership, and offices may only reach Assigned,
+    // In Progress or Resolved.
+    Route::post('/admin/citizen-reports/{id}/status',
+        [AdminCitizenReportController::class, 'updateStatus']);
 });

@@ -50,7 +50,7 @@
             <span class="material-symbols-outlined" style="font-size:24px;color:#10B981;">task_alt</span>
           </div>
           <div>
-            <div style="font-size:26px;font-weight:700;color:var(--gray-900);">35</div>
+            <div style="font-size:26px;font-weight:700;color:var(--gray-900);" id="sumWeek">0</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-600);">Resolved This Week</div>
           </div>
         </div>
@@ -59,7 +59,7 @@
             <span class="material-symbols-outlined" style="font-size:24px;color:#059669;">eco</span>
           </div>
           <div>
-            <div style="font-size:26px;font-weight:700;color:var(--gray-900);">142</div>
+            <div style="font-size:26px;font-weight:700;color:var(--gray-900);" id="sumTotal">0</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-600);">Total Resolved</div>
           </div>
         </div>
@@ -68,7 +68,7 @@
             <span class="material-symbols-outlined" style="font-size:24px;color:#F59E0B;">avg_time</span>
           </div>
           <div>
-            <div style="font-size:26px;font-weight:700;color:var(--gray-900);">2.8</div>
+            <div style="font-size:26px;font-weight:700;color:var(--gray-900);" id="sumAvg">—</div>
             <div style="font-size:13px;font-weight:600;color:var(--gray-600);">Avg. Days to Resolve</div>
           </div>
         </div>
@@ -109,7 +109,8 @@
 <script src="/js/utils.js"></script>
 <script src="/js/app.js"></script>
 <script>
-const resolvedData = [
+// Built-in sample rows — shown only when there is no backend/token.
+const sampleResolved = [
   { ref:'CW-2026-00105', issue:'Illegal Dumping',     barangay:'Soong',    dateAssigned:'May 18, 2026', dateResolved:'May 21, 2026', photo:'illegal-dumping' },
   { ref:'CW-2026-00098', issue:'Blocked Canal',        barangay:'Badiang',  dateAssigned:'May 18, 2026', dateResolved:'May 20, 2026', photo:'blocked-drainage' },
   { ref:'CW-2026-00090', issue:'Overgrown Vegetation', barangay:'Carmen',   dateAssigned:'May 16, 2026', dateResolved:'May 18, 2026', photo:'overgrown' },
@@ -118,34 +119,71 @@ const resolvedData = [
   { ref:'CW-2026-00072', issue:'Blocked Canal',        barangay:'Magsaysay',dateAssigned:'May 12, 2026', dateResolved:'May 14, 2026', photo:'blocked-drainage' },
 ];
 
-let filtered = [...resolvedData];
+let resolvedData = [];
+let filtered = [];
+let loading = true;
+
+function toDate(v) {
+  if (!v) return null;
+  var d = new Date(v);
+  return isNaN(d) ? null : d;
+}
+
+function computeStats() {
+  var total = resolvedData.length;
+  var now = Date.now();
+  var week = 0, sum = 0, n = 0;
+  resolvedData.forEach(function(r) {
+    var res = toDate(r.resolvedAt || r.dateResolved);
+    var sub = toDate(r.submittedAt || r.dateAssigned);
+    if (res && (now - res.getTime()) <= 7 * 24 * 3600 * 1000) week++;
+    if (res && sub) { sum += (res - sub) / 86400000; n++; }
+  });
+  document.getElementById('sumWeek').textContent = week;
+  document.getElementById('sumTotal').textContent = total;
+  document.getElementById('sumAvg').textContent = n ? (sum / n).toFixed(1) : '—';
+}
 
 function render() {
   const tbody = document.getElementById('resolvedBody');
+  if (loading) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">Loading reports…</td></tr>`;
+    document.getElementById('showingLabel').textContent = 'Loading…';
+    return;
+  }
   tbody.innerHTML = filtered.length ? filtered.map(r => `
     <tr>
-      <td><img class="table-photo" src="${getPhotoUrl(r.issue)}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${r.issue}" /></td>
+      <td><img class="table-photo" src="${r.imageUrl || getPhotoUrl(r.photo || r.issue)}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${r.issue}" /></td>
       <td><span class="ref-id">${r.ref}</span></td>
       <td style="font-size:13px;font-weight:600;color:var(--gray-800);">${r.issue}</td>
       <td style="font-size:13px;color:var(--gray-600);">${r.barangay}</td>
-      <td style="font-size:12px;color:var(--gray-500);">${r.dateAssigned}</td>
-      <td style="font-size:12px;color:var(--gray-500);">${r.dateResolved}</td>
+      <td style="font-size:12px;color:var(--gray-500);">${r.dateAssigned || '—'}</td>
+      <td style="font-size:12px;color:var(--gray-500);">${r.dateResolved || '—'}</td>
       <td><span class="resolved-badge"><span class="material-symbols-outlined" style="font-size:13px;">check_circle</span>Resolved</span></td>
     </tr>
   `).join('') : `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray-400);">No resolved reports found.</td></tr>`;
   document.getElementById('showingLabel').textContent = `Showing ${filtered.length} of ${resolvedData.length} reports`;
+  computeStats();
 }
 
 const doFilter = Utils.debounce(() => {
   const q = document.getElementById('searchInput').value.toLowerCase();
   filtered = resolvedData.filter(r =>
-    !q || r.issue.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || r.barangay.toLowerCase().includes(q)
+    (!q || (r.issue || '').toLowerCase().includes(q) || (r.ref || '').toLowerCase().includes(q) || (r.barangay || '').toLowerCase().includes(q))
   );
   render();
 }, 250);
 
 document.getElementById('searchInput').addEventListener('input', doFilter);
 render();
+
+// Load the office's resolved reports; keep the sample rows as a fallback.
+(async function load() {
+  const res = await Utils.fetchOfficeReports(sampleResolved);
+  resolvedData = res.reports.filter(r => r.status === 'Resolved');
+  loading = false;
+  doFilter();
+})();
 </script>
 </body>
 </html>
