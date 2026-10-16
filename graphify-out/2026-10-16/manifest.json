@@ -12,9 +12,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_colors.dart": {
-    "mtime": 1792151457.280265,
-    "seen": 1792154221.5508142,
-    "ast_hash": "c6a1f39df92b816e8e6c6b45db6a8a0e",
+    "mtime": 1792155757.0343306,
+    "seen": 1792156087.951775,
+    "ast_hash": "9cfb5e8c75a498f5b84c3e559643c7cc",
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/app_icons.dart": {
@@ -54,15 +54,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/state/app_state.dart": {
-    "mtime": 1792152258.626336,
-    "seen": 1792154221.5513868,
-    "ast_hash": "0aafbaaa69c4b5c8032243ebe2bb190e",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9523416,
+    "ast_hash": "baff11d37ae91e3f1941d40225fcc587",
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/app_theme.dart": {
-    "mtime": 1792152201.6364908,
-    "seen": 1792154221.5513892,
-    "ast_hash": "0a9108fe322b0d41b9fb9e0ea75fb8bc",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9523435,
+    "ast_hash": "a1dfe648778c1bee1fa341f419c4fec7",
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/light_theme.dart": {
@@ -72,9 +72,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/text_styles.dart": {
-    "mtime": 1792152260.764393,
-    "seen": 1792154221.5514872,
-    "ast_hash": "62e3b0767427f2c17eba6dbc42fc7145",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9524572,
+    "ast_hash": "cbef79c06de3e4b75250707c17437799",
     "semantic_hash": ""
   },
   "civ-main/lib/core/utils/dummy_data.dart": {
@@ -84,9 +84,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/utils/helpers.dart": {
-    "mtime": 1792132727.1874373,
-    "seen": 1792133884.2373152,
-    "ast_hash": "2d6b1f23bbaee9a576b5cc93f2411165",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9525552,
+    "ast_hash": "382dabfa97b371952708790f3a9bc6fe",
     "semantic_hash": ""
   },
   "civ-main/lib/core/utils/validators.dart": {
@@ -126,165 +126,165 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/forgot_password_flow.dart": {
-    "mtime": 1792152512.04333,
-    "seen": 1792154221.5521417,
-    "ast_hash": "6de4874000e180ef74a69b24389c33b6",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9531126,
+    "ast_hash": "d9a118be6b101f400ac2e9d9b0b51f02",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/login_screen.dart": {
-    "mtime": 1792152512.061768,
-    "seen": 1792154221.5521433,
-    "ast_hash": "9afb212208fabbab433d00ebb839cb13",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.953115,
+    "ast_hash": "3f352f541281cce37934b7161b32f897",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/otp_screen.dart": {
-    "mtime": 1792152680.9433875,
-    "seen": 1792154221.552145,
-    "ast_hash": "effe48ec27ea79d6360f3d84b3ada3e6",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9531167,
+    "ast_hash": "6c67d3c133106970cfb507afbcf20e53",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/register_screen.dart": {
-    "mtime": 1792152512.085891,
-    "seen": 1792154221.5521464,
-    "ast_hash": "5e98639f40827a40e1c1151b5cdfa863",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9531183,
+    "ast_hash": "146e96e23fbb382be55621b8c2edc14c",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/community_map/community_map_screen.dart": {
-    "mtime": 1792152680.9572802,
-    "seen": 1792154221.5521483,
-    "ast_hash": "455dd9769dcb89dcf6f75039718e373b",
+    "mtime": 1792155431.0298648,
+    "seen": 1792156087.9531202,
+    "ast_hash": "d68949956556224b89e49fee0bc365f6",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/home/home_screen.dart": {
-    "mtime": 1792152680.9552858,
-    "seen": 1792154221.55215,
-    "ast_hash": "fa8a10da9269ec8bee2d7d11addd0f11",
+    "mtime": 1792155548.9623015,
+    "seen": 1792156087.953122,
+    "ast_hash": "be3fd37c5b4669aa995bf8fd8d5e9833",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/landing/landing_screen.dart": {
-    "mtime": 1792152680.9582775,
-    "seen": 1792154221.5521512,
-    "ast_hash": "664f092a79b0a4e6d371a55680bdf341",
+    "mtime": 1792155548.9623015,
+    "seen": 1792156087.9531233,
+    "ast_hash": "31a23803f581396c7dfa67710847d210",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/map_preview/private_map_screen.dart": {
-    "mtime": 1792152680.9532912,
-    "seen": 1792154221.5521529,
-    "ast_hash": "460e0e7d3f4123c09ae6faffbe502ae1",
+    "mtime": 1792155431.034879,
+    "seen": 1792156087.9531255,
+    "ast_hash": "630bb7e6ce4d949047e7464ee69da1d9",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/my_reports/my_reports_screen.dart": {
-    "mtime": 1792152512.1042643,
-    "seen": 1792154221.5521543,
-    "ast_hash": "8b63da77566df2c225bb99d6b6ba747c",
+    "mtime": 1792155431.034879,
+    "seen": 1792156087.9531267,
+    "ast_hash": "03d8f66cfff91ca40ebf6983726c4f12",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/notifications/notification_screen.dart": {
-    "mtime": 1792152680.9522882,
-    "seen": 1792154221.552156,
-    "ast_hash": "6369fd4d54b87959ef46878e99dd9411",
+    "mtime": 1792155431.0359907,
+    "seen": 1792156087.9531283,
+    "ast_hash": "be8499f7055e4f44a0ea9d923e309759",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/profile/profile_screen.dart": {
-    "mtime": 1792152680.9522882,
-    "seen": 1792154221.5521574,
-    "ast_hash": "20d09fb6a1730b8053de6479665f3f1f",
+    "mtime": 1792155492.226327,
+    "seen": 1792156087.95313,
+    "ast_hash": "d5d73cf37e5785ed7a9abcd1c6c3d60a",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/_report_stepper.dart": {
-    "mtime": 1792151534.7828257,
-    "seen": 1792154221.5521588,
-    "ast_hash": "3770ed06aa4fab3291d3fbcc1573725a",
+    "mtime": 1792155431.0359907,
+    "seen": 1792156087.9531312,
+    "ast_hash": "7860200b3dbb767ae720cf7f0537c717",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_category.dart": {
-    "mtime": 1792152512.110007,
-    "seen": 1792154221.5521603,
-    "ast_hash": "00f5eb03afe9e68a21b8ec94f102050a",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531326,
+    "ast_hash": "903d4061df1410ff4e49a4ca4e587b32",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_concern.dart": {
-    "mtime": 1792152512.1110048,
-    "seen": 1792154221.5521617,
-    "ast_hash": "b4f81314718d0fb2f4057ddcd4c1c0d3",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531343,
+    "ast_hash": "f4a745430742a019749a7433bc542755",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_details.dart": {
-    "mtime": 1792152512.1124697,
-    "seen": 1792154221.5521631,
-    "ast_hash": "037afd2792367aec94649e550359006d",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531357,
+    "ast_hash": "f08cf032f89fcd450a721cdd7c18ec27",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_issue.dart": {
-    "mtime": 1792152512.1124697,
-    "seen": 1792154221.5521646,
-    "ast_hash": "d35035939383382e6881e3c5bc6787fb",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531372,
+    "ast_hash": "20795530925904fa5b1a230f09eae661",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_location.dart": {
-    "mtime": 1792152680.94838,
-    "seen": 1792154221.552166,
-    "ast_hash": "806c10048b1b503ca6a905809d73bec6",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531386,
+    "ast_hash": "384d93d99e8e25e13b5d5b3caa3fb365",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_photo.dart": {
-    "mtime": 1792152512.118734,
-    "seen": 1792154221.5521674,
-    "ast_hash": "8cd0d20e2bc992aff3074f7f2e8fea4c",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.95314,
+    "ast_hash": "6cb79e452e0ad508af5743ce3991c8f5",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_review.dart": {
-    "mtime": 1792152512.1210294,
-    "seen": 1792154221.5521686,
-    "ast_hash": "bd55ca37e5e89e997025d237c3cb9634",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531412,
+    "ast_hash": "57169b29af3d14e71c3a58064cb42585",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_submitted.dart": {
-    "mtime": 1792152512.1210294,
-    "seen": 1792154221.55217,
-    "ast_hash": "41be4fbeb0aef1ca4589aed35cb7cbe9",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.953143,
+    "ast_hash": "ebfe9dbc1297b0177bf5290c4a800547",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/splash/splash_screen.dart": {
-    "mtime": 1792152512.1220267,
-    "seen": 1792154221.5521715,
-    "ast_hash": "0ebb7d3d8187b701fd9bb457c15dfe15",
+    "mtime": 1792155548.9623015,
+    "seen": 1792156087.9531443,
+    "ast_hash": "eafc34d64ec020a04dbc925dafc2638e",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/track_report/status_update_screen.dart": {
-    "mtime": 1792152680.949936,
-    "seen": 1792154221.552173,
-    "ast_hash": "a9d0a62d95f2373b81230b342e0c6820",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531455,
+    "ast_hash": "f3b5989cfbfd45adeb2182a2ab8e0b29",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/track_report/track_report_screen.dart": {
-    "mtime": 1792152680.954289,
-    "seen": 1792154221.552174,
-    "ast_hash": "dd695c7905dbc28a8c2ef6922d53d668",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531472,
+    "ast_hash": "32516a314aeb8fa6426c2390ccf9a9ef",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/track_by_reference_screen.dart": {
-    "mtime": 1792152680.9562826,
-    "seen": 1792154221.5521758,
-    "ast_hash": "682f38d6a5207b42f715126cff832ce9",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531486,
+    "ast_hash": "553e4f1457d7e01999a198c659cda63a",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/visitor_about_screen.dart": {
-    "mtime": 1792152512.1323986,
-    "seen": 1792154221.5521774,
-    "ast_hash": "7142a972175c389a65686a4e834a425f",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531503,
+    "ast_hash": "8b053bd02ff09c19bd804c605ab81c60",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/visitor_reports_screen.dart": {
-    "mtime": 1792152680.9582775,
-    "seen": 1792154221.5521786,
-    "ast_hash": "47e1b62ffc77c4e1ae634c03d2959185",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9531517,
+    "ast_hash": "c2e840c29a5d1000c32b347c9929f320",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/visitor/visitor_shell.dart": {
-    "mtime": 1792152680.9509797,
-    "seen": 1792154221.5521803,
-    "ast_hash": "418bba0cb954d6f569e85127b674d1ce",
+    "mtime": 1792155548.9623015,
+    "seen": 1792156087.9531534,
+    "ast_hash": "7a4801fda0ef14c89de5149cef5aaffe",
     "semantic_hash": ""
   },
   "civ-main/lib/services/announcement_service.dart": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/buttons/icon_button.dart": {
-    "mtime": 1792151725.7958097,
-    "seen": 1792154221.5526493,
-    "ast_hash": "c87f5c4b724d18901cbf7e8f80f02bbf",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9536204,
+    "ast_hash": "76f476a6d20ef6c125e0c8f2e973fc06",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/buttons/primary_button.dart": {
@@ -336,123 +336,123 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/activity_card.dart": {
-    "mtime": 1792132727.1993854,
-    "seen": 1792133884.2374372,
-    "ast_hash": "3c8eb59d87ed29b96fc065392547ab2c",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9538121,
+    "ast_hash": "16fe7edfe593723c9448c98f565b7cb4",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/notification_card.dart": {
-    "mtime": 1792152130.4939582,
-    "seen": 1792154221.5528448,
-    "ast_hash": "c968cefcd9c17b782a52c932db3f2556",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9538143,
+    "ast_hash": "c1c419f1f2798e5e3faf36dab87d3ac1",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/report_card.dart": {
-    "mtime": 1792152512.1349237,
-    "seen": 1792154221.5528467,
-    "ast_hash": "418bcdc32048a17e9fd4f842d5daf30d",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9538162,
+    "ast_hash": "e43d3d1e92d69e5e17ac61d5718849f4",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/cards/status_card.dart": {
-    "mtime": 1792152512.1359208,
-    "seen": 1792154221.552848,
-    "ast_hash": "ea8e0a6009e5cd0bb9a41ed2b03ceac6",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9538176,
+    "ast_hash": "7a13e39621a1c59d76a31f1903f2cf15",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/app_dialog.dart": {
-    "mtime": 1792132727.200382,
-    "seen": 1792133884.2374475,
-    "ast_hash": "0174f6029b8bb1f79859a9f6ac0cb838",
+    "mtime": 1792155431.0369954,
+    "seen": 1792156087.9538193,
+    "ast_hash": "237af25dcd87766ad65dbdfc3d3eeb72",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/app_network_image.dart": {
-    "mtime": 1792152512.1359208,
-    "seen": 1792154221.552945,
-    "ast_hash": "0ee2d1132787552c4c3c1cbe683031a2",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.953821,
+    "ast_hash": "d405a07a8628d74393e17a3091f8c4f3",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/empty_state.dart": {
-    "mtime": 1792152680.9494045,
-    "seen": 1792154221.5529463,
-    "ast_hash": "a838ba177d897290a24e6856d2f4ac3a",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.9538221,
+    "ast_hash": "17daab702c38458b91c38ba11840f817",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/loading.dart": {
-    "mtime": 1792152512.1359208,
-    "seen": 1792154221.552948,
-    "ast_hash": "350aee0df502a8a2ac93bd743c164de1",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.953824,
+    "ast_hash": "1fe6609d2981f0d26ab21d8cd9707a8d",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/section_title.dart": {
-    "mtime": 1792132727.201353,
-    "seen": 1792133884.237457,
-    "ast_hash": "2d4d97e87d9ed8633062f5396b37a8cd",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.9538252,
+    "ast_hash": "b5a8a2bec29b017bb24666bdab9c2077",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/skeleton.dart": {
-    "mtime": 1792152512.1379154,
-    "seen": 1792154221.5530436,
-    "ast_hash": "2289a57da44f5bf79662d227d72b3e71",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.953827,
+    "ast_hash": "21179810fbd42fb187e3e640539694be",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/status_chip.dart": {
-    "mtime": 1792132727.2023516,
-    "seen": 1792133884.2374618,
-    "ast_hash": "eb248b2dda3d40241caecee0297a5404",
+    "mtime": 1792155431.044004,
+    "seen": 1792156087.9538286,
+    "ast_hash": "840c5d6c0004a8e18c31918a05e21d93",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/inputs/custom_textfield.dart": {
-    "mtime": 1792152512.1389115,
-    "seen": 1792154221.553142,
-    "ast_hash": "819dd58f8a4552a8c96a1a18a9873560",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.953928,
+    "ast_hash": "77e103a6c76fb481828f714d0db86824",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/inputs/otp_box.dart": {
-    "mtime": 1792152512.1389115,
-    "seen": 1792154221.5531437,
-    "ast_hash": "a68717599ce2ed6a81348df4da710c35",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539294,
+    "ast_hash": "419743fd5581b87bb687d7a7c742de27",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/inputs/search_field.dart": {
-    "mtime": 1792152512.1399112,
-    "seen": 1792154221.5531452,
-    "ast_hash": "c9c7d215e31c724a183bac00ec577817",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.953931,
+    "ast_hash": "ad71088c7b8089de15917da237a30fac",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/map/filter_chip.dart": {
-    "mtime": 1792132727.2043457,
-    "seen": 1792133884.2374723,
-    "ast_hash": "686f1e6839ecddbac53974c9c68fa40b",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539323,
+    "ast_hash": "2d3fc24018b4da0640d3d469b5603abe",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/map/map_marker.dart": {
-    "mtime": 1792151534.7889,
-    "seen": 1792154221.5532434,
-    "ast_hash": "54378254572cfae9be1f1c62d3d06ddb",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539337,
+    "ast_hash": "489ad0e474e38e59f3e5974053a3fa7e",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/map/map_preview.dart": {
-    "mtime": 1792151534.7898977,
-    "seen": 1792154221.553245,
-    "ast_hash": "3670c91751fc1b33723bfc7fdafdfc26",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539354,
+    "ast_hash": "fe69ae912f5f49797a7196d8b8d9bf16",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/navigation/app_bar.dart": {
-    "mtime": 1792152512.1399112,
-    "seen": 1792154221.5532467,
-    "ast_hash": "e3ba165ba42c56ae5240349cf6ac0be3",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539368,
+    "ast_hash": "478d26724108539ee8a1351dc2e83c28",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/navigation/bottom_nav.dart": {
-    "mtime": 1792152680.949936,
-    "seen": 1792154221.5532482,
-    "ast_hash": "fa766236360e767e05daaa4a0a0792b9",
+    "mtime": 1792155431.045515,
+    "seen": 1792156087.9539382,
+    "ast_hash": "62312467d71921d526b66a1f14f28e3c",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/timeline/progress_timeline.dart": {
-    "mtime": 1792132727.2043457,
-    "seen": 1792133884.2374861,
-    "ast_hash": "0e1afc2a4219ebf8ad38e1fe7d46bf75",
+    "mtime": 1792155431.0490959,
+    "seen": 1792156087.9539397,
+    "ast_hash": "02b4df756b29c67e3fd2d271e78ed8e0",
     "semantic_hash": ""
   },
   "civ-main/test/widget_test.dart": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792154200.11865,
-    "seen": 1792154221.5712643,
-    "ast_hash": "b14b60650738f24168aaf566e845af3a",
+    "mtime": 1792156074.1980808,
+    "seen": 1792156087.972167,
+    "ast_hash": "9dbce62c2509b179ddce64bd85c5e54b",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1092,9 +1092,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/timeline/rejection_notice.dart": {
-    "mtime": 1792132727.2058873,
-    "seen": 1792133884.2374895,
-    "ast_hash": "487356483991b4722ee2e8206feebfaf",
+    "mtime": 1792155431.0490959,
+    "seen": 1792156087.953942,
+    "ast_hash": "af5fc303011927beb018fa0d4ce55e36",
     "semantic_hash": ""
   },
   "laravel/docs/SUPER_ADMIN.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792154047.6649954,
-    "seen": 1792154221.5662084,
-    "ast_hash": "b1c314fd20ab4a12785064386aa56633",
+    "mtime": 1792155695.290156,
+    "seen": 1792156087.9668727,
+    "ast_hash": "2f97151a768dbb08eddf537b1cc672a3",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1950,9 +1950,9 @@
     "semantic_hash": ""
   },
   "docs/TASKS.md": {
-    "mtime": 1792154047.6649954,
-    "seen": 1792154221.5662107,
-    "ast_hash": "8f62bf7a59b3e3f292875874081117f8",
+    "mtime": 1792155645.512785,
+    "seen": 1792156087.966875,
+    "ast_hash": "f78e84f1b4ef12958e48cdcf13ea4de6",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-09-033-graphify-on-pc.md": {
@@ -2184,9 +2184,9 @@
     "semantic_hash": ""
   },
   "civ-main/test/theme_tokens_test.dart": {
-    "mtime": 1792153311.5096803,
-    "seen": 1792154221.55441,
-    "ast_hash": "399539f243715da52f84173702df16e9",
+    "mtime": 1792155833.5426912,
+    "seen": 1792156087.9548826,
+    "ast_hash": "02d8a4105a89e31e5ef4fd111934a46d",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-16-054-dark-mode-toggle-switch.md": {
@@ -2199,6 +2199,12 @@
     "mtime": 1792154047.665567,
     "seen": 1792154221.5712616,
     "ast_hash": "0dfc6054fb8bc752bb734c3f7b0799bc",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-16-056-unified-theme-palette-theme-extension.md": {
+    "mtime": 1792155903.9190583,
+    "seen": 1792156087.9721637,
+    "ast_hash": "924c02959bb557beecf3e992abf37ec6",
     "semantic_hash": ""
   }
 }

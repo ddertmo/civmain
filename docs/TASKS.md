@@ -91,3 +91,27 @@ Running list of planned work. Nothing here is done unless its box is checked.
   (readable), in light mode dark.
 - As guest: toggle flips the visitor shell, reports list, about tab and
   persists across restart (same `dark_mode` key).
+
+---
+
+## [ ] Dark-mode contrast of status tint backgrounds is marginal
+
+- **Status:** known and deliberately deferred — decision 2026-10-16 while doing
+  change [057](changes/2026-10-16-057-dark-mode-contrast-home-notifications.md).
+  **Do not fold this into any other task**; it is a palette-wide value change.
+- **Finding:** accent-on-tint contrast in Dark Mode falls just under the 3:1
+  non-text target for three hues:
+  | Status | accent on dark tint |
+  |---|---|
+  | Submitted `#7C3AED` on `#2E1065` | 2.67:1 |
+  | Assigned `#2563EB` on `#172554` | 2.84:1 |
+  | Approved `#0E7C7B` on `#042F2E` | 2.88:1 |
+
+  (Pending 6.97:1, In Progress 4.40:1, Resolved 4.52:1, Rejected 3.34:1 are
+  fine, as are all Light Mode values.)
+- **Where it shows:** anything drawing `context.c.statusColor` on
+  `context.c.statusBg` — notification card icon circles, status chips,
+  Home summary tiles, report status badges.
+- **Proposed fix:** darken the three dark-mode `statusXBg` values in
+  `AppPalette` (Light Mode untouched). No existing darker token is wrong for
+  this; it needs a values change, not a new token.
