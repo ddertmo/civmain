@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/route_generator.dart';
 import 'core/state/app_state.dart';
@@ -17,6 +17,8 @@ class CivilWatchApp extends StatelessWidget {
           title: 'CIVILWATCH',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          themeMode: ThemeMode.dark,
           initialRoute: AppRoutes.splash,
           onGenerateRoute: RouteGenerator.generateRoute,
         );
@@ -24,3 +26,4 @@ class CivilWatchApp extends StatelessWidget {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/app_colors.dart';
@@ -7,6 +7,7 @@ class AppTheme {
   AppTheme._();
 
   static ThemeData get light => _lightTheme;
+  static ThemeData get dark => _darkTheme;
 
   static final ThemeData _lightTheme = ThemeData(
     useMaterial3: true,
@@ -21,7 +22,7 @@ class AppTheme {
       brightness: Brightness.light,
     ),
 
-    // ── Typography ───────────────────────────────────────────────────────────
+    // â”€â”€ Typography â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     textTheme: GoogleFonts.interTextTheme().copyWith(
       displayLarge: GoogleFonts.inter(
         fontSize: 32,
@@ -65,7 +66,7 @@ class AppTheme {
       ),
     ),
 
-    // ── AppBar ───────────────────────────────────────────────────────────────
+    // â”€â”€ AppBar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.white,
       foregroundColor: AppColors.textPrimary,
@@ -83,7 +84,7 @@ class AppTheme {
       iconTheme: const IconThemeData(color: AppColors.textPrimary),
     ),
 
-    // ── Elevated Button ──────────────────────────────────────────────────────
+    // â”€â”€ Elevated Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.navy,
@@ -100,7 +101,7 @@ class AppTheme {
       ),
     ),
 
-    // ── Outlined Button ──────────────────────────────────────────────────────
+    // â”€â”€ Outlined Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.navy,
@@ -116,7 +117,7 @@ class AppTheme {
       ),
     ),
 
-    // ── Text Button ──────────────────────────────────────────────────────────
+    // â”€â”€ Text Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.primary,
@@ -127,7 +128,7 @@ class AppTheme {
       ),
     ),
 
-    // ── Input Decoration ─────────────────────────────────────────────────────
+    // â”€â”€ Input Decoration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.inputFill,
@@ -154,7 +155,7 @@ class AppTheme {
       ),
     ),
 
-    // ── Card ─────────────────────────────────────────────────────────────────
+    // â”€â”€ Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     cardTheme: CardThemeData(
       color: AppColors.white,
       elevation: 0,
@@ -165,7 +166,7 @@ class AppTheme {
       margin: EdgeInsets.zero,
     ),
 
-    // ── Chip ─────────────────────────────────────────────────────────────────
+    // â”€â”€ Chip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     chipTheme: ChipThemeData(
       backgroundColor: AppColors.background,
       selectedColor: AppColors.navy,
@@ -177,14 +178,14 @@ class AppTheme {
       ),
     ),
 
-    // ── Divider ──────────────────────────────────────────────────────────────
+    // â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     dividerTheme: const DividerThemeData(
       color: AppColors.divider,
       thickness: 1,
       space: 0,
     ),
 
-    // ── Bottom Navigation ─────────────────────────────────────────────────
+    // â”€â”€ Bottom Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.white,
       selectedItemColor: AppColors.primary,
@@ -202,3 +203,4 @@ class AppTheme {
     ),
   );
 }
+
