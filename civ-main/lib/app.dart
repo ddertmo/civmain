@@ -18,7 +18,8 @@ class CivilWatchApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
-          themeMode: ThemeMode.dark,
+          themeMode:
+              AppState().isDarkMode ? ThemeMode.dark : ThemeMode.light,
           initialRoute: AppRoutes.splash,
           onGenerateRoute: RouteGenerator.generateRoute,
         );

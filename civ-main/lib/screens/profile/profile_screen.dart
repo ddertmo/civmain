@@ -263,6 +263,25 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () {},
                     ),
                     const Divider(height: 1, color: AppColors.divider, indent: 56),
+                    // ── Dark mode toggle (like the website's on/off switch) ──
+                    ListenableBuilder(
+                      listenable: AppState(),
+                      builder: (context, _) => _MenuTile(
+                        icon: Icons.dark_mode_rounded,
+                        iconBg: AppColors.navy.withValues(alpha: 0.10),
+                        iconColor: AppColors.navy,
+                        label: 'Dark Mode',
+                        onTap: () => AppState()
+                            .setDarkMode(!AppState().isDarkMode),
+                        showArrow: false,
+                        trailing: Switch(
+                          value: AppState().isDarkMode,
+                          activeTrackColor: AppColors.primary,
+                          onChanged: (v) => AppState().setDarkMode(v),
+                        ),
+                      ),
+                    ),
+                    const Divider(height: 1, color: AppColors.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.info_outline_rounded,
                       iconBg: AppColors.background,
@@ -510,6 +529,7 @@ class _MenuTile extends StatelessWidget {
   final VoidCallback onTap;
   final int? badge;
   final bool showArrow;
+  final Widget? trailing;
 
   const _MenuTile({
     required this.icon,
@@ -520,6 +540,7 @@ class _MenuTile extends StatelessWidget {
     required this.onTap,
     this.badge,
     this.showArrow = true,
+    this.trailing,
   });
 
   @override
@@ -544,7 +565,9 @@ class _MenuTile extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: labelColor ?? AppColors.textPrimary)),
           ),
-          if (badge != null && badge! > 0)
+          if (trailing != null)
+            trailing!
+          else if (badge != null && badge! > 0)
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 2),

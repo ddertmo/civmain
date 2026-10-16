@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/report.dart';
 import '../../models/notification_model.dart';
 import '../../models/user.dart';
@@ -37,6 +38,9 @@ class AppState extends ChangeNotifier {
     if (_initialized) return;
     _initialized = true;
 
+    // Restore dark-mode preference first so the first frame renders correctly
+    await _loadThemePreference();
+
     // Always load community reports (public endpoint — no auth needed)
     await _loadCommunityReports();
 
@@ -56,6 +60,26 @@ class AppState extends ChangeNotifier {
       _notifications = List.from(DummyData.notifications);
     }
     notifyListeners();
+  }
+
+  // ── Theme — dark mode toggle ──────────────────────────────────────────────
+  static const _kDarkModeKey = 'dark_mode';
+  bool _isDarkMode = true; // default: dark (matches shipped look)
+  bool get isDarkMode => _isDarkMode;
+
+  Future<void> _loadThemePreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    _isDarkMode = prefs.getBool(_kDarkModeKey) ?? true;
+    notifyListeners();
+  }
+
+  /// Flip dark mode on/off. Persists the choice across app restarts.
+  Future<void> setDarkMode(bool value) async {
+    if (_isDarkMode == value) return;
+    _isDarkMode = value;
+    notifyListeners(); // MaterialApp listens → switches themeMode
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kDarkModeKey, value);
   }
 
   // ── Auth / session ────────────────────────────────────────────────────────
