@@ -1,17 +1,17 @@
 # Graph Report - civmain  (2026-10-16)
 
 ## Corpus Check
-- 290 files · ~204,332 words
+- 294 files · ~207,036 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 93 file(s) not represented in the graph (top: (none) 27, .xml 20, .css 15)
 
 ## Summary
-- 3149 nodes · 4367 edges · 248 communities (175 shown, 73 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 131 edges (avg confidence: 0.94)
+- 3251 nodes · 4482 edges · 249 communities (174 shown, 75 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 132 edges (avg confidence: 0.94)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `acf996d7`
+- Built from commit: `f8e24a72`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,7 +31,7 @@
 - status_update_screen.dart
 - report.dart
 - report_photo.dart
-- custom_textfield.dart
+- VoidCallback?
 - login_screen.dart
 - skeleton.dart
 - route_generator.dart
@@ -59,7 +59,7 @@
 - my_reports_screen.dart
 - user.dart
 - _
-- icon_button.dart
+- text_styles.dart
 - CEO/CENRO report details load from the API; reporter panels show name, address and phone
 - ../../core/constants/app_colors.dart
 - AGENTS.md
@@ -77,8 +77,8 @@
 - 4. Complete Map Feature Flow — Step by Step
 - State
 - graphify now runs on the PC — graph refreshed with SQL + PHP folded in
-- Color?
-- package:google_fonts/google_fonts.dart
+- report_issue.dart
+- .notifications
 - CIVILWATCH — Feature Documentation
 - civ-main/README.md
 - announcements/index.blade.php
@@ -88,16 +88,16 @@
 - citizen-reports/index.blade.php
 - show.blade.php
 - dashboard.blade.php
-- New Eloquent Models
+- [ ] Use UniSMS as the primary SMS provider
 - bottom_nav.dart
-- What `git pull` gives you on the PC vs what you must install
+- Dark mode on/off toggle in Profile (and fix the missing dark theme body)
 - Require Playwright E2E: scaffold, run script and docs
 - map.blade.php
 - Report photos: missing storage link and CORS header
 - Record UniSMS as the planned primary SMS provider
 - CivilWatch — PC setup (XAMPP MySQL)
 - 3. Report Concern Flow
-- app_bar.dart
+- List
 - 15. Extended Widget Library
 - 2. Authentication & Registration
 - One-click boot script: START_ALL.bat starts the whole PC stack
@@ -132,20 +132,21 @@
 - <one-line title of the change>
 - RUN_APP: run on Chrome and auto-start the backend
 - Docs: stop claiming the app has no backend
+- 10. Critical Mismatches to Resolve
 - Change 029 — QA: polish + cleanup + docs
 - Recent changes — "Approved" status flow fix (report stays on Pending)
 - Change 025 — QA: GIS status/palette + map scope
 - CIVILWATCH — Development Log
-- build
+- theme_tokens_test.dart
 - GIS map emoji marker replaced with a proper category icon
 - Illuminate\Database\Schema\Blueprint
-- CustomPainter
+- Add the missing sessions migration so web pages stop 500ing
 - Clean up Assign Report modal and restrict priority to the assigned office
 - ReportActivity
 - win32_window.cpp
 - changes/README.md
-- .notifications
-- package:flutter/services.dart
+- 6. Notifications
+- app_theme.dart
 - Session start: fresh sessions continue from a short handoff, existing sessions keep their history
 - PC health-check scripts (Windows + Termux) and companion repo
 - Export session context for cross-machine handoff
@@ -153,13 +154,13 @@
 - Change 027 — QA: real date filter + search + dynamic range labels
 - PC setup: the SQL import path never ran the `sessions` migration
 - Auto-update run scripts for app and backend
-- 2. The code, before → after
+- TextInputFormatter
 - auth.js
 - package.json
 - Super Admin — Reject with Notes, Pending Queue, Approve Flow
 - Change 028 — QA: login creds + users table from API
 - utils.cpp
-- Reject a report with a reason, end to end
+- .transitionTo
 - main
 - Illuminate\Http\Request
 - Monitoring report view reused pending-reports detail layout
@@ -184,7 +185,7 @@
 - utils.js
 - Unify the Digos City barangay list to the official 26 everywhere
 - 4. Report Submission
-- Repair the dead analytics, notification and user-list endpoints
+- Drop the legacy /api/reports subsystem
 - psr-4
 - loadUsers
 - public/js/app.js
@@ -231,16 +232,16 @@
 - 2. Home Dashboard
 - _next
 - 8. Integration Points & Field Mapping
-- Report details redesigned to two-column workflow layout
-- _next
-- _ForgotPasswordSheet
+- laravel/DEVLOG.md
+- AppState
+- _PinInputRow
 
 ## God Nodes (most connected - your core abstractions)
-1. `_` - 58 edges
+1. `_` - 59 edges
 2. `_` - 56 edges
 3. `CitizenReport` - 45 edges
 4. `_` - 43 edges
-5. `_` - 39 edges
+5. `_` - 40 edges
 6. `_` - 33 edges
 7. `_` - 31 edges
 8. `_` - 26 edges
@@ -262,7 +263,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (248 total, 73 thin omitted)
+## Communities (249 total, 75 thin omitted)
 
 ### Community 0 - "app_strings.dart"
 Cohesion: 0.01
@@ -278,7 +279,7 @@ Nodes (60): about, announcement, AppIcons, arrowBack, arrowForward, arrowRight, 
 
 ### Community 3 - "app_state.dart"
 Cohesion: 0.04
-Nodes (49): addReport, _addSubmissionNotifications, _announcements, _annSvc, AppState, _auth, buildFromFormData, _communityReports (+41 more)
+Nodes (49): addReport, _addSubmissionNotifications, _announcements, _annSvc, _applySystemUi, _auth, buildFromFormData, _communityReports (+41 more)
 
 ### Community 4 - "report_location.dart"
 Cohesion: 0.04
@@ -289,32 +290,32 @@ Cohesion: 0.04
 Nodes (47): agreed, _agreedToTerms, _animController, _BarangayDropdown, build, _buildPhoneField, _buildTextField, _cityCtrl (+39 more)
 
 ### Community 6 - "helpers.dart"
-Cohesion: 0.04
-Nodes (39): appBarTitle, AppTextStyles, bodyLarge, bodyMedium, bodySmall, buttonLarge, buttonMedium, caption (+31 more)
+Cohesion: 0.09
+Nodes (20): AppHelpers, formatDate, formatDateShort, formatDateTime, formatTime, generateRefNumber, getCategoryBgColor, getCategoryColor (+12 more)
 
 ### Community 7 - "_"
-Cohesion: 0.10
-Nodes (20): _, build, color, height, icon, isBlurred, issue, issueLabel (+12 more)
+Cohesion: 0.06
+Nodes (30): _SkylinePainter, _TailPainter, _HomeMiniMapPainter, _MiniCityPainter, _LandingSkylinePainter, _TailPainter, _SuccessCityPainter, _PinTailPainter (+22 more)
 
 ### Community 8 - "track_by_reference_screen.dart"
-Cohesion: 0.06
-Nodes (30): _PhoneFmt, _PhoneNumberFormatter, _PhoneFormatter, build, _CompactTimeline, createState, _ctrl, _DetailRow (+22 more)
+Cohesion: 0.07
+Nodes (24): build, _CompactTimeline, createState, _ctrl, _DetailRow, dispose, _focusNode, formatEditUpdate (+16 more)
 
 ### Community 9 - "app_colors.dart"
-Cohesion: 0.04
-Nodes (44): AppColors, background, cardShadow, divider, environment, environmentBg, infrastructure, infrastructureBg (+36 more)
+Cohesion: 0.02
+Nodes (97): AppColors, _approvedBgDark, _approvedBgLight, _approvedBorderDark, _approvedBorderLight, _assignedBgDark, _assignedBgLight, _assignedBorderDark (+89 more)
 
 ### Community 10 - "_"
-Cohesion: 0.06
-Nodes (28): _, _activeFilter, bg, build, _center, color, count, createState (+20 more)
+Cohesion: 0.05
+Nodes (35): _, _activeFilter, bg, build, _center, color, count, createState (+27 more)
 
 ### Community 11 - "dummy_data.dart"
 Cohesion: 0.07
 Nodes (24): Announcement, announcements, barangay, body, category, communityPins, communityReports, currentUser (+16 more)
 
 ### Community 12 - "status_update_screen.dart"
-Cohesion: 0.07
-Nodes (25): activityLog, _ActivityRow, _buildPendingSteps, currentIdx, description, _getReport, highlightBg, highlightBorder (+17 more)
+Cohesion: 0.05
+Nodes (37): IncidentReport, activityLog, _ActivityRow, _buildPendingSteps, currentIdx, description, _getReport, highlightBg (+29 more)
 
 ### Community 13 - "report.dart"
 Cohesion: 0.08
@@ -322,11 +323,11 @@ Nodes (25): activityLog, afterImageUrl, assignedOffice, barangay, category, copy
 
 ### Community 14 - "report_photo.dart"
 Cohesion: 0.06
-Nodes (31): bg, build, _buildImage, bytes, canSkip, catColor, color, createState (+23 more)
+Nodes (32): bg, build, _buildImage, bytes, canSkip, catColor, color, createState (+24 more)
 
-### Community 15 - "custom_textfield.dart"
-Cohesion: 0.12
-Nodes (14): build, controller, CustomTextField, hint, inputFormatters, keyboardType, label, maxLength (+6 more)
+### Community 15 - "VoidCallback?"
+Cohesion: 0.06
+Nodes (29): AppIconButton, backgroundColor, badge, build, hasBorder, icon, iconColor, iconSize (+21 more)
 
 ### Community 16 - "login_screen.dart"
 Cohesion: 0.07
@@ -366,19 +367,19 @@ Nodes (21): _BarangayDropdown, build, catColor, createState, _descController, di
 
 ### Community 25 - "track_report_screen.dart"
 Cohesion: 0.06
-Nodes (30): _viewOnMap, build, afterPending, _BeforeAfterPhotos, build, color, fallbackColor, fallbackIcon (+22 more)
+Nodes (32): _viewOnMap, build, afterPending, _BeforeAfterPhotos, build, color, fallbackColor, fallbackIcon (+24 more)
 
 ### Community 26 - "otp_screen.dart"
 Cohesion: 0.07
 Nodes (21): build, _animController, build, createState, _devOtp, dispose, _fadeAnim, initState (+13 more)
 
 ### Community 27 - "StatelessWidget"
-Cohesion: 0.05
-Nodes (40): _FilterRow, _MapHeader, _PinDetailSheet, _StatsBar, _StatTile, _TeardropPin, _ZoomBtn, _ (+32 more)
+Cohesion: 0.07
+Nodes (29): _, announcement, _AnnouncementCard, bg, color, count, createState, firstName (+21 more)
 
 ### Community 28 - "report_concern.dart"
-Cohesion: 0.06
-Nodes (28): build, catBg, catColor, category, concern, _ConcernCard, _ConcernNavBar, _concerns (+20 more)
+Cohesion: 0.10
+Nodes (21): build, catBg, catColor, category, concern, _ConcernCard, _ConcernNavBar, _concerns (+13 more)
 
 ### Community 29 - "report_review.dart"
 Cohesion: 0.10
@@ -389,12 +390,12 @@ Cohesion: 0.09
 Nodes (21): badge, bg, color, _confirmLogout, count, embedded, _formatPhone, icon (+13 more)
 
 ### Community 31 - "visitor_shell.dart"
-Cohesion: 0.07
-Nodes (19): build, CivilWatchApp, main, build, createState, currentIndex, GuestBanner, icon (+11 more)
+Cohesion: 0.06
+Nodes (24): build, CivilWatchApp, build, createState, currentIndex, GuestBanner, icon, _index (+16 more)
 
 ### Community 32 - "_"
 Cohesion: 0.10
-Nodes (22): _, actionLabel, AppDialog, build, createState, _ctrl, _DialogCard, _DialogCardState (+14 more)
+Nodes (20): _, actionLabel, AppDialog, build, createState, _ctrl, _DialogVariant, dispose (+12 more)
 
 ### Community 33 - "api_constants.dart"
 Cohesion: 0.11
@@ -405,16 +406,16 @@ Cohesion: 0.17
 Nodes (5): AdminAnnouncementController, Controller, MobileAnnouncementController, Announcement, New Controllers
 
 ### Community 36 - "report_category.dart"
-Cohesion: 0.12
-Nodes (15): bg, build, _CategoryCard, color, createState, icon, isSelected, _next (+7 more)
+Cohesion: 0.11
+Nodes (17): bg, build, _CategoryCard, color, createState, icon, isSelected, _next (+9 more)
 
 ### Community 37 - "notification_service.dart"
 Cohesion: 0.12
 Nodes (10): AnnouncementService, _api, instance, _parse, _api, instance, markAllRead, markRead (+2 more)
 
 ### Community 38 - "splash_screen.dart"
-Cohesion: 0.15
-Nodes (10): build, _CivilWatchLogo, _controller, createState, dispose, _fadeAnim, initState, _scaleAnim (+2 more)
+Cohesion: 0.14
+Nodes (12): build, _CivilWatchLogo, _controller, createState, dispose, _fadeAnim, initState, _scaleAnim (+4 more)
 
 ### Community 39 - "Workflow"
 Cohesion: 0.14
@@ -425,8 +426,8 @@ Cohesion: 0.13
 Nodes (10): _api, AuthService, _currentUser, fetchMe, instance, isLoggedIn, logout, _normalizePhone (+2 more)
 
 ### Community 41 - "my_reports_screen.dart"
-Cohesion: 0.07
-Nodes (18): _activeFilter, createState, dispose, embedded, _filters, _getFiltered, initState, _searchController (+10 more)
+Cohesion: 0.09
+Nodes (14): _viewFullDetails, build, _activeFilter, build, createState, dispose, embedded, _filters (+6 more)
 
 ### Community 42 - "user.dart"
 Cohesion: 0.14
@@ -436,40 +437,40 @@ Nodes (11): AppUser, avatarUrl, barangay, firstName, fullName, id, joinedDate, p
 Cohesion: 0.13
 Nodes (12): _, build, _controller, createState, dispose, _fadeAnim, initState, paint (+4 more)
 
-### Community 44 - "icon_button.dart"
-Cohesion: 0.17
-Nodes (10): AppIconButton, backgroundColor, badge, build, hasBorder, icon, iconColor, iconSize (+2 more)
+### Community 44 - "text_styles.dart"
+Cohesion: 0.10
+Nodes (19): appBarTitle, AppTextStyles, bodyLarge, bodyMedium, bodySmall, buttonLarge, buttonMedium, caption (+11 more)
 
 ### Community 46 - "CEO/CENRO report details load from the API; reporter panels show name, address and phone"
 Cohesion: 0.29
 Nodes (6): Cause, CEO/CENRO report details load from the API; reporter panels show name, address and phone, Changes, Impact / how to test by hand, Problem, Verification
 
 ### Community 47 - "../../core/constants/app_colors.dart"
-Cohesion: 0.09
-Nodes (19): build, dateLabel, message, showLock, status, StatusCard, AppLoading, build (+11 more)
+Cohesion: 0.06
+Nodes (28): AppLoading, build, message, actionLabel, build, onAction, SectionTitle, title (+20 more)
 
 ### Community 48 - "AGENTS.md"
-Cohesion: 0.15
-Nodes (10): changelog, graphify, lazy lookups — do not preload, `## NOW` budget — a snapshot, never a log, playwright (removed), session context — read on a NEW session only, two machines — detect before applying env-specific commands, unknown info — use a subagent, then write it down (+2 more)
+Cohesion: 0.10
+Nodes (16): changelog, graphify, lazy lookups — do not preload, `## NOW` budget — a snapshot, never a log, playwright (removed), session context — read on a NEW session only, two machines — detect before applying env-specific commands, unknown info — use a subagent, then write it down (+8 more)
 
 ### Community 49 - "CitizenReport"
-Cohesion: 0.12
-Nodes (13): Changes, Cause, Cause, Changes, Impact / how to test by hand, Persist an Approved status so approve/assign/map/monitoring/Android agree, Problem, Verification (+5 more)
+Cohesion: 0.08
+Nodes (14): 2.1 Migration — widen the `status` ENUM, 2.2 Model — `CitizenReport` gains the constant + flow order, 2.3 Controller — the actual approve endpoint (`validate`), 2.4 Controller — `assign()` only accepts Approved, unassigned reports, 2.5 Map + mobile community — Approved and later, never Pending, 2.6 Summary / analytics gain an `approved` bucket, 2.7 Web admin (HTML prototype + Blade), 2.8 Flutter app (+6 more)
 
 ### Community 50 - "HUB: CIVILWATCH"
 Cohesion: 0.22
 Nodes (8): Constraints, Decisions, Goal, HUB: CIVILWATCH, Key files, Links, Sessions, Status
 
 ### Community 51 - "IconData"
-Cohesion: 0.06
-Nodes (27): backgroundColor, borderRadius, build, height, icon, isLoading, label, onPressed (+19 more)
+Cohesion: 0.05
+Nodes (36): backgroundColor, borderRadius, build, height, icon, isLoading, label, onPressed (+28 more)
 
 ### Community 52 - "GeneratedPluginRegistrant.swift"
 Cohesion: 0.05
 Nodes (18): AppDelegate, SceneDelegate, RunnerTests, RegisterGeneratedPlugins(), AppDelegate, MainFlutterWindow, RunnerTests, Cocoa (+10 more)
 
 ### Community 53 - "GovernmentOffice"
-Cohesion: 0.11
+Cohesion: 0.09
 Nodes (3): AdminOfficeController, AdminWebController, GovernmentOffice
 
 ### Community 54 - "validators.dart"
@@ -501,20 +502,20 @@ Cohesion: 0.09
 Nodes (22): 1. Full Project File Structure, 2. Map-Related Files — What Each One Does, 3. Data Model — MapPin, 4. Complete Map Feature Flow — Step by Step, 5. Filter Flow — Category Filtering, 6. State Management Summary, 7. Navigation Map (All Routes), 8. Key Dependencies (Map-Specific) (+14 more)
 
 ### Community 61 - "State"
-Cohesion: 0.10
-Nodes (30): LoginScreen, _LoginScreenState, OtpScreen, _OtpScreenState, _PinInputRow, _PinInputRowState, RegisterScreen, _RegisterScreenState (+22 more)
+Cohesion: 0.11
+Nodes (28): _ForgotPasswordSheet, _ForgotPasswordSheetState, LoginScreen, _LoginScreenState, OtpScreen, _OtpScreenState, RegisterScreen, _RegisterScreenState (+20 more)
 
 ### Community 62 - "graphify now runs on the PC — graph refreshed with SQL + PHP folded in"
 Cohesion: 0.29
 Nodes (6): Cause, Changes, graphify now runs on the PC — graph refreshed with SQL + PHP folded in, Impact / how to test by hand, Problem, Verification
 
-### Community 63 - "Color?"
-Cohesion: 0.18
-Nodes (9): activeBg, activeColor, build, icon, isFiltersChip, isSelected, label, MapFilterChip (+1 more)
+### Community 63 - "report_issue.dart"
+Cohesion: 0.14
+Nodes (11): _next, build, catColor, category, createState, _next, onNext, ReportIssueScreen (+3 more)
 
-### Community 64 - "package:google_fonts/google_fonts.dart"
-Cohesion: 0.11
-Nodes (14): build, notification, NotificationCard, onTap, actionLabel, build, onAction, SectionTitle (+6 more)
+### Community 64 - ".notifications"
+Cohesion: 0.17
+Nodes (4): 16. AppIcons Constants (`lib/core/constants/app_icons.dart`), Files to touch, One-time database import, Notifications feed
 
 ### Community 65 - "CIVILWATCH — Feature Documentation"
 Cohesion: 0.12
@@ -529,20 +530,20 @@ Cohesion: 0.07
 Nodes (26): body, build, child, color, _FeatureItem, icon, _onLoginTap, _SectionCard (+18 more)
 
 ### Community 70 - "Citizen"
-Cohesion: 0.13
-Nodes (3): {closure#2}(), Citizen, User
+Cohesion: 0.08
+Nodes (8): 12. Services Layer, SemaphoreService, {closure#2}(), MobileAuthController, Citizen, OtpCode, User, New Eloquent Models
 
-### Community 75 - "New Eloquent Models"
-Cohesion: 0.10
-Nodes (13): 12. Services Layer, 16. AppIcons Constants (`lib/core/constants/app_icons.dart`), SemaphoreService, Files to touch, Known limits, Open decisions (answer at implementation time), Preconditions (must be true before it can work live), Scope (+5 more)
+### Community 75 - "[ ] Use UniSMS as the primary SMS provider"
+Cohesion: 0.20
+Nodes (10): CivilWatch — Task List, [ ] Dark mode toggle for visitor mode + status-bar icon conflicts, Known limits, Open decisions (answer at implementation time), Preconditions (must be true before it can work live), Scope, Scope, [ ] Use UniSMS as the primary SMS provider (+2 more)
 
 ### Community 76 - "bottom_nav.dart"
 Cohesion: 0.20
 Nodes (8): activeIcon, build, CivilWatchBottomNav, currentIndex, icon, _items, label, _NavItem
 
-### Community 77 - "What `git pull` gives you on the PC vs what you must install"
-Cohesion: 0.33
-Nodes (5): Changes, Impact / how to test by hand, Problem, Verification, What `git pull` gives you on the PC vs what you must install
+### Community 77 - "Dark mode on/off toggle in Profile (and fix the missing dark theme body)"
+Cohesion: 0.29
+Nodes (6): Cause, Changes, Dark mode on/off toggle in Profile (and fix the missing dark theme body), Impact / how to test by hand, Problem, Verification
 
 ### Community 78 - "Require Playwright E2E: scaffold, run script and docs"
 Cohesion: 0.29
@@ -564,9 +565,9 @@ Nodes (33): How UI changes are verified now, IMPORTANT — Playwright has been r
 Cohesion: 0.25
 Nodes (8): 3. Report Concern Flow, Progress Stepper, Step 1 — Category (`/report/category`), Step 2 — Concern (`/report/concern`), Step 3 — Photo (`/report/photo`), Step 4 — Location (`/report/location`), Step 5 — Review (`/report/review`), Submitted Screen (`/report/submitted`)
 
-### Community 90 - "app_bar.dart"
-Cohesion: 0.10
-Nodes (17): abbreviation, address, contactNumber, email, GovernmentOffice, handles, id, name (+9 more)
+### Community 90 - "List"
+Cohesion: 0.20
+Nodes (8): abbreviation, address, contactNumber, email, GovernmentOffice, handles, id, name
 
 ### Community 91 - "15. Extended Widget Library"
 Cohesion: 0.29
@@ -597,8 +598,8 @@ Cohesion: 0.33
 Nodes (6): 9.1 New `citizens` Table, 9.2 New Columns on `reports` Table, 9.3 New `citizen_notifications` Table, 9.4 Optional: `announcements` Table, 9.5 RLS Policy for `reports` — Citizen Access, 9. Schema Changes Needed
 
 ### Community 98 - "package:flutter/material.dart"
-Cohesion: 0.07
-Nodes (23): ActivityEntry, IncidentReport, ActivityCard, build, entry, isCurrent, isLast, build (+15 more)
+Cohesion: 0.05
+Nodes (31): AppNotification, ActivityEntry, build, embedded, _GroupLabel, label, NotificationScreen, build (+23 more)
 
 ### Community 99 - "Office list restricted to CEO and CENRO"
 Cohesion: 0.29
@@ -625,8 +626,8 @@ Cohesion: 0.50
 Nodes (4): 5. Track Report, Private Map Screen, Status Update Screen, Track Report Screen
 
 ### Community 105 - "CIVILWATCH — Citizen App Integration Context"
-Cohesion: 0.14
-Nodes (13): 10.1 Category Spelling, 10.2 Severity vs Priority Column Name, 10.3 Status: "Assigned to Office" vs "Assigned", 10.4 Reference Number Generation, 10.5 `submitted_by` / `phone` Not Yet Wired, 10. Critical Mismatches to Resolve, 11. Not Yet Built — Planned Features, 1.1 App Name & Branding (+5 more)
+Cohesion: 0.25
+Nodes (7): 11. Not Yet Built — Planned Features, 1.1 App Name & Branding, 1.2 Tech Stack, 1.3 Current Backend Status, 1. Overview, CIVILWATCH — Citizen App Integration Context, Table of Contents
 
 ### Community 106 - "users.js"
 Cohesion: 0.10
@@ -700,6 +701,10 @@ Nodes (6): Cause, Changes, Impact / how to test by hand, Problem, RUN_APP: run o
 Cohesion: 0.29
 Nodes (6): Cause, Changes, Docs: stop claiming the app has no backend, Impact / how to test by hand, Problem, Verification
 
+### Community 126 - "10. Critical Mismatches to Resolve"
+Cohesion: 0.33
+Nodes (6): 10.1 Category Spelling, 10.2 Severity vs Priority Column Name, 10.3 Status: "Assigned to Office" vs "Assigned", 10.4 Reference Number Generation, 10.5 `submitted_by` / `phone` Not Yet Wired, 10. Critical Mismatches to Resolve
+
 ### Community 127 - "Change 029 — QA: polish + cleanup + docs"
 Cohesion: 0.33
 Nodes (5): Change 029 — QA: polish + cleanup + docs, Changes, Impact, Problem, Verification
@@ -713,12 +718,8 @@ Cohesion: 0.29
 Nodes (7): Cause, Change 025 — QA: GIS status/palette + map scope, Changes, Impact / how to test by hand, Problem, Verification, statusBadge()
 
 ### Community 130 - "CIVILWATCH — Development Log"
-Cohesion: 0.22
-Nodes (7): CivilWatch Laravel Backend — Development Log, CIVILWATCH — Development Log, Decisions & Clarifications Log, Future Features (Post-Phase 2), Mobile App, Phase 1 — Laravel Migration, Project File Structure (Current)
-
-### Community 131 - "build"
-Cohesion: 0.22
-Nodes (5): _viewFullDetails, build, build, build, _viewDetail
+Cohesion: 0.33
+Nodes (6): CIVILWATCH — Development Log, Decisions & Clarifications Log, Future Features (Post-Phase 2), Mobile App, Phase 1 — Laravel Migration, Project File Structure (Current)
 
 ### Community 132 - "GIS map emoji marker replaced with a proper category icon"
 Cohesion: 0.29
@@ -728,33 +729,33 @@ Nodes (6): Cause, Changes, GIS map emoji marker replaced with a proper category 
 Cohesion: 0.24
 Nodes (5): {closure#1}(), {closure#2}(), {closure#3}(), {closure#1}(), {closure#2}()
 
-### Community 134 - "CustomPainter"
-Cohesion: 0.18
-Nodes (10): _SkylinePainter, _TailPainter, _HomeMiniMapPainter, _MiniCityPainter, _LandingSkylinePainter, _TailPainter, _SuccessCityPainter, _PinTailPainter (+2 more)
+### Community 134 - "Add the missing sessions migration so web pages stop 500ing"
+Cohesion: 0.33
+Nodes (6): Add the missing sessions migration so web pages stop 500ing, Cause, Changes, Impact / how to test by hand, Problem, Verification
 
 ### Community 135 - "Clean up Assign Report modal and restrict priority to the assigned office"
 Cohesion: 0.25
 Nodes (7): Cause, Changes, Clean up Assign Report modal and restrict priority to the assigned office, Impact / how to test by hand, Limitation noted, Problem, Verification
 
 ### Community 136 - "ReportActivity"
-Cohesion: 0.07
-Nodes (11): Changes, Drop the legacy /api/reports subsystem, Impact / how to test by hand, Problem, Verification, ClearDummyReports, NotificationController, CitizenNotification (+3 more)
+Cohesion: 0.11
+Nodes (8): Changes, ClearDummyReports, NotificationController, CitizenNotification, ReportActivity, Flutter API Field Mapping, Report Status Flow, Analytics endpoints
 
 ### Community 137 - "win32_window.cpp"
 Cohesion: 0.18
 Nodes (5): Scale(), Win32Window::Win32Window(), WindowClassRegistrar, class_registered_, instance_
 
 ### Community 138 - "changes/README.md"
+Cohesion: 0.08
+Nodes (19): Changes, Impact / how to test by hand, Problem, Verification, What `git pull` gives you on the PC vs what you must install, Changes, Fix report view link JavaScript quoting, Problem (+11 more)
+
+### Community 139 - "6. Notifications"
+Cohesion: 0.50
+Nodes (4): 6.1 Notification System, 6.2 Events That Trigger Notifications, 6.3 Notification Data Model, 6. Notifications
+
+### Community 140 - "app_theme.dart"
 Cohesion: 0.09
-Nodes (17): Add the missing sessions migration so web pages stop 500ing, Cause, Changes, Impact / how to test by hand, Problem, Verification, Changes, Fix report view link JavaScript quoting (+9 more)
-
-### Community 139 - ".notifications"
-Cohesion: 0.25
-Nodes (7): 6.1 Notification System, 6.2 Events That Trigger Notifications, 6.3 Notification Data Model, 6. Notifications, 2. Database, One-time database import, Notifications feed
-
-### Community 140 - "package:flutter/services.dart"
-Cohesion: 0.22
-Nodes (5): AppTheme, dark, _darkTheme, light, _lightTheme
+Nodes (18): AppTheme, dark, _darkTheme, _dBackground, _dDivider, _dSurface, _dTextPrimary, _dTextSecondary (+10 more)
 
 ### Community 141 - "Session start: fresh sessions continue from a short handoff, existing sessions keep their history"
 Cohesion: 0.29
@@ -784,9 +785,9 @@ Nodes (6): Cause, Changes, Impact / how to test by hand, PC setup: the SQL impor
 Cohesion: 0.33
 Nodes (6): Auto-update run scripts for app and backend, Cause, Changes, Impact / how to test by hand, Problem, Verification
 
-### Community 148 - "2. The code, before → after"
-Cohesion: 0.22
-Nodes (9): 2.1 Migration — widen the `status` ENUM, 2.2 Model — `CitizenReport` gains the constant + flow order, 2.3 Controller — the actual approve endpoint (`validate`), 2.4 Controller — `assign()` only accepts Approved, unassigned reports, 2.5 Map + mobile community — Approved and later, never Pending, 2.6 Summary / analytics gain an `approved` bucket, 2.7 Web admin (HTML prototype + Blade), 2.8 Flutter app (+1 more)
+### Community 148 - "TextInputFormatter"
+Cohesion: 0.40
+Nodes (4): _PhoneFmt, _PhoneNumberFormatter, _PhoneFormatter, _RefNumberFormatter
 
 ### Community 149 - "auth.js"
 Cohesion: 0.17
@@ -808,17 +809,17 @@ Nodes (6): Cause, Change 028 — QA: login creds + users table from API, Changes
 Cohesion: 0.17
 Nodes (4): wWinMain(), CreateAndAttachConsole(), GetCommandLineArguments(), Utf8FromUtf16()
 
-### Community 155 - "Reject a report with a reason, end to end"
-Cohesion: 0.33
-Nodes (5): Cause, Impact / how to test by hand, Problem, Reject a report with a reason, end to end, Verification
+### Community 155 - ".transitionTo"
+Cohesion: 0.15
+Nodes (12): Cause, Changes, Impact / how to test by hand, Problem, Reject a report with a reason, end to end, Verification, Cause, Changes (+4 more)
 
 ### Community 156 - "main"
-Cohesion: 0.17
+Cohesion: 0.22
 Nodes (9): main(), Changes, Cause, Changes, Impact / how to test by hand, Problem, Pull the PC companion repo: civilwatch_check_pc into civmain, Verification (+1 more)
 
 ### Community 157 - "Illuminate\Http\Request"
-Cohesion: 0.13
-Nodes (6): Cause, Changes, AnalyticsController, AuthController, MobileNotificationController, UserController
+Cohesion: 0.11
+Nodes (10): Cause, Changes, Impact / how to test by hand, Problem, Repair the dead analytics, notification and user-list endpoints, Verification, AnalyticsController, AuthController (+2 more)
 
 ### Community 158 - "Monitoring report view reused pending-reports detail layout"
 Cohesion: 0.33
@@ -833,8 +834,8 @@ Cohesion: 0.24
 Nodes (4): Win32Window, child_content_, quit_on_close_, window_handle_
 
 ### Community 161 - "notification_model.dart"
-Cohesion: 0.18
-Nodes (9): AppNotification, copyWith, id, isRead, message, referenceNumber, status, timestamp (+1 more)
+Cohesion: 0.20
+Nodes (8): copyWith, id, isRead, message, referenceNumber, status, timestamp, title
 
 ### Community 164 - "scripts"
 Cohesion: 0.20
@@ -884,9 +885,9 @@ Nodes (6): Cause, Changes, Impact / how to test by hand, Problem, Unify the Digo
 Cohesion: 0.29
 Nodes (7): 4.1 Current Concern Types (Final — as of latest update), 4.2 All Fields Collected During Submission, 4.3 Location Selection — Two Methods, 4.4 Photo Upload — Current Status, 4.5 After Submitting, 4.6 Exact Data Object Created on Submit, 4. Report Submission
 
-### Community 180 - "Repair the dead analytics, notification and user-list endpoints"
+### Community 180 - "Drop the legacy /api/reports subsystem"
 Cohesion: 0.40
-Nodes (4): Impact / how to test by hand, Problem, Repair the dead analytics, notification and user-list endpoints, Verification
+Nodes (4): Drop the legacy /api/reports subsystem, Impact / how to test by hand, Problem, Verification
 
 ### Community 181 - "psr-4"
 Cohesion: 0.40
@@ -905,8 +906,8 @@ Cohesion: 0.67
 Nodes (3): extra, laravel, dont-discover
 
 ### Community 213 - "What Was Done"
-Cohesion: 0.29
-Nodes (7): 1. File Migration, 3. Eloquent Models Created, 4. Controllers Created, 5. API Routes (`routes/api.php`), 6. Frontend Auth Updated, 7. Auth Approach — Laravel Sanctum, What Was Done
+Cohesion: 0.25
+Nodes (8): 1. File Migration, 2. Database, 3. Eloquent Models Created, 4. Controllers Created, 5. API Routes (`routes/api.php`), 6. Frontend Auth Updated, 7. Auth Approach — Laravel Sanctum, What Was Done
 
 ### Community 214 - "Submitted and approved reports were invisible until the app restarted"
 Cohesion: 0.29
@@ -941,8 +942,8 @@ Cohesion: 0.50
 Nodes (3): Changes, Commits, Files Modified
 
 ### Community 224 - "otp_box.dart"
-Cohesion: 0.20
-Nodes (10): build, _controllers, createState, dispose, _focusNodes, initState, length, _onChanged (+2 more)
+Cohesion: 0.14
+Nodes (11): main, build, _controllers, createState, dispose, _focusNodes, initState, length (+3 more)
 
 ### Community 225 - "13. Theme System"
 Cohesion: 0.67
@@ -960,29 +961,25 @@ Nodes (3): 2. Home Dashboard, Home Tab, Navigation Shell
 Cohesion: 0.50
 Nodes (4): 8.1 Citizen App → Admin DB Column Mapping, 8.2 Data the Citizen App Needs to READ from Admin System, 8.3 Auth Separation Strategy, 8. Integration Points & Field Mapping
 
-### Community 242 - "Report details redesigned to two-column workflow layout"
-Cohesion: 0.50
-Nodes (3): Changes, Report details redesigned to two-column workflow layout, Verification
-
 ## Knowledge Gaps
-- **1243 isolated node(s):** `build`, `ApiConstants`, `baseUrl`, `ping`, `login` (+1238 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2128 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **73 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1317 isolated node(s):** `build`, `ApiConstants`, `baseUrl`, `ping`, `login` (+1312 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2219 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **75 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `_` connect `StatelessWidget` to `package:google_fonts/google_fonts.dart`, `package:flutter/material.dart`, `build`, `notification_service.dart`, `CustomPainter`, `my_reports_screen.dart`, `../../core/constants/app_colors.dart`, `route_generator.dart`, `IconData`, `app_bar.dart`, `visitor_shell.dart`, `State`, `Color?`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **Why does `_` connect `_` to `package:flutter/material.dart`, `notification_service.dart`, `splash_screen.dart`, `_`, `my_reports_screen.dart`, `dummy_data.dart`, `status_update_screen.dart`, `../../core/constants/app_colors.dart`, `VoidCallback?`, `IconData`, `_`, `track_report_screen.dart`, `State`, `visitor_shell.dart`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **What connects `build`, `ApiConstants`, `baseUrl` to the rest of the system?**
-  _1243 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1317 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `app_strings.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.013333333333333334 - nodes in this community are weakly interconnected._
-- **Why does `_` connect `_` to `package:google_fonts/google_fonts.dart`, `package:flutter/material.dart`, `build`, `notification_service.dart`, `CustomPainter`, `splash_screen.dart`, `dummy_data.dart`, `../../core/constants/app_colors.dart`, `IconData`, `_`, `track_report_screen.dart`, `StatelessWidget`, `visitor_shell.dart`, `State`, `Color?`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `_` connect `StatelessWidget` to `otp_box.dart`, `package:flutter/material.dart`, `notification_service.dart`, `_`, `my_reports_screen.dart`, `../../core/constants/app_colors.dart`, `VoidCallback?`, `route_generator.dart`, `IconData`, `List`, `State`, `visitor_shell.dart`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **Should `forgot_password_flow.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.0273972602739726 - nodes in this community are weakly interconnected._
-- **Why does `_` connect `_` to `package:google_fonts/google_fonts.dart`, `package:flutter/material.dart`, `CustomPainter`, `splash_screen.dart`, `my_reports_screen.dart`, `_`, `../../core/constants/app_colors.dart`, `IconData`, `visitor_shell.dart`, `State`, `Color?`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `CitizenReport` connect `CitizenReport` to `.notifications`, `Citizen`, `ReportActivity`, `.transitionTo`, `GovernmentOffice`, `One-file XAMPP database import and PC setup guide`, `Illuminate\Http\Request`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Should `app_icons.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.03225806451612903 - nodes in this community are weakly interconnected._
