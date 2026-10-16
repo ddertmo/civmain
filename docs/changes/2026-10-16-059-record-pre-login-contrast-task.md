@@ -1,7 +1,7 @@
 # Record the pre-login Dark Mode contrast audit as an approved-pending task
 
 - **Date:** 2026-10-16
-- **Commit:** (see index row 059)
+- **Commit:** `6a45925`
 - **Type:** docs
 - **Areas:** docs
 
