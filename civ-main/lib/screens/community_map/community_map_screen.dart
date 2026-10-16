@@ -157,10 +157,10 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
                           ],
                           border: Border.all(color: context.c.divider),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.my_location_rounded,
                           size: 20,
-                          color: AppColors.navy,
+                          color: context.c.textPrimary,
                         ),
                       ),
                     ),
@@ -602,7 +602,7 @@ class _PinDetailSheet extends StatelessWidget {
                                     style: GoogleFonts.inter(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w700,
-                                      color: AppColors.navy,
+                                      color: context.c.textPrimary,
                                     ),
                                   ),
                                 ],

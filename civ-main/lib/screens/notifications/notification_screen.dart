@@ -97,7 +97,7 @@ class NotificationScreen extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.primary,
+                              color: context.c.primaryOnSurface,
                             ),
                           ),
                         ),
@@ -122,9 +122,9 @@ class NotificationScreen extends StatelessWidget {
                                   color: context.c.primarySurface,
                                   shape: BoxShape.circle,
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.notifications_none_rounded,
-                                  color: AppColors.primary,
+                                  color: context.c.primaryOnSurface,
                                   size: 36,
                                 ),
                               ),

@@ -66,6 +66,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     required this.textDisabled,
     required this.inputBorder,
     required this.inputFill,
+    required this.primaryOnSurface,
     required this.primarySurface,
     required this.statusPendingBg,
     required this.statusPendingBorder,
@@ -95,6 +96,15 @@ class AppPalette extends ThemeExtension<AppPalette> {
   final Color textDisabled;
   final Color inputBorder;
   final Color inputFill;
+
+  /// Brand green for text/icons drawn **on themed surfaces**.
+  ///
+  /// The deep brand green ([AppColors.primary]) reads well on light surfaces
+  /// but measures ~1.2:1 on the dark palette (#0F172A / #1E293B / #14532D),
+  /// so Dark Mode substitutes a lighter green (7.8:1 on `background`,
+  /// 6.4:1 on `card`, 4.0:1 on `primarySurface`). The Light value is
+  /// identical to [AppColors.primary], so Light Mode is unchanged.
+  final Color primaryOnSurface;
   final Color primarySurface;
   final Color statusPendingBg;
   final Color statusPendingBorder;
@@ -126,6 +136,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     textDisabled: Color(0xFFCBD5E1),
     inputBorder: Color(0xFFE2E8F0),
     inputFill: Color(0xFFF8FAFC),
+    primaryOnSurface: AppColors.primary,
     primarySurface: Color(0xFFE8F5E9),
     statusPendingBg: Color(0xFFFFFBEB),
     statusPendingBorder: Color(0xFFFDE68A),
@@ -158,6 +169,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     textDisabled: Color(0xFF475569), // slate-600
     inputBorder: Color(0xFF475569),
     inputFill: Color(0xFF1E293B),
+    primaryOnSurface: Color(0xFF22C55E), // green-500, readable on dark surfaces
     primarySurface: Color(0xFF14532D), // green-900
     statusPendingBg: Color(0xFF451A04),
     statusPendingBorder: Color(0xFF92400E),
@@ -264,6 +276,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     Color? textDisabled,
     Color? inputBorder,
     Color? inputFill,
+    Color? primaryOnSurface,
     Color? primarySurface,
     Color? statusPendingBg,
     Color? statusPendingBorder,
@@ -293,6 +306,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
       textDisabled: textDisabled ?? this.textDisabled,
       inputBorder: inputBorder ?? this.inputBorder,
       inputFill: inputFill ?? this.inputFill,
+      primaryOnSurface: primaryOnSurface ?? this.primaryOnSurface,
       primarySurface: primarySurface ?? this.primarySurface,
       statusPendingBg: statusPendingBg ?? this.statusPendingBg,
       statusPendingBorder: statusPendingBorder ?? this.statusPendingBorder,

@@ -29,6 +29,16 @@ void main() {
     // Accent tokens are identical in both themes.
     expect(AppColors.primary, const Color(0xFF1B5E20));
     expect(AppColors.onAccent, const Color(0xFFFFFFFF));
+
+    // Brand green drawn ON themed surfaces: Light stays byte-identical to the
+    // brand primary; Dark is lighter so links/icons remain readable (~6.4:1 on
+    // card, ~7.8:1 on background) instead of the ~1.2:1 of AppColors.primary.
+    expect(AppPalette.light.primaryOnSurface, AppColors.primary);
+    expect(AppPalette.dark.primaryOnSurface, const Color(0xFF22C55E));
+    expect(
+      AppPalette.light.primaryOnSurface,
+      isNot(AppPalette.dark.primaryOnSurface),
+    );
   });
 
   test('status/category tint lookups resolve against the palette', () {

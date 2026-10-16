@@ -38,14 +38,14 @@ class SectionTitle extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
+                    color: context.c.primaryOnSurface,
                   ),
                 ),
                 const SizedBox(width: 2),
-                const Icon(
+                Icon(
                   Icons.chevron_right_rounded,
                   size: 16,
-                  color: AppColors.primary,
+                  color: context.c.primaryOnSurface,
                 ),
               ],
             ),

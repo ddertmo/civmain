@@ -158,9 +158,13 @@ class _HomeAppBar extends StatelessWidget {
           Container(
             width: 36,
             height: 36,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.navy,
               shape: BoxShape.circle,
+              // Defines the navy disc against the header card. Divider is
+              // #E2E8F0 on light (invisible against white) and #334155 on dark,
+              // where it separates the disc from the slate card.
+              border: Border.all(color: context.c.divider),
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -178,7 +182,7 @@ class _HomeAppBar extends StatelessWidget {
             style: GoogleFonts.inter(
               fontSize: 18,
               fontWeight: FontWeight.w800,
-              color: AppColors.navy,
+              color: context.c.textPrimary,
               letterSpacing: 1,
             ),
           ),
@@ -498,7 +502,7 @@ class _MiniMapCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
-                    color: AppColors.onAccent.withOpacity(0.92),
+                    color: context.c.card,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: context.c.divider),
                   ),
@@ -531,7 +535,7 @@ class _MiniMapCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: context.c.textPrimary.withOpacity(0.7),
+                      color: AppColors.navy.withValues(alpha: 0.7),
                     ),
                   ),
                 ),
@@ -625,8 +629,8 @@ class _AnnouncementCard extends StatelessWidget {
               color: context.c.primarySurface,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.campaign_rounded,
-                color: AppColors.primary, size: 22),
+            child: Icon(Icons.campaign_rounded,
+                color: context.c.primaryOnSurface, size: 22),
           ),
           const SizedBox(width: 14),
           Expanded(
