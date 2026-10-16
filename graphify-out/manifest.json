@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792159818.1195624,
-    "seen": 1792159847.405468,
-    "ast_hash": "cf89df30d71abd6c08630d5c59a2fc89",
+    "mtime": 1792160283.2133498,
+    "seen": 1792160332.2178814,
+    "ast_hash": "1ce727b6feac88536a1784e0870c3cab",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1950,9 +1950,9 @@
     "semantic_hash": ""
   },
   "docs/TASKS.md": {
-    "mtime": 1792159818.1195624,
-    "seen": 1792159847.4054704,
-    "ast_hash": "808647b491b5f8ba74313a9db6f0dcea",
+    "mtime": 1792160268.971159,
+    "seen": 1792160332.2178843,
+    "ast_hash": "01ebb161046a12bba334759682100c31",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-09-033-graphify-on-pc.md": {
@@ -2217,6 +2217,12 @@
     "mtime": 1792159728.026068,
     "seen": 1792159847.4110222,
     "ast_hash": "f5da548172424ce2eb5abc27dba00a2c",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-16-059-record-pre-login-contrast-task.md": {
+    "mtime": 1792160295.9421833,
+    "seen": 1792160332.2235124,
+    "ast_hash": "fb4f8087b3b3a88e1eea188f7419dba2",
     "semantic_hash": ""
   }
 }

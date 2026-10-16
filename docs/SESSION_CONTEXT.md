@@ -14,7 +14,7 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 - at:      2026-10-16 - latest change = 058 (exact commit = newest row of `docs/changes/README.md`)
 - running: Laravel artisan serve (8000) + Flutter web (:8080 static build)
 - doing:   Dark Mode contrast fixes — 057 read cards/links, 058 Profile + My Reports + shared-widget ink (all `context.c.primaryOnSurface`)
-- next:    user hand-checks both themes (no screen access from here); pre-login ink + status tints in `docs/TASKS.md` (4 open)
+- next:    user hand-checks the 057/058 Dark Mode fixes (no screen access from here); pre-login audit is spec'd in `docs/TASKS.md` (4 open) — do not start unapproved
 - blocked: -
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)

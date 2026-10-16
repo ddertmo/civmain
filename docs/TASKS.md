@@ -118,35 +118,83 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ---
 
-## [ ] Pre-login flow still uses fixed brand ink in Dark Mode
+## [ ] Future task — Dark Mode contrast audit of the pre-login flow
 
-- **Status:** known and deliberately deferred — decision 2026-10-16 while doing
-  change [058](changes/2026-10-16-058-dark-mode-ink-profile-reports-widgets.md).
-  The approved scope for 058 was Profile + My Reports + shared widgets; these
-  sites turned up in the same audit and were left untouched on purpose.
-- **Defect:** identical to 057/058 — fixed `AppColors.primary` / `AppColors.navy`
-  used as *foreground ink* on themed surfaces instead of
-  `context.c.primaryOnSurface` / `context.c.textPrimary`.
-- **Confirmed sites (1.02–2.3:1 in Dark Mode):**
+- **Status:** deferred. **Do not implement until this task is explicitly
+  requested and approved.** Recorded 2026-10-16 from the 058 audit, where the
+  same defect was fixed on Profile / My Reports / shared widgets — see
+  [058](changes/2026-10-16-058-dark-mode-ink-profile-reports-widgets.md).
+- **Precondition:** the 057 + 058 fixes are visually verified first.
+- **Objective:** fix the remaining Dark Mode contrast issues in the pre-login
+  flow. Reuse the existing `AppPalette` / `ThemeExtension` and the `context.c`
+  helpers. **No second theme system.**
+- **Defect:** fixed `AppColors.primary` / `AppColors.navy` used as *foreground
+  ink* on themed surfaces instead of `context.c.primaryOnSurface` /
+  `context.c.textPrimary` — 1.02–2.3:1 in Dark Mode.
 
-  | file:line | element | why |
-  |---|---|---|
-  | `landing_screen.dart:179-182` | "Explore as Visitor" CTA — icon, label, border | `primary` on `primarySurface`, 1.16:1 |
-  | `landing_screen.dart:378,383,419` | `_LandingButton` icon circle, icon, chevron | `primary` on `primarySurface`, 1.16:1 |
-  | `landing_screen.dart:130` | `CIVILWATCH` wordmark | `navy` on themed bg, ~1.1:1 |
-  | `otp_screen.dart:386,400` | OTP countdown + "Resend OTP" | `navy` on themed bg, ~1.1:1 |
-  | `otp_screen.dart:452,459` | "Back" arrow icon + label | `navy` on themed bg, ~1.1:1 |
-  | `forgot_password_flow.dart:552` | "Resend OTP" link | `primary` on themed card, ~1.9:1 |
-  | `forgot_password_flow.dart:741,747` | password-hint icon + copy | `primary` on `primarySurface`, 1.16:1 |
-  | `forgot_password_flow.dart:878` | secondary TextButton label | `navy` on themed bg, ~1.1:1 |
-  | `forgot_password_flow.dart:1068,1113` | **OTP input text** — typed digits | `navy` on `inputFill` `#1E293B`, ~1.1:1 |
-- **Suspected, not yet audited** (same fixed-ink pattern): `login_screen.dart`,
-  `register_screen.dart`, `splash_screen.dart`, `visitor_shell.dart`,
-  `visitor_about_screen.dart`, `visitor_reports_screen.dart`,
-  `track_by_reference_screen.dart`, `track_report_screen.dart`,
-  `status_update_screen.dart`. Re-run the `AppColors.(primary|navy)` audit
-  before editing them — do not assume these lines are still accurate.
-- **Fix:** foreground uses → `context.c.primaryOnSurface` /
-  `context.c.textPrimary`. **Leave every use that is a *fill* carrying
-  `AppColors.onAccent` text** (button backgrounds, badges, the bottom-nav centre
-  circle, the OTP badge). Light Mode stays unchanged either way.
+### 1. Landing screen — `lib/screens/landing/landing_screen.dart`
+
+- "Explore as Visitor" button: icon, label and border (`:179-182`) —
+  `AppColors.primary` on `context.c.primarySurface` = **1.16:1**.
+- Landing feature buttons: icon circles, icons and chevrons (`_LandingButton`
+  `:353`, `:378`, `:383`, `:419`) — **1.16:1**.
+- `CIVILWATCH` wordmark (`:130`) — `AppColors.navy` on the themed background,
+  **~1.1:1**.
+
+### 2. OTP screen — `lib/screens/auth/otp_screen.dart`
+
+- Countdown text (`:386`) and the "Resend OTP" link (`:400`) — navy,
+  **~1.1:1**.
+- Back button (`:452`, `:459`) — navy icon + label, **~1.1:1**.
+- OTP digit text and related input styling
+  (`forgot_password_flow.dart:1068,1113`) — navy on `inputFill` `#1E293B` =
+  **~1.1:1**; the typed digits are barely visible in Dark Mode.
+
+### 3. Forgot-password flow — `lib/screens/auth/forgot_password_flow.dart`
+
+- Resend link (`:552`) — primary on themed card, **~1.9:1**.
+- Secondary button (`:878`) — navy, **~1.1:1**.
+- Password-hint icon and explanatory text (`:741`, `:747`) — primary on
+  `primarySurface`, **1.16:1**.
+
+### 4. Additional screens requiring an audit — suspected only
+
+Inspect these for similar fixed-colour contrast defects; **inspect the actual
+code before treating any element as defective**:
+`login_screen.dart`, `register_screen.dart`, `splash_screen.dart`,
+`visitor_shell.dart`, `visitor_about_screen.dart`,
+`visitor_reports_screen.dart`, `track_by_reference_screen.dart`,
+`track_report_screen.dart`, `status_update_screen.dart`. Re-run the
+`AppColors.(primary|navy)` audit on resume — do not assume the line numbers
+above are still accurate.
+
+### Implementation requirements
+
+1. Inspect the affected files and identify each **confirmed** contrast issue.
+2. Report the affected elements, their current colours, the replacement theme
+   tokens and the exact files, then **wait for approval before modifying code**.
+3. Reuse existing `AppPalette` tokens — `primaryOnSurface`, `textPrimary`,
+   `textSecondary` and other appropriate existing tokens.
+4. Correct foreground/background combinations without unnecessarily changing the
+   established CivilWatch branding.
+5. Preserve the Light Mode appearance, layouts, spacing, sizes, navigation and
+   authentication behaviour.
+6. No API, backend, database-schema, report-workflow or unrelated-component
+   changes.
+7. No new packages, no second theme system.
+8. Fix only confirmed issues inside the approved scope.
+
+### Verification
+
+- `flutter analyze --no-pub`, the theme tests and the full suite, then
+  `flutter build web`; compare against the documented baseline.
+- Visually inspect all affected screens in **both** Light and Dark Mode when
+  browser access is available.
+- Report remaining issues honestly — passing tests alone does not establish
+  visual correctness.
+- Finish with the `AGENTS.md` changelog workflow.
+
+**Still leave every use that is a *fill* carrying `AppColors.onAccent` text**
+(button backgrounds, badges, the bottom-nav centre circle, the OTP badge) —
+those are correct in both themes, and Light Mode must stay unchanged either
+way.

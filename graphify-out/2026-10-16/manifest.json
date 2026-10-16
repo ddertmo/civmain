@@ -126,9 +126,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/forgot_password_flow.dart": {
-    "mtime": 1792155431.0298648,
-    "seen": 1792156087.9531126,
-    "ast_hash": "d9a118be6b101f400ac2e9d9b0b51f02",
+    "mtime": 1792159279.02966,
+    "seen": 1792159847.3872483,
+    "ast_hash": "485917f93f10ea31a524ba01de68540e",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/login_screen.dart": {
@@ -138,9 +138,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/otp_screen.dart": {
-    "mtime": 1792155431.0298648,
-    "seen": 1792156087.9531167,
-    "ast_hash": "6c67d3c133106970cfb507afbcf20e53",
+    "mtime": 1792159294.7327676,
+    "seen": 1792159847.387347,
+    "ast_hash": "218f79d83847b739c16543324e03c85e",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/register_screen.dart": {
@@ -162,15 +162,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/landing/landing_screen.dart": {
-    "mtime": 1792155548.9623015,
-    "seen": 1792156087.9531233,
-    "ast_hash": "31a23803f581396c7dfa67710847d210",
+    "mtime": 1792159294.6990325,
+    "seen": 1792159847.3876357,
+    "ast_hash": "c2dd118d6cab3f67b65678709b27c3ac",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/map_preview/private_map_screen.dart": {
-    "mtime": 1792155431.034879,
-    "seen": 1792156087.9531255,
-    "ast_hash": "630bb7e6ce4d949047e7464ee69da1d9",
+    "mtime": 1792159366.1914325,
+    "seen": 1792159847.3876379,
+    "ast_hash": "c8ff5340a9a073c082d971871ab766f2",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/my_reports/my_reports_screen.dart": {
@@ -186,9 +186,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/profile/profile_screen.dart": {
-    "mtime": 1792155492.226327,
-    "seen": 1792156087.95313,
-    "ast_hash": "d5d73cf37e5785ed7a9abcd1c6c3d60a",
+    "mtime": 1792159294.7552664,
+    "seen": 1792159847.387832,
+    "ast_hash": "7a10fd847e1ad7d34ce067b6f393f13f",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/_report_stepper.dart": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/empty_state.dart": {
-    "mtime": 1792155431.044004,
-    "seen": 1792156087.9538221,
-    "ast_hash": "17daab702c38458b91c38ba11840f817",
+    "mtime": 1792159279.02966,
+    "seen": 1792159847.3906345,
+    "ast_hash": "5a97f42e7f343ba707ebee098ef8113f",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/common/loading.dart": {
@@ -444,15 +444,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/navigation/bottom_nav.dart": {
-    "mtime": 1792155431.045515,
-    "seen": 1792156087.9539382,
-    "ast_hash": "62312467d71921d526b66a1f14f28e3c",
+    "mtime": 1792159279.0486991,
+    "seen": 1792159847.3917654,
+    "ast_hash": "824439ff5ac50276613fe5f2fc152abf",
     "semantic_hash": ""
   },
   "civ-main/lib/widgets/timeline/progress_timeline.dart": {
-    "mtime": 1792155431.0490959,
-    "seen": 1792156087.9539397,
-    "ast_hash": "02b4df756b29c67e3fd2d271e78ed8e0",
+    "mtime": 1792159279.02966,
+    "seen": 1792159847.391768,
+    "ast_hash": "ef6912a9f42fe7fe74009888c07e9fe7",
     "semantic_hash": ""
   },
   "civ-main/test/widget_test.dart": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792158279.4300804,
-    "seen": 1792158295.9244738,
-    "ast_hash": "731666c605175d0f2845f3fb35cee6f5",
+    "mtime": 1792159818.1195624,
+    "seen": 1792159847.411025,
+    "ast_hash": "416ab3a62bf4e04567c4a8bb526439ab",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792158279.4300804,
-    "seen": 1792158295.9185262,
-    "ast_hash": "c323aadfeba74989a7c748573c9ef96b",
+    "mtime": 1792159818.1195624,
+    "seen": 1792159847.405468,
+    "ast_hash": "cf89df30d71abd6c08630d5c59a2fc89",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -1950,9 +1950,9 @@
     "semantic_hash": ""
   },
   "docs/TASKS.md": {
-    "mtime": 1792158279.4300804,
-    "seen": 1792158295.9185286,
-    "ast_hash": "b72f410734e065cfe2e99eb56d8584c1",
+    "mtime": 1792159818.1195624,
+    "seen": 1792159847.4054704,
+    "ast_hash": "808647b491b5f8ba74313a9db6f0dcea",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-09-033-graphify-on-pc.md": {
@@ -2211,6 +2211,12 @@
     "mtime": 1792158242.915675,
     "seen": 1792158295.9244702,
     "ast_hash": "42aca59a95a49bd438367a349c708d6d",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-16-058-dark-mode-ink-profile-reports-widgets.md": {
+    "mtime": 1792159728.026068,
+    "seen": 1792159847.4110222,
+    "ast_hash": "f5da548172424ce2eb5abc27dba00a2c",
     "semantic_hash": ""
   }
 }
