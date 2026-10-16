@@ -23,7 +23,7 @@ class CivilWatchBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider, width: 1)),
       ),
@@ -54,7 +54,7 @@ class CivilWatchBottomNav extends StatelessWidget {
                           ),
                           child: Icon(
                             isActive ? item.activeIcon : item.icon,
-                            color: AppColors.white,
+                            color: AppColors.onAccent,
                             size: 24,
                           ),
                         )

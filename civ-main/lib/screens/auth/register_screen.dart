@@ -372,7 +372,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 const SizedBox(height: 24),
 
                                 // ── Divider ───────────────────────────────
-                                const Divider(color: AppColors.divider),
+                                Divider(color: AppColors.divider),
                                 const SizedBox(height: 20),
 
                                 // ── Create PIN ────────────────────────────
@@ -534,11 +534,11 @@ class _RegisterScreenState extends State<RegisterScreen>
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -585,11 +585,11 @@ class _RegisterScreenState extends State<RegisterScreen>
             horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -768,7 +768,7 @@ class _TermsCheckbox extends StatelessWidget {
               height: 22,
               margin: const EdgeInsets.only(top: 1),
               decoration: BoxDecoration(
-                color: agreed ? AppColors.primary : AppColors.white,
+                color: agreed ? AppColors.primary : AppColors.onAccent,
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color:
@@ -778,7 +778,7 @@ class _TermsCheckbox extends StatelessWidget {
               ),
               child: agreed
                   ? const Icon(Icons.check_rounded,
-                      color: AppColors.white, size: 14)
+                      color: AppColors.onAccent, size: 14)
                   : null,
             ),
             const SizedBox(width: 12),
@@ -832,14 +832,14 @@ class _RegisterHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(bottom: BorderSide(color: AppColors.divider)),
       ),
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+            icon: Icon(Icons.arrow_back_ios_new_rounded,
                 size: 20, color: AppColors.textPrimary),
             onPressed: () => Navigator.pop(context),
           ),
@@ -872,7 +872,7 @@ class _RegisterHeader extends StatelessWidget {
               color: AppColors.navy,
             ),
             child: const Icon(Icons.shield_rounded,
-                color: AppColors.white, size: 18),
+                color: AppColors.onAccent, size: 18),
           ),
         ],
       ),
@@ -964,17 +964,17 @@ class _BarangayDropdown extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.inputFill,
-        prefixIcon: const Icon(Icons.location_on_outlined,
+        prefixIcon: Icon(Icons.location_on_outlined,
             color: AppColors.textHint, size: 20),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -984,7 +984,7 @@ class _BarangayDropdown extends StatelessWidget {
       ),
       style: GoogleFonts.inter(
           fontSize: 14, color: AppColors.textPrimary),
-      icon: const Icon(Icons.keyboard_arrow_down_rounded,
+      icon: Icon(Icons.keyboard_arrow_down_rounded,
           color: AppColors.textSecondary),
       borderRadius: BorderRadius.circular(12),
       isExpanded: true,
@@ -1002,7 +1002,7 @@ class _PhonePrefixWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(right: BorderSide(color: AppColors.inputBorder)),
       ),
       child: Row(
@@ -1019,7 +1019,7 @@ class _PhonePrefixWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 2),
-          const Icon(Icons.keyboard_arrow_down_rounded,
+          Icon(Icons.keyboard_arrow_down_rounded,
               size: 16, color: AppColors.textSecondary),
         ],
       ),

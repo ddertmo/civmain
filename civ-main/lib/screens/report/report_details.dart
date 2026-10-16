@@ -128,12 +128,12 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              const BorderSide(color: AppColors.inputBorder),
+                              BorderSide(color: AppColors.inputBorder),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              const BorderSide(color: AppColors.inputBorder),
+                              BorderSide(color: AppColors.inputBorder),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -228,7 +228,7 @@ class _LocationOption extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(Icons.chevron_right_rounded,
+            Icon(Icons.chevron_right_rounded,
                 color: AppColors.textHint, size: 18),
           ],
         ),
@@ -261,17 +261,17 @@ class _BarangayDropdown extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.white,
-        prefixIcon: const Icon(Icons.location_city_rounded,
+        prefixIcon: Icon(Icons.location_city_rounded,
             color: AppColors.textHint, size: 20),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -281,7 +281,7 @@ class _BarangayDropdown extends StatelessWidget {
       ),
       style: GoogleFonts.inter(
           fontSize: 14, color: AppColors.textPrimary),
-      icon: const Icon(Icons.keyboard_arrow_down_rounded,
+      icon: Icon(Icons.keyboard_arrow_down_rounded,
           color: AppColors.textSecondary),
       borderRadius: BorderRadius.circular(12),
     );
@@ -298,7 +298,7 @@ class _ReportDetailsFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -311,7 +311,7 @@ class _ReportDetailsFooter extends StatelessWidget {
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
-                side: const BorderSide(color: AppColors.divider),
+                side: BorderSide(color: AppColors.divider),
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -329,7 +329,7 @@ class _ReportDetailsFooter extends StatelessWidget {
               label: const Text('Next'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: catColor,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),

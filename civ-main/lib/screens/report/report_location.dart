@@ -212,7 +212,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
             behavior: SnackBarBehavior.floating,
             action: SnackBarAction(
               label: 'Settings',
-              textColor: AppColors.white,
+              textColor: AppColors.onAccent,
               onPressed: () => Geolocator.openAppSettings(),
             ),
           ),
@@ -419,7 +419,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                                       'Tap the map to place a marker',
                                       style: GoogleFonts.inter(
                                         fontSize: 12,
-                                        color: AppColors.white,
+                                        color: AppColors.onAccent,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -430,9 +430,9 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                             if (_isGeocoding)
                               Container(
                                 color: Colors.black.withOpacity(0.3),
-                                child: const Center(
+                                child: Center(
                                   child: CircularProgressIndicator(
-                                      color: AppColors.white),
+                                      color: AppColors.onAccent),
                                 ),
                               ),
                           ],
@@ -461,7 +461,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.info_outline_rounded,
+                        Icon(Icons.info_outline_rounded,
                             size: 13, color: AppColors.textHint),
                         const SizedBox(width: 6),
                         Expanded(
@@ -562,11 +562,11 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
           const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: AppColors.inputBorder),
+        borderSide: BorderSide(color: AppColors.inputBorder),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: AppColors.inputBorder),
+        borderSide: BorderSide(color: AppColors.inputBorder),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
@@ -614,7 +614,7 @@ class _LocationActionButton extends StatelessWidget {
                 color: color,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: AppColors.white, size: 22),
+              child: Icon(icon, color: AppColors.onAccent, size: 22),
             ),
             const SizedBox(height: 10),
             Text(
@@ -718,7 +718,7 @@ class _AddressCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Divider(color: AppColors.divider, height: 1),
+                Divider(color: AppColors.divider, height: 1),
                 const SizedBox(height: 12),
                 _AddressField(
                     label: 'Street / Area', ctrl: addressCtrl),
@@ -772,7 +772,7 @@ class _AddressCard extends StatelessWidget {
                                 fontSize: 13,
                                 color: AppColors.textPrimary,
                               ),
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_drop_down_rounded,
                                 color: AppColors.textSecondary,
                               ),
@@ -846,11 +846,11 @@ class _AddressField extends StatelessWidget {
                 fillColor: AppColors.background,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColors.inputBorder),
+                  borderSide: BorderSide(color: AppColors.inputBorder),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColors.inputBorder),
+                  borderSide: BorderSide(color: AppColors.inputBorder),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -914,7 +914,7 @@ class _LocationNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -927,7 +927,7 @@ class _LocationNavBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.info_outline_rounded,
+                  Icon(Icons.info_outline_rounded,
                       size: 14, color: AppColors.textHint),
                   const SizedBox(width: 6),
                   Text(
@@ -947,7 +947,7 @@ class _LocationNavBar extends StatelessWidget {
                   label: const Text('Back'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.textPrimary,
-                    side: const BorderSide(color: AppColors.divider),
+                    side: BorderSide(color: AppColors.divider),
                     minimumSize: const Size(0, 52),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16)),
@@ -964,7 +964,7 @@ class _LocationNavBar extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         onNext != null ? catColor : AppColors.textDisabled,
-                    foregroundColor: AppColors.white,
+                    foregroundColor: AppColors.onAccent,
                     minimumSize: const Size(0, 52),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16)),

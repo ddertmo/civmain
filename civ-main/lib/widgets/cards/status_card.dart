@@ -66,7 +66,7 @@ class StatusCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.calendar_today_rounded,
+                      Icon(Icons.calendar_today_rounded,
                           size: 11, color: AppColors.textSecondary),
                       const SizedBox(width: 4),
                       Text(

@@ -183,7 +183,7 @@ class _ReportNavFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -196,7 +196,7 @@ class _ReportNavFooter extends StatelessWidget {
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
-                side: const BorderSide(color: AppColors.divider),
+                side: BorderSide(color: AppColors.divider),
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -214,7 +214,7 @@ class _ReportNavFooter extends StatelessWidget {
               label: const Text('Next'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: onNext != null ? catColor : AppColors.textDisabled,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 50),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),

@@ -60,7 +60,7 @@ class AppIconButton extends StatelessWidget {
                 child: Text(
                   badge! > 9 ? '9+' : '$badge',
                   style: const TextStyle(
-                    color: AppColors.white,
+                    color: AppColors.onAccent,
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
                   ),

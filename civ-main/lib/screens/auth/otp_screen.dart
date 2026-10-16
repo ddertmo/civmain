@@ -194,7 +194,7 @@ class _OtpScreenState extends State<OtpScreen>
         backgroundColor: AppColors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
             color: AppColors.textPrimary,
@@ -537,7 +537,7 @@ class _OtpIllustration extends StatelessWidget {
                 style: GoogleFonts.robotoMono(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.white,
+                  color: AppColors.onAccent,
                   letterSpacing: 2,
                 ),
               ),
@@ -554,11 +554,11 @@ class _OtpIllustration extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.statusResolved,
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.white, width: 2),
+                border: Border.all(color: AppColors.onAccent, width: 2),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check_rounded,
-                color: AppColors.white,
+                color: AppColors.onAccent,
                 size: 16,
               ),
             ),

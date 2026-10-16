@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -214,14 +214,14 @@ class _CivilWatchLogo extends StatelessWidget {
         children: [
           Icon(
             Icons.shield_rounded,
-            color: AppColors.white.withOpacity(0.15),
+            color: AppColors.onAccent.withOpacity(0.15),
             size: size * 0.85,
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.location_on_rounded,
-                  color: AppColors.white, size: size * 0.28),
+                  color: AppColors.onAccent, size: size * 0.28),
               Icon(Icons.eco_rounded,
                   color: AppColors.primary, size: size * 0.22),
             ],

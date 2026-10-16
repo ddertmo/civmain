@@ -90,7 +90,7 @@ class _StatusUpdateBody extends StatelessWidget {
         backgroundColor: AppColors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
@@ -112,7 +112,7 @@ class _StatusUpdateBody extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               IconButton(
-                icon: const Icon(Icons.notifications_outlined,
+                icon: Icon(Icons.notifications_outlined,
                     color: AppColors.textPrimary, size: 26),
                 onPressed: () =>
                     Navigator.pushNamed(context, AppRoutes.notifications),
@@ -132,7 +132,7 @@ class _StatusUpdateBody extends StatelessWidget {
             ],
           ),
         ],
-        bottom: const PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, color: AppColors.divider),
         ),
@@ -165,7 +165,7 @@ class _StatusUpdateBody extends StatelessWidget {
                       color: const Color(0xFF1A2A3A),
                       child: Center(
                         child: Icon(catIcon,
-                            color: AppColors.white.withValues(alpha: 0.3),
+                            color: AppColors.onAccent.withValues(alpha: 0.3),
                             size: 36),
                       ),
                     ),
@@ -207,7 +207,7 @@ class _StatusUpdateBody extends StatelessWidget {
                           const SizedBox(height: 6),
                           Row(
                             children: [
-                              const Icon(Icons.location_on_rounded,
+                              Icon(Icons.location_on_rounded,
                                   size: 11, color: AppColors.textSecondary),
                               const SizedBox(width: 3),
                               Expanded(
@@ -267,7 +267,7 @@ class _StatusUpdateBody extends StatelessWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            const Icon(Icons.calendar_today_rounded,
+                            Icon(Icons.calendar_today_rounded,
                                 size: 10, color: AppColors.textHint),
                             const SizedBox(width: 3),
                             Text(
@@ -422,14 +422,14 @@ class _StatusUpdateBody extends StatelessWidget {
               child: Row(
                 children: [
                   const Icon(Icons.notifications_outlined,
-                      color: AppColors.white, size: 20),
+                      color: AppColors.onAccent, size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'You will be notified whenever there is an update on your report.',
                       style: GoogleFonts.inter(
                           fontSize: 11,
-                          color: AppColors.white.withValues(alpha: 0.9),
+                          color: AppColors.onAccent.withValues(alpha: 0.9),
                           height: 1.4),
                     ),
                   ),
@@ -440,19 +440,19 @@ class _StatusUpdateBody extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 6),
                       decoration: BoxDecoration(
-                        color: AppColors.white.withValues(alpha: 0.15),
+                        color: AppColors.onAccent.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(Icons.settings_rounded,
-                              size: 12, color: AppColors.white),
+                              size: 12, color: AppColors.onAccent),
                           const SizedBox(width: 4),
                           Text('Manage\nNotifications',
                               style: GoogleFonts.inter(
                                   fontSize: 9,
-                                  color: AppColors.white,
+                                  color: AppColors.onAccent,
                                   fontWeight: FontWeight.w600)),
                         ],
                       ),
@@ -482,7 +482,7 @@ class _StatusUpdateBody extends StatelessWidget {
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.navy,
-                  foregroundColor: AppColors.white,
+                  foregroundColor: AppColors.onAccent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   elevation: 0,

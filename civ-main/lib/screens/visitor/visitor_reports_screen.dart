@@ -119,14 +119,14 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.search_rounded,
-                                color: AppColors.white, size: 16),
+                                color: AppColors.onAccent, size: 16),
                             const SizedBox(width: 5),
                             Text(
                               'Track',
                               style: GoogleFonts.inter(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.white,
+                                color: AppColors.onAccent,
                               ),
                             ),
                           ],
@@ -181,7 +181,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: active
-                                    ? AppColors.white
+                                    ? AppColors.onAccent
                                     : AppColors.textSecondary,
                               ),
                             ),
@@ -195,7 +195,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
               ],
             ),
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: AppColors.divider),
 
           // ── Status legend ──────────────────────────────────────────────
           Container(
@@ -225,7 +225,7 @@ class _VisitorReportsScreenState extends State<VisitorReportsScreen> {
               ],
             ),
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: AppColors.divider),
 
           // ── Report list ────────────────────────────────────────────────
           Expanded(
@@ -377,7 +377,7 @@ class _PublicReportCard extends StatelessWidget {
                     // Location
                     Row(
                       children: [
-                        const Icon(Icons.location_on_rounded,
+                        Icon(Icons.location_on_rounded,
                             size: 12, color: AppColors.textSecondary),
                         const SizedBox(width: 3),
                         Text(

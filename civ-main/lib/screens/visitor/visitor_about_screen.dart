@@ -49,13 +49,13 @@ class VisitorAboutScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         Icon(Icons.shield_rounded,
-                            color: AppColors.white.withValues(alpha: 0.12),
+                            color: AppColors.onAccent.withValues(alpha: 0.12),
                             size: 68),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.location_on_rounded,
-                                color: AppColors.white, size: 22),
+                                color: AppColors.onAccent, size: 22),
                             Icon(Icons.eco_rounded,
                                 color: AppColors.primary, size: 18),
                           ],
@@ -166,7 +166,7 @@ class VisitorAboutScreen extends StatelessWidget {
                       label: const Text('Login / Register'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
-                        foregroundColor: AppColors.white,
+                        foregroundColor: AppColors.onAccent,
                         minimumSize: const Size(0, 52),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
@@ -188,7 +188,7 @@ class VisitorAboutScreen extends StatelessWidget {
                       label: const Text('Track by Reference No.'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.navy,
-                        side: const BorderSide(color: AppColors.divider),
+                        side: BorderSide(color: AppColors.divider),
                         minimumSize: const Size(0, 52),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
@@ -202,7 +202,7 @@ class VisitorAboutScreen extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   // ── System info ─────────────────────────────────────
-                  const Divider(color: AppColors.divider),
+                  Divider(color: AppColors.divider),
                   const SizedBox(height: 20),
                   Text(
                     'A Capstone Project',

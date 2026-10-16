@@ -81,11 +81,11 @@ class _OtpInputRowState extends State<OtpInputRow> {
               contentPadding: EdgeInsets.zero,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppColors.inputBorder),
+                borderSide: BorderSide(color: AppColors.inputBorder),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppColors.inputBorder),
+                borderSide: BorderSide(color: AppColors.inputBorder),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),

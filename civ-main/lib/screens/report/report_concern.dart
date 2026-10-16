@@ -251,7 +251,7 @@ class _ConcernCard extends StatelessWidget {
               ),
               child: Icon(
                 concern.icon,
-                color: isSelected ? AppColors.white : catColor,
+                color: isSelected ? AppColors.onAccent : catColor,
                 size: 24,
               ),
             ),
@@ -291,7 +291,7 @@ class _ConcernCard extends StatelessWidget {
               height: 22,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isSelected ? catColor : AppColors.white,
+                color: isSelected ? catColor : AppColors.onAccent,
                 border: Border.all(
                   color: isSelected ? catColor : AppColors.inputBorder,
                   width: 2,
@@ -299,7 +299,7 @@ class _ConcernCard extends StatelessWidget {
               ),
               child: isSelected
                   ? const Icon(Icons.check_rounded,
-                      color: AppColors.white, size: 13)
+                      color: AppColors.onAccent, size: 13)
                   : null,
             ),
           ],
@@ -323,7 +323,7 @@ class _ConcernNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -337,7 +337,7 @@ class _ConcernNavBar extends StatelessWidget {
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
-                side: const BorderSide(color: AppColors.divider),
+                side: BorderSide(color: AppColors.divider),
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
@@ -356,7 +356,7 @@ class _ConcernNavBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor:
                     onNext != null ? catColor : AppColors.textDisabled,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),

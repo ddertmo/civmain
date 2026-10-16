@@ -33,11 +33,11 @@ class SearchField extends StatelessWidget {
           hintText: hint,
           hintStyle:
               GoogleFonts.inter(fontSize: 14, color: AppColors.textHint),
-          prefixIcon: const Icon(Icons.search_rounded,
+          prefixIcon: Icon(Icons.search_rounded,
               color: AppColors.textHint, size: 20),
           suffixIcon: (controller?.text.isNotEmpty ?? false)
               ? IconButton(
-                  icon: const Icon(Icons.close_rounded,
+                  icon: Icon(Icons.close_rounded,
                       color: AppColors.textHint, size: 18),
                   onPressed: () {
                     controller?.clear();

@@ -26,7 +26,7 @@ class NotificationCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: notification.isRead ? AppColors.white : AppColors.primarySurface,
+          color: notification.isRead ? AppColors.onAccent : AppColors.primarySurface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: notification.isRead ? AppColors.divider : AppColors.primary.withOpacity(0.2),

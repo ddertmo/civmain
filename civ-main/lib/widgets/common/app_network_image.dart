@@ -38,7 +38,7 @@ class AppNetworkImage extends StatelessWidget {
               width: width,
               height: height,
               color: AppColors.background,
-              child: const Center(
+              child: Center(
                 child: Icon(Icons.broken_image_outlined,
                     color: AppColors.textHint, size: 32),
               ),

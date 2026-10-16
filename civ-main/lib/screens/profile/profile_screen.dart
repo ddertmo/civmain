@@ -107,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                               style: GoogleFonts.inter(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w800,
-                                  color: AppColors.white),
+                                  color: AppColors.onAccent),
                             ),
                           ),
                         ),
@@ -121,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
                                 color: AppColors.primary,
                                 shape: BoxShape.circle),
                             child: const Icon(Icons.camera_alt_rounded,
-                                color: AppColors.white, size: 12),
+                                color: AppColors.onAccent, size: 12),
                           ),
                         ),
                       ],
@@ -136,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.location_on_rounded,
+                        Icon(Icons.location_on_rounded,
                             size: 13, color: AppColors.textSecondary),
                         const SizedBox(width: 3),
                         Text('Barangay ${user.barangay}, Digos City',
@@ -210,7 +210,7 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 14),
-                    const Divider(color: AppColors.divider),
+                    Divider(color: AppColors.divider),
                     const SizedBox(height: 12),
                     _ProfileInfoRow(
                         icon: Icons.phone_rounded,
@@ -244,7 +244,7 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.myReports),
                     ),
-                    const Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: AppColors.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.notifications_rounded,
                       iconBg: AppColors.statusPendingBg,
@@ -254,7 +254,7 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.notifications),
                     ),
-                    const Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: AppColors.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.help_outline_rounded,
                       iconBg: AppColors.primarySurface,
@@ -262,7 +262,7 @@ class ProfileScreen extends StatelessWidget {
                       label: 'Help Center',
                       onTap: () {},
                     ),
-                    const Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: AppColors.divider, indent: 56),
                     // ── Dark mode toggle (like the website's on/off switch) ──
                     ListenableBuilder(
                       listenable: AppState(),
@@ -281,7 +281,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Divider(height: 1, color: AppColors.divider, indent: 56),
+                    Divider(height: 1, color: AppColors.divider, indent: 56),
                     _MenuTile(
                       icon: Icons.info_outline_rounded,
                       iconBg: AppColors.background,
@@ -366,7 +366,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Text('Logout',
                 style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w700, color: AppColors.white)),
+                    fontWeight: FontWeight.w700, color: AppColors.onAccent)),
           ),
         ],
       ),
@@ -400,7 +400,7 @@ class ProfileScreen extends StatelessWidget {
             decoration: const BoxDecoration(
                 color: AppColors.navy, shape: BoxShape.circle),
             child: const Icon(Icons.shield_rounded,
-                color: AppColors.white, size: 20),
+                color: AppColors.onAccent, size: 20),
           ),
           const SizedBox(width: 10),
           Text('CIVILWATCH',
@@ -434,7 +434,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Text('Close',
                 style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w600, color: AppColors.white)),
+                    fontWeight: FontWeight.w600, color: AppColors.onAccent)),
           ),
         ],
       ),
@@ -579,10 +579,10 @@ class _MenuTile extends StatelessWidget {
                   style: GoogleFonts.inter(
                       fontSize: 10,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.white)),
+                      color: AppColors.onAccent)),
             ),
           if (showArrow)
-            const Icon(Icons.chevron_right_rounded,
+            Icon(Icons.chevron_right_rounded,
                 color: AppColors.textHint, size: 20),
         ]),
       ),

@@ -331,7 +331,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                             ),
                             child: _confirmed
                                 ? const Icon(Icons.check_rounded,
-                                    color: AppColors.white, size: 15)
+                                    color: AppColors.onAccent, size: 15)
                                 : null,
                           ),
                           const SizedBox(width: 12),
@@ -359,7 +359,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
           // ── Bottom bar ────────────────────────────────────────────────
           Container(
             padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.white,
               border: Border(top: BorderSide(color: AppColors.divider)),
             ),
@@ -372,7 +372,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                     label: const Text('Back'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.textPrimary,
-                      side: const BorderSide(color: AppColors.divider),
+                      side: BorderSide(color: AppColors.divider),
                       minimumSize: const Size(0, 52),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -388,7 +388,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                     onPressed: _submit,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-                      foregroundColor: AppColors.white,
+                      foregroundColor: AppColors.onAccent,
                       minimumSize: const Size(0, 52),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -420,7 +420,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
 class _RowDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
-      const Divider(height: 1, color: AppColors.divider);
+      Divider(height: 1, color: AppColors.divider);
 }
 
 class _ReviewRow extends StatelessWidget {

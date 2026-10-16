@@ -212,7 +212,7 @@ class RegisterSkeleton extends StatelessWidget {
                 _skeletonField(labelWidth: 120),
                 const SizedBox(height: 24),
 
-                const Divider(color: AppColors.divider),
+                Divider(color: AppColors.divider),
                 const SizedBox(height: 20),
 
                 // PIN row
@@ -640,7 +640,7 @@ class ProfileSkeleton extends StatelessWidget {
                   )),
                 ),
                 const SizedBox(height: 14),
-                const Divider(color: AppColors.divider),
+                Divider(color: AppColors.divider),
                 const SizedBox(height: 12),
                 _infoRow(),
                 const SizedBox(height: 10),
@@ -675,7 +675,7 @@ class ProfileSkeleton extends StatelessWidget {
                     ),
                   ),
                   if (i < 3)
-                    const Divider(height: 1, color: AppColors.divider),
+                    Divider(height: 1, color: AppColors.divider),
                 ],
               )),
             ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants/app_colors.dart';
 import '../../models/report.dart';
 import '../../models/notification_model.dart';
 import '../../models/user.dart';
@@ -70,16 +72,33 @@ class AppState extends ChangeNotifier {
   Future<void> _loadThemePreference() async {
     final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool(_kDarkModeKey) ?? true;
-    notifyListeners();
+    // Swap the palette tokens BEFORE the first frame so nothing flashes.
+    AppColors.setDark(_isDarkMode);
+    _applySystemUi();
   }
 
   /// Flip dark mode on/off. Persists the choice across app restarts.
   Future<void> setDarkMode(bool value) async {
     if (_isDarkMode == value) return;
     _isDarkMode = value;
+    AppColors.setDark(value); // repaints every screen that reads the tokens
+    _applySystemUi();
     notifyListeners(); // MaterialApp listens → switches themeMode
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kDarkModeKey, value);
+  }
+
+  /// Match the OS status/navigation bars to the active theme.
+  /// (No-op on web; matters on Android/iOS.)
+  void _applySystemUi() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: _isDarkMode ? Brightness.light : Brightness.dark,
+      statusBarBrightness: _isDarkMode ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor: AppColors.surface,
+      systemNavigationBarIconBrightness:
+          _isDarkMode ? Brightness.light : Brightness.dark,
+    ));
   }
 
   // ── Auth / session ────────────────────────────────────────────────────────

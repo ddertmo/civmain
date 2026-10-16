@@ -35,7 +35,7 @@ class PrimaryButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.navy,
-          foregroundColor: textColor ?? AppColors.white,
+          foregroundColor: textColor ?? AppColors.onAccent,
           disabledBackgroundColor: AppColors.navy.withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
@@ -43,12 +43,12 @@ class PrimaryButton extends StatelessWidget {
           elevation: 0,
         ),
         child: isLoading
-            ? const SizedBox(
+            ? SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  color: AppColors.white,
+                  color: AppColors.onAccent,
                 ),
               )
             : Row(
@@ -56,7 +56,7 @@ class PrimaryButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (icon != null) ...[
-                    Icon(icon, size: 20, color: textColor ?? AppColors.white),
+                    Icon(icon, size: 20, color: textColor ?? AppColors.onAccent),
                     const SizedBox(width: 8),
                   ],
                   Text(
@@ -64,7 +64,7 @@ class PrimaryButton extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: textColor ?? AppColors.white,
+                      color: textColor ?? AppColors.onAccent,
                     ),
                   ),
                 ],

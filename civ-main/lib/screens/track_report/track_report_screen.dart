@@ -38,7 +38,7 @@ class TrackReportScreen extends StatelessWidget {
               backgroundColor: AppColors.white,
               elevation: 0,
               leading: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_ios_new_rounded,
                   size: 20,
                   color: AppColors.textPrimary,
@@ -58,7 +58,7 @@ class TrackReportScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.article_outlined,
                     size: 56,
                     color: AppColors.textHint,
@@ -103,7 +103,7 @@ class _TrackReportBody extends StatelessWidget {
         backgroundColor: AppColors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
             color: AppColors.textPrimary,
@@ -135,7 +135,7 @@ class _TrackReportBody extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.notifications_outlined,
                   color: AppColors.textPrimary,
                 ),
@@ -157,7 +157,7 @@ class _TrackReportBody extends StatelessWidget {
             ],
           ),
         ],
-        bottom: const PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, color: AppColors.divider),
         ),
@@ -355,7 +355,7 @@ class _TrackReportBody extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: AppColors.divider),
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.business_rounded,
                                   size: 18,
                                   color: AppColors.textHint,
@@ -447,7 +447,7 @@ class _TrackReportBody extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Row(
                               children: [
-                                const Icon(Icons.history_rounded,
+                                Icon(Icons.history_rounded,
                                     size: 14, color: AppColors.textHint),
                                 const SizedBox(width: 6),
                                 Text(
@@ -509,9 +509,9 @@ class _TrackReportBody extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.notifications_outlined,
-                      color: AppColors.white,
+                      color: AppColors.onAccent,
                       size: 20,
                     ),
                     const SizedBox(width: 12),
@@ -520,7 +520,7 @@ class _TrackReportBody extends StatelessWidget {
                         'You will be notified whenever there is an update on your report.',
                         style: GoogleFonts.inter(
                           fontSize: 11,
-                          color: AppColors.white.withOpacity(0.9),
+                          color: AppColors.onAccent.withOpacity(0.9),
                           height: 1.4,
                         ),
                       ),
@@ -534,23 +534,23 @@ class _TrackReportBody extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.white.withOpacity(0.15),
+                          color: AppColors.onAccent.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.settings_rounded,
                               size: 12,
-                              color: AppColors.white,
+                              color: AppColors.onAccent,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               'Manage',
                               style: GoogleFonts.inter(
                                 fontSize: 10,
-                                color: AppColors.white,
+                                color: AppColors.onAccent,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -577,7 +577,7 @@ class _TrackReportBody extends StatelessWidget {
                 label: const Text('View on Map'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.navy,
-                  foregroundColor: AppColors.white,
+                  foregroundColor: AppColors.onAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -602,7 +602,7 @@ class _TrackReportBody extends StatelessWidget {
                   label: const Text('Back to My Reports'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppColors.textPrimary,
-                    side: const BorderSide(color: AppColors.divider),
+                    side: BorderSide(color: AppColors.divider),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -804,7 +804,7 @@ class _RealMiniMap extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.statusPending,
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.white, width: 2),
+                  border: Border.all(color: AppColors.onAccent, width: 2),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.statusPending.withValues(alpha: 0.4),
@@ -813,9 +813,9 @@ class _RealMiniMap extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.location_on_rounded,
-                  color: AppColors.white,
+                  color: AppColors.onAccent,
                   size: 16,
                 ),
               ),
@@ -892,7 +892,7 @@ class _BeforeAfterPhotos extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.location_on_rounded,
+                          Icon(Icons.location_on_rounded,
                               size: 11, color: AppColors.textSecondary),
                           const SizedBox(width: 2),
                           Flexible(
@@ -931,7 +931,7 @@ class _BeforeAfterPhotos extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          Divider(height: 1, color: AppColors.divider),
 
           // ── Photo panels ─────────────────────────────────────────────
           Padding(
@@ -1182,13 +1182,13 @@ class _PhotoPanel extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(Icons.fullscreen_rounded,
-                                color: AppColors.white, size: 12),
+                                color: AppColors.onAccent, size: 12),
                             const SizedBox(width: 4),
                             Text(
                               'View',
                               style: GoogleFonts.inter(
                                 fontSize: 10,
-                                color: AppColors.white,
+                                color: AppColors.onAccent,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -1232,7 +1232,7 @@ class _FallbackPhoto extends StatelessWidget {
           label,
           style: GoogleFonts.inter(
             fontSize: 11,
-            color: AppColors.white.withValues(alpha: 0.5),
+            color: AppColors.onAccent.withValues(alpha: 0.5),
             height: 1.4,
           ),
           textAlign: TextAlign.center,
@@ -1275,14 +1275,14 @@ class _FullscreenPhotoView extends StatelessWidget {
                   fit: BoxFit.contain,
                   loadingBuilder: (_, child, progress) {
                     if (progress == null) return child;
-                    return const Center(
+                    return Center(
                       child: CircularProgressIndicator(
-                          color: AppColors.white),
+                          color: AppColors.onAccent),
                     );
                   },
-                  errorBuilder: (_, __, ___) => const Icon(
+                  errorBuilder: (_, __, ___) => Icon(
                     Icons.broken_image_rounded,
-                    color: AppColors.white,
+                    color: AppColors.onAccent,
                     size: 64,
                   ),
                 ),
@@ -1298,7 +1298,7 @@ class _FullscreenPhotoView extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.close_rounded,
-                          color: AppColors.white, size: 26),
+                          color: AppColors.onAccent, size: 26),
                       onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 4),
@@ -1307,7 +1307,7 @@ class _FullscreenPhotoView extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.white,
+                        color: AppColors.onAccent,
                       ),
                     ),
                   ],
@@ -1332,7 +1332,7 @@ class _FullscreenPhotoView extends StatelessWidget {
                     'Tap anywhere to close  •  Pinch to zoom',
                     style: GoogleFonts.inter(
                       fontSize: 11,
-                      color: AppColors.white.withValues(alpha: 0.8),
+                      color: AppColors.onAccent.withValues(alpha: 0.8),
                     ),
                   ),
                 ),

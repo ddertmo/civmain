@@ -195,7 +195,7 @@ class _MapPin extends StatelessWidget {
                   offset: const Offset(0, 3))
             ],
           ),
-          child: Icon(icon, color: AppColors.white, size: 22),
+          child: Icon(icon, color: AppColors.onAccent, size: 22),
         ),
         CustomPaint(
           size: const Size(12, 8),

@@ -105,14 +105,14 @@ class AppTextStyles {
   static TextStyle buttonLarge = GoogleFonts.inter(
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    color: AppColors.white,
+    color: AppColors.onAccent,
     height: 1.25,
   );
 
   static TextStyle buttonMedium = GoogleFonts.inter(
     fontSize: 14,
     fontWeight: FontWeight.w600,
-    color: AppColors.white,
+    color: AppColors.onAccent,
     height: 1.25,
   );
 

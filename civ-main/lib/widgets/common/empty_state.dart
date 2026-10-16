@@ -72,7 +72,7 @@ class EmptyState extends StatelessWidget {
                   actionLabel!,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.white,
+                    color: AppColors.onAccent,
                   ),
                 ),
               ),

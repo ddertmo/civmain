@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart' hide Path;
@@ -242,7 +242,7 @@ class _TeardropPin extends StatelessWidget {
               color: color,
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColors.white,
+                color: AppColors.onAccent,
                 width: isSelected ? 3 : 2,
               ),
               boxShadow: [
@@ -253,7 +253,7 @@ class _TeardropPin extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(icon, color: AppColors.white, size: iconSize),
+            child: Icon(icon, color: AppColors.onAccent, size: iconSize),
           ),
           // Tail
           Positioned(
@@ -285,7 +285,7 @@ class _MapHeader extends StatelessWidget {
           if (!embedded) ...[
             GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.only(top: 2, right: 8),
                 child: Icon(
                   Icons.arrow_back_ios_new_rounded,
@@ -310,7 +310,7 @@ class _MapHeader extends StatelessWidget {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.location_on_rounded,
                       size: 13,
                       color: AppColors.textSecondary,
@@ -340,7 +340,7 @@ class _MapHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.divider),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.notifications_outlined,
                   size: 20,
                   color: AppColors.textPrimary,
@@ -393,7 +393,7 @@ class _FilterRow extends StatelessWidget {
               isSelected: activeFilter == 'Infrastructure',
               onTap: () => onChanged('Infrastructure'),
               icon: Icons.construction_rounded,
-              activeColor: AppColors.white,
+              activeColor: AppColors.onAccent,
               activeBg: AppColors.infrastructure,
             ),
             const SizedBox(width: 8),
@@ -402,7 +402,7 @@ class _FilterRow extends StatelessWidget {
               isSelected: activeFilter == 'Environment',
               onTap: () => onChanged('Environment'),
               icon: Icons.eco_rounded,
-              activeColor: AppColors.white,
+              activeColor: AppColors.onAccent,
               activeBg: AppColors.environment,
             ),
             const SizedBox(width: 8),
@@ -411,7 +411,7 @@ class _FilterRow extends StatelessWidget {
               isSelected: activeFilter == 'Others',
               onTap: () => onChanged('Others'),
               icon: Icons.more_horiz_rounded,
-              activeColor: AppColors.white,
+              activeColor: AppColors.onAccent,
               activeBg: AppColors.statusSubmitted,
             ),
             const SizedBox(width: 8),
@@ -467,7 +467,7 @@ class _PinDetailSheet extends StatelessWidget {
     final statusBg = AppHelpers.getStatusBgColor(pin.status);
 
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
@@ -624,7 +624,7 @@ class _PinDetailSheet extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(color: AppColors.divider),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.close_rounded,
                           size: 14,
                           color: AppColors.textSecondary,
@@ -639,7 +639,7 @@ class _PinDetailSheet extends StatelessWidget {
                 // â”€â”€ Details section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.article_outlined,
                       size: 15,
                       color: AppColors.textPrimary,
@@ -667,7 +667,7 @@ class _PinDetailSheet extends StatelessWidget {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.location_on_outlined,
                       size: 13,
                       color: AppColors.textSecondary,
@@ -691,7 +691,7 @@ class _PinDetailSheet extends StatelessWidget {
                 // â”€â”€ Location preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.location_on_rounded,
                       size: 15,
                       color: AppColors.textPrimary,
@@ -765,7 +765,7 @@ class _PinDetailSheet extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.open_in_new_rounded,
                                 size: 14,
                                 color: AppColors.textPrimary,
@@ -789,7 +789,7 @@ class _PinDetailSheet extends StatelessWidget {
                     onPressed: () => _viewFullDetails(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.navy,
-                      foregroundColor: AppColors.white,
+                      foregroundColor: AppColors.onAccent,
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),

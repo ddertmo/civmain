@@ -349,10 +349,10 @@ class _EnterPhoneModal extends StatelessWidget {
                       color: AppColors.primary,
                       shape: BoxShape.circle,
                       border:
-                          Border.all(color: AppColors.white, width: 2),
+                          Border.all(color: AppColors.onAccent, width: 2),
                     ),
                     child: const Icon(Icons.lock_outline_rounded,
-                        color: AppColors.white, size: 12),
+                        color: AppColors.onAccent, size: 12),
                   ),
                 ),
               ],
@@ -394,7 +394,7 @@ class _EnterPhoneModal extends StatelessWidget {
               onPressed: isSending ? null : onSend,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
@@ -407,7 +407,7 @@ class _EnterPhoneModal extends StatelessWidget {
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
-                          strokeWidth: 2, color: AppColors.white),
+                          strokeWidth: 2, color: AppColors.onAccent),
                     )
                   : const Text('Send OTP'),
             ),
@@ -481,7 +481,7 @@ class _EnterOtpModal extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.arrow_back_ios_new_rounded,
+                  Icon(Icons.arrow_back_ios_new_rounded,
                       size: 14, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text('Back',
@@ -565,7 +565,7 @@ class _EnterOtpModal extends StatelessWidget {
               onPressed: isVerifying ? null : onVerify,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
@@ -578,7 +578,7 @@ class _EnterOtpModal extends StatelessWidget {
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
-                          strokeWidth: 2, color: AppColors.white),
+                          strokeWidth: 2, color: AppColors.onAccent),
                     )
                   : const Text('Verify'),
             ),
@@ -637,7 +637,7 @@ class _SetNewPinModal extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.arrow_back_ios_new_rounded,
+                Icon(Icons.arrow_back_ios_new_rounded,
                     size: 14, color: AppColors.textSecondary),
                 const SizedBox(width: 4),
                 Text('Back',
@@ -706,7 +706,7 @@ class _SetNewPinModal extends StatelessWidget {
               onPressed: canReset ? onReset : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 disabledBackgroundColor: AppColors.textDisabled,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
@@ -720,7 +720,7 @@ class _SetNewPinModal extends StatelessWidget {
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
-                          strokeWidth: 2, color: AppColors.white),
+                          strokeWidth: 2, color: AppColors.onAccent),
                     )
                   : const Text('Reset Password'),
             ),
@@ -854,7 +854,7 @@ class _StatusModal extends StatelessWidget {
                 backgroundColor: primaryIsDestructive
                     ? const Color(0xFFDC2626)
                     : AppColors.primary,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
@@ -907,7 +907,7 @@ class _SheetWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
@@ -931,7 +931,7 @@ class _SheetWrapper extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 4, 8, 0),
               child: IconButton(
-                icon: const Icon(Icons.close_rounded,
+                icon: Icon(Icons.close_rounded,
                     color: AppColors.textSecondary, size: 22),
                 onPressed: onClose,
               ),
@@ -996,7 +996,7 @@ class _PhoneField extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.phone_android_rounded,
+              Icon(Icons.phone_android_rounded,
                   color: AppColors.textSecondary, size: 18),
               const SizedBox(width: 6),
               Text('+63',
@@ -1011,11 +1011,11 @@ class _PhoneField extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -1079,7 +1079,7 @@ class _PinField extends StatelessWidget {
             letterSpacing: 0),
         filled: true,
         fillColor: AppColors.inputFill,
-        prefixIcon: const Icon(Icons.lock_outline_rounded,
+        prefixIcon: Icon(Icons.lock_outline_rounded,
             color: AppColors.textSecondary, size: 18),
         suffixIcon: IconButton(
           icon: Icon(

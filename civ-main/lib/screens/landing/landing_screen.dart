@@ -61,7 +61,7 @@ class _LandingScreenState extends State<LandingScreen>
           // ── Background gradient ───────────────────────────────────────
           Positioned.fill(
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -155,7 +155,7 @@ class _LandingScreenState extends State<LandingScreen>
                       // ── Divider label ──────────────────────────────
                       Row(
                         children: [
-                          const Expanded(
+                          Expanded(
                               child: Divider(color: AppColors.divider)),
                           Padding(
                             padding:
@@ -169,7 +169,7 @@ class _LandingScreenState extends State<LandingScreen>
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                               child: Divider(color: AppColors.divider)),
                         ],
                       ),
@@ -199,7 +199,7 @@ class _LandingScreenState extends State<LandingScreen>
                         color: AppColors.navy,
                         bg: AppColors.navy,
                         border: AppColors.navy,
-                        textColor: AppColors.white,
+                        textColor: AppColors.onAccent,
                         filled: false,
                         onTap: _loginOrRegister,
                       ),
@@ -210,7 +210,7 @@ class _LandingScreenState extends State<LandingScreen>
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.info_outline_rounded,
+                          Icon(Icons.info_outline_rounded,
                               size: 13, color: AppColors.textHint),
                           const SizedBox(width: 5),
                           Flexible(
@@ -379,13 +379,13 @@ class _LandingButton extends StatelessWidget {
               height: 48,
               decoration: BoxDecoration(
                 color: isSolid
-                    ? AppColors.white.withValues(alpha: 0.15)
+                    ? AppColors.onAccent.withValues(alpha: 0.15)
                     : AppColors.primary.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
-                color: isSolid ? AppColors.white : AppColors.primary,
+                color: isSolid ? AppColors.onAccent : AppColors.primary,
                 size: 24,
               ),
             ),
@@ -408,7 +408,7 @@ class _LandingButton extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       color: isSolid
-                          ? AppColors.white.withValues(alpha: 0.75)
+                          ? AppColors.onAccent.withValues(alpha: 0.75)
                           : AppColors.textSecondary,
                       height: 1.4,
                     ),
@@ -420,7 +420,7 @@ class _LandingButton extends StatelessWidget {
               Icons.arrow_forward_ios_rounded,
               size: 14,
               color: isSolid
-                  ? AppColors.white.withValues(alpha: 0.7)
+                  ? AppColors.onAccent.withValues(alpha: 0.7)
                   : AppColors.primary,
             ),
           ],
@@ -459,14 +459,14 @@ class _CivilWatchLogo extends StatelessWidget {
         children: [
           Icon(
             Icons.shield_rounded,
-            color: AppColors.white.withValues(alpha: 0.12),
+            color: AppColors.onAccent.withValues(alpha: 0.12),
             size: size * 0.85,
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.location_on_rounded,
-                  color: AppColors.white, size: size * 0.28),
+                  color: AppColors.onAccent, size: size * 0.28),
               Icon(Icons.eco_rounded,
                   color: AppColors.primary, size: size * 0.22),
             ],

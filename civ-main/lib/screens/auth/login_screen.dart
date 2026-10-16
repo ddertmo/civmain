@@ -182,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Icon(
+                                    Icon(
                                         Icons.arrow_back_ios_new_rounded,
                                         size: 13,
                                         color: AppColors.textSecondary),
@@ -334,13 +334,13 @@ class _LoginScreenState extends State<LoginScreen>
                                   border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(14),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                         color: AppColors.inputBorder),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(14),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                         color: AppColors.inputBorder),
                                   ),
                                   focusedBorder: OutlineInputBorder(
@@ -523,7 +523,7 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
         ),
         filled: true,
         fillColor: AppColors.inputFill,
-        prefixIcon: const Icon(Icons.lock_outline_rounded,
+        prefixIcon: Icon(Icons.lock_outline_rounded,
             color: AppColors.textSecondary, size: 20),
         suffixIcon: IconButton(
           icon: Icon(
@@ -539,11 +539,11 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.inputBorder),
+          borderSide: BorderSide(color: AppColors.inputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -575,7 +575,7 @@ class _PhonePrefixWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 12, right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(right: BorderSide(color: AppColors.inputBorder)),
       ),
       child: Row(
@@ -592,7 +592,7 @@ class _PhonePrefixWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 2),
-          const Icon(Icons.keyboard_arrow_down_rounded,
+          Icon(Icons.keyboard_arrow_down_rounded,
               size: 16, color: AppColors.textSecondary),
         ],
       ),
@@ -688,13 +688,13 @@ class _LogoBadge extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Icon(Icons.shield_rounded,
-              color: AppColors.white.withValues(alpha: 0.10),
+              color: AppColors.onAccent.withValues(alpha: 0.10),
               size: size * 0.82),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.location_on_rounded,
-                  color: AppColors.white, size: size * 0.28),
+                  color: AppColors.onAccent, size: size * 0.28),
               Icon(Icons.eco_rounded,
                   color: AppColors.primary, size: size * 0.22),
             ],

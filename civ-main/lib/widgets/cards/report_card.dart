@@ -85,7 +85,7 @@ class ReportCard extends StatelessWidget {
                     // Barangay
                     Row(
                       children: [
-                        const Icon(Icons.location_on_rounded,
+                        Icon(Icons.location_on_rounded,
                             size: 12, color: AppColors.textSecondary),
                         const SizedBox(width: 3),
                         Text(
@@ -102,7 +102,7 @@ class ReportCard extends StatelessWidget {
                     // Date
                     Row(
                       children: [
-                        const Icon(Icons.calendar_today_rounded,
+                        Icon(Icons.calendar_today_rounded,
                             size: 12, color: AppColors.textSecondary),
                         const SizedBox(width: 3),
                         Text(
@@ -146,7 +146,7 @@ class ReportCard extends StatelessWidget {
             ),
 
             // ── Arrow ────────────────────────────────────────────────────────
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(right: 10, top: 40),
               child: Icon(Icons.chevron_right_rounded,
                   color: AppColors.textHint, size: 20),

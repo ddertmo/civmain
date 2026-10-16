@@ -14,12 +14,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.dark,
-  ));
-
+  // Status/navigation bar styling is applied by AppState.init() and on every
+  // theme toggle (see AppState._applySystemUi) so it matches the active theme.
   runApp(const CivilWatchApp());
 }

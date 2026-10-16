@@ -63,7 +63,7 @@ class CivilWatchAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: actions,
-      bottom: const PreferredSize(
+      bottom: PreferredSize(
         preferredSize: Size.fromHeight(1),
         child: Divider(height: 1, color: AppColors.divider),
       ),

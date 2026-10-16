@@ -19,7 +19,7 @@ class AppLoading extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               message!,
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.textSecondary,
                 fontSize: 14,
               ),

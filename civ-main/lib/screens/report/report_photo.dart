@@ -291,7 +291,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                     color: AppColors.background,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.photo_library_rounded,
+                  child: Icon(Icons.photo_library_rounded,
                       color: AppColors.textSecondary, size: 22),
                 ),
                 title: Text('Gallery',
@@ -535,7 +535,7 @@ class _PhotoOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
         decoration: BoxDecoration(
-          color: isPrimary ? bg : AppColors.white,
+          color: isPrimary ? bg : AppColors.onAccent,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isPrimary ? color.withOpacity(0.35) : AppColors.divider,
@@ -593,7 +593,7 @@ class _ReportPhotoFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -607,7 +607,7 @@ class _ReportPhotoFooter extends StatelessWidget {
               label: const Text('Back'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
-                side: const BorderSide(color: AppColors.divider),
+                side: BorderSide(color: AppColors.divider),
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),

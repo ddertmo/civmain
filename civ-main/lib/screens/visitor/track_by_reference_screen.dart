@@ -65,7 +65,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
               size: 20, color: AppColors.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
@@ -90,7 +90,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
             ),
           ],
         ),
-        bottom: const PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, color: AppColors.divider),
         ),
@@ -180,11 +180,11 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       ),
                       filled: true,
                       fillColor: AppColors.white,
-                      prefixIcon: const Icon(Icons.tag_rounded,
+                      prefixIcon: Icon(Icons.tag_rounded,
                           color: AppColors.textSecondary, size: 20),
                       suffixIcon: _ctrl.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(Icons.clear_rounded,
+                              icon: Icon(Icons.clear_rounded,
                                   size: 18,
                                   color: AppColors.textSecondary),
                               onPressed: () {
@@ -202,12 +202,12 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            const BorderSide(color: AppColors.inputBorder),
+                            BorderSide(color: AppColors.inputBorder),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
                         borderSide:
-                            const BorderSide(color: AppColors.inputBorder),
+                            BorderSide(color: AppColors.inputBorder),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -225,7 +225,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                     onPressed: _ctrl.text.trim().isNotEmpty ? _search : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.navy,
-                      foregroundColor: AppColors.white,
+                      foregroundColor: AppColors.onAccent,
                       disabledBackgroundColor: AppColors.textDisabled,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14)),
@@ -392,7 +392,7 @@ class _ResultCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 18),
-                const Divider(color: AppColors.divider, height: 1),
+                Divider(color: AppColors.divider, height: 1),
                 const SizedBox(height: 16),
 
                 // Details grid
@@ -446,7 +446,7 @@ class _ResultCard extends StatelessWidget {
                     label: const Text('View Full Details'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.navy,
-                      foregroundColor: AppColors.white,
+                      foregroundColor: AppColors.onAccent,
                       minimumSize: const Size(0, 50),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14)),
@@ -658,15 +658,15 @@ class _CompactTimeline extends StatelessWidget {
                   ),
                   child: isDone
                       ? const Icon(Icons.check_rounded,
-                          color: AppColors.white, size: 13)
+                          color: AppColors.onAccent, size: 13)
                       : isActive
                           ? Container(
                               width: 10,
                               height: 10,
                               margin: const EdgeInsets.all(5),
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: AppColors.white,
+                                color: AppColors.onAccent,
                               ),
                             )
                           : null,

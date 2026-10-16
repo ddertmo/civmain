@@ -168,7 +168,7 @@ class _CategoryCard extends StatelessWidget {
                   ),
                   child: Icon(
                     icon,
-                    color: isSelected ? AppColors.white : color,
+                    color: isSelected ? AppColors.onAccent : color,
                     size: 30,
                   ),
                 ),
@@ -208,7 +208,7 @@ class _CategoryCard extends StatelessWidget {
                   height: 24,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isSelected ? color : AppColors.white,
+                    color: isSelected ? color : AppColors.onAccent,
                     border: Border.all(
                       color: isSelected ? color : AppColors.inputBorder,
                       width: 2,
@@ -216,13 +216,13 @@ class _CategoryCard extends StatelessWidget {
                   ),
                   child: isSelected
                       ? const Icon(Icons.check_rounded,
-                          color: AppColors.white, size: 14)
+                          color: AppColors.onAccent, size: 14)
                       : null,
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            const Divider(color: AppColors.divider, height: 1),
+            Divider(color: AppColors.divider, height: 1),
             const SizedBox(height: 14),
             // ── Description ────────────────────────────────────────────
             Text(
@@ -257,7 +257,7 @@ class _ReportNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
       ),
@@ -271,7 +271,7 @@ class _ReportNavBar extends StatelessWidget {
                 label: const Text('Back'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.textPrimary,
-                  side: const BorderSide(color: AppColors.divider),
+                  side: BorderSide(color: AppColors.divider),
                   minimumSize: const Size(0, 52),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
@@ -290,7 +290,7 @@ class _ReportNavBar extends StatelessWidget {
                 backgroundColor: onNext != null
                     ? AppColors.primary
                     : AppColors.textDisabled,
-                foregroundColor: AppColors.white,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size(0, 52),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),

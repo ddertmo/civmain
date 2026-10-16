@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 
@@ -74,7 +74,7 @@ class ReportStepper extends StatelessWidget {
                             ),
                             child: isDone
                                 ? const Icon(Icons.check_rounded,
-                                    color: AppColors.white, size: 16)
+                                    color: AppColors.onAccent, size: 16)
                                 : isCurrent
                                     ? Center(
                                         child: Container(

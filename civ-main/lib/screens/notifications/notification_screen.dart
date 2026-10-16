@@ -81,7 +81,7 @@ class NotificationScreen extends StatelessWidget {
                                   style: GoogleFonts.inter(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.white,
+                                    color: AppColors.onAccent,
                                   ),
                                 ),
                               ),
@@ -104,7 +104,7 @@ class NotificationScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(height: 1, color: AppColors.divider),
+                Divider(height: 1, color: AppColors.divider),
 
                 // ── List ─────────────────────────────────────────────
                 Expanded(
@@ -118,7 +118,7 @@ class NotificationScreen extends StatelessWidget {
                               Container(
                                 width: 72,
                                 height: 72,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   color: AppColors.primarySurface,
                                   shape: BoxShape.circle,
                                 ),

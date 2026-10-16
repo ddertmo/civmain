@@ -130,7 +130,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.filter_list_rounded,
+                            Icon(Icons.filter_list_rounded,
                                 size: 16, color: AppColors.textSecondary),
                             const SizedBox(width: 4),
                             Text('Filter',
@@ -204,7 +204,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                           height: 7,
                                           decoration: BoxDecoration(
                                             color: isActive
-                                                ? AppColors.white
+                                                ? AppColors.onAccent
                                                 : dotColor,
                                             shape: BoxShape.circle,
                                           ),
@@ -214,7 +214,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                         Icon(Icons.list_rounded,
                                             size: 14,
                                             color: isActive
-                                                ? AppColors.white
+                                                ? AppColors.onAccent
                                                 : AppColors.textSecondary),
                                         const SizedBox(width: 6),
                                       ],
@@ -224,7 +224,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
                                           color: isActive
-                                              ? AppColors.white
+                                              ? AppColors.onAccent
                                               : AppColors.textSecondary,
                                         ),
                                       ),
@@ -239,7 +239,7 @@ class _MyReportsScreenState extends State<MyReportsScreen> {
                     ],
                   ),
                 ),
-                const Divider(height: 1, color: AppColors.divider),
+                Divider(height: 1, color: AppColors.divider),
 
                 // ── Report List ────────────────────────────────────────
                 Expanded(

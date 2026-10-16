@@ -104,11 +104,11 @@ class _GuestBanner extends StatelessWidget {
                   width: 28,
                   height: 28,
                   decoration: BoxDecoration(
-                    color: AppColors.white.withValues(alpha: 0.12),
+                    color: AppColors.onAccent.withValues(alpha: 0.12),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.visibility_rounded,
-                      color: AppColors.white, size: 15),
+                      color: AppColors.onAccent, size: 15),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -121,14 +121,14 @@ class _GuestBanner extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.white,
+                          color: AppColors.onAccent,
                         ),
                       ),
                       Text(
                         'Login or register to submit reports.',
                         style: GoogleFonts.inter(
                           fontSize: 10,
-                          color: AppColors.white.withValues(alpha: 0.75),
+                          color: AppColors.onAccent.withValues(alpha: 0.75),
                         ),
                       ),
                     ],
@@ -146,7 +146,7 @@ class _GuestBanner extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.white,
+                      color: AppColors.onAccent,
                     ),
                   ),
                 ),
@@ -177,7 +177,7 @@ class _VisitorBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.divider)),
         boxShadow: [
@@ -307,7 +307,7 @@ class _NavItemLogin extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Icon(Icons.login_rounded,
-                    size: 20, color: AppColors.white),
+                    size: 20, color: AppColors.onAccent),
               ),
               const SizedBox(height: 2),
               Text(

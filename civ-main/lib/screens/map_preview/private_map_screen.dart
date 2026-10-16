@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart' hide Path;
@@ -36,7 +36,7 @@ class PrivateMapScreen extends StatelessWidget {
         backgroundColor: AppColors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 20,
             color: AppColors.textPrimary,
@@ -51,7 +51,7 @@ class PrivateMapScreen extends StatelessWidget {
             color: AppColors.textPrimary,
           ),
         ),
-        bottom: const PreferredSize(
+        bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
           child: Divider(height: 1, color: AppColors.divider),
         ),
@@ -188,7 +188,7 @@ class PrivateMapScreen extends StatelessWidget {
                                 color: pinColor,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: AppColors.white,
+                                  color: AppColors.onAccent,
                                   width: 2.5,
                                 ),
                                 boxShadow: [
@@ -201,7 +201,7 @@ class PrivateMapScreen extends StatelessWidget {
                               ),
                               child: Icon(
                                 pinIcon,
-                                color: AppColors.white,
+                                color: AppColors.onAccent,
                                 size: 20,
                               ),
                             ),
@@ -222,7 +222,7 @@ class PrivateMapScreen extends StatelessWidget {
 
           // ── Info sheet ────────────────────────────────────────────────
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(20),
@@ -252,7 +252,7 @@ class PrivateMapScreen extends StatelessWidget {
                   label: 'Barangay ${report.barangay}',
                   subtitle: 'Digos City',
                 ),
-                const Divider(
+                Divider(
                   height: 1,
                   color: AppColors.divider,
                   indent: 20,
@@ -264,7 +264,7 @@ class PrivateMapScreen extends StatelessWidget {
                   subtitle:
                       '${report.latitude.toStringAsFixed(4)}, ${report.longitude.toStringAsFixed(4)}',
                 ),
-                const Divider(
+                Divider(
                   height: 1,
                   color: AppColors.divider,
                   indent: 20,
@@ -293,7 +293,7 @@ class PrivateMapScreen extends StatelessWidget {
                 label: const Text('Back to Report'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.navy,
-                  foregroundColor: AppColors.white,
+                  foregroundColor: AppColors.onAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -452,7 +452,7 @@ class _MapPhotoTile extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.image_not_supported_outlined,
+            Icon(Icons.image_not_supported_outlined,
                 color: AppColors.textHint, size: 22),
             const SizedBox(height: 4),
             Text('No photo',
@@ -573,7 +573,7 @@ class _BeforeAfterDialog extends StatelessWidget {
             // Header
             Row(
               children: [
-                const Icon(Icons.compare_rounded,
+                Icon(Icons.compare_rounded,
                     size: 18, color: AppColors.textPrimary),
                 const SizedBox(width: 8),
                 Text(
@@ -612,7 +612,7 @@ class _BeforeAfterDialog extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.divider),
                     ),
-                    child: const Icon(Icons.close_rounded,
+                    child: Icon(Icons.close_rounded,
                         size: 14, color: AppColors.textSecondary),
                   ),
                 ),

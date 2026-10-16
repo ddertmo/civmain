@@ -8,6 +8,7 @@ import '../../core/utils/dummy_data.dart';
 import '../../core/utils/helpers.dart';
 import '../../widgets/common/section_title.dart';
 import '../../widgets/common/skeleton.dart';
+import '../../widgets/common/theme_toggle.dart';
 import '../../widgets/navigation/bottom_nav.dart';
 import '../../screens/my_reports/my_reports_screen.dart';
 import '../../screens/community_map/community_map_screen.dart';
@@ -66,7 +67,7 @@ class _HomeTab extends StatelessWidget {
 
         // ── Show skeleton while data is loading from API ────────────────
         if (state.isLoading) {
-          return const Scaffold(
+          return Scaffold(
             backgroundColor: AppColors.background,
             body: SafeArea(child: HomeTabSkeleton()),
           );
@@ -75,7 +76,6 @@ class _HomeTab extends StatelessWidget {
         final pending = state.pendingCount;
         final inProgress = state.inProgressCount;
         final resolvedCount = state.resolvedCount;
-        final unreadCount = state.unreadCount;
 
         return SafeArea(
           child: CustomScrollView(
@@ -84,7 +84,6 @@ class _HomeTab extends StatelessWidget {
               SliverToBoxAdapter(
                 child: _HomeAppBar(
                   userName: user?.firstName ?? 'Citizen',
-                  unreadCount: unreadCount,
                 ),
               ),
               SliverToBoxAdapter(
@@ -150,9 +149,8 @@ class _HomeTab extends StatelessWidget {
 // ── Home App Bar ──────────────────────────────────────────────────────────────
 class _HomeAppBar extends StatelessWidget {
   final String userName;
-  final int unreadCount;
 
-  const _HomeAppBar({required this.userName, required this.unreadCount});
+  const _HomeAppBar({required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -173,9 +171,9 @@ class _HomeAppBar extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Icon(Icons.shield_rounded,
-                    color: AppColors.white.withOpacity(0.15), size: 30),
+                    color: AppColors.onAccent.withOpacity(0.15), size: 30),
                 const Icon(Icons.location_on_rounded,
-                    color: AppColors.white, size: 14),
+                    color: AppColors.onAccent, size: 14),
               ],
             ),
           ),
@@ -190,39 +188,9 @@ class _HomeAppBar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // Notification bell
-          GestureDetector(
-            onTap: () =>
-                Navigator.pushNamed(context, AppRoutes.notifications),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                const Icon(Icons.notifications_outlined,
-                    color: AppColors.textPrimary, size: 26),
-                if (unreadCount > 0)
-                  Positioned(
-                    top: -3,
-                    right: -3,
-                    child: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: const BoxDecoration(
-                        color: AppColors.statusResolved,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        '$unreadCount',
-                        style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w700),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
+          // Light / dark mode toggle (replaces the old notification bell —
+          // notifications remain available from the bottom navigation bar).
+          const ThemeToggle(),
         ],
       ),
     );
@@ -315,7 +283,7 @@ class _ReportCtaBanner extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add_circle_outline_rounded,
-                  color: AppColors.white, size: 28),
+                  color: AppColors.onAccent, size: 28),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -327,7 +295,7 @@ class _ReportCtaBanner extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.white,
+                      color: AppColors.onAccent,
                     ),
                   ),
                   const SizedBox(height: 3),
@@ -335,7 +303,7 @@ class _ReportCtaBanner extends StatelessWidget {
                     'Tap to report infrastructure or\nenvironmental concerns.',
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.white.withOpacity(0.75),
+                      color: AppColors.onAccent.withOpacity(0.75),
                       height: 1.4,
                     ),
                   ),
@@ -346,11 +314,11 @@ class _ReportCtaBanner extends StatelessWidget {
               width: 34,
               height: 34,
               decoration: BoxDecoration(
-                color: AppColors.white.withOpacity(0.15),
+                color: AppColors.onAccent.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.arrow_forward_rounded,
-                  color: AppColors.white, size: 18),
+                  color: AppColors.onAccent, size: 18),
             ),
           ],
         ),
@@ -535,7 +503,7 @@ class _MiniMapCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
-                    color: AppColors.white.withOpacity(0.92),
+                    color: AppColors.onAccent.withOpacity(0.92),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.divider),
                   ),
@@ -593,7 +561,7 @@ class _MiniPin extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.circle,
-        border: Border.all(color: AppColors.white, width: 2),
+        border: Border.all(color: AppColors.onAccent, width: 2),
         boxShadow: [
           BoxShadow(
               color: color.withOpacity(0.4),
@@ -602,7 +570,7 @@ class _MiniPin extends StatelessWidget {
         ],
       ),
       child: Icon(Icons.construction_rounded,
-          color: AppColors.white, size: 12),
+          color: AppColors.onAccent, size: 12),
     );
   }
 }
@@ -760,7 +728,7 @@ class _HomeMiniMapPainter extends CustomPainter {
         Paint()..color = const Color(0xFFEEF2F7));
 
     final roadPaint = Paint()
-      ..color = AppColors.white
+      ..color = AppColors.onAccent
       ..strokeWidth = 8
       ..style = PaintingStyle.stroke;
 

@@ -34,7 +34,7 @@ class MapMarker extends StatelessWidget {
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.white, width: 2),
+              border: Border.all(color: AppColors.onAccent, width: 2),
               boxShadow: [
                 BoxShadow(
                   color: color.withOpacity(0.4),
@@ -43,7 +43,7 @@ class MapMarker extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(icon, color: AppColors.white, size: isSelected ? 26 : 22),
+            child: Icon(icon, color: AppColors.onAccent, size: isSelected ? 26 : 22),
           ),
           CustomPaint(
             size: Size(isSelected ? 14 : 10, isSelected ? 10 : 7),
