@@ -65,3 +65,4 @@ automatically after each change.
 | 051 | 2026-10-15 | `HEAD` | [Token-lean session start: read `## NOW` + the last 3 changelog rows, with research fallbacks](2026-10-15-051-token-lean-handoff-now-block.md) |
 | 052 | 2026-10-15 | `HEAD` | [CEO/CENRO report details load from the API; reporter panels show name, address and phone](2026-10-15-052-office-report-details-live-api-reporter-panels.md) |
 | 053 | 2026-10-16 | `HEAD` | [CEO/CENRO list pages load from the API; offices can post status updates](2026-10-16-053-office-list-pages-live-and-status-post.md) |
+| 054 | 2026-10-16 | `b9c9bfe` | [Dark mode on/off toggle in Profile (and fix the missing dark theme body)](2026-10-16-054-dark-mode-toggle-switch.md) |

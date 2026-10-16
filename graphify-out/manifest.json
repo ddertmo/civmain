@@ -1,8 +1,8 @@
 {
   "civ-main/lib/app.dart": {
-    "mtime": 1792132727.1826973,
-    "seen": 1792133884.2372751,
-    "ast_hash": "1d1bda90bc80b24b4a6c1a2d4b604c9a",
+    "mtime": 1792149488.7682273,
+    "seen": 1792149667.251712,
+    "ast_hash": "53079f83e013498dc3b9a31d6a722957",
     "semantic_hash": ""
   },
   "civ-main/lib/core/constants/api_constants.dart": {
@@ -54,15 +54,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/core/state/app_state.dart": {
-    "mtime": 1792132727.1856892,
-    "seen": 1792133884.2373016,
-    "ast_hash": "bbae51bedbde2fbaefa8dbb6d279d05d",
+    "mtime": 1792149488.78358,
+    "seen": 1792149667.2525332,
+    "ast_hash": "b3da49be5dfeef34cd538636b0f4c61c",
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/app_theme.dart": {
-    "mtime": 1792132727.1861959,
-    "seen": 1792133884.2373042,
-    "ast_hash": "438695031b390711dde57b38c0f18d31",
+    "mtime": 1792149585.899575,
+    "seen": 1792149667.2525358,
+    "ast_hash": "0b12f6b532b3fe8087c503244384ce32",
     "semantic_hash": ""
   },
   "civ-main/lib/core/theme/light_theme.dart": {
@@ -186,15 +186,15 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/profile/profile_screen.dart": {
-    "mtime": 1792132727.1924262,
-    "seen": 1792133884.2373624,
-    "ast_hash": "2c90b7def66c08505aba5f24a83f1f03",
+    "mtime": 1792149504.0516095,
+    "seen": 1792149667.2548285,
+    "ast_hash": "f82fd0e825b633ae4d19a55118a88a94",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/_report_stepper.dart": {
-    "mtime": 1792132727.1924262,
-    "seen": 1792133884.2373652,
-    "ast_hash": "d9204b3b03b3340e5d91cc857ba2defa",
+    "mtime": 1792144011.295123,
+    "seen": 1792149667.2548313,
+    "ast_hash": "9e5e6547bed4a3a53672eea0fd2bbdeb",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/report/report_category.dart": {
@@ -666,9 +666,9 @@
     "semantic_hash": ""
   },
   "laravel/public/gis-map.html": {
-    "mtime": 1792132727.5071018,
-    "seen": 1792133884.2380512,
-    "ast_hash": "bdc42a5dc1c1f099d842f6e98ca54b20",
+    "mtime": 1792148143.0617275,
+    "seen": 1792149667.291569,
+    "ast_hash": "11b011533cef5cc46850ed31137ca47c",
     "semantic_hash": ""
   },
   "laravel/public/index.html": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792133867.4957669,
-    "seen": 1792133884.2378628,
-    "ast_hash": "643abb1d9598ffbae4f40909c3796420",
+    "mtime": 1792146872.9802687,
+    "seen": 1792149667.2801025,
+    "ast_hash": "0d93d21e5a2756216f5eac414eba49e2",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -2163,6 +2163,18 @@
     "mtime": 1792133855.3360934,
     "seen": 1792133884.237999,
     "ast_hash": "d49ec00c785219687f44db896f1c9b43",
+    "semantic_hash": ""
+  },
+  "CHANGELOG_GIS.md": {
+    "mtime": 1792146242.3727434,
+    "seen": 1792149667.2771404,
+    "ast_hash": "9b1c3904f86dafa03e2284c015a58044",
+    "semantic_hash": ""
+  },
+  "CHANGELOG_GIS_ICON.md": {
+    "mtime": 1792148167.7090354,
+    "seen": 1792149667.2771459,
+    "ast_hash": "8ba2038e6201189f519454756148e968",
     "semantic_hash": ""
   }
 }
