@@ -224,7 +224,7 @@ class _StatusUpdateBody extends StatelessWidget {
                               style: GoogleFonts.inter(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.navy)),
+                                  color: context.c.textPrimary)),
                           const SizedBox(height: 3),
                           Text(
                               'Submitted  ${AppHelpers.formatDateTime(report.submittedAt)}',
@@ -674,7 +674,7 @@ class _HorizontalTimeline extends StatelessWidget {
                     height: 2.5,
                     decoration: BoxDecoration(
                       color: i < currentIdx
-                          ? AppColors.primary
+                          ? context.c.primaryOnSurface
                           : context.c.divider,
                       borderRadius: BorderRadius.circular(2),
                     ),

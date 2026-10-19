@@ -254,7 +254,7 @@ class _NavItem extends StatelessWidget {
                   icon,
                   size: 22,
                   color: isActive
-                      ? AppColors.primary
+                      ? context.c.primaryOnSurface
                       : context.c.textSecondary,
                 ),
               ),
@@ -266,7 +266,7 @@ class _NavItem extends StatelessWidget {
                   fontWeight:
                       isActive ? FontWeight.w700 : FontWeight.w500,
                   color: isActive
-                      ? AppColors.primary
+                      ? context.c.primaryOnSurface
                       : context.c.textSecondary,
                 ),
               ),
@@ -309,7 +309,7 @@ class _NavItemLogin extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.navy,
+                  color: context.c.textPrimary,
                 ),
               ),
             ],

@@ -257,7 +257,7 @@ class _OtpScreenState extends State<OtpScreen>
                           height: 14,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: AppColors.primary,
+                            color: context.c.primaryOnSurface,
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -383,7 +383,7 @@ class _OtpScreenState extends State<OtpScreen>
                           style: GoogleFonts.inter(
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.navy,
+                            color: context.c.textPrimary,
                           ),
                         ),
                       ],
@@ -397,7 +397,7 @@ class _OtpScreenState extends State<OtpScreen>
                       style: GoogleFonts.inter(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.navy,
+                        color: context.c.textPrimary,
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -421,7 +421,7 @@ class _OtpScreenState extends State<OtpScreen>
                     color: context.c.primarySurface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                        color: AppColors.primary.withValues(alpha: 0.2)),
+                        color: context.c.primaryOnSurface.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -446,17 +446,17 @@ class _OtpScreenState extends State<OtpScreen>
                 // ── Back text button ──────────────────────────────────────
                 TextButton.icon(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back_rounded,
                     size: 16,
-                    color: AppColors.navy,
+                    color: context.c.textPrimary,
                   ),
                   label: Text(
                     'Back',
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.navy,
+                      color: context.c.textPrimary,
                     ),
                   ),
                 ),
@@ -571,7 +571,7 @@ class _OtpIllustration extends StatelessWidget {
             child: Icon(
               Icons.star_rounded,
               size: 12,
-              color: AppColors.primary.withValues(alpha: 0.5),
+              color: context.c.primaryOnSurface.withValues(alpha: 0.5),
             ),
           ),
           Positioned(

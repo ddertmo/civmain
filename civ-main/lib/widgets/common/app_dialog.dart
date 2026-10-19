@@ -188,7 +188,7 @@ class _DialogCardState extends State<_DialogCard>
   // ── Per-variant colours ───────────────────────────────────────────────────
   Color get _accent {
     return switch (widget.variant) {
-      _DialogVariant.loading => AppColors.primary,
+      _DialogVariant.loading => context.c.primaryOnSurface,
       _DialogVariant.success => const Color(0xFF16A34A),
       _DialogVariant.error   => const Color(0xFFDC2626),
     };

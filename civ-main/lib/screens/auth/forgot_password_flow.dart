@@ -346,7 +346,7 @@ class _EnterPhoneModal extends StatelessWidget {
                     width: 22,
                     height: 22,
                     decoration: BoxDecoration(
-                      color: AppColors.primary,
+                      color: context.c.primaryOnSurface,
                       shape: BoxShape.circle,
                       border:
                           Border.all(color: AppColors.onAccent, width: 2),
@@ -549,7 +549,7 @@ class _EnterOtpModal extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: resendSeconds > 0
                     ? context.c.textSecondary
-                    : AppColors.primary,
+                    : context.c.primaryOnSurface,
                 decoration: resendSeconds == 0
                     ? TextDecoration.underline
                     : TextDecoration.none,
@@ -737,14 +737,14 @@ class _SetNewPinModal extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.lightbulb_outline_rounded,
-                    size: 16, color: AppColors.primary),
+                Icon(Icons.lightbulb_outline_rounded,
+                    size: 16, color: context.c.primaryOnSurface),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'Password must be exactly 6 digits (numbers only).',
                     style: GoogleFonts.inter(
-                        fontSize: 12, color: AppColors.primary, height: 1.5),
+                        fontSize: 12, color: context.c.primaryOnSurface, height: 1.5),
                   ),
                 ),
               ],
@@ -875,7 +875,7 @@ class _StatusModal extends StatelessWidget {
                 onPressed: onSecondary,
                 style: TextButton.styleFrom(
                   foregroundColor: onSecondary != null
-                      ? AppColors.navy
+                      ? context.c.textPrimary
                       : context.c.textDisabled,
                   minimumSize: const Size(0, 44),
                 ),
@@ -1019,7 +1019,7 @@ class _PhoneField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: AppColors.navy, width: 2),
+          borderSide: BorderSide(color: context.c.textPrimary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -1065,7 +1065,7 @@ class _PinField extends StatelessWidget {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       style: GoogleFonts.inter(
           fontSize: 18,
-          color: isError ? const Color(0xFFDC2626) : AppColors.navy,
+          color: isError ? const Color(0xFFDC2626) : context.c.textPrimary,
           fontWeight: FontWeight.w700,
           letterSpacing: 4),
       textAlign: TextAlign.center,
@@ -1110,7 +1110,7 @@ class _PinField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
-              color: isError ? const Color(0xFFDC2626) : AppColors.navy,
+              color: isError ? const Color(0xFFDC2626) : context.c.textPrimary,
               width: 2),
         ),
       ),

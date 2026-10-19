@@ -214,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 style: GoogleFonts.inter(
                                   fontSize: 30,
                                   fontWeight: FontWeight.w900,
-                                  color: AppColors.navy,
+                                  color: context.c.textPrimary,
                                   letterSpacing: 2.5,
                                 ),
                               ),
@@ -263,8 +263,8 @@ class _LoginScreenState extends State<LoginScreen>
                                       borderRadius:
                                           BorderRadius.circular(12),
                                     ),
-                                    child: const Icon(Icons.login_rounded,
-                                        color: AppColors.navy, size: 20),
+                                    child: Icon(Icons.login_rounded,
+                                        color: context.c.textPrimary, size: 20),
                                   ),
                                   const SizedBox(width: 12),
                                   Expanded(
@@ -346,8 +346,8 @@ class _LoginScreenState extends State<LoginScreen>
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(14),
-                                    borderSide: const BorderSide(
-                                        color: AppColors.navy, width: 2),
+                                    borderSide: BorderSide(
+                                        color: context.c.textPrimary, width: 2),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius:
@@ -396,7 +396,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     style: GoogleFonts.inter(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
-                                      color: AppColors.navy,
+                                      color: context.c.textPrimary,
                                       decoration: TextDecoration.underline,
                                     ),
                                   ),
@@ -440,7 +440,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   style: GoogleFonts.inter(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: AppColors.navy,
+                                    color: context.c.textPrimary,
                                     decoration: TextDecoration.underline,
                                   ),
                                 ),
@@ -509,7 +509,7 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
       style: GoogleFonts.inter(
         fontSize: 22,
         fontWeight: FontWeight.w700,
-        color: AppColors.navy,
+        color: context.c.textPrimary,
         letterSpacing: 6,
       ),
       textAlign: TextAlign.center,
@@ -548,7 +548,7 @@ class _PinPasswordFieldState extends State<_PinPasswordField> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide:
-              const BorderSide(color: AppColors.navy, width: 2),
+              BorderSide(color: context.c.textPrimary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -642,7 +642,7 @@ class _TrustBadgeRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             children: [
-              Icon(b.$1, size: 20, color: AppColors.primary),
+              Icon(b.$1, size: 20, color: context.c.primaryOnSurface),
               const SizedBox(height: 4),
               Text(
                 b.$2,

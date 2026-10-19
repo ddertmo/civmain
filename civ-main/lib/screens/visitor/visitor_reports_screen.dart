@@ -407,7 +407,7 @@ class _PublicReportCard extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.navy,
+                            color: context.c.textPrimary,
                             letterSpacing: 0.3,
                           ),
                         ),

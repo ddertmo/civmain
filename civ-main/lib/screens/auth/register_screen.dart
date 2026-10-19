@@ -489,7 +489,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 'Already have an account? Sign in',
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
-                                  color: AppColors.navy,
+                                  color: context.c.textPrimary,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -543,7 +543,7 @@ class _RegisterScreenState extends State<RegisterScreen>
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide:
-              const BorderSide(color: AppColors.primary, width: 1.5),
+              BorderSide(color: context.c.primaryOnSurface, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -593,8 +593,8 @@ class _RegisterScreenState extends State<RegisterScreen>
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-              color: AppColors.primary, width: 1.5),
+          borderSide: BorderSide(
+              color: context.c.primaryOnSurface, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -666,9 +666,9 @@ class _PinInputRowState extends State<_PinInputRow> {
   @override
   Widget build(BuildContext context) {
     final activeColor =
-        widget.isError ? const Color(0xFFDC2626) : AppColors.primary;
+        widget.isError ? const Color(0xFFDC2626) : context.c.primaryOnSurface;
     final filledColor =
-        widget.isError ? const Color(0xFFDC2626) : AppColors.navy;
+        widget.isError ? const Color(0xFFDC2626) : context.c.textPrimary;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -755,7 +755,7 @@ class _TermsCheckbox extends StatelessWidget {
           color: agreed ? context.c.primarySurface : context.c.card,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: agreed ? AppColors.primary : context.c.divider,
+            color: agreed ? context.c.primaryOnSurface : context.c.divider,
             width: agreed ? 2 : 1,
           ),
         ),
@@ -772,7 +772,7 @@ class _TermsCheckbox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(
                   color:
-                      agreed ? AppColors.primary : context.c.inputBorder,
+                      agreed ? context.c.primaryOnSurface : context.c.inputBorder,
                   width: 1.5,
                 ),
               ),
@@ -796,7 +796,7 @@ class _TermsCheckbox extends StatelessWidget {
                       text: 'Privacy Policy',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.navy,
+                        color: context.c.textPrimary,
                         fontWeight: FontWeight.w700,
                         decoration: TextDecoration.underline,
                       ),
@@ -806,7 +806,7 @@ class _TermsCheckbox extends StatelessWidget {
                       text: 'Terms of Service',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.navy,
+                        color: context.c.textPrimary,
                         fontWeight: FontWeight.w700,
                         decoration: TextDecoration.underline,
                       ),
@@ -978,8 +978,8 @@ class _BarangayDropdown extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-              color: AppColors.primary, width: 1.5),
+          borderSide: BorderSide(
+              color: context.c.primaryOnSurface, width: 1.5),
         ),
       ),
       style: GoogleFonts.inter(

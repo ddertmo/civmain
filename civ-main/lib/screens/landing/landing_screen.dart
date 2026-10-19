@@ -176,10 +176,10 @@ class _LandingScreenState extends State<LandingScreen>
                         label: 'Explore as Visitor',
                         sublabel:
                             'Browse the map and view reports without an account.',
-                        color: AppColors.primary,
+                        color: context.c.primaryOnSurface,
                         bg: context.c.primarySurface,
-                        border: AppColors.primary,
-                        textColor: AppColors.primary,
+                        border: context.c.primaryOnSurface,
+                        textColor: context.c.primaryOnSurface,
                         filled: true,
                         onTap: _exploreAsVisitor,
                       ),
@@ -288,7 +288,7 @@ class _FeatureRow extends StatelessWidget {
                   color: context.c.primarySurface,
                   shape: BoxShape.circle,
                   border: Border.all(
-                      color: AppColors.primary.withValues(alpha: 0.15)),
+                      color: context.c.primaryOnSurface.withValues(alpha: 0.15)),
                 ),
                 child: Icon(f.$1, color: context.c.primaryOnSurface, size: 24),
               ),
@@ -355,7 +355,7 @@ class _LandingButton extends StatelessWidget {
           border: Border.all(
             color: isSolid
                 ? border
-                : AppColors.primary.withValues(alpha: 0.35),
+                : context.c.primaryOnSurface.withValues(alpha: 0.35),
             width: isSolid ? 2 : 1.5,
           ),
           boxShadow: [
@@ -380,7 +380,7 @@ class _LandingButton extends StatelessWidget {
               ),
               child: Icon(
                 icon,
-                color: isSolid ? AppColors.onAccent : AppColors.primary,
+                color: isSolid ? AppColors.onAccent : context.c.primaryOnSurface,
                 size: 24,
               ),
             ),
@@ -416,7 +416,7 @@ class _LandingButton extends StatelessWidget {
               size: 14,
               color: isSolid
                   ? AppColors.onAccent.withValues(alpha: 0.7)
-                  : AppColors.primary,
+                  : context.c.primaryOnSurface,
             ),
           ],
         ),

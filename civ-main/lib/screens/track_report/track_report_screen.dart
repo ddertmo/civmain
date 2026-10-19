@@ -294,10 +294,10 @@ class _TrackReportBody extends StatelessWidget {
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.map_rounded,
                                 size: 12,
-                                color: AppColors.primary,
+                                color: context.c.primaryOnSurface,
                               ),
                               const SizedBox(width: 4),
                               Text(
@@ -305,7 +305,7 @@ class _TrackReportBody extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.primary,
+                                  color: context.c.primaryOnSurface,
                                 ),
                               ),
                             ],
@@ -396,10 +396,10 @@ class _TrackReportBody extends StatelessWidget {
                                   color: context.c.primarySurface,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.business_rounded,
                                   size: 18,
-                                  color: AppColors.primary,
+                                  color: context.c.primaryOnSurface,
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -480,13 +480,13 @@ class _TrackReportBody extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.primary,
+                                  color: context.c.primaryOnSurface,
                                 ),
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.chevron_right_rounded,
                                 size: 16,
-                                color: AppColors.primary,
+                                color: context.c.primaryOnSurface,
                               ),
                             ],
                           ),
@@ -702,7 +702,7 @@ class _VerticalTimeline extends StatelessWidget {
                     width: 2,
                     height: 22,
                     color: i < currentIdx
-                        ? AppColors.primary
+                        ? context.c.primaryOnSurface
                         : context.c.divider,
                   ),
               ],
@@ -923,7 +923,7 @@ class _BeforeAfterPhotos extends StatelessWidget {
                     style: GoogleFonts.robotoMono(
                       fontSize: 9,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.navy,
+                      color: context.c.textPrimary,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -962,13 +962,13 @@ class _BeforeAfterPhotos extends StatelessWidget {
                           color: context.c.primarySurface,
                           shape: BoxShape.circle,
                           border: Border.all(
-                              color: AppColors.primary
+                              color: context.c.primaryOnSurface
                                   .withValues(alpha: 0.3)),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.compare_arrows_rounded,
                           size: 14,
-                          color: AppColors.primary,
+                          color: context.c.primaryOnSurface,
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -1142,7 +1142,7 @@ class _PhotoPanel extends StatelessWidget {
                                     progress.expectedTotalBytes!
                                 : null,
                             strokeWidth: 2,
-                            color: AppColors.primary,
+                            color: context.c.primaryOnSurface,
                           ),
                         );
                       },

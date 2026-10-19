@@ -69,10 +69,10 @@ class _OtpInputRowState extends State<OtpInputRow> {
             maxLength: 1,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (v) => _onChanged(v, i),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
-              color: AppColors.navy,
+              color: context.c.textPrimary,
             ),
             decoration: InputDecoration(
               counterText: '',
@@ -90,7 +90,7 @@ class _OtpInputRowState extends State<OtpInputRow> {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide:
-                    const BorderSide(color: AppColors.navy, width: 2),
+                    BorderSide(color: context.c.textPrimary, width: 2),
               ),
             ),
           ),

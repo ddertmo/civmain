@@ -116,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen>
                         style: GoogleFonts.inter(
                           fontSize: 32,
                           fontWeight: FontWeight.w800,
-                          color: AppColors.navy,
+                          color: context.c.textPrimary,
                           letterSpacing: 2,
                         ),
                       ),
@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                         height: 32,
                         child: CircularProgressIndicator(
                           strokeWidth: 2.5,
-                          color: AppColors.primary.withOpacity(0.6),
+                          color: context.c.primaryOnSurface.withOpacity(0.6),
                         ),
                       ),
                     ],

@@ -69,7 +69,7 @@ class VisitorAboutScreen extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 26,
                       fontWeight: FontWeight.w900,
-                      color: AppColors.navy,
+                      color: context.c.textPrimary,
                       letterSpacing: 2,
                     ),
                   ),
@@ -133,7 +133,7 @@ class VisitorAboutScreen extends StatelessWidget {
                       children: [
                         _FeatureItem(
                           icon: Icons.add_circle_outline_rounded,
-                          color: AppColors.primary,
+                          color: context.c.primaryOnSurface,
                           title: 'Submit Reports',
                           subtitle:
                               'Report road damage, blocked canals, illegal dumping, and more.',
@@ -187,7 +187,7 @@ class VisitorAboutScreen extends StatelessWidget {
                       icon: const Icon(Icons.search_rounded, size: 18),
                       label: const Text('Track by Reference No.'),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.navy,
+                        foregroundColor: context.c.textPrimary,
                         side: BorderSide(color: context.c.divider),
                         minimumSize: const Size(0, 52),
                         shape: RoundedRectangleBorder(
@@ -294,7 +294,7 @@ class _SectionCard extends StatelessWidget {
                   color: context.c.primarySurface,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(icon, color: AppColors.primary, size: 18),
+                child: Icon(icon, color: context.c.primaryOnSurface, size: 18),
               ),
               const SizedBox(width: 10),
               Text(

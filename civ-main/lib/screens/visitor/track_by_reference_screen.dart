@@ -84,7 +84,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
               'No login required',
               style: GoogleFonts.inter(
                 fontSize: 11,
-                color: AppColors.primary,
+                color: context.c.primaryOnSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -108,7 +108,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                 color: context.c.primarySurface,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                    color: AppColors.primary.withValues(alpha: 0.2)),
+                    color: context.c.primaryOnSurface.withValues(alpha: 0.2)),
               ),
               child: Row(
                 children: [
@@ -119,8 +119,8 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       color: AppColors.primary.withValues(alpha: 0.12),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.search_rounded,
-                        color: AppColors.primary, size: 20),
+                    child: Icon(Icons.search_rounded,
+                        color: context.c.primaryOnSurface, size: 20),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -128,7 +128,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       'Enter a reference number to view the status and details of any community report.',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: AppColors.primary,
+                        color: context.c.primaryOnSurface,
                         height: 1.5,
                         fontWeight: FontWeight.w500,
                       ),
@@ -168,7 +168,7 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                     style: GoogleFonts.robotoMono(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.navy,
+                      color: context.c.textPrimary,
                       letterSpacing: 1.2,
                     ),
                     decoration: InputDecoration(
@@ -211,8 +211,8 @@ class _TrackByReferenceScreenState extends State<TrackByReferenceScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(14),
-                        borderSide: const BorderSide(
-                            color: AppColors.navy, width: 2),
+                        borderSide: BorderSide(
+                            color: context.c.textPrimary, width: 2),
                       ),
                     ),
                     onChanged: (_) => setState(() {}),
@@ -310,15 +310,15 @@ class _ResultCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.check_circle_rounded,
-                    color: AppColors.primary, size: 16),
+                Icon(Icons.check_circle_rounded,
+                    color: context.c.primaryOnSurface, size: 16),
                 const SizedBox(width: 7),
                 Text(
                   'Report Found',
                   style: GoogleFonts.inter(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.primary,
+                    color: context.c.primaryOnSurface,
                   ),
                 ),
               ],
@@ -403,7 +403,7 @@ class _ResultCard extends StatelessWidget {
                   valueStyle: GoogleFonts.robotoMono(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.navy,
+                    color: context.c.textPrimary,
                     letterSpacing: 0.5,
                   ),
                 ),
@@ -626,7 +626,7 @@ class _CompactTimeline extends StatelessWidget {
                 child: Container(
                   height: 2,
                   color: isComplete
-                      ? AppColors.primary
+                      ? context.c.primaryOnSurface
                       : context.c.divider,
                 ),
               );
@@ -645,13 +645,13 @@ class _CompactTimeline extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isDone
-                        ? AppColors.primary
+                        ? context.c.primaryOnSurface
                         : isActive
-                            ? AppColors.navy
+                            ? context.c.textPrimary
                             : context.c.background,
                     border: Border.all(
                       color: isDone || isActive
-                          ? (isDone ? AppColors.primary : AppColors.navy)
+                          ? (isDone ? context.c.primaryOnSurface : context.c.textPrimary)
                           : context.c.divider,
                       width: 2,
                     ),
@@ -680,9 +680,9 @@ class _CompactTimeline extends StatelessWidget {
                         ? FontWeight.w700
                         : FontWeight.w400,
                     color: isDone
-                        ? AppColors.primary
+                        ? context.c.primaryOnSurface
                         : isActive
-                            ? AppColors.navy
+                            ? context.c.textPrimary
                             : context.c.textHint,
                     height: 1.3,
                   ),
