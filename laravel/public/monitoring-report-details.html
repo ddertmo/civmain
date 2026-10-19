@@ -129,6 +129,34 @@
             .rd-map { height:240px; }
             .rd-image-wrap { height:220px; }
         }
+
+        /* ═══════════════════════════════════════════════════════════
+           DARK MODE (063) — the rules above hardcode the light palette
+           (#FFFFFF cards, #F5F8FC page, #0F2D62/#111827/#64748B ink), so
+           [data-theme="dark"] (js/app.js, variables.css) never reached this
+           page's own content. Same override pattern as offices/*/report-details.
+           Light Mode: untouched — these selectors only match in dark.
+           ═══════════════════════════════════════════════════════════ */
+        [data-theme="dark"] .rd-page { background:var(--gray-50); }
+        [data-theme="dark"] .rd-title { color:var(--gray-900); }
+        [data-theme="dark"] .rd-meta { color:var(--gray-500); }
+        [data-theme="dark"] .rd-badge--blue { background:var(--status-assigned-bg); color:var(--primary); border-color:var(--status-assigned-border); }
+        [data-theme="dark"] .rd-card { background:var(--white); border-color:var(--gray-200); box-shadow:var(--shadow-sm); }
+        [data-theme="dark"] .rd-card h2 { color:var(--gray-900); }
+        [data-theme="dark"] .rd-card p { color:var(--gray-500); }
+        [data-theme="dark"] .rd-summary-icon { background:var(--status-assigned-bg); color:var(--primary); }
+        [data-theme="dark"] .rd-summary-label { color:var(--gray-500); }
+        [data-theme="dark"] .rd-summary-value { color:var(--gray-900); }
+        [data-theme="dark"] .rd-map-note { color:var(--gray-500); }
+        [data-theme="dark"] .rd-dot { background:var(--white); }
+        [data-theme="dark"] .rd-status-option { background:var(--white); }
+        [data-theme="dark"] .rd-status-option.selected { border-color:var(--primary); background:var(--status-assigned-bg); }
+        [data-theme="dark"] .rd-status-option:focus-within { border-color:var(--primary); }
+        [data-theme="dark"] .rd-status-title { color:var(--gray-900); }
+        [data-theme="dark"] .rd-status-desc { color:var(--gray-500); }
+        [data-theme="dark"] .rd-info-name { color:var(--gray-900); }
+        [data-theme="dark"] .rd-quick-label { color:var(--gray-500); }
+        [data-theme="dark"] .rd-quick-value { color:var(--gray-900); }
     </style>
 </head>
 <body data-page="pending-reports" class="rd-page">
@@ -242,7 +270,7 @@
                             </div>
 
                             <div style="margin-top:12px;">
-                                <label for="statusNotes" style="font-size:12px;font-weight:600;color:#111827;display:block;margin-bottom:6px;">Notes (Optional)</label>
+                                <label for="statusNotes" style="font-size:12px;font-weight:600;color:var(--gray-900);display:block;margin-bottom:6px;">Notes (Optional)</label>
                                 <textarea id="statusNotes" class="rd-notes" maxlength="500" placeholder="Add notes about the status update..."></textarea>
                                 <div id="notesCount" class="rd-counter">0/500</div>
                             </div>
