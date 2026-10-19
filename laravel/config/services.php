@@ -35,4 +35,22 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | UniSMS (primary SMS provider)
+    |--------------------------------------------------------------------------
+    |
+    | https://unismsapi.com/docs/sms - Basic auth: the secret key is the
+    | username, the password is empty. Never commit a real key; UNISMS_* lives
+    | in .env only. Keep swappable: code reads through this block, not env()
+    | directly, so another provider could be added alongside later.
+    |
+    */
+
+    'unisms' => [
+        'key'       => env('UNISMS_SECRET_KEY'),
+        'sender_id' => env('UNISMS_SENDER_ID'),
+        'base_url'  => env('UNISMS_BASE_URL', 'https://unismsapi.com/api'),
+    ],
+
 ];

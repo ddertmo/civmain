@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Mobile;
 use App\Http\Controllers\Controller;
 use App\Models\Citizen;
 use App\Models\OtpCode;
+use App\Services\UniSmsService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class MobileAuthController extends Controller
@@ -69,9 +71,10 @@ class MobileAuthController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // POST /api/mobile/auth/send-otp
     // Body: { phone: "09XXXXXXXXX" }
-    // Generates a 6-digit OTP and stores it. You can hook up any SMS
-    // provider later — right now the code is returned in the response
-    // (useful for development / testing).
+    // Generates a 6-digit OTP and stores it, then sends it by real SMS via
+    // UniSMS (docs/TASKS.md task 1) when UNISMS_SECRET_KEY is configured.
+    // With no key the old dev behaviour stays: the code is echoed in the
+    // response while APP_DEBUG=true (never in production).
     // ─────────────────────────────────────────────────────────────────────
     public function sendOtp(Request $request): JsonResponse
     {
@@ -87,16 +90,64 @@ class MobileAuthController extends Controller
         // Store OTP (invalidates any previous unused ones for this number)
         OtpCode::issue($normalized, $code);
 
-        // TODO: Integrate your preferred SMS provider here to send $code to $normalized.
-        // For now we return the code in the response (remove this before going live).
+        // UniSMS (docs/TASKS.md task 1): real SMS when configured, honest
+        // failure signals, and the debug echo gated behind APP_DEBUG.
+        $provider = app(UniSmsService::class);
+        $sms      = null;
+
+        if ($provider->configured()) {
+            $sms = $provider->send(
+                $normalized,
+                "CivilWatch: your verification code is {$code}. It expires in 5 minutes.",
+                ['purpose' => 'otp', 'app' => 'civilwatch'],
+            );
+
+            if (! $sms['ok']) {
+                Log::warning('UniSMS OTP send failed', [
+                    'phone'  => $normalized,
+                    'status' => $sms['status'],
+                    'reason' => $sms['error'],
+                ]);
+            }
+        }
+
+        $data = [
+            'phone'    => $normalized,
+            'sms_sent' => (bool) ($sms['ok'] ?? false),
+        ];
+
+        if (! $provider->configured()) {
+            $data['sms_error'] = 'UniSMS not configured (UNISMS_SECRET_KEY missing).';
+        } elseif (! $sms['ok']) {
+            $data['sms_error'] = $sms['error'];
+        }
+
+        // Debug keeps the dev autofill (the Flutter OTP screen uses it only
+        // when present); production responses never echo the code.
+        if (config('app.debug')) {
+            $data['otp'] = $code;
+        }
+
+        // No key + no debug = the user could never receive the code: fail honestly.
+        if (! $provider->configured() && ! config('app.debug')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'SMS service is not configured (UNISMS_SECRET_KEY missing).',
+            ], 503);
+        }
+
+        // Sending was attempted and failed while the debug echo is off: don't fake success.
+        if ($sms && ! $sms['ok'] && ! config('app.debug')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send the verification SMS. Please try again.',
+            ], 502);
+        }
+
         return response()->json([
             'success' => true,
-            'message' => 'OTP generated successfully.',
-            'data'    => [
-                'phone' => $normalized,
-                // Remove 'otp' from response in production
-                'otp'   => $code,
-            ],
+            'message' => ($sms && $sms['ok']) ? 'OTP sent via SMS.' : 'OTP generated successfully.',
+            'data'    => $data,
         ]);
     }
 
