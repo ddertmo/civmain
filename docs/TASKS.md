@@ -120,8 +120,14 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ## [ ] Future task — Dark Mode contrast audit of the pre-login flow
 
-- **Status:** deferred. **Do not implement until this task is explicitly
-  requested and approved.** Recorded 2026-10-16 from the 058 audit, where the
+- **Status:** implemented 2026-10-19 in
+  [060](changes/2026-10-19-060-pre-login-dark-mode-ink.md) (commit `54d1ebe`),
+  requested and approved by the user. **This box stays unchecked until the
+  visual hand-check of both themes passes** — 060's "Impact / how to test by
+  hand" is the checklist. The per-screen defect list with verified line numbers
+  and ratios lives in 060; **the line numbers and the Landing wordmark claim in
+  this entry are stale** (Landing's wordmark renders on a fixed light gradient,
+  ~5:1, and was not a defect). Recorded 2026-10-16 from the 058 audit, where the
   same defect was fixed on Profile / My Reports / shared widgets — see
   [058](changes/2026-10-16-058-dark-mode-ink-profile-reports-widgets.md).
 - **Precondition:** the 057 + 058 fixes are visually verified first.

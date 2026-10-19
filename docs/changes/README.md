@@ -71,3 +71,4 @@ automatically after each change.
 | 057 | 2026-10-16 | `3040d62` | [Dark Mode hid Home + Notifications text — white cards, brand green, fixed-light map](2026-10-16-057-dark-mode-contrast-home-notifications.md) |
 | 058 | 2026-10-16 | `f8d5e03` | [Dark Mode hid the Profile + My Reports icons — same fixed-ink defect, now on shared widgets and the nav bar](2026-10-16-058-dark-mode-ink-profile-reports-widgets.md) |
 | 059 | 2026-10-16 | `6a45925` | [Record the pre-login Dark Mode contrast audit as a deferred task](2026-10-16-059-record-pre-login-contrast-task.md) |
+| 060 | 2026-10-19 | `54d1ebe` | [Dark Mode hid the whole pre-login flow — same fixed-ink defect as 057/058, now on landing, auth, visitor and track screens](2026-10-19-060-pre-login-dark-mode-ink.md) |
