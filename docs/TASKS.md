@@ -67,7 +67,14 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ## [ ] Dark mode toggle for visitor mode
 
-- **Status:** planned, not started. **Do not implement until this task is picked up.** (User decided 2026-10-16: leave visitor mode as-is for now.)
+- **Status:** implemented 2026-10-19 in
+  [062](changes/2026-10-19-062-guest-dark-mode-toggle.md) (commit `958ce55`),
+  user-approved — this supersedes the 2026-10-16 "leave visitor mode as-is"
+  decision. **Box stays unchecked until the hand-check passes** (see 062's
+  "Impact / how to test by hand"): as guest, the Sun/Moon pill in the
+  `_GuestBanner` flips every tab, tapping it must *not* trigger the banner's
+  login navigation, and the choice persists across restart. Placement chosen:
+  the banner row (visible on all guest tabs), not the About header.
 - **Context:** change [055](changes/2026-10-16-055-animated-sun-moon-dark-mode-toggle.md)
   added the animated Sun/Moon toggle (`lib/widgets/common/theme_toggle.dart`)
   to the logged-in Home header only.
@@ -96,9 +103,14 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ## [ ] Dark-mode contrast of status tint backgrounds is marginal
 
-- **Status:** known and deliberately deferred — decision 2026-10-16 while doing
-  change [057](changes/2026-10-16-057-dark-mode-contrast-home-notifications.md).
-  **Do not fold this into any other task**; it is a palette-wide value change.
+- **Status:** fixed 2026-10-19 in
+  [061](changes/2026-10-19-061-status-tint-dark-values.md) (commit `9525085`),
+  user-approved. Dark `statusSubmittedBg` `#2E1065`→`#1C0A3D` (3.18:1),
+  `statusAssignedBg` `#172554`→`#0E1632` (3.44:1), `statusApprovedBg`
+  `#042F2E`→`#021C1C` (3.53:1) — Light Mode untouched. **Box stays unchecked
+  until the hand-check passes.** Originally deferred 2026-10-16 while doing
+  change [057](changes/2026-10-16-057-dark-mode-contrast-home-notifications.md)
+  as a palette-wide value change kept out of every other task.
 - **Finding:** accent-on-tint contrast in Dark Mode falls just under the 3:1
   non-text target for three hues:
   | Status | accent on dark tint |

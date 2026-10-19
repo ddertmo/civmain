@@ -73,3 +73,4 @@ automatically after each change.
 | 059 | 2026-10-16 | `6a45925` | [Record the pre-login Dark Mode contrast audit as a deferred task](2026-10-16-059-record-pre-login-contrast-task.md) |
 | 060 | 2026-10-19 | `54d1ebe` | [Dark Mode hid the whole pre-login flow — same fixed-ink defect as 057/058, now on landing, auth, visitor and track screens](2026-10-19-060-pre-login-dark-mode-ink.md) |
 | 061 | 2026-10-19 | `9525085` | [Three Dark Mode status tints sat just under 3:1 — Submitted, Assigned, Approved darkened](2026-10-19-061-status-tint-dark-values.md) |
+| 062 | 2026-10-19 | `958ce55` | [Guests were stuck in one theme — Dark Mode toggle added to the visitor banner](2026-10-19-062-guest-dark-mode-toggle.md) |
