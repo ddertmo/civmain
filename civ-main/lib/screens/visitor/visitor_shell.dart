@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/state/app_state.dart';
+import '../../widgets/common/theme_toggle.dart';
 import '../community_map/community_map_screen.dart';
 import 'visitor_reports_screen.dart';
 import 'visitor_about_screen.dart';
@@ -128,6 +129,12 @@ class _GuestBanner extends StatelessWidget {
                     ],
                   ),
                 ),
+                const SizedBox(width: 12),
+                // Theme control for guests — same single theme state as the
+                // logged-in Home header and the Profile switch (AppState).
+                // Sits inside the banner's InkWell; the inner GestureDetector
+                // wins the tap, so toggling does not trigger the login nav.
+                const ThemeToggle(),
                 Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 12, vertical: 6),
