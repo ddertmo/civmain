@@ -11,9 +11,14 @@ Running list of planned work. Nothing here is done unless its box is checked.
   (send/status/credits), `config/services.php` `unisms` block, `UNISMS_*` env
   keys, and `sendOtp()` wired with honest 502/503/`sms_error` handling; the
   debug `otp` echo is now gated behind `APP_DEBUG`. **Box stays unchecked until
-  the preconditions below are true AND a real SMS was received.** Wiring is
-  already proven live: no key → dev fallback, dummy key → honest `401` from
-  unismsapi.com (connectivity + Basic auth + payload correct).
+  the preconditions below are true AND a real SMS was received.**
+  **State 2026-10-19 (parked here):** real key in `.env` (gitignored),
+  `GET /account` → `active`, and a live `send-otp` reached billing only
+  (`422 "credits are insufficient"`, `sms_sent:false`, `Log::warning`) — so
+  auth/payload/sender are all accepted, **`sms_credits: 0` blocks the delivery
+  test**. Remaining: top up → send one real SMS → then check this box.
+  Sender ID used: `Unisoft` (confirm it matches the dashboard on the first
+  funded send).
 - **Decision:** UniSMS is the **prime** SMS provider. Keep it swappable via
   config so another provider could be added later, but UniSMS is the default.
 - **Why:** UniSMS is a Philippines-focused SMS API with `+63` number support and
@@ -45,7 +50,7 @@ Running list of planned work. Nothing here is done unless its box is checked.
   (never `origin`) per `AGENTS.md`.
 
 ### Preconditions (must be true before it can work live)
-- [ ] UniSMS account + **API secret key** obtained.
+- [x] UniSMS account + **API secret key** obtained (2026-10-19; account active, key validated via `GET /account`, stored in `.env`).
 - [ ] **SenderID registered** (`/sender_ids/new`, with business documents).
       ⚠️ The default test sender **cannot reach Smart/TNT/Sun** — mandatory for a
       real Digos City deployment.
