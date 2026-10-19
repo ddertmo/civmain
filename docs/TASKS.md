@@ -19,6 +19,11 @@ Running list of planned work. Nothing here is done unless its box is checked.
   test**. Remaining: top up → send one real SMS → then check this box.
   Sender ID used: `Unisoft` (confirm it matches the dashboard on the first
   funded send).
+  **Update 2026-10-19 (later):** credits topped up to **10** and
+  [066](changes/2026-10-19-066-test-html-bound-otp-verify.md) shipped
+  `public/test.html` — a register-flow harness whose Verify step only accepts
+  the OTP **this page requested** (bound phone + code + local mismatch guard).
+  Only a real SMS delivery through that page remains before checking the box.
 - **Decision:** UniSMS is the **prime** SMS provider. Keep it swappable via
   config so another provider could be added later, but UniSMS is the default.
 - **Why:** UniSMS is a Philippines-focused SMS API with `+63` number support and
@@ -54,7 +59,7 @@ Running list of planned work. Nothing here is done unless its box is checked.
 - [ ] **SenderID registered** (`/sender_ids/new`, with business documents).
       ⚠️ The default test sender **cannot reach Smart/TNT/Sun** — mandatory for a
       real Digos City deployment.
-- [ ] SMS **credits** funded (`GET /account`).
+- [x] SMS **credits** funded (`GET /account`) — 10 credits on 2026-10-19.
 
 ### Known limits
 - UniSMS's SMS API covers **sending** + **delivery-status webhooks** only.

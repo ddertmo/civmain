@@ -77,3 +77,4 @@ automatically after each change.
 | 063 | 2026-10-19 | `f45c762` | [The admin Monitoring Report Details page ignored Dark Mode — hardcoded light palette in its inline CSS](2026-10-19-063-admin-monitoring-details-dark.md) |
 | 064 | 2026-10-19 | `67216c3` | [Flutter registration returned 500 — `artisan migrate` had been dying on a record-less `sessions` table, so the citizens address columns never existed](2026-10-19-064-register-500-blocked-migrations.md) |
 | 065 | 2026-10-19 | `fd5d5a1` | [OTPs were never sent — UniSMS wired in as the primary SMS provider, with an honest no-key fallback](2026-10-19-065-unisms-otp-integration.md) |
+| 066 | 2026-10-19 | `0788307` | [No way to test SMS/OTP outside the app — test.html register harness whose Verify step only accepts the OTP this page requested](2026-10-19-066-test-html-bound-otp-verify.md) |
