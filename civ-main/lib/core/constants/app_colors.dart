@@ -173,15 +173,15 @@ class AppPalette extends ThemeExtension<AppPalette> {
     primarySurface: Color(0xFF14532D), // green-900
     statusPendingBg: Color(0xFF451A04),
     statusPendingBorder: Color(0xFF92400E),
-    statusApprovedBg: Color(0xFF042F2E),
+    statusApprovedBg: Color(0xFF021C1C), // darkened 2026-10-19 (061): teal-on-tint was 2.88:1, now 3.53:1
     statusApprovedBorder: Color(0xFF115E59),
     statusInProgressBg: Color(0xFF431407),
     statusInProgressBorder: Color(0xFF9A3412),
     statusResolvedBg: Color(0xFF052E16),
     statusResolvedBorder: Color(0xFF166534),
-    statusAssignedBg: Color(0xFF172554),
+    statusAssignedBg: Color(0xFF0E1632), // darkened 2026-10-19 (061): blue-on-tint was 2.84:1, now 3.44:1
     statusAssignedBorder: Color(0xFF1D4ED8),
-    statusSubmittedBg: Color(0xFF2E1065),
+    statusSubmittedBg: Color(0xFF1C0A3D), // darkened 2026-10-19 (061): purple-on-tint was 2.67:1, now 3.18:1
     statusRejectedBg: Color(0xFF450A0A),
     statusRejectedBorder: Color(0xFF991B1B),
     infrastructureBg: Color(0xFF451A04),
