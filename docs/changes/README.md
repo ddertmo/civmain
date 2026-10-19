@@ -76,3 +76,4 @@ automatically after each change.
 | 062 | 2026-10-19 | `958ce55` | [Guests were stuck in one theme — Dark Mode toggle added to the visitor banner](2026-10-19-062-guest-dark-mode-toggle.md) |
 | 063 | 2026-10-19 | `f45c762` | [The admin Monitoring Report Details page ignored Dark Mode — hardcoded light palette in its inline CSS](2026-10-19-063-admin-monitoring-details-dark.md) |
 | 064 | 2026-10-19 | `67216c3` | [Flutter registration returned 500 — `artisan migrate` had been dying on a record-less `sessions` table, so the citizens address columns never existed](2026-10-19-064-register-500-blocked-migrations.md) |
+| 065 | 2026-10-19 | `fd5d5a1` | [OTPs were never sent — UniSMS wired in as the primary SMS provider, with an honest no-key fallback](2026-10-19-065-unisms-otp-integration.md) |

@@ -6,7 +6,14 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ## [ ] Use UniSMS as the primary SMS provider
 
-- **Status:** planned, not started. **Do not implement until this task is picked up.**
+- **Status:** implemented 2026-10-19 in
+  [065](changes/2026-10-19-065-unisms-otp-integration.md) — `UniSmsService`
+  (send/status/credits), `config/services.php` `unisms` block, `UNISMS_*` env
+  keys, and `sendOtp()` wired with honest 502/503/`sms_error` handling; the
+  debug `otp` echo is now gated behind `APP_DEBUG`. **Box stays unchecked until
+  the preconditions below are true AND a real SMS was received.** Wiring is
+  already proven live: no key → dev fallback, dummy key → honest `401` from
+  unismsapi.com (connectivity + Basic auth + payload correct).
 - **Decision:** UniSMS is the **prime** SMS provider. Keep it swappable via
   config so another provider could be added later, but UniSMS is the default.
 - **Why:** UniSMS is a Philippines-focused SMS API with `+63` number support and

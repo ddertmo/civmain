@@ -227,6 +227,52 @@ curl -s -X POST http://127.0.0.1:8000/api/mobile/auth/login \
 
 ---
 
+## SMS (UniSMS) — OTP delivery (task 1)
+
+The OTP flow sends real SMS through **UniSMS** (<https://unismsapi.com/docs/sms>)
+via `app/Services/UniSmsService.php` — plain REST + Basic auth, no Composer
+dependency (Laravel `Http` facade).
+
+1. Register a **free** account: <https://unismsapi.com/register>.
+2. Copy your **API secret key** (<https://unismsapi.com/api_keys>) and your
+   **test Sender ID** (dashboard; new accounts get a random one for testing).
+3. Fill them in `.env` (gitignored) and restart `php artisan serve`:
+
+   ```dotenv
+   UNISMS_SECRET_KEY=sk_...
+   UNISMS_SENDER_ID=YOUR_TEST_SID
+   UNISMS_BASE_URL=https://unismsapi.com/api
+   ```
+
+Behaviour of `POST /api/mobile/auth/send-otp`:
+
+- **No key (default):** old dev behaviour — the OTP is echoed in the JSON
+  *while `APP_DEBUG=true`*, with `sms_sent:false` and an `sms_error` explaining
+  why. Production (`APP_DEBUG=false`) answers `503` instead of pretending.
+- **Key set:** every request sends `CivilWatch: your verification code is ...`
+  (valid 5 minutes). Production responses never include the code; a failed send
+  answers `502` with `sms_error` details, and 401/422/429 are logged via
+  `Log::warning`.
+
+Test from the command line (curl, same style as above):
+
+```bash
+# credit balance (GET /account)
+curl -s https://unismsapi.com/api/account -u "$UNISMS_SECRET_KEY:"
+
+# send one test SMS
+curl -s -X POST https://unismsapi.com/api/sms -u "$UNISMS_SECRET_KEY:" \
+  -H 'Content-Type: application/json' \
+  -d '{"recipient":"+639171234567","content":"Hello from CivilWatch","sender_id":"YOUR_TEST_SID"}'
+```
+
+Caveats: the **test Sender ID cannot reach Smart/TNT/Sun** numbers (register a
+real one at `/sender_ids/new` for deployment), messages cost ₱0.50/SMS at the
+lowest top-up tier (1 credit per 160-char segment), and status webhooks need a
+public HTTPS URL (not covered here — poll `GET /sms/:reference_id` instead).
+
+---
+
 ## Run the E2E tests (Playwright) — required
 
 Playwright drives the real pages so we can **see what actually runs** before
