@@ -1,7 +1,7 @@
 # Registration OTP flow had no visual demo — added an app-style browser walkthrough
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `d53f83f`
 - **Type:** docs
 - **Areas:** Laravel (public dev tools)
 

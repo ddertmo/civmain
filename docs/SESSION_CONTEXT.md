@@ -15,7 +15,7 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 - running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000); UniSMS 8 credits
 - doing:   Mock = free: registration registers without OTP; reset opens the demo dashboard (072)
 - next:    test both Mock paths at http://127.0.0.1:5000; Live/OTP waits for the user's command
-- blocked: nothing pushed yet (no GitHub token); dev pages/test.html must be deleted before production
+- blocked: dev pages (test.html, register-demo.html, reset-demo.html) must be deleted before production
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)
 

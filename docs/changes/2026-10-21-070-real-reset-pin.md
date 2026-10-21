@@ -1,7 +1,7 @@
 # Reset PIN was a fake — a correct OTP now actually changes the PIN
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `d53f83f`
 - **Type:** feature
 - **Areas:** Laravel (mobile auth), Flutter (forgot-password flow), dev tools
 

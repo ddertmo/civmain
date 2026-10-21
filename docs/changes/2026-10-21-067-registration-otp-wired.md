@@ -1,7 +1,7 @@
 # Registration skipped the OTP screen — the existing `OtpScreen` was dead code
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `d53f83f`
 - **Type:** feature
 - **Areas:** Flutter
 

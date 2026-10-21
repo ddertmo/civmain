@@ -1,7 +1,7 @@
 # Reset PIN had no UI walkthrough — added a mockup that says what is real vs fake
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `d53f83f`
 - **Type:** docs
 - **Areas:** Laravel (public dev tools)
 

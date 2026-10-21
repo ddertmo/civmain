@@ -1,7 +1,7 @@
 # Reset testing needed a real SMS in the app — added a debug-only Mock / Live switch
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `d53f83f`
 - **Type:** feature
 - **Areas:** Flutter (forgot-password flow, OTP input widget), dev tools
 

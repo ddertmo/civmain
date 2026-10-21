@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792563845.7062242,
-    "seen": 1792564004.0952876,
-    "ast_hash": "dd71a550fed24861856febae7227d708",
+    "mtime": 1792568083.9199026,
+    "seen": 1792568095.0209014,
+    "ast_hash": "d22d0333925bb9e190176837c0e269e8",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792563852.863158,
-    "seen": 1792564004.0952876,
-    "ast_hash": "30b7044a246abd957e2b96db8ff70011",
+    "mtime": 1792568036.7685173,
+    "seen": 1792568095.0209014,
+    "ast_hash": "3dca79ae2ffb7bdd005404571a4bdcd7",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -2274,33 +2274,33 @@
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-067-registration-otp-wired.md": {
-    "mtime": 1792559030.3620954,
-    "seen": 1792562983.2498584,
-    "ast_hash": "d11d11860c5e82d820a1abbcbc3c93c2",
+    "mtime": 1792568083.9127796,
+    "seen": 1792568095.0209014,
+    "ast_hash": "a462014f4eb93b3b72bda3f89cbcce7a",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-068-registration-visual-demo.md": {
-    "mtime": 1792561737.7255156,
-    "seen": 1792562983.2498584,
-    "ast_hash": "a7405fee3bbb0a7bfdca92c8028550b5",
+    "mtime": 1792568083.9156303,
+    "seen": 1792568095.0209014,
+    "ast_hash": "ed157d36e77126d6b718bacff631d3b4",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-069-reset-pin-mockup.md": {
-    "mtime": 1792562276.733967,
-    "seen": 1792562983.2498584,
-    "ast_hash": "44fe5b8342001ef844203721b721a5a7",
+    "mtime": 1792568083.8792553,
+    "seen": 1792568095.0209014,
+    "ast_hash": "92b9bad083f978ae62b325dbd8998605",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-070-real-reset-pin.md": {
-    "mtime": 1792562276.733967,
-    "seen": 1792562983.2498584,
-    "ast_hash": "f59db27d9996cfa8b24add9f1dfeef45",
+    "mtime": 1792568083.9061968,
+    "seen": 1792568095.0209014,
+    "ast_hash": "fbd78ea98c498284c882a1b1dad09201",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-071-in-app-mock-live-reset.md": {
-    "mtime": 1792562926.060219,
-    "seen": 1792562983.2498584,
-    "ast_hash": "30c328914761afeb3a7e9d37031444fb",
+    "mtime": 1792568083.916629,
+    "seen": 1792568095.0209014,
+    "ast_hash": "757c76f68fc4c872870b6332aecc20be",
     "semantic_hash": ""
   },
   "laravel/public/register-demo.html": {
@@ -2328,9 +2328,9 @@
     "semantic_hash": ""
   },
   "docs/changes/2026-10-21-072-mock-skips-otp.md": {
-    "mtime": 1792563891.0798256,
-    "seen": 1792564004.0952876,
-    "ast_hash": "5b0a6d7ceb8da9367ac2d44360fd6c90",
+    "mtime": 1792568083.916629,
+    "seen": 1792568095.0209014,
+    "ast_hash": "24d856601fa282c08c2736888c05e6ea",
     "semantic_hash": ""
   }
 }

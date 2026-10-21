@@ -1,7 +1,7 @@
 # Mock testing still needed SMS — registration and reset now skip OTP in debug
 
 - **Date:** 2026-10-21
-- **Commit:** `(uncommitted)`
+- **Commit:** `ea059a2`
 - **Type:** feature
 - **Areas:** Flutter (registration, forgot-password flow), dev tools
 

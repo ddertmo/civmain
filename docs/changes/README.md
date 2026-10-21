@@ -78,9 +78,9 @@ automatically after each change.
 | 064 | 2026-10-19 | `67216c3` | [Flutter registration returned 500 — `artisan migrate` had been dying on a record-less `sessions` table, so the citizens address columns never existed](2026-10-19-064-register-500-blocked-migrations.md) |
 | 065 | 2026-10-19 | `fd5d5a1` | [OTPs were never sent — UniSMS wired in as the primary SMS provider, with an honest no-key fallback](2026-10-19-065-unisms-otp-integration.md) |
 | 066 | 2026-10-19 | `0788307` | [No way to test SMS/OTP outside the app — test.html register harness whose Verify step only accepts the OTP this page requested](2026-10-19-066-test-html-bound-otp-verify.md) |
-| 067 | 2026-10-21 | `(uncommitted)` | [Registration skipped the OTP screen — the existing `OtpScreen` was dead code](2026-10-21-067-registration-otp-wired.md) |
-| 068 | 2026-10-21 | `(uncommitted)` | [Registration OTP flow had no visual demo - added an app-style browser walkthrough](2026-10-21-068-registration-visual-demo.md) |
-| 069 | 2026-10-21 | `(uncommitted)` | [Reset PIN had no UI walkthrough - added a mockup that says what is real vs fake](2026-10-21-069-reset-pin-mockup.md) |
-| 070 | 2026-10-21 | `(uncommitted)` | [Reset PIN was a fake - a correct OTP now actually changes the PIN](2026-10-21-070-real-reset-pin.md) |
-| 071 | 2026-10-21 | `(uncommitted)` | [Reset testing needed a real SMS in the app - added a debug-only Mock / Live switch](2026-10-21-071-in-app-mock-live-reset.md) |
-| 072 | 2026-10-21 | `(uncommitted)` | [Mock testing still needed SMS - registration and reset now skip OTP in debug](2026-10-21-072-mock-skips-otp.md) |
+| 067 | 2026-10-21 | `d53f83f` | [Registration skipped the OTP screen — the existing `OtpScreen` was dead code](2026-10-21-067-registration-otp-wired.md) |
+| 068 | 2026-10-21 | `d53f83f` | [Registration OTP flow had no visual demo - added an app-style browser walkthrough](2026-10-21-068-registration-visual-demo.md) |
+| 069 | 2026-10-21 | `d53f83f` | [Reset PIN had no UI walkthrough - added a mockup that says what is real vs fake](2026-10-21-069-reset-pin-mockup.md) |
+| 070 | 2026-10-21 | `d53f83f` | [Reset PIN was a fake - a correct OTP now actually changes the PIN](2026-10-21-070-real-reset-pin.md) |
+| 071 | 2026-10-21 | `d53f83f` | [Reset testing needed a real SMS in the app - added a debug-only Mock / Live switch](2026-10-21-071-in-app-mock-live-reset.md) |
+| 072 | 2026-10-21 | `ea059a2` | [Mock testing still needed SMS - registration and reset now skip OTP in debug](2026-10-21-072-mock-skips-otp.md) |
