@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import '../../core/utils/validators.dart';
 import '../../services/auth_service.dart';
 import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/common/app_dialog.dart';
+import '../../widgets/common/debug_mode_toggle.dart';
 import '../../widgets/common/skeleton.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -39,8 +41,11 @@ class _RegisterScreenState extends State<RegisterScreen>
   // ── Other state ───────────────────────────────────────────────────────────
   String? _selectedBarangay;
   bool _agreedToTerms = false;
-  bool _isLoading = false;
   bool _isInitializing = true; // shows skeleton while screen animates in
+
+  // Debug-only Mock mode: skip the OTP screen and register directly, so no
+  // UniSMS credit is spent. Release builds always require the real OTP.
+  bool _mockMode = kDebugMode;
 
   // ── Animations ────────────────────────────────────────────────────────────
   late AnimationController _animController;
@@ -139,17 +144,22 @@ class _RegisterScreenState extends State<RegisterScreen>
     // POST /api/mobile/auth/send-otp on open and verify-otp on submit.
     // `returnToCaller` makes it pop back here with `true` on success instead
     // of navigating to a fresh register screen.
-    final verified = await Navigator.pushNamed(
-      context,
-      AppRoutes.otp,
-      arguments: {
-        'phone': phone,
-        'isNewUser': true,
-        'returnToCaller': true,
-      },
-    );
-    if (verified != true) return;
-    if (!mounted) return;
+    //
+    // Debug Mock mode skips this screen completely (no SMS, no credit) and
+    // calls the normal register API below. Live mode keeps the real OTP gate.
+    if (!(kDebugMode && _mockMode)) {
+      final verified = await Navigator.pushNamed(
+        context,
+        AppRoutes.otp,
+        arguments: {
+          'phone': phone,
+          'isNewUser': true,
+          'returnToCaller': true,
+        },
+      );
+      if (verified != true) return;
+      if (!mounted) return;
+    }
 
     // Show loading modal — blocks UI while request is in-flight
     AppDialog.loading(context, message: 'Creating your account...');
@@ -267,6 +277,28 @@ class _RegisterScreenState extends State<RegisterScreen>
                               height: 1.5,
                             ),
                           ),
+                          if (kDebugMode) ...[
+                            const SizedBox(height: 14),
+                            DebugModeToggle(
+                              mock: _mockMode,
+                              onChanged: (v) =>
+                                  setState(() => _mockMode = v),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              _mockMode
+                                  ? 'Debug mock — no SMS. Creates the account and opens the dashboard.'
+                                  : 'Live — real OTP SMS, uses 1 UniSMS credit.',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.inter(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.w600,
+                                color: _mockMode
+                                    ? const Color(0xFFB45309)
+                                    : context.c.textSecondary,
+                              ),
+                            ),
+                          ],
                           const SizedBox(height: 28),
 
                           // ── Form card ────────────────────────────────────

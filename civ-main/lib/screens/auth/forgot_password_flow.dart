@@ -1,11 +1,13 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/routes/app_routes.dart';
+import '../../core/state/app_state.dart';
 import '../../services/auth_service.dart';
+import '../../widgets/common/debug_mode_toggle.dart';
 import '../../widgets/inputs/otp_box.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -110,12 +112,14 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
     });
 
     if (_mockMode) {
-      await Future.delayed(const Duration(milliseconds: 450));
+      // Free demo path: no SMS and no OTP screen. The real OTP branch below
+      // is untouched and still used when the switch is on Live API.
+      await Future.delayed(const Duration(milliseconds: 350));
       if (!mounted) return;
       setState(() {
         _sendingOtp = false;
-        _debugOtp = (100000 + Random().nextInt(900000)).toString();
-        _state = _FpState.otpSent;
+        _debugOtp = null;
+        _state = _FpState.setNewPin;
       });
       return;
     }
@@ -151,14 +155,13 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
     });
 
     if (_mockMode) {
-      await Future.delayed(const Duration(milliseconds: 450));
+      await Future.delayed(const Duration(milliseconds: 350));
       if (!mounted) return;
       setState(() {
         _sendingOtp = false;
-        _debugOtp = (100000 + Random().nextInt(900000)).toString();
-        _state = _FpState.otpResent;
+        _debugOtp = null;
+        _state = _FpState.setNewPin;
       });
-      _startResendTimer();
       return;
     }
 
@@ -230,12 +233,30 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
     });
 
     if (_mockMode) {
-      await Future.delayed(const Duration(milliseconds: 450));
+      // Mock reset changes nothing. Open the seeded demo citizen so the real
+      // dashboard (same route a normal login uses) can be previewed for free.
+      await Future.delayed(const Duration(milliseconds: 350));
       if (!mounted) return;
-      setState(() {
-        _resetting = false;
-        _state = _FpState.resetSuccess;
-      });
+      final demo = await AuthService.instance.loginWithPin(
+        phone: '+639171234567',
+        pin: '123456',
+      );
+      if (!mounted) return;
+      if (demo.success && demo.user != null) {
+        await AppState().onLoginSuccess(demo.user!);
+        if (!mounted) return;
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          AppRoutes.home,
+          (route) => false,
+        );
+      } else {
+        setState(() {
+          _resetting = false;
+          _errorMessage = demo.error ??
+              'Mock demo login failed. Is the Laravel server running?';
+          _state = _FpState.genericError;
+        });
+      }
       return;
     }
 
@@ -384,7 +405,8 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           isResetting: _resetting,
           pinMismatch: _pinMismatch,
           onReset: _resetPassword,
-          onBack: () => setState(() => _state = _FpState.enterOtp),
+          onBack: () => setState(() => _state =
+              _mockMode ? _FpState.enterPhone : _FpState.enterOtp),
           mockMode: _mockMode,
         );
 
@@ -504,11 +526,11 @@ class _EnterPhoneModal extends StatelessWidget {
           ),
           if (debugMode) ...[
             const SizedBox(height: 14),
-            _DebugModeToggle(mock: mockMode, onChanged: onModeChanged),
+            DebugModeToggle(mock: mockMode, onChanged: onModeChanged),
             const SizedBox(height: 6),
             Text(
               mockMode
-                  ? 'Debug mock — no SMS, no credits. The OTP is shown on screen.'
+                  ? 'Debug mock — no SMS, no credits. Skips OTP and opens the demo dashboard.'
                   : 'Live API — real SMS, uses 1 UniSMS credit.',
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
@@ -867,7 +889,7 @@ class _SetNewPinModal extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Debug mock — this PIN will NOT be saved.',
+                      'Debug mock — opens the demo dashboard; your PIN is not changed.',
                       style: GoogleFonts.inter(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
@@ -1162,70 +1184,6 @@ class _SheetWrapper extends StatelessWidget {
 
           // Bottom safe area
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 8),
-        ],
-      ),
-    );
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// DEBUG MODE TOGGLE (Mock / Live) — only rendered in debug builds
-// ─────────────────────────────────────────────────────────────────────────────
-
-class _DebugModeToggle extends StatelessWidget {
-  final bool mock;
-  final ValueChanged<bool>? onChanged;
-
-  const _DebugModeToggle({required this.mock, this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget item(String label, bool value, IconData icon, Color active) {
-      final selected = mock == value;
-      return Expanded(
-        child: GestureDetector(
-          onTap: onChanged == null ? null : () => onChanged!(value),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 150),
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              color: selected ? active : Colors.transparent,
-              borderRadius: BorderRadius.circular(9),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(icon,
-                    size: 14,
-                    color: selected ? Colors.white : context.c.textSecondary),
-                const SizedBox(width: 5),
-                Text(
-                  label,
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w800,
-                    color: selected ? Colors.white : context.c.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        color: context.c.inputFill,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: context.c.inputBorder),
-      ),
-      child: Row(
-        children: [
-          item('Mock', true, Icons.science_outlined, AppColors.primary),
-          item('Live API', false, Icons.cloud_outlined,
-              const Color(0xFFB45309)),
         ],
       ),
     );

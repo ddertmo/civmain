@@ -126,9 +126,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/forgot_password_flow.dart": {
-    "mtime": 1792562628.4670467,
-    "seen": 1792562983.2498584,
-    "ast_hash": "d200750c5506672540ab76d41f54be64",
+    "mtime": 1792563896.3266995,
+    "seen": 1792564004.0952876,
+    "ast_hash": "f2569deb99a289a1716b1b8c72d17d32",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/login_screen.dart": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "civ-main/lib/screens/auth/register_screen.dart": {
-    "mtime": 1792558945.1399987,
-    "seen": 1792562983.2498584,
-    "ast_hash": "d8057f904a21a860a932393b60ffe350",
+    "mtime": 1792563921.0595932,
+    "seen": 1792564004.0952876,
+    "ast_hash": "add55a5bc7c58fe80a78c3d35d34d5e8",
     "semantic_hash": ""
   },
   "civ-main/lib/screens/community_map/community_map_screen.dart": {
@@ -1080,9 +1080,9 @@
     "semantic_hash": ""
   },
   "docs/changes/README.md": {
-    "mtime": 1792562930.402252,
-    "seen": 1792562983.2498584,
-    "ast_hash": "e991e2b1498f23cc01eb9c3298415e96",
+    "mtime": 1792563845.7062242,
+    "seen": 1792564004.0952876,
+    "ast_hash": "dd71a550fed24861856febae7227d708",
     "semantic_hash": ""
   },
   "docs/changes/TEMPLATE.md": {
@@ -1146,9 +1146,9 @@
     "semantic_hash": ""
   },
   "docs/SESSION_CONTEXT.md": {
-    "mtime": 1792562934.6946766,
-    "seen": 1792562983.2498584,
-    "ast_hash": "60728e780e671db8ba3db5ac4066ada4",
+    "mtime": 1792563852.863158,
+    "seen": 1792564004.0952876,
+    "ast_hash": "30b7044a246abd957e2b96db8ff70011",
     "semantic_hash": ""
   },
   "docs/changes/2026-10-07-015-session-context-export.md": {
@@ -2319,6 +2319,18 @@
     "mtime": 1792560848.072981,
     "seen": 1792562983.2498584,
     "ast_hash": "0b74bc59d705a1650cd526730072f28b",
+    "semantic_hash": ""
+  },
+  "civ-main/lib/widgets/common/debug_mode_toggle.dart": {
+    "mtime": 1792563606.2077003,
+    "seen": 1792564004.0952876,
+    "ast_hash": "cea05f429ecc7b0a6122399535ccb561",
+    "semantic_hash": ""
+  },
+  "docs/changes/2026-10-21-072-mock-skips-otp.md": {
+    "mtime": 1792563891.0798256,
+    "seen": 1792564004.0952876,
+    "ast_hash": "5b0a6d7ceb8da9367ac2d44360fd6c90",
     "semantic_hash": ""
   }
 }

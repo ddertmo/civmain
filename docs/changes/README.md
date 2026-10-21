@@ -83,3 +83,4 @@ automatically after each change.
 | 069 | 2026-10-21 | `(uncommitted)` | [Reset PIN had no UI walkthrough - added a mockup that says what is real vs fake](2026-10-21-069-reset-pin-mockup.md) |
 | 070 | 2026-10-21 | `(uncommitted)` | [Reset PIN was a fake - a correct OTP now actually changes the PIN](2026-10-21-070-real-reset-pin.md) |
 | 071 | 2026-10-21 | `(uncommitted)` | [Reset testing needed a real SMS in the app - added a debug-only Mock / Live switch](2026-10-21-071-in-app-mock-live-reset.md) |
+| 072 | 2026-10-21 | `(uncommitted)` | [Mock testing still needed SMS - registration and reset now skip OTP in debug](2026-10-21-072-mock-skips-otp.md) |

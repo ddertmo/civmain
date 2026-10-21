@@ -11,10 +11,10 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-10-21 - latest change = 071 (in-app debug Mock/Live reset)
+- at:      2026-10-21 - latest change = 072 (Mock skips OTP)
 - running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000); UniSMS 8 credits
-- doing:   reset flow real (070); debug Mock/Live switch in the app's Forgot Password sheet (071)
-- next:    walk Mock path at http://127.0.0.1:5000; flip Live only when ready to spend a credit
+- doing:   Mock = free: registration registers without OTP; reset opens the demo dashboard (072)
+- next:    test both Mock paths at http://127.0.0.1:5000; Live/OTP waits for the user's command
 - blocked: nothing pushed yet (no GitHub token); dev pages/test.html must be deleted before production
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)
