@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/inputs/otp_box.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -59,6 +62,11 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
   bool _verifying = false;
   int _resendSeconds = 60;
   Timer? _resendTimer;
+  final _otpKey = GlobalKey<OtpInputRowState>();
+  String? _debugOtp;
+
+  // debug-only mock mode (never visible or active in release builds)
+  bool _mockMode = kDebugMode;
 
   // new pin step
   final _newPinCtrl = TextEditingController();
@@ -67,6 +75,9 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
   bool _confirmPinObscure = true;
   bool _resetting = false;
   bool _pinMismatch = false;
+
+  // last backend error, shown by the error modals
+  String? _errorMessage;
 
   @override
   void dispose() {
@@ -93,12 +104,34 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
   Future<void> _sendOtp() async {
     if (!_phoneFormKey.currentState!.validate()) return;
     _phone = '+63 ${_phoneCtrl.text.trim()}';
-    setState(() => _sendingOtp = true);
-    await Future.delayed(const Duration(milliseconds: 900));
+    setState(() {
+      _sendingOtp = true;
+      _errorMessage = null;
+    });
+
+    if (_mockMode) {
+      await Future.delayed(const Duration(milliseconds: 450));
+      if (!mounted) return;
+      setState(() {
+        _sendingOtp = false;
+        _debugOtp = (100000 + Random().nextInt(900000)).toString();
+        _state = _FpState.otpSent;
+      });
+      return;
+    }
+
+    final res = await AuthService.instance.sendOtp(_phone);
     if (!mounted) return;
     setState(() {
       _sendingOtp = false;
-      _state = _FpState.otpSent;
+      if (res.success) {
+        _debugOtp = res.otp;
+        _state = _FpState.otpSent;
+      } else {
+        _errorMessage =
+            res.error ?? 'Could not send the OTP. Please try again.';
+        _state = _FpState.genericError;
+      }
     });
   }
 
@@ -112,29 +145,74 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
       setState(() => _state = _FpState.pleaseWait);
       return;
     }
-    setState(() => _sendingOtp = true);
-    await Future.delayed(const Duration(milliseconds: 900));
+    setState(() {
+      _sendingOtp = true;
+      _errorMessage = null;
+    });
+
+    if (_mockMode) {
+      await Future.delayed(const Duration(milliseconds: 450));
+      if (!mounted) return;
+      setState(() {
+        _sendingOtp = false;
+        _debugOtp = (100000 + Random().nextInt(900000)).toString();
+        _state = _FpState.otpResent;
+      });
+      _startResendTimer();
+      return;
+    }
+
+    final res = await AuthService.instance.sendOtp(_phone);
     if (!mounted) return;
     setState(() {
       _sendingOtp = false;
-      _state = _FpState.otpResent;
+      if (res.success) {
+        _debugOtp = res.otp;
+        _state = _FpState.otpResent;
+      } else {
+        _errorMessage =
+            res.error ?? 'Could not send the OTP. Please try again.';
+        _state = _FpState.genericError;
+      }
     });
-    _startResendTimer();
+    if (res.success) _startResendTimer();
   }
 
   Future<void> _verifyOtp() async {
     if (_otp.length != 6) return;
-    setState(() => _verifying = true);
-    await Future.delayed(const Duration(milliseconds: 700));
-    if (!mounted) return;
-    setState(() => _verifying = false);
+    setState(() {
+      _verifying = true;
+      _errorMessage = null;
+    });
 
-    // Simulate: wrong OTP if it's all same digits (demo only)
-    if (_otp == '000000') {
-      setState(() => _state = _FpState.invalidOtp);
-    } else {
-      setState(() => _state = _FpState.setNewPin);
+    if (_mockMode) {
+      await Future.delayed(const Duration(milliseconds: 350));
+      if (!mounted) return;
+      setState(() {
+        _verifying = false;
+        if (_otp == _debugOtp) {
+          _state = _FpState.setNewPin;
+        } else {
+          _errorMessage = 'Invalid mock OTP. Tap the amber hint to fill it.';
+          _state = _FpState.invalidOtp;
+        }
+      });
+      return;
     }
+
+    // Verifies against the backend without consuming the code — resetPin()
+    // consumes it after the new PIN is confirmed.
+    final res = await AuthService.instance.verifyResetOtp(_phone, _otp);
+    if (!mounted) return;
+    setState(() {
+      _verifying = false;
+      if (res.success) {
+        _state = _FpState.setNewPin;
+      } else {
+        _errorMessage = res.error ?? 'Invalid or expired OTP.';
+        _state = _FpState.invalidOtp;
+      }
+    });
   }
 
   Future<void> _resetPassword() async {
@@ -145,12 +223,40 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
       setState(() => _pinMismatch = true);
       return;
     }
-    setState(() { _resetting = true; _pinMismatch = false; });
-    await Future.delayed(const Duration(milliseconds: 900));
+    setState(() {
+      _resetting = true;
+      _pinMismatch = false;
+      _errorMessage = null;
+    });
+
+    if (_mockMode) {
+      await Future.delayed(const Duration(milliseconds: 450));
+      if (!mounted) return;
+      setState(() {
+        _resetting = false;
+        _state = _FpState.resetSuccess;
+      });
+      return;
+    }
+
+    final res = await AuthService.instance.resetPin(
+      phone: _phone,
+      otp: _otp,
+      pin: newPin,
+    );
     if (!mounted) return;
     setState(() {
       _resetting = false;
-      _state = _FpState.resetSuccess;
+      if (res.success) {
+        _state = _FpState.resetSuccess;
+      } else if ((res.error ?? '').toLowerCase().contains('otp')) {
+        _errorMessage = res.error;
+        _state = _FpState.invalidOtp;
+      } else {
+        _errorMessage =
+            res.error ?? 'Something went wrong. Please try again.';
+        _state = _FpState.genericError;
+      }
     });
   }
 
@@ -187,6 +293,13 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           isSending: _sendingOtp,
           onSend: _sendOtp,
           onCancel: () => Navigator.pop(context),
+          debugMode: kDebugMode,
+          mockMode: _mockMode,
+          onModeChanged: (v) => setState(() {
+            _mockMode = v;
+            _debugOtp = null;
+            _errorMessage = null;
+          }),
         );
 
       case _FpState.otpSent:
@@ -215,6 +328,8 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           onVerify: _verifyOtp,
           onResend: _resendOtp,
           onBack: () => setState(() => _state = _FpState.enterPhone),
+          mockCode: kDebugMode ? _debugOtp : null,
+          otpKey: _otpKey,
         );
 
       case _FpState.pleaseWait:
@@ -247,7 +362,7 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           key: const ValueKey('invalidOtp'),
           isSuccess: false,
           title: 'Invalid OTP',
-          message:
+          message: _errorMessage ??
               'The code you entered is incorrect.\nPlease check and try again.',
           primaryLabel: 'Try Again',
           onPrimary: () => setState(() => _state = _FpState.enterOtp),
@@ -270,6 +385,7 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           pinMismatch: _pinMismatch,
           onReset: _resetPassword,
           onBack: () => setState(() => _state = _FpState.enterOtp),
+          mockMode: _mockMode,
         );
 
       case _FpState.resetSuccess:
@@ -277,8 +393,9 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           key: const ValueKey('resetSuccess'),
           isSuccess: true,
           title: 'Password Reset!',
-          message:
-              'Your password has been updated\nsuccessfully. You can now log in\nwith your new password.',
+          message: _mockMode
+              ? 'Mock reset complete — the PIN was NOT saved.\nSwitch to Live API to change it.'
+              : 'Your password has been updated\nsuccessfully. You can now log in\nwith your new password.',
           primaryLabel: 'Go to Login',
           onPrimary: _goToLogin,
           onClose: _goToLogin,
@@ -289,7 +406,8 @@ class _ForgotPasswordSheetState extends State<_ForgotPasswordSheet> {
           key: const ValueKey('genericError'),
           isSuccess: false,
           title: 'Something went wrong',
-          message: 'An unexpected error occurred.\nPlease try again later.',
+          message: _errorMessage ??
+              'An unexpected error occurred.\nPlease try again later.',
           primaryLabel: 'Try Again',
           primaryIsDestructive: true,
           onPrimary: () => setState(() => _state = _FpState.enterPhone),
@@ -309,6 +427,9 @@ class _EnterPhoneModal extends StatelessWidget {
   final bool isSending;
   final VoidCallback onSend;
   final VoidCallback onCancel;
+  final bool debugMode;
+  final bool mockMode;
+  final ValueChanged<bool>? onModeChanged;
 
   const _EnterPhoneModal({
     super.key,
@@ -317,6 +438,9 @@ class _EnterPhoneModal extends StatelessWidget {
     required this.isSending,
     required this.onSend,
     required this.onCancel,
+    this.debugMode = false,
+    this.mockMode = false,
+    this.onModeChanged,
   });
 
   @override
@@ -378,6 +502,24 @@ class _EnterPhoneModal extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
+          if (debugMode) ...[
+            const SizedBox(height: 14),
+            _DebugModeToggle(mock: mockMode, onChanged: onModeChanged),
+            const SizedBox(height: 6),
+            Text(
+              mockMode
+                  ? 'Debug mock — no SMS, no credits. The OTP is shown on screen.'
+                  : 'Live API — real SMS, uses 1 UniSMS credit.',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.inter(
+                fontSize: 10.5,
+                fontWeight: FontWeight.w600,
+                color: mockMode
+                    ? const Color(0xFFB45309)
+                    : context.c.textSecondary,
+              ),
+            ),
+          ],
           const SizedBox(height: 24),
 
           // Phone field
@@ -452,6 +594,8 @@ class _EnterOtpModal extends StatelessWidget {
   final VoidCallback onVerify;
   final VoidCallback onResend;
   final VoidCallback onBack;
+  final String? mockCode;
+  final GlobalKey<OtpInputRowState>? otpKey;
 
   const _EnterOtpModal({
     super.key,
@@ -464,6 +608,8 @@ class _EnterOtpModal extends StatelessWidget {
     required this.onVerify,
     required this.onResend,
     required this.onBack,
+    this.mockCode,
+    this.otpKey,
   });
 
   @override
@@ -525,10 +671,49 @@ class _EnterOtpModal extends StatelessWidget {
 
           // OTP input boxes
           OtpInputRow(
+            key: otpKey,
             length: 6,
             onChanged: onOtpChanged,
             onCompleted: onOtpChanged,
           ),
+          if (mockCode != null) ...[
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () => otpKey?.currentState?.fill(mockCode!),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFFBEB),
+                  border: Border.all(color: const Color(0xFFFCD34D)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.science_outlined,
+                        size: 14, color: Color(0xFFB45309)),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Debug OTP: $mockCode',
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.2,
+                        color: const Color(0xFFB45309),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'tap to fill',
+                      style: GoogleFonts.inter(
+                          fontSize: 10, color: const Color(0xFFB45309)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 20),
 
           // Resend
@@ -604,6 +789,7 @@ class _SetNewPinModal extends StatelessWidget {
   final bool pinMismatch;
   final VoidCallback onReset;
   final VoidCallback onBack;
+  final bool mockMode;
 
   const _SetNewPinModal({
     super.key,
@@ -617,6 +803,7 @@ class _SetNewPinModal extends StatelessWidget {
     required this.pinMismatch,
     required this.onReset,
     required this.onBack,
+    this.mockMode = false,
   });
 
   @override
@@ -664,6 +851,33 @@ class _SetNewPinModal extends StatelessWidget {
             style: GoogleFonts.inter(
                 fontSize: 13, color: context.c.textSecondary),
           ),
+          if (mockMode) ...[
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFFBEB),
+                border: Border.all(color: const Color(0xFFFCD34D)),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.science_outlined,
+                      size: 15, color: Color(0xFFB45309)),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Debug mock — this PIN will NOT be saved.',
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFFB45309)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 20),
 
           // New PIN
@@ -948,6 +1162,70 @@ class _SheetWrapper extends StatelessWidget {
 
           // Bottom safe area
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 8),
+        ],
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DEBUG MODE TOGGLE (Mock / Live) — only rendered in debug builds
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _DebugModeToggle extends StatelessWidget {
+  final bool mock;
+  final ValueChanged<bool>? onChanged;
+
+  const _DebugModeToggle({required this.mock, this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget item(String label, bool value, IconData icon, Color active) {
+      final selected = mock == value;
+      return Expanded(
+        child: GestureDetector(
+          onTap: onChanged == null ? null : () => onChanged!(value),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: selected ? active : Colors.transparent,
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon,
+                    size: 14,
+                    color: selected ? Colors.white : context.c.textSecondary),
+                const SizedBox(width: 5),
+                Text(
+                  label,
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    color: selected ? Colors.white : context.c.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: context.c.inputFill,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: context.c.inputBorder),
+      ),
+      child: Row(
+        children: [
+          item('Mock', true, Icons.science_outlined, AppColors.primary),
+          item('Live API', false, Icons.cloud_outlined,
+              const Color(0xFFB45309)),
         ],
       ),
     );

@@ -13,10 +13,16 @@ class OtpScreen extends StatefulWidget {
   final String phoneNumber;
   final bool isNewUser;
 
+  /// When true, a successful verification pops this screen with `true`
+  /// instead of navigating on. Used by the registration form so the same
+  /// OTP screen can gate account creation.
+  final bool returnToCaller;
+
   const OtpScreen({
     super.key,
     required this.phoneNumber,
     this.isNewUser = true,
+    this.returnToCaller = false,
   });
 
   @override
@@ -153,6 +159,11 @@ class _OtpScreenState extends State<OtpScreen>
           title: 'Invalid Code',
           message: result.error ?? 'The code is incorrect or has expired. Tap Resend to get a new one.',
           actionLabel: 'Try Again');
+      return;
+    }
+
+    if (widget.returnToCaller) {
+      Navigator.pop(context, true);
       return;
     }
 

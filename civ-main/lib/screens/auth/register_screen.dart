@@ -133,10 +133,26 @@ class _RegisterScreenState extends State<RegisterScreen>
       return;
     }
 
+    final phone = '+63${_phoneCtrl.text.replaceAll(' ', '')}';
+
+    // Reuse the existing OTP screen for number verification: it calls
+    // POST /api/mobile/auth/send-otp on open and verify-otp on submit.
+    // `returnToCaller` makes it pop back here with `true` on success instead
+    // of navigating to a fresh register screen.
+    final verified = await Navigator.pushNamed(
+      context,
+      AppRoutes.otp,
+      arguments: {
+        'phone': phone,
+        'isNewUser': true,
+        'returnToCaller': true,
+      },
+    );
+    if (verified != true) return;
+    if (!mounted) return;
+
     // Show loading modal — blocks UI while request is in-flight
     AppDialog.loading(context, message: 'Creating your account...');
-
-    final phone = '+63${_phoneCtrl.text.replaceAll(' ', '')}';
 
     final result = await AuthService.instance.register(
       fullName: _nameCtrl.text.trim(),

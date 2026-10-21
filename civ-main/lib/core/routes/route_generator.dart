@@ -49,14 +49,20 @@ class RouteGenerator {
         final raw = settings.arguments;
         String phone;
         bool isNewUser;
+        bool returnToCaller = false;
         if (raw is Map<String, dynamic>) {
           phone = raw['phone'] as String? ?? '';
           isNewUser = raw['isNewUser'] as bool? ?? true;
+          returnToCaller = raw['returnToCaller'] as bool? ?? false;
         } else {
           phone = raw as String? ?? '';
           isNewUser = phone.isNotEmpty;
         }
-        return _slide(OtpScreen(phoneNumber: phone, isNewUser: isNewUser));
+        return _slide(OtpScreen(
+          phoneNumber: phone,
+          isNewUser: isNewUser,
+          returnToCaller: returnToCaller,
+        ));
 
       case AppRoutes.register:
         return _slide(const RegisterScreen());

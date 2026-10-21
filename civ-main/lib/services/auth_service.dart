@@ -96,6 +96,43 @@ class AuthService {
     }
   }
 
+  // ── Reset PIN — verify OTP (does not consume it) ──────────────────────────
+  Future<({bool success, String? error})> verifyResetOtp(
+      String phone, String otp) async {
+    try {
+      final res = await _api.post(
+        ApiConstants.verifyResetOtp,
+        {'phone': _normalizePhone(phone), 'otp': otp},
+        auth: false,
+      );
+      return (success: res['success'] == true, error: null);
+    } on ApiException catch (e) {
+      return (success: false, error: e.message);
+    } catch (e) {
+      return (success: false, error: 'Cannot reach server.');
+    }
+  }
+
+  // ── Reset PIN — consume OTP, save new PIN, revoke old sessions ────────────
+  Future<({bool success, String? error})> resetPin({
+    required String phone,
+    required String otp,
+    required String pin,
+  }) async {
+    try {
+      final res = await _api.post(
+        ApiConstants.resetPin,
+        {'phone': _normalizePhone(phone), 'otp': otp, 'pin': pin},
+        auth: false,
+      );
+      return (success: res['success'] == true, error: null);
+    } on ApiException catch (e) {
+      return (success: false, error: e.message);
+    } catch (e) {
+      return (success: false, error: 'Cannot reach server.');
+    }
+  }
+
   // ── Register ──────────────────────────────────────────────────────────────
   Future<({bool success, AppUser? user, String? error})> register({
     required String fullName,

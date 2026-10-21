@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset PIN — CIVILWATCH</title>
+    <link rel="stylesheet" href="/css/variables.css" />
+    <style>
+        :root {
+            --cw-green: #1B5E20;
+            --cw-green-light: #2E7D32;
+            --cw-green-soft: #E8F5E9;
+            --cw-navy: #0D2137;
+            --cw-amber-bg: #FFFBEB;
+            --cw-amber: #B45309;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 28px 18px 56px;
+            background: var(--gray-50); color: var(--gray-900);
+            font-family: var(--font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+        }
+        .wrap { max-width: 1120px; margin: 0 auto; }
+        .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+        h1 { font-size: 22px; font-weight: 800; margin: 0; }
+        .sub { color: var(--gray-500); font-size: 13px; margin: 6px 0 22px; max-width: 840px; line-height: 1.55; }
+        .sub b { color: var(--gray-700); }
+        .theme-btn {
+            background: var(--gray-100); color: var(--gray-700); border: 1px solid var(--gray-300);
+            border-radius: 8px; padding: 8px 12px; cursor: pointer; font-size: 14px;
+        }
+        .controls { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; justify-content: flex-end; }
+        .mode { display: flex; gap: 3px; padding: 3px; background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: 10px; }
+        .mode button {
+            border: 0; background: transparent; cursor: pointer; padding: 6px 11px;
+            border-radius: 7px; font-size: 12px; font-weight: 800; font-family: inherit; color: var(--gray-500);
+        }
+        .mode button.on { background: var(--cw-green); color: #fff; box-shadow: 0 2px 6px rgba(27,94,32,.25); }
+        .mode button[data-live].on { background: #B45309; box-shadow: 0 2px 6px rgba(180,83,9,.25); }
+        .mockpill {
+            display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px;
+            background: var(--cw-amber-bg); border: 1px solid #FDE68A; color: var(--cw-amber);
+            font-size: 12px; font-weight: 800;
+        }
+        .grid { display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 28px; align-items: start; }
+        @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } .phone { margin: 0 auto; } }
+
+        /* ── phone ──────────────────────────────────────────────── */
+        .phone {
+            width: 390px; max-width: 100%; height: 772px;
+            background: var(--cw-navy); border-radius: 42px; padding: 10px;
+            box-shadow: 0 24px 60px rgba(13,33,55,.28), 0 6px 18px rgba(13,33,55,.18);
+            position: sticky; top: 18px;
+        }
+        .phone-inner {
+            position: relative; height: 100%; background: #F8FAFC;
+            border-radius: 34px; overflow: hidden; display: flex; flex-direction: column;
+        }
+        .statusbar {
+            height: 34px; flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 22px; font-size: 11px; font-weight: 700; color: var(--cw-navy); background: #fff;
+        }
+        .statusbar .dots { letter-spacing: 2px; font-size: 9px; }
+        .appbar {
+            flex: 0 0 auto; display: flex; align-items: center; gap: 9px;
+            padding: 10px 18px 12px; background: #fff; border-bottom: 1px solid var(--gray-200);
+        }
+        .logo {
+            width: 30px; height: 30px; border-radius: 9px; background: var(--cw-green);
+            display: grid; place-items: center; color: #fff; font-size: 15px; font-weight: 900;
+        }
+        .appbar .name { font-size: 14px; font-weight: 800; color: var(--cw-navy); line-height: 1.1; }
+        .appbar .place { font-size: 10px; color: var(--gray-500); }
+        .appbar .live { margin-left: auto; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
+        .live.mock { color: #B45309; background: var(--cw-amber-bg); }
+
+        .screens { position: relative; flex: 1 1 auto; overflow-y: auto; }
+        .screens::-webkit-scrollbar { width: 0; }
+        .screen { display: none; padding: 20px 20px 26px; animation: fade .28s ease; }
+        .screen.active { display: block; }
+        @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+        .eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--cw-green); margin-bottom: 6px; }
+        .h2 { font-size: 22px; line-height: 1.2; font-weight: 800; color: var(--cw-navy); margin: 0 0 6px; }
+        .muted { font-size: 12px; line-height: 1.5; color: var(--gray-500); margin: 0 0 16px; }
+        .muted b { color: var(--gray-700); }
+
+        .field { margin-bottom: 11px; }
+        .field label { display: block; font-size: 11px; font-weight: 700; color: var(--gray-600); margin: 0 0 4px; }
+        .input {
+            width: 100%; padding: 10px 11px; font-size: 13px; font-family: inherit;
+            background: #fff; color: var(--gray-900); border: 1px solid var(--gray-300); border-radius: 10px;
+        }
+        .input:focus { outline: 2px solid var(--cw-green); outline-offset: -1px; border-color: var(--cw-green); }
+        .phone-wrap { display: flex; align-items: stretch; }
+        .cc {
+            display: flex; align-items: center; gap: 5px; padding: 0 10px;
+            background: var(--gray-100); border: 1px solid var(--gray-300); border-right: 0;
+            border-radius: 10px 0 0 10px; font-size: 12px; font-weight: 700; color: var(--gray-700);
+        }
+        .phone-wrap .input { border-radius: 0 10px 10px 0; }
+        .two { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+
+        .btn {
+            width: 100%; padding: 13px 16px; font-size: 14px; font-weight: 800; font-family: inherit;
+            border: 0; border-radius: 12px; cursor: pointer; background: var(--cw-green); color: #fff;
+            box-shadow: 0 8px 18px rgba(27,94,32,.22);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn:hover { background: var(--cw-green-light); }
+        .btn:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+        .btn.ghost { background: transparent; color: var(--cw-green); border: 1px solid var(--cw-green); box-shadow: none; }
+        .btn.amber { background: var(--cw-amber); box-shadow: 0 8px 18px rgba(180,83,9,.2); }
+        .hint { text-align: center; font-size: 10.5px; color: var(--gray-400); margin-top: 12px; }
+        .link { color: var(--cw-green); font-weight: 700; text-decoration: none; cursor: pointer; }
+        .link:hover { text-decoration: underline; }
+        .center { text-align: center; }
+
+        /* icons / status */
+        .hero { display: grid; place-items: center; margin: 16px 0 14px; }
+        .hero-icon {
+            width: 92px; height: 92px; border-radius: 28px; background: var(--cw-green-soft);
+            display: grid; place-items: center; font-size: 42px; position: relative;
+        }
+        .hero-icon::after { content: ''; position: absolute; inset: -7px; border-radius: 34px; border: 1px dashed rgba(27,94,32,.25); }
+
+        .otp-boxes { display: flex; gap: 7px; justify-content: center; margin: 18px 0 6px; }
+        .otp-box {
+            width: 44px; height: 54px; text-align: center; font-size: 21px; font-weight: 800;
+            font-family: inherit; color: var(--cw-navy);
+            border: 1.5px solid var(--gray-300); border-radius: 11px; background: #fff;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .otp-box:focus { outline: none; border-color: var(--cw-green); box-shadow: 0 0 0 3px rgba(27,94,32,.13); }
+        .otp-box.filled { border-color: var(--cw-green); background: var(--cw-green-soft); }
+        .otp-box.err { border-color: #DC2626; background: #FEF2F2; }
+
+        .dev {
+            display: none; align-items: center; gap: 8px; margin: 12px 0 0;
+            padding: 8px 10px; border: 1px dashed #F59E0B; border-radius: 10px;
+            background: var(--cw-amber-bg); color: var(--cw-amber); font-size: 10.5px;
+        }
+        .dev.show { display: flex; }
+        .dev b { font-size: 16px; letter-spacing: 3px; color: var(--cw-amber); }
+        .dev button {
+            margin-left: auto; font-size: 10px; font-weight: 800; padding: 5px 8px;
+            background: #fff; color: var(--cw-amber); border: 1px solid #FCD34D; border-radius: 7px; cursor: pointer;
+        }
+
+        .note {
+            display: none; margin: 12px 0 0; padding: 9px 11px; border-radius: 10px;
+            font-size: 10.5px; line-height: 1.45; white-space: pre-wrap; word-break: break-word;
+        }
+        .note.show { display: block; }
+        .note.ok { background: var(--status-resolved-bg); color: var(--status-resolved); border: 1px solid var(--status-resolved-border); }
+        .note.err { background: var(--status-rejected-bg); color: var(--status-rejected); border: 1px solid var(--status-rejected-border); }
+        .note.info { background: var(--status-assigned-bg); color: var(--status-assigned); border: 1px solid var(--status-assigned-border); }
+        .note.warn { background: var(--cw-amber-bg); color: var(--cw-amber); border: 1px solid #FDE68A; }
+
+        .resend { text-align: center; margin-top: 14px; font-size: 11px; color: var(--gray-500); }
+        .pinrow { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--gray-600); margin: 10px 0 18px; }
+        .pinrow b { color: var(--cw-navy); letter-spacing: 3px; }
+
+        .success-wrap { text-align: center; padding-top: 10px; }
+        .check-circle {
+            width: 96px; height: 96px; margin: 8px auto 18px; border-radius: 50%;
+            background: var(--cw-green); color: #fff; display: grid; place-items: center;
+            font-size: 46px; box-shadow: 0 0 0 12px var(--cw-green-soft), 0 14px 30px rgba(27,94,32,.28);
+            animation: pop .45s cubic-bezier(.2,1.4,.4,1);
+        }
+        @keyframes pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .success-title { font-size: 24px; font-weight: 800; color: var(--cw-navy); margin: 0 0 6px; }
+        .success-sub { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin: 0 0 18px; }
+
+        /* ── side ───────────────────────────────────────────────── */
+        .card {
+            background: var(--white); border: 1px solid var(--gray-200);
+            border-radius: 14px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow-sm);
+        }
+        .card h2 { font-size: 13px; font-weight: 800; margin: 0 0 12px; padding-bottom: 9px; border-bottom: 1px solid var(--gray-200); text-transform: uppercase; letter-spacing: .05em; }
+        .card h2 .tag { float: right; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--gray-300); color: var(--gray-500); letter-spacing: 0; text-transform: none; }
+
+        .steps { display: flex; flex-direction: column; gap: 10px; }
+        .step { display: flex; gap: 11px; align-items: flex-start; }
+        .step .num {
+            flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+            font-size: 11px; font-weight: 800; background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-200);
+        }
+        .step.active .num { background: var(--cw-green); color: #fff; border-color: var(--cw-green); box-shadow: 0 0 0 4px var(--cw-green-soft); }
+        .step.done .num { background: var(--cw-green-soft); color: var(--cw-green); border-color: #A5D6A7; }
+        .step .t { font-size: 12.5px; font-weight: 800; color: var(--gray-700); }
+        .step.active .t { color: var(--cw-navy); }
+        .step .d { font-size: 10.5px; color: var(--gray-500); margin-top: 2px; line-height: 1.4; }
+        .step code { font-size: 9.5px; background: var(--gray-100); padding: 1px 5px; border-radius: 5px; color: var(--gray-600); }
+
+        .reality { display: flex; flex-direction: column; gap: 9px; }
+        .reality .item { display: flex; gap: 9px; font-size: 11.5px; line-height: 1.45; color: var(--gray-600); }
+        .reality .ic { flex: 0 0 auto; font-size: 13px; line-height: 1.2; }
+        .reality b { color: var(--gray-800); }
+        .reality code { font-size: 10px; background: var(--gray-100); padding: 1px 5px; border-radius: 5px; }
+
+        .warn {
+            background: var(--cw-amber-bg); border: 1px solid #FDE68A; color: #92400E;
+            border-radius: 12px; padding: 11px 13px; font-size: 11px; line-height: 1.5; margin-bottom: 16px;
+        }
+        .warn b { color: #78350F; }
+
+        #log {
+            background: #0F172A; color: #D7E3F4; font-family: Consolas, "Cascadia Code", monospace;
+            font-size: 11px; padding: 12px; border-radius: 10px; white-space: pre-wrap;
+            word-break: break-word; max-height: 300px; overflow: auto; margin: 0; border: 1px solid #1E293B;
+        }
+        .links { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; margin-top: 16px; }
+        .foot { font-size: 11px; color: var(--gray-400); margin-top: 14px; line-height: 1.5; }
+
+        [data-theme="dark"] .phone-inner { background: #0F172A; }
+        [data-theme="dark"] .statusbar,
+        [data-theme="dark"] .appbar { background: #111C2E; border-color: #1E293B; }
+        [data-theme="dark"] .appbar .name,
+        [data-theme="dark"] .h2,
+        [data-theme="dark"] .success-title { color: #E2E8F0; }
+        [data-theme="dark"] .input,
+        [data-theme="dark"] .otp-box { background: #111C2E; color: #E2E8F0; border-color: #334155; }
+        [data-theme="dark"] .cc { background: #0B1424; color: #CBD5E1; border-color: #334155; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="top">
+        <h1>Reset PIN — preview</h1>
+        <div class="controls">
+            <div class="mode" role="group" aria-label="Data mode">
+                <button id="modeMock" class="on" title="No API calls, no SMS, no credits">🧪 Mock</button>
+                <button id="modeLive" data-live title="Real API + real SMS (uses credits)">Live API</button>
+            </div>
+            <button class="theme-btn" id="themeBtn" title="Toggle Dark Mode">🌙</button>
+        </div>
+    </div>
+    <div class="sub">
+        The app's <b>Forgot Password?</b> flow: mobile number → <b>OTP sent</b> → 6-digit code → new PIN → success.
+        It starts in <b>🧪 Mock mode</b> — nothing leaves the browser, so <b>no SMS and no credits</b> are used.
+        Flip to <b>Live API</b> to call the real endpoints: a correct OTP updates <code>citizens.pin_hash</code> and signs out old sessions.
+    </div>
+
+    <div class="grid">
+        <!-- ── PHONE ───────────────────────────────────────────── -->
+        <div class="phone" aria-label="CivilWatch reset PIN preview">
+            <div class="phone-inner">
+                <div class="statusbar">
+                    <span id="clock">9:41</span>
+                    <span class="dots">● ● ●</span>
+                    <span>▮▮▮ 100%</span>
+                </div>
+                <div class="appbar">
+                    <div class="logo">C</div>
+                    <div>
+                        <div class="name">CivilWatch</div>
+                        <div class="place">Digos City, Davao del Sur</div>
+                    </div>
+                    <div class="live mock" id="appMode">MOCK</div>
+                </div>
+
+                <div class="screens">
+                    <!-- 1. PHONE -->
+                    <section class="screen active" id="screenPhone">
+                        <div class="eyebrow">Forgot password</div>
+                        <h3 class="h2">Reset your PIN</h3>
+                        <p class="muted">Enter your mobile number and we'll send you a 6-digit OTP to reset your password.</p>
+
+                        <div class="field">
+                            <label for="phone">Mobile number</label>
+                            <div class="phone-wrap">
+                                <span class="cc">🇵🇭 +63</span>
+                                <input class="input" id="phone" inputmode="tel" placeholder="9XX XXX XXXX" autocomplete="tel" />
+                            </div>
+                        </div>
+
+                        <div class="note" id="phoneNote"></div>
+                        <button class="btn" id="btnSend" style="margin-top:14px">Send OTP</button>
+                        <div class="resend"><a class="link" id="btnCancel">← Back to login</a></div>
+                    </section>
+
+                    <!-- 2. OTP SENT (the app's status modal) -->
+                    <section class="screen" id="screenSent">
+                        <div class="hero"><div class="hero-icon">📤</div></div>
+                        <h3 class="h2 center">OTP Sent!</h3>
+                        <p class="muted center">We've sent a 6-digit OTP<br />to your mobile number<br /><b id="sentPhone">+63 9XX XXX XXXX</b>.</p>
+
+                        <button class="btn" id="btnContinue">Continue</button>
+                        <div class="resend">
+                            <a class="link" id="btnResendSent" style="pointer-events:none;opacity:.5">Resend OTP</a>
+                            <span id="sentTimer"> (60s)</span>
+                        </div>
+                        <div class="note" id="sentNote"></div>
+                    </section>
+
+                    <!-- 3. ENTER OTP -->
+                    <section class="screen" id="screenOtp">
+                        <div class="eyebrow">Verify</div>
+                        <h3 class="h2 center">Enter OTP</h3>
+                        <p class="muted center">Enter the 6-digit code sent to<br /><b id="otpPhone">+63 9XX XXX XXXX</b></p>
+
+                        <div class="otp-boxes" id="otpBoxes">
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 1" />
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 2" />
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 3" />
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 4" />
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 5" />
+                            <input class="otp-box" inputmode="numeric" maxlength="1" aria-label="digit 6" />
+                        </div>
+
+                        <div class="dev" id="devBox">
+                            <span id="devLabel">mock code:</span> <b id="devCode"></b>
+                            <button id="btnUseCode">use it →</button>
+                        </div>
+
+                        <div class="note" id="otpNote"></div>
+                        <button class="btn" id="btnVerify" style="margin-top:14px">Verify</button>
+                        <div class="resend">Didn't get it? <a class="link" id="btnResendOtp">Resend code</a> <span id="otpTimer"></span></div>
+                        <div class="resend"><a class="link" id="btnBackPhone">← Change number</a></div>
+                    </section>
+
+                    <!-- 4. NEW PIN -->
+                    <section class="screen" id="screenPin">
+                        <div class="eyebrow">New credentials</div>
+                        <h3 class="h2">Set a new PIN</h3>
+                        <p class="muted">Choose a new 6-digit PIN for <b id="pinPhone">+63 9XX XXX XXXX</b>. You'll use it the next time you log in.</p>
+
+                        <div class="field">
+                            <label for="pin">New PIN (6 digits)</label>
+                            <input class="input" id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" />
+                        </div>
+                        <div class="field">
+                            <label for="pin2">Confirm new PIN</label>
+                            <input class="input" id="pin2" type="password" inputmode="numeric" maxlength="6" placeholder="••••••" />
+                        </div>
+
+                        <div class="note" id="pinNote"></div>
+                        <button class="btn" id="btnReset" style="margin-top:8px">Reset Password</button>
+                        <div class="resend"><a class="link" id="btnBackOtp">← Back to code</a></div>
+                    </section>
+
+                    <!-- 5. DONE -->
+                    <section class="screen" id="screenDone">
+                        <div class="success-wrap">
+                            <div class="check-circle">✓</div>
+                            <h3 class="success-title">Password Reset!</h3>
+                            <p class="success-sub">Your new PIN is ready.<br />You can now log in with it.</p>
+
+                            <div class="pinrow center" style="justify-content:center">
+                                <span>New PIN</span><b id="donePin">••••••</b><span>for</span><b id="donePhone" style="letter-spacing:0">+63…</b>
+                            </div>
+
+                            <div class="note warn show" id="doneNote" style="text-align:left">
+                                Mockup only — the PIN was not written to the database.
+                            </div>
+
+                            <button class="btn ghost" id="btnAgain" style="margin-top:16px">Run it again</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── SIDE ────────────────────────────────────────────── -->
+        <div>
+            <div class="card">
+                <h2>Reset flow <span class="tag">5 screens</span></h2>
+                <div class="steps">
+                    <div class="step active" id="step1">
+                        <div class="num">1</div>
+                        <div><div class="t">Forgot Password?</div><div class="d">Mobile number entry (the app's login-sheet entry point).</div></div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="num">2</div>
+                        <div><div class="t">OTP Sent!</div><div class="d">The status modal the app shows before entering the code.</div></div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="num">3</div>
+                        <div><div class="t">Enter OTP</div><div class="d">6-digit code with resend timer.</div></div>
+                    </div>
+                    <div class="step" id="step4">
+                        <div class="num">4</div>
+                        <div><div class="t">Set new PIN</div><div class="d">New PIN + confirmation.</div></div>
+                    </div>
+                    <div class="step" id="step5">
+                        <div class="num">5</div>
+                        <div><div class="t">Password Reset!</div><div class="d">Success state.</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Reality check <span class="tag">important</span></h2>
+                <div class="reality">
+                    <div class="item"><span class="ic">✅</span><div><b>Real:</b> <code>send-otp</code> → <code>verify-reset-otp</code> → <code>reset-pin</code>. The code is checked server-side before the PIN changes.</div></div>
+                    <div class="item"><span class="ic">🔒</span><div><b>Security:</b> the OTP is single-use and expires in 5 minutes. A successful reset deletes every existing token.</div></div>
+                    <div class="item"><span class="ic">📱</span><div><b>App:</b> <code>forgot_password_flow.dart</code> calls these endpoints — the old <code>Future.delayed</code> fake is gone.</div></div>
+                    <div class="item"><span class="ic">🧪</span><div><b>Mock mode:</b> the OTP is generated in the browser and the PIN is only displayed; nothing is saved.</div></div>
+                </div>
+            </div>
+
+            <div class="warn" id="warnBox">
+                <b>Mock mode — free.</b> Nothing leaves this browser: no API calls, no SMS, no credits.
+                The OTP is generated locally.
+            </div>
+
+            <div class="card">
+                <h2>Request log <span class="tag" id="logCount">0 steps</span></h2>
+                <pre id="log">// steps appear here</pre>
+            </div>
+
+            <div class="links">
+                <a class="link" href="/register-demo.html">🧪 Registration demo (Mock/Live)</a>
+                <a class="link" href="/test.html">⚙️ API test harness</a>
+            </div>
+            <div class="foot">Dev-only page — delete before deploying to production. Mock mode changes nothing; Live mode writes the PIN.</div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    const $ = id => document.getElementById(id);
+    const screens = {
+        phone: $('screenPhone'),
+        sent: $('screenSent'),
+        otp: $('screenOtp'),
+        pin: $('screenPin'),
+        done: $('screenDone')
+    };
+    const steps = [$('step1'), $('step2'), $('step3'), $('step4'), $('step5')];
+    const boxes = Array.from(document.querySelectorAll('.otp-box'));
+
+    let phone = '';
+    let otp = '';
+    let calls = 0;
+    let resendLeft = 0;
+    let timer = null;
+    let mock = localStorage.getItem('resetdemo-mode') !== 'live';
+    let mockOtp = null;
+
+    // theme + clock
+    const applyTheme = t => document.documentElement.setAttribute('data-theme', t);
+    applyTheme(localStorage.getItem('theme') || 'light');
+    $('themeBtn').addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+    });
+    (function tick() {
+        $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    })();
+
+    // helpers
+    function log(text, data) {
+        calls++;
+        $('logCount').textContent = calls + (calls === 1 ? ' step' : ' steps');
+        const tag = mock ? '[MOCK — no network] ' : '[LIVE] ';
+        let line = '[' + new Date().toLocaleTimeString() + '] ' + tag + text;
+        if (data !== undefined) line += '\n    ' + JSON.stringify(data);
+        $('log').textContent = line + '\n' + $('log').textContent;
+    }
+    const msg = d => (d && (d.message || d.error)) || String(d);
+
+    async function post(path, body) {
+        if (mock) return mockPost(path, body);
+        log('POST ' + path, body);
+        try {
+            const res = await fetch('/api/mobile/auth/' + path, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            let data;
+            try { data = await res.json(); } catch (e) { data = await res.text(); }
+            log('← ' + res.status + ' ' + path, data);
+            return { ok: res.ok, status: res.status, data };
+        } catch (e) {
+            log('← NETWORK ERROR ' + path, String(e));
+            return { ok: false, status: 0, data: { message: 'Network error — is php artisan serve running? (' + e + ')' } };
+        }
+    }
+
+    // Local stand-in for the Laravel endpoints. Never touches the network.
+    function mockPost(path, body) {
+        return new Promise(resolve => setTimeout(() => {
+            let status = 200;
+            let data;
+            if (path === 'send-otp') {
+                mockOtp = String(Math.floor(100000 + Math.random() * 900000));
+                otp = mockOtp;
+                $('devCode').textContent = mockOtp;
+                $('devBox').classList.add('show');
+                data = { success: true, message: 'OTP generated (mock).', data: {
+                    phone: body.phone, sms_sent: false,
+                    sms_error: 'Mock mode — no SMS sent, no credits used.', otp: mockOtp } };
+            } else if (path === 'verify-reset-otp') {
+                if (mockOtp && body.otp === mockOtp) {
+                    data = { success: true, message: 'OTP verified (mock).', data: { phone: body.phone } };
+                } else {
+                    status = 422;
+                    data = { success: false, message: 'Invalid or expired OTP (mock).' };
+                }
+            } else if (path === 'reset-pin') {
+                if (!mockOtp || body.otp !== mockOtp) {
+                    status = 422;
+                    data = { success: false, message: 'Invalid or expired OTP (mock).' };
+                } else if (!/^\d{6}$/.test(body.pin)) {
+                    status = 422;
+                    data = { success: false, message: 'PIN must be exactly 6 digits.' };
+                } else {
+                    data = { success: true, message: 'PIN reset successfully (mock).' };
+                }
+            } else {
+                status = 404;
+                data = { success: false, message: 'Unknown mock route.' };
+            }
+            log('← ' + status + ' ' + path, data);
+            resolve({ ok: status < 400, status, data });
+        }, 550));
+    }
+
+    // ── mock / live mode ─────────────────────────────────────────
+    function applyMode() {
+        $('modeMock').classList.toggle('on', mock);
+        $('modeLive').classList.toggle('on', !mock);
+        $('appMode').textContent = mock ? 'MOCK' : 'LIVE';
+        $('appMode').classList.toggle('mock', mock);
+        $('devLabel').textContent = mock ? 'mock code:' : 'debug code:';
+        $('warnBox').innerHTML = mock
+            ? '<b>Mock mode — free.</b> Nothing leaves this browser: no API calls, no SMS, no credits. The OTP is generated locally.'
+            : '<b>Live mode — real SMS, real credits.</b> “Send OTP” calls Laravel + UniSMS (1 credit ≈ ₱0.50). A correct OTP writes the new PIN to <code>citizens.pin_hash</code> and signs out old sessions.';
+    }
+
+    $('modeMock').addEventListener('click', () => {
+        mock = true; localStorage.setItem('resetdemo-mode', 'mock'); applyMode(); resetDemo();
+    });
+    $('modeLive').addEventListener('click', () => {
+        mock = false; localStorage.setItem('resetdemo-mode', 'live'); applyMode(); resetDemo();
+    });
+    function note(id, kind, text) {
+        const el = $(id);
+        el.className = 'note ' + kind + ' show';
+        el.textContent = text;
+    }
+    function clearNote(id) { const el = $(id); el.className = 'note'; el.textContent = ''; }
+    function show(name) {
+        Object.values(screens).forEach(s => s.classList.remove('active'));
+        screens[name].classList.add('active');
+        screens[name].parentElement.scrollTop = 0;
+    }
+    function setStep(n) {
+        steps.forEach((s, i) => {
+            s.classList.toggle('done', i + 1 < n);
+            s.classList.toggle('active', i + 1 === n);
+        });
+    }
+    function formatPhone(p) {
+        const d = String(p).replace(/\D/g, '').replace(/^63/, '');
+        return '+63 ' + d.slice(0, 3) + ' ' + d.slice(3, 6) + ' ' + d.slice(6);
+    }
+    function getCode() { return boxes.map(b => b.value).join(''); }
+    function resetBoxes() {
+        boxes.forEach(b => { b.value = ''; b.classList.remove('filled', 'err'); });
+        boxes[0].focus();
+    }
+
+    // OTP boxes
+    boxes.forEach((box, i) => {
+        box.addEventListener('input', () => {
+            box.value = box.value.replace(/\D/g, '').slice(0, 1);
+            box.classList.toggle('filled', !!box.value);
+            box.classList.remove('err');
+            if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
+        });
+        box.addEventListener('keydown', e => {
+            if (e.key === 'Backspace' && !box.value && i > 0) { boxes[i - 1].focus(); boxes[i - 1].value = ''; boxes[i - 1].classList.remove('filled'); }
+            if (e.key === 'ArrowLeft' && i > 0) boxes[i - 1].focus();
+            if (e.key === 'ArrowRight' && i < boxes.length - 1) boxes[i + 1].focus();
+            if (e.key === 'Enter') $('btnVerify').click();
+        });
+        box.addEventListener('paste', e => {
+            e.preventDefault();
+            const digits = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+            digits.split('').forEach((d, j) => { if (boxes[j]) { boxes[j].value = d; boxes[j].classList.add('filled'); } });
+            if (digits.length === 6) boxes[5].focus();
+        });
+    });
+
+    // state machine
+    async function requestOtp() {
+        const res = await post('send-otp', { phone: phone });
+        if (!res.ok) return { ok: false, error: msg(res.data) };
+        const d = res.data.data || {};
+        if (d.otp) {
+            otp = d.otp;
+            $('devCode').textContent = d.otp;
+            $('devBox').classList.add('show');
+        } else if (!mock) {
+            $('devBox').classList.remove('show');
+        }
+        return { ok: true, data: d };
+    }
+
+    function showSent(info) {
+        $('sentPhone').textContent = formatPhone(phone);
+        $('otpPhone').textContent = formatPhone(phone);
+        $('pinPhone').textContent = formatPhone(phone);
+        if (info) note('sentNote', info.kind, info.text); else clearNote('sentNote');
+        startResend('btnResendSent', 'sentTimer');
+        setStep(2);
+        show('sent');
+    }
+
+    function startResend(linkId, timerId) {
+        resendLeft = 60;
+        const link = $(linkId), label = $(timerId);
+        link.style.pointerEvents = 'none';
+        link.style.opacity = '.5';
+        label.textContent = ' (' + resendLeft + 's)';
+        clearInterval(timer);
+        timer = setInterval(() => {
+            resendLeft--;
+            label.textContent = resendLeft > 0 ? ' (' + resendLeft + 's)' : '';
+            if (resendLeft <= 0) {
+                clearInterval(timer);
+                link.style.pointerEvents = '';
+                link.style.opacity = '';
+            }
+        }, 1000);
+    }
+
+    // 1 → send
+    $('btnSend').addEventListener('click', async () => {
+        clearNote('phoneNote');
+        const raw = $('phone').value.replace(/\D/g, '');
+        if (!/^(0|\+63|63)?9\d{9}$/.test(raw)) {
+            note('phoneNote', 'err', 'Enter a valid PH mobile number (e.g. 9171234567).');
+            return;
+        }
+        phone = raw;
+        const btn = $('btnSend');
+        btn.disabled = true;
+        const r = await requestOtp();
+        btn.disabled = false;
+        if (!r.ok) { note('phoneNote', 'err', r.error); return; }
+        const d = r.data;
+        if (mock) {
+            showSent({ kind: 'info', text: 'Mock OTP generated — no SMS, no credits. Continue and use the code chip.' });
+        } else if (d.sms_sent) {
+            showSent({ kind: 'ok', text: 'SMS sent ✓ — check the phone. The code expires in 5 minutes.' });
+        } else {
+            showSent({ kind: 'warn', text: 'SMS not sent: ' + (d.sms_error || 'unknown') + (d.otp ? '\nUse the debug code on the next screen.' : '') });
+        }
+    });
+
+    // 2 → continue
+    $('btnContinue').addEventListener('click', () => {
+        resetBoxes();
+        clearNote('otpNote');
+        if (otp) { $('devCode').textContent = otp; $('devBox').classList.add('show'); }
+        else { $('devBox').classList.remove('show'); }
+        setStep(3);
+        show('otp');
+        startResend('btnResendOtp', 'otpTimer');
+    });
+
+    $('btnResendSent').addEventListener('click', async () => {
+        if (resendLeft > 0) return;
+        const r = await requestOtp();
+        if (!r.ok) { note('sentNote', 'err', r.error); return; }
+        note('sentNote', mock ? 'info' : 'ok', mock ? 'New mock OTP generated — use it on the next screen.' : 'A new code was sent ✓');
+        startResend('btnResendSent', 'sentTimer');
+    });
+
+    // 3 → verify
+    $('btnUseCode').addEventListener('click', () => {
+        $('devCode').textContent.replace(/\D/g, '').slice(0, 6).split('').forEach((d, i) => {
+            if (boxes[i]) { boxes[i].value = d; boxes[i].classList.add('filled'); }
+        });
+        boxes[5].focus();
+    });
+
+    $('btnVerify').addEventListener('click', async () => {
+        const code = getCode();
+        if (!/^\d{6}$/.test(code)) { note('otpNote', 'err', 'Enter the 6-digit code.'); return; }
+        const btn = $('btnVerify');
+        btn.disabled = true;
+        const res = await post('verify-reset-otp', { phone: phone, otp: code });
+        btn.disabled = false;
+        if (!res.ok) {
+            boxes.forEach(b => b.classList.add('err'));
+            note('otpNote', 'err', msg(res.data));
+            return;
+        }
+        otp = code;
+        setStep(4);
+        show('pin');
+        $('pin').value = '';
+        $('pin2').value = '';
+        clearNote('pinNote');
+    });
+
+    $('btnResendOtp').addEventListener('click', async () => {
+        if (resendLeft > 0) return;
+        const r = await requestOtp();
+        if (!r.ok) { note('otpNote', 'err', r.error); return; }
+        resetBoxes();
+        note('otpNote', mock ? 'info' : 'ok', mock ? 'New mock OTP generated — use the code chip.' : 'A new code was sent ✓');
+        startResend('btnResendOtp', 'otpTimer');
+    });
+
+    // 4 → reset
+    $('btnReset').addEventListener('click', async () => {
+        clearNote('pinNote');
+        const p1 = $('pin').value.trim();
+        const p2 = $('pin2').value.trim();
+        if (!/^\d{6}$/.test(p1)) { note('pinNote', 'err', 'PIN must be exactly 6 digits.'); return; }
+        if (p1 !== p2) { note('pinNote', 'err', 'PINs do not match. Please try again.'); return; }
+        const btn = $('btnReset');
+        btn.disabled = true;
+        const res = await post('reset-pin', { phone: phone, otp: otp, pin: p1 });
+        btn.disabled = false;
+        if (!res.ok) {
+            const m = msg(res.data);
+            if (res.status === 422 && /otp/i.test(m)) {
+                boxes.forEach(b => b.classList.add('err'));
+                setStep(3);
+                show('otp');
+                note('otpNote', 'err', m + ' Request a new code and try again.');
+                return;
+            }
+            note('pinNote', 'err', m);
+            return;
+        }
+        $('donePin').textContent = p1;
+        $('donePhone').textContent = formatPhone(phone);
+        if (mock) {
+            $('doneNote').className = 'note warn show';
+            $('doneNote').innerHTML = 'Mockup only — nothing was saved. Switch to <b>Live API</b> to actually change the PIN.';
+        } else {
+            $('doneNote').className = 'note ok show';
+            $('doneNote').innerHTML = 'Your PIN was updated in <code>citizens.pin_hash</code>. Every previous session was signed out.';
+        }
+        setStep(5);
+        show('done');
+    });
+
+    // back / restart
+    $('btnBackPhone').addEventListener('click', () => { setStep(1); show('phone'); });
+    $('btnBackOtp').addEventListener('click', () => { setStep(3); show('otp'); });
+    $('btnCancel').addEventListener('click', () => { note('phoneNote', 'info', 'In the app this closes the sheet and returns to login.'); });
+
+    function resetDemo() {
+        phone = ''; otp = ''; calls = 0; mockOtp = null;
+        clearInterval(timer);
+        resendLeft = 0;
+        $('phone').value = '';
+        $('pin').value = ''; $('pin2').value = '';
+        ['phoneNote', 'sentNote', 'otpNote', 'pinNote'].forEach(clearNote);
+        $('devBox').classList.remove('show');
+        $('devCode').textContent = '';
+        $('sentTimer').textContent = '';
+        $('otpTimer').textContent = '';
+        ['btnResendSent', 'btnResendOtp'].forEach(id => {
+            $(id).style.pointerEvents = '';
+            $(id).style.opacity = '';
+        });
+        $('log').textContent = '// steps appear here';
+        $('logCount').textContent = '0 steps';
+        resetBoxes();
+        setStep(1);
+        show('phone');
+    }
+    $('btnAgain').addEventListener('click', resetDemo);
+    applyMode();
+
+    ['phone', 'pin', 'pin2'].forEach(id => {
+        $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d ]/g, ''); });
+    });
+})();
+</script>
+</body>
+</html>

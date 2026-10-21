@@ -45,6 +45,8 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
         Route::post('login',      [MobileAuthController::class, 'login']);
         Route::post('send-otp',   [MobileAuthController::class, 'sendOtp']);
         Route::post('verify-otp', [MobileAuthController::class, 'verifyOtp']);
+        Route::post('verify-reset-otp', [MobileAuthController::class, 'verifyResetOtp']);
+        Route::post('reset-pin',  [MobileAuthController::class, 'resetPin']);
         Route::post('register',   [MobileAuthController::class, 'register']);
     });
 

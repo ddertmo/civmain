@@ -30,6 +30,8 @@ class ApiConstants {
   static const String login     = '$baseUrl/mobile/auth/login';
   static const String sendOtp   = '$baseUrl/mobile/auth/send-otp';
   static const String verifyOtp = '$baseUrl/mobile/auth/verify-otp';
+  static const String verifyResetOtp = '$baseUrl/mobile/auth/verify-reset-otp';
+  static const String resetPin = '$baseUrl/mobile/auth/reset-pin';
   static const String register  = '$baseUrl/mobile/auth/register';
   static const String logout    = '$baseUrl/mobile/auth/logout';
   static const String me        = '$baseUrl/mobile/auth/me';

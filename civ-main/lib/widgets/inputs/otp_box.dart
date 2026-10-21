@@ -15,10 +15,10 @@ class OtpInputRow extends StatefulWidget {
   });
 
   @override
-  State<OtpInputRow> createState() => _OtpInputRowState();
+  State<OtpInputRow> createState() => OtpInputRowState();
 }
 
-class _OtpInputRowState extends State<OtpInputRow> {
+class OtpInputRowState extends State<OtpInputRow> {
   late List<TextEditingController> _controllers;
   late List<FocusNode> _focusNodes;
 
@@ -50,6 +50,21 @@ class _OtpInputRowState extends State<OtpInputRow> {
     if (otp.length == widget.length) {
       widget.onCompleted(otp);
     }
+  }
+
+  /// Fills every box with the digits in [otp]. Used by the debug mock OTP
+  /// hint in the forgot-password sheet ("tap to fill").
+  void fill(String otp) {
+    final digits = otp.replaceAll(RegExp(r'\D'), '');
+    for (var i = 0; i < _controllers.length; i++) {
+      _controllers[i].text = i < digits.length ? digits[i] : '';
+    }
+    final value = _controllers.map((c) => c.text).join();
+    widget.onChanged?.call(value);
+    if (value.length == widget.length) {
+      widget.onCompleted(value);
+    }
+    if (_focusNodes.isNotEmpty) _focusNodes.last.requestFocus();
   }
 
   @override

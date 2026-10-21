@@ -9,6 +9,7 @@ use App\Services\UniSmsService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -204,6 +205,103 @@ class MobileAuthController extends Controller
                 'isNewUser' => true,
                 'phone'     => $normalized,
             ],
+        ]);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // POST /api/mobile/auth/verify-reset-otp
+    // Body: { phone, otp }
+    // Checks the OTP for a password reset WITHOUT consuming it, so the user
+    // gets immediate feedback before choosing a new PIN. resetPin() then
+    // consumes the same code atomically.
+    // ─────────────────────────────────────────────────────────────────────
+    public function verifyResetOtp(Request $request): JsonResponse
+    {
+        $request->validate([
+            'phone' => ['required', 'string', 'regex:/^(0|\+63|63)?9\d{9}$/'],
+            'otp'   => ['required', 'string', 'size:6'],
+        ]);
+
+        $normalized = $this->normalizePhone($request->phone);
+        $citizen    = Citizen::where('phone', $normalized)->first();
+
+        if (! $citizen) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No account found with that mobile number.',
+            ], 404);
+        }
+
+        if (! $citizen->is_active) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Your account has been deactivated.',
+            ], 403);
+        }
+
+        if (! OtpCode::findValid($normalized, $request->otp)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid or expired OTP.',
+            ], 422);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP verified.',
+            'data'    => ['phone' => $normalized],
+        ]);
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // POST /api/mobile/auth/reset-pin
+    // Body: { phone, otp, pin }
+    // If the OTP is valid, replaces the citizen's PIN and revokes every
+    // existing token so any stolen session is signed out.
+    // ─────────────────────────────────────────────────────────────────────
+    public function resetPin(Request $request): JsonResponse
+    {
+        $request->validate([
+            'phone' => ['required', 'string', 'regex:/^(0|\+63|63)?9\d{9}$/'],
+            'otp'   => ['required', 'string', 'size:6'],
+            'pin'   => ['required', 'string', 'regex:/^\d{6}$/'],
+        ]);
+
+        $normalized = $this->normalizePhone($request->phone);
+        $citizen    = Citizen::where('phone', $normalized)->first();
+
+        if (! $citizen) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No account found with that mobile number.',
+            ], 404);
+        }
+
+        if (! $citizen->is_active) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Your account has been deactivated.',
+            ], 403);
+        }
+
+        $otpRecord = OtpCode::findValid($normalized, $request->otp);
+
+        if (! $otpRecord) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid or expired OTP.',
+            ], 422);
+        }
+
+        DB::transaction(function () use ($citizen, $otpRecord, $request) {
+            $otpRecord->update(['is_used' => true]);
+            $citizen->update(['pin_hash' => Hash::make($request->pin)]);
+            $citizen->tokens()->delete();
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'PIN reset successfully. Please log in with your new PIN.',
         ]);
     }
 

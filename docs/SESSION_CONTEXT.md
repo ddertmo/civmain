@@ -11,11 +11,11 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-10-19 - latest change = 065 (exact commit = newest row of `docs/changes/README.md`)
-- running: Laravel artisan serve (8000) + MySQL (XAMPP) — all migrations ran; no UniSMS key yet
-- doing:   060-066 shipped; task 1 UniSMS live-verified to billing, credits topped to 10, test.html harness ready (verify bound to the OTP this page requested)
-- next:    user opens http://127.0.0.1:8000/test.html with a real number -> receives SMS -> checks task 1 box (SenderID precondition still open); user decides on 063's 10 admin dark pages; hand-checks themes then checks off tasks 2/3/4
-- blocked: `graphify update .` not run — no Python/`graphifyy` on this PC (graph reflects 058)
+- at:      2026-10-21 - latest change = 071 (in-app debug Mock/Live reset)
+- running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000); UniSMS 8 credits
+- doing:   reset flow real (070); debug Mock/Live switch in the app's Forgot Password sheet (071)
+- next:    walk Mock path at http://127.0.0.1:5000; flip Live only when ready to spend a credit
+- blocked: nothing pushed yet (no GitHub token); dev pages/test.html must be deleted before production
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)
 
