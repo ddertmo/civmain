@@ -1,7 +1,7 @@
 # Session context refreshed so a new agent can pick up the audit follow-up
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `4214c06`
 - **Type:** docs
 - **Areas:** agent context (SESSION_CONTEXT, TASKS, AGENTS), changelog index
 

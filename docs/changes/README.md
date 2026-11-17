@@ -91,4 +91,4 @@ automatically after each change.
 | 079 | 2026-11-17 | `2dba606` | [Low audit fixes - hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts](2026-11-17-079-low-audit-fixes.md) |
 | 080 | 2026-11-17 | `77d5012` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
 | 081 | 2026-11-17 | `2e6a751` | [Migrations verified on MariaDB - rollback of the index migration fixed (FK error 1553)](2026-11-17-081-mysql-migration-run.md) |
-| 082 | 2026-11-17 | `PENDING` | [Session context refreshed - NOW, TASKS, AGENTS push rule, backfilled hashes](2026-11-17-082-session-context-refresh.md) |
+| 082 | 2026-11-17 | `4214c06` | [Session context refreshed - NOW, TASKS, AGENTS push rule, backfilled hashes](2026-11-17-082-session-context-refresh.md) |
