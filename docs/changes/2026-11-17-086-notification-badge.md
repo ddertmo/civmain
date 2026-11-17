@@ -1,7 +1,7 @@
 # Notification badge: shows the count, hides at zero, clears once viewed
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `45c0389`
 - **Type:** fix (UI)
 - **Areas:** web panel — `js/app.js` (shared by Super Admin, CEO and CENRO pages), `css/navbar.css`, `dashboard.html`
 
