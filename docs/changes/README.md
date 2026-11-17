@@ -90,3 +90,4 @@ automatically after each change.
 | 078 | 2026-11-17 | `(see git log)` | [Medium audit fixes - office scoping, token expiry, workflow rules, honest UI, performance, app hardening](2026-11-17-078-medium-audit-fixes.md) |
 | 079 | 2026-11-17 | `(see git log)` | [Low audit fixes - hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts](2026-11-17-079-low-audit-fixes.md) |
 | 080 | 2026-11-17 | `(see git log)` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
+| 081 | 2026-11-17 | `(see git log)` | [Migrations verified on MariaDB - rollback of the index migration fixed (FK error 1553)](2026-11-17-081-mysql-migration-run.md) |
