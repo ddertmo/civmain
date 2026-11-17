@@ -1,7 +1,7 @@
 # Analytics charts fit their cards on all three roles (Super Admin, CEO, CENRO)
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `cefccf6`
 - **Type:** fix (UI layout)
 - **Areas:** web panel — `analytics.html`, `offices/ceo/analytics.html`, `offices/cenro/analytics.html`, shared `css/charts.css`
 
