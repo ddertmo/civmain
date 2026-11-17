@@ -303,6 +303,10 @@ they cannot, which is why PHP must be read directly here.
 
 ## 10. Where things stand
 
+> **Historical snapshot (changelog 014).** For the current state see `## NOW`
+> in `SESSION_CONTEXT.md`, and section 11 below for the 2026-11-17 security
+> audit changes (076–082).
+
 Everything through **changelog 014** is committed and pushed to
 `backup/main` at `2e1a5a6`; working tree clean.
 
@@ -322,6 +326,87 @@ repaired, legacy `/api/reports` subsystem deleted, `super_admin` write gate,
 3. The parent repo (`SerenoLawrence/CIVILWATCH`) is stale and untouched.
 4. `README_DOCUMENTATION.md` / `CIVILWATCH_MASTER.md` etc. live in the parent
    repo, outside `prc/`, and are not part of this workflow.
+
+---
+
+## 11. Security audit 2026-11-17 — what changed (read before touching auth, reports, notifications)
+
+**Where to look:**
+- **Details and verification:** [076](changes/2026-11-17-076-critical-security-fixes.md) Critical,
+  [077](changes/2026-11-17-077-high-security-fixes.md) High,
+  [078](changes/2026-11-17-078-medium-audit-fixes.md) Medium,
+  [079](changes/2026-11-17-079-low-audit-fixes.md) Low,
+  [080](changes/2026-11-17-080-first-test-run.md) first test run,
+  [081](changes/2026-11-17-081-mysql-migration-run.md) MariaDB migration run,
+  [082](changes/2026-11-17-082-session-context-refresh.md) context docs.
+- **Open items:** `TASKS.md` → "Security audit follow-up".
+
+### Removed — do not re-add or call these
+| What | Where it was | Why |
+|---|---|---|
+| Demo-credentials box and password auto-fill on the login page | `laravel/public/index.html` | It published the super-admin password |
+| Plain-text passwords in the dump header, seeder output and docs | `civilwatch_FINAL.sql`, `DatabaseSeeder`, `START_ALL.bat`, `*.md` | Same. The seeder now uses `SEED_ADMIN_PASSWORD` or a random password |
+| `public/test.html`, `register-demo.html`, `reset-demo.html` | `laravel/public/` | Public pages that sent real SMS and exposed OTPs and tokens |
+| `resources/views/t1.php` | `laravel/resources/views/` | Empty stub |
+| `public/js/auth.js`, `dashboard.js`, `users.js` | `laravel/public/js/` | Unreferenced; `auth.js` had a syntax error |
+| `php artisan reports:clear-dummy` (`ClearDummyReports.php`) | `laravel/app/Console/Commands/` | Deleted real reports CW-2026-00101…00110 |
+| `DELETE /api/notifications`, `DELETE /api/notifications/{id}`, `POST /api/notifications/{id}/read` | `routes/api.php` | Staff were changing and deleting **citizens'** inboxes |
+| `UserController::dashboardStats()` | `app/Http/Controllers` | Dead code with no route |
+| `Notifiable` trait on `Citizen` | `app/Models/Citizen.php` | Unused, and it clashed with `notifications()` |
+| Sample/dummy data fallbacks shown as real | office pages, `utils.js fetchOfficeReports`, Flutter `AppState` | Pages now show an error or empty state instead |
+| Fake "success" buttons | office Update, users.html, settings.html | They are wired to the API now, or say "not saved yet" |
+| Flutter `semaphore_service.dart`, `addReport`/`updateStatus` fabrication helpers | `civ-main/lib/` | Unused, unsafe |
+| Flutter packages `cupertino_icons`, `url_launcher`, `permission_handler` | `pubspec.yaml` | Unused. `flutter pub get` is needed to refresh the lock file |
+| Android cleartext in release builds; iOS `NSAllowsArbitraryLoads` | manifest, `Info.plist` | Cleartext is debug/profile only now |
+| Tracked `graphify-out/cache/` and dated `graphify-out/YYYY-MM-DD/` snapshots | git index (still on disk, now gitignored) | About 89% of the repo size |
+
+### Changed behaviour — things that will surprise you
+- **Auth guards.**
+  - `auth:sanctum` is bound to `users` (`config/auth.php`). Staff routes also use the `staff`, `active` and `superadmin` middleware.
+  - A citizen token on a staff route returns 401/403.
+- **Registration needs proof.** `verify-otp` returns `data.registrationTicket` for new users, and `register` requires it. The only exception is `APP_ENV=local` + `APP_DEBUG=true`, so the Flutter debug "Mock" path keeps working. Old app builds cannot register on production.
+- **OTP echo.** The OTP is returned only when the environment is local **and** debug is on.
+- **Rate limits and lockouts.** Per-IP throttles on all auth routes, plus:
+  - 5 wrong PINs per phone per 15 min;
+  - 5 wrong OTPs per phone, after which the codes are burned;
+  - 3 SMS per phone per 10 min;
+  - 5 failed staff logins per email per 15 min.
+
+  The counters live in the cache table. Clear one with `RateLimiter::clear('staff-login:<email>')`.
+- **Tokens expire after 7 days** (`config/sanctum.php`, `SANCTUM_EXPIRATION`). Deactivating a user, resetting their password or deleting them revokes their tokens.
+- **Office scoping.** `CitizenReport::scopeVisibleTo($user)` applies to every staff read: list, detail, map, summary, analytics and the Blade pages. A CEO user gets 404 for CENRO reports.
+- **Status workflow is enforced** by `CitizenReport::TRANSITIONS`:
+  - Submitted → Pending Validation, Approved or Rejected
+  - Pending Validation → Approved or Rejected
+  - Approved → Assigned to Office (assign only)
+  - Assigned → In Progress or Resolved
+  - In Progress → Resolved
+  - Resolved and Rejected are final
+
+  `transitionTo()` runs in a transaction with a row lock and throws `InvalidArgumentException` on an illegal move.
+- **Reference numbers.** `CW-{year}-{id:05}` comes from the auto-increment id (`createWithReferenceNumber`). They are no longer count-based.
+- **Admin bell.** It is a read-only view of `citizen_notifications`. Per-staff read state is in `users.notifications_read_at`.
+- **Staff list.** Reading `/api/users` and `/api/admin/users` needs super admin (`superadmin:all`).
+- **Barangays.** Reports must use one of the 26 official barangays (`CitizenReport::BARANGAYS`, the same list as Flutter `AppStrings.barangays`).
+- **Offices.** Only offices with a staff role (CEO, CENRO) can be created or listed.
+- **OTP storage.** `otp_codes.code` holds an HMAC-SHA256 of the code, not the code itself.
+- **Photos.** Uploaded JPEGs are re-encoded, which strips EXIF/GPS.
+- **Security headers.** A CSP (with `unsafe-inline`), `nosniff` and `X-Frame-Options: DENY` are sent by `SecurityHeaders` middleware and by `public/.htaccess`. CDN scripts are pinned with SRI. Pages can't be iframed.
+- **Escaping in the web panel.** Every API value put into HTML goes through `Utils.esc`, `Utils.jsArg` (inline handlers) or `Utils.safeUrl`. Keep doing that.
+- **Flutter app.**
+  - The token is in `FlutterSecureStorage`.
+  - Requests time out after 15 s (uploads 90 s).
+  - Release builds require `--dart-define=API_BASE_URL=https://…` and sign with `android/key.properties`.
+- **Catch-all `.html` route.** It only matches `*.html` inside `public/`.
+- **Config keys.** New `.env` keys: `SEED_ADMIN_PASSWORD`, `SANCTUM_EXPIRATION`, `CORS_ALLOWED_ORIGINS`, `SESSION_SECURE_COOKIE`.
+
+### Added
+- **Migrations:**
+  - `2026_11_17_000001` `users.notifications_read_at`
+  - `…000002` performance indexes; `down()` keeps the foreign-key index
+  - `…000003` `otp_codes.code` widened to 64
+- **Tests:** `tests/Feature/SecurityRegressionTest` (11), `MediumFixesTest` (9) and `LowFixesTest` (5). `tests/TestCase::call()` resets the auth guards before each request.
+- **Results:** 27/27 pass on SQLite and on MariaDB 10.11.
 
 
 ## Context-minimization (graph-first retrieval)
