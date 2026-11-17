@@ -21,14 +21,16 @@ class MobileReportController extends Controller
     public function index(Request $request): JsonResponse
     {
         $citizen = $request->user('citizen');
-        $query   = CitizenReport::with(['activities', 'assignedOffice'])
+        // 'citizen' eager-loaded: toApiArray() reads it, which was one extra
+        // query per report (N+1). Bounded to the newest 200 reports.
+        $query   = CitizenReport::with(['activities', 'assignedOffice', 'citizen'])
                                 ->where('citizen_id', $citizen->id);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        $reports = $query->orderBy('created_at', 'desc')->get();
+        $reports = $query->orderBy('created_at', 'desc')->limit(200)->get();
 
         return response()->json([
             'success' => true,
@@ -51,7 +53,10 @@ class MobileReportController extends Controller
             'description'       => 'nullable|string|max:1000',
             'street'            => 'nullable|string|max:255',
             'purok'             => 'nullable|string|max:100',
-            'barangay'          => 'required|string|max:100',
+            // Official list only — a free-text value (or the app's old
+            // 'Unknown Barangay' fallback) routed reports wrongly and skewed
+            // the per-barangay analytics.
+            'barangay'          => ['required', 'string', Rule::in(CitizenReport::BARANGAYS)],
             'city'              => 'nullable|string|max:100',
             'province'          => 'nullable|string|max:100',
             'landmark'          => 'nullable|string|max:255',
@@ -148,6 +153,10 @@ class MobileReportController extends Controller
                 CitizenReport::STATUS_RESOLVED,
             ])
             ->orderBy('created_at', 'desc')
+            // Public, unauthenticated endpoint: never return an unbounded set
+            // (easy to use for loading the server). Newest 500 is plenty for
+            // the community feed/map.
+            ->limit(500)
             ->get();
 
         return response()->json([

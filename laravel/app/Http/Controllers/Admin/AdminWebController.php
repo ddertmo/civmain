@@ -57,19 +57,13 @@ class AdminWebController extends Controller
     // Dashboard
     // ─────────────────────────────────────────────────────────────────────
 
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
-        $stats = [
-            'total'              => CitizenReport::count(),
-            'submitted'          => CitizenReport::where('status', CitizenReport::STATUS_SUBMITTED)->count(),
-            'pending_validation' => CitizenReport::where('status', CitizenReport::STATUS_PENDING_VALIDATION)->count(),
-            'approved'           => CitizenReport::where('status', CitizenReport::STATUS_APPROVED)->count(),
-            'assigned'           => CitizenReport::where('status', CitizenReport::STATUS_ASSIGNED)->count(),
-            'in_progress'        => CitizenReport::where('status', CitizenReport::STATUS_IN_PROGRESS)->count(),
-            'resolved'           => CitizenReport::where('status', CitizenReport::STATUS_RESOLVED)->count(),
-        ];
+        // Shared with the API summary: one grouped query, office-scoped.
+        $stats = CitizenReport::statusCounts($request->user());
 
         $recentReports = CitizenReport::with('assignedOffice')
+            ->visibleTo($request->user())
             ->orderBy('created_at', 'desc')
             ->limit(8)
             ->get();
@@ -89,6 +83,7 @@ class AdminWebController extends Controller
     public function reportsIndex(Request $request): View
     {
         $query = CitizenReport::with(['citizen', 'assignedOffice'])
+            ->visibleTo($request->user())
             ->orderBy('created_at', 'desc');
 
         if ($request->filled('status'))   $query->where('status', $request->status);
@@ -105,9 +100,11 @@ class AdminWebController extends Controller
         return view('admin.citizen-reports.index', compact('reports'));
     }
 
-    public function reportsShow(int $id): View
+    public function reportsShow(Request $request, int $id): View
     {
-        $report  = CitizenReport::with(['citizen', 'assignedOffice', 'activities'])->findOrFail($id);
+        $report  = CitizenReport::with(['citizen', 'assignedOffice', 'activities'])
+            ->visibleTo($request->user())
+            ->findOrFail($id);
         $offices = GovernmentOffice::where('is_active', true)->orderBy('name')->get();
         return view('admin.citizen-reports.show', compact('report', 'offices'));
     }
@@ -118,8 +115,11 @@ class AdminWebController extends Controller
         if (! in_array($report->status, [CitizenReport::STATUS_SUBMITTED, CitizenReport::STATUS_PENDING_VALIDATION])) {
             return back()->with('error', 'Only Submitted or Pending Validation reports can be approved.');
         }
-        $report->update(['is_public' => true]);
-        $report->transitionTo(CitizenReport::STATUS_APPROVED);
+        try {
+            $report->transitionTo(CitizenReport::STATUS_APPROVED); // also sets is_public
+        } catch (\InvalidArgumentException $e) {
+            return back()->with('error', $e->getMessage());
+        }
         return back()->with('success', 'Report approved and published to community map.');
     }
 
@@ -134,8 +134,14 @@ class AdminWebController extends Controller
             return back()->with('error', 'This report is already assigned to an office.');
         }
         $office = GovernmentOffice::findOrFail($request->office_id);
-        $report->update(['assigned_office_id' => $office->id]);
-        $report->transitionTo(CitizenReport::STATUS_ASSIGNED, null, $office->name);
+        try {
+            // Office + status in one locked write (see CitizenReport::transitionTo).
+            $report->transitionTo(CitizenReport::STATUS_ASSIGNED, null, $office->name, [
+                'assigned_office_id' => $office->id,
+            ]);
+        } catch (\InvalidArgumentException $e) {
+            return back()->with('error', 'This report was changed by someone else. Please reload it.');
+        }
         return back()->with('success', "Report assigned to {$office->name}.");
     }
 
@@ -154,7 +160,16 @@ class AdminWebController extends Controller
             return back()->with('error', 'A report can only be rejected before it is assigned to an office.');
         }
 
-        $report->transitionTo($request->status, $request->description);
+        // Same workflow rules as the API (CitizenReport::TRANSITIONS).
+        if ($report->status !== $request->status && ! $report->canTransitionTo($request->status)) {
+            return back()->with('error', "A report cannot move from '{$report->status}' to '{$request->status}'.");
+        }
+
+        try {
+            $report->transitionTo($request->status, $request->description);
+        } catch (\InvalidArgumentException $e) {
+            return back()->with('error', $e->getMessage());
+        }
         return back()->with('success', 'Status updated to: ' . $request->status);
     }
 
@@ -162,9 +177,14 @@ class AdminWebController extends Controller
     // Map
     // ─────────────────────────────────────────────────────────────────────
 
-    public function map(): View
+    public function map(Request $request): View
     {
+        // Same filters as the API map: office-scoped, public only, bounded.
         $reports = CitizenReport::with('assignedOffice')
+            ->visibleTo($request->user())
+            ->where('is_public', true)
+            ->latest()
+            ->limit(2000)
             ->whereNotNull('lat')
             ->whereNotNull('lng')
             ->whereIn('status', [

@@ -28,9 +28,13 @@ class AuthService {
         _currentUser = _parseUser(res['data'] as Map<String, dynamic>);
         return _currentUser;
       }
-    } catch (_) {
-      // Token expired or invalid — clear it
-      await _api.deleteToken();
+    } catch (e) {
+      // Only an explicit 401 means the token is expired/invalid — clear it.
+      // Network errors / timeouts / 5xx keep the token so an offline start
+      // doesn't log the user out.
+      if (e is ApiException && e.isUnauthorized) {
+        await _api.deleteToken();
+      }
     }
     return null;
   }

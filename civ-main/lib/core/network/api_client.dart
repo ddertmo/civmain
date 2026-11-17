@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/api_constants.dart';
@@ -9,29 +11,68 @@ import '../constants/api_constants.dart';
 /// - Automatically injects Bearer token from storage
 /// - Parses JSON responses
 /// - Throws [ApiException] on non-2xx responses
-/// - On web (Chrome), flutter_secure_storage falls back to SharedPreferences
+/// - Applies a [_timeout] to every request
+/// - Token is kept in flutter_secure_storage (Keychain / Android Keystore) on
+///   mobile; on web it stays in SharedPreferences (browser storage — secure
+///   storage offers no real protection there anyway)
 class ApiClient {
   ApiClient._();
   static final ApiClient _instance = ApiClient._();
   static ApiClient get instance => _instance;
 
   static const _tokenKey = 'cw_citizen_token';
+  static const _timeout = Duration(seconds: 15);
+  static const _uploadTimeout = Duration(seconds: 90);
+
+  static const FlutterSecureStorage _secure = FlutterSecureStorage();
 
   // ── Token storage ─────────────────────────────────────────────────────
 
   Future<void> saveToken(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_tokenKey, token);
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_tokenKey, token);
+      return;
+    }
+    await _secure.write(key: _tokenKey, value: token);
   }
 
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_tokenKey);
+    if (kIsWeb) return prefs.getString(_tokenKey);
+
+    String? secureToken;
+    try {
+      secureToken = await _secure.read(key: _tokenKey);
+    } on Exception {
+      // Keystore/Keychain read failure — treat as signed out.
+      secureToken = null;
+    }
+    if (secureToken != null && secureToken.isNotEmpty) return secureToken;
+
+    // One-time migration: older builds stored the token in SharedPreferences.
+    final legacy = prefs.getString(_tokenKey);
+    if (legacy != null && legacy.isNotEmpty) {
+      try {
+        await _secure.write(key: _tokenKey, value: legacy);
+        await prefs.remove(_tokenKey);
+      } on Exception {
+        // Secure write failed — keep the legacy copy so the user stays in.
+      }
+      return legacy;
+    }
+    return null;
   }
 
   Future<void> deleteToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
+    if (kIsWeb) return;
+    try {
+      await _secure.delete(key: _tokenKey);
+    } on Exception {
+      // Nothing more we can do; the prefs copy is already gone.
+    }
   }
 
   Future<bool> get hasToken async {
@@ -44,7 +85,8 @@ class ApiClient {
   Future<Map<String, dynamic>> get(String url, {bool auth = true}) async {
     final headers = await _headers(auth);
     _log('GET', url);
-    final response = await http.get(Uri.parse(url), headers: headers);
+    final response =
+        await _send(() => http.get(Uri.parse(url), headers: headers));
     return _parse(response);
   }
 
@@ -58,11 +100,11 @@ class ApiClient {
     final headers = await _headers(auth);
     headers['Content-Type'] = 'application/json';
     _log('POST', url, body: body);
-    final response = await http.post(
-      Uri.parse(url),
-      headers: headers,
-      body: jsonEncode(body),
-    );
+    final response = await _send(() => http.post(
+          Uri.parse(url),
+          headers: headers,
+          body: jsonEncode(body),
+        ));
     return _parse(response);
   }
 
@@ -84,8 +126,12 @@ class ApiClient {
     request.files.addAll(files);
 
     _log('POST multipart', url, body: fields);
-    final streamed = await request.send();
-    final response = await http.Response.fromStream(streamed);
+    // Photo uploads (up to 5 MB) need longer than a normal call on slow
+    // mobile data.
+    final response = await _send(() async {
+      final streamed = await request.send();
+      return http.Response.fromStream(streamed);
+    }, timeout: _uploadTimeout);
     return _parse(response);
   }
 
@@ -94,11 +140,35 @@ class ApiClient {
   Future<Map<String, dynamic>> delete(String url) async {
     final headers = await _headers(true);
     _log('DELETE', url);
-    final response = await http.delete(Uri.parse(url), headers: headers);
+    final response =
+        await _send(() => http.delete(Uri.parse(url), headers: headers));
     return _parse(response);
   }
 
   // ── Private helpers ───────────────────────────────────────────────────
+
+  /// Runs [request] with [_timeout] and maps timeouts / connection failures
+  /// to an [ApiException] with statusCode 0 (see [ApiException.isNetwork]).
+  Future<http.Response> _send(
+    Future<http.Response> Function() request, {
+    Duration timeout = _timeout,
+  }) async {
+    try {
+      return await request().timeout(timeout);
+    } on TimeoutException {
+      throw const ApiException(
+        message: 'Cannot reach server. The request timed out — please check '
+            'your connection and try again.',
+        statusCode: 0,
+      );
+    } on http.ClientException {
+      // On mobile, http wraps SocketException in ClientException.
+      throw const ApiException(
+        message: 'Cannot reach server. Please check your internet connection.',
+        statusCode: 0,
+      );
+    }
+  }
 
   Future<Map<String, String>> _headers(bool withAuth) async {
     final headers = <String, String>{'Accept': 'application/json'};
@@ -226,6 +296,8 @@ class ApiException implements Exception {
   bool get isValidation => statusCode == 422;
   bool get isNotFound => statusCode == 404;
   bool get isServer => statusCode >= 500;
+  /// Timeout or connection failure — the server was never reached.
+  bool get isNetwork => statusCode == 0;
 
   @override
   String toString() => 'ApiException($statusCode): $message';

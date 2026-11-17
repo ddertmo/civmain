@@ -11,11 +11,11 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-10-21 - latest change = 072 (Mock skips OTP)
-- running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000); UniSMS 8 credits
-- doing:   Mock = free: registration registers without OTP; reset opens the demo dashboard (072)
-- next:    test both Mock paths at http://127.0.0.1:5000; Live/OTP waits for the user's command
-- blocked: dev pages (test.html, register-demo.html, reset-demo.html) must be deleted before production
+- at:      2026-11-17 - latest change = 078 (Medium audit fixes); 076/077 = Critical/High security fixes
+- running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000)
+- doing:   security audit follow-up; Mock registration still works on local debug backends only
+- next:    on the PC: `php artisan migrate` + `php artisan test`; rotate the published seed passwords; rebuild the app
+- blocked: nothing (dev pages test/register-demo/reset-demo deleted in 078)
 
 Detailed/portable notes â†’ [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) Â· open work â†’ [`TASKS.md`](TASKS.md)
 

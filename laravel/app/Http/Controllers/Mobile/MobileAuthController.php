@@ -608,13 +608,7 @@ class MobileAuthController extends Controller
         return $phone;
     }
 
-    // Official 26 barangays of Digos City, Davao del Sur (PSA 2020 / PhilAtlas).
-    // Keep in sync with AppStrings.barangays in the Flutter app.
-    private const BARANGAYS = [
-        'Aplaya', 'Balabag', 'Binaton', 'Cogon', 'Colorado', 'Dawis',
-        'Dulangan', 'Goma', 'Igpit', 'Kapatagan', 'Kiagot', 'Lungag',
-        'Mahayahay', 'Matti', 'Ruparan', 'San Agustin', 'San Jose',
-        'San Miguel', 'San Roque', 'Sinawilan', 'Soong', 'Tiguman',
-        'Tres de Mayo', 'Zone 1 (Pob.)', 'Zone 2 (Pob.)', 'Zone 3 (Pob.)',
-    ];
+    // Official 26 barangays — single list on the model, shared with report
+    // validation. Keep in sync with AppStrings.barangays in the Flutter app.
+    private const BARANGAYS = \App\Models\CitizenReport::BARANGAYS;
 }

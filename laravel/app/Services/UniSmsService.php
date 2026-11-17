@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -49,7 +50,14 @@ class UniSmsService
             $payload['metadata'] = $metadata;
         }
 
-        $response = $this->client()->post('/sms', $payload);
+        // DNS failure, refused connection or the 15 s timeout throw instead of
+        // returning a response; report them in the same shape so the caller
+        // answers "Failed to send" instead of an HTTP 500.
+        try {
+            $response = $this->client()->post('/sms', $payload);
+        } catch (ConnectionException $e) {
+            return $this->fail(0, 'UniSMS unreachable (network error or timeout).');
+        }
 
         if ($response->successful()) {
             return [
@@ -73,7 +81,11 @@ class UniSmsService
             return null;
         }
 
-        $response = $this->client()->get('/sms/'.rawurlencode($referenceId));
+        try {
+            $response = $this->client()->get('/sms/'.rawurlencode($referenceId));
+        } catch (ConnectionException $e) {
+            return null;
+        }
 
         return $response->successful() ? $response->json('message') : null;
     }
@@ -85,7 +97,11 @@ class UniSmsService
             return null;
         }
 
-        $response = $this->client()->get('/account');
+        try {
+            $response = $this->client()->get('/account');
+        } catch (ConnectionException $e) {
+            return null;
+        }
 
         return $response->successful() ? $response->json('sms_credits') : null;
     }
@@ -93,7 +109,8 @@ class UniSmsService
     protected function client(): PendingRequest
     {
         return Http::withBasicAuth(config('services.unisms.key'), '')
-            ->timeout(15)
+            ->connectTimeout(5)
+            ->timeout(10)
             ->baseUrl(rtrim(config('services.unisms.base_url', 'https://unismsapi.com/api'), '/'));
     }
 

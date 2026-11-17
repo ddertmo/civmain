@@ -60,7 +60,7 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
     Route::get('reports/community', [MobileReportController::class, 'community']);
 
     // ── Protected — requires citizen Sanctum token ────────────────────
-    Route::middleware('auth:citizen')->group(function () {
+    Route::middleware(['auth:citizen', 'active:citizen'])->group(function () {
 
         // Auth
         Route::post('auth/logout', [MobileAuthController::class, 'logout']);
@@ -85,7 +85,7 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
 // Exception: POST citizen-reports/{id}/status is deliberately NOT here — the
 // assigned office (CEO/CENRO) drives that transition, so it lives in the
 // auth-only group below where updateStatus() enforces office ownership.
-Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'staff', 'superadmin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'staff', 'active', 'superadmin'])->group(function () {
 
     // Citizen reports management
     Route::get('citizen-reports/summary',      [AdminCitizenReportController::class, 'summary']);
@@ -118,7 +118,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'staff', 'su
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
 
 // `staff` rejects any non-User token (see App\Http\Middleware\EnsureStaff).
-Route::middleware(['auth:sanctum', 'staff'])->group(function () {
+Route::middleware(['auth:sanctum', 'staff', 'active'])->group(function () {
 
     // Auth
     Route::get('/user',   [AuthController::class, 'me']);

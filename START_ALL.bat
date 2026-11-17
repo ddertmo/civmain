@@ -67,7 +67,15 @@ if errorlevel 1 (
   echo        No APP_KEY - generating
   cd /d "%LARAVEL%" && call "%PHP%" artisan key:generate --force >nul
 )
-cd /d "%LARAVEL%" && call "%PHP%" artisan migrate --force >nul 2>&1
+rem Migrations bring an imported civilwatch_FINAL.sql up to date (the dump
+rem predates several migrations). Show errors instead of hiding them.
+cd /d "%LARAVEL%" && call "%PHP%" artisan migrate --force
+if errorlevel 1 (
+  echo.
+  echo  [!] Database migration FAILED - see the error above. The app may
+  echo      misbehave until it is fixed. Press any key to continue anyway.
+  pause >nul
+)
 
 echo [4/6] Backend (Laravel :8000) ...
 powershell -NoProfile -Command "if (-not (Test-NetConnection 127.0.0.1 -Port 8000 -InformationLevel Quiet -WarningAction SilentlyContinue)) { Start-Process '%PHP%' -ArgumentList 'artisan','serve','--host=127.0.0.1','--port=8000' -WorkingDirectory '%LARAVEL%' -WindowStyle Hidden }"

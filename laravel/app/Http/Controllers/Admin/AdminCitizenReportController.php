@@ -40,14 +40,7 @@ class AdminCitizenReportController extends Controller
 
         // Office staff only ever see the reports handed to their own office;
         // the super admin still sees every report.
-        $user = $request->user();
-        if ($user && in_array($user->role, ['ceo', 'cenro'], true)) {
-            $abbr = $user->role === 'ceo' ? 'CEO' : 'CENRO';
-            $query->whereHas(
-                'assignedOffice',
-                fn ($q) => $q->where('abbreviation', $abbr)
-            );
-        }
+        $query->visibleTo($request->user());
 
         // The admin HTML pages pass ?limit=200/500 expecting all matching rows
         // in one shot; the Blade admin defaults to 25 per page. Honor both
@@ -72,9 +65,13 @@ class AdminCitizenReportController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // GET /api/admin/citizen-reports/{id}
     // ─────────────────────────────────────────────────────────────────────
-    public function show(string $id): JsonResponse
+    public function show(Request $request, string $id): JsonResponse
     {
-        $query = CitizenReport::with(['citizen', 'assignedOffice', 'activities']);
+        // Same office scope as index(): a CEO user can no longer open CENRO,
+        // unassigned or rejected reports (and their reporter's PII) by id or
+        // by guessing the sequential reference number. Out of scope → 404.
+        $query = CitizenReport::with(['citizen', 'assignedOffice', 'activities'])
+            ->visibleTo($request->user());
 
         // Accept either the numeric id or the human reference number
         // (e.g. CW-2026-00125) so the office pages can link by reference.
@@ -101,11 +98,13 @@ class AdminCitizenReportController extends Controller
             ], 422);
         }
 
-        $report->update(['is_public' => true]);
-
-        // Persist the APPROVED status — this is the transition every screen
-        // downstream (map, assign office, Android, monitoring) keys off.
-        $report->transitionTo(CitizenReport::STATUS_APPROVED);
+        // Persist the APPROVED status (transitionTo also publishes it:
+        // is_public = true) — every screen downstream keys off this.
+        try {
+            $report->transitionTo(CitizenReport::STATUS_APPROVED);
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 409);
+        }
 
         return response()->json([
             'success' => true,
@@ -142,8 +141,22 @@ class AdminCitizenReportController extends Controller
             ], 422);
         }
 
-        $report->update(['assigned_office_id' => $office->id]);
-        $report->transitionTo(CitizenReport::STATUS_ASSIGNED, null, $office->name);
+        // Office + status are written together under a row lock. If another
+        // admin assigned it a moment ago, the locked re-read sees the new
+        // status and the move is refused instead of overwriting their office.
+        try {
+            $report->transitionTo(
+                CitizenReport::STATUS_ASSIGNED,
+                null,
+                $office->name,
+                ['assigned_office_id' => $office->id],
+            );
+        } catch (\InvalidArgumentException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This report was changed by someone else. Please reload it.',
+            ], 409);
+        }
 
         return response()->json([
             'success' => true,
@@ -221,7 +234,26 @@ class AdminCitizenReportController extends Controller
             ], 422);
         }
 
-        $report->transitionTo($request->status, $request->description);
+        if ($request->status === CitizenReport::STATUS_ASSIGNED && $report->assigned_office_id === null) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Use "Assign to office" to hand this report to an office.',
+            ], 422);
+        }
+
+        if ($report->status !== $request->status && ! $report->canTransitionTo($request->status)) {
+            return response()->json([
+                'success' => false,
+                'message' => "A report cannot move from '{$report->status}' to '{$request->status}'.",
+            ], 422);
+        }
+
+        try {
+            $report->transitionTo($request->status, $request->description);
+        } catch (\InvalidArgumentException $e) {
+            // Status changed between the check above and the locked write.
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 409);
+        }
 
         return response()->json([
             'success' => true,
@@ -288,7 +320,10 @@ class AdminCitizenReportController extends Controller
                 CitizenReport::STATUS_RESOLVED,
             ])
             ->whereNotNull('lat')
-            ->whereNotNull('lng');
+            ->whereNotNull('lng')
+            ->visibleTo($request->user())
+            ->latest()
+            ->limit(2000); // bounded payload; the map never needs more
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -317,19 +352,13 @@ class AdminCitizenReportController extends Controller
     // GET /api/admin/citizen-reports/summary
     // Dashboard stat counts.
     // ─────────────────────────────────────────────────────────────────────
-    public function summary(): JsonResponse
+    public function summary(Request $request): JsonResponse
     {
+        // One grouped query, scoped to the caller's office, and now includes
+        // 'rejected' (previously missing from every dashboard).
         return response()->json([
             'success' => true,
-            'data'    => [
-                'total'              => CitizenReport::count(),
-                'submitted'          => CitizenReport::where('status', CitizenReport::STATUS_SUBMITTED)->count(),
-                'pending_validation' => CitizenReport::where('status', CitizenReport::STATUS_PENDING_VALIDATION)->count(),
-                'approved'           => CitizenReport::where('status', CitizenReport::STATUS_APPROVED)->count(),
-                'assigned'           => CitizenReport::where('status', CitizenReport::STATUS_ASSIGNED)->count(),
-                'in_progress'        => CitizenReport::where('status', CitizenReport::STATUS_IN_PROGRESS)->count(),
-                'resolved'           => CitizenReport::where('status', CitizenReport::STATUS_RESOLVED)->count(),
-            ],
+            'data'    => CitizenReport::statusCounts($request->user()),
         ]);
     }
 }

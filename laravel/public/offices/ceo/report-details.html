@@ -615,7 +615,7 @@
                             <textarea class="form-input" id="remarksInput" rows="4" placeholder="Describe the current progress or update..." style="height:auto;padding-top:10px;resize:vertical;" maxlength="500" oninput="document.getElementById('charCount').textContent=this.value.length+'/500'"></textarea>
                             <div class="char-count" id="charCount">0/500</div>
                         </div>
-                        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="saveUpdate()">
+                        <button class="btn btn-primary" id="saveUpdateBtn" style="width:100%;justify-content:center;" onclick="saveUpdate()">
                             <span class="material-symbols-outlined">save</span> Save Update
                         </button>
                         <div class="or-divider"><span>OR</span></div>
@@ -710,87 +710,7 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        // ── Report data (read from URL param, fallback to default) ───
-        const REPORTS = {
-            'CW-2026-00132': {
-                issue: 'Potholes on Rizal Street',
-                barangay: 'Poblacion, Digos City',
-                lat: 6.7490,
-                lng: 125.3570,
-                status: 'In Progress',
-                date: 'May 21, 2026 · 9:20 AM',
-                assigned: 'May 21, 2026',
-                photo: 'Damaged Road',
-                desc: 'Deep potholes along Rizal Street causing difficulty for vehicles and pedestrians. Road surface is severely damaged and requires immediate repair.'
-            },
-            'CW-2026-00131': {
-                issue: 'Damaged Sidewalk',
-                barangay: 'Zone 2, Digos City',
-                lat: 6.7560,
-                lng: 125.3600,
-                status: 'In Progress',
-                date: 'May 21, 2026 · 8:45 AM',
-                assigned: 'May 21, 2026',
-                photo: 'Damaged Sidewalk',
-                desc: 'Sidewalk along Zone 2 is cracked and uneven, posing a safety hazard for pedestrians especially at night.'
-            },
-            'CW-2026-00130': {
-                issue: 'Broken Streetlight',
-                barangay: 'Ma-a, Digos City',
-                lat: 6.7530,
-                lng: 125.3570,
-                status: 'In Progress',
-                date: 'May 20, 2026 · 7:30 PM',
-                assigned: 'May 20, 2026',
-                photo: 'Broken Streetlight',
-                desc: 'Streetlight along Ma-a has been non-functional for two weeks, causing safety concerns at night.'
-            },
-            'CW-2026-00129': {
-                issue: 'Blocked Drainage',
-                barangay: 'Badiang, Digos City',
-                lat: 6.7480,
-                lng: 125.3520,
-                status: 'In Progress',
-                date: 'May 20, 2026 · 4:10 PM',
-                assigned: 'May 20, 2026',
-                photo: 'Blocked Drainage',
-                desc: 'Drainage canal in Badiang is heavily clogged causing water overflow during rain.'
-            },
-            'CW-2026-00128': {
-                issue: 'Flooding on National Highway',
-                barangay: 'Buhangin, Digos City',
-                lat: 6.7420,
-                lng: 125.3480,
-                status: 'Resolved',
-                date: 'May 19, 2026 · 10:15 AM',
-                assigned: 'May 19, 2026',
-                photo: 'Blocked Drainage',
-                desc: 'Flooding on the national highway section in Buhangin due to blocked drainage culvert.'
-            },
-            'CW-2026-00127': {
-                issue: 'Road Sign Damage',
-                barangay: 'Aplaya, Digos City',
-                lat: 6.7500,
-                lng: 125.3540,
-                status: 'Assigned',
-                date: 'May 19, 2026 · 2:00 PM',
-                assigned: 'May 19, 2026',
-                photo: 'Road Sign Damage',
-                desc: 'Road sign at the Aplaya intersection is damaged and partially fallen, causing confusion for drivers.'
-            },
-        };
-
-        const CITIZENS = {
-            'CW-2026-00132': { name: 'Roberto Lim', phone: '0917 555 0132', email: 'roberto.lim@example.com', address: 'Zone 4, Digos City' },
-            'CW-2026-00131': { name: 'Grace Bautista', phone: '0918 555 0131', email: 'grace.bautista@example.com', address: 'Carmen, Digos City' },
-            'CW-2026-00130': { name: 'Mark Villanueva', phone: '0919 555 0130', email: 'mark.villanueva@example.com', address: 'Soong, Digos City' },
-            'CW-2026-00129': { name: 'Jenny Rose Domingo', phone: '0920 555 0129', email: 'jennyrose.domingo@example.com', address: 'Aplaya, Digos City' },
-            'CW-2026-00128': { name: 'Carlos Mendoza', phone: '0921 555 0128', email: 'carlos.mendoza@example.com', address: 'Goma, Digos City' },
-            'CW-2026-00127': { name: 'Kim Navarro', phone: '0922 555 0127', email: 'kim.navarro@example.com', address: 'Poblacion, Digos City' },
-        };
-
         // ── Live data + rendering ────────────────────────────────────
-        var DEFAULT_REF = 'CW-2026-00132';
         var OFFICE_CATEGORY = 'Infrastructure';
 
         const statusColors = {
@@ -898,37 +818,66 @@
             }).addTo(map).bindPopup(Utils.esc(report.issue)).openPopup();
         }
 
-        var ref = Utils.getParam('ref') || Utils.getParam('id') || DEFAULT_REF;
+        var ref = Utils.getParam('ref') || Utils.getParam('id') || '';
+        var currentStatus = ''; // real status from the API ('' until loaded)
 
-        // Prefer the real API; fall back to the built-in sample record when
-        // there is no backend or the user is not signed in, so the page still
-        // renders as a prototype.
-        async function loadReport() {
-            var s = REPORTS[ref] || REPORTS[DEFAULT_REF] || {};
-            var sc = CITIZENS[ref] || {};
-            var fallback = Object.assign({}, s, {
-                priority: s.priority || 'Medium',
-                citizen: {
-                    fullName: sc.name,
-                    phoneNumber: sc.phone,
-                    street: sc.address
-                }
+        // Offices may only move their reports along: Assigned → In Progress |
+        // Resolved, In Progress → Resolved (the API enforces the same map).
+        var OFFICE_NEXT = {
+            'Assigned': ['In Progress', 'Resolved'],
+            'In Progress': ['Resolved']
+        };
+
+        // Enable only the allowed next statuses; Save/Resolve only when there
+        // is somewhere to go.
+        function applyStatusOptions(status) {
+            currentStatus = status || '';
+            var allowed = OFFICE_NEXT[currentStatus] || [];
+            var sel = document.getElementById('statusSelect');
+            Array.prototype.forEach.call(sel.options, function(o) {
+                o.disabled = o.value !== currentStatus && allowed.indexOf(o.value) === -1;
             });
+            sel.value = currentStatus;
+            sel.disabled = !allowed.length;
+            document.getElementById('saveUpdateBtn').disabled = !allowed.length;
+            document.getElementById('resolveBtn').disabled = allowed.indexOf('Resolved') === -1;
+        }
 
+        // Shown when the report cannot be loaded — never sample data.
+        function renderLoadError(message) {
+            document.getElementById('reportRef').textContent = ref || '—';
+            document.getElementById('infoRef').textContent = ref || '—';
+            document.getElementById('infoDesc').textContent = message;
+            document.getElementById('statusBadgeEl').innerHTML = statusBadgeHtml('Unavailable');
+            document.getElementById('statusSelect').disabled = true;
+            document.getElementById('saveUpdateBtn').disabled = true;
+            document.getElementById('resolveBtn').disabled = true;
+            Utils.showToast(message, 'error', 5000);
+        }
+
+        async function loadReport() {
+            if (!ref) {
+                renderLoadError('No report reference was given. Open a report from the Reports list.');
+                return;
+            }
             if (typeof Api === 'undefined' || !Api.token()) {
-                render(ref, fallback);
+                renderLoadError('You are not signed in. Please log in to view this report.');
                 return;
             }
             try {
                 var json = await Api.get('/api/admin/citizen-reports/' + encodeURIComponent(ref));
+                if (json === null) return; // 401 — Api is redirecting to login
                 if (json && json.success && json.data) {
-                    render(ref, fromApi(json.data));
+                    var report = fromApi(json.data);
+                    render(ref, report);
+                    applyStatusOptions(report.status);
                     return;
                 }
+                renderLoadError('Report ' + ref + ' could not be loaded: ' + ((json && json.message) || 'not found or not assigned to your office.'));
             } catch (e) {
-                console.warn('Falling back to sample report data:', e);
+                console.error('Report load failed:', e);
+                renderLoadError('Could not reach the server. Check your connection and reload.');
             }
-            render(ref, fallback);
         }
 
         loadReport();
@@ -938,7 +887,7 @@
         // UI) without reloading the page.
         function applyStatusLocally(status) {
             document.getElementById('statusBadgeEl').innerHTML = statusBadgeHtml(status);
-            document.getElementById('statusSelect').value = status;
+            applyStatusOptions(status);
             if (status === 'Resolved') {
                 document.getElementById('resolveBtn').style.display = 'none';
                 document.getElementById('successBanner').classList.add('show');
@@ -953,11 +902,16 @@
                 Utils.showToast('Please add remarks before saving', 'error');
                 return;
             }
-
-            // Prototype fallback: no backend/token — reflect locally only.
-            if (typeof Api === 'undefined' || !Api.token()) {
-                applyStatusLocally(status);
-                Utils.showToast('Progress updated successfully', 'success');
+            if (!currentStatus) {
+                Utils.showToast('The report has not loaded; nothing was saved.', 'error');
+                return;
+            }
+            if (status === currentStatus) {
+                Utils.showToast('Choose a new status before saving.', 'info');
+                return;
+            }
+            if ((OFFICE_NEXT[currentStatus] || []).indexOf(status) === -1) {
+                Utils.showToast('"' + status + '" is not an allowed next step from "' + currentStatus + '".', 'error');
                 return;
             }
 
@@ -990,10 +944,9 @@
         async function confirmResolve() {
             closeResolveModal();
 
-            // Prototype fallback: no backend/token — reflect locally only.
-            if (typeof Api === 'undefined' || !Api.token()) {
-                applyStatusLocally('Resolved');
-                Utils.showToast('Report marked as Resolved successfully', 'success');
+            if ((OFFICE_NEXT[currentStatus] || []).indexOf('Resolved') === -1) {
+                Utils.showToast(currentStatus ? 'This report cannot be resolved from "' + currentStatus + '".' :
+                    'The report has not loaded; nothing was saved.', 'error');
                 return;
             }
 

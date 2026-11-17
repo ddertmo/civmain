@@ -96,6 +96,7 @@
         .rd-status-option.selected { border-color:#2563EB; background:#EFF6FF; }
         .rd-status-option input { position:absolute; opacity:0; pointer-events:none; }
         .rd-status-option:focus-within { border-color:#2563EB; }
+        .rd-status-option.disabled { opacity:.5; cursor:not-allowed; }
         .rd-status-icon { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
         .rd-status-icon .material-symbols-outlined { font-size:19px; color:#FFFFFF; }
         .rd-status-icon--amber { background:#F59E0B; }
@@ -241,7 +242,7 @@
                     <aside class="rd-right">
                         <article class="rd-card">
                             <h2>Update Report Status</h2>
-                            <p>Select the current stage of this report.</p>
+                            <p id="statusHint">Select the next stage of this report.</p>
                             <div class="rd-status-options" role="radiogroup" aria-label="Report status">
                                 <label class="rd-status-option" data-status="Pending Validation">
                                     <input type="radio" name="statusOption" value="Pending Validation" />
@@ -405,7 +406,18 @@
         var reportId = Utils.getParam('id');
         var detailMap = null;
         var fromPage = 'monitoring';
-        var savedStatusValue = 'Pending Validation';
+        // The report's real current status (from the API) — never a UI guess.
+        var savedStatusValue = '';
+        // Allowed next statuses, mirroring the transition map the API enforces.
+        var STATUS_TRANSITIONS = {
+            'Submitted': ['Pending Validation', 'Approved', 'Rejected'],
+            'Pending Validation': ['Approved', 'Rejected'],
+            'Approved': ['Assigned to Office'],
+            'Assigned to Office': ['In Progress', 'Resolved'],
+            'In Progress': ['Resolved'],
+            'Resolved': [],
+            'Rejected': []
+        };
 
         (function setBackLink() {
             var backLink = document.getElementById('backLink');
@@ -472,14 +484,42 @@
             return 'Pending Validation';
         }
 
-        function setUiStatus(value) {
+        // Highlight the user's pick (value = '' clears the pick).
+        function selectUiStatus(value) {
             document.querySelectorAll('.rd-status-option').forEach(function(card) {
-                var checked = card.getAttribute('data-status') === value;
+                var checked = !!value && card.getAttribute('data-status') === value;
                 card.classList.toggle('selected', checked);
                 var input = card.querySelector('input');
                 if (input) input.checked = checked;
             });
-            savedStatusValue = value;
+        }
+
+        // Show the real current status; enable only allowed next statuses.
+        function setUiStatus(current) {
+            savedStatusValue = current || '';
+            var allowed = STATUS_TRANSITIONS[savedStatusValue] || [];
+            var pickable = 0;
+            document.querySelectorAll('.rd-status-option').forEach(function(card) {
+                var s = card.getAttribute('data-status');
+                var ok = allowed.indexOf(s) !== -1;
+                if (ok) pickable++;
+                card.classList.toggle('disabled', !ok);
+                card.setAttribute('aria-disabled', ok ? 'false' : 'true');
+                card.title = s === savedStatusValue ? 'Current status' : (ok ? '' : 'Not an allowed next step from "' + savedStatusValue + '"');
+                var input = card.querySelector('input');
+                if (input) input.disabled = !ok;
+            });
+            selectUiStatus('');
+            var hint = document.getElementById('statusHint');
+            if (hint) {
+                hint.textContent = 'Current status: ' + (savedStatusValue || '—') + '. ' +
+                    (!allowed.length ? 'This status is final; no further updates are possible.' :
+                        savedStatusValue === 'Approved' ? 'Next step: assign it to an office on the Assign Office page.' :
+                        !pickable ? 'Approve or reject it from the Pending Reports page.' :
+                        'Select the next stage of this report.');
+            }
+            var saveBtn = document.getElementById('statusSaveBtn');
+            if (saveBtn) saveBtn.disabled = !pickable;
         }
 
         async function loadReport() {
@@ -562,7 +602,7 @@
                 if (photoCard) photoCard.style.display = 'block';
             }
 
-            setUiStatus(normalizeUiStatus(status));
+            setUiStatus(r.status || '');
 
             var tl = document.getElementById('timeline');
             var activityLog = r.activityLog || [];
@@ -627,13 +667,13 @@
         // Event wiring
         document.querySelectorAll('.rd-status-option input').forEach(function(input) {
             input.addEventListener('change', function() {
-                setUiStatus(this.value);
+                if (!this.disabled) selectUiStatus(this.value);
             });
         });
         document.querySelectorAll('.rd-status-option').forEach(function(card) {
             card.addEventListener('click', function() {
                 var input = card.querySelector('input');
-                if (input) { input.checked = true; setUiStatus(input.value); }
+                if (input && !input.disabled) { input.checked = true; selectUiStatus(input.value); }
             });
         });
         var notesEl = document.getElementById('statusNotes');
@@ -645,13 +685,22 @@
         updateCounter();
 
         document.getElementById('statusCancelBtn').onclick = function() {
-            setUiStatus(savedStatusValue);
+            selectUiStatus('');
             if (notesEl) notesEl.value = '';
             updateCounter();
         };
         document.getElementById('statusSaveBtn').onclick = function() {
             var selected = document.querySelector('input[name="statusOption"]:checked');
-            var newStatus = selected ? selected.value : savedStatusValue;
+            var newStatus = selected && !selected.disabled ? selected.value : '';
+            // Only post an explicit, allowed change — never a default.
+            if (!newStatus || newStatus === savedStatusValue) {
+                Utils.showToast('Select a new status before saving.', 'info');
+                return;
+            }
+            if ((STATUS_TRANSITIONS[savedStatusValue] || []).indexOf(newStatus) === -1) {
+                Utils.showToast('"' + newStatus + '" is not an allowed next step from "' + savedStatusValue + '".', 'error');
+                return;
+            }
             var description = notesEl ? notesEl.value.trim() : '';
             Api.action('POST', '/api/admin/citizen-reports/' + reportId + '/status', {
                 status: newStatus,
@@ -661,8 +710,7 @@
                 success: 'Status updated to: ' + newStatus,
                 successTitle: 'Status Updated',
                 errorTitle: 'Status Update Failed',
-                onAction: function() {
-                    savedStatusValue = newStatus;
+                onSuccess: function() {
                     if (notesEl) notesEl.value = '';
                     updateCounter();
                     loadReport();

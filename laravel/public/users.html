@@ -703,42 +703,43 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">First Name</label>
-                        <input type="text" class="form-input" placeholder="e.g. Juan" />
+                        <input type="text" class="form-input" id="addFirstName" maxlength="60" placeholder="e.g. Juan" />
                     </div>
                     <div class="form-group">
                         <label class="form-label">Last Name</label>
-                        <input type="text" class="form-input" placeholder="e.g. Dela Cruz" />
+                        <input type="text" class="form-input" id="addLastName" maxlength="60" placeholder="e.g. Dela Cruz" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="user@digos.gov.ph" />
+                    <input type="email" class="form-input" id="addEmail" maxlength="191" placeholder="user@digos.gov.ph" />
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <input type="text" class="form-input" placeholder="09XX XXX XXXX" />
+                    <label class="form-label">Temporary Password</label>
+                    <input type="password" class="form-input" id="addPassword" minlength="8" autocomplete="new-password" placeholder="At least 8 characters" />
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Role</label>
-                        <select class="form-select">
-                            <option>Administrator</option>
-                            <option>Staff</option>
+                        <select class="form-select" id="addRole">
+                            <option value="ceo">Staff — City Engineering Office</option>
+                            <option value="cenro">Staff — CENRO</option>
+                            <option value="super_admin">Administrator</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Assigned Office</label>
-                        <select class="form-select">
-                            <option>City Engineering Office</option>
-                            <option>CENRO</option>
-                            <option>TAPIK Digos</option>
+                        <select class="form-select" id="addOffice">
+                            <option value="City Engineering Office">City Engineering Office</option>
+                            <option value="CENRO">CENRO</option>
+                            <option value="TAPIK Digos">TAPIK Digos</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;">
                 <button class="btn btn-secondary" onclick="closeAddUserModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="confirmAddUser()">
+                <button class="btn btn-primary" id="addUserSubmitBtn" onclick="confirmAddUser()">
                     <span class="material-symbols-outlined">person_add</span>
                     Add User
                 </button>
@@ -1013,11 +1014,11 @@
         <button class="btn btn-secondary" style="font-size:13px;" onclick="Utils.showToast('Edit user feature coming soon','info')">
           <span class="material-symbols-outlined">edit</span> Edit User
         </button>
-        <button class="btn btn-secondary" style="font-size:13px;" onclick="Utils.showToast('Password reset link sent','success')">
+        <button class="btn btn-secondary" style="font-size:13px;" onclick="resetUserPassword(${idx})">
           <span class="material-symbols-outlined">lock_reset</span> Reset Password
         </button>
       </div>
-      <button class="btn-deactivate" onclick="Utils.showToast('${isActive ? 'User deactivated' : 'User activated'}','${isActive ? 'error' : 'success'}')">
+      <button class="btn-deactivate" onclick="toggleUserActive(${idx})">
         <span class="material-symbols-outlined">${isActive ? 'person_off' : 'person'}</span>
         ${isActive ? 'Deactivate User' : 'Activate User'}
       </button>
@@ -1056,9 +1057,86 @@
             document.getElementById('addUserModal').classList.remove('active');
         }
 
-        function confirmAddUser() {
-            closeAddUserModal();
-            Utils.showToast('New user added successfully', 'success');
+        // Keep the office in step with the chosen role (CEO / CENRO staff).
+        document.getElementById('addRole').addEventListener('change', function() {
+            const office = { ceo: 'City Engineering Office', cenro: 'CENRO', super_admin: 'TAPIK Digos' }[this.value];
+            if (office) document.getElementById('addOffice').value = office;
+        });
+
+        function resetAddUserForm() {
+            ['addFirstName', 'addLastName', 'addEmail', 'addPassword'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('addRole').value = 'ceo';
+            document.getElementById('addOffice').value = 'City Engineering Office';
+        }
+
+        // POST /api/users (super_admin only) — fields per UserController@store.
+        async function confirmAddUser() {
+            const first = document.getElementById('addFirstName').value.trim();
+            const last = document.getElementById('addLastName').value.trim();
+            const email = document.getElementById('addEmail').value.trim();
+            const password = document.getElementById('addPassword').value;
+            const role = document.getElementById('addRole').value;
+            const office = document.getElementById('addOffice').value;
+            const name = [first, last].filter(Boolean).join(' ');
+
+            if (!name) return Utils.showToast('Please enter the user\'s name.', 'error');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return Utils.showToast('Please enter a valid email address.', 'error');
+            if (password.length < 8) return Utils.showToast('Password must be at least 8 characters.', 'error');
+
+            const btn = document.getElementById('addUserSubmitBtn');
+            if (btn) btn.disabled = true;
+            const json = await Api.action('POST', '/api/users', {
+                name, email, password, role, office, is_active: true,
+            }, {
+                loading: 'Creating user…',
+                errorTitle: 'Could Not Add User',
+            });
+            if (btn) btn.disabled = false;
+            // On failure the modal stays open with what was typed, so the
+            // admin can fix it (Api.action already showed the server message).
+            if (json && json.success) {
+                closeAddUserModal();
+                resetAddUserForm();
+                Utils.showToast(json.message || 'User created successfully.', 'success');
+                loadUsers();
+            }
+        }
+
+        // PUT /api/users/{id} {is_active}
+        async function toggleUserActive(idx) {
+            const u = usersData[idx];
+            if (!u || u.id === '—') return;
+            const activate = u.status !== 'Active';
+            if (!activate && !confirm(`Deactivate ${u.name}? They will be signed out and unable to log in.`)) return;
+            const json = await Api.action('PUT', '/api/users/' + encodeURIComponent(u.id), { is_active: activate }, {
+                loading: activate ? 'Activating user…' : 'Deactivating user…',
+                errorTitle: activate ? 'Activation Failed' : 'Deactivation Failed',
+            });
+            if (json && json.success) {
+                Utils.showToast(activate ? 'User activated.' : 'User deactivated.', 'success');
+                closePanel();
+                loadUsers();
+            }
+        }
+
+        // PUT /api/users/{id} {password} — UserController@update accepts a new
+        // password (min 8) and revokes the user's existing tokens.
+        async function resetUserPassword(idx) {
+            const u = usersData[idx];
+            if (!u || u.id === '—') return;
+            const pw = prompt(`Enter a new password for ${u.name} (at least 8 characters):`);
+            if (pw === null) return; // cancelled
+            if (pw.length < 8) return Utils.showToast('Password must be at least 8 characters.', 'error');
+            const json = await Api.action('PUT', '/api/users/' + encodeURIComponent(u.id), { password: pw }, {
+                loading: 'Resetting password…',
+                errorTitle: 'Password Reset Failed',
+            });
+            if (json && json.success) {
+                Utils.showToast('Password updated. Share it with the user securely.', 'success');
+                loadUsers();
+            }
         }
 
         loadUsers();

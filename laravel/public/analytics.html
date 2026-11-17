@@ -231,8 +231,19 @@
         // ── Current mode ──────────────────────────────────────────────────────
         var currentMode = 'weekly';
 
-        // ── Computed data from API ────────────────────────────────────────────
-        var allReports = [];
+        // ── Aggregated data from GET /api/analytics ───────────────────────────
+        // { summary, status_distribution, by_category, top_issues,
+        //   top_barangays, weekly_trend, monthly_trend } — computed server-side
+        // over every visible report (no list-endpoint row cap).
+        var analytics = {};
+
+        function series(key) {
+            var s = analytics[key] || {};
+            return {
+                labels: Array.isArray(s.labels) ? s.labels : [],
+                data: Array.isArray(s.data) ? s.data.map(function(n) { return Number(n) || 0; }) : []
+            };
+        }
 
         // ── Chart builders ────────────────────────────────────────────────────
 
@@ -240,40 +251,18 @@
             var ctx = document.getElementById('trendChart').getContext('2d');
             if (trendChart) trendChart.destroy();
 
-            var buckets = {};
-            allReports.forEach(function(r) {
-                var raw = r.submittedAt || r.created_at;
-                if (!raw) return;
-                var d = new Date(raw);
-                var key;
-                if (mode === 'weekly') {
-                    // ISO week key: YYYY-Www
-                    var jan1 = new Date(d.getFullYear(), 0, 1);
-                    var week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
-                    key = d.getFullYear() + '-W' + String(week).padStart(2, '0');
-                } else {
-                    key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
-                }
-                buckets[key] = (buckets[key] || 0) + 1;
-            });
+            // Server buckets: last 5 weeks / last 6 months.
+            var trend = series(mode === 'weekly' ? 'weekly_trend' : 'monthly_trend');
+            var labels = trend.labels.map(String);
+            var values = trend.data;
 
-            var keys = Object.keys(buckets).sort();
-            var labels = keys.map(function(k) {
-                if (mode === 'weekly') return k.replace('-W', ' W');
-                var parts = k.split('-');
-                return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][parseInt(parts[1]) - 1] + ' ' + parts[0];
-            });
-            var values = keys.map(function(k) {
-                return buckets[k];
-            });
-
-            if (keys.length === 0) {
+            if (labels.length === 0) {
                 labels = ['No data yet'];
                 values = [0];
             }
 
             document.getElementById('trendTitle').textContent =
-                'Reports Over Time (' + (mode === 'weekly' ? 'Weekly' : 'Monthly') + ')';
+                'Reports Over Time (' + (mode === 'weekly' ? 'Weekly, last 5 weeks' : 'Monthly, last 6 months') + ')';
 
             trendChart = new Chart(ctx, {
                 type: 'line',
@@ -333,21 +322,10 @@
             var ctx = document.getElementById('issuesChart').getContext('2d');
             if (issuesChart) issuesChart.destroy();
 
-            // Count by concern/issue, take top 5
-            var counts = {};
-            allReports.forEach(function(r) {
-                var key = r.concern || r.issue || 'Other';
-                counts[key] = (counts[key] || 0) + 1;
-            });
-            var sorted = Object.entries(counts).sort(function(a, b) {
-                return b[1] - a[1];
-            }).slice(0, 5);
-            var labels = sorted.map(function(x) {
-                return x[0];
-            });
-            var values = sorted.map(function(x) {
-                return x[1];
-            });
+            // Server returns the top 10 concerns (sorted desc); show top 5.
+            var top = series('top_issues');
+            var labels = top.labels.slice(0, 5).map(function(l) { return String(l || 'Other'); });
+            var values = top.data.slice(0, 5);
             var colors = values.map(function(_, i) {
                 return i === 0 ? '#1A56DB' : i === 1 ? '#1A56DB' : i < 4 ? '#93C5FD' : '#BFDBFE';
             });
@@ -411,11 +389,13 @@
             var infra = 0,
                 env = 0,
                 others = 0;
-            allReports.forEach(function(r) {
-                var c = (r.category || '').toLowerCase();
-                if (c.includes('infra')) infra++;
-                else if (c.includes('environ') || c === 'environment') env++;
-                else others++;
+            var cat = series('by_category');
+            cat.labels.forEach(function(l, i) {
+                var c = String(l || '').toLowerCase();
+                var n = cat.data[i] || 0;
+                if (c.includes('infra')) infra += n;
+                else if (c.includes('environ')) env += n;
+                else others += n;
             });
             var total = infra + env + others;
             var labels = ['Infrastructure', 'Environmental'];
@@ -480,20 +460,10 @@
             var ctx = document.getElementById('barangayChart').getContext('2d');
             if (barangayChart) barangayChart.destroy();
 
-            var counts = {};
-            allReports.forEach(function(r) {
-                var b = r.barangay || 'Unknown';
-                counts[b] = (counts[b] || 0) + 1;
-            });
-            var sorted = Object.entries(counts).sort(function(a, b) {
-                return b[1] - a[1];
-            }).slice(0, 5);
-            var labels = sorted.map(function(x) {
-                return x[0];
-            });
-            var values = sorted.map(function(x) {
-                return x[1];
-            });
+            // Server returns the top 10 barangays (sorted desc); show top 5.
+            var top = series('top_barangays');
+            var labels = top.labels.slice(0, 5).map(function(l) { return String(l || 'Unknown'); });
+            var values = top.data.slice(0, 5);
 
             if (labels.length === 0) {
                 labels = ['No data yet'];
@@ -558,11 +528,15 @@
                 'In Progress': 0,
                 'Resolved': 0
             };
-            allReports.forEach(function(r) {
-                var s = r.status || '';
-                if (counts[s] !== undefined) counts[s]++;
+            var dist = series('status_distribution');
+            var distTotal = 0;
+            dist.labels.forEach(function(s, i) {
+                var n = dist.data[i] || 0;
+                distTotal += n;
+                if (counts[s] !== undefined) counts[s] += n;
             });
-            var total = allReports.length;
+            // Total of all reports (incl. Rejected), as before.
+            var total = (analytics.summary && Number(analytics.summary.total_reports)) || distTotal;
 
             var labels = Object.keys(counts);
             var values = Object.values(counts);
@@ -643,28 +617,23 @@
             buildTrendChart(mode);
         }
 
-        // ── Load all reports from API then build charts ────────────
+        // ── Load aggregated analytics from the API then build charts ──
         async function loadAnalytics() {
             try {
-                // Fetch all reports (limit 1000 — enough for analytics)
-                var json = await Api.get('/api/admin/citizen-reports', {
-                    limit: 1000
-                });
-                if (!json || !json.success) throw new Error('API error');
-                allReports = (json.data && json.data.data) ? json.data.data : (json.data || []);
-                const dates = allReports.map(r => new Date(r.submittedAt || r.created_at)).filter(d => !isNaN(d));
-                const rangeText = document.getElementById('dateRangeText');
-                if (rangeText && dates.length) {
-                    const min = new Date(Math.min.apply(null, dates));
-                    const max = new Date(Math.max.apply(null, dates));
-                    const fmt = d => d.toISOString().slice(0,10);
-                    rangeText.textContent = fmt(min) + ' – ' + fmt(max);
-                }
+                // One aggregated response (server-side GROUP BY over every
+                // visible report) instead of downloading the report list.
+                var json = await Api.get('/api/analytics');
+                if (!json || !json.success) throw new Error((json && json.message) || 'API error');
+                analytics = json.data || {};
+                // Aggregates cover all dates; the trend chart shows its own window.
+                var rangeText = document.getElementById('dateRangeText');
+                if (rangeText) rangeText.textContent = 'All dates';
                 buildAllCharts();
             } catch (e) {
                 console.error('Analytics load failed:', e);
+                Utils.showToast('Could not load analytics: ' + (e && e.message ? e.message : 'server error'), 'error');
                 // Build empty charts so the page still renders cleanly
-                allReports = [];
+                analytics = {};
                 buildAllCharts();
             }
         }

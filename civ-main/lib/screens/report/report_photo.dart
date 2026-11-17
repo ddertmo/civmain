@@ -35,6 +35,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
       );
       if (file != null) {
         final bytes = await file.readAsBytes();
+        if (!mounted) return;
         setState(() {
           _pickedFile  = file;
           _imageBytes  = bytes;

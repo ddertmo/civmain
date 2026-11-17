@@ -141,6 +141,13 @@ class UserController extends Controller
 
         $user->update($updateData);
 
+        // A deactivated account or a reset password must not keep working
+        // through tokens issued before the change.
+        if ((array_key_exists('is_active', $updateData) && ! $updateData['is_active'])
+            || isset($updateData['password_hash'])) {
+            $user->tokens()->delete();
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'User updated successfully.',
@@ -171,6 +178,7 @@ class UserController extends Controller
             ], 403);
         }
 
+        $user->tokens()->delete();
         $user->delete();
 
         return response()->json([

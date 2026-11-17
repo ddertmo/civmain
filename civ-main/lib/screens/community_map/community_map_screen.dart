@@ -65,6 +65,12 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
   }
 
   @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: AppState(),
@@ -496,7 +502,7 @@ class _PinDetailSheet extends StatelessWidget {
             ),
           ),
 
-          // Scrollable content â€” prevents overflow when before/after photos
+          // Scrollable content — prevents overflow when before/after photos
           // push the sheet taller than the available screen height
           Flexible(
             child: SingleChildScrollView(

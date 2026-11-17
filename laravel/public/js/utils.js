@@ -260,29 +260,53 @@ const Utils = {
             dateResolved: this.shortDate(resolvedAt),
             imageUrl: r.imageUrl || r.photo_url || null,
             assignedBy: r.assignedOffice || '',
+            lat: (r.latitude != null ? parseFloat(r.latitude) : (r.lat != null ? parseFloat(r.lat) : null)),
+            lng: (r.longitude != null ? parseFloat(r.longitude) : (r.lng != null ? parseFloat(r.lng) : null)),
             submittedAt: submittedAt,
             resolvedAt: resolvedAt,
         };
     },
 
-    // Fetch every report assigned to the signed-in office. Falls back to the
-    // caller's built-in sample rows when there is no backend or no token, so
-    // the page still previews as a prototype.
-    async fetchOfficeReports(sampleRows) {
-        const sample = sampleRows || [];
+    // Fetch every report assigned to the signed-in office (the API scopes
+    // CEO/CENRO users to their own office), paging through all pages.
+    // Never substitutes sample data: on failure it returns
+    // { reports: [], live: false, error } so the caller can show an error
+    // state. The argument is ignored (kept so existing callers don't break).
+    async fetchOfficeReports(_unusedSampleRows) {
         if (typeof Api === 'undefined' || !Api.token()) {
-            return { reports: sample, live: false };
+            return { reports: [], live: false, error: 'You are not signed in.' };
         }
         try {
-            const json = await Api.get('/api/admin/citizen-reports', { limit: 500 });
-            if (json && json.success) {
-                const rows = (json.data && json.data.data) ? json.data.data : (json.data || []);
-                return { reports: rows.map(r => Utils.officeReport(r)), live: true };
-            }
+            const rows = [];
+            let page = 1;
+            let lastPage = 1;
+            do {
+                const json = await Api.get('/api/admin/citizen-reports', { limit: 500, page: page });
+                if (json === null) {
+                    return { reports: [], live: false, error: 'Your session has expired.' };
+                }
+                if (!json || !json.success) {
+                    return { reports: [], live: false, error: (json && json.message) || 'Could not load reports.' };
+                }
+                const d = json.data || {};
+                const batch = Array.isArray(d.data) ? d.data : (Array.isArray(d) ? d : []);
+                rows.push(...batch);
+                lastPage = Number(d.last_page) || 1;
+                page++;
+            } while (page <= lastPage && page <= 50); // hard stop: 25k rows
+            return { reports: rows.map(r => Utils.officeReport(r)), live: true };
         } catch (e) {
-            console.warn('Falling back to sample office reports:', e);
+            console.error('Office reports load failed:', e);
+            return { reports: [], live: false, error: 'Could not reach the server. Check your connection.' };
         }
-        return { reports: sample, live: false };
+    },
+
+    // Shared error/empty row for office list tables when fetchOfficeReports
+    // returns live: false.
+    officeLoadErrorRow(colspan, message) {
+        return `<tr><td colspan="${Number(colspan) || 1}" style="text-align:center;padding:40px;color:var(--gray-400);">` +
+            `<span class="material-symbols-outlined" style="font-size:36px;display:block;margin-bottom:8px">wifi_off</span>` +
+            `Could not load reports. ${Utils.esc(message || '')}</td></tr>`;
     },
 
     // Format relative time
@@ -371,6 +395,7 @@ function getPhotoUrlLarge(issue) {
 
 const CwModal = (() => {
     const SHELL_ID = 'cwModalShell';
+    let _hideTimer = null;
 
     // ── Ensure the shell exists ───────────────────────────────────────────
     function _ensureShell() {
@@ -409,6 +434,9 @@ const CwModal = (() => {
         dismissible = true
     }) {
         _ensureShell();
+        // A hide() just before (e.g. loading → success) must not close the
+        // modal we are about to show when its delayed timer fires.
+        if (_hideTimer) { clearTimeout(_hideTimer); _hideTimer = null; }
         const shell = document.getElementById(SHELL_ID);
         const iconWrap = document.getElementById('cwModalIconWrap');
         const titleEl = document.getElementById('cwModalTitle');
@@ -511,7 +539,11 @@ const CwModal = (() => {
             if (!shell) return;
             const box = document.getElementById('cwModalBox');
             if (box) box.classList.remove('cw-modal-box--visible');
-            setTimeout(() => shell.classList.remove('cw-modal--active'), 220);
+            if (_hideTimer) clearTimeout(_hideTimer);
+            _hideTimer = setTimeout(() => {
+                _hideTimer = null;
+                shell.classList.remove('cw-modal--active');
+            }, 220);
         },
     };
 })();

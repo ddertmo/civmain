@@ -9,7 +9,7 @@ import '../../services/auth_service.dart';
 import '../../services/report_service.dart';
 import '../../services/notification_service.dart';
 import '../../services/announcement_service.dart';
-import '../utils/dummy_data.dart';
+import '../utils/dummy_data.dart'; // Announcement model lives here
 import '../utils/helpers.dart';
 
 /// Central app state — ChangeNotifier singleton.
@@ -17,7 +17,8 @@ import '../utils/helpers.dart';
 /// Data sources:
 ///   - When logged in:  real API data from Laravel backend
 ///   - When guest:      community reports from API (public endpoint)
-///   - Fallback:        DummyData (if API is unreachable)
+///   - On API failure:  previously loaded data (or empty lists) + *Error flag.
+///                      Sample DummyData is never shown as real data.
 class AppState extends ChangeNotifier {
 
   // ── Singleton ─────────────────────────────────────────────────────────────
@@ -43,23 +44,27 @@ class AppState extends ChangeNotifier {
     // Restore dark-mode preference first so the first frame renders correctly
     await _loadThemePreference();
 
-    // Always load community reports (public endpoint — no auth needed)
-    await _loadCommunityReports();
-
-    // Try to restore session from saved token
-    final user = await _auth.restoreSession();
+    // Always load public data (community reports + announcements — no auth)
+    // and, in parallel, try to restore the session from the saved token.
+    // Each request is bounded by ApiClient's timeout, so this can't hang.
+    final results = await Future.wait<Object?>([
+      _loadCommunityReports(),
+      _loadAnnouncements(),
+      _auth.restoreSession(),
+    ]);
+    final user = results[2] as AppUser?;
     if (user != null) {
       _currentUser = user;
       _isGuest = false;
       await Future.wait([
         _loadMyReports(),
         _loadNotifications(),
-        _loadAnnouncements(),
       ]);
     } else {
-      // Not logged in — seed personal data with dummy fallback
-      _reports = List.from(DummyData.myReports);
-      _notifications = List.from(DummyData.notifications);
+      // Not logged in — no personal data (never show sample data as real)
+      _reports = [];
+      _notifications = [];
+      _unreadCount = 0;
     }
     notifyListeners();
   }
@@ -135,9 +140,10 @@ class AppState extends ChangeNotifier {
   Future<void> logout() async {
     await _auth.logout();
     _currentUser = null;
-    _reports = List.from(DummyData.myReports);
-    _notifications = List.from(DummyData.notifications);
-    // Community reports stay loaded (public data)
+    _reports = [];
+    _notifications = [];
+    _unreadCount = 0;
+    // Community reports and announcements stay loaded (public data)
     notifyListeners();
   }
 
@@ -168,13 +174,25 @@ class AppState extends ChangeNotifier {
   List<IncidentReport> get communityReportsPublic =>
       List.unmodifiable(_communityReports);
 
+  // Last load error per data set (null = last load succeeded). Screens can
+  // show these alongside their empty states.
+  String? _myReportsError;
+  String? _communityReportsError;
+  String? _announcementsError;
+  String? _notificationsError;
+  String? get myReportsError => _myReportsError;
+  String? get communityReportsError => _communityReportsError;
+  String? get announcementsError => _announcementsError;
+  String? get notificationsError => _notificationsError;
+
   Future<void> _loadMyReports() async {
     final result = await _reportSvc.getMyReports();
     if (result.error == null) {
       _reports = result.reports;
+      _myReportsError = null;
     } else {
-      // Fallback to dummy data if API fails
-      if (_reports.isEmpty) _reports = List.from(DummyData.myReports);
+      // Keep whatever was loaded before; never substitute sample data.
+      _myReportsError = result.error;
     }
   }
 
@@ -182,11 +200,10 @@ class AppState extends ChangeNotifier {
     final result = await _reportSvc.getCommunityReports();
     if (result.error == null) {
       _communityReports = result.reports;
+      _communityReportsError = null;
     } else {
-      // Fallback to dummy data if API is unreachable
-      if (_communityReports.isEmpty) {
-        _communityReports = List.from(DummyData.communityReports);
-      }
+      // Keep whatever was loaded before; never substitute sample data.
+      _communityReportsError = result.error;
     }
     notifyListeners();
   }
@@ -262,10 +279,9 @@ class AppState extends ChangeNotifier {
     final result = await _annSvc.getAnnouncements();
     if (result.error == null) {
       _announcements = result.announcements;
+      _announcementsError = null;
     } else {
-      if (_announcements.isEmpty) {
-        _announcements = List.from(DummyData.announcements);
-      }
+      _announcementsError = result.error;
     }
   }
 
@@ -281,11 +297,9 @@ class AppState extends ChangeNotifier {
     if (result.error == null) {
       _notifications = result.notifications;
       _unreadCount = result.unreadCount;
+      _notificationsError = null;
     } else {
-      if (_notifications.isEmpty) {
-        _notifications = List.from(DummyData.notifications);
-        _unreadCount = _notifications.where((n) => !n.isRead).length;
-      }
+      _notificationsError = result.error;
     }
   }
 

@@ -175,19 +175,20 @@
                 <div class="form-group">
                     <label class="form-label">Update Status</label>
                     <select class="form-select" id="modalStatus">
-                        <option value="Assigned">Assigned</option>
+                        <option value="">Select new status…</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Resolved">Resolved</option>
                     </select>
+                    <div id="modalCurrentStatus" style="font-size:12px;color:var(--gray-500);margin-top:6px;"></div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Progress Notes</label>
-                    <textarea class="form-input" rows="3" placeholder="Describe the current progress..." style="height:auto;padding-top:10px;resize:vertical;"></textarea>
+                    <textarea class="form-input" id="modalNote" maxlength="500" rows="3" placeholder="Describe the current progress..." style="height:auto;padding-top:10px;resize:vertical;"></textarea>
                 </div>
             </div>
             <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;">
                 <button class="btn btn-secondary" onclick="closeUpdateModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="confirmUpdate()">
+                <button class="btn btn-primary" id="modalSaveBtn" onclick="confirmUpdate()">
                     <span class="material-symbols-outlined">save</span> Save Update
                 </button>
             </div>
@@ -197,66 +198,18 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        // Built-in sample rows — shown only when there is no backend/token.
-        const sampleReports = [{
-                ref: 'CW-2026-00125',
-                issue: 'Illegal Dumping',
-                barangay: 'Poblacion',
-                priority: 'High',
-                status: 'In Progress',
-                date: 'May 21, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00118',
-                issue: 'Garbage Collection',
-                barangay: 'Badiang',
-                priority: 'High',
-                status: 'In Progress',
-                date: 'May 20, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00105',
-                issue: 'Illegal Dumping',
-                barangay: 'Soong',
-                priority: 'Medium',
-                status: 'Resolved',
-                date: 'May 18, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00098',
-                issue: 'Garbage Collection',
-                barangay: 'Badiang',
-                priority: 'Low',
-                status: 'Resolved',
-                date: 'May 18, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00092',
-                issue: 'Illegal Dumping',
-                barangay: 'Goma',
-                priority: 'High',
-                status: 'Assigned',
-                date: 'May 17, 2026',
-                photo: 'illegal-dumping'
-            },
-            {
-                ref: 'CW-2026-00088',
-                issue: 'Garbage Collection',
-                barangay: 'Magsaysay',
-                priority: 'Low',
-                status: 'In Progress',
-                date: 'May 16, 2026',
-                photo: 'illegal-dumping'
-            },
-        ];
-
         let reportsData = [];
         let filtered = [];
         let loading = true;
+        let loadError = null; // set when the API could not be reached
+
+        // Offices may only move their reports along: Assigned → In Progress |
+        // Resolved, In Progress → Resolved (the API enforces the same map).
+        const OFFICE_NEXT = {
+            'Assigned': ['In Progress', 'Resolved'],
+            'In Progress': ['Resolved'],
+        };
+        let modalCurrent = '';
         const priorityClass = {
             'High': 'high',
             'Medium': 'medium',
@@ -280,6 +233,11 @@
                 document.getElementById('showingLabel').textContent = 'Loading…';
                 return;
             }
+            if (loadError) {
+                tbody.innerHTML = Utils.officeLoadErrorRow(8, loadError);
+                document.getElementById('showingLabel').textContent = 'No results';
+                return;
+            }
             tbody.innerHTML = filtered.length ? filtered.map(r => `
     <tr>
       <td><img class="table-photo" src="${Utils.safeUrl(r.imageUrl || getPhotoUrl(r.photo || r.issue))}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${Utils.esc(r.issue)}" /></td>
@@ -293,6 +251,9 @@
         <button class="btn-view" onclick="location.href=${Utils.jsArg('report-details.html?ref=' + encodeURIComponent(r.ref))}">
           <span class="material-symbols-outlined">visibility</span> View
         </button>
+        ${OFFICE_NEXT[r.status] ? `<button class="btn-view" onclick="openUpdateModal(${Utils.jsArg(r.ref)}, ${Utils.jsArg(r.status)})">
+          <span class="material-symbols-outlined">edit</span> Update
+        </button>` : ''}
       </td>
     </tr>
   `).join('') : `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--gray-400);">No reports found</td></tr>`;
@@ -317,8 +278,16 @@
         document.getElementById('priorityFilter').addEventListener('change', applyFilter);
 
         function openUpdateModal(ref, status) {
+            modalCurrent = status || '';
+            const allowed = OFFICE_NEXT[modalCurrent] || [];
+            const sel = document.getElementById('modalStatus');
+            Array.from(sel.options).forEach(o => {
+                if (o.value) o.disabled = allowed.indexOf(o.value) === -1;
+            });
+            sel.value = '';
             document.getElementById('modalRef').value = ref;
-            document.getElementById('modalStatus').value = status;
+            document.getElementById('modalNote').value = '';
+            document.getElementById('modalCurrentStatus').textContent = 'Current status: ' + (modalCurrent || '—');
             document.getElementById('updateBackdrop').classList.add('active');
             document.getElementById('updateModal').classList.add('active');
         }
@@ -328,20 +297,45 @@
             document.getElementById('updateModal').classList.remove('active');
         }
 
-        function confirmUpdate() {
-            closeUpdateModal();
-            Utils.showToast('Report status updated successfully', 'success');
+        // POST /api/admin/citizen-reports/{ref}/status — offices may only set
+        // In Progress or Resolved on their own reports.
+        async function confirmUpdate() {
+            const ref = document.getElementById('modalRef').value;
+            const status = document.getElementById('modalStatus').value;
+            const note = document.getElementById('modalNote').value.trim();
+            if (!status) return Utils.showToast('Select the new status first.', 'info');
+            if ((OFFICE_NEXT[modalCurrent] || []).indexOf(status) === -1) {
+                return Utils.showToast(`"${status}" is not an allowed next step from "${modalCurrent}".`, 'error');
+            }
+            const btn = document.getElementById('modalSaveBtn');
+            btn.disabled = true;
+            const json = await Api.action('POST', '/api/admin/citizen-reports/' + encodeURIComponent(ref) + '/status', {
+                status: Utils.apiStatusValue(status),
+                description: note || null,
+            }, {
+                loading: 'Updating status…',
+                errorTitle: 'Status Update Failed',
+            });
+            btn.disabled = false;
+            if (json && json.success) {
+                closeUpdateModal();
+                Utils.showToast('Status updated to ' + status + '.', 'success');
+                load();
+            }
         }
 
         render();
 
-        // Load the office's real reports; keep the sample rows as a fallback.
-        (async function load() {
-            const res = await Utils.fetchOfficeReports(sampleReports);
+        // Load the office's real reports — no sample fallback.
+        async function load() {
+            const res = await Utils.fetchOfficeReports();
             reportsData = res.reports;
+            loadError = res.live ? null : (res.error || 'Server unavailable.');
+            if (!res.live) Utils.showToast('Could not load reports: ' + loadError, 'error');
             loading = false;
             applyFilter();
-        })();
+        }
+        load();
     </script>
 </body>
 

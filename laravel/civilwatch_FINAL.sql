@@ -23,6 +23,11 @@
 --   file, so treat them as public. Never import this dump on a server that
 --   is reachable by others without rotating them first.
 --
+-- AFTER IMPORTING: run  php artisan migrate  (START_ALL.bat does this).
+--   This dump predates later migrations (citizen_reports.priority,
+--   citizens.street/purok/province, sessions, users.notifications_read_at,
+--   performance indexes); migrate adds them on top of the imported schema.
+--
 -- ALTERNATIVE (no SQL import)
 --   composer setup       -> copies .env, key:generate, migrate --seed,
 --                           storage:link

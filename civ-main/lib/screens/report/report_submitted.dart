@@ -40,8 +40,11 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
 
   @override
   Widget build(BuildContext context) {
-    final refNumber = widget.reportData['referenceNumber'] as String? ??
-        AppHelpers.generateRefNumber();
+    // Show the server-issued reference only — never invent one.
+    final rawRef = widget.reportData['referenceNumber']?.toString().trim();
+    final String refNumber =
+        (rawRef == null || rawRef.isEmpty) ? '—' : rawRef;
+    final hasRef = refNumber != '—';
     final submittedAtStr =
         widget.reportData['submittedAt'] as String? ?? DateTime.now().toIso8601String();
     final submittedAt = DateTime.tryParse(submittedAtStr) ?? DateTime.now();
@@ -119,6 +122,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
+                              if (!hasRef) return;
                               Clipboard.setData(
                                   ClipboardData(text: refNumber));
                               ScaffoldMessenger.of(context).showSnackBar(

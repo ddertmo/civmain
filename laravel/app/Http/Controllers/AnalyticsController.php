@@ -3,279 +3,226 @@
 namespace App\Http\Controllers;
 
 use App\Models\CitizenReport;
+use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Analytics for the admin/office dashboards.
+ *
+ * Every endpoint is scoped to the caller (super admin → all reports; CEO /
+ * CENRO → their office only, via CitizenReport::scopeVisibleTo) and computed
+ * with grouped queries: one query per chart instead of one COUNT per bucket
+ * (the old summary ran 8 queries, the trends 5-6, and full() ~24 plus a JSON
+ * encode/decode of every sub-response). Response shapes are unchanged, except
+ * that status_distribution now includes 'Approved' (it was silently missing).
+ */
 class AnalyticsController extends Controller
 {
-    // ──────────────────────────────────────────────────────────
     // GET /api/analytics/summary
-    // Top-level stat cards — used by all dashboards
-    // Super admin sees all; CEO/CENRO see their office scope only
-    // ──────────────────────────────────────────────────────────
     public function summary(Request $request): JsonResponse
     {
-        $query = $this->scopedQuery($request);
-
-        $total      = (clone $query)->count();
-        $pending    = (clone $query)->where('status', 'Pending Validation')->count();
-        $submitted  = (clone $query)->where('status', 'Submitted')->count();
-        $approved   = (clone $query)->where('status', 'Approved')->count();
-        $assigned   = (clone $query)->where('status', 'Assigned to Office')->count();
-        $inProgress = (clone $query)->where('status', 'In Progress')->count();
-        $resolved   = (clone $query)->where('status', 'Resolved')->count();
-        $rejected   = (clone $query)->where('status', 'Rejected')->count();
-
-        return response()->json([
-            'success' => true,
-            'data'    => [
-                'total_reports'      => $total,
-                'pending_validation' => $pending + $submitted,
-                'approved'           => $approved,
-                'assigned'           => $assigned,
-                'in_progress'        => $inProgress,
-                'resolved'           => $resolved,
-                'rejected'           => $rejected,
-            ],
-        ]);
+        return $this->ok($this->summaryData($request));
     }
 
-    // ──────────────────────────────────────────────────────────
     // GET /api/analytics/status-distribution
-    // Doughnut chart — count per status
-    // ──────────────────────────────────────────────────────────
     public function statusDistribution(Request $request): JsonResponse
     {
-        $query = $this->scopedQuery($request);
+        return $this->ok($this->statusData($request));
+    }
 
-        $rows = (clone $query)
-            ->select('status', DB::raw('COUNT(*) as count'))
-            ->groupBy('status')
-            ->get()
-            ->keyBy('status');
+    // GET /api/analytics/by-category
+    public function byCategory(Request $request): JsonResponse
+    {
+        return $this->ok($this->categoryData($request));
+    }
 
-        $statuses = ['Submitted', 'Pending Validation', 'Assigned to Office', 'In Progress', 'Resolved', 'Rejected'];
-        $labels   = $statuses;
-        $data     = [];
+    // GET /api/analytics/top-issues
+    public function topIssues(Request $request): JsonResponse
+    {
+        return $this->ok($this->topData($request, 'concern'));
+    }
 
-        foreach ($statuses as $s) {
-            $data[] = $rows->get($s)?->count ?? 0;
-        }
+    // GET /api/analytics/top-barangays
+    public function topBarangays(Request $request): JsonResponse
+    {
+        return $this->ok($this->topData($request, 'barangay'));
+    }
 
-        $total = array_sum($data);
-        $percentages = array_map(
-            fn($n) => $total > 0 ? round(($n / $total) * 100, 1) . '%' : '0%',
-            $data
-        );
+    // GET /api/analytics/weekly-trend  (last 5 weeks)
+    public function weeklyTrend(Request $request): JsonResponse
+    {
+        return $this->ok($this->weeklyData($request));
+    }
 
-        return response()->json([
-            'success' => true,
-            'data'    => compact('labels', 'data', 'percentages'),
+    // GET /api/analytics/monthly-trend (last 6 months)
+    public function monthlyTrend(Request $request): JsonResponse
+    {
+        return $this->ok($this->monthlyData($request));
+    }
+
+    // GET /api/analytics — all chart data in one request (Analytics pages)
+    public function full(Request $request): JsonResponse
+    {
+        return $this->ok([
+            'summary'             => $this->summaryData($request),
+            'status_distribution' => $this->statusData($request),
+            'by_category'         => $this->categoryData($request),
+            'top_issues'          => $this->topData($request, 'concern'),
+            'top_barangays'       => $this->topData($request, 'barangay'),
+            'weekly_trend'        => $this->weeklyData($request),
+            'monthly_trend'       => $this->monthlyData($request),
         ]);
     }
 
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/by-category
-    // Doughnut chart — Infrastructure vs Environmental
-    // ──────────────────────────────────────────────────────────
-    public function byCategory(Request $request): JsonResponse
-    {
-        $query = $this->scopedQuery($request);
+    // ── Builders ────────────────────────────────────────────────────────
 
-        $rows = (clone $query)
+    private function summaryData(Request $request): array
+    {
+        $c = CitizenReport::statusCounts($request->user());
+
+        return [
+            'total_reports'      => $c['total'],
+            // Kept as before: "pending" on the analytics cards = waiting for
+            // the admin (Submitted + Pending Validation).
+            'pending_validation' => $c['pending_validation'] + $c['submitted'],
+            'approved'           => $c['approved'],
+            'assigned'           => $c['assigned'],
+            'in_progress'        => $c['in_progress'],
+            'resolved'           => $c['resolved'],
+            'rejected'           => $c['rejected'],
+        ];
+    }
+
+    private function statusData(Request $request): array
+    {
+        $rows = $this->scoped($request)
+            ->select('status', DB::raw('COUNT(*) as count'))
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        $labels = CitizenReport::STATUS_ORDER; // includes Approved
+        $data   = array_map(fn ($s) => (int) ($rows[$s] ?? 0), $labels);
+
+        return ['labels' => $labels, 'data' => $data, 'percentages' => $this->percentages($data)];
+    }
+
+    private function categoryData(Request $request): array
+    {
+        $rows = $this->scoped($request)
             ->select('category', DB::raw('COUNT(*) as count'))
             ->groupBy('category')
-            ->get()
-            ->keyBy('category');
+            ->pluck('count', 'category');
 
-        $categories = ['Infrastructure', 'Environment', 'Others'];
-        $labels     = [];
-        $data       = [];
-
-        foreach ($categories as $c) {
-            $count = $rows->get($c)?->count ?? 0;
-            if ($count > 0) {
+        $labels = [];
+        $data   = [];
+        foreach (['Infrastructure', 'Environment', 'Others'] as $c) {
+            $n = (int) ($rows[$c] ?? 0);
+            if ($n > 0) {
                 $labels[] = $c;
-                $data[]   = $count;
+                $data[]   = $n;
             }
         }
 
-        $total = array_sum($data);
-        $percentages = array_map(
-            fn($n) => $total > 0 ? round(($n / $total) * 100, 1) . '%' : '0%',
-            $data
-        );
-
-        return response()->json([
-            'success' => true,
-            'data'    => compact('labels', 'data', 'percentages'),
-        ]);
+        return ['labels' => $labels, 'data' => $data, 'percentages' => $this->percentages($data)];
     }
 
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/top-issues
-    // Bar chart — top issue titles by volume
-    // ──────────────────────────────────────────────────────────
-    public function topIssues(Request $request): JsonResponse
+    private function topData(Request $request, string $column): array
     {
-        $query = $this->scopedQuery($request);
-
-        $rows = (clone $query)
-            ->select('concern', DB::raw('COUNT(*) as count'))
-            ->groupBy('concern')
+        $rows = $this->scoped($request)
+            ->select($column, DB::raw('COUNT(*) as count'))
+            ->whereNotNull($column)
+            ->groupBy($column)
             ->orderByDesc('count')
             ->limit(10)
             ->get();
 
-        return response()->json([
-            'success' => true,
-            'data'    => [
-                'labels' => $rows->pluck('concern')->toArray(),
-                'data'   => $rows->pluck('count')->toArray(),
-            ],
-        ]);
+        return [
+            'labels' => $rows->pluck($column)->toArray(),
+            'data'   => $rows->pluck('count')->map(fn ($n) => (int) $n)->toArray(),
+        ];
     }
 
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/top-barangays
-    // Bar chart — barangays with the most reports
-    // ──────────────────────────────────────────────────────────
-    public function topBarangays(Request $request): JsonResponse
+    private function weeklyData(Request $request): array
     {
-        $query = $this->scopedQuery($request);
-
-        $rows = (clone $query)
-            ->select('barangay', DB::raw('COUNT(*) as count'))
-            ->whereNotNull('barangay')
-            ->groupBy('barangay')
-            ->orderByDesc('count')
-            ->limit(10)
-            ->get();
-
-        return response()->json([
-            'success' => true,
-            'data'    => [
-                'labels' => $rows->pluck('barangay')->toArray(),
-                'data'   => $rows->pluck('count')->toArray(),
-            ],
-        ]);
-    }
-
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/weekly-trend
-    // Line chart — reports submitted per week (last 5 weeks)
-    // ──────────────────────────────────────────────────────────
-    public function weeklyTrend(Request $request): JsonResponse
-    {
-        $query  = $this->scopedQuery($request);
-        $weeks  = 5;
-        $labels = [];
-        $data   = [];
-
+        $weeks   = 5;
+        $buckets = [];
         for ($i = $weeks - 1; $i >= 0; $i--) {
             $start = now()->startOfWeek()->subWeeks($i);
-            $end   = (clone $start)->endOfWeek();
-
-            $count = (clone $query)
-                ->whereBetween('created_at', [$start, $end])
-                ->count();
-
-            $labels[] = $start->format('M d') . '–' . $end->format('M d');
-            $data[]   = $count;
+            $buckets[] = [$start, (clone $start)->endOfWeek()];
         }
 
-        return response()->json([
-            'success' => true,
-            'data'    => compact('labels', 'data'),
-        ]);
+        $counts = $this->bucketCounts($request, $buckets);
+
+        return [
+            'labels' => array_map(fn ($b) => $b[0]->format('M d') . '–' . $b[1]->format('M d'), $buckets),
+            'data'   => $counts,
+        ];
     }
 
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/monthly-trend
-    // Line chart — reports submitted per month (last 6 months)
-    // ──────────────────────────────────────────────────────────
-    public function monthlyTrend(Request $request): JsonResponse
+    private function monthlyData(Request $request): array
     {
-        $query  = $this->scopedQuery($request);
-        $months = 6;
-        $labels = [];
-        $data   = [];
-
+        $months  = 6;
+        $buckets = [];
         for ($i = $months - 1; $i >= 0; $i--) {
-            $month = now()->startOfMonth()->subMonths($i);
-
-            $count = (clone $query)
-                ->whereYear('created_at', $month->year)
-                ->whereMonth('created_at', $month->month)
-                ->count();
-
-            $labels[] = $month->format('M Y');
-            $data[]   = $count;
+            $start = now()->startOfMonth()->subMonths($i);
+            $buckets[] = [$start, (clone $start)->endOfMonth()];
         }
 
-        return response()->json([
-            'success' => true,
-            'data'    => compact('labels', 'data'),
-        ]);
+        $counts = $this->bucketCounts($request, $buckets);
+
+        return [
+            'labels' => array_map(fn ($b) => $b[0]->format('M Y'), $buckets),
+            'data'   => $counts,
+        ];
     }
-
-    // ──────────────────────────────────────────────────────────
-    // GET /api/analytics/full
-    // All chart data in one request — used by Analytics pages
-    // ──────────────────────────────────────────────────────────
-    public function full(Request $request): JsonResponse
-    {
-        $summaryResp     = $this->summary($request);
-        $statusResp      = $this->statusDistribution($request);
-        $categoryResp    = $this->byCategory($request);
-        $topIssuesResp   = $this->topIssues($request);
-        $topBarangaysResp = $this->topBarangays($request);
-        $weeklyResp      = $this->weeklyTrend($request);
-        $monthlyResp     = $this->monthlyTrend($request);
-
-        return response()->json([
-            'success' => true,
-            'data'    => [
-                'summary'             => json_decode($summaryResp->getContent(), true)['data'],
-                'status_distribution' => json_decode($statusResp->getContent(), true)['data'],
-                'by_category'         => json_decode($categoryResp->getContent(), true)['data'],
-                'top_issues'          => json_decode($topIssuesResp->getContent(), true)['data'],
-                'top_barangays'       => json_decode($topBarangaysResp->getContent(), true)['data'],
-                'weekly_trend'        => json_decode($weeklyResp->getContent(), true)['data'],
-                'monthly_trend'       => json_decode($monthlyResp->getContent(), true)['data'],
-            ],
-        ]);
-    }
-
-    // ──────────────────────────────────────────────────────────
-    // Private helpers
-    // ──────────────────────────────────────────────────────────
 
     /**
-     * Return a base CitizenReport query already scoped to the user's role.
-     * Super admin → all reports
-     * CEO         → only reports assigned to the CEO office
-     * CENRO       → only reports assigned to the CENRO office
+     * One range query (index-friendly: created_at BETWEEN, no YEAR()/MONTH()
+     * wrappers), then counts per [start, end] bucket in PHP. Only the
+     * created_at column of the window is fetched, so it stays light.
+     *
+     * @param  array<int, array{0: CarbonInterface, 1: CarbonInterface}>  $buckets
+     * @return int[]
      */
-    private function scopedQuery(Request $request)
+    private function bucketCounts(Request $request, array $buckets): array
     {
-        $user  = $request->user();
-        $query = CitizenReport::query();
+        $from = $buckets[0][0];
+        $to   = $buckets[count($buckets) - 1][1];
 
-        $officeAbbreviation = match ($user?->role) {
-            'ceo'   => 'CEO',
-            'cenro' => 'CENRO',
-            default => null,
-        };
+        $stamps = $this->scoped($request)
+            ->whereBetween('created_at', [$from, $to])
+            ->pluck('created_at');
 
-        if ($officeAbbreviation !== null) {
-            $query->whereHas(
-                'assignedOffice',
-                fn ($q) => $q->where('abbreviation', $officeAbbreviation)
-            );
+        $counts = array_fill(0, count($buckets), 0);
+        foreach ($stamps as $ts) {
+            foreach ($buckets as $i => [$start, $end]) {
+                if ($ts >= $start && $ts <= $end) {
+                    $counts[$i]++;
+                    break;
+                }
+            }
         }
 
-        return $query;
+        return $counts;
+    }
+
+    private function percentages(array $data): array
+    {
+        $total = array_sum($data);
+
+        return array_map(fn ($n) => $total > 0 ? round(($n / $total) * 100, 1) . '%' : '0%', $data);
+    }
+
+    private function scoped(Request $request): Builder
+    {
+        return CitizenReport::query()->visibleTo($request->user());
+    }
+
+    private function ok(array $data): JsonResponse
+    {
+        return response()->json(['success' => true, 'data' => $data]);
     }
 }

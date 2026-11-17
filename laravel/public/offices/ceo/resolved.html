@@ -116,19 +116,10 @@
 <script src="/js/utils.js"></script>
 <script src="/js/app.js"></script>
 <script>
-// Built-in sample rows — shown only when there is no backend/token.
-const sampleResolved = [
-  { ref:'CW-2026-00128', issue:'Flooding on National Highway', barangay:'Buhangin',  dateAssigned:'May 19, 2026', dateResolved:'May 21, 2026', photo:'blocked-drainage' },
-  { ref:'CW-2026-00125', issue:'Broken Streetlight',           barangay:'Zone III',  dateAssigned:'May 18, 2026', dateResolved:'May 20, 2026', photo:'streetlight' },
-  { ref:'CW-2026-00120', issue:'Damaged Road',                 barangay:'Aplaya',    dateAssigned:'May 17, 2026', dateResolved:'May 19, 2026', photo:'damaged-road' },
-  { ref:'CW-2026-00118', issue:'Damaged Sidewalk',             barangay:'Zone II',   dateAssigned:'May 16, 2026', dateResolved:'May 18, 2026', photo:'damaged-sidewalk' },
-  { ref:'CW-2026-00115', issue:'Road Sign Damage',             barangay:'Carmen',    dateAssigned:'May 15, 2026', dateResolved:'May 17, 2026', photo:'road-sign' },
-  { ref:'CW-2026-00110', issue:'Blocked Drainage',             barangay:'Magsaysay', dateAssigned:'May 14, 2026', dateResolved:'May 16, 2026', photo:'blocked-drainage' },
-];
-
 let resolvedData = [];
 let filtered = [];
 let loading = true;
+let loadError = null; // set when the API could not be reached
 
 function toDate(v) {
   if (!v) return null;
@@ -158,6 +149,12 @@ function render() {
     document.getElementById('showingLabel').textContent = 'Loading…';
     return;
   }
+  if (loadError) {
+    tbody.innerHTML = Utils.officeLoadErrorRow(7, loadError);
+    document.getElementById('showingLabel').textContent = 'No results';
+    computeStats();
+    return;
+  }
   tbody.innerHTML = filtered.length ? filtered.map(r => `
     <tr>
       <td><img class="table-photo" src="${Utils.safeUrl(r.imageUrl || getPhotoUrl(r.photo || r.issue))}" onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')" alt="${Utils.esc(r.issue)}" /></td>
@@ -184,10 +181,12 @@ const doFilter = Utils.debounce(() => {
 document.getElementById('searchInput').addEventListener('input', doFilter);
 render();
 
-// Load the office's resolved reports; keep the sample rows as a fallback.
+// Load the office's resolved reports — no sample fallback.
 (async function load() {
-  const res = await Utils.fetchOfficeReports(sampleResolved);
+  const res = await Utils.fetchOfficeReports();
   resolvedData = res.reports.filter(r => r.status === 'Resolved');
+  loadError = res.live ? null : (res.error || 'Server unavailable.');
+  if (!res.live) Utils.showToast('Could not load reports: ' + loadError, 'error');
   loading = false;
   doFilter();
 })();

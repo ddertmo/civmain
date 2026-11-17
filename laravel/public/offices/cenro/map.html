@@ -74,9 +74,6 @@
         <span class="chip" onclick="toggleChip(this,'In Progress')">
           <span class="material-symbols-outlined">autorenew</span> In Progress
         </span>
-        <span class="chip" onclick="toggleChip(this,'For Resolution')">
-          <span class="material-symbols-outlined">note_alt</span> For Resolution
-        </span>
         <span class="chip" onclick="toggleChip(this,'Resolved')">
           <span class="material-symbols-outlined">task_alt</span> Resolved
         </span>
@@ -91,7 +88,6 @@
           <div class="map-overlay-legend-title">Legend</div>
           <div class="map-legend-item"><div class="map-legend-dot" style="background:#1A56DB"></div> Assigned</div>
           <div class="map-legend-item"><div class="map-legend-dot" style="background:#F97316"></div> In Progress</div>
-          <div class="map-legend-item"><div class="map-legend-dot" style="background:#F59E0B"></div> For Resolution</div>
           <div class="map-legend-item"><div class="map-legend-dot" style="background:#10B981"></div> Resolved</div>
         </div>
       </div>
@@ -111,15 +107,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const pinColors = { 'Assigned':'#1A56DB','In Progress':'#F97316','For Resolution':'#F59E0B','Resolved':'#10B981' };
 
-const mapData = [
-  { lat:6.7500, lng:125.3540, issue:'Illegal Dumping',     barangay:'Poblacion', status:'In Progress',   ref:'CW-2026-00125' },
-  { lat:6.7420, lng:125.3480, issue:'Blocked Canal',        barangay:'Badiang',  status:'In Progress',   ref:'CW-2026-00118' },
-  { lat:6.7530, lng:125.3570, issue:'Overgrown Vegetation', barangay:'Carmen',   status:'For Resolution',ref:'CW-2026-00110' },
-  { lat:6.7640, lng:125.3360, issue:'Illegal Dumping',      barangay:'Soong',    status:'Resolved',      ref:'CW-2026-00105' },
-  { lat:6.7480, lng:125.3520, issue:'Blocked Canal',        barangay:'Magsaysay',status:'Resolved',      ref:'CW-2026-00098' },
-  { lat:6.7610, lng:125.3680, issue:'Soil Erosion',         barangay:'Goma',     status:'Assigned',      ref:'CW-2026-00092' },
-  { lat:6.7560, lng:125.3600, issue:'Overgrown Vegetation', barangay:'Magsaysay',status:'In Progress',   ref:'CW-2026-00088' },
-];
+// Filled from GET /api/admin/citizen-reports (scoped to this office);
+// only reports with coordinates get a pin. No sample fallback.
+let mapData = [];
 
 let markers = [];
 let activeFilter = 'all';
@@ -155,7 +145,21 @@ function toggleChip(el, filter) {
   renderMarkers();
 }
 
-renderMarkers();
+async function loadMapData() {
+  const res = await Utils.fetchOfficeReports();
+  if (!res.live) {
+    Utils.showToast('Could not load reports: ' + (res.error || 'Server unavailable.'), 'error', 5000);
+    return;
+  }
+  mapData = res.reports.filter(r => Number.isFinite(r.lat) && Number.isFinite(r.lng));
+  renderMarkers();
+  if (mapData.length) {
+    cenroMap.fitBounds(mapData.map(p => [p.lat, p.lng]), { padding: [40, 40], maxZoom: 16 });
+  } else {
+    Utils.showToast('No reports with map locations are assigned to your office yet.', 'info');
+  }
+}
+loadMapData();
 </script>
 </body>
 </html>

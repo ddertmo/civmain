@@ -48,8 +48,12 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
   final _mapController = MapController();
   bool _showMap = false;
 
+  // Incremented per reverse-geocode request; stale responses are ignored.
+  int _geocodeRequestId = 0;
+
   @override
   void dispose() {
+    _mapController.dispose();
     _addressCtrl.dispose();
     _purokCtrl.dispose();
     _cityCtrl.dispose();
@@ -61,6 +65,12 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
 
   // ── reverse geocoding via Nominatim ──────────────────────────────────────
   Future<void> _reverseGeocode(LatLng latlng) async {
+    // Only the most recent request may update the form; older responses that
+    // arrive late (user tapped again) are dropped.
+    final requestId = ++_geocodeRequestId;
+    bool isStale() => !mounted || requestId != _geocodeRequestId;
+
+    if (!mounted) return;
     setState(() {
       _isGeocoding = true;
       _geocodeFailed = false;
@@ -116,6 +126,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
             addr['state'] as String? ??
             'Davao del Sur';
 
+        if (isStale()) return;
         setState(() {
           _addressCtrl.text = _toTitleCase(shortAddr);
           _purokCtrl.text = _toTitleCase(purok);
@@ -126,30 +137,47 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
           _geocodeFailed = false;
         });
       } else {
+        if (isStale()) return;
         setState(() => _geocodeFailed = true);
       }
     } catch (_) {
+      if (isStale()) return;
       setState(() => _geocodeFailed = true);
     } finally {
-      setState(() => _isGeocoding = false);
+      // A newer request owns the spinner; only the latest one clears it.
+      if (!isStale()) setState(() => _isGeocoding = false);
     }
   }
 
-  /// Fuzzy-match a raw geocoded barangay string to the official Digos City list.
-  /// Returns the best match, or null if no reasonable match is found.
-  String? _matchBarangay(String raw) {
-    if (raw.isEmpty) return null;
-    final q = raw.toLowerCase().trim();
-    // Exact match first
+  /// Match a raw geocoded barangay string to the official Digos City list.
+  ///
+  /// Exact, case-insensitive comparison only (after trimming, collapsing
+  /// whitespace and dropping a leading "Barangay"/"Brgy." prefix). A trailing
+  /// parenthetical is ignored on both sides, so "Zone 1" matches
+  /// "Zone 1 (Pob.)". Returns null when nothing matches exactly — the user
+  /// must then pick from the dropdown.
+  static String? _matchBarangay(String raw) {
+    final q = _normBarangay(raw);
+    if (q.isEmpty) return null;
     for (final b in _kDigosBarangays) {
-      if (b.toLowerCase() == q) return b;
+      if (_normBarangay(b) == q) return b;
     }
-    // Contains match (e.g. "Dawis Norte" → "Dawis")
+    final qBase = _stripParen(q);
+    if (qBase.isEmpty) return null;
     for (final b in _kDigosBarangays) {
-      if (q.contains(b.toLowerCase()) || b.toLowerCase().contains(q)) return b;
+      if (_stripParen(_normBarangay(b)) == qBase) return b;
     }
-    return null; // no match — user picks from dropdown
+    return null;
   }
+
+  static String _normBarangay(String s) {
+    var n = s.toLowerCase().trim().replaceAll(RegExp(r'\s+'), ' ');
+    n = n.replaceFirst(RegExp(r'^(barangay|brgy\.?)\s+'), '');
+    return n;
+  }
+
+  static String _stripParen(String s) =>
+      s.replaceFirst(RegExp(r'\s*\(.*\)\s*$'), '').trim();
 
   /// Converts a string to Title Case — first letter of each word capitalized.
   static String _toTitleCase(String s) {
@@ -221,45 +249,56 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
     }
 
     // ── Step 3: Get real GPS coordinates ──────────────────────────────
+    if (!mounted) return;
     setState(() {
       _isGeocoding = true; // show spinner while getting position
     });
 
+    Position position;
     try {
-      final position = await Geolocator.getCurrentPosition(
+      position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
           timeLimit: Duration(seconds: 15),
         ),
       );
-
-      final latlng = LatLng(position.latitude, position.longitude);
-
-      setState(() {
-        _pickedLatLng = latlng;
-        _showMap = true; // open map so user can see their position
-      });
-
-      // Move map camera to the real location
-      _mapController.move(latlng, 16.0);
-
-      // Reverse geocode the real coordinates
-      await _reverseGeocode(latlng);
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isGeocoding = false);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Could not get location. Try again or tap the map.',
-              style: GoogleFonts.inter(fontSize: 13),
-            ),
-            backgroundColor: AppColors.navy,
-            behavior: SnackBarBehavior.floating,
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Could not get location. Try again or tap the map.',
+            style: GoogleFonts.inter(fontSize: 13),
           ),
-        );
-      }
+          backgroundColor: AppColors.navy,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
     }
+
+    final latlng = LatLng(position.latitude, position.longitude);
+    if (!mounted) return;
+    setState(() {
+      _pickedLatLng = latlng;
+      _showMap = true; // open map so user can see their position
+    });
+
+    // The FlutterMap widget is only attached to _mapController after the
+    // next frame (it may have just been inserted by _showMap = true), so move
+    // the camera then. A failure here must not skip geocoding.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      try {
+        _mapController.move(latlng, 16.0);
+      } catch (_) {
+        // Map not ready — it still opens near the pin via initialCenter.
+      }
+    });
+
+    // Reverse geocode the real coordinates (independent of the camera move)
+    await _reverseGeocode(latlng);
   }
 
   void _onMapTap(TapPosition _, LatLng latlng) async {
@@ -271,15 +310,27 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
 
   void _next() {
     if (!_canProceed) return;
+    final barangay = _selectedBarangay;
+    if (barangay == null || !_kDigosBarangays.contains(barangay)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Please select the barangay of the concern.',
+            style: GoogleFonts.inter(fontSize: 13),
+          ),
+          backgroundColor: const Color(0xFFF59E0B),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
     Navigator.pushNamed(context, AppRoutes.reportReview, arguments: {
       ...widget.reportData,
       'latitude': _pickedLatLng!.latitude,
       'longitude': _pickedLatLng!.longitude,
       'address': _addressCtrl.text.trim(),
       'purok': _purokCtrl.text.trim(),
-      'barangay': (_selectedBarangay ?? '').isEmpty
-          ? 'Unknown Barangay'
-          : _selectedBarangay!,
+      'barangay': barangay,
       'city': _cityCtrl.text.trim(),
       'province': _provinceCtrl.text.trim(),
       'landmark': _landmarkCtrl.text.trim(),

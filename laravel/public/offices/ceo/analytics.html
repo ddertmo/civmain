@@ -218,8 +218,70 @@ Chart.defaults.color = '#6B7280';
 const BLUE = '#1A56DB';
 const BLUE_LIGHT = ['#1A56DB','#2563EB','#3B82F6','#60A5FA','#93C5FD','#BFDBFE'];
 
-const weeklyData  = { labels:['Apr 28 – May 4','May 5–11','May 12–18','May 19–21'], data:[8,11,9,4] };
-const monthlyData = { labels:['Feb','Mar','Apr','May'], data:[18,24,29,32] };
+// Computed from this office's reports (GET /api/admin/citizen-reports, which
+// the API scopes to the signed-in office). No sample data.
+let weeklyData  = { labels: [], data: [] };
+let monthlyData = { labels: [], data: [] };
+// Assigned / In Progress / Resolved (the page's existing palette).
+const STATUS_PALETTE = ['#1A56DB','#F97316','#10B981'];
+let S = { issues: { labels: [], data: [] }, barangays: { labels: [], data: [] }, status: [0, 0, 0], priority: [0, 0, 0], total: 0 };
+
+function topN(reports, key, n) {
+  const counts = {};
+  reports.forEach(r => { const k = r[key] || 'Other'; counts[k] = (counts[k] || 0) + 1; });
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, n);
+  return { labels: sorted.map(x => x[0]), data: sorted.map(x => x[1]) };
+}
+
+function computeAnalytics(reports) {
+  const ts = r => { const d = r.submittedAt ? new Date(r.submittedAt) : null; return d && !isNaN(d) ? d : null; };
+  const inRange = (s, e) => reports.filter(r => { const d = ts(r); return d && d >= s && d < e; }).length;
+  const fmt = d => d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric' });
+  const now = new Date();
+
+  // Last 5 weeks (Mon–Sun), oldest first.
+  const w0 = new Date(now); w0.setHours(0, 0, 0, 0); w0.setDate(w0.getDate() - ((w0.getDay() + 6) % 7));
+  weeklyData = { labels: [], data: [] };
+  for (let i = 4; i >= 0; i--) {
+    const s = new Date(w0); s.setDate(s.getDate() - 7 * i);
+    const e = new Date(s); e.setDate(e.getDate() + 7);
+    weeklyData.labels.push(fmt(s) + ' – ' + fmt(new Date(e.getTime() - 1)));
+    weeklyData.data.push(inRange(s, e));
+  }
+  // Last 6 months, oldest first.
+  monthlyData = { labels: [], data: [] };
+  for (let i = 5; i >= 0; i--) {
+    const s = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const e = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
+    monthlyData.labels.push(s.toLocaleDateString('en-PH', { month: 'short', year: 'numeric' }));
+    monthlyData.data.push(inRange(s, e));
+  }
+
+  S.total = reports.length;
+  S.issues = topN(reports, 'issue', 5);
+  S.barangays = topN(reports, 'barangay', 5);
+  S.status = ['Assigned', 'In Progress', 'Resolved'].map(s => reports.filter(r => r.status === s).length);
+  S.priority = ['High', 'Medium', 'Low'].map(p => reports.filter(r => r.priority === p).length);
+}
+
+function renderSummary() {
+  const pct = n => S.total ? (n / S.total * 100).toFixed(1) + '%' : '0%';
+  const vals = document.querySelectorAll('.summary-val');
+  const rate = S.total ? Math.round(S.status[2] / S.total * 100) + '%' : '—';
+  [S.total, S.status[1], S.status[2], rate].forEach((v, i) => { if (vals[i]) vals[i].textContent = v; });
+
+  const legendHtml = (items) => items.map(([label, color, n]) =>
+    `<div class="legend-item"><div class="legend-dot" style="background:${color}"></div>` +
+    `<span class="legend-label">${Utils.esc(label)}</span><span class="legend-value">${pct(n)}</span></div>`).join('') +
+    `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--gray-200);">` +
+    `<div style="font-size:22px;font-weight:700;color:var(--gray-900);">${S.total}</div>` +
+    `<div style="font-size:11px;color:var(--gray-400);">Total</div></div>`;
+  const legends = document.querySelectorAll('.doughnut-legend');
+  if (legends[0]) legends[0].innerHTML = legendHtml([['Assigned', STATUS_PALETTE[0], S.status[0]], ['In Progress', STATUS_PALETTE[1], S.status[1]], ['Resolved', STATUS_PALETTE[2], S.status[2]]]);
+  if (legends[1]) legends[1].innerHTML = legendHtml([['High', '#EF4444', S.priority[0]], ['Medium', '#F59E0B', S.priority[1]], ['Low', '#10B981', S.priority[2]]]);
+  const df = document.querySelector('.date-filter');
+  if (df) df.innerHTML = '<span class="material-symbols-outlined">calendar_today</span> All dates';
+}
 let trendChart;
 
 function buildTrendChart(d) {
@@ -258,13 +320,15 @@ function buildTrendChart(d) {
   });
 }
 
+// Built after the office's reports load (see loadAnalytics below).
+function buildStaticCharts() {
 // Chart 2: Top infrastructure issues
 new Chart(document.getElementById('issuesChart').getContext('2d'), {
   type: 'bar',
   data: {
-    labels: ['Damaged Road','Blocked Drainage','Broken Streetlight','Damaged Sidewalk','Road Sign Damage'],
+    labels: S.issues.labels,
     datasets: [{
-      data: [12, 8, 6, 4, 2],
+      data: S.issues.data,
       backgroundColor: BLUE_LIGHT,
       borderRadius: 6,
       borderSkipped: false,
@@ -287,10 +351,10 @@ new Chart(document.getElementById('issuesChart').getContext('2d'), {
 new Chart(document.getElementById('statusChart').getContext('2d'), {
   type: 'doughnut',
   data: {
-    labels: ['Assigned','In Progress','For Resolution','Resolved'],
+    labels: ['Assigned','In Progress','Resolved'],
     datasets: [{
-      data: [4, 18, 8, 22],
-      backgroundColor: ['#1A56DB','#F97316','#F59E0B','#10B981'],
+      data: S.status,
+      backgroundColor: STATUS_PALETTE,
       borderColor: '#fff', borderWidth: 3, hoverOffset: 4,
     }]
   },
@@ -307,9 +371,9 @@ new Chart(document.getElementById('statusChart').getContext('2d'), {
 new Chart(document.getElementById('barangayChart').getContext('2d'), {
   type: 'bar',
   data: {
-    labels: ['Aplaya','Zone 2','Badiang','Poblacion','Zone 3'],
+    labels: S.barangays.labels,
     datasets: [{
-      data: [8, 6, 5, 4, 3],
+      data: S.barangays.data,
       backgroundColor: BLUE,
       borderRadius: 6, borderSkipped: false,
     }]
@@ -333,7 +397,7 @@ new Chart(document.getElementById('priorityChart').getContext('2d'), {
   data: {
     labels: ['High','Medium','Low'],
     datasets: [{
-      data: [14, 12, 6],
+      data: S.priority,
       backgroundColor: ['#EF4444','#F59E0B','#10B981'],
       borderColor: '#fff', borderWidth: 3, hoverOffset: 4,
     }]
@@ -347,6 +411,8 @@ new Chart(document.getElementById('priorityChart').getContext('2d'), {
   }
 });
 
+}
+
 function setMode(mode, btn) {
   document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -355,7 +421,19 @@ function setMode(mode, btn) {
   buildTrendChart(isWeekly ? weeklyData : monthlyData);
 }
 
-buildTrendChart(weeklyData);
+// Show zeros (not sample numbers) until the data arrives.
+document.querySelectorAll('.summary-val').forEach(el => { el.textContent = '—'; });
+
+(async function loadAnalytics() {
+  const res = await Utils.fetchOfficeReports();
+  if (!res.live) {
+    Utils.showToast('Could not load analytics: ' + (res.error || 'Server unavailable.'), 'error', 5000);
+  }
+  computeAnalytics(res.reports || []);
+  renderSummary();
+  buildStaticCharts();
+  buildTrendChart(document.getElementById('monthlyBtn').classList.contains('active') ? monthlyData : weeklyData);
+})();
 </script>
 </body>
 </html>

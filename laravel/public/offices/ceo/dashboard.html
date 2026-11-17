@@ -173,9 +173,9 @@
             <span class="material-symbols-outlined">description</span>
           </div>
           <div>
-            <div class="office-stat-val">32</div>
+            <div class="office-stat-val">—</div>
             <div class="office-stat-label">Assigned to Office</div>
-            <div class="office-stat-trend"><span class="material-symbols-outlined">arrow_upward</span> 10% from last week</div>
+            <div class="office-stat-trend">Loading…</div>
           </div>
         </div>
         <div class="office-stat-card">
@@ -183,9 +183,9 @@
             <span class="material-symbols-outlined">schedule</span>
           </div>
           <div>
-            <div class="office-stat-val">18</div>
+            <div class="office-stat-val">—</div>
             <div class="office-stat-label">In Progress</div>
-            <div class="office-stat-trend"><span class="material-symbols-outlined">arrow_upward</span> 7% from last week</div>
+            <div class="office-stat-trend">Loading…</div>
           </div>
         </div>
         <div class="office-stat-card">
@@ -193,9 +193,9 @@
             <span class="material-symbols-outlined">note_alt</span>
           </div>
           <div>
-            <div class="office-stat-val">8</div>
+            <div class="office-stat-val">—</div>
             <div class="office-stat-label">For Resolution</div>
-            <div class="office-stat-trend"><span class="material-symbols-outlined">arrow_upward</span> 3% from last week</div>
+            <div class="office-stat-trend">Loading…</div>
           </div>
         </div>
         <div class="office-stat-card">
@@ -203,9 +203,9 @@
             <span class="material-symbols-outlined">check_circle</span>
           </div>
           <div>
-            <div class="office-stat-val">22</div>
+            <div class="office-stat-val">—</div>
             <div class="office-stat-label">Resolved</div>
-            <div class="office-stat-trend"><span class="material-symbols-outlined">arrow_upward</span> 12% from last week</div>
+            <div class="office-stat-trend">Loading…</div>
           </div>
         </div>
       </div>
@@ -237,9 +237,9 @@
             <div id="officeMap"></div>
           </div>
           <div class="map-legend">
-            <div class="map-legend-item"><div class="map-legend-dot" style="background:#1A56DB"></div> In Progress (18)</div>
-            <div class="map-legend-item"><div class="map-legend-dot" style="background:#F59E0B"></div> For Resolution (8)</div>
-            <div class="map-legend-item"><div class="map-legend-dot" style="background:#10B981"></div> Resolved (22)</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#1A56DB"></div> In Progress</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#F59E0B"></div> For Resolution</div>
+            <div class="map-legend-item"><div class="map-legend-dot" style="background:#10B981"></div> Resolved</div>
           </div>
         </div>
       </div>
@@ -253,76 +253,109 @@
 <script src="/js/utils.js"></script>
 <script src="/js/app.js"></script>
 <script>
-// ── Date range ───────────────────────────────────────────────
-const now = new Date();
-const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-document.getElementById('dateRange').textContent = `May 15, 2026 – May 21, 2026`;
-
-// ── Recent assigned reports (CEO = Infrastructure only) ──────
-const ceoReports = [
-  { ref:'CW-2026-00132', issue:'Potholes on Rizal Street',  barangay:'Poblacion, Digos City', date:'May 21, 2026', time:'9:20 AM',  status:'In Progress',  photo: 'damaged-road' },
-  { ref:'CW-2026-00131', issue:'Damaged Sidewalk',           barangay:'Zone 2, Digos City',   date:'May 21, 2026', time:'8:45 AM',  status:'In Progress',  photo: 'damaged-sidewalk' },
-  { ref:'CW-2026-00130', issue:'Broken Streetlight',         barangay:'Ma-a, Digos City',     date:'May 20, 2026', time:'7:30 PM',  status:'For Resolution',photo: 'streetlight' },
-  { ref:'CW-2026-00129', issue:'Blocked Canal',              barangay:'Badiang, Digos City',  date:'May 20, 2026', time:'4:10 PM',  status:'In Progress',  photo: 'blocked-drainage' },
-  { ref:'CW-2026-00128', issue:'Flooding on National Highway',barangay:'Buhangin, Digos City',date:'May 19, 2026', time:'10:15 AM', status:'Resolved',     photo: 'blocked-drainage' },
-];
-
+// Live data: GET /api/admin/citizen-reports (the API scopes office staff to
+// their own office's reports), flattened with Utils.officeReport.
 const statusColors = {
-  'In Progress':   '#F97316',
-  'For Resolution':'#F59E0B',
-  'Resolved':      '#10B981',
-  'Assigned':      '#1A56DB',
+  'In Progress': '#F97316',
+  'Resolved':    '#10B981',
+  'Assigned':    '#1A56DB',
 };
-
 const statusBg = {
-  'In Progress':   '#FFF7ED',
-  'For Resolution':'#FFFBEB',
-  'Resolved':      '#ECFDF5',
-  'Assigned':      '#EFF6FF',
+  'In Progress': '#FFF7ED',
+  'Resolved':    '#ECFDF5',
+  'Assigned':    '#EFF6FF',
 };
+// Map pin / legend colours (unchanged palette).
+const pinColors = { 'In Progress': '#1A56DB', 'Assigned': '#F59E0B', 'Resolved': '#10B981' };
 
-document.getElementById('recentList').innerHTML = ceoReports.map(r => `
-  <div class="recent-report-item" onclick="location.href='reports.html'">
-    <img class="recent-report-thumb"
-         src="${getPhotoUrl(r.photo.replace(/-/g,' '))}"
-         onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')"
-         alt="${r.issue}" />
-    <div class="recent-report-info">
-      <div class="recent-report-title">${r.issue}</div>
-      <div class="recent-report-meta">${r.barangay}</div>
-      <div class="recent-report-meta">Ref: ${r.ref} &bull; ${r.date}</div>
-    </div>
-    <div class="recent-report-right">
-      <span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:${statusBg[r.status]};color:${statusColors[r.status]};">${r.status}</span>
-      <span class="recent-report-time">${r.time}</span>
-    </div>
-  </div>
-`).join('');
+document.getElementById('dateRange').textContent = 'As of ' + new Date().toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric' });
 
-// ── Leaflet map ──────────────────────────────────────────────
 const officeMap = L.map('officeMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.7490, 125.3570], 12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors', maxZoom: 19
 }).addTo(officeMap);
 
-const ceoPins = [
-  { lat:6.7500, lng:125.3540, count:2, color:'#F97316' },
-  { lat:6.7530, lng:125.3570, count:3, color:'#1A56DB' },
-  { lat:6.7480, lng:125.3520, count:4, color:'#10B981' },
-  { lat:6.7420, lng:125.3480, count:2, color:'#10B981' },
-  { lat:6.7610, lng:125.3680, count:5, color:'#1A56DB' },
-  { lat:6.7560, lng:125.3600, count:3, color:'#1A56DB' },
-  { lat:6.7350, lng:125.3550, count:2, color:'#F59E0B' },
-];
+function setStat(i, value, label, sub) {
+  const card = document.querySelectorAll('.office-stat-card')[i];
+  if (!card) return;
+  card.querySelector('.office-stat-val').textContent = value;
+  if (label) card.querySelector('.office-stat-label').textContent = label;
+  const trend = card.querySelector('.office-stat-trend');
+  if (trend) trend.textContent = sub;
+}
 
-ceoPins.forEach(p => {
-  const icon = L.divIcon({
-    className: '',
-    html: `<div style="width:30px;height:30px;border-radius:50%;background:${p.color};border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;">${p.count}</div>`,
-    iconSize: [30,30], iconAnchor: [15,15]
+function withinDays(iso, days) {
+  const d = iso ? new Date(iso) : null;
+  return !!d && !isNaN(d) && (Date.now() - d.getTime()) <= days * 86400000;
+}
+
+function renderDashboard(reports) {
+  const by = s => reports.filter(r => r.status === s);
+  const inProg = by('In Progress'), assigned = by('Assigned'), resolved = by('Resolved');
+  const recent7 = list => list.filter(r => withinDays(r.submittedAt, 7)).length + ' submitted in the last 7 days';
+
+  setStat(0, reports.length, 'Assigned to Office', recent7(reports));
+  setStat(1, inProg.length, 'In Progress', recent7(inProg));
+  setStat(2, assigned.length, 'Awaiting Action', 'Assigned, not yet started');
+  setStat(3, resolved.length, 'Resolved', resolved.filter(r => withinDays(r.resolvedAt, 7)).length + ' resolved in the last 7 days');
+
+  const recent = reports.slice(0, 5); // API returns newest first
+  document.getElementById('recentList').innerHTML = recent.length ? recent.map(r => `
+  <div class="recent-report-item" onclick="location.href=${Utils.jsArg('report-details.html?ref=' + encodeURIComponent(r.ref))}">
+    <img class="recent-report-thumb"
+         src="${Utils.safeUrl(r.imageUrl || getPhotoUrl(r.issue))}"
+         onerror="this.style.background='var(--gray-200)';this.removeAttribute('src')"
+         alt="${Utils.esc(r.issue)}" />
+    <div class="recent-report-info">
+      <div class="recent-report-title">${Utils.esc(r.issue)}</div>
+      <div class="recent-report-meta">${Utils.esc(r.barangay)}</div>
+      <div class="recent-report-meta">Ref: ${Utils.esc(r.ref)} &bull; ${Utils.esc(r.date)}</div>
+    </div>
+    <div class="recent-report-right">
+      <span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:600;background:${statusBg[r.status] || '#F3F4F6'};color:${statusColors[r.status] || '#6B7280'};">${Utils.esc(r.status)}</span>
+      <span class="recent-report-time">${Utils.esc(r.time)}</span>
+    </div>
+  </div>
+`).join('') : `<div style="text-align:center;padding:30px;color:var(--gray-400);font-size:13px;">No reports assigned to your office yet.</div>`;
+
+  // One pin per report with coordinates, coloured by status.
+  const bounds = [];
+  reports.forEach(r => {
+    if (!Number.isFinite(r.lat) || !Number.isFinite(r.lng)) return;
+    const color = pinColors[r.status] || '#9CA3AF';
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:22px;height:22px;border-radius:50%;background:${color};border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+      iconSize: [22, 22], iconAnchor: [11, 11]
+    });
+    L.marker([r.lat, r.lng], { icon }).addTo(officeMap)
+      .bindPopup(`<strong>${Utils.esc(r.issue)}</strong><br>${Utils.esc(r.ref)} &bull; ${Utils.esc(r.status)}`);
+    bounds.push([r.lat, r.lng]);
   });
-  L.marker([p.lat, p.lng], { icon }).addTo(officeMap);
-});
+  if (bounds.length) officeMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 15 });
+
+  const legend = document.querySelector('.map-legend');
+  if (legend) legend.innerHTML = [['In Progress', inProg.length], ['Assigned', assigned.length], ['Resolved', resolved.length]]
+    .map(([s, n]) => `<div class="map-legend-item"><div class="map-legend-dot" style="background:${pinColors[s]}"></div> ${s} (${n})</div>`).join('');
+}
+
+function renderDashboardError(message) {
+  [0, 1, 2, 3].forEach(i => setStat(i, '—', null, 'Unavailable'));
+  document.getElementById('recentList').innerHTML =
+    `<div style="text-align:center;padding:30px;color:var(--gray-400);font-size:13px;">` +
+    `<span class="material-symbols-outlined" style="font-size:32px;display:block;margin-bottom:6px">wifi_off</span>` +
+    `Could not load reports. ${Utils.esc(message)}</div>`;
+  const legend = document.querySelector('.map-legend');
+  if (legend) legend.innerHTML = '<div class="map-legend-item">No data</div>';
+  Utils.showToast('Could not load reports: ' + message, 'error');
+}
+
+document.getElementById('recentList').innerHTML = `<div style="text-align:center;padding:30px;color:var(--gray-400);font-size:13px;">Loading reports…</div>`;
+(async function load() {
+  const res = await Utils.fetchOfficeReports();
+  if (res.live) renderDashboard(res.reports);
+  else renderDashboardError(res.error || 'Server unavailable.');
+})();
 </script>
 </body>
 </html>

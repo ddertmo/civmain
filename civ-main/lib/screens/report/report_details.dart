@@ -29,9 +29,11 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
 
   void _next() {
     if (!_formKey.currentState!.validate()) return;
+    final barangay = _selectedBarangay;
+    if (barangay == null) return; // validator above already flagged it
     Navigator.pushNamed(context, AppRoutes.reportReview, arguments: {
       ...widget.reportData,
-      'barangay': _selectedBarangay ?? 'Aplaya',
+      'barangay': barangay,
       'description': _descController.text.trim(),
       'severity': 'Moderate', // set by admin when assigning office
       'useCurrentLocation': _useCurrentLocation,
@@ -87,14 +89,14 @@ class _ReportDetailsScreenState extends State<ReportDetailsScreen> {
                           setState(() => _useCurrentLocation = false),
                     ),
 
-                    if (!_useCurrentLocation) ...[
-                      const SizedBox(height: 14),
-                      _BarangayDropdown(
-                        value: _selectedBarangay,
-                        onChanged: (v) =>
-                            setState(() => _selectedBarangay = v),
-                      ),
-                    ],
+                    // Barangay is always required (no silent default), so
+                    // the picker is shown for both location options.
+                    const SizedBox(height: 14),
+                    _BarangayDropdown(
+                      value: _selectedBarangay,
+                      onChanged: (v) =>
+                          setState(() => _selectedBarangay = v),
+                    ),
 
                     const SizedBox(height: 24),
 
@@ -246,6 +248,9 @@ class _BarangayDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: value,
+      validator: (v) => (v == null || !AppStrings.barangays.contains(v))
+          ? 'Please select a barangay'
+          : null,
       hint: Text('Select barangay',
           style:
               GoogleFonts.inter(fontSize: 14, color: context.c.textHint)),

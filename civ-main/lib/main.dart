@@ -11,7 +11,11 @@ void main() async {
   // right here if misconfigured (no-op in debug/profile).
   ApiConstants.ensureSecureBaseUrl();
 
-  // Restore session from saved token + load API data if logged in
+  // Restore theme + session from saved token + load API data if logged in.
+  // Kept awaited (theme must be known for the first frame, and init's
+  // logged-out branch would race a fast login). Every request inside is
+  // bounded by ApiClient's 15 s timeout and run in parallel, so a hung or
+  // unreachable server can't block the splash indefinitely.
   await AppState().init();
 
   SystemChrome.setPreferredOrientations([

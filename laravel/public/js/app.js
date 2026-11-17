@@ -72,7 +72,20 @@ const Api = {
             window.location.href = depth + 'index.html';
             return null;
         }
-        return res.json();
+        // Laravel validation (422), authorization (403) and not-found (404)
+        // errors come back as {message, errors} without a `success` key.
+        // Mark every non-2xx response as a failure so callers checking
+        // `json.success` never mistake an error for success.
+        let json;
+        try {
+            json = await res.json();
+        } catch (e) {
+            json = { message: `Request failed (HTTP ${res.status}).` };
+        }
+        if (!res.ok && json && typeof json === 'object' && json.success !== false) {
+            json = { ...json, success: false, message: json.message || `Request failed (HTTP ${res.status}).` };
+        }
+        return json;
     },
 
     // ── Action helper ─────────────────────────────────────────
@@ -100,9 +113,11 @@ const Api = {
                 success = null,
                 successTitle = 'Done!',
                 errorTitle = 'Request Failed',
-                onSuccess = null,
                 silent = false,
         } = opts;
+        // Many pages pass `onAction` (CwModal's option name) instead of
+        // `onSuccess`; accept both so their post-success refresh/redirect runs.
+        const onSuccess = opts.onSuccess || opts.onAction || null;
 
         if (!silent) CwModal.loading(loading);
 
