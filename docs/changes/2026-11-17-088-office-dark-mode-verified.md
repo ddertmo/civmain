@@ -1,7 +1,7 @@
 # CEO / CENRO dark mode: all 16 office pages verified, last two gaps fixed
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `6e2cab7`
 - **Type:** fix + verification (follow-up to 087)
 - **Areas:** web panel — `css/global.css`
 
