@@ -21,30 +21,35 @@ Route::middleware(['auth', 'web', 'active', 'superadmin'])->prefix('admin')->nam
     Route::post('/logout', [AdminWebController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [AdminWebController::class, 'dashboard'])->name('dashboard');
     Route::get('/citizen-reports', [AdminWebController::class, 'reportsIndex'])->name('citizen-reports.index');
-    Route::get('/citizen-reports/{id}', [AdminWebController::class, 'reportsShow'])->name('citizen-reports.show');
-    Route::post('/citizen-reports/{id}/validate', [AdminWebController::class, 'reportsValidate'])->name('citizen-reports.validate');
-    Route::post('/citizen-reports/{id}/assign', [AdminWebController::class, 'reportsAssign'])->name('citizen-reports.assign');
-    Route::post('/citizen-reports/{id}/status', [AdminWebController::class, 'reportsStatus'])->name('citizen-reports.status');
+    Route::get('/citizen-reports/{id}', [AdminWebController::class, 'reportsShow'])->name('citizen-reports.show')->whereNumber('id');
+    Route::post('/citizen-reports/{id}/validate', [AdminWebController::class, 'reportsValidate'])->name('citizen-reports.validate')->whereNumber('id');
+    Route::post('/citizen-reports/{id}/assign', [AdminWebController::class, 'reportsAssign'])->name('citizen-reports.assign')->whereNumber('id');
+    Route::post('/citizen-reports/{id}/status', [AdminWebController::class, 'reportsStatus'])->name('citizen-reports.status')->whereNumber('id');
     Route::get('/map', [AdminWebController::class, 'map'])->name('map');
     Route::get('/offices', [AdminWebController::class, 'officesIndex'])->name('offices.index');
     Route::post('/offices', [AdminWebController::class, 'officesStore'])->name('offices.store');
-    Route::put('/offices/{id}', [AdminWebController::class, 'officesUpdate'])->name('offices.update');
-    Route::delete('/offices/{id}', [AdminWebController::class, 'officesDestroy'])->name('offices.destroy');
+    Route::put('/offices/{id}', [AdminWebController::class, 'officesUpdate'])->name('offices.update')->whereNumber('id');
+    Route::delete('/offices/{id}', [AdminWebController::class, 'officesDestroy'])->name('offices.destroy')->whereNumber('id');
     Route::get('/announcements', [AdminWebController::class, 'announcementsIndex'])->name('announcements.index');
     Route::post('/announcements', [AdminWebController::class, 'announcementsStore'])->name('announcements.store');
-    Route::put('/announcements/{id}', [AdminWebController::class, 'announcementsUpdate'])->name('announcements.update');
-    Route::delete('/announcements/{id}', [AdminWebController::class, 'announcementsDestroy'])->name('announcements.destroy');
+    Route::put('/announcements/{id}', [AdminWebController::class, 'announcementsUpdate'])->name('announcements.update')->whereNumber('id');
+    Route::delete('/announcements/{id}', [AdminWebController::class, 'announcementsDestroy'])->name('announcements.destroy')->whereNumber('id');
 });
 
 // ── Catch-all: serve any .html file from public/ ──────────────────────────
 // Handles: dashboard.html, analytics.html, offices/ceo/dashboard.html, etc.
 // Must be LAST so it doesn't intercept API or admin routes above.
+// The path is resolved with realpath() and must stay inside public/, so a
+// request like /../../storage/x.html can't read files outside the web root.
 Route::get('{any}', function (string $any) {
     if (str_ends_with($any, '.html')) {
-        $path = public_path($any);
-        if (file_exists($path)) {
+        $root = realpath(public_path());
+        $path = realpath(public_path($any));
+        if ($root !== false && $path !== false
+            && str_starts_with($path, $root . DIRECTORY_SEPARATOR)
+            && is_file($path)) {
             return response(file_get_contents($path), 200)
-                ->header('Content-Type', 'text/html');
+                ->header('Content-Type', 'text/html; charset=UTF-8');
         }
     }
     abort(404);

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
+import '../common/app_network_image.dart';
 import '../common/status_chip.dart';
 
 class ReportCard extends StatelessWidget {
@@ -47,7 +48,13 @@ class ReportCard extends StatelessWidget {
                 height: 110,
                 color: context.c.background,
                 child: report.imageUrl != null
-                    ? Image.network(report.imageUrl!, fit: BoxFit.cover)
+                    ? AppNetworkImage(
+                        url: report.imageUrl!,
+                        errorWidget: Container(
+                          color: catBg,
+                          child: Icon(catIcon, color: catColor, size: 32),
+                        ),
+                      )
                     : Container(
                         color: catBg,
                         child: Icon(catIcon, color: catColor, size: 32),

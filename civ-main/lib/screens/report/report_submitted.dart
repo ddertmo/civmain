@@ -182,7 +182,7 @@ class _ReportSubmittedScreenState extends State<ReportSubmittedScreen>
                     color: context.c.primarySurface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                        color: AppColors.primary.withOpacity(0.2)),
+                        color: AppColors.primary.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -262,7 +262,7 @@ class _SuccessIllustration extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.statusResolved.withOpacity(0.35),
+                  color: AppColors.statusResolved.withValues(alpha: 0.35),
                   blurRadius: 20,
                   offset: const Offset(0, 6),
                 ),

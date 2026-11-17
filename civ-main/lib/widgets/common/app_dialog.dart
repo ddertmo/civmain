@@ -47,7 +47,7 @@ class AppDialog extends StatelessWidget {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       useRootNavigator: true,
       builder: (_) => AppDialog._(
         variant: _DialogVariant.loading,
@@ -68,7 +68,7 @@ class AppDialog extends StatelessWidget {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       useRootNavigator: true,
       builder: (_) => AppDialog._(
         variant: _DialogVariant.success,
@@ -93,7 +93,7 @@ class AppDialog extends StatelessWidget {
     return showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       useRootNavigator: true,
       builder: (_) => AppDialog._(
         variant: _DialogVariant.error,
@@ -232,7 +232,7 @@ class _DialogCardState extends State<_DialogCard>
             borderRadius: BorderRadius.circular(28),
             boxShadow: [
               BoxShadow(
-                color: _accent.withOpacity(0.18),
+                color: _accent.withValues(alpha: 0.18),
                 blurRadius: 48,
                 spreadRadius: 0,
                 offset: const Offset(0, 16),

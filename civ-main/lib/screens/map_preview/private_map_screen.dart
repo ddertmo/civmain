@@ -76,7 +76,7 @@ class PrivateMapScreen extends StatelessWidget {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: AppColors.statusPending.withOpacity(0.15),
+                      color: AppColors.statusPending.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
@@ -112,7 +112,7 @@ class PrivateMapScreen extends StatelessWidget {
                   ),
                   Icon(
                     Icons.lock_rounded,
-                    color: AppColors.statusPending.withOpacity(0.4),
+                    color: AppColors.statusPending.withValues(alpha: 0.4),
                     size: 26,
                   ),
                 ],

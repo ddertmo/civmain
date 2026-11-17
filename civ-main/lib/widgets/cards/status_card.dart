@@ -28,7 +28,7 @@ class StatusCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Row(
         children: [
@@ -36,7 +36,7 @@ class StatusCard extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withValues(alpha: 0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 22),
@@ -84,7 +84,7 @@ class StatusCard extends StatelessWidget {
           ),
           if (showLock)
             Icon(Icons.lock_rounded,
-                color: color.withOpacity(0.4), size: 28),
+                color: color.withValues(alpha: 0.4), size: 28),
         ],
       ),
     );

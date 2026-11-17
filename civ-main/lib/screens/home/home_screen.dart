@@ -170,7 +170,7 @@ class _HomeAppBar extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Icon(Icons.shield_rounded,
-                    color: AppColors.onAccent.withOpacity(0.15), size: 30),
+                    color: AppColors.onAccent.withValues(alpha: 0.15), size: 30),
                 const Icon(Icons.location_on_rounded,
                     color: AppColors.onAccent, size: 14),
               ],
@@ -265,7 +265,7 @@ class _ReportCtaBanner extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: AppColors.navy.withOpacity(0.25),
+              color: AppColors.navy.withValues(alpha: 0.25),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -278,7 +278,7 @@ class _ReportCtaBanner extends StatelessWidget {
               width: 52,
               height: 52,
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.9),
+                color: AppColors.primary.withValues(alpha: 0.9),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add_circle_outline_rounded,
@@ -302,7 +302,7 @@ class _ReportCtaBanner extends StatelessWidget {
                     'Tap to report infrastructure or\nenvironmental concerns.',
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: AppColors.onAccent.withOpacity(0.75),
+                      color: AppColors.onAccent.withValues(alpha: 0.75),
                       height: 1.4,
                     ),
                   ),
@@ -313,7 +313,7 @@ class _ReportCtaBanner extends StatelessWidget {
               width: 34,
               height: 34,
               decoration: BoxDecoration(
-                color: AppColors.onAccent.withOpacity(0.15),
+                color: AppColors.onAccent.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.arrow_forward_rounded,
@@ -563,7 +563,7 @@ class _MiniPin extends StatelessWidget {
         border: Border.all(color: AppColors.onAccent, width: 2),
         boxShadow: [
           BoxShadow(
-              color: color.withOpacity(0.4),
+              color: color.withValues(alpha: 0.4),
               blurRadius: 4,
               offset: const Offset(0, 2))
         ],
@@ -751,7 +751,7 @@ class _HomeMiniMapPainter extends CustomPainter {
 
     // block fills
     final blockPaint = Paint()
-      ..color = const Color(0xFFD8E2DC).withOpacity(0.5);
+      ..color = const Color(0xFFD8E2DC).withValues(alpha: 0.5);
     canvas.drawRect(
         Rect.fromLTWH(size.width * 0.05, size.height * 0.06, 55, 35),
         blockPaint);

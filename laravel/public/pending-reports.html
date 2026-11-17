@@ -172,10 +172,10 @@
                         <button class="btn btn-secondary" onclick="document.getElementById('searchInput').value='';document.getElementById('catFilter').value='';document.getElementById('brgyFilter').value='';document.getElementById('fromDate').value='';document.getElementById('toDate').value='';applyFilter()" style="margin-left:4px">Clear Filters</button>
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div class="pagination" id="pagination"></div>
-                            <select class="per-page-select">
-                                <option>10 / page</option>
-                                <option>20 / page</option>
-                                <option>50 / page</option>
+                            <select class="per-page-select" id="perPageSelect">
+                                <option value="10">10 / page</option>
+                                <option value="20">20 / page</option>
+                                <option value="50">50 / page</option>
                             </select>
                         </div>
                     </div>
@@ -188,13 +188,14 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        requireAuth();
+        // Stops data loading below when not signed in (requireAuth redirects)
+        const isAuthed = requireAuth();
 
         // ── State ────────────────────────────────────────────────────────────
         let allReports = []; // full list from API
         let filtered = []; // after search / filter
         let currentPage = 1;
-        const perPage = 10;
+        let perPage = 10;
 
         // ── Stat counter ──────────────────────────────────────────────────────
         function updateStat(count) {
@@ -362,12 +363,20 @@
         document.getElementById('brgyFilter').addEventListener('change', applyFilter);
         document.getElementById('fromDate')?.addEventListener('change', applyFilter);
         document.getElementById('toDate')?.addEventListener('change', applyFilter);
+        document.getElementById('perPageSelect').addEventListener('change', function() {
+            perPage = parseInt(this.value, 10) || 10;
+            currentPage = 1;
+            render();
+        });
 
         // ── Load from real API ─────────────────────────────────────────────────
         async function loadPendingReports() {
-            // Show skeleton while loading
-            Skeleton.injectTableRows('pendingTableBody', 6, 8);
-            updateStat('…');
+            if (!isAuthed) return;
+            // Show skeleton only on the first load (not on the 30 s refresh)
+            if (!allReports.length) {
+                Skeleton.injectTableRows('pendingTableBody', 6, 8);
+                updateStat('…');
+            }
 
             try {
                 // Fetch Submitted + Pending Validation statuses in parallel
@@ -395,8 +404,12 @@
                     })
                     .sort((a, b) => new Date(b.submittedAt || b.created_at) - new Date(a.submittedAt || a.created_at));
 
-                filtered = [...allReports];
                 updateStat(allReports.length);
+                // Re-apply the active search / filters and keep the current page
+                const prevPage = currentPage;
+                applyFilter();
+                const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+                currentPage = Math.min(prevPage, totalPages);
                 render();
 
             } catch (err) {
@@ -412,20 +425,22 @@
         }
 
         // ── Auto-refresh every 30s so new reports appear without manual reload ─
-        loadPendingReports();
-        setInterval(loadPendingReports, 30000);
-
-        // ── If returning from approval/rejection, reload reports ─────────────
-        // Set flag when leaving page (before navigation to report-details or assign-office)
-        window.addEventListener('beforeunload', function() {
-            sessionStorage.setItem('pending-reports-needs-refresh', 'true');
-        });
-
-        // Check if we're returning from approval workflow
-        if (sessionStorage.getItem('pending-reports-needs-refresh') === 'true') {
+        if (isAuthed) {
+            // A fresh page load already fetches current data, so the
+            // "needs refresh" flag set by report-details after an approval /
+            // rejection is simply consumed here (no second load).
             sessionStorage.removeItem('pending-reports-needs-refresh');
-            loadPendingReports(); // Reload to remove approved reports
+            loadPendingReports();
+            setInterval(loadPendingReports, 30000);
         }
+
+        // ── If restored from the back/forward cache, the script does not
+        // re-run: reload only then (e.g. after an approval in report-details).
+        window.addEventListener('pageshow', function(e) {
+            if (!e.persisted) return;
+            sessionStorage.removeItem('pending-reports-needs-refresh');
+            loadPendingReports();
+        });
 
         // Also listen for storage changes (if user approved in another tab)
         window.addEventListener('storage', function(e) {

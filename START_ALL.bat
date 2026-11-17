@@ -6,11 +6,15 @@ color 0B
 set "REPO=%~dp0"
 set "LARAVEL=%REPO%laravel"
 set "CIVMAIN=%REPO%civ-main"
-set "FLUTTER=C:\Users\Administrator\Downloads\flutter\bin\flutter.bat"
-set "MYSQLD=C:\xampp\mysql\bin\mysqld.exe"
-set "MYSQL=C:\xampp\mysql\bin\mysql.exe"
-set "HTTPD=C:\xampp\apache\bin\httpd.exe"
-set "PHP=C:\xampp\php\php.exe"
+rem Tool paths: defaults match the original Windows PC. Override any of them by
+rem setting CW_FLUTTER / CW_XAMPP / CW_CHROME before running this script.
+if defined CW_FLUTTER (set "FLUTTER=%CW_FLUTTER%") else (set "FLUTTER=C:\Users\Administrator\Downloads\flutter\bin\flutter.bat")
+if defined CW_XAMPP (set "XAMPP=%CW_XAMPP%") else (set "XAMPP=C:\xampp")
+if defined CW_CHROME (set "CHROME=%CW_CHROME%") else (set "CHROME=C:\Program Files\Google\Chrome\Application\chrome.exe")
+set "MYSQLD=%XAMPP%\mysql\bin\mysqld.exe"
+set "MYSQL=%XAMPP%\mysql\bin\mysql.exe"
+set "HTTPD=%XAMPP%\apache\bin\httpd.exe"
+set "PHP=%XAMPP%\php\php.exe"
 set "BACKEND_URL=http://127.0.0.1:8000"
 set "FLUTTER_PORT=5000"
 
@@ -52,7 +56,7 @@ if %errorlevel%==0 (
   echo [3/6] Database civilwatch .... present
 ) else (
   echo [3/6] Database civilwatch .... missing - importing civilwatch_FINAL.sql ...
-  powershell -NoProfile -ExecutionPolicy Bypass -Command "$src='%REPO%laravel\civilwatch_FINAL.sql'; $dst=$env:TEMP+'\civilwatch_import.sql'; $lines=[System.IO.File]::ReadAllLines($src); $clean=$lines | Where-Object { $_ -notmatch 'M!999999' }; [System.IO.File]::WriteAllLines($dst,$clean,[System.Text.UTF8Encoding]::new($false)); cmd /c ('C:\xampp\mysql\bin\mysql.exe -u root --default-character-set=utf8mb4 < ""' + $dst + '""')" >nul 2>&1
+  powershell -NoProfile -ExecutionPolicy Bypass -Command "$src='%REPO%laravel\civilwatch_FINAL.sql'; $dst=$env:TEMP+'\civilwatch_import.sql'; $lines=[System.IO.File]::ReadAllLines($src); $clean=$lines | Where-Object { $_ -notmatch 'M!999999' }; [System.IO.File]::WriteAllLines($dst,$clean,[System.Text.UTF8Encoding]::new($false)); cmd /c ('%MYSQL% -u root --default-character-set=utf8mb4 < ""' + $dst + '""')" >nul 2>&1
   if %errorlevel%==0 (echo        Import OK) else (echo        WARNING: import failed - check %REPO%laravel\civilwatch_FINAL.sql)
 )
 echo.
@@ -95,9 +99,9 @@ echo.
 
 rem ---------- 5. Open pages in Chrome ----------
 echo [5/6] Opening in Chrome...
-start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "%BACKEND_URL%"
-start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "http://localhost/phpmyadmin/"
-start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" "http://localhost:%FLUTTER_PORT%"
+start "" "%CHROME%" "%BACKEND_URL%"
+start "" "%CHROME%" "http://localhost/phpmyadmin/"
+start "" "%CHROME%" "http://localhost:%FLUTTER_PORT%"
 
 echo.
 echo ============================================================

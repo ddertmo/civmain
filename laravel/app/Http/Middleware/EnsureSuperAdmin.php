@@ -22,9 +22,14 @@ class EnsureSuperAdmin
     /** HTTP verbs that are allowed for every authenticated role. */
     private const READ_VERBS = ['GET', 'HEAD', 'OPTIONS'];
 
-    public function handle(Request $request, Closure $next): Response
+    /**
+     * `superadmin`     → writes need super_admin, reads open to every staff role.
+     * `superadmin:all` → reads need super_admin too (e.g. the staff account
+     *                    list: names, emails and roles of every account).
+     */
+    public function handle(Request $request, Closure $next, ?string $scope = null): Response
     {
-        if (in_array($request->method(), self::READ_VERBS, true)) {
+        if ($scope !== 'all' && in_array($request->method(), self::READ_VERBS, true)) {
             return $next($request);
         }
 

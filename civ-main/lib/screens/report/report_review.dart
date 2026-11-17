@@ -187,7 +187,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                                   onTap: () => showDialog(
                                     context: context,
                                     barrierColor:
-                                        Colors.black.withOpacity(0.92),
+                                        Colors.black.withValues(alpha: 0.92),
                                     builder: (_) => GestureDetector(
                                       onTap: () =>
                                           Navigator.of(context).pop(),
@@ -393,7 +393,7 @@ class _ReportReviewScreenState extends State<ReportReviewScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
                       elevation: 2,
-                      shadowColor: AppColors.primary.withOpacity(0.3),
+                      shadowColor: AppColors.primary.withValues(alpha: 0.3),
                     ),
                     child: Text(
                             'Submit Concern',
@@ -480,7 +480,7 @@ class _Chip extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Text(
         label,

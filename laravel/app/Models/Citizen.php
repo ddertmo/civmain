@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Citizen extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    // No Notifiable trait: citizens get in-app notices through the
+    // citizen_notifications table (notifications() below), never Laravel's
+    // notification system. The trait's own notifications() relation was
+    // silently overridden by ours, which would break $citizen->notify().
+    use HasApiTokens;
 
     protected $table = 'citizens';
 

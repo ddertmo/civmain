@@ -107,7 +107,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                           boxShadow: [
                             BoxShadow(
                               color: isSelected
-                                  ? catColor.withOpacity(0.1)
+                                  ? catColor.withValues(alpha: 0.1)
                                   : AppColors.cardShadow,
                               blurRadius: 6,
                               offset: const Offset(0, 2),

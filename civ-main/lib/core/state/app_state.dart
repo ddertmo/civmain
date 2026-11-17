@@ -214,8 +214,11 @@ class AppState extends ChangeNotifier {
     final result = await _reportSvc.submitReport(data);
     if (result.error == null && result.report != null) {
       _reports.insert(0, result.report!);
-      _addSubmissionNotifications(result.report!);
       notifyListeners();
+      // The server creates the submission notification — reload it rather
+      // than fabricating local ones. Not awaited so the submit flow isn't
+      // delayed by the extra request.
+      _loadNotifications().then((_) => notifyListeners());
     }
     return (
       success: result.error == null && result.report != null,
@@ -303,11 +306,15 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  Future<void> markAllRead() async {
-    await _notifSvc.markAllRead();
+  /// Marks every notification read. Local state only changes once the API
+  /// call succeeds; returns the error message on failure (null on success).
+  Future<String?> markAllRead() async {
+    final error = await _notifSvc.markAllRead();
+    if (error != null) return error;
     _notifications = _notifications.map((n) => n.copyWith(isRead: true)).toList();
     _unreadCount = 0;
     notifyListeners();
+    return null;
   }
 
   Future<void> markRead(String id) async {
@@ -321,42 +328,6 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  // ── Local report manipulation (kept for optimistic UI updates) ────────────
-  void addReport(IncidentReport report) {
-    _reports.insert(0, report);
-    _addSubmissionNotifications(report);
-    notifyListeners();
-  }
-
-  void updateStatus(String reportId, String newStatus) {
-    final idx = _reports.indexWhere((r) => r.id == reportId);
-    if (idx == -1) return;
-    final report = _reports[idx];
-    final newLog = List<ActivityEntry>.from(report.activityLog)
-      ..add(ActivityEntry(
-        title: newStatus,
-        description: _statusDescription(newStatus),
-        timestamp: DateTime.now(),
-        status: newStatus,
-      ));
-    _reports[idx] = report.copyWith(
-      status: newStatus,
-      activityLog: newLog,
-      resolvedAt: newStatus == 'Resolved' ? DateTime.now() : report.resolvedAt,
-    );
-    _notifications.insert(0, AppNotification(
-      id: 'n-${DateTime.now().millisecondsSinceEpoch}',
-      title: newStatus,
-      message: '${report.referenceNumber} — ${_statusDescription(newStatus)}',
-      referenceNumber: report.referenceNumber,
-      status: newStatus,
-      timestamp: DateTime.now(),
-      isRead: false,
-    ));
-    _unreadCount++;
-    notifyListeners();
-  }
-
   // ── Summary counts ────────────────────────────────────────────────────────
   int get pendingCount   => _reports.where((r) => r.isPending).length;
   int get inProgressCount => _reports.where((r) => r.status == 'In Progress').length;
@@ -365,43 +336,6 @@ class AppState extends ChangeNotifier {
   int get totalCount     => _reports.length;
 
   // ── Helpers ───────────────────────────────────────────────────────────────
-  void _addSubmissionNotifications(IncidentReport report) {
-    final now = DateTime.now();
-    _notifications.insertAll(0, [
-      AppNotification(
-        id: 'n-${now.millisecondsSinceEpoch}-b',
-        title: 'Pending Validation',
-        message: '${report.referenceNumber} is now under review.',
-        referenceNumber: report.referenceNumber,
-        status: 'Pending Validation',
-        timestamp: now.add(const Duration(minutes: 1)),
-        isRead: false,
-      ),
-      AppNotification(
-        id: 'n-${now.millisecondsSinceEpoch}-a',
-        title: 'Concern Submitted',
-        message: 'Your concern ${report.referenceNumber} was submitted.',
-        referenceNumber: report.referenceNumber,
-        status: 'Submitted',
-        timestamp: now,
-        isRead: false,
-      ),
-    ]);
-    _unreadCount += 2;
-  }
-
-  String _statusDescription(String status) {
-    switch (status) {
-      case 'Pending Validation': return 'Your report is now waiting for validation.';
-      case 'Approved':           return 'Your report has been approved and published to the community map.';
-      case 'Assigned to Office': return 'Assigned to the appropriate government office.';
-      case 'In Progress':        return 'Work is currently in progress.';
-      case 'Resolved':           return 'The issue has been successfully resolved.';
-      case 'Rejected':           return 'The administrator rejected this report.';
-      default:                   return 'Status updated.';
-    }
-  }
-
   static IncidentReport buildFromFormData(Map<String, dynamic> data) {
     final now = DateTime.now();
     final issue = data['concern'] as String? ?? data['issue'] as String? ?? 'Others';

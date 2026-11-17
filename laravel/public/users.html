@@ -750,7 +750,8 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        requireAuth();
+        // Stops data loading below when not signed in (requireAuth redirects)
+        const isAuthed = requireAuth();
 
         // Avatar backgrounds — taken from the panel palette (css/variables.css)
         const AVATAR_COLORS = ['#1A56DB', '#10B981', '#F59E0B', '#0E7C7B', '#F97316', '#1344B5'];
@@ -1139,7 +1140,7 @@
             }
         }
 
-        loadUsers();
+        if (isAuthed) loadUsers();
     </script>
 </body>
 

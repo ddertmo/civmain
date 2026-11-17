@@ -520,7 +520,7 @@ class _TrackReportBody extends StatelessWidget {
                         'You will be notified whenever there is an update on your report.',
                         style: GoogleFonts.inter(
                           fontSize: 11,
-                          color: AppColors.onAccent.withOpacity(0.9),
+                          color: AppColors.onAccent.withValues(alpha: 0.9),
                           height: 1.4,
                         ),
                       ),
@@ -534,7 +534,7 @@ class _TrackReportBody extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.onAccent.withOpacity(0.15),
+                          color: AppColors.onAccent.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -737,7 +737,7 @@ class _VerticalTimeline extends StatelessWidget {
                               vertical: 1,
                             ),
                             decoration: BoxDecoration(
-                              color: color.withOpacity(0.15),
+                              color: color.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(

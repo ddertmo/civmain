@@ -200,7 +200,7 @@ class ApiClient {
     }
 
     // Extract error message from Laravel's standard error shapes
-    final rawMessage = json['message'] as String? ??
+    final rawMessage = json['message']?.toString() ??
         _extractValidationError(json) ??
         'An error occurred (${response.statusCode})';
 

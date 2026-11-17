@@ -11,7 +11,7 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-11-17 - latest change = 078 (Medium audit fixes); 076/077 = Critical/High security fixes
+- at:      2026-11-17 - latest change = 079 (Low audit fixes); 076-079 = full security audit follow-up
 - running: Laravel artisan serve (8000) + MySQL (XAMPP); Flutter web (5000)
 - doing:   security audit follow-up; Mock registration still works on local debug backends only
 - next:    on the PC: `php artisan migrate` + `php artisan test`; rotate the published seed passwords; rebuild the app

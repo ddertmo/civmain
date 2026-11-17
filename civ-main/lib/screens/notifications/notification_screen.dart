@@ -91,7 +91,14 @@ class NotificationScreen extends StatelessWidget {
                       ),
                       if (unread > 0)
                         TextButton(
-                          onPressed: () => state.markAllRead(),
+                          onPressed: () async {
+                            final error = await state.markAllRead();
+                            if (error != null && context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(error)),
+                              );
+                            }
+                          },
                           child: Text(
                             'Mark all read',
                             style: GoogleFonts.inter(

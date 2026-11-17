@@ -29,7 +29,7 @@ class NotificationCard extends StatelessWidget {
           color: notification.isRead ? context.c.card : context.c.primarySurface,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: notification.isRead ? context.c.divider : AppColors.primary.withOpacity(0.2),
+            color: notification.isRead ? context.c.divider : AppColors.primary.withValues(alpha: 0.2),
           ),
         ),
         child: Row(

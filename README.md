@@ -1,9 +1,9 @@
 # civilwatch_check_pc
 
-> **Required when running CivilWatch:** the Playwright end-to-end tests in
-> [`e2e/`](e2e/). Run them with [`RUN_TESTS.bat`](RUN_TESTS.bat) on the PC.
-> Why: see [`IMPORTANT.md`](IMPORTANT.md). Playwright cannot run on
-> Android/Termux.
+> **Tests:** the Playwright `e2e/` suite and `RUN_TESTS.bat` were removed (see
+> `AGENTS.md`). Backend tests run with
+> `cd laravel && C:\xampp\php\php.exe artisan test` (includes the security
+> regression tests from docs/changes 077/078).
 
 Health checks for the **CivilWatch** local setup (XAMPP + Laravel + Flutter on
 Windows). One command tells you what is running, what is broken, and how to fix

@@ -133,7 +133,8 @@ class MobileAuthController extends Controller
 
             if (! $sms['ok']) {
                 Log::warning('UniSMS OTP send failed', [
-                    'phone'  => $normalized,
+                    // Masked: logs are kept and shared more widely than the DB.
+                    'phone'  => substr($normalized, 0, 4) . str_repeat('*', max(0, strlen($normalized) - 7)) . substr($normalized, -3),
                     'status' => $sms['status'],
                     'reason' => $sms['error'],
                 ]);
@@ -145,10 +146,15 @@ class MobileAuthController extends Controller
             'sms_sent' => (bool) ($sms['ok'] ?? false),
         ];
 
-        if (! $provider->configured()) {
-            $data['sms_error'] = 'UniSMS not configured (UNISMS_SECRET_KEY missing).';
-        } elseif (! $sms['ok']) {
-            $data['sms_error'] = $sms['error'];
+        // Provider error details (which can include up to 300 chars of the
+        // provider's response body) are for developers only; clients get the
+        // generic messages below. The full reason is in the log.
+        if ($this->isLocalDebug()) {
+            if (! $provider->configured()) {
+                $data['sms_error'] = 'UniSMS not configured (UNISMS_SECRET_KEY missing).';
+            } elseif (! $sms['ok']) {
+                $data['sms_error'] = $sms['error'];
+            }
         }
 
         // Dev autofill (the Flutter OTP screen uses it only when present).

@@ -122,7 +122,7 @@ class _ReportConcernScreenState extends State<ReportConcernScreen> {
                       color: catBg,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                          color: catColor.withOpacity(0.25), width: 1),
+                          color: catColor.withValues(alpha: 0.25), width: 1),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -222,7 +222,7 @@ class _ConcernCard extends StatelessWidget {
         curve: Curves.easeOutCubic,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? catColor.withOpacity(0.04) : context.c.card,
+          color: isSelected ? catColor.withValues(alpha: 0.04) : context.c.card,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected ? catColor : context.c.divider,
@@ -231,7 +231,7 @@ class _ConcernCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: isSelected
-                  ? catColor.withOpacity(0.10)
+                  ? catColor.withValues(alpha: 0.10)
                   : const Color(0x08000000),
               blurRadius: isSelected ? 12 : 6,
               offset: const Offset(0, 3),
@@ -361,7 +361,7 @@ class _ConcernNavBar extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
                 elevation: onNext != null ? 2 : 0,
-                shadowColor: catColor.withOpacity(0.3),
+                shadowColor: catColor.withValues(alpha: 0.3),
                 textStyle: GoogleFonts.inter(
                     fontSize: 15, fontWeight: FontWeight.w700),
               ),

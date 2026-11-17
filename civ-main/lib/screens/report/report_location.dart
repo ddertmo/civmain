@@ -461,7 +461,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 14, vertical: 8),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.65),
+                                      color: Colors.black.withValues(alpha: 0.65),
                                       borderRadius:
                                           BorderRadius.circular(20),
                                     ),
@@ -479,7 +479,7 @@ class _ReportLocationScreenState extends State<ReportLocationScreen> {
                             // Geocoding spinner overlay
                             if (_isGeocoding)
                               Container(
-                                color: Colors.black.withOpacity(0.3),
+                                color: Colors.black.withValues(alpha: 0.3),
                                 child: Center(
                                   child: CircularProgressIndicator(
                                       color: AppColors.onAccent),
@@ -651,9 +651,9 @@ class _LocationActionButton extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.06),
+          color: color.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.25), width: 1.5),
+          border: Border.all(color: color.withValues(alpha: 0.25), width: 1.5),
         ),
         child: Column(
           children: [
@@ -722,7 +722,7 @@ class _AddressCard extends StatelessWidget {
         border: Border.all(
           color: geocodeFailed
               ? const Color(0xFFF59E0B)
-              : AppColors.primary.withOpacity(0.3),
+              : AppColors.primary.withValues(alpha: 0.3),
           width: 1.5,
         ),
         boxShadow: const [
@@ -1019,7 +1019,7 @@ class _LocationNavBar extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16)),
                     elevation: onNext != null ? 2 : 0,
-                    shadowColor: catColor.withOpacity(0.3),
+                    shadowColor: catColor.withValues(alpha: 0.3),
                     textStyle: GoogleFonts.inter(
                         fontSize: 15, fontWeight: FontWeight.w700),
                   ),

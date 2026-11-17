@@ -71,6 +71,7 @@ class MobileReportController extends Controller
         $photoPath = null;
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('report-photos', 'public');
+            $this->stripJpegMetadata(Storage::disk('public')->path($photoPath));
             $photoUrl  = Storage::disk('public')->url($photoPath);
         }
 
@@ -94,6 +95,51 @@ class MobileReportController extends Controller
             'message' => 'Report submitted successfully.',
             'data'    => $report->toApiArray(),
         ], 201);
+    }
+
+    /**
+     * Remove EXIF metadata (GPS position, device, timestamps) from an
+     * uploaded JPEG by re-encoding it. Photos are served publicly from
+     * /storage/report-photos, and phone cameras embed the exact location of
+     * the photographer — often the reporter's home. The camera orientation
+     * is applied first so the image doesn't end up rotated.
+     *
+     * Best effort: needs the GD extension (bundled with XAMPP's PHP). If GD
+     * is missing or the file isn't a readable JPEG, the original is kept.
+     */
+    private function stripJpegMetadata(string $path): void
+    {
+        if (! function_exists('imagecreatefromjpeg') || ! is_file($path)) {
+            return;
+        }
+
+        $info = @getimagesize($path);
+        if (! $info || ($info[2] ?? null) !== IMAGETYPE_JPEG) {
+            return;
+        }
+
+        $img = @imagecreatefromjpeg($path);
+        if (! $img) {
+            return;
+        }
+
+        if (function_exists('exif_read_data')) {
+            $orientation = (int) (@exif_read_data($path)['Orientation'] ?? 1);
+            $rotated = match ($orientation) {
+                3       => imagerotate($img, 180, 0),
+                6       => imagerotate($img, -90, 0),
+                8       => imagerotate($img, 90, 0),
+                default => null,
+            };
+            if ($rotated) {
+                imagedestroy($img);
+                $img = $rotated;
+            }
+        }
+
+        // imagejpeg() writes no EXIF/XMP blocks.
+        @imagejpeg($img, $path, 85);
+        imagedestroy($img);
     }
 
     /**

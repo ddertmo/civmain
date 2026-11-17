@@ -67,12 +67,12 @@ Route::prefix('mobile')->name('mobile.')->group(function () {
         Route::get('auth/me',      [MobileAuthController::class, 'me']);
         Route::get('reports',           [MobileReportController::class, 'index']);
         Route::post('reports',          [MobileReportController::class, 'store']);
-        Route::get('reports/{id}',      [MobileReportController::class, 'show']);
+        Route::get('reports/{id}',      [MobileReportController::class, 'show'])->whereNumber('id');
 
         // Notifications
         Route::get('notifications',                       [MobileNotificationController::class, 'index']);
         Route::post('notifications/mark-all-read',        [MobileNotificationController::class, 'markAllRead']);
-        Route::post('notifications/{id}/read',            [MobileNotificationController::class, 'markRead']);
+        Route::post('notifications/{id}/read',            [MobileNotificationController::class, 'markRead'])->whereNumber('id');
     });
 });
 
@@ -92,23 +92,23 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'staff', 'ac
     Route::get('citizen-reports/map',          [AdminCitizenReportController::class, 'map']);
     Route::get('citizen-reports',              [AdminCitizenReportController::class, 'index']);
     Route::get('citizen-reports/{id}',         [AdminCitizenReportController::class, 'show']);
-    Route::post('citizen-reports/{id}/validate', [AdminCitizenReportController::class, 'validate']);
-    Route::post('citizen-reports/{id}/assign', [AdminCitizenReportController::class, 'assign']);
+    Route::post('citizen-reports/{id}/validate', [AdminCitizenReportController::class, 'validate'])->whereNumber('id');
+    Route::post('citizen-reports/{id}/assign', [AdminCitizenReportController::class, 'assign'])->whereNumber('id');
 
     // Users — stats table on public/users.html
-    Route::get('users',          [UserController::class, 'index']);
+    Route::get('users',          [UserController::class, 'index'])->middleware('superadmin:all');
 
     // Government offices
     Route::get('offices',        [AdminOfficeController::class, 'index']);
     Route::post('offices',       [AdminOfficeController::class, 'store']);
-    Route::put('offices/{id}',   [AdminOfficeController::class, 'update']);
-    Route::delete('offices/{id}',[AdminOfficeController::class, 'destroy']);
+    Route::put('offices/{id}',   [AdminOfficeController::class, 'update'])->whereNumber('id');
+    Route::delete('offices/{id}',[AdminOfficeController::class, 'destroy'])->whereNumber('id');
 
     // Announcements
     Route::get('announcements',           [AdminAnnouncementController::class, 'index']);
     Route::post('announcements',          [AdminAnnouncementController::class, 'store']);
-    Route::put('announcements/{id}',      [AdminAnnouncementController::class, 'update']);
-    Route::delete('announcements/{id}',   [AdminAnnouncementController::class, 'destroy']);
+    Route::put('announcements/{id}',      [AdminAnnouncementController::class, 'update'])->whereNumber('id');
+    Route::delete('announcements/{id}',   [AdminAnnouncementController::class, 'destroy'])->whereNumber('id');
 });
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -126,11 +126,13 @@ Route::middleware(['auth:sanctum', 'staff', 'active'])->group(function () {
 
     // Users (super_admin only) — creating or changing staff accounts is a
     // privilege escalation, so writes are gated; listing stays readable.
-    Route::get('/users',         [UserController::class, 'index']);
+    // Reads are super_admin only as well: the list exposes every staff
+    // account's name, email and role.
+    Route::get('/users',         [UserController::class, 'index'])->middleware('superadmin:all');
     Route::post('/users',        [UserController::class, 'store'])->middleware('superadmin');
-    Route::get('/users/{id}',    [UserController::class, 'show']);
-    Route::put('/users/{id}',    [UserController::class, 'update'])->middleware('superadmin');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('superadmin');
+    Route::get('/users/{id}',    [UserController::class, 'show'])->middleware('superadmin:all')->whereNumber('id');
+    Route::put('/users/{id}',    [UserController::class, 'update'])->middleware('superadmin')->whereNumber('id');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('superadmin')->whereNumber('id');
 
     // Reports (admin-side) live at /api/admin/citizen-reports — the legacy
     // /api/reports* block against the dropped `reports` table was removed.
@@ -156,7 +158,7 @@ Route::middleware(['auth:sanctum', 'staff', 'active'])->group(function () {
     // Priority management is restricted to authorized personnel of the
     // office currently assigned to the report (no super_admin access).
     Route::post('/admin/citizen-reports/{id}/priority',
-        [AdminCitizenReportController::class, 'updatePriority']);
+        [AdminCitizenReportController::class, 'updatePriority'])->whereNumber('id');
 
     // Status updates are shared: the super admin can drive any transition
     // (from Monitoring) and the assigned office can progress its own reports.

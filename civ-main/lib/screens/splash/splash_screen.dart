@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primary.withOpacity(0.05),
+                  color: AppColors.primary.withValues(alpha: 0.05),
                 ),
               ),
             ),
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
                 height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.navy.withOpacity(0.04),
+                  color: AppColors.navy.withValues(alpha: 0.04),
                 ),
               ),
             ),
@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                         height: 32,
                         child: CircularProgressIndicator(
                           strokeWidth: 2.5,
-                          color: context.c.primaryOnSurface.withOpacity(0.6),
+                          color: context.c.primaryOnSurface.withValues(alpha: 0.6),
                         ),
                       ),
                     ],
@@ -197,7 +197,7 @@ class _CivilWatchLogo extends StatelessWidget {
         color: AppColors.navy,
         boxShadow: [
           BoxShadow(
-            color: AppColors.navy.withOpacity(0.25),
+            color: AppColors.navy.withValues(alpha: 0.25),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -208,7 +208,7 @@ class _CivilWatchLogo extends StatelessWidget {
         children: [
           Icon(
             Icons.shield_rounded,
-            color: AppColors.onAccent.withOpacity(0.15),
+            color: AppColors.onAccent.withValues(alpha: 0.15),
             size: size * 0.85,
           ),
           Column(

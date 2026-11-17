@@ -45,7 +45,7 @@ class MapPreviewWidget extends StatelessWidget {
               if (isBlurred)
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                  child: Container(color: Colors.black.withOpacity(0.08)),
+                  child: Container(color: Colors.black.withValues(alpha: 0.08)),
                 ),
 
               // ── Pin ───────────────────────────────────────────────────────
@@ -149,7 +149,7 @@ class _MapPainter extends CustomPainter {
     canvas.drawPath(path, waterPaint);
 
     // Block fills
-    final blockPaint = Paint()..color = const Color(0xFFD8E2DC).withOpacity(0.5);
+    final blockPaint = Paint()..color = const Color(0xFFD8E2DC).withValues(alpha: 0.5);
     canvas.drawRect(
         Rect.fromLTWH(size.width * 0.05, size.height * 0.05, 60, 40),
         blockPaint);
@@ -190,7 +190,7 @@ class _MapPin extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                  color: color.withOpacity(0.4),
+                  color: color.withValues(alpha: 0.4),
                   blurRadius: 8,
                   offset: const Offset(0, 3))
             ],

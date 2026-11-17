@@ -33,8 +33,10 @@ class UserController extends Controller
         }
 
         // Filter by status
+        // boolean(): "true"/"false"/"1"/"0" all work (a raw "true" string
+        // compared as 0 in MySQL and returned the inactive users).
         if ($request->filled('is_active')) {
-            $query->where('is_active', $request->is_active);
+            $query->where('is_active', $request->boolean('is_active'));
         }
 
         $users = $query->orderBy('created_at', 'desc')->get();
@@ -131,7 +133,8 @@ class UserController extends Controller
         if (isset($validated['name']))      $updateData['name']      = $validated['name'];
         if (isset($validated['email']))     $updateData['email']     = $validated['email'];
         if (isset($validated['role']))      $updateData['role']      = $validated['role'];
-        if (isset($validated['office']))    $updateData['office']    = $validated['office'];
+        // array_key_exists, not isset: sending office = null must clear it.
+        if (array_key_exists('office', $validated)) $updateData['office'] = $validated['office'];
         if (isset($validated['is_active'])) $updateData['is_active'] = $validated['is_active'];
 
         // Only update password if a new one was provided
@@ -184,27 +187,6 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'User deleted successfully.',
-        ], 200);
-    }
-
-    /**
-     * GET /api/dashboard/stats
-     * Returns stats for the dashboard.
-     */
-    public function dashboardStats(): JsonResponse
-    {
-        $totalUsers  = User::count();
-        $activeUsers = User::where('is_active', true)->count();
-        $adminCount  = User::where('role', 'super_admin')->count();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Dashboard stats retrieved.',
-            'data'    => [
-                'total_users'  => $totalUsers,
-                'active_users' => $activeUsers,
-                'admin_count'  => $adminCount,
-            ],
         ], 200);
     }
 }

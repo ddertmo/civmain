@@ -78,7 +78,7 @@ class MapFilterChip extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: selectedBg.withOpacity(0.2),
+                    color: selectedBg.withValues(alpha: 0.2),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),

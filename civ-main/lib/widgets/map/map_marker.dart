@@ -37,7 +37,7 @@ class MapMarker extends StatelessWidget {
               border: Border.all(color: AppColors.onAccent, width: 2),
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.4),
+                  color: color.withValues(alpha: 0.4),
                   blurRadius: isSelected ? 12 : 6,
                   offset: const Offset(0, 3),
                 ),

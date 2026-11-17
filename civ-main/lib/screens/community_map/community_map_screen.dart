@@ -8,6 +8,7 @@ import '../../core/state/app_state.dart';
 import '../../core/utils/dummy_data.dart';
 import '../../core/utils/helpers.dart';
 import '../../models/report.dart';
+import '../../widgets/common/app_network_image.dart';
 import '../../widgets/map/filter_chip.dart';
 
 class CommunityMapScreen extends StatefulWidget {
@@ -156,7 +157,7 @@ class _CommunityMapScreenState extends State<CommunityMapScreen> {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.12),
+                              color: Colors.black.withValues(alpha: 0.12),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -253,7 +254,7 @@ class _TeardropPin extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: color.withOpacity(0.4),
+                  color: color.withValues(alpha: 0.4),
                   blurRadius: isSelected ? 14 : 8,
                   offset: const Offset(0, 3),
                 ),
@@ -523,7 +524,14 @@ class _PinDetailSheet extends StatelessWidget {
                         height: 90,
                         color: const Color(0xFF1A1A2E),
                         child: pin.imageUrl != null
-                            ? Image.network(pin.imageUrl!, fit: BoxFit.cover)
+                            ? AppNetworkImage(
+                                url: pin.imageUrl!,
+                                errorWidget: const Icon(
+                                  Icons.image_not_supported_rounded,
+                                  color: Colors.white38,
+                                  size: 32,
+                                ),
+                              )
                             : const Icon(
                                 Icons.image_not_supported_rounded,
                                 color: Colors.white38,
@@ -904,7 +912,7 @@ class _StatTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(12),
-          border: isActive ? Border.all(color: color.withOpacity(0.15)) : null,
+          border: isActive ? Border.all(color: color.withValues(alpha: 0.15)) : null,
         ),
         child: Column(
           children: [

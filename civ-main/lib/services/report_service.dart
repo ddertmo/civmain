@@ -77,7 +77,8 @@ class ReportService {
         'barangay':    (data['barangay'] ?? '').toString(),
         'city':        'Digos City',
         'province':    'Davao del Sur',
-        'severity':    'Moderate', // always default; admin sets priority
+        // 'severity' is intentionally omitted: the report flow doesn't collect
+        // it, so the server applies its default and the admin sets priority.
         if (data['landmark'] != null && data['landmark'].toString().isNotEmpty)
           'landmark': data['landmark'].toString(),
         if (data['purok'] != null && data['purok'].toString().isNotEmpty)

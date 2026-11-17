@@ -503,7 +503,10 @@ class _NotFoundCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'No report matches that reference number.\nPlease check and try again.',
+            'No report matches that reference number.\n'
+            'This search only covers public community reports (and your own '
+            'reports when signed in). Reports still pending validation '
+            'will not appear here.',
             style: GoogleFonts.inter(
               fontSize: 13,
               color: context.c.textSecondary,

@@ -157,14 +157,19 @@ Test accounts:
 ## Notifications feed
 
 The bell in the prototype navbar reads `citizen_notifications` — the shared
-organisation feed, **not** a per-user inbox. There is no `user_id` filter.
+organisation feed, **read-only** for staff. That table is also every
+citizen's own inbox, so staff actions never write to it. Read state is per
+staff user (`users.notifications_read_at`, docs/changes 077): `is_read` and
+`unread_count` in these responses are that staff member's own state.
 
 | Endpoint | Shape |
 |---|---|
 | `GET /api/notifications` | `{success, data:{notifications[], unread_count}}` |
-| `GET /api/notifications/unread-count` | `{success, data:{unread_count}}` — polled every 30s (`app.js:627`) |
-| `POST /api/notifications/{id}/read`, `POST /api/notifications/read-all` | mark read |
-| `DELETE /api/notifications`, `DELETE /api/notifications/{id}` | clear |
+| `GET /api/notifications/unread-count` | `{success, data:{unread_count}}` — polled every 30s |
+| `POST /api/notifications/read-all` | marks the feed read for the current staff user only |
+
+The old per-item read and the `DELETE` (clear) endpoints were removed in 077:
+they changed or deleted the citizens' inboxes.
 
 `app.js:575` renders each item from `type`, `message`, `created_at`,
 `is_read` and maps `type` through `iconMap`

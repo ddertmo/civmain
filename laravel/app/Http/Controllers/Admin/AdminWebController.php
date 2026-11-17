@@ -223,7 +223,8 @@ class AdminWebController extends Controller
     {
         $validated = $request->validate([
             'name'         => 'required|string|max:255',
-            'abbreviation' => 'required|string|max:20',
+            // Only offices with a staff login role can work reports.
+            'abbreviation' => 'required|string|max:20|in:' . implode(',', CitizenReport::OFFICE_ROLES),
             'handles'      => 'required|in:Infrastructure,Environment,Both',
             'phone'        => 'nullable|string|max:30',
             'email'        => 'nullable|email|max:191',
@@ -238,7 +239,8 @@ class AdminWebController extends Controller
         $office    = GovernmentOffice::findOrFail($id);
         $validated = $request->validate([
             'name'         => 'required|string|max:255',
-            'abbreviation' => 'required|string|max:20',
+            // Only offices with a staff login role can work reports.
+            'abbreviation' => 'required|string|max:20|in:' . implode(',', CitizenReport::OFFICE_ROLES),
             'handles'      => 'required|in:Infrastructure,Environment,Both',
             'phone'        => 'nullable|string|max:30',
             'email'        => 'nullable|email|max:191',

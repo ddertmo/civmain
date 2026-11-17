@@ -65,7 +65,7 @@ class ReportStepper extends StatelessWidget {
                               boxShadow: isCurrent
                                   ? [
                                       BoxShadow(
-                                        color: AppColors.primary.withOpacity(0.25),
+                                        color: AppColors.primary.withValues(alpha: 0.25),
                                         blurRadius: 6,
                                         offset: const Offset(0, 2),
                                       ),

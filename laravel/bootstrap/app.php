@@ -27,6 +27,11 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\HandleCors::class,
         ]);
 
+        // CSP / nosniff / anti-framing on every web (HTML) response.
+        $middleware->web(append: [
+            \App\Http\Middleware\SecurityHeaders::class,
+        ]);
+
         $middleware->alias([
             'superadmin' => \App\Http\Middleware\EnsureSuperAdmin::class,
             'staff'      => \App\Http\Middleware\EnsureStaff::class,

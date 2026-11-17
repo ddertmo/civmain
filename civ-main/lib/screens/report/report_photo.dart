@@ -24,9 +24,66 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
   Uint8List? _imageBytes;   // works on both Web and Android
   final _picker = ImagePicker();
 
+  // Server limits: max 5 MB, image types jpg/png/gif/webp/bmp.
+  static const int _maxPhotoBytes = 5 * 1024 * 1024;
+  static const Set<String> _allowedExtensions = {
+    'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp',
+  };
+  static const Set<String> _allowedMimeTypes = {
+    'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp',
+    'image/bmp', 'image/x-ms-bmp',
+  };
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: GoogleFonts.inter(fontSize: 13),
+        ),
+        backgroundColor: const Color(0xFFDC2626),
+        behavior: SnackBarBehavior.floating,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+  }
+
+  /// Returns an error message if the picked file can't be uploaded, else null.
+  String? _validatePhoto(XFile file, int byteLength) {
+    final name = file.name.toLowerCase();
+    final dot = name.lastIndexOf('.');
+    final ext = dot != -1 ? name.substring(dot + 1) : '';
+    final mime = file.mimeType?.toLowerCase();
+
+    if (ext == 'heic' || ext == 'heif' ||
+        mime == 'image/heic' || mime == 'image/heif') {
+      return 'HEIC/HEIF photos are not supported.\n'
+          'Please choose a JPG or PNG photo, or set your camera to '
+          '"Most Compatible".';
+    }
+    // If the platform reports neither an extension nor a MIME type, let the
+    // server decide rather than rejecting a possibly valid photo.
+    final typeOk = _allowedExtensions.contains(ext) ||
+        (mime != null && _allowedMimeTypes.contains(mime)) ||
+        (ext.isEmpty && mime == null);
+    if (!typeOk) {
+      return 'Unsupported photo format.\n'
+          'Please use a JPG, PNG, GIF, WEBP or BMP image.';
+    }
+    if (byteLength > _maxPhotoBytes) {
+      final mb = (byteLength / (1024 * 1024)).toStringAsFixed(1);
+      return 'Photo is too large ($mb MB).\nThe maximum size is 5 MB.';
+    }
+    return null;
+  }
+
   // ── Pick from camera or gallery ─────────────────────────────────────────
   Future<void> _pickImage(ImageSource source) async {
     try {
+      // maxWidth/maxHeight/imageQuality make image_picker re-encode the
+      // image (as JPEG on most platforms), which also keeps it small.
       final file = await _picker.pickImage(
         source: source,
         imageQuality: 85,
@@ -36,6 +93,11 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
       if (file != null) {
         final bytes = await file.readAsBytes();
         if (!mounted) return;
+        final error = _validatePhoto(file, bytes.lengthInBytes);
+        if (error != null) {
+          _showError(error);
+          return;
+        }
         setState(() {
           _pickedFile  = file;
           _imageBytes  = bytes;
@@ -43,19 +105,8 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Could not access camera or gallery.\nPlease allow permission in Settings.',
-              style: GoogleFonts.inter(fontSize: 13),
-            ),
-            backgroundColor: const Color(0xFFDC2626),
-            behavior: SnackBarBehavior.floating,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            margin: const EdgeInsets.all(16),
-          ),
-        );
+        _showError(
+            'Could not access camera or gallery.\nPlease allow permission in Settings.');
       }
     }
   }
@@ -70,7 +121,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
     if (_imageBytes == null) return;
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.92),
+      barrierColor: Colors.black.withValues(alpha: 0.92),
       builder: (_) => _FullscreenImageModal(bytes: _imageBytes!),
     );
   }
@@ -145,7 +196,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                       label: const Text('Change Photo'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: catColor,
-                        side: BorderSide(color: catColor.withOpacity(0.5)),
+                        side: BorderSide(color: catColor.withValues(alpha: 0.5)),
                         minimumSize: const Size(double.infinity, 46),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),
@@ -201,7 +252,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                       color: context.c.primarySurface,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                          color: AppColors.primary.withOpacity(0.2)),
+                          color: AppColors.primary.withValues(alpha: 0.2)),
                     ),
                     child: Row(
                       children: [
@@ -269,7 +320,7 @@ class _ReportPhotoScreenState extends State<ReportPhotoScreen> {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: catColor.withOpacity(0.1),
+                    color: catColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(Icons.camera_alt_rounded,
@@ -378,7 +429,7 @@ class _RealPhotoPreview extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withOpacity(0.55),
+                    Colors.black.withValues(alpha: 0.55),
                   ],
                 ),
               ),
@@ -467,7 +518,7 @@ class _FullscreenImageModal extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.55),
+                    color: Colors.black.withValues(alpha: 0.55),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(Icons.close_rounded,
@@ -486,14 +537,14 @@ class _FullscreenImageModal extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.45),
+                    color: Colors.black.withValues(alpha: 0.45),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     'Pinch to zoom  •  Tap anywhere to close',
                     style: GoogleFonts.inter(
                       fontSize: 12,
-                      color: Colors.white.withOpacity(0.85),
+                      color: Colors.white.withValues(alpha: 0.85),
                     ),
                   ),
                 ),
@@ -538,7 +589,7 @@ class _PhotoOption extends StatelessWidget {
           color: isPrimary ? bg : AppColors.onAccent,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isPrimary ? color.withOpacity(0.35) : context.c.divider,
+            color: isPrimary ? color.withValues(alpha: 0.35) : context.c.divider,
             width: isPrimary ? 1.5 : 1,
           ),
         ),

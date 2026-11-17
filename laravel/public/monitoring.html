@@ -348,9 +348,9 @@
                         <span class="table-showing" id="showingLabel">Showing 1 to 6 of 36 results</span>
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div class="pagination" id="pagination"></div>
-                            <select class="per-page-select">
-                                <option>10 / page</option>
-                                <option>20 / page</option>
+                            <select class="per-page-select" id="perPageSelect">
+                                <option value="10">10 / page</option>
+                                <option value="20">20 / page</option>
                             </select>
                         </div>
                     </div>
@@ -878,6 +878,11 @@
         });
         document.getElementById('fromDate')?.addEventListener('change', applyFilter);
         document.getElementById('toDate')?.addEventListener('change', applyFilter);
+        document.getElementById('perPageSelect')?.addEventListener('change', function() {
+            perPage = parseInt(this.value, 10) || 10;
+            currentPage = 1;
+            render();
+        });
 
         // ── Update progress modal ─────────────────────────────
         // Allowed next statuses \u2014 mirrors the transition map the API enforces.
@@ -971,7 +976,8 @@
 
         // ── Load real data from API ───────────────────────────
         async function loadReports() {
-            Skeleton.injectTableRows('monitoringTableBody', 6, 7);
+            // Skeleton only on the first load (not on the 30 s refresh)
+            if (!allReports.length) Skeleton.injectTableRows('monitoringTableBody', 6, 7);
             try {
                 var json = await Api.get('/api/admin/citizen-reports', {
                     status: '', // load all — tabs/overview filter client-side
@@ -979,8 +985,14 @@
                 });
                 if (!json || !json.success) throw new Error('API error');
                 allReports = (json.data && json.data.data) ? json.data.data : (json.data || []);
-                filtered = allReports.slice();
                 updateStats(allReports);
+                // Re-apply the active search / filters / tab and keep the current page
+                var prevPage = currentPage;
+                applyFilter();
+                var tabLen = activeTab === 'all' ? filtered.length : filtered.filter(function(r) {
+                    return r.status === activeTab;
+                }).length;
+                currentPage = Math.min(prevPage, Math.max(1, Math.ceil(tabLen / perPage)));
                 render();
             } catch (e) {
                 document.getElementById('monitoringTableBody').innerHTML =
@@ -1005,6 +1017,8 @@
     </script>
 
 <script id="rdBuiltInScript">
+        // Embedded-detail helpers are prefixed rd* so they don't override the
+        // list's fmtDate()/normCategory() above (the table splits on '\n').
 
         var reportId = Utils.getParam('id');
         var detailMap = null;
@@ -1041,7 +1055,7 @@
             }
         })();
 
-        function fmtDate(str) {
+        function rdFmtDate(str) {
             if (!str) return '—';
             var d = new Date(str);
             if (isNaN(d)) return str;
@@ -1049,7 +1063,7 @@
                 ' · ' + d.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
         }
 
-        function normCategory(c) {
+        function rdNormCategory(c) {
             if (!c) return '';
             var lc = c.toLowerCase();
             if (lc === 'infrastructure') return 'Infrastructure';
@@ -1139,14 +1153,14 @@
             var phone = citizen.phoneNumber || citizen.phone || '—';
             var ref = r.referenceNumber || r.reference_number || String(r.id);
             var concern = r.concern || r.issue || '—';
-            var cat = normCategory(r.category);
+            var cat = rdNormCategory(r.category);
             var barangay = r.barangay || '—';
             var status = r.status || '—';
             var desc = r.description || '—';
             var lat = parseFloat(r.latitude || r.lat) || 6.7498;
             var lng = parseFloat(r.longitude || r.lng) || 125.3572;
             var photo = r.imageUrl || r.photo_url || null;
-            var date = fmtDate(r.submittedAt || r.created_at || '—');
+            var date = rdFmtDate(r.submittedAt || r.created_at || '—');
             var office = (r.assignedOffice && typeof r.assignedOffice === 'object') ? r.assignedOffice.name : (r.assignedOffice || null);
 
             document.getElementById('pageTitle').textContent = concern;
@@ -1209,7 +1223,7 @@
                         (i < activityLog.length - 1 ? '<div class="rd-connector done"></div>' : '') +
                         '</div><div class="rd-step-content">' +
                         '<div class="rd-step-title ' + (isCurrent ? 'current' : 'done') + '">' + Utils.esc(a.title || a.status) + '</div>' +
-                        '<div class="rd-step-date">' + Utils.esc(fmtDate(a.timestamp || a.created_at)) + '</div>' +
+                        '<div class="rd-step-date">' + Utils.esc(rdFmtDate(a.timestamp || a.created_at)) + '</div>' +
                         (a.description ? '<div class="rd-step-note">' + Utils.esc(a.description) + '</div>' : '') +
                         '</div></div>';
                 }).join('');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CitizenReport;
 use App\Models\GovernmentOffice;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -10,10 +11,22 @@ use Illuminate\Validation\Rule;
 
 class AdminOfficeController extends Controller
 {
+    /**
+     * Only offices that have a staff login role can work on reports (see
+     * CitizenReport::OFFICE_ROLES: ceo → CEO, cenro → CENRO). A report
+     * assigned to any other office could never be progressed, so the list
+     * (used by the Assign Office page) and create/update are limited to them.
+     * Adding a new office needs a matching role in users.role + OFFICE_ROLES.
+     */
+    private function staffedAbbreviations(): array
+    {
+        return array_values(CitizenReport::OFFICE_ROLES);
+    }
+
     public function index(): JsonResponse
     {
         $offices = GovernmentOffice::where('is_active', true)
-            ->whereIn('abbreviation', ['CEO', 'CENRO'])
+            ->whereIn('abbreviation', $this->staffedAbbreviations())
             ->orderBy('name')
             ->get()
             ->map(fn($o) => $o->toApiArray());
@@ -25,7 +38,7 @@ class AdminOfficeController extends Controller
     {
         $validated = $request->validate([
             'name'         => 'required|string|max:255',
-            'abbreviation' => 'required|string|max:20',
+            'abbreviation' => ['required', 'string', 'max:20', Rule::in($this->staffedAbbreviations())],
             'phone'        => 'nullable|string|max:30',
             'email'        => 'nullable|email|max:191',
             'address'      => 'nullable|string|max:500',
@@ -47,7 +60,7 @@ class AdminOfficeController extends Controller
 
         $validated = $request->validate([
             'name'         => 'sometimes|string|max:255',
-            'abbreviation' => 'sometimes|string|max:20',
+            'abbreviation' => ['sometimes', 'string', 'max:20', Rule::in($this->staffedAbbreviations())],
             'phone'        => 'nullable|string|max:30',
             'email'        => 'nullable|email|max:191',
             'address'      => 'nullable|string|max:500',

@@ -228,9 +228,9 @@
                         <span class="table-showing" id="showingLabel">Showing 1 to 6 of 156 results</span>
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div class="pagination" id="pagination"></div>
-                            <select class="per-page-select">
-                                <option>10 / page</option>
-                                <option>20 / page</option>
+                            <select class="per-page-select" id="perPageSelect">
+                                <option value="10">10 / page</option>
+                                <option value="20">20 / page</option>
                             </select>
                         </div>
                     </div>
@@ -434,10 +434,16 @@
                 el.addEventListener('change', applyFilter);
             }
         });
+        document.getElementById('perPageSelect').addEventListener('change', function() {
+            perPage = parseInt(this.value, 10) || 10;
+            currentPage = 1;
+            render();
+        });
 
         // ── Load from real API ────────────────────────────────
         async function loadResolved() {
-            Skeleton.injectTableRows('resolvedTableBody', 6, 9);
+            // Skeleton only on the first load (not on the 30 s refresh)
+            if (!allResolved.length) Skeleton.injectTableRows('resolvedTableBody', 6, 9);
             try {
                 var results = await Promise.all([
                     Api.get('/api/admin/citizen-reports', { status: 'Resolved', limit: 500 }),
@@ -470,7 +476,11 @@
                     ? (summaryJson.data.total || 0) : '—';
 
                 updateStats(totalAll, allResolved);
-                filtered = allResolved.slice();
+                // Re-apply the active search / filters and keep the current page
+                var prevPage = currentPage;
+                applyFilter();
+                var totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+                currentPage = Math.min(prevPage, totalPages);
                 render();
             } catch (e) {
                 document.getElementById('resolvedTableBody').innerHTML =
