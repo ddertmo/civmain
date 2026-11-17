@@ -53,4 +53,6 @@ Route::get('{any}', function (string $any) {
         }
     }
     abort(404);
-})->where('any', '.*');
+})->where('any', '.*\.html');
+// Pattern is limited to *.html: with '.*' this GET route matched every path,
+// so an unknown POST/PUT (e.g. /api/users/abc) answered 405 instead of 404.

@@ -89,3 +89,4 @@ automatically after each change.
 | 077 | 2026-11-17 | `(see git log)` | [High-severity fixes - OTP-verified registration, rate limits, admin bell, reference numbers, HTTPS app, Users page, tests](2026-11-17-077-high-security-fixes.md) |
 | 078 | 2026-11-17 | `(see git log)` | [Medium audit fixes - office scoping, token expiry, workflow rules, honest UI, performance, app hardening](2026-11-17-078-medium-audit-fixes.md) |
 | 079 | 2026-11-17 | `(see git log)` | [Low audit fixes - hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts](2026-11-17-079-low-audit-fixes.md) |
+| 080 | 2026-11-17 | `(see git log)` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
