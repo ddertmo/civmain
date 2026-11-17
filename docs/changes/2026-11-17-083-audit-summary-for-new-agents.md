@@ -1,7 +1,7 @@
 # One-page "what changed / what was removed" summary of the security audit, for new agents
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `373e851`
 - **Type:** docs
 - **Areas:** agent context (PROJECT_CONTEXT, SESSION_CONTEXT)
 

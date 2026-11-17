@@ -92,4 +92,4 @@ automatically after each change.
 | 080 | 2026-11-17 | `77d5012` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
 | 081 | 2026-11-17 | `2e6a751` | [Migrations verified on MariaDB - rollback of the index migration fixed (FK error 1553)](2026-11-17-081-mysql-migration-run.md) |
 | 082 | 2026-11-17 | `4214c06` | [Session context refreshed - NOW, TASKS, AGENTS push rule, backfilled hashes](2026-11-17-082-session-context-refresh.md) |
-| 083 | 2026-11-17 | `PENDING` | [Audit summary for new agents - what was removed, changed and added (PROJECT_CONTEXT section 11)](2026-11-17-083-audit-summary-for-new-agents.md) |
+| 083 | 2026-11-17 | `373e851` | [Audit summary for new agents - what was removed, changed and added (PROJECT_CONTEXT section 11)](2026-11-17-083-audit-summary-for-new-agents.md) |
