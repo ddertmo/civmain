@@ -95,3 +95,4 @@ automatically after each change.
 | 083 | 2026-11-17 | `373e851` | [Audit summary for new agents - what was removed, changed and added (PROJECT_CONTEXT section 11)](2026-11-17-083-audit-summary-for-new-agents.md) |
 | 084 | 2026-11-17 | `cefccf6` | [Analytics charts fit their cards on all three roles - doughnut sizing loop, grid overflow, dead breakpoints](2026-11-17-084-analytics-chart-sizing.md) |
 | 085 | 2026-11-17 | `cde3ba2` | [Dark mode - no light flash, readable secondary text, themed charts, missing dark colours, white text on fills](2026-11-17-085-dark-mode-fixes.md) |
+| 086 | 2026-11-17 | `PENDING` | [Notification badge - shows the count, hides at zero, clears once the bell is opened](2026-11-17-086-notification-badge.md) |

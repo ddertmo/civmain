@@ -122,8 +122,12 @@
   position: absolute;
   top: 4px;
   right: 4px;
-  width: 18px;
+  /* min-width + padding: "9", "12" and "99+" all fit (was a fixed 18px). */
+  min-width: 18px;
   height: 18px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  line-height: 1;
   background: #EF4444;
   color: var(--on-accent);
   font-size: 10px;
@@ -133,6 +137,12 @@
   align-items: center;
   justify-content: center;
   border: 2px solid var(--white);
+}
+
+/* No unread notifications → no badge (it used to stay as an empty red dot). */
+.notif-badge[hidden],
+.notif-badge:empty {
+  display: none;
 }
 
 /* Admin profile */

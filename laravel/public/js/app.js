@@ -422,7 +422,7 @@ const App = {
         </button>
         <button class="navbar-icon-btn" id="notifBtn" title="Notifications">
           <span class="material-symbols-outlined">notifications</span>
-          <span class="notif-badge" id="notifBadge"></span>
+          <span class="notif-badge" id="notifBadge" hidden></span>
         </button>
         <div class="navbar-profile" id="profileBtn">
           <div class="navbar-avatar">${appEsc(this.getInitials())}</div>
@@ -495,6 +495,56 @@ const App = {
         if (navbar) navbar.classList.toggle('sidebar-collapsed', this.sidebarCollapsed);
     },
 
+    // ── Unread badge ──────────────────────────────────────────
+    // Single place that drives every unread indicator: the navbar bell
+    // (#notifBadge), the dashboard quick-action badge (#notifQuickBadge) and
+    // the count inside the panel (#notifCountBadge). A badge with nothing to
+    // count is HIDDEN — it used to stay visible as an empty red circle.
+    unreadCount: 0,
+
+    setUnreadCount(n) {
+        const count = Math.max(0, parseInt(n, 10) || 0);
+        this.unreadCount = count;
+        const label = count > 99 ? '99+' : String(count);
+        ['notifBadge', 'notifQuickBadge'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.textContent = count > 0 ? label : '';
+            el.hidden = count === 0;
+            // Inline display wins over [hidden], so set it explicitly; badges
+            // styled inline say which display to use via data-show-display.
+            el.style.display = count === 0 ? 'none' : (el.dataset.showDisplay || '');
+            el.setAttribute('aria-label', count > 0 ? `${count} unread notifications` : 'No unread notifications');
+        });
+        const countBadge = document.getElementById('notifCountBadge');
+        if (countBadge) countBadge.textContent = String(count);
+    },
+
+    // Clear the highlight on items already seen (after the panel closes).
+    clearUnreadHighlights() {
+        document.querySelectorAll('.notif-item.unread').forEach(el => {
+            el.classList.remove('unread');
+            const dot = el.querySelector('.unread-dot');
+            if (dot) dot.remove();
+        });
+    },
+
+    // Mark the feed read for THIS staff user (server keeps per-user read
+    // state, see NotificationController). Badge is cleared immediately and
+    // restored if the request fails.
+    async markReadOnServer() {
+        const previous = this.unreadCount;
+        this.setUnreadCount(0);
+        try {
+            const json = await Api.action('POST', '/api/notifications/read-all', {}, { silent: true });
+            if (json && json.success === false) throw new Error(json.message || 'failed');
+            return true;
+        } catch (_) {
+            this.setUnreadCount(previous);
+            return false;
+        }
+    },
+
     openNotif() {
         const panel = document.getElementById('notifPanel');
         const overlay = document.getElementById('notifOverlay');
@@ -503,6 +553,13 @@ const App = {
         document.querySelectorAll('.leaflet-control-container').forEach(el => {
             el.style.visibility = 'hidden';
         });
+        // Viewing the notifications counts as reading them: the badge goes
+        // away now. New items stay highlighted while the panel is open so the
+        // user can still see what was new; the highlight clears on close.
+        if (this.unreadCount > 0) {
+            this._seenWhileOpen = true;
+            this.markReadOnServer();
+        }
     },
 
     closeNotif() {
@@ -513,22 +570,18 @@ const App = {
         document.querySelectorAll('.leaflet-control-container').forEach(el => {
             el.style.visibility = '';
         });
+        if (this._seenWhileOpen) {
+            this._seenWhileOpen = false;
+            this.clearUnreadHighlights();
+        }
     },
 
-    markAllRead() {
-        document.querySelectorAll('.notif-item.unread').forEach(el => {
-            el.classList.remove('unread');
-            const dot = el.querySelector('.unread-dot');
-            if (dot) dot.remove();
-        });
-        const badge = document.getElementById('notifBadge');
-        if (badge) badge.textContent = '';
-        const countBadge = document.getElementById('notifCountBadge');
-        if (countBadge) countBadge.textContent = '0';
-        Utils.showToast('All notifications marked as read', 'success');
-        Api.action('POST', '/api/notifications/read-all', {}, {
-            silent: true
-        }).catch(() => {});
+    async markAllRead() {
+        this.clearUnreadHighlights();
+        const ok = await this.markReadOnServer();
+        if (typeof Utils !== 'undefined') {
+            Utils.showToast(ok ? 'All notifications marked as read' : 'Could not mark notifications as read', ok ? 'success' : 'error');
+        }
     },
 
     // ── Dark Mode ─────────────────────────────────────────────
@@ -584,11 +637,7 @@ const App = {
                 unread_count
             } = json.data;
 
-            const badge = document.getElementById('notifBadge');
-            if (badge) badge.textContent = unread_count > 0 ? unread_count : '';
-
-            const countBadge = document.getElementById('notifCountBadge');
-            if (countBadge) countBadge.textContent = unread_count;
+            this.setUnreadCount(unread_count);
 
             const list = document.getElementById('notifList');
             if (!list) return;
@@ -650,12 +699,18 @@ const App = {
 
     startNotifPolling() {
         setInterval(async () => {
+            // Don't re-light the badge while the user is looking at the panel.
+            if (document.getElementById('notifPanel')?.classList.contains('open')) return;
             try {
                 const json = await Api.get('/api/notifications/unread-count');
                 if (!json || !json.success) return;
                 const count = json.data.unread_count;
-                const badge = document.getElementById('notifBadge');
-                if (badge) badge.textContent = count > 0 ? count : '';
+                // Something new arrived: reload the list so it shows up too.
+                if (count > this.unreadCount) {
+                    this.loadNotifications();
+                } else {
+                    this.setUnreadCount(count);
+                }
             } catch (_) {}
         }, 30000);
     },

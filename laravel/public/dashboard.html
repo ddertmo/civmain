@@ -465,7 +465,7 @@
                             <a href="#" class="quick-action-btn qa-notif" onclick="App.openNotif(); return false;">
                                 <div class="quick-action-icon" style="position:relative;">
                                     <span class="material-symbols-outlined">notifications</span>
-                                    <span id="notifQuickBadge" style="position:absolute;top:-4px;right:-4px;background:#EF4444;color:white;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;"></span>
+                                    <span id="notifQuickBadge" hidden style="position:absolute;top:-4px;right:-4px;background:#EF4444;color:white;font-size:9px;font-weight:700;min-width:16px;height:16px;padding:0 3px;box-sizing:border-box;border-radius:999px;display:none;align-items:center;justify-content:center;" data-show-display="flex"></span>
                                 </div>
                                 <span class="quick-action-label">Notifications</span>
                             </a>
@@ -795,8 +795,10 @@
             try {
                 var json = await Api.get('/api/notifications/unread-count');
                 if (!json || !json.success) return;
-                var badge = document.getElementById('notifQuickBadge');
-                if (badge) badge.textContent = (json.data.unread_count > 0) ? json.data.unread_count : '';
+                // Shared with the navbar bell: hides the badge at 0, "99+" cap.
+                if (typeof App !== 'undefined' && App.setUnreadCount) {
+                    App.setUnreadCount(json.data.unread_count);
+                }
             } catch (_) {}
         }
 
