@@ -1,7 +1,7 @@
 # Dark mode: no light flash, readable secondary text, themed charts, missing dark colours
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `cde3ba2`
 - **Type:** fix (UI / theme)
 - **Areas:** web panel — every panel page's `<head>`, `css/variables.css`, `css/global.css`, `css/*.css`, `js/utils.js`, `js/app.js`, office pages
 
