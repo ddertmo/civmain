@@ -32,6 +32,9 @@ class User extends Authenticatable
         'office',
         'avatar_url',
         'is_active',
+        // Without these, update(['last_login_at' => …]) was silently dropped.
+        'last_login_at',
+        'notifications_read_at',
     ];
 
     /**
@@ -49,6 +52,7 @@ class User extends Authenticatable
         return [
             'is_active'     => 'boolean',
             'last_login_at' => 'datetime',
+            'notifications_read_at' => 'datetime',
             'created_at'    => 'datetime',
             'updated_at'    => 'datetime',
             // NOTE: Do NOT cast password_hash as 'hashed' — it breaks Auth::attempt()

@@ -13,8 +13,9 @@ class OtpScreen extends StatefulWidget {
   final String phoneNumber;
   final bool isNewUser;
 
-  /// When true, a successful verification pops this screen with `true`
-  /// instead of navigating on. Used by the registration form so the same
+  /// When true, a successful verification pops this screen with
+  /// `{'verified': true, 'registrationTicket': String?}` instead of
+  /// navigating on. Used by the registration form so the same
   /// OTP screen can gate account creation.
   final bool returnToCaller;
 
@@ -163,7 +164,12 @@ class _OtpScreenState extends State<OtpScreen>
     }
 
     if (widget.returnToCaller) {
-      Navigator.pop(context, true);
+      // Hand the server-issued registration ticket back to the caller
+      // (RegisterScreen), which must send it with POST /register.
+      Navigator.pop(context, <String, dynamic>{
+        'verified': true,
+        'registrationTicket': result.registrationTicket,
+      });
       return;
     }
 
@@ -171,6 +177,8 @@ class _OtpScreenState extends State<OtpScreen>
       Navigator.pushNamed(
         context,
         AppRoutes.register,
+        // RegisterScreen re-verifies the number itself (returnToCaller flow)
+        // and obtains a fresh registrationTicket there.
         arguments: {'phone': widget.phoneNumber},
       );
     } else {

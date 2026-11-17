@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class CitizenReport extends Model
 {
@@ -105,9 +106,33 @@ class CitizenReport extends Model
      */
     public static function generateReferenceNumber(): string
     {
-        $year  = now()->year;
-        $count = static::whereYear('created_at', $year)->count() + 1;
-        return 'CW-' . $year . '-' . str_pad($count, 5, '0', STR_PAD_LEFT);
+        // Placeholder only. The real number is assigned by
+        // createWithReferenceNumber() from the row's auto-increment id. The
+        // old "count this year's rows + 1" scheme collided under concurrent
+        // submissions and after any delete (UNIQUE violation → HTTP 500).
+        // 20 chars max (column is varchar(20)).
+        return 'TMP-' . substr(bin2hex(random_bytes(8)), 0, 16);
+    }
+
+    /**
+     * Insert a report and give it a unique, permanent reference number
+     * derived from its auto-increment id: CW-{year}-{id, zero-padded to 5}.
+     * Ids never repeat, so neither do reference numbers — no race, no
+     * collision after deletes. Runs in a transaction so a report is never
+     * left with its placeholder number.
+     */
+    public static function createWithReferenceNumber(array $attributes): static
+    {
+        return DB::transaction(function () use ($attributes) {
+            $report = static::create(
+                ['reference_number' => static::generateReferenceNumber()] + $attributes
+            );
+
+            $report->reference_number = sprintf('CW-%d-%05d', now()->year, $report->id);
+            $report->save();
+
+            return $report;
+        });
     }
 
     /**

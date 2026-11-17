@@ -749,26 +749,68 @@
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
     <script>
-        // ── Load User Stats from Server ──────────────────────────────────────────────────
-        async function loadUserStats() {
+        requireAuth();
+
+        // Avatar backgrounds — taken from the panel palette (css/variables.css)
+        const AVATAR_COLORS = ['#1A56DB', '#10B981', '#F59E0B', '#0E7C7B', '#F97316', '#1344B5'];
+
+        let usersData = [];
+        let filtered = [];
+        let activeUser = null;
+
+        // ── Map a GET /api/users record into the shape the renderers use ──
+        function mapUser(u) {
+            const active = u.is_active === true || u.is_active === 1 || u.is_active === '1';
+            const lastLogin = u.last_login_at ?
+                `${Utils.shortDate(u.last_login_at)}\n${Utils.shortTime(u.last_login_at)}`.trim() :
+                '—';
+            return {
+                id: u.id ?? '—',
+                name: u.name || '—',
+                email: u.email || '—',
+                office: u.office || '—',
+                roleKey: u.role || '',
+                role: u.role === 'super_admin' ? 'Administrator' : 'Staff',
+                status: active ? 'Active' : 'Inactive',
+                lastLogin,
+                phone: u.phone || '—',
+                activity: u.created_at ? `Account created ${Utils.shortDate(u.created_at)}` : '—',
+            };
+        }
+
+        // ── Load users from server ───────────────────────────────────
+        async function loadUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">Loading users...</td></tr>`;
             try {
-                const token = localStorage.getItem('cw_token');
-                const res = await fetch('/api/admin/users', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                const json = await Api.get('/api/users');
+                if (json === null) return; // 401 — Api is redirecting to login
+                if (!json || json.success === false || !Array.isArray(json.data)) {
+                    throw new Error((json && json.message) || 'Failed to load users');
+                }
+                usersData = json.data.map(mapUser);
+                filtered = usersData.slice();
+                render();
+                loadUserStats(usersData);
+            } catch (err) {
+                console.error('Error loading users:', err);
+                usersData = [];
+                filtered = [];
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--gray-400);">Could not load users. ${Utils.esc(err.message)}</td></tr>`;
+                document.getElementById('showingLabel').textContent = 'Showing 0 results';
+                document.getElementById('userStatsContainer').style.opacity = '0.5';
+                Utils.showToast('Failed to load users', 'error');
+            }
+        }
 
-                if (!res.ok) throw new Error('Failed to fetch user stats');
-
-                const body = await res.json();
-                const users = Array.isArray(body) ? body : (body.data || []);
-
-                // Calculate stats from user data
+        // ── Render user stats from the loaded user list ─────────────────────────────────
+        function loadUserStats(users) {
+            try {
+                // Calculate stats from mapped user data
                 const total = users.length;
-                const active = users.filter(u => u.status === 'Active' || u.is_active === 1 || u.is_active === true).length;
-                const admins = users.filter(u => u.role === 'Administrator' || u.role === 'super_admin' || u.role === 'ceo' || u.role === 'cenro').length;
-                const staff = users.filter(u => u.role === 'Staff' || u.role === 'staff').length;
+                const active = users.filter(u => u.status === 'Active').length;
+                const admins = users.filter(u => u.role === 'Administrator').length;
+                const staff = users.filter(u => u.role === 'Staff').length;
 
                 // Replace skeleton with real data
                 document.getElementById('userStatsContainer').innerHTML = `
@@ -819,10 +861,6 @@
             }
         }
 
-        let usersData = [];
-        let filtered = [];
-        let activeUser = null;
-
         function colorFor(i) {
             return AVATAR_COLORS[i % AVATAR_COLORS.length];
         }
@@ -831,10 +869,6 @@
             if (!name) return 'U';
             return name.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
         }
-
-        let usersData = [];
-        let filtered = [];
-        let activeUser = null;
 
         // ── Render table ─────────────────────────────────────────────
         function render() {
@@ -1027,7 +1061,7 @@
             Utils.showToast('New user added successfully', 'success');
         }
 
-        render();
+        loadUsers();
     </script>
 </body>
 

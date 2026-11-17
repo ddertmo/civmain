@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (! Schema::hasTable('citizen_reports')) {
+        // MODIFY … ENUM is MySQL/MariaDB-only. Skip on other drivers (e.g.
+        // the SQLite in-memory test database) so `php artisan test` can migrate.
+        if (! Schema::hasTable('citizen_reports')
+            || ! in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)) {
             return;
         }
 
@@ -32,7 +35,10 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (! Schema::hasTable('citizen_reports')) {
+        // MODIFY … ENUM is MySQL/MariaDB-only. Skip on other drivers (e.g.
+        // the SQLite in-memory test database) so `php artisan test` can migrate.
+        if (! Schema::hasTable('citizen_reports')
+            || ! in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)) {
             return;
         }
 

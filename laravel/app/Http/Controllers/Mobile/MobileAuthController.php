@@ -9,13 +9,27 @@ use App\Services\UniSmsService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class MobileAuthController extends Controller
 {
+    // ── Brute-force limits (per phone number, on top of the per-IP route
+    // throttles in routes/api.php). A 6-digit PIN or OTP has only 10^6
+    // values, so failures must be capped per target, not just per client.
+    private const PIN_MAX_FAILURES   = 5;    // wrong PINs …
+    private const PIN_DECAY_SECONDS  = 900;  // … per 15 minutes
+    private const OTP_MAX_FAILURES   = 5;    // wrong OTPs, then all codes are burned
+    private const OTP_DECAY_SECONDS  = 600;
+    private const OTP_SEND_MAX       = 3;    // SMS sends …
+    private const OTP_SEND_DECAY     = 600;  // … per 10 minutes (SMS credits cost money)
+    private const REG_TICKET_MINUTES = 15;   // verified-phone ticket lifetime
+
     // ─────────────────────────────────────────────────────────────────────
     // POST /api/mobile/auth/login
     // Body: { phone, pin }
@@ -30,23 +44,26 @@ class MobileAuthController extends Controller
 
         $normalized = $this->normalizePhone($request->phone);
 
-        // Find citizen by phone
+        $limitKey = 'pin-login:' . $normalized;
+        if (RateLimiter::tooManyAttempts($limitKey, self::PIN_MAX_FAILURES)) {
+            return $this->tooManyAttempts($limitKey, 'Too many incorrect PIN attempts.');
+        }
+
+        // Find citizen by phone. One generic message for "no account" and
+        // "wrong PIN", so this endpoint can't be used to test which numbers
+        // are registered.
         $citizen = Citizen::where('phone', $normalized)->first();
 
-        if (! $citizen) {
+        if (! $citizen || ! $citizen->pin_hash || ! Hash::check($request->pin, $citizen->pin_hash)) {
+            RateLimiter::hit($limitKey, self::PIN_DECAY_SECONDS);
+
             return response()->json([
                 'success' => false,
-                'message' => 'No account found with that mobile number.',
+                'message' => 'Incorrect mobile number or PIN.',
             ], 401);
         }
 
-        // Verify PIN
-        if (! Hash::check($request->pin, $citizen->pin_hash)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Incorrect PIN. Please try again.',
-            ], 401);
-        }
+        RateLimiter::clear($limitKey);
 
         if (! $citizen->is_active) {
             return response()->json([
@@ -84,6 +101,17 @@ class MobileAuthController extends Controller
         ]);
 
         $normalized = $this->normalizePhone($request->phone);
+
+        // Cap SMS sends per number: stops SMS flooding a victim's phone and
+        // draining UniSMS credits.
+        $sendKey = 'otp-send:' . $normalized;
+        if (RateLimiter::tooManyAttempts($sendKey, self::OTP_SEND_MAX)) {
+            return $this->tooManyAttempts($sendKey, 'Too many verification codes requested.');
+        }
+        RateLimiter::hit($sendKey, self::OTP_SEND_DECAY);
+
+        // A fresh code gets a fresh set of verification attempts.
+        RateLimiter::clear('otp-verify:' . $normalized);
 
         // Generate a random 6-digit OTP
         $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
@@ -127,7 +155,7 @@ class MobileAuthController extends Controller
         // Echoing the code hands account takeover to whoever calls send-otp,
         // so it requires BOTH a local environment AND debug — APP_DEBUG alone
         // is not enough, because a server deployed from .env.example has it on.
-        $echoOtp = app()->environment('local') && config('app.debug');
+        $echoOtp = $this->isLocalDebug();
 
         if ($echoOtp) {
             $data['otp'] = $code;
@@ -169,23 +197,37 @@ class MobileAuthController extends Controller
         ]);
 
         $normalized = $this->normalizePhone($request->phone);
-        $otpRecord  = OtpCode::findValid($normalized, $request->otp);
 
-        if (! $otpRecord) {
+        if ($locked = $this->otpLockout($normalized)) {
+            return $locked;
+        }
+
+        $otpRecord = OtpCode::findValid($normalized, $request->otp);
+
+        // Consume atomically: only one concurrent request can flip is_used,
+        // so the same code can never be redeemed twice.
+        if (! $otpRecord || ! $this->consumeOtp($otpRecord)) {
+            $this->recordOtpFailure($normalized);
+
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid or expired OTP.',
             ], 422);
         }
 
-        // Mark OTP as used
-        $otpRecord->update(['is_used' => true]);
+        RateLimiter::clear('otp-verify:' . $normalized);
 
         // Check if citizen already exists
-        $citizen   = Citizen::where('phone', $normalized)->first();
-        $isNewUser = ! $citizen;
+        $citizen = Citizen::where('phone', $normalized)->first();
 
         if ($citizen) {
+            if (! $citizen->is_active) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your account has been deactivated.',
+                ], 403);
+            }
+
             // Returning user — issue token immediately
             $token = $citizen->createToken('mobile')->plainTextToken;
 
@@ -200,14 +242,25 @@ class MobileAuthController extends Controller
             ]);
         }
 
-        // New user — let them proceed to registration
+        // New user — issue a short-lived ticket proving this phone was just
+        // verified. register() requires it, so nobody can register (and get
+        // a token for) a phone number they don't control. Only a hash of the
+        // ticket is stored.
+        $ticket = Str::random(64);
+        Cache::put(
+            $this->ticketCacheKey($ticket),
+            $normalized,
+            now()->addMinutes(self::REG_TICKET_MINUTES)
+        );
+
         return response()->json([
             'success' => true,
             'message' => 'OTP verified. Please complete registration.',
             'data'    => [
-                'token'     => null,
-                'isNewUser' => true,
-                'phone'     => $normalized,
+                'token'              => null,
+                'isNewUser'          => true,
+                'phone'              => $normalized,
+                'registrationTicket' => $ticket,
             ],
         ]);
     }
@@ -227,7 +280,14 @@ class MobileAuthController extends Controller
         ]);
 
         $normalized = $this->normalizePhone($request->phone);
-        $citizen    = Citizen::where('phone', $normalized)->first();
+
+        // This check does not consume the code, so without a cap it would be
+        // an unlimited OTP-guessing oracle.
+        if ($locked = $this->otpLockout($normalized)) {
+            return $locked;
+        }
+
+        $citizen = Citizen::where('phone', $normalized)->first();
 
         if (! $citizen) {
             return response()->json([
@@ -244,6 +304,8 @@ class MobileAuthController extends Controller
         }
 
         if (! OtpCode::findValid($normalized, $request->otp)) {
+            $this->recordOtpFailure($normalized);
+
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid or expired OTP.',
@@ -272,7 +334,12 @@ class MobileAuthController extends Controller
         ]);
 
         $normalized = $this->normalizePhone($request->phone);
-        $citizen    = Citizen::where('phone', $normalized)->first();
+
+        if ($locked = $this->otpLockout($normalized)) {
+            return $locked;
+        }
+
+        $citizen = Citizen::where('phone', $normalized)->first();
 
         if (! $citizen) {
             return response()->json([
@@ -290,18 +357,29 @@ class MobileAuthController extends Controller
 
         $otpRecord = OtpCode::findValid($normalized, $request->otp);
 
-        if (! $otpRecord) {
+        $reset = $otpRecord && DB::transaction(function () use ($citizen, $otpRecord, $request) {
+            // Atomic consume inside the transaction: a concurrent request
+            // that lost the race changes nothing.
+            if (! $this->consumeOtp($otpRecord)) {
+                return false;
+            }
+            $citizen->update(['pin_hash' => Hash::make($request->pin)]);
+            $citizen->tokens()->delete();
+
+            return true;
+        });
+
+        if (! $reset) {
+            $this->recordOtpFailure($normalized);
+
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid or expired OTP.',
             ], 422);
         }
 
-        DB::transaction(function () use ($citizen, $otpRecord, $request) {
-            $otpRecord->update(['is_used' => true]);
-            $citizen->update(['pin_hash' => Hash::make($request->pin)]);
-            $citizen->tokens()->delete();
-        });
+        RateLimiter::clear('otp-verify:' . $normalized);
+        RateLimiter::clear('pin-login:' . $normalized);
 
         return response()->json([
             'success' => true,
@@ -315,7 +393,24 @@ class MobileAuthController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     public function register(Request $request): JsonResponse
     {
-        $normalized = $this->normalizePhone($request->phone ?? '');
+        $normalized = $this->normalizePhone((string) ($request->phone ?? ''));
+
+        // ── Proof of phone ownership ──────────────────────────────────────
+        // The ticket comes from verify-otp (new users only) and is bound to
+        // the verified number. Without it anyone could register any number.
+        // Local debug only: a missing ticket is allowed so the Flutter debug
+        // "Mock" registration (change 072, skips SMS) keeps working.
+        $ticketKey = $request->filled('registrationTicket')
+            ? $this->ticketCacheKey((string) $request->registrationTicket)
+            : null;
+        $ticketPhone = $ticketKey ? Cache::get($ticketKey) : null;
+
+        if ($ticketPhone !== $normalized && ! ($ticketKey === null && $this->isLocalDebug())) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please verify your mobile number first.',
+            ], 422);
+        }
 
         // ── Validation ────────────────────────────────────────────────────
         try {
@@ -378,6 +473,11 @@ class MobileAuthController extends Controller
             ], 500);
         }
 
+        // One ticket, one account.
+        if ($ticketKey) {
+            Cache::forget($ticketKey);
+        }
+
         $token = $citizen->createToken('mobile')->plainTextToken;
 
         return response()->json([
@@ -418,6 +518,63 @@ class MobileAuthController extends Controller
     // ─────────────────────────────────────────────────────────────────────
     // Private helpers
     // ─────────────────────────────────────────────────────────────────────
+
+    /** Local development with debug on — the only place dev shortcuts apply. */
+    private function isLocalDebug(): bool
+    {
+        return app()->environment('local') && (bool) config('app.debug');
+    }
+
+    private function ticketCacheKey(string $ticket): string
+    {
+        return 'reg-ticket:' . hash('sha256', $ticket);
+    }
+
+    /** Flip is_used false→true; false when another request already used it. */
+    private function consumeOtp(OtpCode $otp): bool
+    {
+        return OtpCode::whereKey($otp->getKey())
+            ->where('is_used', false)
+            ->update(['is_used' => true]) === 1;
+    }
+
+    /** 429 once a phone has used up its OTP guesses. */
+    private function otpLockout(string $phone): ?JsonResponse
+    {
+        $key = 'otp-verify:' . $phone;
+
+        return RateLimiter::tooManyAttempts($key, self::OTP_MAX_FAILURES)
+            ? $this->tooManyAttempts($key, 'Too many incorrect codes.')
+            : null;
+    }
+
+    /**
+     * Count a wrong OTP. At the limit every outstanding code for the phone
+     * is burned, so guessing has to restart with a new (rate-limited) SMS.
+     */
+    private function recordOtpFailure(string $phone): void
+    {
+        $key = 'otp-verify:' . $phone;
+        RateLimiter::hit($key, self::OTP_DECAY_SECONDS);
+
+        if (RateLimiter::attempts($key) >= self::OTP_MAX_FAILURES) {
+            OtpCode::where('phone', $phone)
+                ->where('is_used', false)
+                ->update(['is_used' => true]);
+        }
+    }
+
+    private function tooManyAttempts(string $key, string $reason): JsonResponse
+    {
+        $seconds = RateLimiter::availableIn($key);
+        $minutes = max(1, (int) ceil($seconds / 60));
+
+        return response()->json([
+            'success'     => false,
+            'message'     => "{$reason} Please try again in {$minutes} minute(s).",
+            'retry_after' => $seconds,
+        ], 429)->header('Retry-After', (string) $seconds);
+    }
 
     private function citizenResponse(Citizen $citizen): array
     {

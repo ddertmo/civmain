@@ -60,8 +60,16 @@ class AuthService {
 
   // ── Verify OTP ────────────────────────────────────────────────────────────
   /// Returns isNewUser=true if they need to register, false if they can login.
-  Future<({bool success, bool isNewUser, String? token, String? error})>
-      verifyOtp(String phone, String otp) async {
+  /// For a new user the server also issues a short-lived [registrationTicket]
+  /// that must be sent back with [register] (proves the phone was verified).
+  Future<
+      ({
+        bool success,
+        bool isNewUser,
+        String? token,
+        String? registrationTicket,
+        String? error,
+      })> verifyOtp(String phone, String otp) async {
     try {
       final res = await _api.post(
         ApiConstants.verifyOtp,
@@ -71,6 +79,7 @@ class AuthService {
       final data = res['data'] as Map<String, dynamic>?;
       final token = data?['token'] as String?;
       final isNewUser = data?['isNewUser'] as bool? ?? true;
+      final registrationTicket = data?['registrationTicket'] as String?;
 
       if (token != null) {
         await _api.saveToken(token);
@@ -87,12 +96,25 @@ class AuthService {
         success: res['success'] == true,
         isNewUser: isNewUser,
         token: token,
+        registrationTicket: registrationTicket,
         error: null,
       );
     } on ApiException catch (e) {
-      return (success: false, isNewUser: true, token: null, error: e.message);
+      return (
+        success: false,
+        isNewUser: true,
+        token: null,
+        registrationTicket: null,
+        error: e.message,
+      );
     } catch (e) {
-      return (success: false, isNewUser: true, token: null, error: 'Cannot reach server.');
+      return (
+        success: false,
+        isNewUser: true,
+        token: null,
+        registrationTicket: null,
+        error: 'Cannot reach server.',
+      );
     }
   }
 
@@ -144,6 +166,7 @@ class AuthService {
     String? purok,
     String? city,
     String? province,
+    String? registrationTicket,
   }) async {
     try {
       final res = await _api.post(
@@ -158,6 +181,7 @@ class AuthService {
           if (purok != null && purok.isNotEmpty) 'purok': purok,
           if (city != null && city.isNotEmpty) 'city': city,
           if (province != null && province.isNotEmpty) 'province': province,
+          if (registrationTicket != null) 'registrationTicket': registrationTicket,
         },
         auth: false,
       );

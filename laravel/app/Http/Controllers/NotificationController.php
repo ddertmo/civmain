@@ -7,66 +7,58 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Admin-panel notification feed.
+ * Admin-panel notification feed (the bell).
  *
- * Backed by `citizen_notifications` (the shared organisation feed), not the
- * legacy `notifications` table, which no longer exists. The panel shows the
- * whole feed, so there is deliberately no per-user scoping here.
+ * The feed is the shared `citizen_notifications` table, shown READ-ONLY.
+ * That table is also every citizen's own in-app inbox, so staff actions must
+ * never write to it: the old "mark all read" flipped `is_read` for every
+ * citizen, and "clear" deleted every citizen's notifications.
  *
- * Consumers: public/js/app.js (badge + dropdown) and the 30s unread-count poll.
- * Expected shape: {success, data:{notifications, unread_count}} and
- *                 {success, data:{unread_count}}.
+ * Read state for staff is per user: `users.notifications_read_at` is the
+ * "read up to" moment. A notification is unread for a staff member when it
+ * was created after that moment. The `is_read` field in the JSON is that
+ * per-staff value, not the citizen's flag.
+ *
+ * Consumers: public/js/app.js (badge, dropdown, "mark all read") and the
+ * 30s unread-count poll (app.js, dashboard.html).
  */
 class NotificationController extends Controller
 {
     // ──────────────────────────────────────────────────────────
-    // GET /api/notifications
-    // Returns the organisation-wide notification feed
-    // ?unread_only=1  → filter to unread only
+    // GET /api/notifications   (?unread_only=1)
     // ──────────────────────────────────────────────────────────
     public function index(Request $request): JsonResponse
     {
-        $query = CitizenNotification::orderByDesc('created_at');
+        $readAt = $request->user()->notifications_read_at;
 
+        $query = CitizenNotification::orderByDesc('created_at');
         if ($request->boolean('unread_only')) {
-            $query->where('is_read', false);
+            $this->scopeUnread($query, $readAt);
         }
 
-        $notifications = $query->limit(50)->get();
-        $unreadCount   = CitizenNotification::where('is_read', false)->count();
+        $notifications = $query->limit(50)->get()->map(function ($n) use ($readAt) {
+            $row = $n->toArray();
+            $row['is_read'] = $readAt !== null && $n->created_at !== null && $n->created_at->lte($readAt);
+
+            return $row;
+        })->values();
 
         return response()->json([
             'success' => true,
             'data'    => [
                 'notifications' => $notifications,
-                'unread_count'  => $unreadCount,
+                'unread_count'  => $this->unreadFor($readAt),
             ],
         ]);
     }
 
     // ──────────────────────────────────────────────────────────
-    // POST /api/notifications/{id}/read
-    // Mark a single notification as read
-    // ──────────────────────────────────────────────────────────
-    public function markRead(Request $request, int $id): JsonResponse
-    {
-        $notification = CitizenNotification::findOrFail($id);
-
-        $notification->update(['is_read' => true]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Notification marked as read.',
-        ]);
-    }
-
-    // ──────────────────────────────────────────────────────────
     // POST /api/notifications/read-all
-    // Mark ALL notifications as read
+    // Marks the feed read for THIS staff user only.
     // ──────────────────────────────────────────────────────────
     public function markAllRead(Request $request): JsonResponse
     {
-        CitizenNotification::where('is_read', false)->update(['is_read' => true]);
+        $request->user()->forceFill(['notifications_read_at' => now()])->save();
 
         return response()->json([
             'success' => true,
@@ -75,45 +67,28 @@ class NotificationController extends Controller
     }
 
     // ──────────────────────────────────────────────────────────
-    // DELETE /api/notifications/{id}
-    // Delete a single notification
-    // ──────────────────────────────────────────────────────────
-    public function destroy(Request $request, int $id): JsonResponse
-    {
-        CitizenNotification::findOrFail($id)->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Notification deleted.',
-        ]);
-    }
-
-    // ──────────────────────────────────────────────────────────
-    // DELETE /api/notifications
-    // Clear all notifications
-    // ──────────────────────────────────────────────────────────
-    public function destroyAll(Request $request): JsonResponse
-    {
-        CitizenNotification::query()->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'All notifications cleared.',
-        ]);
-    }
-
-    // ──────────────────────────────────────────────────────────
-    // GET /api/notifications/unread-count
-    // Lightweight poll endpoint — returns just the badge count
-    // The frontend calls this every 30s to update the bell badge
+    // GET /api/notifications/unread-count — 30s badge poll
     // ──────────────────────────────────────────────────────────
     public function unreadCount(Request $request): JsonResponse
     {
-        $count = CitizenNotification::where('is_read', false)->count();
-
         return response()->json([
             'success' => true,
-            'data'    => ['unread_count' => $count],
+            'data'    => ['unread_count' => $this->unreadFor($request->user()->notifications_read_at)],
         ]);
+    }
+
+    private function unreadFor($readAt): int
+    {
+        $query = CitizenNotification::query();
+        $this->scopeUnread($query, $readAt);
+
+        return $query->count();
+    }
+
+    private function scopeUnread($query, $readAt): void
+    {
+        if ($readAt !== null) {
+            $query->where('created_at', '>', $readAt);
+        }
     }
 }

@@ -41,13 +41,15 @@ Route::get('/ping', fn() => response()->json([
 Route::prefix('mobile')->name('mobile.')->group(function () {
 
     // ── Auth (public — no token needed) ───────────────────────────────
+    // Per-IP throttles. The controller adds per-phone limits on top (PIN
+    // and OTP failures, SMS sends) — see MobileAuthController constants.
     Route::prefix('auth')->name('auth.')->group(function () {
-        Route::post('login',      [MobileAuthController::class, 'login']);
-        Route::post('send-otp',   [MobileAuthController::class, 'sendOtp']);
-        Route::post('verify-otp', [MobileAuthController::class, 'verifyOtp']);
-        Route::post('verify-reset-otp', [MobileAuthController::class, 'verifyResetOtp']);
-        Route::post('reset-pin',  [MobileAuthController::class, 'resetPin']);
-        Route::post('register',   [MobileAuthController::class, 'register']);
+        Route::post('login',      [MobileAuthController::class, 'login'])->middleware('throttle:10,1');
+        Route::post('send-otp',   [MobileAuthController::class, 'sendOtp'])->middleware('throttle:5,10');
+        Route::post('verify-otp', [MobileAuthController::class, 'verifyOtp'])->middleware('throttle:10,1');
+        Route::post('verify-reset-otp', [MobileAuthController::class, 'verifyResetOtp'])->middleware('throttle:10,1');
+        Route::post('reset-pin',  [MobileAuthController::class, 'resetPin'])->middleware('throttle:10,1');
+        Route::post('register',   [MobileAuthController::class, 'register'])->middleware('throttle:5,1');
     });
 
     // ── Announcements (public — readable without login) ───────────────
@@ -113,7 +115,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:sanctum', 'staff', 'su
 // LEGACY ADMIN API (unchanged — staff email/password workflow)
 // ═══════════════════════════════════════════════════════════════════════
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
 
 // `staff` rejects any non-User token (see App\Http\Middleware\EnsureStaff).
 Route::middleware(['auth:sanctum', 'staff'])->group(function () {
@@ -143,12 +145,12 @@ Route::middleware(['auth:sanctum', 'staff'])->group(function () {
     Route::get('/analytics/weekly-trend',         [AnalyticsController::class, 'weeklyTrend']);
     Route::get('/analytics/monthly-trend',        [AnalyticsController::class, 'monthlyTrend']);
 
-    // Notifications (admin-side)
+    // Notifications (admin-side bell). Read-only view of the shared citizen
+    // feed with per-staff read state. The old per-item read and the delete
+    // routes were removed: they changed/deleted the citizens' own inboxes,
+    // and the panel never called them.
     Route::get('/notifications/unread-count',     [NotificationController::class, 'unreadCount']);
     Route::get('/notifications',                  [NotificationController::class, 'index']);
-    Route::delete('/notifications',               [NotificationController::class, 'destroyAll']);
-    Route::post('/notifications/{id}/read',       [NotificationController::class, 'markRead']);
-    Route::delete('/notifications/{id}',          [NotificationController::class, 'destroy']);
     Route::post('/notifications/read-all',        [NotificationController::class, 'markAllRead']);
 
     // Priority management is restricted to authorized personnel of the

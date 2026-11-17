@@ -11,7 +11,9 @@ Route::get('/', function () {
 
 // ── Laravel Blade Admin (kept for internal use) ────────────────────────────
 Route::get('/admin/login',  [AdminWebController::class, 'showLogin'])->name('admin.login');
-Route::post('/admin/login', [AdminWebController::class, 'login'])->name('admin.login.post');
+Route::post('/admin/login', [AdminWebController::class, 'login'])
+    ->middleware('throttle:10,1')
+    ->name('admin.login.post');
 
 // Writes here are super_admin only — see App\Middleware\EnsureSuperAdmin.
 // Reads stay open to every authenticated role (CEO/CENRO need the data).

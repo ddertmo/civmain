@@ -142,11 +142,15 @@ class _RegisterScreenState extends State<RegisterScreen>
 
     // Reuse the existing OTP screen for number verification: it calls
     // POST /api/mobile/auth/send-otp on open and verify-otp on submit.
-    // `returnToCaller` makes it pop back here with `true` on success instead
-    // of navigating to a fresh register screen.
+    // `returnToCaller` makes it pop back here with
+    // `{'verified': true, 'registrationTicket': ...}` on success instead of
+    // navigating to a fresh register screen. The server-issued ticket is
+    // required by POST /register (proves this phone was OTP-verified).
     //
     // Debug Mock mode skips this screen completely (no SMS, no credit) and
-    // calls the normal register API below. Live mode keeps the real OTP gate.
+    // calls the normal register API below without a ticket (accepted only by
+    // a local debug backend). Live mode keeps the real OTP gate.
+    String? registrationTicket;
     if (!(kDebugMode && _mockMode)) {
       final verified = await Navigator.pushNamed(
         context,
@@ -157,7 +161,8 @@ class _RegisterScreenState extends State<RegisterScreen>
           'returnToCaller': true,
         },
       );
-      if (verified != true) return;
+      if (verified is! Map || verified['verified'] != true) return;
+      registrationTicket = verified['registrationTicket'] as String?;
       if (!mounted) return;
     }
 
@@ -174,6 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       purok: _purokCtrl.text.trim(),
       city: _cityCtrl.text.trim(),
       province: _provinceCtrl.text.trim(),
+      registrationTicket: registrationTicket,
     );
 
     if (!mounted) return;

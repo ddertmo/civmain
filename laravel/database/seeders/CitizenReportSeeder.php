@@ -11,7 +11,10 @@ class CitizenReportSeeder extends Seeder
      *
      * Dummy citizen reports have been removed so the admin panel only shows
      * real submissions from the Flutter app.
-     * Run  php artisan reports:clear-dummy  to wipe any previously seeded data.
+     *
+     * The old `reports:clear-dummy` command was removed: it treated
+     * CW-2026-00101…00110 as dummy rows, but those are now numbers that real
+     * reports receive, so running it deleted real reports.
      */
     public function run(): void
     {

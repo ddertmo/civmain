@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -24,16 +26,34 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Step 2 — Find the user by email
+        // Step 2 — Per-account brute-force limit (the route also throttles
+        // per IP): 5 wrong passwords per email per 15 minutes.
+        $limitKey = 'staff-login:' . Str::lower((string) $request->email);
+        if (RateLimiter::tooManyAttempts($limitKey, 5)) {
+            $seconds = RateLimiter::availableIn($limitKey);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Too many failed sign-in attempts. Please try again in '
+                    . max(1, (int) ceil($seconds / 60)) . ' minute(s).',
+            ], 429)->header('Retry-After', (string) $seconds);
+        }
+
+        // Step 3 — Find the user and verify the password FIRST, so the
+        // "deactivated" message below is only revealed to someone who
+        // already knows the password (no account-status enumeration).
         $user = User::where('email', $request->email)->first();
 
-        // Step 3 — Check if user exists
-        if (! $user) {
+        if (! $user || ! Hash::check($request->password, $user->getAuthPassword())) {
+            RateLimiter::hit($limitKey, 900);
+
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid email or password.',
             ], 401);
         }
+
+        RateLimiter::clear($limitKey);
 
         // Step 4 — Check if account is active
         if (! $user->isActive()) {
@@ -41,15 +61,6 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Your account has been deactivated. Please contact the administrator.',
             ], 403);
-        }
-
-        // Step 5 — Verify the password against the stored hash
-        // Hash::check() safely compares plain password vs hashed password
-        if (! Hash::check($request->password, $user->getAuthPassword())) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid email or password.',
-            ], 401);
         }
 
         // Step 6 — Update last login timestamp

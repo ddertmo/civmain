@@ -7,6 +7,7 @@ use App\Models\CitizenReport;
 use App\Models\ReportActivity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -61,14 +62,42 @@ class MobileReportController extends Controller
         ]);
 
         // Handle photo upload
-        $photoUrl = null;
+        $photoUrl  = null;
+        $photoPath = null;
         if ($request->hasFile('photo')) {
-            $path     = $request->file('photo')->store('report-photos', 'public');
-            $photoUrl = Storage::disk('public')->url($path);
+            $photoPath = $request->file('photo')->store('report-photos', 'public');
+            $photoUrl  = Storage::disk('public')->url($photoPath);
         }
 
-        $report = CitizenReport::create([
-            'reference_number'  => CitizenReport::generateReferenceNumber(),
+        try {
+            // One transaction: either the report, its first activity and its
+            // Pending Validation step all exist, or none of them do.
+            $report = DB::transaction(fn () => $this->createReport($citizen, $validated, $photoUrl));
+        } catch (\Throwable $e) {
+            // Don't leave an orphaned upload behind when the insert fails.
+            if ($photoPath) {
+                Storage::disk('public')->delete($photoPath);
+            }
+            throw $e;
+        }
+
+        // Reload with relationships
+        $report->load(['activities', 'assignedOffice']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Report submitted successfully.',
+            'data'    => $report->toApiArray(),
+        ], 201);
+    }
+
+    /**
+     * Insert the report (with a collision-free reference number), its
+     * "Submitted" activity and the move to Pending Validation.
+     */
+    private function createReport($citizen, array $validated, ?string $photoUrl): CitizenReport
+    {
+        $report = CitizenReport::createWithReferenceNumber([
             'citizen_id'        => $citizen->id,
             'category'          => $validated['category'],
             'concern'           => $validated['concern'],
@@ -99,14 +128,7 @@ class MobileReportController extends Controller
         // Auto-transition to Pending Validation
         $report->transitionTo(CitizenReport::STATUS_PENDING_VALIDATION);
 
-        // Reload with relationships
-        $report->load(['activities', 'assignedOffice']);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Report submitted successfully.',
-            'data'    => $report->toApiArray(),
-        ], 201);
+        return $report;
     }
 
     // ─────────────────────────────────────────────────────────────────────
