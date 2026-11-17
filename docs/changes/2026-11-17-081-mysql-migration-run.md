@@ -1,7 +1,7 @@
 # Migrations verified on MariaDB; rollback of the index migration fixed
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `2e6a751`
 - **Type:** fix + verification
 - **Areas:** Laravel (migrations)
 

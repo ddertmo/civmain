@@ -50,19 +50,24 @@ For detail, go to (do not duplicate these):
 
 ### two machines — detect before applying env-specific commands
 
-This repo is edited from **two machines**; the limits differ:
+This repo is edited from **several machines**; the limits differ:
 
 | Machine | Platform | Environment |
 |---|---|---|
 | Windows PC | `win32` | XAMPP — PHP `C:\xampp\php\php.exe`, MySQL `C:\xampp\mysql\bin\mysql.exe`; Flutter `C:\Users\Administrator\Downloads\flutter\bin\flutter.bat`; Node available; `tree_sitter_php` parses, so Laravel PHP **can** be in the graph |
 | Android / Termux | `android` | PHP / Composer / MariaDB only — **no** Flutter, Dart, Node, Windows or XAMPP; small disk (no installs); `/tmp` unwritable; Laravel PHP is **not** in the graph — read PHP files directly |
+| Windows PC, portable tools (clone at `C:\Users\Administrator\Downloads\civmain`, fork `ddertmo/civmain`) | `win32` | **No XAMPP.** Portable PHP 8.3 `C:\Users\Administrator\Downloads\tools\php83\php.exe`, Composer `…\tools\composer.phar`, MariaDB 10.11 `…\tools\mariadb\bin\` (data `…\tools\mariadb-data`, root, no password). Start commands are in `.claude/launch.json`. **No** Flutter, Node or graphify. Git is `C:\Program Files\Git\cmd\git.exe`. See `docs/TASKS.md` → "Security audit follow-up" |
 
 **Never assume the other machine's limits.** Detect the current platform, then
 apply the matching column.
 
-**Push target (both machines):** the working repo pushes to `backup`
-(`dertmo01/civmain`); the parent `CIVILWATCH` has `origin`
-(`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
+**Push target — check `git remote -v` first; it depends on the clone:**
+- **Fork clone** (`C:\Users\Administrator\Downloads\civmain`, only remote is
+  `origin` = `ddertmo/civmain`): push to **`origin main`**. The owner
+  confirmed this on 2026-11-17. Do not add a `backup` remote here.
+- **Original clones** (XAMPP PC, Termux): the working repo pushes to `backup`
+  (`dertmo01/civmain`). The parent `CIVILWATCH` has `origin`
+  (`SerenoLawrence/CIVILWATCH`), is stale, and must never be committed to.
 
 ## playwright (removed)
 
@@ -99,11 +104,14 @@ Rules:
 ## changelog
 
 Every change gets its own markdown file in `docs/changes/`, indexed by
-`docs/changes/README.md`, committed and pushed to the `backup` remote.
+`docs/changes/README.md`, committed and pushed to this clone's push target
+(see "Push target" above).
 
 Rules:
 - After finishing any fix, feature, refactor, doc edit or graph refresh, run the installed **changelog** skill (`.opencode/skills/changelog/SKILL.md`) before moving on. It writes `docs/changes/YYYY-MM-DD-NNN-<slug>.md`, updates the index, runs `graphify update .`, then commits and pushes.
 - One file per change. One change per file — do not merge unrelated fixes.
 - Document what the diff actually did plus the root cause and the real verification commands. If a check could not be run (no Flutter SDK, no Xcode), say so explicitly instead of implying it passed.
-- Push target is `backup` (`https://github.com/dertmo01/civmain.git`), branch `main`. Never push to `origin`.
-- After pushing, confirm `git ls-remote backup main` equals `git rev-parse HEAD`.
+- Push target: `origin main` in the fork clone (`ddertmo/civmain`), `backup main` (`https://github.com/dertmo01/civmain.git`) in the original clones — see "Push target" above.
+- After pushing, confirm `git ls-remote <remote> main` equals `git rev-parse HEAD`.
+- Fill the index row's commit column with the real short hash (backfill it in the next commit if needed), not a placeholder.
+- No graphify on the machine? Skip `graphify update .` and say so in the change file.

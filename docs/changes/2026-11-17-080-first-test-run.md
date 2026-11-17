@@ -1,7 +1,7 @@
 # First real test run: all 27 tests pass after two fixes
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `77d5012`
 - **Type:** fix + verification
 - **Areas:** Laravel (routes, test harness)
 

@@ -1,7 +1,7 @@
 # High-severity fixes: OTP-verified registration, rate limits, admin bell, reference numbers, HTTPS app, Users page, tests
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `5fda2b4`
 - **Type:** fix (security + data integrity)
 - **Areas:** Laravel (mobile auth, staff auth, notifications, reports, migrations, tests), admin web (users.html), Flutter (auth flow, network config)
 

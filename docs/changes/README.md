@@ -84,10 +84,11 @@ automatically after each change.
 | 070 | 2026-10-21 | `d53f83f` | [Reset PIN was a fake - a correct OTP now actually changes the PIN](2026-10-21-070-real-reset-pin.md) |
 | 071 | 2026-10-21 | `d53f83f` | [Reset testing needed a real SMS in the app - added a debug-only Mock / Live switch](2026-10-21-071-in-app-mock-live-reset.md) |
 | 072 | 2026-10-21 | `ea059a2` | [Mock testing still needed SMS - registration and reset now skip OTP in debug](2026-10-21-072-mock-skips-otp.md) |
-| 075 | 2026-11-17 | `(uncommitted)` | [Dashboard charts reverted - dashboard back to stat cards only (undoes 073 and 074)](2026-11-17-075-dashboard-charts-reverted.md) |
-| 076 | 2026-11-17 | `(see git log)` | [Critical security fixes - citizen tokens on staff API, stored XSS, published admin password, OTP echo](2026-11-17-076-critical-security-fixes.md) |
-| 077 | 2026-11-17 | `(see git log)` | [High-severity fixes - OTP-verified registration, rate limits, admin bell, reference numbers, HTTPS app, Users page, tests](2026-11-17-077-high-security-fixes.md) |
-| 078 | 2026-11-17 | `(see git log)` | [Medium audit fixes - office scoping, token expiry, workflow rules, honest UI, performance, app hardening](2026-11-17-078-medium-audit-fixes.md) |
-| 079 | 2026-11-17 | `(see git log)` | [Low audit fixes - hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts](2026-11-17-079-low-audit-fixes.md) |
-| 080 | 2026-11-17 | `(see git log)` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
-| 081 | 2026-11-17 | `(see git log)` | [Migrations verified on MariaDB - rollback of the index migration fixed (FK error 1553)](2026-11-17-081-mysql-migration-run.md) |
+| 075 | 2026-11-17 | `7e578d8` | [Dashboard charts reverted - dashboard back to stat cards only (undoes 073 and 074)](2026-11-17-075-dashboard-charts-reverted.md) |
+| 076 | 2026-11-17 | `4a1cc71` | [Critical security fixes - citizen tokens on staff API, stored XSS, published admin password, OTP echo](2026-11-17-076-critical-security-fixes.md) |
+| 077 | 2026-11-17 | `5fda2b4` | [High-severity fixes - OTP-verified registration, rate limits, admin bell, reference numbers, HTTPS app, Users page, tests](2026-11-17-077-high-security-fixes.md) |
+| 078 | 2026-11-17 | `118b82f` | [Medium audit fixes - office scoping, token expiry, workflow rules, honest UI, performance, app hardening](2026-11-17-078-medium-audit-fixes.md) |
+| 079 | 2026-11-17 | `2dba606` | [Low audit fixes - hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts](2026-11-17-079-low-audit-fixes.md) |
+| 080 | 2026-11-17 | `77d5012` | [First real test run - all 27 tests pass after a test-harness and catch-all route fix](2026-11-17-080-first-test-run.md) |
+| 081 | 2026-11-17 | `2e6a751` | [Migrations verified on MariaDB - rollback of the index migration fixed (FK error 1553)](2026-11-17-081-mysql-migration-run.md) |
+| 082 | 2026-11-17 | `PENDING` | [Session context refreshed - NOW, TASKS, AGENTS push rule, backfilled hashes](2026-11-17-082-session-context-refresh.md) |

@@ -1,7 +1,7 @@
 # Dashboard charts reverted — dashboard back to stat cards only
 
 - **Date:** 2026-11-17
-- **Commit:** `(uncommitted)`
+- **Commit:** `7e578d8`
 - **Type:** refactor
 - **Areas:** Laravel (admin web dashboard)
 

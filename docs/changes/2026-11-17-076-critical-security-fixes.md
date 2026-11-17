@@ -1,7 +1,7 @@
 # Critical security fixes: citizen tokens on staff API, stored XSS, published admin password, OTP echo
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `4a1cc71`
 - **Type:** fix (security)
 - **Areas:** Laravel (auth config, routes, middleware, mobile auth, seeder, SQL dump), admin web panel (all report pages, office pages, shared JS), docs
 

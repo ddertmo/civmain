@@ -1,7 +1,7 @@
 # Low audit fixes: hardening, CSP + SRI, hashed OTPs, small bugs, Flutter cleanup, scripts
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `2dba606`
 - **Type:** fix (security hardening, bugs, cleanup)
 - **Areas:** Laravel, admin and office web panel, Flutter app, startup scripts, docs
 

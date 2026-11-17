@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mariadb",
+      "runtimeExecutable": "C:\\Users\\Administrator\\Downloads\\tools\\mariadb\\bin\\mariadbd.exe",
+      "runtimeArgs": [
+        "--datadir=C:\\Users\\Administrator\\Downloads\\tools\\mariadb-data",
+        "--port=3306",
+        "--bind-address=127.0.0.1",
+        "--console",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci"
+      ],
+      "port": 3306
+    },
+    {
+      "name": "laravel",
+      "runtimeExecutable": "C:\\Users\\Administrator\\Downloads\\tools\\php83\\php.exe",
+      "runtimeArgs": ["laravel/artisan", "serve", "--host=127.0.0.1", "--port=8000"],
+      "port": 8000
+    }
+  ]
+}

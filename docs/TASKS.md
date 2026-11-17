@@ -4,6 +4,62 @@ Running list of planned work. Nothing here is done unless its box is checked.
 
 ---
 
+## [ ] Security audit follow-up (2026-11-17)
+
+- **Status:** the audit's 57 findings were fixed in
+  [076](changes/2026-11-17-076-critical-security-fixes.md) (Critical),
+  [077](changes/2026-11-17-077-high-security-fixes.md) (High),
+  [078](changes/2026-11-17-078-medium-audit-fixes.md) (Medium) and
+  [079](changes/2026-11-17-079-low-audit-fixes.md) (Low).
+- **Verified:** `php artisan test` passes 27/27 on SQLite
+  ([080](changes/2026-11-17-080-first-test-run.md)) and on MariaDB 10.11.
+  The dump import plus `migrate` was also run on MariaDB 10.11, and
+  rollback/reset was checked ([081](changes/2026-11-17-081-mysql-migration-run.md)).
+- **Box stays unchecked until the items below are done.**
+
+### Open items
+- [ ] **XAMPP PC:** `cd laravel && C:\xampp\php\php.exe artisan migrate`, then
+      `artisan test`. XAMPP's MariaDB, usually 10.4, has not been tested yet.
+- [ ] **Rotate the published seed passwords** on every database built from
+      `civilwatch_FINAL.sql` or the old seeder: `admin@civilwatch.ph`,
+      `ceo@civilwatch.ph`, and citizen `+639171234567`. They are still in git
+      history.
+      - On the portable-tools PC only, the local admin password was rotated. The
+        new one is in `laravel/.env` as `SEED_ADMIN_PASSWORD` (quoted, because it
+        contains `#`). The CEO account and the test citizen still have the old
+        passwords there too.
+- [ ] **Flutter:** none of the Flutter changes have been compiled. Run
+      `flutter pub get` (076–079 changed pubspec, so this regenerates the lock
+      file and the plugin registrants), then `flutter analyze`, a rebuild, and a
+      device test of login, registration (it now needs the OTP
+      `registrationTicket`), report submit with a photo, and the maps.
+- [ ] **Any server other people can reach:** set `APP_ENV=production`,
+      `APP_DEBUG=false` and `CORS_ALLOWED_ORIGINS` in `.env`. Release builds of
+      the app also need `--dart-define=API_BASE_URL=https://…` plus
+      `android/key.properties` for signing.
+- [ ] **Scheduler:** run `php artisan schedule:work`, or a Task Scheduler entry
+      for `schedule:run`, so expired tokens are pruned daily.
+
+### Deferred (decide later)
+- **Merge the near-duplicate pages:** `public/offices/ceo` and
+  `public/offices/cenro`, plus the Blade/API report controllers (audit M21).
+- **Regenerate `civilwatch_FINAL.sql`** from a migrated database. For now,
+  `migrate` after import brings it up to date.
+- **Unused `welcome.blade.php` and the Vite/Tailwind tooling.** The setup docs
+  still reference them.
+- **Bundle Google Fonts** in the app so it doesn't fetch them at runtime.
+- **`settings.html` ~1279/1289** has U+FFFD sample emoji characters
+  (pre-existing).
+
+### Machine notes (portable-tools PC)
+- **Tools:** PHP 8.3.36, `composer.phar` and MariaDB 10.11.20 live in
+  `C:\Users\Administrator\Downloads\tools`. The MariaDB data folder is
+  `tools\mariadb-data`.
+- **Start commands:** in `.claude/launch.json` (`mariadb`, then `laravel`).
+- **Not installed:** XAMPP, Flutter, Node and graphify.
+
+---
+
 ## [ ] Use UniSMS as the primary SMS provider
 
 - **Status:** implemented 2026-10-19 in

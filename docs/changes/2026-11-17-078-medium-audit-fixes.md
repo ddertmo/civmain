@@ -1,7 +1,7 @@
 # Medium audit fixes: office scoping, token expiry, workflow rules, honest UI, performance, app hardening
 
 - **Date:** 2026-11-17
-- **Commit:** `(see git log)`
+- **Commit:** `118b82f`
 - **Type:** fix (security, data integrity, performance, UX honesty)
 - **Areas:** Laravel (models, controllers, middleware, config, migrations, tests), admin and office web panel, Flutter app, repo hygiene
 
