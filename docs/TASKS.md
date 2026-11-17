@@ -26,8 +26,10 @@ Running list of planned work. Nothing here is done unless its box is checked.
       history.
       - On the portable-tools PC only, the local admin password was rotated. The
         new one is in `laravel/.env` as `SEED_ADMIN_PASSWORD` (quoted, because it
-        contains `#`). The CEO account and the test citizen still have the old
-        passwords there too.
+        contains `#`). In 084 the CEO account got a new local password too, and
+        a CENRO test user `cenro@civilwatch.ph` was created, with passwords in
+        `SEED_CEO_PASSWORD` / `SEED_CENRO_PASSWORD`. The test citizen still has
+        the old PIN there, and other databases still have every old password.
 - [ ] **Flutter:** none of the Flutter changes have been compiled. Run
       `flutter pub get` (076–079 changed pubspec, so this regenerates the lock
       file and the plugin registrants), then `flutter analyze`, a rebuild, and a
