@@ -11,10 +11,10 @@ context. See `AGENTS.md` for the full startup rule and the budget below.
 
 ## NOW
 
-- at:      2026-11-17 - latest change = 087 (CEO/CENRO dark mode); 086 = notification badge; 085 = dark mode; 076-081 = security audit
+- at:      2026-11-17 - latest change = 088 (CEO/CENRO dark mode verified, 16/16 pages); 087 office dark mode; 086 notification badge; 085 dark mode; 076-081 security audit
 - running: this clone = C:\Users\Administrator\Downloads\civmain on a PC with portable PHP 8.3 + Composer + MariaDB 10.11 in C:\Users\Administrator\Downloads\tools (no XAMPP, Flutter or Node); app on http://127.0.0.1:8000, start commands in .claude/launch.json
 - doing:   nothing in progress - audit follow-up done (tests 27/27 SQLite + MariaDB); what was removed/changed: PROJECT_CONTEXT.md section 11
-- next:    re-scan CENRO + CEO map/analytics/report-details/settings in dark mode (087 notes); then docs/TASKS.md "Security audit follow-up"
+- next:    see docs/TASKS.md "Security audit follow-up" (XAMPP migrate, rotate seed passwords, Flutter pub get/analyze/rebuild)
 - blocked: Flutter changes from 076-079 are unverified until run on a machine with the Flutter SDK
 
 Detailed/portable notes → [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md) · open work → [`TASKS.md`](TASKS.md)

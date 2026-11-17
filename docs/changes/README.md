@@ -97,3 +97,4 @@ automatically after each change.
 | 085 | 2026-11-17 | `cde3ba2` | [Dark mode - no light flash, readable secondary text, themed charts, missing dark colours, white text on fills](2026-11-17-085-dark-mode-fixes.md) |
 | 086 | 2026-11-17 | `45c0389` | [Notification badge - shows the count, hides at zero, clears once the bell is opened](2026-11-17-086-notification-badge.md) |
 | 087 | 2026-11-17 | `8a39eb4` | [Dark mode on the CEO/CENRO office pages - pastel tiles, office colours by role, white text on office fills](2026-11-17-087-office-pages-dark-mode.md) |
+| 088 | 2026-11-17 | `PENDING` | [CEO/CENRO dark mode verified on all 16 office pages - green action buttons and grey pill fixed](2026-11-17-088-office-dark-mode-verified.md) |

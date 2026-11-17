@@ -1317,3 +1317,19 @@ html[data-theme="dark"] {
 [data-theme="dark"] :is([style*="#FFF7ED" i], [style*="#FFFBEB" i], [style*="#FEF3C7" i], [style*="#ECFDF5" i], [style*="#D1FAE5" i], [style*="#EFF6FF" i], [style*="#DBEAFE" i], [style*="#F3E8FF" i], [style*="#FEF2F2" i], [style*="#FEE2E2" i]) .material-symbols-outlined {
     color: inherit !important;
 }
+
+/* Green action buttons styled inline (background:#10B981 — "Confirm Resolve",
+   CENRO "Save Update"): white text on that green is 2.5:1. Deeper green in
+   dark mode (#047857, 5.5:1). */
+[data-theme="dark"] .btn[style*="background:#10B981" i] {
+    background: #047857 !important;
+    border-color: #047857 !important;
+}
+
+/* Neutral light-grey pills written inline (e.g. the "Unavailable" status
+   badge, background:#F3F4F6; color:#6B7280). */
+[data-theme="dark"] [style*="background:#F3F4F6" i],
+[data-theme="dark"] [style*="background:#F9FAFB" i] {
+    background-color: var(--gray-100) !important;
+    color: var(--gray-700) !important;
+}
