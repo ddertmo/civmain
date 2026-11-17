@@ -4,6 +4,16 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   padding: 20px;
+  /* Grid items default to min-width:auto, so a wide legend or canvas pushed
+     the card past its column. min-width:0 lets the card shrink to the grid
+     track; overflow:hidden is a last guard against anything still too wide. */
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Lets the doughnut layout react to the card's own width (see bottom). */
+  container-type: inline-size;
+  container-name: chart-card;
 }
 
 .chart-header {
@@ -48,23 +58,46 @@
   position: relative;
 }
 
+/* Chart.js (responsive:true, maintainAspectRatio:false) sizes the canvas to
+   THIS box, so it must have a definite height (set per chart via the inline
+   height on the element) and must be allowed to shrink in width. */
 .chart-container {
   position: relative;
   width: 100%;
+  min-width: 0;
 }
 
-/* Analytics layout */
-.analytics-top-row {
+.chart-container > canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* Analytics layout — shared by the Super Admin, CEO and CENRO analytics
+   pages (.analytics-grid-*), and the older .analytics-*-row names.
+   minmax(0,1fr) instead of 1fr: a plain 1fr track can't shrink below its
+   content's min-content width, which is what let wide charts and legends
+   overflow. Breakpoints are at the bottom of this file. */
+.analytics-top-row,
+.analytics-grid-top {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   margin-bottom: 20px;
 }
 
-.analytics-bottom-row {
+.analytics-bottom-row,
+.analytics-grid-bottom {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+}
+
+/* Office analytics (CEO / CENRO) stat strip */
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
 }
 
 /* Analytics controls */
@@ -108,26 +141,51 @@
   color: var(--white);
 }
 
-/* Doughnut legend */
+/* Doughnut + legend
+   Root cause of the oversized doughnuts: the charts use
+   maintainAspectRatio:false, so Chart.js takes its height from the canvas'
+   parent (.doughnut-canvas). That box had no height of its own — it was a
+   flex item centred in a row, so its height was the canvas' height — and
+   Chart.js and the box kept growing each other. The 200px on .doughnut-wrap
+   never reached the canvas.
+   Fix: .doughnut-canvas is an explicit square (height of the row, width =
+   height via aspect-ratio, capped), so Chart.js always gets a fixed box. */
 .doughnut-wrap {
   display: flex;
   align-items: center;
   gap: 20px;
+  min-height: 200px; /* grows if a long legend (e.g. 7 statuses) needs it */
+  min-width: 0;
 }
 
-.doughnut-canvas { flex: 1; }
+.doughnut-canvas {
+  position: relative;
+  flex: 0 0 auto;
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.doughnut-canvas > canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
 
 .doughnut-legend {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex-shrink: 0;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .legend-dot {
@@ -141,12 +199,19 @@
   font-size: var(--font-size-xs);
   color: var(--gray-600);
   font-weight: 500;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .legend-value {
   font-size: var(--font-size-xs);
   color: var(--gray-500);
   margin-left: auto;
+  padding-left: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Analytics Note */
@@ -172,4 +237,40 @@
   font-size: var(--font-size-sm);
   color: var(--gray-600);
   line-height: 1.5;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────
+   Lives here (not responsive.css) so it sits next to the base grid rules
+   above; the analytics pages no longer redefine these grids locally. */
+
+/* Narrow card (e.g. 3 columns on a laptop): doughnut above its legend. */
+@container chart-card (max-width: 400px) {
+  .doughnut-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    gap: 14px;
+  }
+  .doughnut-canvas {
+    width: 170px;
+    height: 170px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .analytics-bottom-row,
+  .analytics-grid-bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .summary-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1024px) {
+  .analytics-top-row,
+  .analytics-grid-top,
+  .analytics-bottom-row,
+  .analytics-grid-bottom { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .summary-strip { grid-template-columns: minmax(0, 1fr); }
+  .chart-card { padding: 16px; }
 }
