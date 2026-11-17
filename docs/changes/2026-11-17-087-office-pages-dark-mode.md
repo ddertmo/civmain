@@ -1,7 +1,7 @@
 # Dark mode on the CEO / CENRO office pages
 
 - **Date:** 2026-11-17
-- **Commit:** see the index row (backfilled in the following commit)
+- **Commit:** `8a39eb4`
 - **Type:** fix (UI / theme)
 - **Areas:** web panel — `css/global.css`, the `<head>` of all 27 panel pages (early theme script), `offices/{ceo,cenro}/report-details.html` and the office pages' office-colour overrides
 
