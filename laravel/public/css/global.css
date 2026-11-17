@@ -806,8 +806,9 @@ ol {
 }
 
 [data-theme="dark"] .chip.active {
-    background: var(--primary);
-    border-color: var(--primary);
+    /* --primary-dark, not --primary: white text needs the deeper blue (4.6:1). */
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
     color: white;
 }
 
@@ -837,7 +838,8 @@ ol {
 }
 
 [data-theme="dark"] .toggle-btn.active {
-    background: var(--primary);
+    /* --primary-dark, not --primary: white text needs the deeper blue (4.6:1). */
+    background: var(--primary-dark);
     color: white;
 }
 
@@ -1224,4 +1226,94 @@ html[data-theme="dark"] {
 [data-theme="dark"] .sk-card {
     background: #1E2330;
     border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   CEO / CENRO office pages — dark mode
+   The office pages hard-code light pastel tiles (#EFF6FF, #FFF7ED, …) in
+   their own <style> blocks and in inline styles written by page scripts,
+   and define --office-color / --office-light without a dark version.
+   data-role is set on <html> by the early <head> script (cw-theme-early)
+   from the signed-in role, before first paint.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Office palette. --office-color is used for TEXT on dark cards (brighter);
+   --office-fill for fills that carry white text (deeper, ≥4.5:1). */
+[data-theme="dark"][data-role="ceo"] {
+    --office-color: #4D8EFF;
+    --office-light: rgba(77, 142, 255, 0.14);
+    --office-fill:  #2B6FE8;
+}
+
+[data-theme="dark"][data-role="cenro"] {
+    --office-color: #34D399;
+    --office-light: rgba(16, 185, 129, 0.15);
+    --office-fill:  #047857;
+}
+
+/* Tinted tiles / pills / badges: translucent tint + bright foreground. */
+[data-theme="dark"] .office-stat-icon.assigned {
+    background: var(--office-light);
+    color: var(--office-color);
+}
+
+[data-theme="dark"] .office-stat-icon.progress,
+[data-theme="dark"] .active-stat-icon.inprogress,
+[data-theme="dark"] .status-pill.inprogress,
+[data-theme="dark"] .summary-icon.progress {
+    background: rgba(249, 115, 22, 0.15);
+    color: #FDBA74;
+}
+
+[data-theme="dark"] .office-stat-icon.resolution,
+[data-theme="dark"] .active-stat-icon.resolution,
+[data-theme="dark"] .status-pill.resolution,
+[data-theme="dark"] .priority-badge.medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #FCD34D;
+}
+
+[data-theme="dark"] .office-stat-icon.resolved,
+[data-theme="dark"] .summary-icon.resolved,
+[data-theme="dark"] .priority-badge.low,
+[data-theme="dark"] .resolved-badge,
+[data-theme="dark"] .modal-icon-wrap {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+}
+
+[data-theme="dark"] .success-banner {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #6EE7B7;
+}
+
+[data-theme="dark"] .summary-icon.rate {
+    background: rgba(167, 139, 250, 0.15);
+    color: #C4B5FD;
+}
+
+[data-theme="dark"] .priority-badge.high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
+}
+
+/* Inline pastel backgrounds written straight into style="" by the office
+   page scripts (e.g. the statusBg map: 'In Progress': '#FFF7ED'). Matched by
+   colour value; !important because inline styles otherwise win. */
+[data-theme="dark"] [style*="#FFF7ED" i] { background-color: rgba(249, 115, 22, 0.15) !important; color: #FDBA74 !important; }
+[data-theme="dark"] [style*="#FFFBEB" i],
+[data-theme="dark"] [style*="#FEF3C7" i] { background-color: rgba(245, 158, 11, 0.15) !important; color: #FCD34D !important; }
+[data-theme="dark"] [style*="#ECFDF5" i],
+[data-theme="dark"] [style*="#D1FAE5" i] { background-color: rgba(16, 185, 129, 0.15) !important; color: #34D399 !important; }
+[data-theme="dark"] [style*="#EFF6FF" i],
+[data-theme="dark"] [style*="#DBEAFE" i] { background-color: rgba(77, 142, 255, 0.15) !important; color: #93C5FD !important; }
+[data-theme="dark"] [style*="#F3E8FF" i] { background-color: rgba(167, 139, 250, 0.15) !important; color: #C4B5FD !important; }
+[data-theme="dark"] [style*="#FEF2F2" i],
+[data-theme="dark"] [style*="#FEE2E2" i] { background-color: rgba(239, 68, 68, 0.15) !important; color: #FCA5A5 !important; }
+
+/* Icons inside those inline pastel tiles often carry their own inline dark
+   colour (e.g. color:#1A56DB on a #EFF6FF tile); take the tile's bright one. */
+[data-theme="dark"] :is([style*="#FFF7ED" i], [style*="#FFFBEB" i], [style*="#FEF3C7" i], [style*="#ECFDF5" i], [style*="#D1FAE5" i], [style*="#EFF6FF" i], [style*="#DBEAFE" i], [style*="#F3E8FF" i], [style*="#FEF2F2" i], [style*="#FEE2E2" i]) .material-symbols-outlined {
+    color: inherit !important;
 }

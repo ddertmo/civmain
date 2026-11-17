@@ -10,8 +10,8 @@
   })();
 </script>
 <head>
-  <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
-  <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+  <!-- cw-theme-early: apply the saved theme (and the signed-in role, for role-specific dark colours) before first paint. Same keys as App.loadTheme / App.getRole in js/app.js. -->
+  <script>try{var d=document.documentElement;if(localStorage.getItem('theme')==='dark')d.setAttribute('data-theme','dark');var r=localStorage.getItem('cw_role');if(r)d.setAttribute('data-role',r);}catch(e){}</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard — City Engineering Office</title>

@@ -96,3 +96,4 @@ automatically after each change.
 | 084 | 2026-11-17 | `cefccf6` | [Analytics charts fit their cards on all three roles - doughnut sizing loop, grid overflow, dead breakpoints](2026-11-17-084-analytics-chart-sizing.md) |
 | 085 | 2026-11-17 | `cde3ba2` | [Dark mode - no light flash, readable secondary text, themed charts, missing dark colours, white text on fills](2026-11-17-085-dark-mode-fixes.md) |
 | 086 | 2026-11-17 | `45c0389` | [Notification badge - shows the count, hides at zero, clears once the bell is opened](2026-11-17-086-notification-badge.md) |
+| 087 | 2026-11-17 | `PENDING` | [Dark mode on the CEO/CENRO office pages - pastel tiles, office colours by role, white text on office fills](2026-11-17-087-office-pages-dark-mode.md) |
