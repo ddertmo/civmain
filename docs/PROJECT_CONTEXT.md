@@ -332,6 +332,7 @@ repaired, legacy `/api/reports` subsystem deleted, `super_admin` write gate,
 ## 11. Security audit 2026-11-17 — what changed (read before touching auth, reports, notifications)
 
 **Where to look:**
+- **The original audit report (57 findings):** [audit/2026-11-17-security-audit.md](audit/2026-11-17-security-audit.md).
 - **Details and verification:** [076](changes/2026-11-17-076-critical-security-fixes.md) Critical,
   [077](changes/2026-11-17-077-high-security-fixes.md) High,
   [078](changes/2026-11-17-078-medium-audit-fixes.md) Medium,
