@@ -30,6 +30,10 @@
   --status-approved-border: #99F6E4;
 
   /* Neutral Colors */
+  /* --white is the SURFACE colour (cards, inputs) and becomes dark in dark
+     mode. For white TEXT/ICONS on a coloured fill (buttons, active chips,
+     badges, sidebar, toasts) use --on-accent, which stays white. */
+  --on-accent: #FFFFFF;
   --white: #FFFFFF;
   --gray-50: #F9FAFB;
   --gray-100: #F3F4F6;
@@ -97,8 +101,11 @@
   --gray-100:  #252D3D;
   --gray-200:  #2E3A50;
   --gray-300:  #3D4E68;
-  --gray-400:  #5A6B85;
-  --gray-500:  #7A8FA8;
+  /* Secondary text (timestamps, subtitles, "Total", hints). Was #5A6B85 /
+     #7A8FA8 = 2.9:1 and 4.7:1 on the #1E2330 card — too dim. Now ≥4.5:1 on
+     cards and panel surfaces, still ordered 300 < 400 < 500 < 600. */
+  --gray-400:  #8494AC;
+  --gray-500:  #93A4BA;
   --gray-600:  #9BAEC4;
   --gray-700:  #B8CCDF;
   --gray-800:  #D4E2EF;
@@ -121,6 +128,12 @@
   --status-inprogress-border:rgba(249,115,22,0.3);
   --status-resolved-bg:     rgba(16,185,129,0.15);
   --status-resolved-border: rgba(16,185,129,0.3);
+
+  /* Were missing, so these badges kept their light pastel backgrounds. */
+  --status-validation-bg:   rgba(245,158,11,0.15);
+  --status-approved:        #2CC5C2; /* light #0E7C7B is too dark on dark */
+  --status-approved-bg:     rgba(44,197,194,0.15);
+  --status-approved-border: rgba(44,197,194,0.3);
 
   --infra-bg: rgba(77,142,255,0.12);
   --env-bg:   rgba(16,185,129,0.12);

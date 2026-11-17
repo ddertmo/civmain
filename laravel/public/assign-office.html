@@ -15,6 +15,8 @@
 </script>
 
 <head>
+    <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assign Office - CIVILWATCH Admin</title>
@@ -270,7 +272,7 @@
             border: none;
             border-radius: var(--radius-md);
             background: var(--primary);
-            color: var(--white);
+            color: var(--on-accent);
             cursor: pointer;
             transition: var(--transition);
         }
@@ -350,7 +352,7 @@
         .pg-btn.active {
             background: var(--primary);
             border-color: var(--primary);
-            color: var(--white);
+            color: var(--on-accent);
         }
 
         .pg-btn:disabled {
@@ -1201,7 +1203,7 @@
 
         .af-rec-badge {
             background: var(--primary);
-            color: var(--white);
+            color: var(--on-accent);
             font-size: 10px;
             font-weight: 700;
             padding: 2px 8px;

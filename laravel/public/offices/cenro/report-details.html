@@ -12,6 +12,8 @@
 </script>
 
 <head>
+    <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Details — CENRO</title>
@@ -34,6 +36,7 @@
             --office-color: #10B981;
             --office-light: #ECFDF5;
         }
+[data-theme="dark"] { --office-color: #34D399; --office-light: rgba(16, 185, 129, 0.15); } /* dark: brighter green so office-coloured text reads on dark cards */
 
         .back-link {
             display: inline-flex;

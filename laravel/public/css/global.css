@@ -188,7 +188,7 @@ ol {
 
 .toast {
     background: var(--gray-800);
-    color: var(--white);
+    color: var(--on-accent);
     padding: 12px 18px;
     border-radius: var(--radius-md);
     font-size: var(--font-size-sm);
@@ -496,6 +496,92 @@ ol {
     background: rgba(16, 185, 129, 0.15);
     color: #34D399;
     border-color: rgba(16, 185, 129, 0.25);
+}
+
+/* Badges that had no dark version (kept light pastel fills + dark text). */
+[data-theme="dark"] .badge-approved {
+    background: var(--status-approved-bg);
+    color: var(--status-approved);
+    border-color: var(--status-approved-border);
+}
+
+[data-theme="dark"] .badge-rejected,
+[data-theme="dark"] .badge-high {
+    background: rgba(239, 68, 68, 0.15);
+    color: #FCA5A5;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .badge-others {
+    background: rgba(129, 140, 248, 0.15);
+    color: #A5B4FC;
+    border-color: rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .badge-submitted {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border-color: var(--gray-200);
+}
+
+[data-theme="dark"] .badge-low {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .badge-medium {
+    background: rgba(245, 158, 11, 0.15);
+    color: #FCD34D;
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* Report-detail layout (.rd-*) used by report-details.html,
+   monitoring-report-details.html and the detail view in monitoring.html.
+   Their page styles hard-code white cards; only one of the three pages had
+   dark overrides, so they live here now for all three. */
+[data-theme="dark"] .rd-page { background: var(--gray-50); }
+[data-theme="dark"] .rd-title { color: var(--gray-900); }
+[data-theme="dark"] .rd-meta { color: var(--gray-500); }
+[data-theme="dark"] .rd-badge--blue { background: var(--status-assigned-bg); color: var(--primary); border-color: var(--status-assigned-border); }
+[data-theme="dark"] .rd-card { background: var(--white); border-color: var(--gray-200); box-shadow: var(--shadow-sm); }
+[data-theme="dark"] .rd-card h2 { color: var(--gray-900); }
+[data-theme="dark"] .rd-card p { color: var(--gray-500); }
+[data-theme="dark"] .rd-summary-icon { background: var(--status-assigned-bg); color: var(--primary); }
+[data-theme="dark"] .rd-summary-label { color: var(--gray-500); }
+[data-theme="dark"] .rd-summary-value { color: var(--gray-900); }
+[data-theme="dark"] .rd-map-note { color: var(--gray-500); }
+[data-theme="dark"] .rd-dot { background: var(--white); }
+[data-theme="dark"] .rd-status-option { background: var(--white); }
+[data-theme="dark"] .rd-status-option.selected { border-color: var(--primary); background: var(--status-assigned-bg); }
+[data-theme="dark"] .rd-status-option.current { border-color: var(--gray-400); background: var(--gray-100); }
+[data-theme="dark"] .rd-status-option:focus-within { border-color: var(--primary); }
+[data-theme="dark"] .rd-status-title { color: var(--gray-900); }
+[data-theme="dark"] .rd-status-desc { color: var(--gray-500); }
+[data-theme="dark"] .rd-info-name { color: var(--gray-900); }
+[data-theme="dark"] .rd-quick-label { color: var(--gray-500); }
+[data-theme="dark"] .rd-quick-value { color: var(--gray-900); }
+
+/* Blue fills carrying white text. Dark mode lightens --primary to #4D8EFF so
+   blue LINKS stay readable on dark cards, but white text on that lighter blue
+   is only 3.2:1. Fills use --primary-dark (#2B6FE8, 4.6:1) instead. */
+[data-theme="dark"] .btn-primary,
+[data-theme="dark"] .toggle-btn.active,
+[data-theme="dark"] .chip.active,
+[data-theme="dark"] .navbar-avatar {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+[data-theme="dark"] .btn-primary:hover:not(:disabled) {
+    background: #2563EB;
+    border-color: #2563EB;
+}
+
+/* Dashboard quick action — notifications icon used a fixed light purple. */
+[data-theme="dark"] .qa-notif .quick-action-icon {
+    background: rgba(167, 139, 250, 0.15);
+    color: #C4B5FD;
 }
 
 /* Office cards (assign page) */

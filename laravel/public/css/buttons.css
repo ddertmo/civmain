@@ -24,7 +24,7 @@
 /* Primary */
 .btn-primary {
   background: var(--primary);
-  color: var(--white);
+  color: var(--on-accent);
   border-color: var(--primary);
 }
 .btn-primary:hover:not(:disabled) {
@@ -69,7 +69,7 @@
 /* Success */
 .btn-success {
   background: var(--status-resolved);
-  color: var(--white);
+  color: var(--on-accent);
   border-color: var(--status-resolved);
 }
 .btn-success:hover:not(:disabled) {

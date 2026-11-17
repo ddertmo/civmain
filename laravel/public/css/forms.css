@@ -168,7 +168,7 @@
 
 .office-recommended {
   background: var(--primary);
-  color: var(--white);
+  color: var(--on-accent);
   font-size: 10px;
   font-weight: 700;
   padding: 2px 8px;
@@ -200,7 +200,7 @@
 
 .office-card-check .material-symbols-outlined {
   font-size: 15px;
-  color: var(--white);
+  color: var(--on-accent);
 }
 
 /* OR divider */

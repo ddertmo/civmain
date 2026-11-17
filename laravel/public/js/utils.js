@@ -381,6 +381,106 @@ function getPhotoUrlLarge(issue) {
 
 
 // ============================================================
+// CwChartTheme — dark-mode colours for Chart.js
+// ============================================================
+//
+// Charts are drawn on <canvas>, so CSS (and the dark theme's CSS variables)
+// never reach them: the pages hard-code light-theme axis/grid colours
+// (#6B7280 ticks, #F3F4F6 / rgba(0,0,0,.1) grid) and white doughnut borders.
+// In dark mode this re-colours every chart from the CSS variables; in light
+// mode it restores each chart's own original colours, so the light design is
+// unchanged. Applied automatically to new charts (plugin below) and to all
+// existing charts when the theme is toggled (App.toggleDarkMode).
+// ============================================================
+
+const CwChartTheme = {
+    isDark() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+    },
+
+    colors() {
+        const cs = getComputedStyle(document.documentElement);
+        const v = (name, fallback) => cs.getPropertyValue(name).trim() || fallback;
+        return {
+            text: v('--gray-500', '#93A4BA'),
+            grid: 'rgba(148, 164, 186, 0.15)',
+            surface: v('--white', '#1E2330'), // card colour, for doughnut gaps
+        };
+    },
+
+    apply(chart) {
+        const o = chart && chart.options;
+        if (!o) return;
+        const scales = o.scales || {};
+
+        // Remember the chart's own (light) colours once, to restore them.
+        if (!chart.$cwOriginal) {
+            const orig = { scales: {}, borders: (chart.data.datasets || []).map(d => d.borderColor) };
+            Object.keys(scales).forEach(id => {
+                const s = scales[id] || {};
+                orig.scales[id] = {
+                    tick: s.ticks && s.ticks.color,
+                    grid: s.grid && s.grid.color,
+                    border: s.border && s.border.color,
+                };
+            });
+            orig.legend = o.plugins && o.plugins.legend && o.plugins.legend.labels && o.plugins.legend.labels.color;
+            chart.$cwOriginal = orig;
+        }
+
+        const dark = this.isDark();
+        const c = this.colors();
+        const orig = chart.$cwOriginal;
+
+        Object.keys(scales).forEach(id => {
+            const s = scales[id];
+            const so = orig.scales[id] || {};
+            if (!s) return;
+            if (s.ticks) s.ticks.color = dark ? c.text : so.tick;
+            if (s.grid) s.grid.color = dark ? c.grid : so.grid;
+            if (s.border) s.border.color = dark ? c.grid : so.border;
+        });
+
+        if (o.plugins && o.plugins.legend && o.plugins.legend.labels) {
+            o.plugins.legend.labels.color = dark ? c.text : orig.legend;
+        }
+
+        if (['doughnut', 'pie', 'polarArea'].includes(chart.config.type)) {
+            (chart.data.datasets || []).forEach((d, i) => {
+                d.borderColor = dark ? c.surface : orig.borders[i];
+            });
+        }
+    },
+
+    refreshAll() {
+        if (typeof Chart === 'undefined') return;
+        Object.values(Chart.instances || {}).forEach(chart => {
+            try {
+                this.apply(chart);
+                chart.update('none');
+            } catch (e) { /* never break a page over chart colours */ }
+        });
+    },
+};
+
+// New charts: re-colour right after creation when the page is in dark mode.
+if (typeof Chart !== 'undefined' && Chart.register) {
+    Chart.register({
+        id: 'cwChartTheme',
+        afterInit(chart) {
+            if (!CwChartTheme.isDark()) return;
+            setTimeout(() => {
+                try {
+                    CwChartTheme.apply(chart);
+                    chart.update('none');
+                } catch (e) { /* ignore */ }
+            }, 0);
+        },
+    });
+}
+
+
+// ============================================================
 // CwModal — Loading / Success / Error modal system
 // ============================================================
 //

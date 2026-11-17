@@ -125,7 +125,7 @@
   width: 18px;
   height: 18px;
   background: #EF4444;
-  color: var(--white);
+  color: var(--on-accent);
   font-size: 10px;
   font-weight: 700;
   border-radius: var(--radius-full);
@@ -157,7 +157,7 @@
   height: 32px;
   border-radius: var(--radius-full);
   background: var(--primary);
-  color: var(--white);
+  color: var(--on-accent);
   display: flex;
   align-items: center;
   justify-content: center;

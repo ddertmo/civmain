@@ -12,6 +12,8 @@
 </script>
 
 <head>
+    <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Assigned Reports — CENRO</title>

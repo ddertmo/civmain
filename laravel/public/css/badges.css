@@ -213,7 +213,7 @@
 .chip.active {
   background: var(--primary);
   border-color: var(--primary);
-  color: var(--white);
+  color: var(--on-accent);
 }
 
 .chip .material-symbols-outlined { font-size: 14px; }

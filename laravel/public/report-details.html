@@ -11,6 +11,8 @@
     })();
 </script>
 <head>
+    <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Details — CIVILWATCH Admin</title>
@@ -244,7 +246,7 @@
                             </div>
 
                             <div style="margin-top:12px;">
-                                <label for="statusNotes" style="font-size:12px;font-weight:600;color:#111827;display:block;margin-bottom:6px;">Notes (Optional)</label>
+                                <label for="statusNotes" style="font-size:12px;font-weight:600;color:var(--gray-900);display:block;margin-bottom:6px;">Notes (Optional)</label>
                                 <textarea id="statusNotes" class="rd-notes" maxlength="500" placeholder="Add notes about the status update..."></textarea>
                                 <div id="notesCount" class="rd-counter">0/500</div>
                             </div>

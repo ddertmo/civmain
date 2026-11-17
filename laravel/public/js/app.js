@@ -540,6 +540,8 @@ const App = {
         localStorage.setItem('theme', newTheme);
         const icon = document.getElementById('darkModeIcon');
         if (icon) icon.textContent = isDark ? 'dark_mode' : 'light_mode';
+        // Canvas charts don't follow CSS — re-colour them for the new theme.
+        if (typeof CwChartTheme !== 'undefined') CwChartTheme.refreshAll();
         if (typeof Utils !== 'undefined') Utils.showToast(`${isDark ? 'Light' : 'Dark'} mode enabled`, 'info');
     },
 

@@ -10,6 +10,8 @@
   })();
 </script>
 <head>
+  <!-- cw-theme-early: apply the saved theme before first paint (no light flash). Same key as App.loadTheme in js/app.js. -->
+  <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analytics — City Engineering Office</title>
@@ -26,6 +28,7 @@
   <link rel="stylesheet" href="/css/responsive.css" />
   <style>
     :root { --office-color:#1A56DB; --office-light:#EFF6FF; }
+[data-theme="dark"] { --office-color: #4D8EFF; --office-light: rgba(77, 142, 255, 0.14); } /* dark: brighter blue so office-coloured text reads on dark cards */
 
     /* Stat summary strip */
     .summary-card  { background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); padding:16px 20px; display:flex; align-items:center; gap:14px; }
