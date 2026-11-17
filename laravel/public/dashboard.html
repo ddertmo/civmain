@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="/css/buttons.css" />
     <link rel="stylesheet" href="/css/tables.css" />
     <link rel="stylesheet" href="/css/badges.css" />
-    <link rel="stylesheet" href="/css/charts.css" />
     <link rel="stylesheet" href="/css/responsive.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
@@ -256,27 +255,6 @@
             height: 14px;
         }
 
-        /* Charts row */
-        .dashboard-charts {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        /* Keep the doughnut inside its 200px container instead of letting
-           Chart.js size it from the (very wide) flex child. */
-        .dashboard-charts .doughnut-canvas {
-            min-width: 0;
-            height: 100%;
-        }
-
-        .dashboard-charts .doughnut-canvas canvas {
-            max-height: 100%;
-            max-width: 240px;
-            margin: 0 auto;
-        }
-
         /* Bottom row */
         .dashboard-bottom {
             display: grid;
@@ -369,67 +347,6 @@
                             <div class="sk-box" style="width:60px;height:32px;margin-bottom:8px;"></div>
                             <div class="sk-box" style="width:100px;height:16px;margin-bottom:8px;"></div>
                             <div class="sk-box" style="width:120px;height:14px;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts: volume + trend + category mix -->
-                <div class="dashboard-charts">
-
-                    <!-- Reports Submitted per period (bar) -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div>
-                                <div class="chart-title" id="volumeChartTitle">Reports Submitted (Weekly)</div>
-                                <div class="chart-subtitle">Citizen reports received per period</div>
-                            </div>
-                            <div class="toggle-group">
-                                <button class="toggle-btn active" onclick="DashboardCharts.setMode('weekly', this)">Weekly</button>
-                                <button class="toggle-btn" onclick="DashboardCharts.setMode('monthly', this)">Monthly</button>
-                            </div>
-                        </div>
-                        <div class="chart-container" style="height:240px;">
-                            <canvas id="volumeChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Submitted vs Resolved (area) -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div>
-                                <div class="chart-title">Submitted vs Resolved (Last 30 Days)</div>
-                                <div class="chart-subtitle">Daily citizen report activity</div>
-                            </div>
-                        </div>
-                        <div class="chart-container" style="height:220px;">
-                            <canvas id="trendAreaChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Report category mix (doughnut) -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div>
-                                <div class="chart-title">Report Category Mix</div>
-                                <div class="chart-subtitle">Share of infrastructure vs environmental reports</div>
-                            </div>
-                        </div>
-                        <div class="doughnut-wrap" style="height:200px;">
-                            <div class="doughnut-canvas">
-                                <canvas id="categoryMixChart"></canvas>
-                            </div>
-                            <div class="doughnut-legend" id="categoryMixLegend">
-                                <div class="legend-item">
-                                    <div class="legend-dot" style="background:#1A56DB"></div>
-                                    <span class="legend-label">Infrastructure</span>
-                                    <span class="legend-value">—</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-dot" style="background:#10B981"></div>
-                                    <span class="legend-label">Environmental</span>
-                                    <span class="legend-value">—</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -562,10 +479,8 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
-    <script src="/js/dashboard-charts.js"></script>
     <script>
         // ── Live date ─────────────────────────────────────────────
         const now = new Date();
@@ -885,7 +800,6 @@
 
         // ── Boot ──────────────────────────────────────────────────
         loadStats();
-        DashboardCharts.init();
         loadRecentReports();
         loadActivity();
         loadMapPins();
